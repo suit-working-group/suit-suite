@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "vendor-product",
+    "surfaceForm": "Microsoft Entra Conditional Access expressions and ... Microsoft 365 application-level configuration",
+    "location": "ch22-wave4-policy-EN.tex / \\section{Trajectory: brownfield Microsoft-centric} (sec:w4-brownfield-ms), lines 125-132",
+    "proposedGenericDecision": "Treat as the named instantiation of the role 'incumbent cloud-suite identity/authorisation stack'. The brownfield-vendor trajectory is a legitimate, deliberately concrete instance, so keep the named product but ensure the role abstraction ('a dominant commercial identity-and-productivity suite whose authorisation lives in the provider's conditional-access engine') is what the reader is told carries forward.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "INCUMBENT_IDENTITY_SUITE_VENDOR / INCUMBENT_CONDITIONAL_ACCESS_ENGINE",
+    "confidence": 0.55,
+    "rationale": "This is a vendor-specific, not institution-specific, anchor. The whole section is explicitly framed as one of several trajectories ('For institutions whose authorisation logic resides primarily in...'), so the Microsoft naming is an illustrative scenario rather than a UL fact. It does not prevent institution-agnosticism, but a reviewer building a localization matrix should record that the brownfield-MS trajectory presupposes a specific commercial suite; flag low-priority parameterization only if the suite wants vendor-neutral trajectory labels."
+  },
+  {
+    "kind": "vendor-product-name",
+    "surfaceForm": "Conditional Access expression / Conditional Access (repeated, lines 138-148)",
+    "location": "ch22-wave4-policy-EN.tex / sec:w4-brownfield-ms (lines 138-148)",
+    "proposedGenericDecision": "Role: 'provider-native conditional-access rule'. Generalise the recurring noun phrase to the role term while keeping at most one parenthetical naming the concrete product, so the pattern reads against any provider's conditional-access mechanism.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "PROVIDER_NATIVE_ACCESS_RULE_TERM",
+    "confidence": 0.5,
+    "rationale": "Vendor-bound terminology repeated as if generic. Not an institution name, but it ties the prose to one supplier's product vocabulary; generalising the repeated occurrences (keeping one named anchor) makes the trajectory portable without losing the concrete example."
+  },
+  {
+    "kind": "vendor-tool",
+    "surfaceForm": "An OPA-based policy decision point ... an equivalent Rego policy is authored",
+    "location": "ch22-wave4-policy-EN.tex / sec:w4-brownfield-ms (lines 134-141) and realworldbox (line 238)",
+    "proposedGenericDecision": "Role: 'standards-based external policy-decision engine and its policy language'. OPA/Rego are the suite's chosen reference implementation; keep as the named instance but ensure the conformance contract (\\trchap{ch:policy}) is what is normative, not the specific engine.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "PDP_ENGINE / PDP_POLICY_LANGUAGE",
+    "confidence": 0.45,
+    "rationale": "Tool-specific, not institution-specific. The exit criteria already abstract over the engine ('re-import on alternative engine produces identical decisions'), so OPA/Rego function as a portable reference implementation rather than a UL fact. Recorded for completeness; parameterize only if the suite wants engine-neutral playbook text."
+  },
+  {
+    "kind": "vendor-tool",
+    "surfaceForm": "Shibboleth attribute releases, Keycloak authorisation policies",
+    "location": "ch22-wave4-policy-EN.tex / \\section{Trajectory: brownfield hybrid} (sec:w4-brownfield-hybrid), lines 161-173",
+    "proposedGenericDecision": "Role: 'incumbent open-source federation/IAM components in a heterogeneous estate'. Keep as concrete examples of the hybrid trajectory; the abstraction is 'scattered authorisation across federation middleware, IAM authorisation policies, app config, and code'.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "HYBRID_FEDERATION_COMPONENT / HYBRID_IAM_COMPONENT",
+    "confidence": 0.4,
+    "rationale": "Product names, not institution names. They illustrate the hybrid scenario generically (any institution with this stack), so they do not block institution-agnosticism. Logged so the localization matrix is complete; no action needed unless vendor-neutral trajectory naming is desired."
+  },
+  {
+    "kind": "named-organizations",
+    "surfaceForm": "publicly described at organisations including Netflix, Capital One and Pinterest",
+    "location": "ch22-wave4-policy-EN.tex / \\section{Exit criteria} > realworldbox 'Policy plane adoption patterns' (sec:w4-exit), lines 235-245",
+    "proposedGenericDecision": "These are third-party industrial precedents (Layer-5 evidence), not the adopting institution. Role: 'large-scale industrial OPA adopters with public deployment write-ups'. Keep as named evidence; they do not impose any institutional identity on the playbook.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "Named, but they are evidence-citations of external industry practice, not the institution the playbook is written for. Per the evidence methodology (named precedents strengthen the claim), removing them would weaken Layer-5 support. Recorded because the detection brief asks for all named entities, but suggested action is keep."
+  },
+  {
+    "kind": "project-specific-construct",
+    "surfaceForm": "The phase-2 international university network anticipated by this Reference would be one of the contexts in which a shared library of academic-context policies might emerge.",
+    "location": "ch22-wave4-policy-EN.tex / realworldbox 'Policy plane adoption patterns' (sec:w4-exit), lines 242-245",
+    "proposedGenericDecision": "This references a suite-internal roadmap construct ('phase-2 international university network', 'this Reference'). Generalise to a role-based forward-looking statement ('a future multi-institution academic network could host a shared library of academic-context policies') that does not assume the specific UL/SnT phase-2 programme.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "'this Reference' and 'phase-2 international university network' are artefacts of the originating project's own roadmap and self-referential document identity. In an institution-agnostic suite this presupposes a particular programme; reframe as a generic possibility so any adopting institution can read it without inheriting the source project's phase plan."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "\\gls{gdpr}~Art.~25 ... NIS2~Art.~21(2)(a) ... and (i) ... the EU AI Act ... Art.~5 ... Art.~50 ... 27001~A.5.15 ... NIST CSF PROTECT (PR.AA)",
+    "location": "ch22-wave4-policy-EN.tex / \\section{Regulatory anchoring} (sec:w4-regulatory), lines 248-264",
+    "proposedGenericDecision": "Role: 'the applicable data-protection regulation, NIS-equivalent directive, AI regulation, and ISMS/cybersecurity standards of the institution's jurisdiction'. The clause-level anchoring is EU-specific (GDPR/NIS2/EU AI Act) without naming a country, which implicitly binds the playbook to the EU regulatory regime. Parameterise the regulatory instruments so a non-EU adopter substitutes its own equivalents while preserving the by-design / access-control control intent.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "DATA_PROTECTION_REG / NIS_EQUIVALENT_DIRECTIVE / AI_REGULATION / ISMS_STANDARD / CYBER_FRAMEWORK",
+    "confidence": 0.7,
+    "rationale": "Implicit jurisdiction binding: GDPR, NIS2 and the EU AI Act are EU instruments cited by article number with no country named, so the chapter silently assumes an EU-jurisdiction institution. ISO 27001 and NIST CSF are international/US and largely portable. To be institution-agnostic the EU-specific instruments should be expressed via a regulatory-mapping layer (\\trchap{ch:regulatory-mapping}) keyed to the adopter's jurisdiction; the control objectives (by-design enforcement, access control) are universal and should be kept."
+  },
+  {
+    "kind": "implicit-eu-framing",
+    "surfaceForm": "the EU AI Act ... Art.~5 (prohibited practices) and Art.~50 (transparency) ... rules that gate AI-related TACs on context labelling and on prohibited-use classification",
+    "location": "ch22-wave4-policy-EN.tex / sec:w4-regulatory (lines 255-258)",
+    "proposedGenericDecision": "Role: 'the jurisdiction's AI regulation, including prohibited-use and transparency provisions'. The EU AI Act prohibited-practice/transparency hooks are EU-specific; express the policy-plane enforcement objective in regulation-neutral terms with the EU Act as the named instance.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "AI_REGULATION_PROHIBITED_USE_CLAUSE / AI_REGULATION_TRANSPARENCY_CLAUSE",
+    "confidence": 0.65,
+    "rationale": "The EU AI Act is named but the surrounding framing ('the locus where ... admit a policy-plane enforcement') treats EU AI-Act categories (prohibited practices, transparency) as the universal target. Non-EU adopters have different or absent AI regulation; parameterizing keeps the enforcement mechanism while letting the regulatory anchor vary by jurisdiction."
+  },
+  {
+    "kind": "internal-reference-id",
+    "surfaceForm": "D7.5, D7.1, D7.7, D17.3, D18.2, D16.5, D22.1-D22.4 (decision/coherence identifiers in header comments and prose: 'specified by D7.7', 'reference Policy conformance subset (D16.5)')",
+    "location": "ch22-wave4-policy-EN.tex / header comment block (lines 4-16) and caveatbox Dependencies (lines 22-30, esp. line 29 'specified by D7.7')",
+    "proposedGenericDecision": "These are suite-internal coherence-registry decision IDs (_coherence-EN.md). They are not institution names, but they are project-internal traceability tokens. Per the no-process-leak convention, the one that surfaces in prose ('specified by D7.7', line 29) should be replaced by a cross-reference to the relevant chapter/section rather than an internal decision number; the comment-block IDs are invisible in output and can stay.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.4,
+    "rationale": "Not institution-specific, but a traceability/process token that leaks into the rendered body at line 29 ('the mapping of identity attributes to the institutional schema specified by D7.7'). The codebase's no-process-leak rule says such revision/decision IDs belong in changelog/coherence files, not prose. Low confidence on relevance to the institution-agnostic goal specifically; flagged because it is a portability/cleanliness issue a reviewer should note. Comment-block D-IDs are out of scope (not rendered)."
+  },
+  {
+    "kind": "implicit-governance-cadence",
+    "surfaceForm": "the first quarterly governance cycle has been completed ... a documented review process",
+    "location": "ch22-wave4-policy-EN.tex / \\section{Exit criteria} (sec:w4-exit), lines 230-233; also 'first quarterly governance cycle' (line 232)",
+    "proposedGenericDecision": "Role: 'the institution's periodic policy-governance review cadence'. 'Quarterly' is a concrete cadence assumption; keep but recognise it as a tunable institutional constant rather than a fixed requirement.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "POLICY_GOVERNANCE_REVIEW_CADENCE",
+    "confidence": 0.35,
+    "rationale": "Mild implicit specificity: a quarterly cadence presupposes an institutional review rhythm. It is generic enough to read as a sensible default, but a fully institution-agnostic template would express cadence as a parameter so institutions with different governance cycles substitute their own. Low priority; no institution is named."
+  }
+]

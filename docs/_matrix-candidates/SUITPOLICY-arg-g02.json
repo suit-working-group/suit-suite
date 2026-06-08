@@ -1,0 +1,232 @@
+[
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "the University of Luxembourg is a small institution",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on institutional comparisons and transferability' (Q5.1 clarificationbox)",
+    "proposedGenericDecision": "Replace the named adopting institution with the role 'the adopting institution' / 'a small-to-mid-size university'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "Names the specific adopting institution by proper name; directly ties the document to University of Luxembourg and contradicts institution-agnostic intent."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "the University of Luxembourg's current infrastructure, contracts, and staffing",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on costs and feasibility' (Q9.1 answerbox)",
+    "proposedGenericDecision": "Refer to 'the adopting institution's current infrastructure, contracts and staffing'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "Possessive proper-name reference binding the cost study to one named institution."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "The University of Luxembourg's existing Committee for Reasonable Adjustments (which supports students and staff)",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on the ICRADP' (Q6.2 answerbox)",
+    "proposedGenericDecision": "Refer generically to 'the institution's existing reasonable-adjustments / accommodation committee' as a precedent, without naming the institution or its specific committee.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME / LOCAL_ADJUSTMENT_BODY",
+    "confidence": "high",
+    "rationale": "Both a named institution and a named local governance body cited as an internal precedent; the precedent only holds for UL. Generalize to 'an existing accommodation committee' or parameterize if the localizer can supply a real local body."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "neither \\gls{restena} nor the University of Luxembourg publishes any Science DMZ today ... if it were the right answer for Luxembourg, our \\gls{nren} or our \\gls{hpc} team would already have built it",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 questionbox)",
+    "proposedGenericDecision": "Recast as the generic objection 'if the Science DMZ were so good, our national NREN or HPC team would already have deployed it' using role nouns (NATIONAL_NREN, NATIONAL_HPC) and the adopting-institution role.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NREN, INSTITUTION_NAME, NATIONAL_HPC_FACILITY",
+    "confidence": "high",
+    "rationale": "Combines a named NREN (RESTENA), the named institution, and the country (Luxembourg) into a single jurisdiction-bound objection; entirely UL/LU-specific."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "public documentation from \\gls{restena} and from \\institution{ULHPC} shows neither a deployed Science DMZ, nor a published \\gls{dtn} fabric, nor a public perfSONAR endpoint --- only 10--100~Gbps point-to-point links and a 100~Gbps uplink to \\gls{geant}~\\cite{restena, geant}",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 answerbox)",
+    "proposedGenericDecision": "Replace named NREN/HPC facility and their concrete link metrics with role-based 'the national NREN and the institution's HPC facility' and a generic statement that public documentation shows no deployed Science DMZ; drop the LU-specific bandwidth figures or move to a localization note.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NREN, INSTITUTION_HPC_FACILITY, NREN_UPLINK_CAPACITY",
+    "confidence": "high",
+    "rationale": "Names RESTENA + ULHPC and cites LU-specific link capacities and a RESTENA/GEANT citation; jurisdiction-bound empirical claim."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "an \\institution{ULHPC} facility moving petabyte-scale traffic to \\institution{MeluXina} (EuroHPC)",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 answerbox, item 1)",
+    "proposedGenericDecision": "Refer to 'the institution's HPC facility moving petabyte-scale traffic to a national/European HPC resource' using role nouns.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_HPC_FACILITY, NATIONAL_HPC_RESOURCE",
+    "confidence": "high",
+    "rationale": "ULHPC and MeluXina are LU/EuroHPC-specific named facilities; the petabyte-traffic claim is instance-specific."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "high-bandwidth \\gls{geant} access via \\gls{restena}, \\gls{restena}-\\gls{csirt} for incident response~\\cite{restena-csirt}",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 answerbox, item 1)",
+    "proposedGenericDecision": "Generalize to 'high-bandwidth GEANT/regional-backbone access via the national NREN, and the NREN's CSIRT for incident response'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NREN, NREN_CSIRT",
+    "confidence": "high",
+    "rationale": "RESTENA and RESTENA-CSIRT are the LU NREN and its incident-response team; GEANT is pan-European but the access path is LU-specific."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "Non-deployment is consistent with a Luxembourg-specific pattern: a small ecosystem, a limited pool of research-network engineers, and no European equivalent to the NSF CC* programme",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 answerbox, item 2)",
+    "proposedGenericDecision": "Recast as 'consistent with a small-national-ecosystem pattern' using a role/scale descriptor; keep the NSF CC* observation only as a comparative funding-route example, not as a LU-specific claim.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "NATIONAL_ECOSYSTEM_DESCRIPTOR",
+    "confidence": "high",
+    "rationale": "Explicitly names Luxembourg and frames the whole diagnostic around the LU national funding landscape; jurisdiction-bound."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "It is that \\gls{restena}, the University, \\institution{LIST} and \\institution{LIH} \\emph{co-design} a federated research-network zone ... shared across the research-active institutions. Mutualisation is the only form in which the operational and economic case closes at Luxembourg's scale (see main report, Section~9.4 --- 'Luxembourg status ...')",
+    "location": "argumentation-body-EN.tex / Sec. 'research zone autonomy' (Q3.4 answerbox)",
+    "proposedGenericDecision": "Replace named LU research institutions with 'the national NREN, the adopting institution, and the other research-active institutions in the ecosystem'; drop 'at Luxembourg's scale' for 'at a small national scale'; the cross-reference to a LU-named section must be neutralised.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NREN, INSTITUTION_NAME, PEER_RESEARCH_INSTITUTIONS",
+    "confidence": "high",
+    "rationale": "Names RESTENA, LIST, LIH and 'the University', plus 'Luxembourg's scale' and a LU-named main-report section; deeply jurisdiction-bound mutualisation argument."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "pilot on the Department of Computer Science, the SnT Centre, and the \\gls{hpc} team",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on costs and feasibility' (Q9.1 answerbox, Step 2)",
+    "proposedGenericDecision": "Replace UL-specific named units with role-based 'pilot on entities with in-house domain expertise (e.g., a computer-science department, an interdisciplinary research centre, the HPC team)'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "PILOT_ENTITIES",
+    "confidence": "high",
+    "rationale": "'SnT Centre' is the UL Interdisciplinary Centre for Security, Reliability and Trust; 'Department of Computer Science' + 'HPC team' are UL units named as the concrete pilot scope."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "The CNIL or CNPD could still sanction insufficient security",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on regulatory interpretation' (Q8.2 questionbox)",
+    "proposedGenericDecision": "Replace named DPAs with role-based 'the competent data protection authority (DPA)'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_DPA",
+    "confidence": "high",
+    "rationale": "CNIL (France) and CNPD (Luxembourg) are jurisdiction-specific supervisory authorities; the second clearly indicates the LU jurisdiction."
+  },
+  {
+    "kind": "explicit-jurisdiction",
+    "surfaceForm": "binding law in the EU and in the Council of Europe member states (including Luxembourg)",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on the ICRADP' (Q6.3 answerbox)",
+    "proposedGenericDecision": "Drop the parenthetical country naming; keep 'binding law in the EU and in Council of Europe member states' and, if needed, 'including the institution's jurisdiction'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_JURISDICTION",
+    "confidence": "high",
+    "rationale": "Explicit '(including Luxembourg)' parenthetical anchors the legal applicability claim to the LU jurisdiction."
+  },
+  {
+    "kind": "explicit-incident",
+    "surfaceForm": "Paris-Saclay, Western Sydney, Texas Tech ... Rennes's segmented architecture confined a breach ... MOVEit, Oracle EBS",
+    "location": "argumentation-body-EN.tex / multiple (Q1.1, Q5.1, Q5.3, Q7.1, Q7.2 boxes)",
+    "proposedGenericDecision": "These are named external comparator incidents/institutions, not the adopting institution; keep as evidence (they support generic theses about segmentation) but verify none implies a France-only audience. No localization variable needed.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "Named incidents/comparator universities are legitimate institution-agnostic evidence (they argue the general principle). They are external, not the adopting institution, so they do not block agnosticism; flagged for completeness per the explicit 'named incidents' criterion."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "asks the governing bodies to adopt the policy ... a board still needs an order of magnitude ... once the governing bodies decide to proceed",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on costs and feasibility' (Q9.3 questionbox and answerbox)",
+    "proposedGenericDecision": "Use a role-neutral governance term ('the governing body' / 'the institution's top governance authority') decoupled from any specific board/rectorate shape.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "GOVERNING_BODY",
+    "confidence": "medium",
+    "rationale": "Assumes a 'board'/'governing bodies' governance shape; some institutions are led by a rectorate, council, senate or board of governors. Role-based term keeps it agnostic."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "the CIO ... a CIO could note that the economic case has not been framed / leaving the precise TCO to the CIO",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on costs and feasibility' (Q9.3)",
+    "proposedGenericDecision": "Keep CIO as a generic role but ensure consistency with the 'CISO' role used elsewhere; CIO/CISO are role nouns, not UL-specific. Confirm the institution actually has this role split.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "CIO/CISO are generic governance roles, not UL-specific; flagged only because an institution may not have both a CIO and a CISO. Low risk to agnosticism."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "the Digital Policy Commission (referenced throughout as the governance body that defines risk appetite / reviews zone compliance)",
+    "location": "argumentation-body-EN.tex / multiple (Q2.1, Q2.3, Q2.4, Q8.1, Q9.1, Q9.3 boxes)",
+    "proposedGenericDecision": "Treat 'Digital Policy Commission' as a named instance of the proposed governance body; either keep as the suite's coined generic term or parameterize to the institution's chosen name for its IT-governance committee.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "DIGITAL_POLICY_COMMISSION_NAME",
+    "confidence": "low",
+    "rationale": "Likely a generic construct coined by the suite rather than a UL body, but it presupposes a single named committee; localizers may map it to an existing institutional committee name."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "the \\gls{icradp} / ICRADP (Independent Commission for Reasonable Adjustments; fr: CARPN) ... rules within 15 working days ... within 48 hours",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on the ICRADP' (section heading and Q6.1-Q6.3 boxes)",
+    "proposedGenericDecision": "Keep ICRADP as a generic proposed-mechanism name if it is the suite's own construct; but the French acronym (CARPN) presupposes a French-language institution and the named UL precedent (Q6.2) ties it to UL. Decouple the timelines from any one jurisdiction's process norms.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "ADJUSTMENT_COMMISSION_NAME, ADJUSTMENT_COMMISSION_LANG_VARIANT",
+    "confidence": "medium",
+    "rationale": "The bilingual ICRADP/CARPN naming presupposes a French-using (LU/FR) institution; the SLA figures (15 working days / 48 hours) are presented as design constants and may be retained, but the bilingual acronym is locale-bound."
+  },
+  {
+    "kind": "implicit-jurisdiction-cost",
+    "surfaceForm": "higher education currently allocates only about 3.6\\%~\\cite{educause-spending}, against central-IT spend on the order of USD~1,600 per student FTE ... size the likely envelope from its enrolment and current IT budget",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on costs and feasibility' (Q9.3 answerbox, item 2)",
+    "proposedGenericDecision": "Keep the sourced sector benchmark (EDUCAUSE) as it is a generic US-higher-ed figure, but flag that the per-student-FTE USD figure is drawn from a specific (US) sector survey; present as 'a sector reference point' and let the localizer substitute a region-appropriate benchmark.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "SECTOR_IT_SPEND_BENCHMARK",
+    "confidence": "medium",
+    "rationale": "USD-denominated per-FTE figure and the 3.6% allocation are US-sector (EDUCAUSE) statistics used as the order-of-magnitude anchor; jurisdiction-bound cost reference. Sourced, so generalize the framing rather than drop."
+  },
+  {
+    "kind": "implicit-jurisdiction-cost",
+    "surfaceForm": "no European equivalent to the NSF CC* programme that explicitly funded Science DMZs at over 100 US campuses ... NSF CC* grants ... typically run 2--3 years",
+    "location": "argumentation-body-EN.tex / Q3.4 (item 2) and Q9.2 answerbox",
+    "proposedGenericDecision": "Keep NSF CC* as a comparator example of a funding route, but recast 'no European equivalent' to 'no equivalent dedicated funding programme in the institution's region' so it is not implicitly a Europe-vs-US (and LU-specific) claim.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "REGIONAL_FUNDING_PROGRAMME",
+    "confidence": "medium",
+    "rationale": "The 'no European equivalent' framing presupposes a European (LU) adopter; the funding-route argument is region-bound. The NSF CC* facts themselves are generic evidence and can stay."
+  },
+  {
+    "kind": "implicit-national-transposition",
+    "surfaceForm": "the institution's statutory security obligations, including those under \\gls{nis2} ... GDPR Article 6(1)(e) ... the institution's DPO / Record of Processing Activities",
+    "location": "argumentation-body-EN.tex / Sec. 'Questions on regulatory interpretation' (Q8.1, Q8.3, Q8.4, Q8.5, Q8.6 boxes)",
+    "proposedGenericDecision": "Keep EU instruments (GDPR/NIS2/AI Act) as they apply suite-wide, but note that NIS2 is applied via national transposition; add a localization hook so a non-EU adopter can map to its own data-protection/network-security regime.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "DATA_PROTECTION_REGIME, NETWORK_SECURITY_REGIME",
+    "confidence": "medium",
+    "rationale": "The regulatory backbone is EU-specific (GDPR/NIS2/AI Act/EU Charter/ECHR) and applied as if the adopter is an EU public university subject to national NIS2 transposition, without naming the transposing country. Implicit jurisdiction assumption."
+  },
+  {
+    "kind": "implicit-single-institution",
+    "surfaceForm": "the administrative enclave is smaller, easier to harden and easier to monitor ... a reduced and well-defined perimeter (single administrative enclave assumed)",
+    "location": "argumentation-body-EN.tex / Sec. 'network segmentation' & 'governance' (Q1.3, Q2.x, recurring 'administrative enclave')",
+    "proposedGenericDecision": "Confirm the architecture's 'single administrative enclave' is presented as a role/zone type rather than a single physical campus assumption; phrase as 'the administrative zone(s)' to avoid presupposing one campus/data-centre.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "The enclave/zone model is generic by design; flagged because repeated singular 'the administrative enclave' could implicitly assume a single campus/data-centre. Low risk; mostly a phrasing nuance."
+  },
+  {
+    "kind": "implicit-macro-expansion",
+    "surfaceForm": "\\institution{ULHPC}, \\institution{LIST}, \\institution{LIH}, \\institution{MeluXina} (\\institution{...} semantic macro expanding to UL-ecosystem terms)",
+    "location": "argumentation-body-EN.tex / Q3.4 answerbox",
+    "proposedGenericDecision": "These \\institution{} macro arguments expand to UL-ecosystem proper names; replace the macro arguments with role-based localization variables so the semantic macro stays but the expanded term is generic.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_HPC_FACILITY, PEER_RESEARCH_INSTITUTIONS, NATIONAL_HPC_RESOURCE",
+    "confidence": "high",
+    "rationale": "The \\institution{} semantic command is correctly used, but its expansion text is UL/LU-specific (ULHPC, LIST, LIH, MeluXina). The macro is fine; the expanded literals are the specificity to remove."
+  },
+  {
+    "kind": "explicit-amount",
+    "surfaceForm": "the global all-industry average data breach cost reached \\$4.88M in 2024~\\cite{ibm-cost-breach-2024} (the education sector sits below this average)",
+    "location": "argumentation-body-EN.tex / Q9.1 and Q9.3 answerboxes",
+    "proposedGenericDecision": "Keep: this is a sourced global (not LU/institution-specific) statistic used as cost-of-inaction context, with the required qualifying education-sector caveat. No localization needed.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "A global IBM benchmark figure with proper qualifying context; not institution- or jurisdiction-bound, so it does not impede agnosticism. Listed because the brief flags 'EUR amounts' / monetary figures; this one is global and may stay."
+  }
+]

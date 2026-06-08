@@ -1,0 +1,115 @@
+[
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "University of Luxembourg",
+    "location": "ul-it-policy/book/book-EN.tex, file header comment (l.2-3): \"BOOK: Infrastructure and Organisation of Information Systems for the University of Luxembourg\"",
+    "proposedGenericDecision": "Refer to the institution by its generic role (e.g. \"the University\" / \"a research-intensive university\") in the dossier title comment.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "Names the specific subject institution in the document banner comment; the dossier is intended to be institution-agnostic."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "University of Luxembourg",
+    "location": "ul-it-policy/book/book-EN.tex, Part \"Annotated table of contents of the Technical Reference\" (l.461-464): \"Guelfi N., ... University of Luxembourg, Department of Computer Science, May 2026\"",
+    "proposedGenericDecision": "Replace publisher affiliation with a generic placeholder or drop the institutional affiliation in the citation line of the Technical Reference.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "Hard-codes the issuing institution as publisher of the cited Technical Reference, tying the dossier to a single university."
+  },
+  {
+    "kind": "explicit-person",
+    "surfaceForm": "Guelfi N. (named author)",
+    "location": "ul-it-policy/book/book-EN.tex, \"Annotated table of contents of the Technical Reference\" citation line (l.461-462)",
+    "proposedGenericDecision": "Use a role-based / placeholder author token (e.g. AUTHOR_NAME) rather than a named individual in the generic template.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "AUTHOR_NAME",
+    "confidence": "medium",
+    "rationale": "A named person is institution/author-specific; an institution-agnostic template should not bind the citation to one author."
+  },
+  {
+    "kind": "explicit-org-unit",
+    "surfaceForm": "Department of Computer Science",
+    "location": "ul-it-policy/book/book-EN.tex, two occurrences: title-page approval line (l.274) and Technical Reference citation (l.463)",
+    "proposedGenericDecision": "Replace the specific issuing department with a generic role (e.g. \"the issuing academic unit\" / SPONSORING_UNIT).",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "SPONSORING_UNIT",
+    "confidence": "high",
+    "rationale": "\"Department of Computer Science\" is the specific authoring/approving unit; institution-agnostic version needs a role placeholder."
+  },
+  {
+    "kind": "explicit-org-unit",
+    "surfaceForm": "Faculty of Science, Technology and Medicine (FSTM)",
+    "location": "ul-it-policy/book/book-EN.tex, title page approval line (l.274): \"approved by: Faculty of Science, Technology and Medicine and Department of Computer Science\"",
+    "proposedGenericDecision": "Replace with a generic approving-body role (e.g. \"the approving faculty/governance body\" / APPROVING_BODY).",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "APPROVING_BODY",
+    "confidence": "high",
+    "rationale": "FSTM is a UL-specific faculty; the approval attribution must become role-based to be institution-agnostic."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "INTERNAL Document version 2.1 approved by: Faculty ... and Department ...",
+    "location": "ul-it-policy/book/book-EN.tex, title page (l.274)",
+    "proposedGenericDecision": "Generalise the approval/endorsement statement to a role-based governance shape, decoupled from a specific faculty+department pairing.",
+    "suggestedAction": "generalize",
+    "confidence": "medium",
+    "rationale": "Beyond the named units, the approval workflow assumes a specific two-tier (faculty + department) endorsement structure that is institution-specific."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "Magna Charta Universitatum, Bologna, 1988 epigraph + \"A university is not a corporation\" governance framing",
+    "location": "ul-it-policy/book/book-EN.tex, title page epigraph/quote boxes (l.294-306)",
+    "proposedGenericDecision": "Keep — the Magna Charta Universitatum and the academic-freedom framing are pan-European/universal to universities, not bound to one institution.",
+    "suggestedAction": "keep",
+    "confidence": "high",
+    "rationale": "This framing is generic to universities worldwide; it does not bind the document to a specific institution and supports the agnostic stance."
+  },
+  {
+    "kind": "explicit-bib-path",
+    "surfaceForm": "infra-uni-consolidé.bib (consolidated UL-suite bibliography path)",
+    "location": "ul-it-policy/book/book-EN.tex, \\addbibresource{../main/infra-uni-consolidé.bib} (l.66)",
+    "proposedGenericDecision": "Keep the bib mechanism but rename/repoint to the generic suite's bibliography; the filename itself is not reader-visible but encodes the UL-suite naming.",
+    "suggestedAction": "keep",
+    "confidence": "low",
+    "rationale": "Build-internal path, not reader-visible specificity; flagged only because the suite naming carries the original project identity. No reader-facing institution leak."
+  },
+  {
+    "kind": "implicit-self-reference",
+    "surfaceForm": "Indicative orders of magnitude for an R1 institution; FTE envelopes per layer",
+    "location": "ul-it-policy/book/book-EN.tex, annotated ToC, Ch.~15 Sizing reference points (l.525-527)",
+    "proposedGenericDecision": "Keep — \"R1 institution\" and per-layer FTE envelopes are a generic sizing class, not jurisdiction- or institution-bound; ensure no EUR/national FTE cost is implied.",
+    "suggestedAction": "keep",
+    "confidence": "medium",
+    "rationale": "References an R1 sizing archetype generically; flagged for awareness because FTE/cost framing can become jurisdiction-bound, but as written it is role/class-based, not UL-specific."
+  },
+  {
+    "kind": "implicit-national-transposition",
+    "surfaceForm": "Regulatory mapping ... regulations most likely to apply to a research-intensive university (GDPR, NIS2, EU AI Act, Schrems II, NIST CSF 2.0, eIDAS 2, ISO/IEC 27001/27002/27005, COBIT 2019)",
+    "location": "ul-it-policy/book/book-EN.tex, annotated ToC, Ch.~33 Regulatory mapping (l.591-597)",
+    "proposedGenericDecision": "Keep — the list is supranational (EU/international) and framed generically for \"a research-intensive university\"; no national transposition is named, so it is already institution-agnostic.",
+    "suggestedAction": "keep",
+    "confidence": "medium",
+    "rationale": "EU/international instruments named without a single-country transposition; the framing \"most likely to apply to a research-intensive university\" is role-based and agnostic. Flagged only to confirm no implicit single-jurisdiction assumption leaks here."
+  },
+  {
+    "kind": "implicit-self-reference",
+    "surfaceForm": "Sovereign University IT --- A Technical Reference for Architecture and Migration (cited as ng-tech-ref-2026)",
+    "location": "ul-it-policy/book/book-EN.tex, Part IV pointer tcolorbox and citation (l.394-396, l.461-464)",
+    "proposedGenericDecision": "Keep the companion-document pointer but ensure its citation metadata (institution, author) is parameterized as flagged above; the title itself is generic.",
+    "suggestedAction": "keep",
+    "confidence": "low",
+    "rationale": "The cited document title is generic; only its embedded affiliation/author metadata (covered by separate rows) carries institution specificity."
+  },
+  {
+    "kind": "implicit-running-header",
+    "surfaceForm": "University IT Infrastructure --- Complete Dossier",
+    "location": "ul-it-policy/book/book-EN.tex, fancyhead RE (l.82)",
+    "proposedGenericDecision": "Keep — the running header is already generic (\"University IT Infrastructure\"), no specific institution named.",
+    "suggestedAction": "keep",
+    "confidence": "high",
+    "rationale": "Header is institution-agnostic as written; included for completeness to confirm it requires no change."
+  }
+]

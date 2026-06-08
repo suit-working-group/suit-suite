@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{nren}NREN] National Research and Education Network --- a specialised Internet service provider dedicated to supporting research and education (e.g., RESTENA in Luxembourg, RENATER in France, SWITCH in Switzerland). / \\glsdefine{nren}{NREN}{National Research and Education Network}{... the institution's national NREN}",
+    "location": "ul-it-policy/main/glossary-EN.tex (Research Networks and Organisations, NREN item, L242-245) and glossary-defs.tex (\\glsdefine{nren}, \\glsdefine{restena} both glossed 'the institution's national NREN')",
+    "proposedGenericDecision": "The NREN glossary definition is generic, but the parenthetical example roster leads with 'RESTENA in Luxembourg' and the \\glsdefine variants gloss the acronym as 'the institution's national NREN', tying the term to the Luxembourg deployment. Keep the generic gloss; either drop the worked example list or present a jurisdiction-neutral set without leading with the home NREN. The ANCHOR-NREN matrix entry treats the prose Q&A occurrence, not the glossary definition itself.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "NREN_NAME",
+    "confidence": "medium",
+    "rationale": "The glossary files were not scanned by the canonical matrix (no glossary-EN/glossary-defs occurrences, no glossary-term kind). The NREN glossary gloss embeds a Luxembourg-first example roster and an institution-bound 'the institution's national NREN' definition that ANCHOR-NREN (a facility/prose anchor) does not address at the glossary layer."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{restena}RESTENA] Fondation Restena --- Luxembourg NREN, connecting research and education institutions to G\\'EANT.",
+    "location": "ul-it-policy/main/glossary-EN.tex (Research Networks and Organisations, RESTENA item, L248-249) and glossary-defs.tex \\glsdefine{restena}",
+    "proposedGenericDecision": "RESTENA is the home-jurisdiction NREN as a standalone glossary entry; the entire entry is Luxembourg-bound. In a genericised suite this glossary item should be parameterised to the deploying institution's NREN (or dropped when the NREN is not named), rather than hard-coding Fondation Restena. ANCHOR-NREN / ANCHOR-NREN-CSIRT cover the entity in prose but not its dedicated glossary line.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NREN_NAME",
+    "confidence": "medium",
+    "rationale": "Standalone glossary entry naming the home NREN; jurisdiction-bound at the glossary layer, not covered by the matrix because the glossary file was never enumerated as an occurrence source."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[RENATER] R\\'eseau National de t\\'el\\'ecommunications pour la Technologie, l'Enseignement et la Recherche --- French NREN. / \\item[SWITCH] Swiss NREN, providing SWITCHaai (federated identity), SWITCHdrive (cloud storage), and SWITCHengines (OpenStack IaaS).",
+    "location": "ul-it-policy/main/glossary-EN.tex (Research Networks and Organisations, RENATER L246-247 and SWITCH L250-251)",
+    "proposedGenericDecision": "RENATER and SWITCH are foreign-jurisdiction NREN exemplars present only because they appear in the NREN example roster. Keep as comparator exemplars only if the NREN worked example is retained; otherwise drop. The SWITCH product trio (SWITCHaai/SWITCHdrive/SWITCHengines) is a vendor-specific service list not captured by any matrix anchor.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "Glossary-only exemplar entries; the matrix references RENATER/SWITCH only incidentally inside ANCHOR-NREN's prose occurrences, never as glossary entries, and never addresses the SWITCH branded-service enumeration."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{nac}NAC] Network Access Control --- system enforcing authentication, device posture assessment, and dynamic VLAN assignment at the network edge (e.g., PacketFence, Cisco ISE).",
+    "location": "ul-it-policy/main/glossary-EN.tex (Technical Infrastructure, NAC item, L48-50) and glossary-defs.tex \\glsdefine{nac}",
+    "proposedGenericDecision": "The NAC concept is jurisdiction-neutral, but the glossary definition embeds a two-product vendor example (PacketFence, Cisco ISE) that is not covered by any matrix vendor anchor. Keep the generic definition; treat the parenthetical product pair as a vendor exemplar list (retain as neutral examples or drop), consistent with how ANCHOR-NETWORK-VENDOR-LIST handles named vendors elsewhere.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "Vendor exemplars (PacketFence, Cisco ISE) appear inside a glossary definition; neither product is referenced anywhere in the matrix (both return 'out' on a full-matrix scan), so this glossary-term product binding is genuinely uncovered."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[DTP] Dynamic Trunking Protocol --- a Cisco protocol for automatic VLAN trunk negotiation; should be disabled on access ports for security.",
+    "location": "ul-it-policy/main/glossary-EN.tex (Technical Infrastructure, DTP item, L31-33)",
+    "proposedGenericDecision": "DTP is a Cisco-proprietary protocol; the glossary term is intrinsically vendor-bound. Either keep with the vendor attribution (it is a factual proprietary-protocol name, like the standards in ANCHOR-STANDARDS-GENERIC) or generalise the security guidance to 'disable automatic trunk negotiation' so the recommendation does not presuppose Cisco switching gear.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "Cisco-bound glossary entry not present in the matrix; borderline because the protocol name is intrinsically proprietary, but the security recommendation built on it implies a Cisco-equipped deployment that an institution-agnostic suite should not assume."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{lms}LMS] Learning Management System --- platform for delivering and managing educational content (e.g., Moodle).",
+    "location": "ul-it-policy/main/glossary-EN.tex (Technical Infrastructure, LMS item, L44-45) and glossary-defs.tex \\glsdefine{lms}",
+    "proposedGenericDecision": "The LMS concept is generic; the parenthetical 'e.g., Moodle' is a specific product exemplar. Keep the generic definition; the Moodle example may stay as a neutral exemplar (open-source, vendor-neutral) but is a product binding not captured by any matrix anchor and could be dropped for full product-agnosticism.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "Moodle returns 'out' on a full-matrix scan; the product exemplar inside the LMS glossary definition is uncovered. Low severity because Moodle is open-source and broadly representative, but it is still a named product in a glossary definition."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[WLCG] Worldwide LHC Computing Grid --- distributed computing infrastructure for processing data from CERN's Large Hadron Collider.",
+    "location": "ul-it-policy/main/glossary-EN.tex (Research Networks and Organisations, WLCG item, L252-253)",
+    "proposedGenericDecision": "WLCG/CERN is a specific named research-infrastructure exemplar appearing as a standalone glossary entry. It is relevant only if the body still uses CERN/WLCG as a reference precedent; otherwise it is an orphaned institution-specific glossary line. Keep as a documented precedent exemplar or drop. ANCHOR-GEANT-BACKBONE mentions WLCG incidentally but does not cover this dedicated glossary definition.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "WLCG appears in the matrix only as an incidental token inside ANCHOR-GEANT-BACKBONE, not as a glossary entry. The standalone CERN-bound glossary line is a named-precedent binding uncovered at the glossary layer."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{byod}BYOD] Bring Your Own Device --- the practice of employees or students using personal devices to access institutional resources. / \\item[\\glstarget{iam}IAM] ... controlling access to resources.",
+    "location": "ul-it-policy/main/glossary-EN.tex (Technical Infrastructure, BYOD L18-19, IAM L38-39) and glossary-defs.tex",
+    "proposedGenericDecision": "These definitions phrase the actor population as 'employees or students' / 'institutional resources', presupposing a teaching-and-research institution with a student body. For a suite intended to generalise across institution types (the ANCHOR-INSTITUTION-TYPE-PROFILE concern), 'students' is a higher-education-bound role. Generalise to 'members / users of the institution' so the glossary does not assume a university population.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "Implicit higher-education population binding inside generic-term glossary definitions; not a named entity so it escapes the matrix's entity-oriented anchors, but it is an institution-type assumption embedded in the glossary text."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{icradp}ICRADP] Independent Commission for Reasonable Adjustments of Digital Policies (proposed in this report; French acronym: CARPN).",
+    "location": "ul-it-policy/main/glossary-EN.tex (European Regulations and Legal Instruments, ICRADP item, L154-155) and glossary-defs.tex \\glsdefine{icradp}",
+    "proposedGenericDecision": "ICRADP is covered as an entity by ANCHOR-ICRADP-CARPN, but the glossary line is a distinct occurrence carrying the same French 'CARPN' Francophone-jurisdiction binding plus the 'proposed in this report' self-reference. Apply the ANCHOR-ICRADP-CARPN decision here too: keep the English construct, make the French acronym suite-neutral / parameterised, and treat 'proposed in this report' per the suite self-reference convention (ANCHOR-SUITE-CROSSREF).",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "Cross-reference completeness: the ICRADP/CARPN binding and the self-referential 'proposed in this report' phrasing recur in the glossary line, which the matrix occurrence lists for ANCHOR-ICRADP-CARPN do not enumerate (no glossary-EN occurrence). Recorded so the glossary occurrence is tracked alongside the existing anchor."
+  },
+  {
+    "kind": "glossary-term",
+    "surfaceForm": "\\item[\\glstarget{tac}TAC] Trusted Activity Context --- a coherent, validated environment assembling data, tools, services, and access rights for a specific university activity (concept introduced in this report).",
+    "location": "ul-it-policy/main/glossary-EN.tex (Technical Infrastructure, TAC item, L75-77) and glossary-defs.tex \\glsdefine{tac}",
+    "proposedGenericDecision": "TAC is a suite-internal construct (ANCHOR-TAC-CONSTRUCT) and the glossary gloss carries the 'concept introduced in this report' self-reference plus 'a specific university activity'. Keep the construct; apply the suite self-reference convention to 'introduced in this report' and generalise 'university activity' to 'institutional activity' so the term does not presuppose a university.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "The TAC glossary line restates the suite-internal construct with an institution-type-bound 'university activity' phrasing and a 'introduced in this report' self-reference; the glossary occurrence is not enumerated under ANCHOR-TAC-CONSTRUCT, so it is recorded here for completeness at the glossary layer."
+  }
+]

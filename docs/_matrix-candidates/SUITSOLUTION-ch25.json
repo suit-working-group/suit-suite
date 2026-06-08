@@ -1,0 +1,72 @@
+[
+  {
+    "kind": "regulatory-jurisdiction-implicit",
+    "surfaceForm": "the audit-and-IR obligations of the regulatory framework. It is the principal anchor of NIS2~Art.~23 (incident reporting: 24-hour early warning, 72-hour notification, one-month final report) and of \\gls{gdpr}~Art.~33--34 ...",
+    "location": "ch25-wave7-audit-ir-EN.tex / Section: Regulatory anchoring (sec:w7-regulatory)",
+    "proposedGenericDecision": "Present NIS2 + GDPR as instances of the applicable incident-reporting / breach-notification regime rather than as 'the' framework. Frame the named instruments and their fixed deadlines (24h/72h/1-month) as the EU-jurisdiction instantiation; abstract to 'the applicable incident-reporting regime and personal-data breach-notification regime, with their statutory deadlines'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INCIDENT_REPORTING_REGIME / BREACH_NOTIFICATION_REGIME / REPORTING_DEADLINES",
+    "confidence": 0.82,
+    "rationale": "NIS2 and GDPR with their exact statutory deadlines bind the document to EU jurisdiction. The 24h/72h/one-month timeline is EU-specific (NIS2 Art.23); a non-EU institution faces a different regime. Stated as 'the regulatory framework' it implicitly assumes the reader is EU-regulated without naming the country."
+  },
+  {
+    "kind": "regulatory-framework-implicit",
+    "surfaceForm": "the institution becomes \\emph{operationally accountable} for the audit-and-IR obligations of the regulatory framework",
+    "location": "ch25-wave7-audit-ir-EN.tex / Section: Regulatory anchoring (sec:w7-regulatory)",
+    "proposedGenericDecision": "Replace the definite-article 'the regulatory framework' (which presumes a single, reader-shared regime) with 'the institution's applicable regulatory framework', signalling that the named instruments below are the worked example for the EU jurisdiction.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.6,
+    "rationale": "The definite article asserts a single shared framework, which is the core implicit institution/jurisdiction binding. Generalizing the framing makes the named instruments illustrative rather than universal."
+  },
+  {
+    "kind": "standard-mapping-keep",
+    "surfaceForm": "27001~A.8.15 (logging) and A.8.16 (monitoring activities) ... NIST CSF \\textsf{DETECT} (DE) and \\textsf{RESPOND} (RS) functions",
+    "location": "ch25-wave7-audit-ir-EN.tex / Section: Regulatory anchoring (sec:w7-regulatory)",
+    "proposedGenericDecision": "Keep. ISO/IEC 27001 and NIST CSF are jurisdiction-neutral international/voluntary standards applicable across institutions worldwide; they are not institution-specific.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.9,
+    "rationale": "ISO 27001 and NIST CSF are globally adopted voluntary frameworks; citing specific controls/functions is the project's documented evidence-methodology convention, not a localization issue."
+  },
+  {
+    "kind": "national-csirt-topology-implicit",
+    "surfaceForm": "MoUs with the national CSIRT and \\gls{nren}-CSIRT where applicable ... at least one exercise has been conducted with institutional CSIRT or \\gls{nren}-CSIRT participation",
+    "location": "ch25-wave7-audit-ir-EN.tex / Sections: Pre-requisites (sec:w7-prereq), Exit criteria (sec:w7-exit)",
+    "proposedGenericDecision": "Largely already generic via the \\gls{nren} macro and 'where applicable'. Confirm the glossary 'nren' expands to a role-based definition (National Research and Education Network), not to RESTENA. Keep the role-based 'national CSIRT / NREN-CSIRT / institutional CSIRT' triad as a parameterizable governance topology.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_CSIRT / NREN_CSIRT",
+    "confidence": 0.55,
+    "rationale": "Assumes a national-CSIRT plus NREN-CSIRT topology, which is jurisdiction-shaped (some countries lack a distinct NREN-CSIRT). Already softened by 'where applicable' and the nren macro, but the named CSIRT relationship slots are localization points. Verify the macro does not resolve to a UL/LU term."
+  },
+  {
+    "kind": "sector-body-precedent",
+    "surfaceForm": "Patterns reported in NREN community fora and at REN-ISAC indicate that research-intensive institutions ...",
+    "location": "ch25-wave7-audit-ir-EN.tex / Section: Exit criteria (realworldbox 'Audit and IR practice in research-intensive institutions')",
+    "proposedGenericDecision": "REN-ISAC is a specific (North-America-rooted) sector information-sharing body. Generalize to 'sector incident-sharing networks (e.g., REN-ISAC, NREN/GEANT community fora)' so the named body is an example, not the assumed forum the institution belongs to.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "SECTOR_ISAC",
+    "confidence": 0.5,
+    "rationale": "Naming REN-ISAC as the reference forum implicitly assumes membership in a specific regional sharing community; a generic reader's relevant ISAC may differ. Low-stakes because already framed as 'reported patterns', but it is a regional precedent presented as the norm."
+  },
+  {
+    "kind": "vendor-trajectory-keep",
+    "surfaceForm": "brownfield Microsoft-centric ... Microsoft Sentinel ... KQL ... OpenTelemetry collector; brownfield hybrid ... Splunk ...",
+    "location": "ch25-wave7-audit-ir-EN.tex / Sections: Trajectory brownfield Microsoft-centric (sec:w7-brownfield-ms), Trajectory brownfield hybrid (sec:w7-brownfield-hybrid)",
+    "proposedGenericDecision": "Keep. These are commercial/technology product trajectories deliberately offered as alternative starting points (greenfield / Microsoft-centric / Splunk-hybrid); they describe technology estates, not the authoring institution's identity, and are explicitly framed as 'for institutions whose ...'.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.85,
+    "rationale": "Sentinel/Splunk/KQL/OpenTelemetry are vendor-neutral-by-design trajectory options, each conditioned on the reader's existing estate. They do not bind the document to any one institution; removing them would reduce, not increase, agnosticism."
+  },
+  {
+    "kind": "cross-reference-internal-keep",
+    "surfaceForm": "\\trchap{ch:observability}, D12.2, D12.8, D16.5, D17.3, D18.2, \\S\\ref{sec:ob-schema}, \\S\\ref{sec:cf-suite}, ch:policy, ch:conformance, ch:regulatory-mapping",
+    "location": "ch25-wave7-audit-ir-EN.tex / throughout (caveatbox, exit criteria, regulatory anchoring)",
+    "proposedGenericDecision": "Keep. These are intra-suite decision IDs and chapter/section cross-references internal to this document suite, not institutional specificity.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.95,
+    "rationale": "Decision registers (Dxx.y) and \\trchap/\\ref targets are document-internal scaffolding; they carry no institution-bound meaning and must remain for coherence."
+  }
+]

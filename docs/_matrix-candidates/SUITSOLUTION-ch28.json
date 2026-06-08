@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "the institution's change advisory board (or equivalent) must review",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Change management (Per-wave change-management cadence)",
+    "proposedGenericDecision": "Refer to the change-authorising body in role terms; '(or equivalent)' already hedges, but 'change advisory board' presumes an ITIL-shaped governance. Keep role-neutral: 'the body authorised to review and approve changes'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.55,
+    "rationale": "CAB is an ITIL construct; the chapter already softens it with '(or equivalent)', so this is low-severity but still presumes a specific governance shape some institutions lack."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "The programme governance body (established in Wave~0) receives structured updates",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Communication (Governance communication)",
+    "proposedGenericDecision": "Role-based: 'the programme's designated governance authority'. Generic already, but tie the name to a localization role rather than an assumed dedicated body.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.25,
+    "rationale": "'Programme governance body' is generic and role-based; flagged only because it presumes a single named governance organ, which is mild and consistent with the playbook's own Wave 0 deliverable."
+  },
+  {
+    "kind": "implicit-org-structure",
+    "surfaceForm": "Coordinating these windows across faculties, with academic-calendar awareness",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Change management (Change windows during waves)",
+    "proposedGenericDecision": "'faculties' presumes a faculty-structured university; generalize to 'across organisational units / constituencies' so non-faculty-structured institutions (or non-university adopters) are covered.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.5,
+    "rationale": "Faculty + academic-calendar framing assumes a higher-education institution with a faculty decomposition; an institution-agnostic infrastructure policy should phrase this as generic organisational units."
+  },
+  {
+    "kind": "implicit-org-structure",
+    "surfaceForm": "Faculties, departments, and research projects receive communication at the events that affect them",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Communication (Faculty and operational communication)",
+    "proposedGenericDecision": "Generalize the unit taxonomy ('faculties, departments, and research projects') to role-based constituencies ('organisational units, departments, and project teams') so the heading and body are not bound to a university faculty model.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.5,
+    "rationale": "Both the paragraph title ('Faculty and operational communication') and body assume a university with faculties and research projects; this is implicit higher-education / research-institution specificity."
+  },
+  {
+    "kind": "implicit-self-reference",
+    "surfaceForm": "The phase-2 international peer comparison anticipated by this Reference",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Communication (Institutional and public communication)",
+    "proposedGenericDecision": "'this Reference' and 'phase-2 international peer comparison' refer to the specific roadmap of the originating UL document/initiative. Drop or rephrase to a generic future-work clause not tied to this document's particular phasing.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "References a project-specific deliverable ('phase-2', 'this Reference', the originating initiative's roadmap); an institution-agnostic adopter has no such phase-2, so this is an implicit self/project binding."
+  },
+  {
+    "kind": "implicit-self-reference",
+    "surfaceForm": "the international network anticipated in phase~2 of this initiative",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Training and skills development (NREN and peer-institution mutualisation)",
+    "proposedGenericDecision": "Drop or generalize the 'phase~2 of this initiative' clause; refer instead to ongoing/future peer-network participation without binding to the originating project's phasing.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "'phase~2 of this initiative' ties the text to the specific UL roadmap rather than a reusable, institution-agnostic policy."
+  },
+  {
+    "kind": "implicit-national-transposition",
+    "surfaceForm": "MONARC, ISO/IEC~27005, FAIR, or comparable",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Risk register",
+    "proposedGenericDecision": "MONARC is the risk-assessment method promoted by Luxembourg's national CERT (and used in the LU/EU public sector); listing it first as a default implies a Luxembourg/ANSSI-LU context. Keep MONARC only as one of several examples or parameterize the leading example by jurisdiction.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{NATIONAL_RISK_METHOD}}",
+    "confidence": 0.45,
+    "rationale": "MONARC is a Luxembourg-origin (CASES/SECURITYMADEIN.LU) risk method; presenting it as the first example among ISO/FAIR is an implicit national-context signal even though the list is open-ended."
+  },
+  {
+    "kind": "implicit-vocabulary-binding",
+    "surfaceForm": "service-management framework is built on ITIL or COBIT ... a wave is a change programme, an exit criterion is a change closure, a reversibility window is a back-out window",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Change management (ITIL or COBIT integration)",
+    "proposedGenericDecision": "Already framed conditionally ('for institutions whose ... framework is built on ITIL or COBIT'); keep as-is. This is institution-agnostic by construction.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.2,
+    "rationale": "Not specificity to remove: the ITIL/COBIT mapping is explicitly conditioned on the institution already using those frameworks, so it generalizes correctly. Recorded for completeness/no-action."
+  },
+  {
+    "kind": "implicit-cost-framing",
+    "surfaceForm": "CAPEX-to-OPEX shift ... shifts a portion of the institution's IT spending from capital expenditure ... to operating expenditure",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Financial planning (CAPEX-to-OPEX shift)",
+    "proposedGenericDecision": "Generic financial framing; no currency or jurisdiction-bound figure present. Keep. No EUR amounts or FTE figures appear in this chapter.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.15,
+    "rationale": "No jurisdiction-bound monetary amount or FTE count is stated; the financial discussion is qualitative and role-based. Recorded as a scanned-but-clean item."
+  },
+  {
+    "kind": "implicit-self-reference",
+    "surfaceForm": "The 5/7/10-year pace options of \\trchap{ch:playbook-reading}{} imply matching financial horizons",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Financial planning (Multi-year horizon)",
+    "proposedGenericDecision": "The 5/7/10-year pace options are a named design constant of this playbook (per memory, a named design constant to keep). Keep the constant; ensure the cross-ref target chapter is itself genericised. No action on the number itself.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.2,
+    "rationale": "5/7/10-year waves are a named design constant of the suite (per project memory: keep named design constants); this is internal-document structure, not institution specificity."
+  },
+  {
+    "kind": "implicit-supplier-binding",
+    "surfaceForm": "operating expenditure that earlier flowed to a single dominant supplier (licence renewals, premium support, captive services) ... brownfield-Microsoft trajectory invests less in Ceph and more in the Microsoft-OPA bridging logic",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Sections: Training (Per-layer skill development) and Financial planning (Sovereignty reinvestment)",
+    "proposedGenericDecision": "'Microsoft' / 'single dominant supplier' names a specific incumbent as the assumed brownfield baseline. Generalize 'brownfield-Microsoft' to 'brownfield-incumbent-suite' (or parameterize the incumbent) so the trajectory is not bound to one vendor.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{INCUMBENT_SUITE}}",
+    "confidence": 0.5,
+    "rationale": "Naming Microsoft as the brownfield trajectory baseline encodes the originating institution's actual incumbent; an institution-agnostic policy should parameterize the dominant-supplier identity. (Tools/standards like Ceph, OPA, Rego, Kubernetes are generic and should be kept.)"
+  },
+  {
+    "kind": "implicit-org-structure",
+    "surfaceForm": "the institution's user constituencies tolerate at agreed windows ... across faculties, with academic-calendar awareness",
+    "location": "ul-it-policy/technical/ch28-cross-cutting-EN.tex - Section: Change management (Change windows during waves)",
+    "proposedGenericDecision": "'academic-calendar awareness' presumes an academic-year-driven operating rhythm. Generalize to 'operating-calendar / service-window awareness' for non-academic adopters, or keep with a note that academic-calendar is the higher-education instantiation.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.4,
+    "rationale": "Academic-calendar framing is specific to teaching institutions; an institution-agnostic infrastructure policy should not assume the adopter runs on an academic year."
+  }
+]

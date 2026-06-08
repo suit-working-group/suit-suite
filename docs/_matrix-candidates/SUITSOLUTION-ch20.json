@@ -1,0 +1,62 @@
+[
+  {
+    "kind": "named-institution-precedent",
+    "surfaceForm": "ETH Zürich's audit pipeline patterns",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / \\section{Exit criteria} (realworldbox \"Audit pipeline precedents\")",
+    "proposedGenericDecision": "Replace the specific named peer institution with a role-based descriptor (e.g. \"a peer research-intensive university with a documented audit pipeline\") OR keep as an explicit, citable external precedent rather than home-institution context.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.72,
+    "rationale": "ETH Zürich is a specific named institution. It is used here as an external precedent (not the home institution), so it does not bind the document to Luxembourg, but it does introduce a non-agnostic concrete entity. The surrounding sentence already hedges (\"would benefit from being consulted in their current published form before being cited\"), signalling it is illustrative; for a fully institution-agnostic suite it should be generalized to a role descriptor or moved to a properly sourced reference list. Lower confidence because named external precedents are sometimes intentionally retained as evidence-layer-5 material."
+  },
+  {
+    "kind": "named-institution-precedent",
+    "surfaceForm": "CERN's security operations environment",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / \\section{Exit criteria} (realworldbox \"Audit pipeline precedents\")",
+    "proposedGenericDecision": "Replace with a role-based descriptor (e.g. \"a large multi-national research organisation's security operations environment\") or retain only as an explicitly cited external precedent.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.72,
+    "rationale": "CERN is a specific named organisation used as an illustrative precedent. Same reasoning as ETH Zürich: it is external context rather than home-institution binding, but it is a concrete non-agnostic entity that an institution-agnostic template would normally generalize or convert into a sourced citation. Retained-as-precedent is a defensible alternative, hence not full confidence."
+  },
+  {
+    "kind": "named-infrastructure-community",
+    "surfaceForm": "NREN community fora ... regional NREN-CSIRT deployments",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / \\section{Exit criteria} (realworldbox \"Audit pipeline precedents\")",
+    "proposedGenericDecision": "\"NREN\" (National Research and Education Network) and \"NREN-CSIRT\" are generic category terms, not a specific institution; keep, but ensure the surrounding examples do not implicitly point to a single national NREN. The phrase \"regional NREN-CSIRT deployments\" is already role-based and agnostic.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "NREN and NREN-CSIRT are generic infrastructure-category terms (like \"SIEM\" or \"SOC\"), not institution-binding. They are agnostic by construction. Flagged at moderate confidence only so the reviewer can confirm that the NREN reference is not silently standing in for a single national NREN (e.g. the home institution's RESTENA); as written it is generic."
+  },
+  {
+    "kind": "implicit-single-institution-voice",
+    "surfaceForm": "\"the institution\" (used pervasively as the implied home/adopting institution, e.g. \"measures the institution before any substantial change\", \"the institution exercises the canonical schema\", \"the institution retains Sentinel\")",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / multiple sections (intro, \\section{Coexistence pattern}, brownfield trajectories)",
+    "proposedGenericDecision": "Already role-based: \"the institution\" is a generic placeholder, not a named entity. Keep as the canonical generic role term for the adopting organisation across the suite.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.85,
+    "rationale": "The chapter consistently uses the generic role noun \"the institution\" rather than naming University of Luxembourg or any named body. This is exactly the institution-agnostic form desired. Logged as a positive/keep finding so the matrix records that no de-specialisation is needed here and that this is the canonical role term to enforce suite-wide."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "\"the institutionally agreed proportion of event-producing sources\" / \"the agreed source coverage\"",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / \\section{Exit criteria}",
+    "proposedGenericDecision": "Role-based already: defers the coverage target to an unspecified institutional decision body rather than naming a rectorate/board. Optionally parameterize the target proportion as a localization variable rather than leaving it fully open.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "OBSERVABILITY_SOURCE_COVERAGE_TARGET",
+    "confidence": 0.5,
+    "rationale": "\"institutionally agreed\" assumes some governance body sets the coverage threshold but wisely does NOT name a rectorate, board of governors, or specific committee, so it is already agnostic in shape. The only specificity gap is that the numeric coverage target is unstated; parameterizing it would let each adopting institution localize the threshold. Low-moderate confidence because the open phrasing may be a deliberate design choice (target set per adoption), not a leak."
+  },
+  {
+    "kind": "regulatory-anchor (multi-jurisdiction, no national transposition)",
+    "surfaceForm": "GDPR Art. 30/32/33-34, NIS2 Art. 21(2)(b)/Art. 23, ISO/IEC 27001 A.8.15/A.8.16, NIST CSF DETECT (DE.CM, DE.AE)",
+    "location": "ul-it-policy/technical/ch20-wave2-observability-EN.tex / \\section{Regulatory anchoring}",
+    "proposedGenericDecision": "These are EU/international instruments and standards, jurisdiction-broad rather than country-specific; keep. No national transposition (e.g. a Luxembourg implementing law) is named or assumed, so there is no hidden single-country binding to remediate.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.8,
+    "rationale": "The regulatory anchoring relies only on supranational instruments (GDPR, NIS2 directive, ISO/IEC 27001, NIST CSF). Unlike many chapters in this suite, it does NOT silently assume a national transposition without naming the country. It is therefore already institution-agnostic at the regulatory layer. Logged as keep so the matrix confirms no de-localisation is required here; the only residual caveat is that an adopting institution outside the EU would need a different anchor set, which is a parameterization the suite handles centrally, not in this chapter."
+  }
+]

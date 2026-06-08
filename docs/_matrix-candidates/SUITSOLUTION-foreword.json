@@ -1,0 +1,82 @@
+[
+  {
+    "kind": "named-person",
+    "surfaceForm": "Nicolas Guelfi",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraph \"Authorship and contact\"",
+    "proposedGenericDecision": "Replace the named individual with a role-based contact descriptor (e.g., the working-group coordinator / initial contact point) so the document does not bind to a specific person.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\suitContactName",
+    "confidence": "high",
+    "rationale": "Hard-codes a specific individual as initial contact point; institution-agnostic versions need a configurable contact, not a named author."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "Department of Computer Science, University of Luxembourg",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraph \"Authorship and contact\"",
+    "proposedGenericDecision": "Replace the specific department + university affiliation with a generic host-institution / hosting-department role descriptor.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\suitContactAffiliation",
+    "confidence": "high",
+    "rationale": "Explicit University of Luxembourg affiliation is the single largest institution-binding element in the foreword; must be parameterized for a peer institution to adopt."
+  },
+  {
+    "kind": "explicit-organisation-name",
+    "surfaceForm": "SUIT --- the International Working Group on Sovereign University IT in the AI Era",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraph \"Authorship and contact\"",
+    "proposedGenericDecision": "SUIT is the suite's own governing/working-group brand, intended to span institutions; keep it as the framework identity rather than a UL-specific term. Verify it is defined suite-wide and not tied to UL.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "SUIT names the cross-institutional working group itself and is the intended generic brand of the suite; it is not UL-bound, so it should be retained, but flagged for confirmation that its definition is institution-agnostic."
+  },
+  {
+    "kind": "implicit-suite-self-reference",
+    "surfaceForm": "companion report \\emph{Infrastructure and Organisation of Information Systems for Universities --- Analysis, State of the Art and Propositions}",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / opening paragraph",
+    "proposedGenericDecision": "Title of the companion report is generic (\"for Universities\") and does not name an institution; keep, but ensure the referenced title matches the generalized suite title.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "Already institution-agnostic (\"for Universities\"); no UL specificity. Retained for completeness as a cross-document reference that must stay in sync."
+  },
+  {
+    "kind": "implicit-deployment-context",
+    "surfaceForm": "the international university network anticipated in phase~2",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraph \"Place of this document in the suite\"",
+    "proposedGenericDecision": "\"phase 2\" and \"international university network\" describe the suite's own roadmap rather than a specific institution; this is generic project framing. Keep, but verify \"phase 2\" is a suite-level concept and not a UL project-plan artefact.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "The phase-2 / international-network framing is part of the generic adoption narrative, not UL-bound; retained but flagged in case 'phase 2' references a UL-internal project timeline elsewhere in the suite."
+  },
+  {
+    "kind": "macro-cross-reference",
+    "surfaceForm": "\\trchap{ch:sovereignty-grid}{}, \\trchap{ch:institutional-precedents}{}, \\trchap{ch:external-references}{}",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraphs \"Posture\" and \"On AI assistance\"",
+    "proposedGenericDecision": "These \\trchap macros are internal Technical-Reference chapter cross-references; verify the macro and target chapters are institution-agnostic. They do not encode UL terms by themselves.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "Internal cross-reference macros pointing to chapters within the same Reference; not institution-specific. Flagged only so the audit confirms the macro expansion carries no UL-bound label."
+  },
+  {
+    "kind": "implicit-institution-reference",
+    "surfaceForm": "the working state of an ongoing engineering and governance investigation / the operational experience of adopting institutions / member institutions",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraphs \"Always-living document\" and \"On AI assistance\"",
+    "proposedGenericDecision": "Phrasing already uses generic role-based terms (\"adopting institutions\", \"member institutions\", \"peer institution\") rather than naming UL; this is the desired institution-agnostic voice. Keep.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "These are role-based, institution-neutral references and serve as the model for how other elements should read; no change needed."
+  },
+  {
+    "kind": "implicit-process-artefact",
+    "surfaceForm": "A post-redaction verification checklist is maintained in the working repository",
+    "location": "ul-it-policy/technical/foreword-EN.tex :: Foreword / paragraph \"On AI assistance\"",
+    "proposedGenericDecision": "\"working repository\" is a neutral process artefact reference and does not bind to UL infrastructure; keep. Confirm it does not link to a UL-specific repository URL elsewhere.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "Generic mention of a maintained checklist/repository with no UL-specific host named; institution-neutral as written, flagged only for URL confirmation."
+  }
+]

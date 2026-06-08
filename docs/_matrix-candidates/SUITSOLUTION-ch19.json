@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "the relevant regional federation",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Goal and dependencies} (sec:w1-goal)",
+    "proposedGenericDecision": "Refer to the <national/regional R&E identity federation> as a role rather than implying a specific federation. Already role-phrased; verify no UL-specific federation (e.g. an implied RESTENA/eduGAIN-LU registration) is assumed.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.55,
+    "rationale": "Phrase is already role-based ('relevant regional federation'). Flagged because 'regional federation' silently assumes the institution belongs to a single national R&E federation operated by its NREN; institutions outside that model (multi-national, private, non-EU) may not. Low-risk but worth confirming it stays parameterizable."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "eduGAIN (Keycloak + SCIM + eduGAIN reference instantiation; greenfield trajectory)",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Trajectory: greenfield} (sec:w1-greenfield)",
+    "proposedGenericDecision": "eduGAIN is the global R&E interfederation, not a single jurisdiction; however its assumption presumes the institution is an R&E entity eligible for NREN-mediated eduGAIN participation. Treat 'eduGAIN' as the default <interfederation> with a localization variable.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INTERFEDERATION_NAME (default: eduGAIN)",
+    "confidence": 0.5,
+    "rationale": "eduGAIN is global, not Luxembourg-specific, so it is not an explicit UL marker. But hard-coding it presumes R&E sector membership and NREN mediation; a fully institution-agnostic playbook should let the federation/interfederation be supplied per adopter."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "by faculty (one faculty at a time for distributed institutions)",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Coexistence pattern} (sec:w1-coexistence)",
+    "proposedGenericDecision": "Replace the assumed 'faculty' organizational unit with a role-based term such as <organizational unit / sub-unit>, since 'faculty' presumes a specific (European university) governance shape.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "'Faculty' as a cohort axis assumes a faculty-based academic structure (common in EU/UL, including UL's FSTM etc.). An institution-agnostic playbook should use a neutral unit term; the parenthetical 'for distributed institutions' is fine but 'faculty' is structure-specific."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "For the dominant European brownfield position",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Trajectory: brownfield Microsoft-centric} (sec:w1-brownfield-ms)",
+    "proposedGenericDecision": "Drop or generalize the geographic qualifier 'European'; describe it as the <prevailing commercial-IdP brownfield position> without binding the playbook to a European market assumption.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.7,
+    "rationale": "'European' is an explicit jurisdictional/market scoping that contradicts institution-agnostic intent. The Microsoft-Entra-dominant pattern is presented as the regional default; a generic document should state the pattern without anchoring it to one continent."
+  },
+  {
+    "kind": "implicit-regulation-binding",
+    "surfaceForm": "eIDAS~2 trust services and notified-eID interoperability ... institutions that participate in the EUDI Wallet ecosystem",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Regulatory anchoring} (sec:w1-regulatory)",
+    "proposedGenericDecision": "eIDAS~2 / EUDI Wallet are EU-specific instruments. Gate these behind an <applicable-eID-regime> variable or present as 'where an EU-style eID regime applies', so non-EU adopters are not implicitly bound.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "EID_REGIME (default: eIDAS 2 / EUDI Wallet, EU)",
+    "confidence": 0.7,
+    "rationale": "eIDAS 2 and the EUDI Wallet are EU regulatory instruments; including them as a baseline anchor binds the chapter to EU jurisdiction. The clause already hedges ('for institutions that participate'), but the regime itself should be a localization variable for true agnosticism."
+  },
+  {
+    "kind": "implicit-regulation-binding",
+    "surfaceForm": "NIS2~Art.~21(2)(i) ... and (j)",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Regulatory anchoring} (sec:w1-regulatory)",
+    "proposedGenericDecision": "NIS2 is an EU directive requiring national transposition. Keep as a default EU anchor but expose the controlling instrument as <applicable-cyber-regulation> so non-EU adopters can substitute their equivalent.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "CYBER_REGULATION (default: NIS2, EU; transposed nationally)",
+    "confidence": 0.55,
+    "rationale": "NIS2 is EU-specific and operates via national transposition (an implicit national-transposition assumption stated without naming the country). GDPR/ISO 27001/NIST CSF in the same paragraph are broadly portable, but NIS2 (and eIDAS2) are EU-bound and should be parameterizable for an institution-agnostic baseline."
+  },
+  {
+    "kind": "implicit-precedent-set",
+    "surfaceForm": "CERN's migration to a Keycloak-based SSO, ETH Zürich's federation evolution, and various campus deployments described in GÉANT and EDUCAUSE community fora",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Exit criteria} (realworldbox: Identity migration precedents)",
+    "proposedGenericDecision": "Named institutional precedents (CERN, ETH Zürich) and sector fora (GÉANT, EDUCAUSE) are concrete examples, not UL-internal markers; they are illustrative and already hedged. Keep as illustrative precedents but ensure they are presented as examples, not as the adopter's own context.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.45,
+    "rationale": "These are third-party precedents, not the adopting institution's identity, so they do not break agnosticism; per the it-policy domain rules, named precedents are encouraged. Flagged only because GEANT/EDUCAUSE imply an R&E-sector context; safe to keep as illustrative."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "the governance body has reviewed the wave outcome and formally closed it",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Exit criteria} (sec:w1-exit)",
+    "proposedGenericDecision": "'governance body' is already role-based (not 'rectorate'/'board of governors'); keep as the abstract <governance body> role. Confirm no macro expands it to a UL-specific term elsewhere in the suite.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.4,
+    "rationale": "The chapter consistently uses the neutral 'governance body' rather than a named governance organ, which is the desired generic form. Included for completeness so the matrix records that governance was checked and found role-based."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "in conformance with that federation's technical profile / brought into the regional federation",
+    "location": "ch19-wave1-identity-EN.tex / \\section{Trajectory: brownfield Microsoft-centric} (sec:w1-brownfield-ms, 'What changes in Wave 1')",
+    "proposedGenericDecision": "Same as the goal-section reference: 'regional federation' is role-based but presumes a single national R&E federation. Keep role-phrased; tie to the same INTERFEDERATION/FEDERATION localization variable for consistency.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "FEDERATION_NAME (default: national R&E federation)",
+    "confidence": 0.5,
+    "rationale": "Repeats the 'regional federation' assumption; cross-listed so localization stays consistent with sec:w1-goal. No explicit UL/RESTENA naming, so risk is low."
+  }
+]

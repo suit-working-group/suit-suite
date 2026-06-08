@@ -1,0 +1,42 @@
+[
+  {
+    "kind": "named-initiative",
+    "surfaceForm": "the international university network anticipated in phase~2 of the SUIT initiative",
+    "location": "ul-it-policy/technical/abstract-EN.tex (Abstract --- Technical Reference; closing sentence)",
+    "proposedGenericDecision": "Refer to the sponsoring/coordinating program by a role-based descriptor (e.g., the cross-institutional infrastructure-sovereignty program / the participating institution network) rather than the proper name 'SUIT' and its internal phase numbering.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "PROGRAM_NAME / PROGRAM_PHASE_REF / INSTITUTION_NETWORK_NAME",
+    "confidence": 0.95,
+    "rationale": "'SUIT initiative' is a proper name of a specific program, and 'phase~2' is internal program staging. Both bind the abstract to one named undertaking, defeating institution-agnostic reuse. A role-based or parameterized descriptor preserves the meaning (a shared technical baseline for a multi-institution network) without the proper noun. Note: the destination tree itself is 'suit-infrastructure-policy', so SUIT is the program brand to be abstracted at instantiation."
+  },
+  {
+    "kind": "vendor-binding-assumption",
+    "surfaceForm": "three trajectories per wave (greenfield, brownfield Microsoft-centric, brownfield hybrid)",
+    "location": "ul-it-policy/technical/abstract-EN.tex (Abstract --- Technical Reference; migration playbook sentence)",
+    "proposedGenericDecision": "Name the incumbent-stack trajectory by the role it plays (dominant-proprietary-vendor brownfield) so the enumeration does not assume the reference institution's incumbent is Microsoft specifically.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "INCUMBENT_VENDOR (optional, if a concrete name is wanted per instantiation)",
+    "confidence": 0.6,
+    "rationale": "'Microsoft-centric' encodes the specific incumbent stack of the originating institution as a fixed trajectory label. A truly institution-agnostic taxonomy would describe the trajectory by role (e.g., 'brownfield dominant-proprietary-vendor' or 'brownfield single-vendor estate'). Lower confidence because Microsoft is a defensible illustrative archetype for many universities, but as written it is an implicit specificity that should at minimum be flagged."
+  },
+  {
+    "kind": "jurisdiction-assumption",
+    "surfaceForm": "aligns the architecture and the playbook to the international perimeter most universities operate under (GDPR, NIS2, EU AI Act, Schrems II, NIST CSF 2.0, eIDAS 2, ISO/IEC 27001/27002/27005, COBIT 2019)",
+    "location": "ul-it-policy/technical/abstract-EN.tex (Abstract --- Technical Reference; regulatory mapping sentence)",
+    "proposedGenericDecision": "Frame the regulatory perimeter as the applicable/illustrative perimeter for the instantiating jurisdiction rather than as 'the perimeter most universities operate under', and keep the EU-instrument list as an instantiation-specific example set that can be swapped per jurisdiction.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "REGULATORY_PERIMETER_SET / APPLICABLE_JURISDICTION",
+    "confidence": 0.55,
+    "rationale": "The instrument list (GDPR, NIS2, EU AI Act, Schrems II, eIDAS 2) is EU-specific, yet it is presented as 'the international perimeter most universities operate under', an implicit EU-centric jurisdiction assumption stated without naming the jurisdiction. Cross-jurisdiction frameworks (NIST CSF, ISO, COBIT) can stay as a portable core; the EU-bound instruments should read as a jurisdiction example to be parameterized. Lower confidence because the abstract elsewhere claims jurisdiction-generality, so this may be intentionally retained as the primary instantiation example."
+  },
+  {
+    "kind": "multi-institution-governance-assumption",
+    "surfaceForm": "intended as the shared technical baseline for the international university network",
+    "location": "ul-it-policy/technical/abstract-EN.tex (Abstract --- Technical Reference; closing sentence)",
+    "proposedGenericDecision": "State the purpose as providing a shared technical baseline for a network/consortium of participating institutions, described by role, without presupposing the specific 'international university network' structure tied to the SUIT program.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "INSTITUTION_NETWORK_NAME",
+    "confidence": 0.5,
+    "rationale": "Implicitly presupposes a particular multi-institution governance shape (a specific 'international university network') as the consumer of the baseline. This is the governance-structure analogue of the named-initiative finding; generalizing to a role-based 'network/consortium of participating institutions' keeps the cooperative intent while removing the assumed concrete structure. Overlaps with candidate 1 (same closing clause) and should be reconciled in any rewrite."
+  }
+]

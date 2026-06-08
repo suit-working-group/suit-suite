@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "jurisdiction-binding",
+    "surfaceForm": "The Court of Justice of the European Union, in \\emph{Schrems~II}~\\cite{schrems2020}, clarified that contractual safeguards alone do not satisfy this dimension when data falls under a third-country regime that authorises disproportionate state access.",
+    "location": "ch03-sovereignty-grid-EN.tex / Section 'Five dimensions of sovereignty' > Subsection 'Data sovereignty'",
+    "proposedGenericDecision": "Treat CJEU/Schrems II as one named instance of the generic role 'apex court ruling on cross-border data transfer'. The analytical point (contractual safeguards insufficient where third-country state access is disproportionate) is universal; the binding instrument is EU-specific.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{DATA_TRANSFER_CASE_LAW}} / {{APEX_DATA_COURT}}",
+    "confidence": 0.78,
+    "rationale": "Schrems II binds EU/EEA processing only. For a non-EU institution the precedent is not binding and a local equivalent must be substituted. The chapter itself signals this in the very next paragraph ('For institutions outside the European Union, the analytical structure ... transposes'), confirming the example is jurisdiction-bound."
+  },
+  {
+    "kind": "jurisdiction-binding",
+    "surfaceForm": "conditions that operationalise the data dimension for any university subject to the \\gls{gdpr}~\\cite{gdpr}.",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Data sovereignty'",
+    "proposedGenericDecision": "GDPR is the institution's governing data-protection regime only in EU/EEA contexts. Reframe as 'the applicable data-protection regime' with GDPR as the named EU instantiation, since the grid is meant to apply to any institution.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{DATA_PROTECTION_REGIME}}",
+    "confidence": 0.7,
+    "rationale": "Naming GDPR ('any university subject to the GDPR') silently assumes EU jurisdiction. The transposition paragraph that follows shows the authors intend the dimension to be regime-agnostic; the GDPR reference is an EU-specific anchor that a localization variable can carry."
+  },
+  {
+    "kind": "jurisdiction-binding",
+    "surfaceForm": "The European Data Protection Board has since elaborated the conditions under which transfers remain permissible~\\cite{edpb-guidelines}",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Data sovereignty'",
+    "proposedGenericDecision": "EDPB is the EU data-protection authority/board. Generalize to 'the competent data-protection authority' with EDPB as the EU instance.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{DATA_PROTECTION_AUTHORITY}}",
+    "confidence": 0.68,
+    "rationale": "EDPB guidance is EU-specific and only operative for institutions under GDPR. Outside the EU, the analogous authority and its guidance differ; this is an implicit EU-jurisdiction assumption embedded in a named EU body."
+  },
+  {
+    "kind": "jurisdiction-binding",
+    "surfaceForm": "The European Network and Information Security Agency has emphasised the governance dimension of digital risk management ... \\cite{enisa-risk}; the \\gls{nis2}~Directive codifies this distinction by requiring management bodies to retain accountability for security measures~\\cite{nis2}.",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Five dimensions of sovereignty' > 'Institutional sovereignty'",
+    "proposedGenericDecision": "ENISA and the NIS2 Directive are EU-specific (agency + binding EU directive). Generalize to 'the cybersecurity agency / governance framework requiring management-body accountability', keeping ENISA + NIS2 as the EU instantiation.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{CYBERSECURITY_AGENCY}} / {{MGMT_ACCOUNTABILITY_FRAMEWORK}}",
+    "confidence": 0.7,
+    "rationale": "NIS2 binds EU essential/important entities only; ENISA is an EU agency. The supporting point (governance accountability is distinct from technical risk) is universal, but the cited instruments presuppose EU jurisdiction without naming the country/region as a variable."
+  },
+  {
+    "kind": "named-country-assumption",
+    "surfaceForm": "For institutions outside the European Union, the analytical structure of the data dimension transposes: the questions of \\emph{where} data sits, \\emph{under which law}, and \\emph{accessible to which actors} are universal, even when the binding instruments differ.",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Data sovereignty'",
+    "proposedGenericDecision": "This paragraph is the explicit transposition disclaimer that exists precisely because the surrounding text is EU-anchored. In a truly institution-agnostic base text the disclaimer becomes redundant; the body should be regime-neutral and EU specifics carried by localization variables, making 'outside the European Union' framing unnecessary.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.55,
+    "rationale": "The sentence presupposes the default reader is inside the EU and others are the exception. A region-agnostic base would not need to single out 'institutions outside the European Union'; flag as an implicit jurisdiction default rather than a hard binding."
+  },
+  {
+    "kind": "vendor-bound-example",
+    "surfaceForm": "Case 2 --- Pure commercial (Microsoft Entra ID with Conditional Access) ... An Entra~ID tenancy operated by the supplier in a designated EU region ... standard Microsoft-managed key custody ... Customer Lockbox, Double Key Encryption, or \\gls{hyok} integrations",
+    "location": "ch03-sovereignty-grid-EN.tex / Section 'Worked examples' > Subsection 'Case 2 --- Pure commercial (Microsoft Entra ID...)'",
+    "proposedGenericDecision": "Named commercial product (Microsoft Entra ID, Conditional Access, Customer Lockbox, Double Key Encryption). This is an illustrative worked example, not an institution identifier; the chapter explicitly frames examples as illustrative not prescriptive. Keep as a generally-recognised market example of a 'pure-commercial identity provider', but note the 'designated EU region' carries the EU-jurisdiction assumption.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.6,
+    "rationale": "Vendor names here are pedagogical instances of a commercial archetype, not institution-specific facts; they do not bind the document to University of Luxembourg. The embedded 'designated EU region' is the only sovereignty-relevant jurisdiction assumption and overlaps with the GDPR/EU items already flagged."
+  },
+  {
+    "kind": "named-incident-reference",
+    "surfaceForm": "a self-hosted Keycloak instance handles role activation, attribute enrichment and \\gls{tac} session management locally.",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Worked examples' > 'Case 3 --- Hybrid (Shibboleth federation + Keycloak local activation)'",
+    "proposedGenericDecision": "The \\gls{tac} acronym is a candidate UL/local-term macro (likely a Luxembourg/UL-specific session or access-control construct). Verify the glossary expansion; if it resolves to an institution-specific term, replace with a generic 'session/access management' phrasing.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{LOCAL_SESSION_MGMT_TERM}}",
+    "confidence": 0.4,
+    "rationale": "TAC is an unexplained acronym in an otherwise generic identity example; it may expand (via \\gls) to an institution- or jurisdiction-specific concept. Lower confidence pending glossary verification, but flagged as a possible macro-to-UL-term leak per the implicit-detection mandate."
+  },
+  {
+    "kind": "governance-shape-assumption",
+    "surfaceForm": "The phase-2 international university network anticipated by this Reference is designed around this premise.",
+    "location": "ch03-sovereignty-grid-EN.tex / Section 'The grid as a governance instrument' (Peer-institution benchmarking item)",
+    "proposedGenericDecision": "Reference to a specific roadmap artefact ('the phase-2 international university network anticipated by this Reference') ties the chapter to one document's particular programme/governance plan rather than a reusable, institution-agnostic policy. Generalize to 'a peer-institution network adopting a common grid'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.62,
+    "rationale": "'phase-2 international university network anticipated by this Reference' is a project-specific roadmap commitment, not a general property of the grid. It presumes the reader is operating within this particular document suite's programme; reusable text should not assume that programme exists."
+  },
+  {
+    "kind": "jurisdiction-bound-cadence",
+    "surfaceForm": "verified by exercise ... within the last twenty-four months --- a window aligned with the biennial cadence of most internal audit cycles",
+    "location": "ch03-sovereignty-grid-EN.tex / Section 'Scoring guidance' (score '3 --- Robust')",
+    "proposedGenericDecision": "The 24-month window justified by 'the biennial cadence of most internal audit cycles' is an assumed audit-governance norm. It is a soft, defensible convention rather than a hard institutional binding; keep as a named design constant but allow the audit-cadence assumption to be parameterized where local audit cycles differ.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{AUDIT_CADENCE_MONTHS}}",
+    "confidence": 0.35,
+    "rationale": "Not institution-naming, but it bakes in a 'biennial internal audit' governance assumption that may not hold across institutions/jurisdictions. Low confidence: this reads as a generic professional norm rather than a UL-specific fact, so parameterizing is optional."
+  },
+  {
+    "kind": "governance-shape-assumption",
+    "surfaceForm": "In a university, institutional sovereignty is the precondition of academic self-government over digital matters.",
+    "location": "ch03-sovereignty-grid-EN.tex / 'Institutional sovereignty'",
+    "proposedGenericDecision": "Generic 'university' / 'academic self-government' framing. This is sector-generic, not institution-specific, and aligns with the document's intended audience (universities). No localization needed.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.9,
+    "rationale": "Refers to universities as a class and to academic self-government as a general principle; contains no campus/rectorate/board-shape assumption nor any named institution. Recorded as an explicitly-considered keep to document that the governance framing was reviewed."
+  }
+]

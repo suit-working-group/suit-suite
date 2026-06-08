@@ -1,0 +1,52 @@
+[
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "Governance / Rectorate",
+    "location": "ul-it-policy/technical/reading-guide-EN.tex :: Reading guide / paragraph \"Audiences and entry points\" (audience table, first row)",
+    "proposedGenericDecision": "Name the audience by role, not by a continental-European governance organ. Use \"Governance / executive leadership\" or \"Governing body / institutional leadership\" so the entry point applies to a rectorate, a board of governors, a president's office, a senate, or a council equally.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "GOVERNANCE_BODY_LABEL",
+    "confidence": "high",
+    "rationale": "\"Rectorate\" is the governance organ of continental-European (notably German/Luxembourgish/French-tradition) universities. It presumes a specific governance shape and excludes institutions structured around a board of governors, a president/provost office, or a council. Role-based phrasing keeps the audience entry point while removing the structural assumption. Parameterizable so a local edition can re-insert its own organ name."
+  },
+  {
+    "kind": "implicit-jurisdiction-assumption",
+    "surfaceForm": "\\S33.10 (national transpositions)",
+    "location": "ul-it-policy/technical/reading-guide-EN.tex :: Reading guide / audience table, \"Data-protection officer\" row",
+    "proposedGenericDecision": "Keep the cross-reference role-based: \"national / local implementing law\" or \"applicable national transposition of EU instruments\". The reading guide should point to the regulatory-mapping section generically; the country-specific transposition belongs to a localization parameter, not a fixed entry-point label.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_TRANSPOSITION_JURISDICTION",
+    "confidence": "medium",
+    "rationale": "Listing \"national transpositions\" alongside GDPR (§33.2) and Schrems II (§33.5) presumes a single home jurisdiction whose transposing law the reader is expected to consult. The country is never named here, but the framing assumes one canonical national layer. The label itself is acceptable if the referenced section is genuinely multi-jurisdiction; flagged so the matrix can confirm §33.10 is not Luxembourg-bound and parameterize the jurisdiction."
+  },
+  {
+    "kind": "implicit-deployment-programme-assumption",
+    "surfaceForm": "Phase-2 peer institution ... then the chapters most relevant to the institution's prevailing brownfield",
+    "location": "ul-it-policy/technical/reading-guide-EN.tex :: Reading guide / audience table, last row",
+    "proposedGenericDecision": "Replace the programme-phase label with a role-based one such as \"Peer / adopting institution\" or \"External adopting institution\". The notion of a sequenced \"Phase 2\" rollout is specific to this institution's own deployment programme and should not appear as a generic audience class.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "ADOPTING_INSTITUTION_LABEL",
+    "confidence": "high",
+    "rationale": "\"Phase-2\" presupposes a multi-phase adoption programme owned by the originating institution (Phase 1 = author institution, Phase 2 = followers). For an institution-agnostic reference this is an implicit self-reference to a specific rollout plan. \"Peer / adopting institution\" preserves the audience (a second institution adopting the architecture) without binding it to the author's programme timeline."
+  },
+  {
+    "kind": "implicit-suite-internal-artifact-name",
+    "surfaceForm": "the book \\emph{Complete Dossier}",
+    "location": "ul-it-policy/technical/reading-guide-EN.tex :: Reading guide / paragraph \"Reading the document in the book context\"",
+    "proposedGenericDecision": "Refer to the assembled volume by a stable generic role-name (e.g. \"the consolidated book\" / \"the complete book volume\") or via a suite-level macro, so a re-branded edition does not require editing prose. Not institution-bound, but a fixed proper-noun title that a generic suite should parameterize.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "BOOK_VOLUME_TITLE",
+    "confidence": "low",
+    "rationale": "\"Complete Dossier\" is the proper title of this suite's assembled book. It is not institution-specific in the geographic/legal sense, but it is a hard suite-internal artifact name that prevents the reading guide from being reused verbatim across re-titled editions. Low confidence because it may be an intentional fixed product name kept across the suite; flagged for the matrix to decide keep-vs-parameterize."
+  },
+  {
+    "kind": "implicit-membership-governance-assumption",
+    "surfaceForm": "statements are framed conditionally pending verification by member institutions",
+    "location": "ul-it-policy/technical/reading-guide-EN.tex :: Reading guide / paragraph \"Tonality and box conventions\" (Plum box description)",
+    "proposedGenericDecision": "Use jurisdiction-neutral phrasing such as \"pending verification by the adopting institution\" or \"pending verification by the reader's institution\". \"Member institutions\" presumes a consortium/federation membership model that may not exist for a standalone adopter.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": "low",
+    "rationale": "\"Member institutions\" implies the document lives inside a consortium or federation with a membership structure (the originating multi-institution programme). A single adopting institution is not a \"member\". Minor, but it leaks an implicit organizational-membership assumption; rephrasing to \"adopting institution\" makes the verification posture institution-agnostic."
+  }
+]

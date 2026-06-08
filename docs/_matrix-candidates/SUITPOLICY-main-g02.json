@@ -1,0 +1,422 @@
+[
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "University of Luxembourg",
+    "location": "main-body-EN.tex / Summary for stakeholders (and recurring throughout: Reading guide, Introduction, NIS2 sections, etc.)",
+    "proposedGenericDecision": "Replace with the role-based term 'the University' (already used in many places) or '<the Institution>' / '<the research-and-teaching university>'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "The named institution is the single most pervasive piece of specificity. The text already alternates with the generic 'the University'; parameterizing makes the document institution-agnostic without rewording most sentences."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "members of the academic community of the University of Luxembourg acting in their scientific and technical capacity",
+    "location": "main-body-EN.tex / Summary for stakeholders ('On the nature of this report' box); echoed in Reading guide 'What this report is about'",
+    "proposedGenericDecision": "Generalize to 'members of the academic community of the Institution'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME",
+    "confidence": "high",
+    "rationale": "Authorship framing is institution-bound; replacing the proper noun keeps the voluntary-contribution framing intact for any institution."
+  },
+  {
+    "kind": "implicit-governance",
+    "surfaceForm": "Rectorate, Board of Governors, Faculty Council, University Council, Conseil de Gouvernance, Rector / president/rector",
+    "location": "main-body-EN.tex / Summary for stakeholders; Reading guide; Federated governance; Executive training",
+    "proposedGenericDecision": "Replace with role-based governance shapes: '<executive leadership / management body>', '<top governing board>', '<faculty-level deliberative body>', '<institution-wide academic council>', '<head of institution>'. The Rectorate/Board-of-Governors/Conseil-de-Gouvernance triad assumes a Luxembourg/continental university governance model.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "GOVERNANCE_BODIES (set: EXEC_BODY, GOVERNING_BOARD, FACULTY_BODY, ACADEMIC_COUNCIL, HEAD_OF_INSTITUTION)",
+    "confidence": "high",
+    "rationale": "These named bodies presuppose a specific governance shape (rectorate + board of governors + councils). A US/UK institution has provosts, senates, councils, trustees. Role-based abstraction is needed for institution-agnosticism. The macro \\institution{Board of Governors} also expands to a UL-specific term."
+  },
+  {
+    "kind": "implicit-governance",
+    "surfaceForm": "research-only units, research-and-teaching departments, teaching/training-only components",
+    "location": "main-body-EN.tex / Introduction 'At the University of Luxembourg, these missions are carried out by organisationally distinct entities...'; recurring in Differentiated needs note, ICRADP mission, Propositions P8",
+    "proposedGenericDecision": "Keep the three-way functional distinction but detach it from 'At the University of Luxembourg'; phrase as a general organisational pattern ('In a research-and-teaching university, missions are typically carried out by...').",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "The tripartite unit taxonomy is presented as a UL-specific organisational fact ('At the University of Luxembourg'). The categories themselves are reasonably generic; only the institution anchor needs removing."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "ILR / Institut Luxembourgeois de Régulation",
+    "location": "main-body-EN.tex / Board message; Reading guide; NIS2 section; Luxembourg institutional landscape; Advocacy positions; Propositions; Transition plan",
+    "proposedGenericDecision": "Replace with role 'the national NIS2 supervisory authority' / '<national-cyber-supervisor>'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NIS2_SUPERVISORY_AUTHORITY",
+    "confidence": "high",
+    "rationale": "ILR is the Luxembourg NIS2 supervisor; every EU member state has a different designated authority. The role 'national supervisory authority' is already used appositively in the text, so parameterization is clean."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "GOVCERT.LU / govcertlu",
+    "location": "main-body-EN.tex / Luxembourg-specific context; Luxembourg institutional landscape; Shared Security Organizations",
+    "proposedGenericDecision": "Replace with role 'the governmental/public-sector CSIRT' / '<national-government-CSIRT>'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "GOVERNMENT_CSIRT",
+    "confidence": "high",
+    "rationale": "GOVCERT.LU is the Luxembourg governmental CSIRT; the operational-CSIRT role generalizes to any jurisdiction."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "HCPN (Haut-Commissariat à la Protection nationale)",
+    "location": "main-body-EN.tex / Luxembourg-specific context; Luxembourg institutional landscape (single point of contact, hosts GOVCERT.LU and ANSSI Luxembourg)",
+    "proposedGenericDecision": "Replace with role 'the national single point of contact for cross-border NIS2 cooperation and major-incident escalation'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NIS2_SINGLE_POINT_OF_CONTACT",
+    "confidence": "high",
+    "rationale": "HCPN is a Luxembourg-specific national-protection body; the NIS2 'single point of contact' is a generic role mandated by the Directive in every member state."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "ANSSI Luxembourg / ANSSI-LU / anssilu; PSI-LU (Politique générale de la sécurité de l'information de l'État luxembourgeois)",
+    "location": "main-body-EN.tex / Luxembourg-specific context; Public-sector reference framework; Advocacy Position D",
+    "proposedGenericDecision": "Replace ANSSI-LU with role 'the national information-systems security agency'; replace PSI-LU with role 'the national public-sector information-security baseline policy'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_INFOSEC_AGENCY / NATIONAL_PUBLIC_SEC_POLICY",
+    "confidence": "high",
+    "rationale": "ANSSI-LU and PSI-LU are Luxembourg public-sector security instruments. The text even disambiguates ANSSI-LU from the French ANSSI, underlining the jurisdiction-bound nature. Roles generalize across states with a public-sector security baseline."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "CNPD (Commission Nationale pour la Protection des Données)",
+    "location": "main-body-EN.tex / Luxembourg institutional landscape (SERIMA operated with CNPD); Safeguards-AI advocacy; Advocacy Position D.5",
+    "proposedGenericDecision": "Replace with role 'the national data-protection authority (DPA)'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_DPA",
+    "confidence": "high",
+    "rationale": "CNPD is the Luxembourg DPA; every EU member state has its own (CNIL, BfDI, etc.). The DPA role is generic."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "CIRCL (Luxembourg CSIRT for private sector / communes / NGOs)",
+    "location": "main-body-EN.tex / Luxembourg institutional landscape; Shared Security Organizations",
+    "proposedGenericDecision": "Replace with role 'the national private-sector / non-governmental CSIRT' or drop if the ecosystem-disambiguation purpose does not survive generalization.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "PRIVATE_SECTOR_CSIRT",
+    "confidence": "medium",
+    "rationale": "CIRCL is Luxembourg-specific. Its role here is ecosystem disambiguation (which CSIRT is/ isn't first-line). For a generic doc this may be droppable, but the role-based CSIRT distinction can be retained as a parameter."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "CSSF (financial-sector supervisor, not competent for the University)",
+    "location": "main-body-EN.tex / Luxembourg institutional landscape (ecosystem disambiguation)",
+    "proposedGenericDecision": "Drop the named body; if a generic note on sectoral supervisors is desired, phrase as 'sector-specific supervisors (e.g. the financial-sector regulator) are not competent outside their sector'.",
+    "suggestedAction": "drop",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "CSSF is a Luxembourg financial regulator mentioned only to exclude its competence. This disambiguation is jurisdiction-specific and adds little to a generic policy; safe to drop or generalize."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "SERIMA (SEcurity RIsk MAnagement) national notification platform, operational since 2 May 2025, 24h/72h/30-day cadence",
+    "location": "main-body-EN.tex / Luxembourg-specific context; Luxembourg institutional landscape; Obligations tables; Regulatory summary; MONARC; Transition plan",
+    "proposedGenericDecision": "Replace named platform with role 'the national incident-notification platform'; keep the NIS2 Article 23 24h/72h/30-day cadence as it is Directive-level and generic.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NOTIFICATION_PLATFORM",
+    "confidence": "high",
+    "rationale": "SERIMA is a Luxembourg-specific platform with an operational date. The reporting cadence is from NIS2 Art.23 (generic). Parameterize the platform name; keep the cadence."
+  },
+  {
+    "kind": "explicit-regulator",
+    "surfaceForm": "MONARC (NC3 / Luxembourg House of Cybersecurity risk-analysis method); NC3; Luxembourg House of Cybersecurity",
+    "location": "main-body-EN.tex / Architectural proposition one-page; MONARC subsection; Transition plan; Propositions P14",
+    "proposedGenericDecision": "Generalize to 'an ISO/IEC 27005-aligned risk-analysis method/tool (e.g. a nationally provided open-source methodology)'; keep ISO/IEC 27005 as the generic anchor.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_RISK_METHOD",
+    "confidence": "high",
+    "rationale": "MONARC and its parent bodies (NC3, Luxembourg House of Cybersecurity) are Luxembourg-specific. The underlying ISO/IEC 27005 standard is generic and should remain as the institution-agnostic anchor."
+  },
+  {
+    "kind": "explicit-legal",
+    "surfaceForm": "project of law 8364 / PL 8364 (Luxembourg NIS2 transposition) and its Articles 2(34°), 2(40°), 11(1)(3°), 11(1)(4°), 12(1), 12(2), 12(3)",
+    "location": "main-body-EN.tex / pervasive: Board message, Reading guide, NIS2 section, Obligations mapping, Advocacy, Propositions, Transition plan, principlebox",
+    "proposedGenericDecision": "Replace with role 'the national NIS2 transposition law' and map the article numbers to NIS2 Directive articles where possible (e.g. Art.12(2) ten families = NIS2 Art.21(2); Art.12(3) maturity report = national supervision). The cumulative-legal-peg argument (2(34°)/11(1)(4°)/2(40°)) is a Luxembourg-specific classification chain.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NIS2_TRANSPOSITION_LAW (+ article mapping table NIS2_ART_*)",
+    "confidence": "high",
+    "rationale": "PL 8364 article numbers are entirely Luxembourg-specific; only the underlying NIS2 Directive articles are universal. The 'essential regardless of size' and 'teaching establishments excluded from research-organisation track' pegs are national-transposition reasoning that must be parameterized or recast against the generic Directive."
+  },
+  {
+    "kind": "explicit-legal",
+    "surfaceForm": "project of law 8307 (Luxembourg CER Directive transposition), deposited 1 September 2023",
+    "location": "main-body-EN.tex / Methodology note; Concomitant CER framework",
+    "proposedGenericDecision": "Replace with role 'the national CER (Critical Entities Resilience) transposition law'; keep CER Directive (EU) 2022/2557 as the generic anchor.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "CER_TRANSPOSITION_LAW",
+    "confidence": "high",
+    "rationale": "PL 8307 is the Luxembourg CER transposition; the EU CER Directive is generic. Parameterize the national instrument."
+  },
+  {
+    "kind": "implicit-national-transposition",
+    "surfaceForm": "'Under the Luxembourg transposition of the NIS2 Directive...the University has been classified...as an essential entity'; 'the Luxembourg transposition' phrasing recurring",
+    "location": "main-body-EN.tex / Board message; NIS2 section; Luxembourg institutional landscape",
+    "proposedGenericDecision": "Recast as 'Under the national transposition of the NIS2 Directive in <JURISDICTION>, the Institution has been (or may be) classified as an essential entity'. The classification outcome is presented as settled fact specific to UL.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "JURISDICTION / NIS2_TRANSPOSITION_LAW",
+    "confidence": "high",
+    "rationale": "A national-transposition assumption stated for Luxembourg; for an agnostic document the country and classification outcome must be parameterized rather than assumed."
+  },
+  {
+    "kind": "explicit-incident",
+    "surfaceForm": "essential-entity classification 'confirmed by the ILR in a letter of which the Department of Computer Science was notified on 3 April 2026'",
+    "location": "main-body-EN.tex / Luxembourg-specific context; cited as ilr-ul-essential throughout",
+    "proposedGenericDecision": "Generalize to '...if and when the national supervisory authority confirms the Institution's classification'; drop the specific notification date and the DCS recipient.",
+    "suggestedAction": "drop",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "A dated, named-recipient regulatory notification specific to UL. Cannot survive in an institution-agnostic document; the generic mechanism (supervisor confirms classification) replaces it."
+  },
+  {
+    "kind": "explicit-incident",
+    "surfaceForm": "NCSS III (third National Cybersecurity Strategy, 2018), Implementation Objective 7 (cooperation with academic and research sphere), approved by Government Council 26 January 2018, published by HCPN",
+    "location": "main-body-EN.tex / Luxembourg-specific context; National strategy hook; Advocacy C.4",
+    "proposedGenericDecision": "Generalize to 'the national cybersecurity strategy, where it identifies cooperation with the academic and research sphere as a priority'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_CYBER_STRATEGY",
+    "confidence": "high",
+    "rationale": "NCSS III with its date, approving body and Objective-7 number is Luxembourg-specific. Many states have an analogous strategy; parameterize the instrument and the relevant objective."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "Department of Computer Science (DCS) / 'a public knowledge institution hosting a Department of Computer Science whose research portfolio covers information-systems security'",
+    "location": "main-body-EN.tex / NIS2 section; Advocacy Positions B/C/D; Safeguards-AI; Transition plan pilot; pilot footnotes",
+    "proposedGenericDecision": "Replace with role '<the Institution's computer-science / cybersecurity research unit>' or 'a relevant security-research department'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "CS_SECURITY_DEPARTMENT",
+    "confidence": "high",
+    "rationale": "The DCS is named as the pilot entity and as the basis for the 'knowledge-institution responsibility' advocacy. The role (a security-capable academic unit) generalizes; the specific department name does not."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "SnT — Interdisciplinary Centre for Security, Reliability and Trust",
+    "location": "main-body-EN.tex / Feasibility cost section; Transition plan pilot (step 2); pilot prose",
+    "proposedGenericDecision": "Replace with role '<a security-focused interdisciplinary research centre>' as a candidate pilot entity.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "SECURITY_RESEARCH_CENTRE",
+    "confidence": "high",
+    "rationale": "SnT is a named UL interdisciplinary centre designated as a pilot site. The pilot-entity role generalizes; the proper name must be parameterized."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "'the university's HPC team' / ULHPC",
+    "location": "main-body-EN.tex / Feasibility; Transition plan pilot; Luxembourg status (ULHPC data-transfer docs, traffic to MeluXina)",
+    "proposedGenericDecision": "Replace ULHPC with role '<the Institution's HPC facility/team>'; keep generic HPC concept.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "HPC_FACILITY",
+    "confidence": "high",
+    "rationale": "ULHPC is the named UL HPC facility used as evidence and pilot site. The HPC-team role is generic."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "'comprises three faculties, each with departments of teaching and research, and interdisciplinary centres with strong industrial and institutional partnerships'",
+    "location": "main-body-EN.tex / Digital Policy Commission ('Applied to the University of Luxembourg --- which comprises three faculties...')",
+    "proposedGenericDecision": "Generalize to '<the Institution's faculties and interdisciplinary centres>' without asserting the count of three faculties.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "FACULTY_COUNT (optional)",
+    "confidence": "high",
+    "rationale": "The 'three faculties' structure is a UL-specific organisational fact. A named-design-constant exception does not apply (this is an institution count, not a design constant); generalize or parameterize."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "Committee for Reasonable Adjustments ('The University of Luxembourg already has a Committee for Reasonable Adjustments...')",
+    "location": "main-body-EN.tex / ICRADP: 'The precedent of the University of Luxembourg: the Committee for Reasonable Adjustments'",
+    "proposedGenericDecision": "Generalize to 'Where the Institution already operates a reasonable-adjustments committee for students and staff...'; recast the precedent as conditional rather than asserting UL's specific committee exists.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "EXISTING_ADJUSTMENTS_COMMITTEE (presence flag)",
+    "confidence": "high",
+    "rationale": "An entire subsection is built on UL having a specific Committee for Reasonable Adjustments. For an agnostic doc this must become conditional/parameterized on whether the institution has such a body."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "ICRADP / CARPN (Independent Commission for Reasonable Adjustments of Digital Policies, fr: CARPN); '15 working days', '48 hours' deadlines",
+    "location": "main-body-EN.tex / Board message; multiple stakeholder boxes; ICRADP section",
+    "proposedGenericDecision": "Keep the ICRADP as a proposed generic governance mechanism (it is a design proposition, not a UL body) but drop the French acronym CARPN (jurisdiction/language-bound) and treat the service-level deadlines (15 days / 48h) as default parameters.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "ICRADP_SLA_DAYS / ICRADP_EMERGENCY_HOURS; drop CARPN",
+    "confidence": "medium",
+    "rationale": "ICRADP itself is a generic proposed mechanism and should be kept. The French acronym CARPN is locale-specific. The 15-day/48h SLAs are proposed defaults that a localiser may tune."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "RESTENA (Luxembourg NREN); RESTENA-CSIRT; 'RESTENA-operated Luxembourg identity federation'",
+    "location": "main-body-EN.tex / Reading guide; Reference panel; NREN ecosystem; Luxembourg Science-DMZ status; Shared Security Organizations; Propositions P10; cost section; conclusion",
+    "proposedGenericDecision": "Replace RESTENA with role '<the national NREN>' and RESTENA-CSIRT with '<the national NREN CSIRT>'; keep GEANT as the generic pan-European backbone (see separate row).",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_NREN / NREN_CSIRT / NREN_IDENTITY_FEDERATION",
+    "confidence": "high",
+    "rationale": "RESTENA is the Luxembourg NREN used pervasively (connectivity, CSIRT, identity federation, Science-DMZ co-design). The NREN role is generic; the specific NREN name is country-bound."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "GÉANT as 'the European backbone' / 'at the Luxembourg scale' framing; 'peer institutions accessible via the same backbone'",
+    "location": "main-body-EN.tex / Reading guide ('at the Luxembourg scale'); Reference panel ('at the Luxembourg scale'); NREN section",
+    "proposedGenericDecision": "Keep GÉANT/NREN/eduroam/eduGAIN as generic European research-infrastructure primitives, but remove the 'at the Luxembourg scale' anchoring; phrase as 'at the national scale' / '<the Institution's national NREN scale>'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "JURISDICTION / NATIONAL_NREN",
+    "confidence": "medium",
+    "rationale": "GÉANT, eduroam, eduGAIN are legitimately generic European primitives and should be kept; the implicit 'Luxembourg scale' framing is the specificity to remove."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "LIST (Luxembourg Institute of Science and Technology) and LIH (Luxembourg Institute of Health); MeluXina (EuroHPC)",
+    "location": "main-body-EN.tex / Luxembourg status: what is already in place (mutualised Science DMZ across UL, LIST, LIH; ULHPC traffic to MeluXina)",
+    "proposedGenericDecision": "Generalize to '<peer national research-active institutions>' for LIST/LIH; replace MeluXina with '<a national/regional EuroHPC supercomputer>'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "PEER_RESEARCH_INSTITUTIONS / EUROHPC_SYSTEM",
+    "confidence": "high",
+    "rationale": "LIST, LIH and MeluXina are Luxembourg-specific entities used to argue for a mutualised national Science DMZ. The mutualisation argument generalizes; the named institutions do not."
+  },
+  {
+    "kind": "implicit-single-campus-datacentre",
+    "surfaceForm": "Whole 'Luxembourg status: what is already in place, what is missing' subsection arguing Luxembourg's small research ecosystem warrants a single NREN-anchored Science DMZ; 'too small for three separate Science DMZs'",
+    "location": "main-body-EN.tex / NREN section, subsec:lux-sdmz-status",
+    "proposedGenericDecision": "Recast as a generic decision criterion: 'In a small national research ecosystem, an NREN-anchored, federated Science-DMZ shared across research-active institutions is the operationally rational form'; remove the Luxembourg-sizing assertions and the named institutions.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "JURISDICTION / NATIONAL_NREN / PEER_RESEARCH_INSTITUTIONS",
+    "confidence": "medium",
+    "rationale": "This subsection embeds a jurisdiction-bound feasibility argument (small-country sizing, named partners, ULHPC/MeluXina evidence). The underlying principle (mutualise via the NREN when the ecosystem is small) is portable, but the specific framing is Luxembourg-only."
+  },
+  {
+    "kind": "implicit-jurisdiction-cost",
+    "surfaceForm": "'In a country that is among the wealthiest in the world, and whose governance bodies set excellence as the sole objective...'; 'the university's multi-year agreement with the State'; 'implementable within the university's multi-year plan'",
+    "location": "main-body-EN.tex / Justification and Feasibility (sec:couts) intro; Feasibility cost structure; Board message feasibility",
+    "proposedGenericDecision": "Generalize the wealth/state-funding rhetoric to '<the Institution's funding context>' and replace 'multi-year agreement with the State' with '<the Institution's multi-year funding/planning cycle>'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "FUNDING_CONTEXT",
+    "confidence": "high",
+    "rationale": "'Among the wealthiest in the world' and 'multi-year agreement with the State' are Luxembourg-specific funding-context claims (UL is funded via a State convention pluriannuelle). These assume a particular public-funding model and must be generalized."
+  },
+  {
+    "kind": "explicit-amount",
+    "surfaceForm": "'sanctions up to EUR 10 M or 2% of annual turnover'",
+    "location": "main-body-EN.tex / Reading guide, European regulatory landscape (NIS2 description)",
+    "proposedGenericDecision": "Keep as a generic NIS2-Directive figure (the EUR 10M / 2% cap is set by the Directive for essential entities, not by Luxembourg), but verify it is cited as the Directive-level cap rather than a national amount.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "Per the project's named-design-constant / sourced-statistic memory, the EUR 10M/2% NIS2 cap is a Directive-level sourced figure and is institution-agnostic across the EU; retain."
+  },
+  {
+    "kind": "explicit-incident",
+    "surfaceForm": "Université Paris-Saclay (August 2024) ransomware; worked with ANSSI (French national cyber agency)",
+    "location": "main-body-EN.tex / Board message; CISO/CIO messages; Media-Covered Failures (France); Root-causes table; Key takeaway box; Reference panel",
+    "proposedGenericDecision": "Keep as a generic, sourced sector-evidence incident example (it is external evidence about university breaches, not about the Institution itself). Retain ANSSI only as 'the French national cybersecurity agency' in its evidentiary context.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "Named breaches at OTHER institutions are sourced sector evidence (Layer 4/5) used to argue the thesis, not specificity about the home institution. They are institution-agnostic illustrative material and should be kept; ANSSI here is correctly external."
+  },
+  {
+    "kind": "explicit-incident",
+    "surfaceForm": "Other named external breach cases: Université de Rennes (ISTIC), Sorbonne Université, Texas Tech University Health Sciences Center, MOVEit (UCLA/Stanford SoM/Missouri/Rutgers/Georgia/Yeshiva), Howard University, Western Sydney University, Oracle EBS (U. of Phoenix/Harvard/Dartmouth/UPenn/Baker)",
+    "location": "main-body-EN.tex / Media-Covered Failures (2024–2025) section and its tables/boxes",
+    "proposedGenericDecision": "Keep as generic sourced incident evidence (external institutions). No parameterization needed; these illustrate causes, not home-institution specifics.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "high",
+    "rationale": "These are evidence about third parties, supporting the segmentation thesis, and are appropriate in any institution's version of the document."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "Reference-panel comparators framed relative to UL: EPFL '(~12,000 students, comparable to the University of Luxembourg)'; 'The University of Luxembourg has more than two decades of experience adapting external models to its specific public-research context'",
+    "location": "main-body-EN.tex / Examples section, 'Relevant and Adequate Reference panel' (criteria 3 and 4)",
+    "proposedGenericDecision": "Keep the comparator universities (MIT, Stanford, Cambridge, ETH, CERN, Oxford, EPFL, etc.) as generic Layer-5 institutional precedents, but remove the UL-relative framing ('comparable to the University of Luxembourg', 'more than two decades of experience') — generalize to '<the Institution>' / 'comparable in size to <the Institution>'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME / INSTITUTION_SIZE",
+    "confidence": "high",
+    "rationale": "The reference universities are legitimately generic precedents. The specificity is the explicit comparison-to-UL and the UL track-record claim, which must be generalized; criterion 4 (two decades of UL experience) is purely UL-specific."
+  },
+  {
+    "kind": "implicit-governance-macro",
+    "surfaceForm": "\\institution{Board of Governors} macro expansions; \\institution{ILR}, \\institution{Institut Luxembourgeois de Régulation}, \\institution{CNPD}, \\institution{Luxembourg House of Cybersecurity}, \\institution{ULHPC}, \\institution{MeluXina}, \\institution{LIST}, \\institution{LIH}, \\institution{EPFL}, \\institution{CERN}, \\institution{Stanford Research Computing Center}, \\institution{MITnet}, \\institution{SUNet}, \\institution{UDN}, \\institution{UMNet}",
+    "location": "main-body-EN.tex / throughout (semantic \\institution{} command usages)",
+    "proposedGenericDecision": "For \\institution{} usages that name the home institution's bodies (Board of Governors, ILR, CNPD, Luxembourg House of Cybersecurity, ULHPC, MeluXina, LIST, LIH), route through localization variables; leave \\institution{} usages that name external precedent institutions (EPFL, CERN, MITnet, SUNet, UDN, UMNet, SRCC) untouched.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "(per-body variables above)",
+    "confidence": "high",
+    "rationale": "Per the detection brief, macros that expand to a UL/home-jurisdiction term are implicit specificity. The \\institution{} command is used for BOTH home-jurisdiction bodies (must parameterize) and external precedents (keep); they must be separated."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "ng-tech-ref-2026 companion 'Technical Reference' cross-references (Chapters 2, 3, 7, 8, 10, 11, 16, 21, 23) and ng.aiday/SUITPOLICY suite self-references",
+    "location": "main-body-EN.tex / Reading guide; TAC notes; VLAN note; TAC transverse box; contextual-roles note; Transition plan note",
+    "proposedGenericDecision": "Keep as intra-suite cross-references but ensure the companion document title is itself genericized when the suite is migrated; treat as suite-internal, not institution-specific per se.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "These reference a companion technical document in the same suite, not an institution. Not institution-specificity, but flagged for awareness: the companion's own genericization must stay in sync. Low priority for this unit."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "French-context institutional examples used as architecture precedents: RENATER federation (FER), CNRS UMR/joint-research-unit model, LIP6, LPNHE, UPPA charte, Le Havre charte, JRES conferences",
+    "location": "main-body-EN.tex / Examples (French universities, CNRS–University model); Organizational models (IT charter); Shared Security Organizations (JRES)",
+    "proposedGenericDecision": "Keep as generic Layer-5 precedents (they illustrate federated models and charter practice in any jurisdiction); no home-institution specificity. Optionally note JRES as 'national academic-network conferences'.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "medium",
+    "rationale": "These are external precedents (France/CNRS) used as evidence, not specificity about the home institution. They remain valid in an agnostic document; only flagged because they are nation-anchored examples a localiser may wish to swap for local equivalents."
+  },
+  {
+    "kind": "explicit-legal",
+    "surfaceForm": "Law of 28 November 2006 transposing Directive 2000/78/EC into Luxembourg national labour law",
+    "location": "main-body-EN.tex / ICRADP, European Equal Treatment and Disability Law",
+    "proposedGenericDecision": "Replace with role 'the national law transposing Directive 2000/78/EC into <JURISDICTION> labour law'; keep Directive 2000/78/EC and the CRPD as generic anchors.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NATIONAL_EQUAL_TREATMENT_LAW / JURISDICTION",
+    "confidence": "high",
+    "rationale": "The 2006 Luxembourg law is the national transposition; the EU Directive and CRPD are generic. Parameterize the national instrument."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "'ratified by the EU and by Luxembourg' (CRPD); 'In Luxembourg, the Law of 28 November 2006...'; references tying ratification/transposition to Luxembourg",
+    "location": "main-body-EN.tex / ICRADP disability-law subsection",
+    "proposedGenericDecision": "Generalize the ratification clause to 'ratified by the EU and by <JURISDICTION>' or simply 'ratified by the EU and its member states'.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "JURISDICTION",
+    "confidence": "medium",
+    "rationale": "The CRPD ratification and transposition statements are anchored to Luxembourg. The EU-level facts are generic; the country anchor must be parameterized."
+  },
+  {
+    "kind": "implicit-governance",
+    "surfaceForm": "'the Rector and the members of the Conseil de Gouvernance must receive cybersecurity training'; 'Executive-training programme for the Board of Governors'",
+    "location": "main-body-EN.tex / Executive training and management responsibility; Transition plan steps 1 and 4",
+    "proposedGenericDecision": "Replace 'Rector' and 'Conseil de Gouvernance' / 'Board of Governors' with role '<the head of institution and the members of the top governing body>'; keep NIS2 Art.20/20(2) as the generic obligation source.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "HEAD_OF_INSTITUTION / GOVERNING_BOARD",
+    "confidence": "high",
+    "rationale": "'Conseil de Gouvernance' (French name of UL's governing board) and 'Rector' are UL/continental governance terms. The NIS2 Art.20(2) management-body training obligation is generic and should be retained with role-based actors."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "Examples of 'European providers (e.g. Mistral, OVH, Scaleway)' as EU-first preference",
+    "location": "main-body-EN.tex / Safeguards-AI, item 4 (EU-first routing preference)",
+    "proposedGenericDecision": "Keep as generic EU-provider examples (illustrative, not home-institution specific); they support the EU-first principle for any EU institution. Optionally mark as non-exhaustive.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "These are illustrative EU-provider examples valid for any EU-based institution; not institution-specific. Low-priority; included for completeness."
+  },
+  {
+    "kind": "implicit-single-campus",
+    "surfaceForm": "Campus-centric phrasing assuming one campus: 'your personal device works on campus', 'built at the campus perimeter', 'campus backbone', 'campus network core', 'on-campus and remote learners'",
+    "location": "main-body-EN.tex / Staff BYOD message; Science-DMZ principles; conceptual-architecture layers; network-architecture figure",
+    "proposedGenericDecision": "Generalize 'campus' to '<the Institution's site(s)>' or retain 'campus' as a generic network-architecture term where it denotes the network perimeter rather than a single physical location; review case-by-case so multi-campus institutions are covered.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": "low",
+    "rationale": "Implicit single-campus assumption flagged by the brief. In network-architecture usage 'campus network' is standard generic vocabulary (RFC/NIST), so most usages are acceptable; only the few that imply a single physical campus (e.g. BYOD 'on campus', 'on-campus vs remote') merit softening."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "unilu-amenagements citation and any UL-specific bibliography keys (ilr-ul-essential, paris-saclay framing as comparator)",
+    "location": "main-body-EN.tex / ICRADP precedent (\\cite{unilu-amenagements}); NIS2/advocacy (\\cite{ilr-ul-essential})",
+    "proposedGenericDecision": "Flag UL-specific .bib keys (unilu-amenagements, ilr-ul-essential) for removal/parameterization when the home-institution facts they support are genericized; they have no generic equivalent.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_NAME (citation set)",
+    "confidence": "medium",
+    "rationale": "Citations pointing to UL's own adjustments page and the UL essential-entity letter are home-institution artefacts. When the supporting prose is genericized, these citations must be dropped or replaced with the localised institution's equivalents."
+  }
+]

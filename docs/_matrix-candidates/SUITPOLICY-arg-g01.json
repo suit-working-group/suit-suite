@@ -1,0 +1,202 @@
+[
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "the University of Luxembourg (Q5.1 questionbox: \"The University of Luxembourg is a small institution\")",
+    "location": "argumentation-body-EN.tex, sec:q-comparisons (Q5.1 clarificationbox)",
+    "proposedGenericDecision": "Replace with the role-based term \"the institution\" / \"a small institution\" as the subject of the comparison objection.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\InstitutionName",
+    "confidence": "high",
+    "rationale": "Names the University of Luxembourg directly as the institution being defended. The objection structure (small institution vs MIT/Stanford) is generic; only the named institution must be parameterized."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "University of Luxembourg (Q3.4 questionbox: \"neither RESTENA nor the University of Luxembourg publishes any Science DMZ today\")",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Q3.4 questionbox)",
+    "proposedGenericDecision": "Generalise to \"the institution\" / \"our institution\"; this whole Q&A is a Luxembourg-specific local-deployment objection.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\InstitutionName",
+    "confidence": "high",
+    "rationale": "Direct naming of UL inside the objection text; the entire Q3.4/Answer pair is a country-and-NREN-bound argument."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "the University of Luxembourg's current infrastructure, contracts, and staffing (Q9.1 answer)",
+    "location": "argumentation-body-EN.tex, sec:q-costs (Answer to Q9.1)",
+    "proposedGenericDecision": "Replace with \"the institution's current infrastructure, contracts, and staffing\".",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\InstitutionName",
+    "confidence": "high",
+    "rationale": "Cost analysis is anchored to a specific named institution; the role (the adopting institution) is what matters, not the name."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "the University of Luxembourg's existing Committee for Reasonable Adjustments (Q6.2 answer: \"has not devolved into a mechanism for bypassing academic standards\")",
+    "location": "argumentation-body-EN.tex, sec:q-carpn (Answer to Q6.2)",
+    "proposedGenericDecision": "Generalise to \"the institution's existing reasonable-adjustments committee (or equivalent)\"; the precedent is the existence of such a body, not the specific UL one.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "\\InstitutionName (optional, with \\AdjustmentsCommitteeName)",
+    "confidence": "high",
+    "rationale": "Cites a UL-specific internal committee as precedent. Many institutions have such bodies; the argument should reference the generic mechanism with an optional local instantiation."
+  },
+  {
+    "kind": "explicit-NREN",
+    "surfaceForm": "RESTENA / \\gls{restena} (appears throughout: Q3.4, Answer Q3.4, Q5.1, Q9.1, Q9.2, summary table, \\gls{restena}-\\gls{csirt})",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Q3.4 + answer), sec:q-comparisons (Q5.1), sec:q-costs (Q9.1)",
+    "proposedGenericDecision": "Replace with the role term \"the national NREN\" (National Research and Education Network) and \"the NREN CSIRT\".",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\NRENName (+ \\NRENCsirtName)",
+    "confidence": "high",
+    "rationale": "RESTENA is Luxembourg's NREN. The architecture argument relies only on the existence of an NREN providing GEANT access and a CSIRT; the specific NREN is jurisdiction-bound and must be parameterized."
+  },
+  {
+    "kind": "explicit-institution-facility",
+    "surfaceForm": "\\institution{ULHPC} (Q3.4 answer, twice)",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Answer to Q3.4)",
+    "proposedGenericDecision": "Replace with role term \"the institution's HPC facility / HPC team\".",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\HPCFacilityName",
+    "confidence": "high",
+    "rationale": "ULHPC is the University of Luxembourg HPC centre — a named local facility. The argument needs only \"an HPC facility moving petabyte-scale traffic\"."
+  },
+  {
+    "kind": "explicit-facility",
+    "surfaceForm": "\\institution{MeluXina} (EuroHPC) (Q3.4 answer); also in summary table Q3.4 row",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Answer to Q3.4) + sec:summary table",
+    "proposedGenericDecision": "Generalise to \"a national/EuroHPC supercomputer\" or parameterize as the regional EuroHPC system.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\EuroHPCSystemName",
+    "confidence": "high",
+    "rationale": "MeluXina is Luxembourg's EuroHPC supercomputer. Country-bound named facility; the role is \"the national EuroHPC system\"."
+  },
+  {
+    "kind": "explicit-institution",
+    "surfaceForm": "\\institution{LIST} and \\institution{LIH} (Q3.4 answer: \"RESTENA, the University, LIST and LIH co-design a federated research-network zone\")",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Answer to Q3.4)",
+    "proposedGenericDecision": "Generalise to \"the research-active institutions in the national ecosystem\" / \"peer research organisations and a biomedical research institute\".",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "\\NationalResearchPartners (list)",
+    "confidence": "high",
+    "rationale": "LIST (Luxembourg Institute of Science and Technology) and LIH (Luxembourg Institute of Health) are Luxembourg-specific public research bodies named as mutualisation partners. The role is generic national research partners."
+  },
+  {
+    "kind": "explicit-institution-unit",
+    "surfaceForm": "the Department of Computer Science, the SnT Centre, and the \\gls{hpc} team (Q9.1 answer, Step 2 pilot)",
+    "location": "argumentation-body-EN.tex, sec:q-costs (Answer to Q9.1, Step 2)",
+    "proposedGenericDecision": "Generalise to role-based \"entities with the strongest domain expertise (e.g., a computer-science department, a security/research centre, and the HPC team)\".",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "\\PilotEntities (list)",
+    "confidence": "high",
+    "rationale": "SnT is the University of Luxembourg's Interdisciplinary Centre for Security, Reliability and Trust — a UL-specific named centre. Department of Computer Science and HPC team are UL-internal units used as the named pilot scope."
+  },
+  {
+    "kind": "explicit-incident-jurisdiction",
+    "surfaceForm": "Country/jurisdiction binding: \"binding law in the EU and in the Council of Europe member states (including Luxembourg)\" (Q6.3 answer)",
+    "location": "argumentation-body-EN.tex, sec:q-carpn (Answer to Q6.3)",
+    "proposedGenericDecision": "Generalise the parenthetical to \"(including the institution's jurisdiction)\" or parameterize the country.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\Jurisdiction / \\CountryName",
+    "confidence": "high",
+    "rationale": "Explicit naming of Luxembourg as the binding jurisdiction. The legal argument (EU Charter/ECHR binding) is generic across EU/CoE members; only the country anchor is local."
+  },
+  {
+    "kind": "explicit-incident-jurisdiction",
+    "surfaceForm": "\"a Luxembourg-specific pattern\" / \"Luxembourg's scale\" / \"the realistic form for Luxembourg\" / \"Luxembourg has not done X yet\" (Q3.4 answer, multiple)",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Answer to Q3.4)",
+    "proposedGenericDecision": "Replace each Luxembourg reference with \"the institution's national context\" / \"a small-ecosystem pattern\" / role-based small-jurisdiction framing.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\CountryName / \\NationalContext",
+    "confidence": "high",
+    "rationale": "Repeated country naming embeds the argument in Luxembourg. The underlying claim (small research ecosystem, limited engineer pool, no NSF-CC* equivalent) is generic to small national systems and should be parameterized."
+  },
+  {
+    "kind": "implicit-funding-assumption",
+    "surfaceForm": "\"no European equivalent to the NSF CC* programme\" / absence of an NSF-CC*-style national funding route (Q3.4 answer)",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Answer to Q3.4)",
+    "proposedGenericDecision": "Generalise to \"the absence of a dedicated national research-network funding programme comparable to the US NSF CC*\"; this is a jurisdiction-bound funding assumption stated as if universal.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "\\NationalFundingProgramme (nullable)",
+    "confidence": "medium",
+    "rationale": "Implicitly assumes the institution's country lacks an NSF-CC*-style programme — true for Luxembourg/EU but not a universal premise. Should be framed as a per-jurisdiction condition rather than a stated fact."
+  },
+  {
+    "kind": "explicit-monetary-jurisdiction",
+    "surfaceForm": "\"central-IT spend on the order of USD 1,600 per student FTE\" and information-security spend percentages 8-15% / 3.6% benchmark (Q9.3 answer)",
+    "location": "argumentation-body-EN.tex, sec:q-costs (Answer to Q9.3)",
+    "proposedGenericDecision": "Keep the sourced sector benchmarks (Gartner/EDUCAUSE) as generic, but flag the per-student-FTE figure as a currency/jurisdiction-bound reference the adopting board reads against its own enrolment and budget.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "n/a (sourced benchmark; optionally \\PerStudentITSpend)",
+    "confidence": "low",
+    "rationale": "These are sourced sector statistics (cited), not UL-specific. Per the project's abstract-over-quantitative-self-references rule, sourced statistics are retained. Flagged only because the USD per-FTE figure is currency-bound and presented as a sizing anchor; generalisation is optional, not required."
+  },
+  {
+    "kind": "explicit-program-acronym",
+    "surfaceForm": "ICRADP / \\gls{icradp} and \"CARPN\" (section title: \"Questions on the ICRADP (Independent Commission for Reasonable Adjustments; fr: CARPN)\"); Q6.1, Q6.2, Q10.2",
+    "location": "argumentation-body-EN.tex, sec:q-carpn (section heading + Q6.1/Q6.2 boxes) and sec:q-meta (Q10.2)",
+    "proposedGenericDecision": "The ICRADP is a suite-specific invented governance body. Retain as a defined construct of the policy proposal but ensure the gloss/acronym is suite-neutral (the French \"CARPN\" form ties it to a Francophone jurisdiction).",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "\\AdjustmentBodyName (+ optional local-language acronym)",
+    "confidence": "medium",
+    "rationale": "ICRADP is the proposal's own named mechanism (the English acronym is generic), but the parenthetical French acronym CARPN assumes a French-language jurisdiction. Keep the body; parameterize or drop the language-bound acronym."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "\"the governing bodies\" / \"the board\" / \"the board cannot decide\" / \"a board still needs an order of magnitude\" (Q9.3 question + answer)",
+    "location": "argumentation-body-EN.tex, sec:q-costs (Q9.3 questionbox + answer)",
+    "proposedGenericDecision": "Already largely role-based (\"governing bodies\", \"board\", \"CIO\"). Confirm these remain generic governance roles rather than a specific board-of-governors/rectorate shape.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "n/a",
+    "confidence": "low",
+    "rationale": "Uses generic governance roles (governing bodies, board, CIO) — already institution-agnostic. Flagged for confirmation only: no UL-specific governance shape (rectorate, board of governors) is named here, so no change needed."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "\"the Digital Policy Commission\" (Q2.1, Q2.3, Q2.4, Q6.x, Q8.1, Q9.1, Q9.3 — the proposal's governance body)",
+    "location": "argumentation-body-EN.tex, multiple sections (sec:q-governance, sec:q-carpn, sec:q-regulatory, sec:q-costs)",
+    "proposedGenericDecision": "This is the proposal's own named governance construct (role-based, not UL-branded). Keep as a defined suite-wide term; verify it is named identically across the suite.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "\\GovernanceBodyName",
+    "confidence": "low",
+    "rationale": "Digital Policy Commission is an invented, role-descriptive governance body internal to the proposal, not a UL-specific organ. Institution-agnostic already; flagged only for cross-suite naming consistency."
+  },
+  {
+    "kind": "implicit-national-transposition",
+    "surfaceForm": "\"its statutory security obligations, including those under NIS2\" and \"For a public university ... Article 6(1)(e)\" (Q8.3 answer); assumes the institution is a public body subject to national NIS2 transposition",
+    "location": "argumentation-body-EN.tex, sec:q-regulatory (Answer to Q8.3)",
+    "proposedGenericDecision": "Generalise the lawful-basis argument to \"a public-sector or public-interest institution\"; note that the NIS2 statutory duty depends on national transposition (stated here without naming the transposing law/country).",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "\\InstitutionLegalStatus / \\NIS2NationalLaw (nullable)",
+    "confidence": "medium",
+    "rationale": "Implicitly assumes the institution is a public university whose GDPR Art.6(1)(e) public-interest basis and NIS2 statutory duties flow from national transposition. Public-vs-private status and the transposing instrument are jurisdiction-bound and should be parameterized rather than assumed."
+  },
+  {
+    "kind": "implicit-incident-localisation",
+    "surfaceForm": "Named university incidents used as evidence: Paris-Saclay, Western Sydney, Texas Tech, Rennes (Q1.1, Q7.1, Q7.2)",
+    "location": "argumentation-body-EN.tex, sec:q-segmentation (Answer Q1.1) and sec:q-incidents (Q7.1/Q7.2)",
+    "proposedGenericDecision": "Retain as evidential precedents (Layer 4/5 empirical incidents) — these are external, sourced examples, not the adopting institution. Keep, as they are part of the generic evidence base usable by any institution.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "n/a",
+    "confidence": "medium",
+    "rationale": "These are third-party incident precedents (cited evidence), not specificity tying the document to UL. They generalise to any institution adopting the architecture. Flagged for awareness only; Rennes/Paris-Saclay are French and could be supplemented but need not be dropped."
+  },
+  {
+    "kind": "implicit-institution-precedent",
+    "surfaceForm": "Reference-university roster: MIT, Stanford, Cambridge, Oxford, ETH Zurich, CERN, Michigan, EPFL, NC State, Penn State, Wisconsin-Madison, Paris-Saclay, Sorbonne (Q1.3, Q2.3, Q5.1, Q5.3, conclusion)",
+    "location": "argumentation-body-EN.tex, multiple (sec:q-segmentation, sec:q-governance, sec:q-comparisons, sec:arg-conclusion)",
+    "proposedGenericDecision": "Retain — these are external comparator institutions forming the convergence/precedent evidence base, reusable by any adopting institution. Not UL self-reference.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "n/a",
+    "confidence": "high",
+    "rationale": "Comparator institutions are the generic evidence layer (institutional precedents) and are explicitly intended to be transferable. They do not bind the document to UL and should be kept."
+  },
+  {
+    "kind": "implicit-macro-expansion",
+    "surfaceForm": "\\institution{...} and \\gls{...} macros expanding to UL/LU-specific terms: \\gls{restena}, \\institution{ULHPC}, \\institution{MeluXina}, \\institution{LIST}, \\institution{LIH}",
+    "location": "argumentation-body-EN.tex, sec:q-autonomy (Q3.4 + answer), sec:q-costs (Q9.1)",
+    "proposedGenericDecision": "Audit the shared glossary/\\institution definitions so that the localisation variables above resolve these macros to role-based generic terms (NREN, HPC facility, EuroHPC system, national research partners) for the suite build.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "\\NRENName, \\HPCFacilityName, \\EuroHPCSystemName, \\NationalResearchPartners",
+    "confidence": "high",
+    "rationale": "Several macros (gls/institution) expand to Luxembourg-specific named entities. Genericising the document requires the macro expansions themselves to be parameterized at the glossary level, not just the prose."
+  }
+]

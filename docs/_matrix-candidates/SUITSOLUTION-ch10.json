@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "external-precedent",
+    "surfaceForm": "CERN's EOS distributed file system, designed for high-energy physics datasets",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Reference instantiation: Ceph + Vault Transit + label-based access (realworldbox 'Research storage precedents')",
+    "proposedGenericDecision": "Treat as a generic 'large-scale physical-sciences research-storage precedent' — an externally documented exemplar, not the home institution. Already framed as a design lesson, not a template.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.78,
+    "rationale": "CERN/EOS is an external reference institution, not the institution being templated. The domain rules explicitly encourage named external precedents (CERN listed among reference institutions). The text already says these should be consulted 'as design lessons rather than as direct templates'. Detected for completeness; recommend keep as a named exemplar. Mild risk only if a deploying institution reads the physics scale as prescriptive — but the surrounding caveat already neutralizes that."
+  },
+  {
+    "kind": "external-precedent",
+    "surfaceForm": "EUDAT Collaborative Data Infrastructure (EUDAT CDI), B2 services suite (B2SAFE, B2SHARE, B2STAGE, B2DROP, B2FIND, B2ACCESS, B2HANDLE) ... more than twenty research and computing centres in over a dozen European nations",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Reference instantiation (realworldbox 'Research storage precedents')",
+    "proposedGenericDecision": "Treat as a generic European research-data-infrastructure precedent available to any European research institution; the 'over a dozen European nations' framing presumes a European-research context but is an external network, not the home institution.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.7,
+    "rationale": "EUDAT is a pan-European federation cited as an external design precedent, not home-institution specificity. The 'European nations' scoping carries a mild implicit assumption that the deploying institution is European-research-oriented; an institution outside Europe would treat EUDAT as illustrative only. Keep as a named precedent; the count is sourced/factual, not a self-reference."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "post-Schrems II posture: storage-placement constraints, key-custody and per-tenant key separation are the technical supplementary measures that an institution can invoke alongside SCCs",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Regulatory anchoring (sec:st-regulatory)",
+    "proposedGenericDecision": "Generalize to 'the institution's applicable cross-border-transfer regime': supplementary technical measures invoked alongside the legal transfer mechanism recognised in the institution's jurisdiction.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "TRANSFER_REGIME_ANCHOR (e.g. 'post-Schrems II / SCCs' for EU/EEA; equivalent adequacy/transfer mechanism elsewhere)",
+    "confidence": 0.6,
+    "rationale": "Schrems II + SCCs is an EU/EEA-jurisdiction-bound construct (CJEU case law + EU transfer instrument). Stated as THE posture without naming the jurisdiction, it implicitly assumes an EU/EEA institution. A non-EU institution would anchor to a different transfer regime. Parameterize the anchor while keeping the underlying technical-supplementary-measures logic generic."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "It operationalises NIS2 Art. 21(2)(c) (backup)",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Regulatory anchoring (sec:st-regulatory)",
+    "proposedGenericDecision": "Generalize to 'the applicable cyber-resilience/backup obligation in the institution's jurisdiction'; NIS2 is an EU Directive requiring national transposition, so the binding form is the local implementing law, not the Directive itself.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "RESILIENCE_BACKUP_OBLIGATION (e.g. 'NIS2 Art. 21(2)(c)' as transposed by the national implementing law in EU member states; equivalent elsewhere)",
+    "confidence": 0.55,
+    "rationale": "NIS2 is an EU Directive; obligations bind only via national transposition. Citing it as directly operative is the classic 'national-transposition assumption stated without naming the country' pattern — it presumes an EU member-state institution and elides which national law actually binds. Parameterize to the applicable transposed/equivalent obligation."
+  },
+  {
+    "kind": "implicit-jurisdiction",
+    "surfaceForm": "GDPR Art. 32 ... Art. 5(1)(c) ... Art. 44--49 (international transfers, when storage placement crosses jurisdictions)",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Regulatory anchoring (sec:st-regulatory)",
+    "proposedGenericDecision": "Keep GDPR as the data-protection anchor where the institution falls within GDPR territorial scope; otherwise generalize to 'the institution's applicable data-protection regime (security-of-processing, data-minimisation, cross-border-transfer provisions)'.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "DATA_PROTECTION_REGIME (GDPR for EU/EEA-scoped institutions; equivalent privacy law elsewhere)",
+    "confidence": 0.45,
+    "rationale": "GDPR is EU law but has broad extraterritorial reach, so many non-EU institutions are still in scope — lower confidence that it is true institutional specificity. Still implicitly assumes the institution is GDPR-bound. Recommend a generic data-protection-regime framing with GDPR as the named instantiation, consistent with the chapter's existing 'reference instantiation' pattern."
+  },
+  {
+    "kind": "implicit-governance",
+    "surfaceForm": "the institutional key-management policy resolves to either a Vault-internal master key or, for higher-classification data, an HSM-backed master key ... the institution would substitute a HYOK arrangement",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Reference instantiation (instantiationbox + 'Cryptographic posture')",
+    "proposedGenericDecision": "Already role-based ('the institution', 'institutional key-management policy'); confirm it assumes a single key-custody authority rather than a federated/multi-tenant custody model.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.3,
+    "rationale": "Phrasing is already institution-neutral and role-based. Mild implicit assumption of a single institutional key-custody authority (rather than federated colleges/units each holding keys), but this is a reasonable architectural default and not home-institution specificity. Detected for completeness; recommend keep."
+  },
+  {
+    "kind": "implicit-cost-fte",
+    "surfaceForm": "An indicative envelope is two to four engineers with substantial Ceph familiarity, often shared with the network and compute teams",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Reference instantiation ('Operational considerations')",
+    "proposedGenericDecision": "Keep as an explicitly indicative, size-relative staffing envelope; it is already hedged ('indicative', 'often shared') and not tied to any jurisdiction-specific FTE cost.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.35,
+    "rationale": "An FTE band is a potential jurisdiction-bound cost/FTE signal, but this one is presented as a size-invariant indicative range with no currency or national labour-market anchor, and the realworldbox already cautions that scale proportions vary by institution. Consistent with the project's minimal-necessary-set / no-hard-self-count guidance. Recommend keep; flagged only for awareness."
+  },
+  {
+    "kind": "macro-crossref",
+    "surfaceForm": "\\trchap{ch:identity}, \\trchap{ch:policy}, \\trchap{ch:compute}, \\trchap{ch:crypto}, \\trchap{ch:observability}, \\trchap{ch:conformance}, \\trchap{ch:sovereignty-grid}, \\trchap{ch:regulatory-mapping}; \\S\\ref{sec:co-reference}, \\S\\ref{sec:rm-gdpr}, \\S\\ref{sec:rm-schrems2}, \\S\\ref{sec:rm-nis2}, \\S\\ref{sec:rm-iso}",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / throughout (caveatbox, contractbox, instantiationbox, sec:st-regulatory, pitfallbox)",
+    "proposedGenericDecision": "Intra-suite cross-references via the \\trchap macro and \\ref labels; these are document-architecture mechanisms, not institutional specificity. Verify the macro does not expand to a UL-specific term.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "The task flags 'a macro that expands to a UL term'. \\trchap and the ch:/sec: labels are generic intra-document cross-reference plumbing with no observable UL expansion in this file; they reference architecture layers (identity, policy, compute, crypto), not the home institution. Recommend keep, contingent on confirming the \\trchap definition in the suite preamble does not embed an institution name."
+  },
+  {
+    "kind": "implicit-single-site",
+    "surfaceForm": "Ceph clusters provide block storage ... an on-premises storage tier ... an on-premises footprint",
+    "location": "ul-it-policy/technical/ch10-storage-EN.tex / Reference instantiation + Alternative 2 (sec:st-alt2)",
+    "proposedGenericDecision": "Confirm 'on-premises' does not silently assume a single campus/data-centre; generalize to 'institutionally-operated storage tier(s)' which admits multi-site / multi-data-centre footprints.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.3,
+    "rationale": "'On-premises' carries a faint single-site connotation (the task lists 'assumes a single campus/data-centre' as an implicit pattern). Here it is used in the data-sovereignty sense (institutional custody vs. cloud) rather than asserting one physical site, so the risk is low. Recommend a light 'institutionally-operated' generalization for multi-campus deployers; flagged for awareness, not a strong finding."
+  }
+]

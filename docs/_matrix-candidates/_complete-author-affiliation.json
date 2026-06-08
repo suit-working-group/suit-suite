@@ -1,0 +1,120 @@
+{
+  "schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Completeness-critic candidates — author-affiliation specificity",
+  "suite": "SUIT — Sustainable University IT Infrastructure & Technology",
+  "kind": "author-affiliation",
+  "generated": "2026-06-09",
+  "method": "Reading-based transversal pass over ul-it-policy (SUITPOLICY / SUITSOLUTION) source .tex and .bib. Only author<->affiliation BINDINGS (an author identity tied to a department/institution/email/PDF-author field) that the canonical matrix does NOT already cover. The matrix's ANCHOR-AUTHOR-NAME treats named persons only as case-law authorities and parameterizes the bare AUTHOR_NAME; ANCHOR-INSTITUTION-NAME / ANCHOR-CS-UNIT cover the institution and the pilot unit separately. None of them capture the author-to-affiliation binding in document metadata, self-citation bib entries, contact blocks, or PDF-author fields.",
+  "note": "Candidate rows only — not merged into the canonical matrix. Each row mirrors the matrix entry shape.",
+  "entries": [
+    {
+      "id": "CAND-AUTHOR-AFFIL-SELFCITE-INSTITUTION",
+      "kind": "author-affiliation",
+      "title": "Author-org + affiliation binding in suite self-citation bib entries (ng-tech-ref-2026, ng-dossier-2026)",
+      "surfaceForms": [
+        "author = {{SUIT --- International Working Group on Sovereign University IT in the AI Era}} ; institution = {Department of Computer Science, University of Luxembourg, Luxembourg}",
+        "author = {{SUIT --- ...}} ; institution = {Faculty of Science, Technology and Medicine and Department of Computer Science, University of Luxembourg, Luxembourg}",
+        "note = {Contact point: Nicolas Guelfi (Department of Computer Science, University of Luxembourg). ...}"
+      ],
+      "genericDecision": "Parameterize the affiliation string bound to the suite's own author entity in the self-citation @techreport entries. The author org (SUIT working group) and the title generalize, but the institution field hard-binds the work to 'Department of Computer Science / Faculty of Science, Technology and Medicine, University of Luxembourg, Luxembourg' and the note hard-binds the contact person 'Nicolas Guelfi' to the same UL unit. Replace the institution string with the localized adopter's host unit and the contact with the adopter's contact, or keep the SUIT author org with a neutral institution placeholder.",
+      "action": "parameterize",
+      "localizationVariable": "AUTHOR_AFFILIATION",
+      "occurrences": [
+        {
+          "document": "SUITPOLICY",
+          "file": "ul-it-policy/main/infra-uni-consolidé.bib",
+          "section": "@techreport{ng-tech-ref-2026} institution + note (lines ~2633-2641); @techreport{ng-dossier-2026} institution + note (lines ~2645-2653)",
+          "surfaceForm": "institution = {Department of Computer Science, University of Luxembourg, Luxembourg}; note = {Contact point: Nicolas Guelfi (Department of Computer Science, University of Luxembourg). ...}"
+        },
+        {
+          "document": "SUITPOLICY",
+          "file": "ul-it-policy/{main,book,technical,argumentation,companion,inspection}/annotations-data.tex",
+          "section": "\\csname annot@ng-tech-ref-2026\\endcsname expansion: 'Department of Computer Science, University of Luxembourg, Luxembourg.' echoed in every suite directory's annotations cache (line ~216)",
+          "surfaceForm": "SUIT --- International Working Group ... (2026). ... Department of Computer Science, University of Luxembourg, Luxembourg."
+        }
+      ],
+      "occurrenceCount": 2,
+      "documents": ["SUITPOLICY"],
+      "confidence": "high",
+      "rationale": "Author-org + affiliation binding in suite self-citation bib entries. The canonical ANCHOR-BIB-PATH entry references ng-tech-ref-2026 only as a citation *key/path*; it does not flag the author/institution affiliation strings inside the entry. The institution and note fields bind the suite's own author entity (SUIT / Nicolas Guelfi) to a UL-specific host unit, which must be parameterized for any non-UL adopter."
+    },
+    {
+      "id": "CAND-AUTHOR-AFFIL-CONTACT-BLOCK",
+      "kind": "author-affiliation",
+      "title": "Title-page contact-point block binding named author to UL unit and uni.lu email",
+      "surfaceForms": [
+        "Contact point: Nicolas Guelfi \\\\ Department of Computer Science \\\\ University of Luxembourg, Luxembourg \\\\ nicolas.guelfi@uni.lu",
+        "\\href{mailto:nicolas.guelfi@uni.lu}{\\texttt{nicolas.guelfi@uni.lu}}"
+      ],
+      "genericDecision": "Parameterize the whole contact-point block as a unit: the named person, the host unit (Department of Computer Science), the institution (University of Luxembourg, Luxembourg), and the affiliation-bearing email domain (uni.lu) are bound together as the SUIT contact point. For a generic/template release, replace with role-based placeholders (CONTACT_NAME, host unit, institution, CONTACT_EMAIL@INSTITUTION_DOMAIN). The uni.lu email domain is itself an affiliation marker and must not survive genericization.",
+      "action": "parameterize",
+      "localizationVariable": "AUTHOR_AFFILIATION",
+      "occurrences": [
+        {
+          "document": "SUITSOLUTION",
+          "file": "ul-it-policy/technical/technical-reference-EN.tex",
+          "section": "Title-page SUIT contact minipage (lines 236-239)",
+          "surfaceForm": "Contact point: Nicolas Guelfi / Department of Computer Science / University of Luxembourg, Luxembourg / nicolas.guelfi@uni.lu"
+        }
+      ],
+      "occurrenceCount": 1,
+      "documents": ["SUITSOLUTION"],
+      "confidence": "high",
+      "rationale": "Title-page contact-point block binding named author to UL unit and uni.lu email. ANCHOR-AUTHOR-NAME parameterizes only the bare name and treats named persons as case-law authorities; ANCHOR-INSTITUTION-NAME notes 'uni.lu (domain)' generically but neither captures the BINDING of the named contact person to the department + institution + institutional email in the document's own front matter. The email domain is a direct affiliation marker."
+    },
+    {
+      "id": "CAND-AUTHOR-AFFIL-CITATION-LINE",
+      "kind": "author-affiliation",
+      "title": "Book front-matter 'Citation:' line binding 'Guelfi N.' to University of Luxembourg, Department of Computer Science",
+      "surfaceForms": [
+        "\\emph{Citation:} Guelfi N., \\emph{Sovereign University IT --- A Technical Reference ...}, University of Luxembourg, Department of Computer Science, May 2026 \\cite{ng-tech-ref-2026}."
+      ],
+      "genericDecision": "Parameterize the author-affiliation pair in the suggested-citation line: 'Guelfi N.' bound to 'University of Luxembourg, Department of Computer Science'. The citation template (author, title, affiliation, date) is generic; the named author and the UL host-unit affiliation must be replaced with the adopter's author/affiliation or the SUIT working-group author with a neutral affiliation.",
+      "action": "parameterize",
+      "localizationVariable": "AUTHOR_AFFILIATION",
+      "occurrences": [
+        {
+          "document": "SUITPOLICY",
+          "file": "ul-it-policy/book/book-EN.tex",
+          "section": "Annotated TOC of the Technical Reference — suggested 'Citation:' line (lines 461-464)",
+          "surfaceForm": "Guelfi N., ... University of Luxembourg, Department of Computer Science, May 2026 \\cite{ng-tech-ref-2026}."
+        }
+      ],
+      "occurrenceCount": 1,
+      "documents": ["SUITPOLICY"],
+      "confidence": "high",
+      "rationale": "Book 'Citation:' line binding author to UL unit. This is a distinct author-affiliation binding in the assembled book's front matter (named author + UL + DCS as the publishing affiliation), not covered by ANCHOR-AUTHOR-NAME (bare name) or ANCHOR-CS-UNIT (pilot-unit role). It is a publication-metadata attribution that pins authorship to the UL host institution."
+    },
+    {
+      "id": "CAND-AUTHOR-AFFIL-PDF-METADATA",
+      "kind": "author-affiliation",
+      "title": "PDF document metadata pdfauthor fields naming UL unit / AI tool as author",
+      "surfaceForms": [
+        "pdfauthor={Department of Computer Science}",
+        "pdfauthor={Claude Sonnet 4.5 (Anthropic AI)}",
+        "pdftitle={Information-Security Constraints at the University of Luxembourg ...}"
+      ],
+      "genericDecision": "Parameterize the PDF \\hypersetup author/title metadata that encodes affiliation. 'pdfauthor={Department of Computer Science}' embeds the UL host unit as the document author in PDF properties; 'pdfauthor={Claude Sonnet 4.5 (Anthropic AI)}' embeds an AI tool as author; 'pdftitle' embeds the University-of-Luxembourg name. For a generic release, set pdfauthor to the suite author org (SUIT) or the adopter, and remove the UL-specific institution name from pdftitle. Avoid leaking the AI-tool author string in any shipped metadata.",
+      "action": "parameterize",
+      "localizationVariable": "AUTHOR_AFFILIATION",
+      "occurrences": [
+        {
+          "document": "SUITPOLICY",
+          "file": "ul-it-policy/consolidation/ul-itsec-consolidation-EN.tex",
+          "section": "\\hypersetup metadata (lines 43-47): pdftitle names University of Luxembourg; pdfauthor={Department of Computer Science}",
+          "surfaceForm": "pdfauthor={Department of Computer Science}; pdftitle={Information-Security Constraints at the University of Luxembourg ...}"
+        },
+        {
+          "document": "SUITPOLICY",
+          "file": "ul-it-policy/inspection/INSPECTION_COMPLETE.tex",
+          "section": "\\hypersetup metadata (lines 61-62): pdfauthor names an AI tool",
+          "surfaceForm": "pdfauthor={Claude Sonnet 4.5 (Anthropic AI)}; pdftitle={Rapport d'Inspection - Infrastructure IT Universitaire}"
+        }
+      ],
+      "occurrenceCount": 2,
+      "documents": ["SUITPOLICY"],
+      "confidence": "medium",
+      "rationale": "PDF metadata pdfauthor fields are an author-affiliation binding embedded in document properties (not body text), unmentioned anywhere in the canonical matrix (pdfauthor count = 0). One field names the UL host unit as author; another names an AI tool as author. Both are affiliation/authorship leaks that survive PDF export and require parameterization for a generic release."
+    }
+  ]
+}

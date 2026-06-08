@@ -1,0 +1,62 @@
+[
+  {
+    "kind": "jurisdiction-bound-taxonomy",
+    "surfaceForm": "for an R1 institution",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex §Reference instantiation (Operational considerations paragraph, line 131)",
+    "proposedGenericDecision": "Express team-sizing envelope against a role-based, jurisdiction-neutral scale descriptor (e.g. 'a large research-intensive institution') rather than the Carnegie 'R1' classification, which is a US-specific taxonomy that does not travel to non-US systems.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "INSTITUTION_SCALE_TIER",
+    "confidence": 0.78,
+    "rationale": "'R1' is the Carnegie Classification of Institutions of Higher Education, a United States taxonomy. Using it as the anchor for an FTE envelope silently assumes a US institutional-classification frame and is not institution-agnostic. A role/size descriptor or a localization variable for the scale tier keeps the sizing guidance portable."
+  },
+  {
+    "kind": "jurisdiction-bound-FTE",
+    "surfaceForm": "on the order of three to six engineers spread across the OS-specific operations, with one engineer-equivalent dedicated to the unified posture schema",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex §Reference instantiation (Operational considerations paragraph, lines 131-134)",
+    "proposedGenericDecision": "Keep the staffing envelope role-based (OS-specific operations roles + one posture-schema integration role) but bind the absolute headcount range to a scale-dependent localization parameter, since 3-6 FTE presumes a particular institutional size and labour-market context.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "ENDPOINT_TEAM_FTE_RANGE",
+    "confidence": 0.55,
+    "rationale": "The headcount band is tied to the 'R1 institution' scale assumption above; it is an implicit jurisdiction/size-bound resourcing figure. The role decomposition (per-OS ops + posture-schema integrator) is already generic and should be kept; only the numeric envelope needs to scale with the deploying institution."
+  },
+  {
+    "kind": "national-transposition-assumption-unnamed",
+    "surfaceForm": "NIS2~Art.~21(2)(g) ... (i) ... (j)",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex §Regulatory anchoring (lines 269-272)",
+    "proposedGenericDecision": "Treat NIS2 as the EU-jurisdiction instantiation of a generic 'applicable cyber-hygiene / asset-management obligation' anchor. Either generalise to 'the applicable national cybersecurity obligation (e.g. NIS2 in the EU)' or parameterize the regulatory instrument so non-EU deployers can substitute their own equivalent.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "CYBER_OBLIGATION_INSTRUMENT",
+    "confidence": 0.62,
+    "rationale": "NIS2 is an EU Directive requiring national transposition; citing its article numbers as the device-side anchor assumes an EU jurisdiction without naming the country, which prevents the chapter from being institution/jurisdiction-agnostic. The architectural point (endpoint layer anchors basic cyber hygiene + asset management) is generic; the specific instrument is jurisdiction-bound."
+  },
+  {
+    "kind": "jurisdiction-bound-regulation",
+    "surfaceForm": "\\gls{gdpr}~Art.~32 (technical measures applied at the device that processes personal data)",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex §Regulatory anchoring (lines 266-268)",
+    "proposedGenericDecision": "Frame as 'the applicable data-protection security-of-processing obligation (GDPR Art. 32 in the EU)' so deployers under other regimes can map to their equivalent; keep GDPR as the EU instantiation rather than the universal anchor.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "DATA_PROTECTION_INSTRUMENT",
+    "confidence": 0.5,
+    "rationale": "GDPR Art. 32 is EU law. Presenting it as the device-side anchor without qualification assumes an EU data-protection jurisdiction. The underlying role (endpoint enforces technical security measures over devices processing personal data) is generic and should be retained; the named instrument should be presented as one jurisdiction's instantiation."
+  },
+  {
+    "kind": "governance-shape-assumption",
+    "surfaceForm": "its presentations in NREN community fora",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex §Reference instantiation (realworldbox, line 144)",
+    "proposedGenericDecision": "Generalise to 'sector/community fora and peer-institution publications', since 'NREN community fora' presumes the institution participates in a national research-and-education-network ecosystem, a governance/membership shape that is not universal.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.4,
+    "rationale": "NREN (National Research and Education Network) is a generic category, but routing verification through 'NREN community fora' implicitly assumes the deploying institution belongs to an NREN ecosystem. A peer-publication / sector-forum phrasing is more institution-agnostic. Low confidence because NREN is already a generic term, not a named NREN."
+  },
+  {
+    "kind": "macro-semantic-misuse-platform",
+    "surfaceForm": "\\institution{iOS} and \\institution{Android}",
+    "location": "ul-it-policy/technical/ch11-endpoint-EN.tex chapter intro (line 38)",
+    "proposedGenericDecision": "The \\institution{} macro is reserved (per project rules) for organization names; here it wraps operating-system platforms. This is a semantic-macro misuse, not an institution-binding leak, so it does not block institution-agnosticism. Flag for review but keep content.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.3,
+    "rationale": "Detected for completeness: \\institution{} expanding over 'iOS'/'Android' is a misuse of the semantic command (organization names), but it does not introduce institution-specific (UL) content. No generalization needed for portability; noted only as a coherence observation."
+  }
+]

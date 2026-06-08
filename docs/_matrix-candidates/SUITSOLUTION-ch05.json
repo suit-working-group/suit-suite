@@ -1,0 +1,92 @@
+[
+  {
+    "kind": "jurisdiction-bound-legal-anchor",
+    "surfaceForm": "The \\gls{gdpr}~\\cite{gdpr} applies to any institution processing personal data, with no exemption by size; ... Where the institution is classified as an essential or important entity, the \\gls{nis2}~\\cite{nis2} obligations apply in addition.",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Functional necessity is independent of scale (sec:ap-necessity)",
+    "proposedGenericDecision": "Frame the no-size-threshold legal compulsion as 'the applicable data-protection regime' and 'the applicable critical-infrastructure / cybersecurity regime', with GDPR and NIS2 retained only as the EU instantiation example, so a non-EU institution can substitute its own equivalent regime.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{DATA_PROTECTION_REGIME}} / {{CRITICAL_ENTITY_REGIME}} (default: GDPR / NIS2)",
+    "confidence": 0.78,
+    "rationale": "GDPR and NIS2 are EU-jurisdiction-bound. The argument (legally compelled functions exist with no size threshold) is meant to be universal, but it is anchored exclusively in EU instruments. A US/UK/CH institution would need its own equivalent (e.g., state privacy law, NIS regulations). Parameterize the regime; keep the structural claim."
+  },
+  {
+    "kind": "classification-system-bound-sizing-anchor",
+    "surfaceForm": "the \\emph{sizing} (\\trchap{ch:sizing}{}, given as orders of magnitude for a typical R1 institution, with a down-scaled profile in \\S\\ref{sec:sz-downscale})",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Functional necessity is independent of scale (sec:ap-necessity)",
+    "proposedGenericDecision": "Replace 'R1 institution' with a system-neutral role descriptor such as 'a research-intensive institution' or 'a large doctoral / research-intensive institution', since R1 is a US-specific Carnegie Classification tier.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "{{REFERENCE_INSTITUTION_PROFILE}} (default: research-intensive institution)",
+    "confidence": 0.82,
+    "rationale": "'R1' is the Carnegie Classification of Institutions of Higher Education (US), not an international category. It implicitly assumes a US classification frame and makes the sizing anchor jurisdiction/system-bound. A role-based descriptor preserves the meaning (high research intensity) without importing a national taxonomy."
+  },
+  {
+    "kind": "classification-system-bound-sizing-anchor",
+    "surfaceForm": "Nor is it a deployment specification: sizing (\\trchap{ch:sizing}{}) is given as orders of magnitude for a typical R1 institution.",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §What this reference architecture is and is not (sec:ap-scope)",
+    "proposedGenericDecision": "Same as the other 'R1' occurrence: use a system-neutral 'research-intensive institution' descriptor so the scope statement does not depend on the US Carnegie tier.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "{{REFERENCE_INSTITUTION_PROFILE}} (default: research-intensive institution)",
+    "confidence": 0.82,
+    "rationale": "Second instance of the US-specific 'R1' Carnegie tier used as the sizing reference; must be generalized consistently with the sec:ap-necessity occurrence to keep the document institution- and jurisdiction-agnostic."
+  },
+  {
+    "kind": "regional-federation-assumption",
+    "surfaceForm": "identity provider compatible with OIDC Core 1.0, SCIM 2.0, and federation metadata in accordance with eduGAIN technical profile",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Interfaces over products (sec:ap-interfaces)",
+    "proposedGenericDecision": "Phrase the federation requirement as 'in accordance with the institution's identity-federation technical profile', with eduGAIN named as the example profile rather than the assumed default, so institutions outside the eduGAIN/GEANT ecosystem can substitute their own federation.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{IDENTITY_FEDERATION_PROFILE}} (default: eduGAIN technical profile)",
+    "confidence": 0.6,
+    "rationale": "eduGAIN is the GEANT-operated inter-federation; using it as the named profile in a procurement-language example presumes membership in the European/NREN research-identity federation. The point (procurement references a federation profile, not a product) generalizes; the specific profile should be parameterizable. Moderate confidence because eduGAIN is genuinely global-ish and may be acceptable as an illustrative example."
+  },
+  {
+    "kind": "regional-federation-assumption",
+    "surfaceForm": "for instance, the eduGAIN technical profile for SAML2 federation, or the OPA bundle distribution pattern",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Standards landscape / Standards versus reference profiles (sec:ap-standards)",
+    "proposedGenericDecision": "Keep eduGAIN as an illustrative profile example but mark it as 'e.g., the eduGAIN technical profile (where the institution participates in research-identity federation)' so it reads as one instance, not a universal assumption.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "{{IDENTITY_FEDERATION_PROFILE}} (default: eduGAIN technical profile)",
+    "confidence": 0.55,
+    "rationale": "Second eduGAIN reference, used here explicitly as an example of a co-normative profile. Already hedged with 'for instance', so lower remediation priority; flagged for consistency with the procurement-example occurrence."
+  },
+  {
+    "kind": "program-roadmap-reference",
+    "surfaceForm": "This is the condition under which the network of universities anticipated in phase~2 can share an architectural baseline despite operating in very different conditions.",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §What this reference architecture is and is not (sec:ap-scope)",
+    "proposedGenericDecision": "Reframe 'the network of universities anticipated in phase~2' as a generic forward-looking goal ('a future network of institutions adopting a shared architectural baseline'), or parameterize the initiative/phase name, since 'phase 2' refers to the specific SUIT-initiative roadmap external to a self-contained generic reference.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": "{{INITIATIVE_PHASE_REFERENCE}} (default: phase 2 of the SUIT initiative)",
+    "confidence": 0.7,
+    "rationale": "Per the suite metadata, 'phase 2' is 'phase 2 of the SUIT initiative' — a program-specific roadmap milestone, not a generic concept. A reusable institution-agnostic reference should not embed a named multi-phase program; reframe as a general multi-institution baseline-sharing goal or parameterize the program name. Mirrors the same reference in abstract-EN.tex."
+  },
+  {
+    "kind": "vendor-specific-example",
+    "surfaceForm": "an \\gls{rfp} that asks for ``Microsoft Entra ID with Conditional Access'' admits one. ... a decision to use ``Entra Conditional Access expression \\texttt{X}'' does not.",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Interfaces over products (sec:ap-interfaces)",
+    "proposedGenericDecision": "Retain as an illustrative negative example (a proprietary product-locked RFP/decision). Optionally make the named product a placeholder ('a named proprietary identity product with vendor-specific conditional-access expressions') so the contrast does not single out one vendor, but the example is legitimately illustrative and not institution-specific.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "{{PROPRIETARY_IDP_EXAMPLE}} (default: Microsoft Entra ID with Conditional Access)",
+    "confidence": 0.45,
+    "rationale": "Microsoft Entra ID is a vendor product, not an institutional identifier; it is used deliberately as the negative 'single-supplier lock-in' contrast and applies to any institution. It does not tie the document to University of Luxembourg, so it is low-priority. Flagged only because it is a concrete named commercial product; could be neutralized to a placeholder if strict vendor-neutrality is required."
+  },
+  {
+    "kind": "suite-internal-concept-macro",
+    "surfaceForm": "Cross-layer command issuance after a TAC activation ... the ``glue'' that turns a TAC activation decision into the cross-layer commands (\\gls{tac})",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §Standards landscape (orchestration row) and §The orchestration gap (sec:ap-standards)",
+    "proposedGenericDecision": "Keep. TAC (Trusted Activity Context) is a report-introduced generic conceptual unit, not a University-of-Luxembourg-specific term; it transposes across institutions by construction.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.3,
+    "rationale": "Glossary defines TAC as 'Trusted Activity Context -- a concept introduced in this report'. It is an architecture-level abstraction (unit of reasoning), not an institution-bound entity or incident. Listed for completeness because it is a suite macro that expands to a coined term, but it is institution-agnostic and should be retained."
+  },
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "An institution in a different regulatory context, or with a different existing estate, instantiates the same contracts with different products without leaving the architecture.",
+    "location": "ul-it-policy/technical/ch05-architectural-principles-EN.tex — §What this reference architecture is and is not (sec:ap-scope)",
+    "proposedGenericDecision": "Keep — this passage is already the explicit statement of institution-/jurisdiction-agnosticism and uses role-based language ('an institution', 'a different regulatory context'). No specificity to remediate.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": "",
+    "confidence": 0.2,
+    "rationale": "Included to record that the chapter's generalization rationale is itself clean: it speaks of 'an institution' and 'a different regulatory context' without naming a country, campus topology, or governance body. No rectorate/board-of-governors assumption appears in this chapter. Confirms absence rather than presence of specificity."
+  }
+]

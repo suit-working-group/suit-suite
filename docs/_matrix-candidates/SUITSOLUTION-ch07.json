@@ -1,0 +1,102 @@
+[
+  {
+    "kind": "jurisdiction-bound-classification",
+    "surfaceForm": "indicatively one to two engineers shared across other duties for an R1 institution",
+    "location": "ch07-policy-EN.tex, \\section{Reference instantiation: OPA + bundle server + decision log to SIEM} -> \\paragraph{Operational considerations.} (line 134)",
+    "proposedGenericDecision": "Replace the US Carnegie 'R1' classification with a role-based institution-size descriptor (e.g. a large research-intensive institution) so the FTE sizing is not tied to a US classification system.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.9,
+    "rationale": "'R1 institution' is the US Carnegie Classification of research-intensive doctoral universities. It is jurisdiction-bound (US) and ties an FTE estimate to a national taxonomy; institution-agnostic text should use a generic research-intensity / size descriptor."
+  },
+  {
+    "kind": "jurisdiction-bound-fte-cost",
+    "surfaceForm": "The operational team would typically be small --- indicatively one to two engineers shared across other duties ... but the institutional skill investment remains significant.",
+    "location": "ch07-policy-EN.tex, \\section{Reference instantiation...} -> \\paragraph{Operational considerations.} (lines 132-134)",
+    "proposedGenericDecision": "Keep the FTE indication as an order-of-magnitude staffing estimate but decouple it from the R1 anchor; optionally parameterize the headcount range so an instantiating institution can localise it.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "policyOpsTeamFteRange",
+    "confidence": 0.55,
+    "rationale": "The 1-2 engineer figure is an implicit jurisdiction/scale-bound staffing assumption. The headcount itself is reasonable to keep, but it presumes a particular institutional scale (the R1 anchor) and labour-market context; parameterizing lets each adopter set its own range."
+  },
+  {
+    "kind": "regulatory-jurisdiction-assumption",
+    "surfaceForm": "operationalises \\gls{gdpr}~Art.~25 (data protection by design) and contributes to Art.~32 (access-control effectiveness)",
+    "location": "ch07-policy-EN.tex, \\section{Regulatory anchoring} (lines 284-286)",
+    "proposedGenericDecision": "Treat GDPR as one named instance of a data-protection-by-design regime; frame the regulatory anchoring as 'the applicable data-protection regulation (e.g. GDPR Art. 25/32 in the EU)' so non-EU adopters substitute their own regime.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "dataProtectionRegulationRef",
+    "confidence": 0.8,
+    "rationale": "GDPR is EU-jurisdiction-bound. The chapter states it as the regulatory frame without flagging that it is EU-specific, which assumes an EU adopter. An institution-agnostic Reference should expose the data-protection regime as a localisation point."
+  },
+  {
+    "kind": "regulatory-national-transposition-assumption",
+    "surfaceForm": "Under NIS2~Art.~21(2)(a) (risk-analysis and information-system security policy) and (i) (access-control policies) it is the locus where the institutional risk posture is enforced uniformly.",
+    "location": "ch07-policy-EN.tex, \\section{Regulatory anchoring} (lines 286-288)",
+    "proposedGenericDecision": "Frame NIS2 as the EU cybersecurity directive that each member state transposes; expose it as a localisation point so an adopter maps to its own national transposition or equivalent national cybersecurity-baseline law.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "cyberSecurityBaselineRegulationRef",
+    "confidence": 0.8,
+    "rationale": "NIS2 is an EU directive requiring national transposition; the article numbers cited are the directive's, not any national law's. Stating it as the default regulatory anchor implicitly assumes an EU (and member-state-transposed) jurisdiction without naming the country."
+  },
+  {
+    "kind": "regulatory-jurisdiction-assumption",
+    "surfaceForm": "Under the EU AI Act, Art.~5 (prohibited practices) and Art.~50 (transparency) admit a policy-plane enforcement",
+    "location": "ch07-policy-EN.tex, \\section{Regulatory anchoring} (lines 288-291)",
+    "proposedGenericDecision": "Keep the EU AI Act as a named EU instance but present it as one possible AI-governance regime; expose an AI-regulation localisation point so non-EU adopters substitute their own (or omit).",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "aiRegulationRef",
+    "confidence": 0.75,
+    "rationale": "The EU AI Act is explicitly EU-jurisdiction-bound (already labelled 'EU'). Used here as the default AI-governance anchor, it assumes an EU adopter; an institution-agnostic Reference should parameterize the AI-governance regime."
+  },
+  {
+    "kind": "framework-default-bias",
+    "surfaceForm": "operationalises 27001~A.5.15 ... A.5.18 ... and A.8.3 ... and contributes to NIST CSF \\textsf{PROTECT} (PR.AA)",
+    "location": "ch07-policy-EN.tex, \\section{Regulatory anchoring} (lines 293-295)",
+    "proposedGenericDecision": "ISO/IEC 27001 is international and may be kept; NIST CSF is a US framework presented as a default companion. Keep both as illustrative control mappings but ensure they are framed as exemplary frameworks, not the mandated baseline.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.45,
+    "rationale": "ISO/IEC 27001 is globally adopted and largely jurisdiction-neutral. NIST CSF is US-origin but internationally referenced; as control-mapping illustrations these are low-risk. Flagged at low confidence in case the suite wants a single neutral framework set."
+  },
+  {
+    "kind": "programme-specific-roadmap-reference",
+    "surfaceForm": "The phase-2 international university network anticipated by this Reference would be one of the contexts in which a shared library of academic-context policies might emerge.",
+    "location": "ch07-policy-EN.tex, \\section{Reference instantiation...} -> \\begin{realworldbox}[Policy plane in academic and research settings] (lines 161-163)",
+    "proposedGenericDecision": "Generalise the 'phase-2 international university network anticipated by this Reference' to a role-based future state (e.g. a future cross-institution collaboration network) rather than a specific programme phase tied to this document's roadmap.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "'phase-2 ... anticipated by this Reference' is an implicit pointer to a specific multi-institution programme/roadmap embedded in this particular document suite, which a reusing institution would not share. It assumes the reader is inside this Reference's specific deployment plan."
+  },
+  {
+    "kind": "commercial-vendor-instance",
+    "surfaceForm": "Conditional Access expressions for Microsoft Entra~ID, authorisation policies and scopes for Keycloak",
+    "location": "ch07-policy-EN.tex, \\section{Alternative~2 --- Native identity-provider authorisation rules} -> \\begin{alternativebox}[Native IdP authorisation] (lines 210-212)",
+    "proposedGenericDecision": "Keep as illustrative product examples of native-IdP authorisation (one proprietary, one open-source); they are not institution-specific. Optionally ensure they remain examples, not a prescribed stack.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.3,
+    "rationale": "Microsoft Entra ID and Keycloak are product names, not institution identifiers, and are used as balanced illustrations (proprietary vs open-source). They do not bind the document to any institution; low-confidence flag only for completeness."
+  },
+  {
+    "kind": "commercial-vendor-instance",
+    "surfaceForm": "Industrial OPA deployments publicly described at organisations including Netflix, Capital One and Pinterest demonstrate the engine at scale",
+    "location": "ch07-policy-EN.tex, \\section{Reference instantiation...} -> \\begin{realworldbox}[Policy plane in academic and research settings] (lines 156-159)",
+    "proposedGenericDecision": "Keep as external industry evidence of OPA scale; these are third-party companies, not the adopting institution. No institution-agnostic concern.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.2,
+    "rationale": "Named companies (Netflix, Capital One, Pinterest) are illustrative industrial precedents, not the adopting institution. They do not impair institution-agnosticism; recorded for completeness at very low confidence."
+  },
+  {
+    "kind": "sector-network-instance",
+    "surfaceForm": "Authorisation patterns relevant to research collaborations are developed in G\\u00c9ANT's eduTEAMS service, which implements the AARC Blueprint Architecture",
+    "location": "ch07-policy-EN.tex, \\section{Reference instantiation...} -> \\begin{realworldbox}[Policy plane in academic and research settings] (lines 147-153)",
+    "proposedGenericDecision": "Keep as pan-sector (GEANT/AARC) reference architecture evidence; these are sector-wide bodies relevant to any research institution, not jurisdiction- or institution-bound.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.2,
+    "rationale": "GEANT eduTEAMS and the AARC Blueprint are pan-European/international research-sector references applicable to any research institution; they do not tie the chapter to a single institution. Logged for completeness only."
+  }
+]

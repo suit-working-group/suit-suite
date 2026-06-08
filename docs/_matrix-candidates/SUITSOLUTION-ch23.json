@@ -1,0 +1,112 @@
+[
+  {
+    "kind": "implicit-governance-shape",
+    "surfaceForm": "reviewed by the governance body",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Exit criteria} (sec:w5-exit) and \\paragraph{Why this scenario} (Scenario A, sec:w5-scenario-llm: \"show to its governance body, its data protection officer, and the regulators\")",
+    "proposedGenericDecision": "Refer to the institution's standing governance authority by role rather than assuming a single named body. The text already uses the generic phrase \"governance body\" / \"governance bodies\" rather than rectorate/board of governors, so this is near-agnostic; keep role-based phrasing and ensure it does not later get bound to a specific organ.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.55,
+    "rationale": "Phrasing is already role-based (\"governance body\", \"programme governance\"). No specific organ (rectorate, board of governors, conseil de gouvernance) is named. Flagged for awareness because it presumes a single approving governance organ exists; acceptable as a generic role. Low remediation need."
+  },
+  {
+    "kind": "implicit-data-protection-role",
+    "surfaceForm": "its data protection officer",
+    "location": "ch23-wave5-pilot-EN.tex :: \\subsection{Scenario A: Researcher-LLM-API} > \\paragraph{Why this scenario} (sec:w5-scenario-llm)",
+    "proposedGenericDecision": "\"Data protection officer\" (DPO) is a GDPR Art.~37 role and is EU-jurisdiction-bound terminology. Outside the GDPR regime the equivalent role has different names (privacy officer, etc.). Keep as a role reference but be aware it assumes a GDPR-governed institution.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.5,
+    "rationale": "DPO is a generic role within the EU/GDPR frame the whole document already adopts. It is role-based, not institution-named. Only worth parameterizing if the suite must serve non-GDPR jurisdictions; otherwise keep."
+  },
+  {
+    "kind": "implicit-single-infrastructure-assumption",
+    "surfaceForm": "the pilot and the production services share the institution's infrastructure but do not share critical operational paths",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Coexistence pattern} (sec:w5-coexistence)",
+    "proposedGenericDecision": "Phrase \"the institution's infrastructure\" presumes a single shared infrastructure estate (one campus / one data-centre footprint). Generalize to allow multi-site / multi-campus / federated-college institutions where \"infrastructure\" may be distributed and not centrally shared.",
+    "suggestedAction": "generalize",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.45,
+    "rationale": "Implicit single-campus / single-estate assumption. The spatial-coexistence argument (isolated zone on shared compute/storage) silently assumes one shared infrastructure. A federated multi-college or multi-campus institution may not have a single shared estate. Soft generalization to \"the institution's infrastructure (or the relevant site's infrastructure)\"."
+  },
+  {
+    "kind": "implicit-jurisdiction-bound-regulatory-frame",
+    "surfaceForm": "third-country data egress under \\gls{gdpr}~Art.~32 and the \\emph{Schrems~II} framework",
+    "location": "ch23-wave5-pilot-EN.tex :: \\subsection{Scenario A: Researcher-LLM-API} (sec:w5-scenario-llm), activation/why-this-scenario paragraphs",
+    "proposedGenericDecision": "GDPR Art.~32 and Schrems~II are EU-jurisdiction-specific. \"Third-country\" is itself a GDPR term-of-art defined relative to the EU/EEA. For an institution-agnostic suite serving non-EU institutions, frame as the applicable cross-border data-transfer regime and parameterize the named instrument.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "CROSS_BORDER_TRANSFER_REGIME (default: \"GDPR Art. 32 + Schrems II\"; e.g. UK GDPR + ICO IDTA, or applicable national transfer rules)",
+    "confidence": 0.6,
+    "rationale": "The whole egress argument is bound to EU adequacy/transfer law. \"Third-country\" and \"Schrems II\" are meaningful only relative to the EU/EEA. A non-EU institution adopting the playbook needs its own transfer regime substituted. The architectural pattern (documented egress policy) is generic; the named legal anchor is not."
+  },
+  {
+    "kind": "implicit-jurisdiction-bound-regulatory-frame",
+    "surfaceForm": "the EU AI Act applies: Art.~2(6) (research exemption ...) ... with Art.~50 (transparency obligations); \\gls{gdpr}~Art.~25 ... Art.~35 (DPIA); \\gls{gdpr}-Art.~32 / NIS2-Art.~21(2)(a)",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Regulatory anchoring} (sec:w5-regulatory)",
+    "proposedGenericDecision": "The entire regulatory-anchoring section is bound to the EU regulatory stack (EU AI Act, GDPR, NIS2). For an institution-agnostic suite this section is the most jurisdiction-specific. Parameterize the regulatory stack so a non-EU institution can substitute its equivalent instruments, or scope the section explicitly as \"EU regulatory profile\".",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "REGULATORY_STACK (default: \"EU AI Act + GDPR + NIS2\"; institution substitutes applicable AI/privacy/cybersecurity law)",
+    "confidence": 0.6,
+    "rationale": "DPIA, the research exemption, and the AI Act transparency duty are EU constructs. The section reads as if every adopting institution is EU-governed. The mapping logic (research exemption, transparency to end-users, by-design, impact assessment) generalizes; the specific article-numbered instruments do not. Note: these EU anchors are intentional throughout the suite per project rules, so this is parameterize-or-scope rather than drop."
+  },
+  {
+    "kind": "implicit-national-transposition-assumption",
+    "surfaceForm": "NIS2-Art.~21(2)(a) measures",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Regulatory anchoring} (sec:w5-regulatory)",
+    "proposedGenericDecision": "NIS2 is an EU Directive that takes legal effect only through national transposition; citing the Directive article without naming the member state's transposing law implicitly assumes an EU member-state institution and that the transposition is in force. Generalize to the applicable transposed cybersecurity-risk-management obligation, or note the transposition dependency.",
+    "suggestedAction": "parameterize",
+    "suggestedLocalizationVariable": "NIS2_TRANSPOSITION (national law transposing NIS2 Art. 21(2)(a); applicable only to EU member-state institutions)",
+    "confidence": 0.5,
+    "rationale": "A Directive is binding as to result but operates via national transposition. Referencing the Directive article alone assumes (a) the institution is in an EU member state and (b) the country has transposed it. This is the classic implicit national-transposition-without-naming-the-country case called out in the detection brief."
+  },
+  {
+    "kind": "implicit-jurisdiction-bound-cost-duration",
+    "surfaceForm": "indicative duration four to six months / Six to nine months for brownfield trajectories",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Trajectories (consolidated)} (sec:w5-trajectories), Greenfield bullet and \\paragraph{Indicative duration}",
+    "proposedGenericDecision": "Indicative durations are calibrated to an assumed institutional change-management cadence and staffing model. They are not currency/FTE figures, but they are context-bound planning constants. Keep but ensure they remain labelled \"indicative\" and tied to \"institutional change-management cadence\" (which the text already does).",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.4,
+    "rationale": "These are durations, not jurisdiction-bound EUR/FTE costs, and are already explicitly qualified as \"indicative\" and dependent on \"the institutional change-management cadence.\" Low specificity risk; flagged only as a soft context-bound planning constant. No EUR amounts or FTE counts appear in this chapter."
+  },
+  {
+    "kind": "implicit-named-vendor-stack",
+    "surfaceForm": "the institution's existing Entra-based identity and Microsoft~365 estate ... evaluated by the Wave~4 OPA deployment ... the Entra-to-OPA decision chain",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Trajectories (consolidated)} (sec:w5-trajectories), Brownfield Microsoft-centric bullet",
+    "proposedGenericDecision": "Microsoft Entra, Microsoft 365, and OPA are named commercial/specific products. These are vendor-specific, not institution-specific, so they do not bind the document to a named institution. They are deliberate brownfield-trajectory exemplars. Keep as named example technologies (consistent with the suite's Microsoft-centric / hybrid trajectory framing) provided they remain illustrative rather than mandated.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.5,
+    "rationale": "Entra/M365/OPA/Shibboleth/Keycloak name a vendor stack, not the University of Luxembourg. They appear as named brownfield-trajectory exemplars (the document explicitly frames a \"Brownfield Microsoft-centric\" and a \"Brownfield hybrid\" trajectory). Not an institution-agnostic blocker; flagged for completeness since the brief lists macros/terms that expand to specific stacks."
+  },
+  {
+    "kind": "implicit-named-vendor-stack",
+    "surfaceForm": "the existing Shibboleth federation and the Wave~1 Keycloak activation layer",
+    "location": "ch23-wave5-pilot-EN.tex :: \\section{Trajectories (consolidated)} (sec:w5-trajectories), Brownfield hybrid bullet",
+    "proposedGenericDecision": "Shibboleth and Keycloak are named open-source products used as the hybrid-trajectory exemplar. Vendor-specific, not institution-specific. Keep as illustrative named technologies consistent with the brownfield-hybrid trajectory.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.5,
+    "rationale": "Named products, not a named institution. Used as a generic brownfield-hybrid exemplar. Not an agnostic blocker; recorded for completeness."
+  },
+  {
+    "kind": "explicit-named-institution-precedent",
+    "surfaceForm": "Indiana University's Jetstream2, operated under the United States National Science Foundation's ACCESS programme",
+    "location": "ch23-wave5-pilot-EN.tex :: \\begin{realworldbox}[Research-cloud pilot precedents] within \\section{Exit criteria} (sec:w5-exit)",
+    "proposedGenericDecision": "Named external precedent institution (Indiana University) and named national funding programme (US NSF ACCESS). This is an illustrative third-party precedent, not the adopting institution's own identity, and the box already explicitly cautions that specifics \"vary substantially across institutions.\" Keep as a cited precedent (Layer-5 institutional precedent per evidence methodology), since precedents are deliberately named and external.",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.6,
+    "rationale": "Per evidence-methodology rules, named institutional precedents are intentional (Layer 5) and are external examples, not the home institution. The box is self-qualifying about non-transposability. Naming Indiana University / NSF / EGI / EUDAT does not bind the document to a specific adopting institution; it is generic by design. Recorded because the brief asks to surface every named institution/EUR/programme even when retained."
+  },
+  {
+    "kind": "implicit-single-IT-function-governance",
+    "surfaceForm": "engages the institution's governance bodies beyond the IT function",
+    "location": "ch23-wave5-pilot-EN.tex :: \\subsection{Scenario C: Administrative compliance workspace} > \\paragraph{Why this scenario} (sec:w5-scenario-compliance)",
+    "proposedGenericDecision": "Assumes a single identifiable \"IT function\" distinct from broader governance bodies. This is a near-universal generic org shape and is already role-based. Keep; it does not name a specific organ (no DCS, no rectorate).",
+    "suggestedAction": "keep",
+    "suggestedLocalizationVariable": null,
+    "confidence": 0.35,
+    "rationale": "Generic organizational role reference (\"the IT function\", \"governance bodies\"); no named unit (DCS/SnT/FSTM) appears. Already institution-agnostic. Listed only because it presumes a centralized IT function, which a fully federated-college institution might not have."
+  }
+]
