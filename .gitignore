@@ -1,0 +1,22 @@
+# LaTeX build artifacts — temporary files live in out/, only the final .pdf
+# (built next to its .tex) is tracked.
+out/
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.run.xml
+*.synctex.gz
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+
+# OS / editor cruft
+.DS_Store
+
+# Per-developer Claude Code settings (machine-local, not part of the toolkit)
+.claude/settings.local.json

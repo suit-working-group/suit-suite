@@ -1,0 +1,73 @@
+% ============================================================================
+% localization-guide-EN.tex — SUIT Localization Guide (English)
+% ============================================================================
+%
+% STATUS: skeleton stub. The variable table below is intentionally EMPTY.
+% P2 populates it as the document bodies are written; P5 reconciles it against
+% the pruned/generalised bibliography and glossary.
+%
+% ----------------------------------------------------------------------------
+% PURPOSE
+% ----------------------------------------------------------------------------
+% The SUIT documents are written to be adopted directly by any university. The
+% body of every document uses role-based, vendor-neutral, institution-neutral,
+% and jurisdiction-neutral language (see .claude/rules/suit-domain.md). Wherever
+% a concrete local anchor would otherwise be hard-coded into the prose -- a
+% national CSIRT, a data-protection authority, a national NREN, a specific
+% governance body, a national transposition of an EU instrument -- the body
+% instead uses a GENERIC ROLE TERM, and the mapping from that generic role to a
+% concrete local value lives HERE, in this guide.
+%
+% ----------------------------------------------------------------------------
+% THE HYBRID LOCALIZATION MODEL
+% ----------------------------------------------------------------------------
+% SUIT uses a two-tier ("hybrid") model rather than a single substitution sweep:
+%
+%   1. GENERIC BODY (default, always shipped)
+%      The published SUIT documents read entirely in generic terms. They are
+%      complete and correct as-is: an adopter can read and reason about them
+%      without supplying any local value. The generic term is the canonical
+%      reference; localization is additive, never required for comprehension.
+%
+%   2. LOCAL INSTANTIATION (per-adopter overlay)
+%      Each adopting institution fills the variable table below with its own
+%      values (its NREN, its national CSIRT, its DPA, its supervisory authority
+%      under the NIS2 transposition, its highest governance body, etc.). A
+%      localized build substitutes these values at the marked points, producing
+%      an institution-specific edition WITHOUT forking the generic source.
+%
+% The two tiers share ONE source. The generic edition is the source of truth;
+% a localized edition is the generic edition plus this lookup table. This keeps
+% the SUIT body maintainable (one set of prose) while letting any university
+% produce a contextualised edition (one set of values).
+%
+% Localization variables are referenced from the body via a single command, so
+% that an unfilled variable renders as its generic default and never as a raw
+% placeholder. P2 defines the command and the marked points; this guide owns
+% only the value table.
+%
+%   \locvar{<key>}   % renders the local value if set, else the generic default
+%
+% ----------------------------------------------------------------------------
+% LOCALIZATION VARIABLE TABLE  (P2 fills this; empty in the skeleton)
+% ----------------------------------------------------------------------------
+% Each row maps a generic role used in the SUIT body to (a) its generic default
+% wording and (b) the concrete value an adopting institution substitutes.
+% Format per row:
+%
+%   \locdefine{<key>}{<generic default wording>}{<local value, blank by default>}
+%
+% Example (illustrative only -- DO NOT treat as content; remove before P2 fills):
+%   % \locdefine{national-csirt}{the national CSIRT}{}
+%   % \locdefine{national-dpa}{the national data-protection authority}{}
+%   % \locdefine{national-nren}{the national research and education network}{}
+%   % \locdefine{nis2-authority}{the competent NIS2 supervisory authority}{}
+%   % \locdefine{top-gov-body}{the institution's highest governance body}{}
+%
+% --- BEGIN LOCALIZATION VARIABLE TABLE (empty -- P2 to populate) ------------
+
+% (no localization variables defined yet)
+
+% --- END LOCALIZATION VARIABLE TABLE ---------------------------------------
+
+\endinput
