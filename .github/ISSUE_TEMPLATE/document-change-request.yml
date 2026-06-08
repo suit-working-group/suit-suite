@@ -1,0 +1,60 @@
+name: Document change request
+description: Propose a change to one of the SUIT documents. Changes are applied by the maintainer (ticket-centralized).
+title: "[change] <document> — <short summary>"
+labels: ["change-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing a change. The documents are maintained under a **ticket-centralized** model:
+        you do not edit the documents directly — the maintainer reviews this ticket and applies the change.
+        Requests that arrive with **evidence/citations** are review-ready and processed faster.
+  - type: dropdown
+    id: document
+    attributes:
+      label: Target document
+      options:
+        - SUIT Policy
+        - SUIT Policy Summary
+        - SUIT Solution
+        - SUIT Solution Summary
+        - Argumentation (policy layer)
+        - Argumentation (solution layer)
+        - Shared bibliography / glossary / localization guide
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Section / location
+      description: Chapter, section heading, or nearest identifiable location.
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: Current text
+      description: Quote the text as it currently stands.
+    validations:
+      required: true
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed change
+      description: What it should say instead, or what to add/remove.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why this change improves the document.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Supporting evidence / citations
+      description: Legal instruments, standards, sector data, empirical results, or institutional precedents that support the change. Required for substantive changes.
+    validations:
+      required: false

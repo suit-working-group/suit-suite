@@ -1,0 +1,32 @@
+name: Localization request
+description: For an adopting university requesting guidance on instantiating the generic suite to its own context.
+title: "[localization] <institution / context> — <short summary>"
+labels: ["localization"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The SUIT documents are institution-neutral by design. Each adopting university instantiates the
+        generic material via `shared/localization-guide-EN.tex`. Use this ticket to ask for localization
+        guidance or to report a gap in the localization guide.
+  - type: input
+    id: context
+    attributes:
+      label: Institution / context
+      description: The kind of institution and jurisdiction (you need not name the institution if you prefer not to).
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: What you are trying to localize
+      description: Which generic element(s) — e.g. national CSIRT, data protection authority, NREN, governance bodies — and what your local equivalent is.
+    validations:
+      required: true
+  - type: textarea
+    id: gap
+    attributes:
+      label: Gap in the localization guide (if any)
+      description: A variable or instruction missing from shared/localization-guide-EN.tex.
+    validations:
+      required: false

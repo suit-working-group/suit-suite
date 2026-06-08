@@ -1,0 +1,19 @@
+name: Question
+description: Ask a question about the SUIT suite, its rationale, or how to adopt it.
+title: "[question] <short summary>"
+labels: ["question"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What would you like to understand? Point to the relevant document/section if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Anything that helps us answer well (your role, what you have already read, what you are trying to decide).
+    validations:
+      required: false
