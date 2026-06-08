@@ -60,6 +60,14 @@
       "statement": "The technical reference (SUIT Solution) intentionally carries no governance approval line; it is an engineering reference realizing the Policy, whose approval lives with the Policy document.",
       "doNotRaise": "Do not flag the absence of an approval/sign-off line in the technical reference as a missing element.",
       "appliesTo": ["XCOH", "TECH", "DEF"]
+    },
+    {
+      "id": "DISPO-MULTI-ENTITY-AFFILIATION-SINGLE-ROLE",
+      "kind": "principle",
+      "title": "Multi-entity affiliations collapse to a single generic role",
+      "statement": "When the source named more than one institutional entity in a single affiliation/approval/authorship reference (e.g. a faculty AND its department), the generic edition collapses them to a single generic role phrase (e.g. 'the approving academic unit'), under one localization variable, unless the distinction is load-bearing for the argument. A separate variable per entity is not required.",
+      "doNotRaise": "Do not flag a single generic role phrase that subsumes a compound source affiliation as an under-modeled or missing-variable defect; this is the ratified treatment.",
+      "appliesTo": ["XCOH", "APP", "DEF"]
     }
   ]
 }
