@@ -43,4 +43,23 @@
   \fi
 }
 
+% --- \Loc{key} : like \loc but capitalises the first letter of the value -----
+%     For sentence-initial use. Relies on the value being expandable to text
+%     whose first token is a letter (true for every role phrase in the suite).
+%     Implementation: \MakeUppercase on the first character only, via a helper.
+\newcommand{\loc@firstup}[1]{\loc@@firstup#1\relax}
+\def\loc@@firstup#1#2\relax{\uppercase{#1}#2}
+\newcommand{\Loc}[1]{%
+  \ifcsname loc@val@#1\endcsname
+    \expandafter\expandafter\expandafter\loc@firstup
+      \expandafter\expandafter\expandafter{\csname loc@val@#1\endcsname}%
+  \else
+    \PackageWarning{localization}{%
+      Undefined localization key `#1'. No \string\setloc{#1}{...} binding was
+      found%
+    }%
+    \textbf{??#1??}%
+  \fi
+}
+
 \endinput

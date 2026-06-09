@@ -24,7 +24,12 @@
 
 % --- Named people & affiliation ---------------------------------------------
 \setloc{author-name}{the author}
-\setloc{author-affiliation}{the author's host department at the institution}
+% author-affiliation is rendered as an OPTIONAL trailing byline clause via
+% \loc{author-affiliation}: the generic default is EMPTY (the working-group
+% attribution stands alone), and a concrete edition fills it with the
+% convener's host-institution affiliation and contact. An empty value
+% produces no stray punctuation or whitespace.
+\setloc{author-affiliation}{}
 
 % --- Institutional units & pilots -------------------------------------------
 \setloc{cs-research-unit}{a computer-science department}
@@ -36,6 +41,10 @@
 \setloc{executive-leadership}{the institution's central executive leadership}
 \setloc{governing-board}{the institution's governing board}
 \setloc{academic-governing-bodies}{the academic deliberative councils}
+% Approving academic units for the internal-approval byline on the dossier and
+% the rectorate summary (the faculty/department domains that signed off the
+% institution's edition). Generic default is the neutral role phrase.
+\setloc{approving-academic-units}{the approving academic units of \loc{institution-name}}
 
 % --- Research & education network and its services --------------------------
 \setloc{nren-name}{the national research and education network}
@@ -61,24 +70,24 @@
 \setloc{ai-regulation}{the adopter's applicable AI-governance regime}
 \setloc{cross-border-transfer-regime}{the applicable cross-border data-transfer regime}
 \setloc{essential-entity-classification-basis}{institutions under the NIS2 essential-entity (or important-entity) regime}
-\setloc{nis2-sanction-ceiling}{the NIS2 essential-entity sanction ceiling}
+\setloc{nis2-sanction-ceiling}{up to EUR\,10\,M or 2\,\% of annual turnover}
 
 % --- National transposition instruments -------------------------------------
 \setloc{nis2-national-transposition}{the national NIS2 transposition law}
-\setloc{cer-national-transposition}{the national CER (Critical Entities Resilience) transposition law}
+\setloc{cer-national-transposition}{the national CER transposition law}
 \setloc{national-equal-treatment-law}{the national transposition of Directive 2000/78/EC into labour law}
-\setloc{national-public-sector-isp}{the national public-sector information-security baseline policy}
+\setloc{national-public-sector-isp}{a national public-sector information-security policy}
 \setloc{national-cyber-strategy}{the national cybersecurity strategy}
-\setloc{national-risk-method}{an ISO/IEC 27005-aligned risk-analysis method}
+\setloc{national-risk-method}{a national risk-analysis method}
 \setloc{national-cyber-commissariat-founding-law}{the national founding statute of the cyber-resilience commissariat}
 
 % --- National authorities & bodies (role-based) -----------------------------
-\setloc{national-dpa}{the competent data protection authority (DPA)}
+\setloc{national-dpa}{the competent data-protection authority}
 \setloc{national-gov-csirt}{the national/governmental CSIRT}
 \setloc{national-infosec-agency}{the national information-security agency}
 \setloc{nis2-supervisory-authority}{the national NIS2 supervisory authority}
-\setloc{national-spoc-authority}{the national NIS2 single point of contact}
-\setloc{national-cyber-competence-centre}{the national cyber competence centre}
+\setloc{national-spoc-authority}{the national single point of contact}
+\setloc{national-cyber-competence-centre}{a national cybersecurity competence centre}
 \setloc{national-notification-platform}{the national NIS2 incident-notification platform}
 \setloc{national-legislature}{the national legislature}
 \setloc{national-executive-department}{the national executive department responsible for the protection commissariat}

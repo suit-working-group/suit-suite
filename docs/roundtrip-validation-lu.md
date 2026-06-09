@@ -227,3 +227,113 @@ verdict from GAPS toward EQUIVALENT.
 
 **Verdict: GAPS** — driven by the un-wired `parameterize` slots for a hard core
 of LU-named instruments and authorities. Everything else is EQUIVALENT or better.
+
+*(This was the v1 verdict, before the retrofit. See the v2 section below for the
+post-retrofit re-evaluation.)*
+
+---
+
+## v2 — after retrofit completion (`\loc` consumption sites wired)
+
+The `\loc{}` consumption sites for the regressed and lower-impact bindings were
+wired into the generic body, each defaulting to the prior generic role phrase so
+**the generic edition renders byte-for-byte unchanged**, and instantiating to the
+Luxembourg surface form in the LU edition. A new `\Loc{}` (sentence-initial,
+first-letter-capitalising) variant was added to `localization.sty` for slots that
+open a sentence. A new key `approving-academic-units` was introduced for the
+internal-approval byline (it also removed a stray UL-named leftover —
+"Faculty of Science, Technology and Medicine and Department of Computer Science" —
+that had survived in the *generic* rectorate summary). The `author-affiliation`
+key became an **optional trailing byline clause** (empty default → the
+working-group attribution stands alone in the generic edition; the LU edition
+appends the DCS / University of Luxembourg affiliation and `nicolas.guelfi@uni.lu`).
+
+### Keys wired in this pass (new consumption sites)
+
+| Key | How wired | Generic default render | LU render |
+|---|---|---|---|
+| `national-dpa` | replaced literal role phrase (4 sites: main ×3, ch25) | "the competent data-protection authority" | CNPD |
+| `national-gov-csirt` | named the team + kept the incident-routing fact (main ×3, ch25 ×2) | "the national/governmental CSIRT" | GOVCERT.LU |
+| `national-public-sector-isp` | replaced role phrase (main) | "a national public-sector information-security policy" | PSI-LU |
+| `cer-national-transposition` | minimal sentence-initial slot (main, `\Loc`) | "The national CER transposition law" | projet de loi 8307 |
+| `national-equal-treatment-law` | replaced the bold instrument phrase (main) | "the national transposition of Directive 2000/78/EC into labour law" | Law of 28 November 2006 |
+| `author-affiliation` | optional trailing byline clause (all 4 doc bylines + `_TEMPLATE`) | *(empty)* | DCS, University of Luxembourg (`nicolas.guelfi@uni.lu`) |
+| `approving-academic-units` | new key; internal-approval byline (policy + summary wrappers + `_TEMPLATE`) | "the approving academic units of the institution" | Faculty of Science, Technology and Medicine + Department of Computer Science |
+| `national-spoc-authority` | replaced role phrase (main) | "the national single point of contact" | HCPN |
+| `national-cyber-competence-centre` | replaced role phrase (main) | "a national cybersecurity competence centre" | NC3 |
+| `national-risk-method` | replaced the leading example in the risk-method list (ch28) | "a national risk-analysis method" | MONARC |
+| `nren-csirt` | replaced "a \loc{nren-name} CSIRT" (companion) | "the NREN CSIRT" | RESTENA-CSIRT |
+| `nis2-sanction-ceiling` | replaced the literal ceiling figure (main) | "up to EUR 10 M or 2 % of annual turnover" | (same EU figure) |
+| `executive-leadership` | replaced role phrase in the NIS2 Art. 20(2) item (main) | "the institution's central executive leadership" | the Rectorate |
+
+### Keys deliberately left unconsumed (documented in `set.tex`)
+
+- **Substance-in-prose orphans** (regime/profile/governance anchors:
+  `regulatory-regime`, `data-protection-regime`, `cybersecurity-baseline-regime`,
+  `eid-trust-services-regime`, `data-custody-sovereignty-profile`,
+  `identity-federation-profile`, `incumbent-identity-suite-vendor`,
+  `institution-type`, `institution-hpc-facility`, `academic-governing-bodies`,
+  `essential-entity-classification-basis`, `research-backbone-scale`,
+  `internal-emergency-incident-contact`, `institution-macro-set`, `author-name`):
+  their LU substance is already present verbatim in the generic body (Entra ID,
+  on-prem HSM custody, EU/EEA posture, GÉANT/RESTENA tier, eduGAIN/eduTEAMS,
+  essential-entity route, internal emergency contact). Retained as authoritative
+  `parameterize` anchors for future consumption sites; not regressions.
+- **Reference-only authority bindings** (`national-legislature`,
+  `national-executive-department`, `national-cyber-commissariat-founding-law`):
+  administrative back-references with no surface in the rendered argument; the
+  HCPN/ANSSI-LU substance they support is already surfaced through
+  `national-spoc-authority` / `national-infosec-agency` / `national-gov-csirt`.
+  Retained and explicitly noted in `set.tex` as intentionally non-rendering.
+
+### Build verification (v2)
+
+- **Generic suite** (6 documents, built from each dir): policy-EN (166 pp),
+  policy-summary-EN, argumentation-policy-EN, solution-EN, solution-summary-EN,
+  argumentation-solution-EN — all clean: 0 undefined citations, 0 undefined
+  references, 0 undefined localization keys, no `??key??` leak. Generic role
+  phrases confirmed present and **no LU name leaks** (CNPD/GOVCERT.LU/PSI-LU/8307/
+  28-Nov-2006/uni.lu/MeluXina all absent from the generic policy-EN). The generic
+  approval line reads "the approving academic units of the institution"; the
+  generic byline ends at "Working Group." — both unchanged in appearance.
+- **LU instantiation** (4 render documents): all clean on the same four checks.
+  Previously-lost values now RENDER (occurrences across the 4 LU documents):
+  CNPD ×4, GOVCERT.LU ×5, PSI-LU ×1, 8307 ×1, "28 November 2006" ×1,
+  `nicolas.guelfi@uni.lu` ×4, "Faculty of Science, Technology and Medicine" ×1,
+  plus the already-fine RESTENA ×12, MeluXina, ANSSI Luxembourg ×4, ILR ×3,
+  HCPN ×5, NC3 ×2, SERIMA ×2.
+
+### v2 round-trip table
+
+| Axis | Result (v2) |
+|---|---|
+| Architecture / argument / playbook | Round-trips fully |
+| Regulatory mapping | Round-trips + improved (multi-regime + method) |
+| Named non-identity entities | Round-trips fully |
+| Institution + consumed keys | Round-trips |
+| The 7 v1 regressions (CNPD / GOVCERT.LU / PSI-LU / PL 8307 / 28-Nov-2006 law / author affiliation / STM faculty domains) | **Closed** — wired, render in the LU edition |
+| Substance-in-prose orphans + reference-only bindings | Retained, documented; not rendered by design |
+| New material (audit, operational summary, archetypes) | Net additive |
+
+### Residual deltas (v2)
+
+- **Count parity, not exact:** the LU render surfaces each named instrument at
+  least once but not always at the same *frequency* as the UL original (e.g.
+  GOVCERT.LU 15→5, CNPD 6→4). The substance and the operational facts
+  (incident-routing through GOVCERT.LU, CNPD as DPA, PSI-LU baseline) round-trip;
+  the raw occurrence counts differ because the SUIT body is genericised prose with
+  single named slots rather than repeated literal mentions. This is expected and
+  not a substance loss.
+- **MONARC framing:** still a named *example* (not a dedicated subsection as in
+  the UL original); its named value now renders via `national-risk-method`.
+- **Reference-only LU instruments** (Chambre des Députés, Ministère d'État, HCPN
+  founding statute) remain intentionally non-rendered; they were never part of
+  the rendered UL argument surface either.
+
+**Verdict (v2): EQUIVALENT (with minor, expected deltas).** All seven v1
+regressions are closed; every LU-named instrument and authority the UL original
+carried now renders in the LU edition, the generic edition is unchanged, and the
+remaining unconsumed bindings are either substance-redundant or intentionally
+reference-only and documented as such in `set.tex`. The localization model is now
+an honest, build-time-substitutable slot model rather than a partly-dead lookup
+table.

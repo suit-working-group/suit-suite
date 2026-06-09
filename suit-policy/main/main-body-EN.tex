@@ -526,8 +526,7 @@ data-protection environment of universities:
     institution is typically classified as an \emph{essential entity}
     on the basis of its public-institution status (Section~\ref{sec:nis2}).
     Essential-entity supervision is proactive (audits, maturity
-    reports), with sanctions up to EUR\,10\,M or 2\,\% of
-    annual turnover.
+    reports), with sanctions \loc{nis2-sanction-ceiling}.
 
     \item[European AI Act (Regulation~(EU)~2024/1689).]
     Risk-based classification of AI systems.
@@ -1127,12 +1126,13 @@ non-overlapping responsibilities towards the institution:
     essential-entity classification and to which the annual compliance
     and maturity report is addressed.
     \item[The national / governmental \gls{csirt}.] The
-    incident-response team for public-sector entities. As a public
+    incident-response team for public-sector entities, namely
+    \loc{national-gov-csirt}. As a public
     institution, the institution reports incidents primarily through
     this team.
     \item[The national single point of contact.] The body responsible
     for cross-border NIS2 cooperation and major-incident escalation;
-    it commonly hosts both the governmental CSIRT and \loc{national-infosec-agency}.
+    it commonly hosts both \loc{national-gov-csirt} and \loc{national-infosec-agency}.
 \end{description}
 
 \noindent Two further categories of body may exist for ecosystem
@@ -1148,7 +1148,7 @@ Many jurisdictions operate a single national incident-notification and
 risk-management platform that consolidates notifications across NIS,
 \gls{nis2}, EECC, \gls{gdpr} and CER directives, operated by the
 supervisory authority in partnership with the national cybersecurity
-bodies and the competent data-protection authority. The institution,
+bodies and \loc{national-dpa}. The institution,
 as an essential entity, discharges its NIS2 incident-notification
 obligations through such a platform on the binding 24-hour / 72-hour /
 30-day cadence (\gls{nis2} Article~23) and submits its annual maturity
@@ -1165,8 +1165,8 @@ is consistent with it.
 
 \subsubsection{Concomitant CER framework}
 
-The national transposition of the Critical Entities Resilience (CER)
-Directive~(EU)~2022/2557 typically provides that every entity
+\Loc{cer-national-transposition}, transposing the Critical Entities
+Resilience (CER) Directive~(EU)~2022/2557, typically provides that every entity
 designated as critical under the CER framework is automatically
 essential under NIS2. A given institution may or may not be designated
 as a CER critical entity; the cross-reference is provided for
@@ -1181,7 +1181,7 @@ detailing the ten obligation families listed in NIS2 Article~21(2).
 \subsubsection{Public-sector reference framework}
 
 The public-sector information-security baseline is typically governed
-by a national public-sector information-security policy, developed
+by \loc{national-public-sector-isp}, developed
 by \loc{national-infosec-agency} and applicable to State
 administrations. Such a baseline establishes the objectives of
 confidentiality, integrity, availability and risk-based
@@ -1417,7 +1417,7 @@ criterion of the public-administration entity definition through
 diploma issuance, ECTS recognition, and qualification certification.
 The interpretation is reasonable but novel; this report recommends
 that interpretive guidance be requested from the national supervisory
-authority and the national single point of contact as part of the
+authority and \loc{national-spoc-authority} as part of the
 auto-registration dialogue
 (Section~\ref{sec:obligations-mapping}).
 
@@ -1551,8 +1551,8 @@ per-access gatekeeping. The model operationalises \gls{gdpr}
 Articles~24(1) and~5(2) in a way that preserves international
 scientific collaboration as an academic right. This report
 indicates that the institution could share its register template
-and audit methodology with the national supervisory authority, the
-competent data-protection authority and
+and audit methodology with the national supervisory authority,
+\loc{national-dpa} and
 EDPB working groups, as a contribution to research-context
 regulatory practice --- without commitment of resources beyond
 the present proposal.
@@ -2916,8 +2916,8 @@ IT investments & Joint committee & Budget allocation between research IT
 \subsection{A nationally provided risk-analysis methodology}
 
 Several jurisdictions provide an open-source, \framework{ISO/IEC
-27005}-aligned risk-analysis method and tool --- often developed by a
-national cybersecurity competence centre --- that enables organisations
+27005}-aligned risk-analysis method and tool --- often developed by
+\loc{national-cyber-competence-centre} --- that enables organisations
 to conduct optimised, precise and repeatable risk assessments,
 leveraging the capitalisation of risk-analysis scenarios already
 produced in similar contexts, and integrated into the national
@@ -3107,7 +3107,7 @@ principle in a research context where strict per-access gatekeeping
 would unduly restrict international scientific collaboration. This
 report indicates that the institution could share its register
 template and audit methodology with the national supervisory
-authority, the competent data-protection authority and EDPB working
+authority, \loc{national-dpa} and EDPB working
 groups, as a contribution to
 research-context regulatory practice (see
 Section~\ref{sec:advocacy}, Position~D.5).
@@ -3491,8 +3491,8 @@ researcher-level training and from the institutional security
 architecture:
 \begin{itemize}[nosep]
     \item \textbf{Executive training} (\gls{nis2}
-    Art.~20(2)~\cite{nis2}): the central executive leadership and the
-    members of the top governing board must receive cybersecurity
+    Art.~20(2)~\cite{nis2}): \loc{executive-leadership} and the
+    members of \loc{governing-board} must receive cybersecurity
     training enabling informed governance decisions on the matters
     covered by the NIS2 obligation framework. The training is a
     governance enablement obligation, not an operational compliance
@@ -3734,7 +3734,7 @@ Rather than managing everything alone, a university can rely on:
     primary first-line CSIRT as a public institution;
     \item \textbf{the national NREN's CSIRT}: the \gls{csirt}
     of the national \gls{nren}, commonly a \emph{Trusted Introducer}
-    member, complementary to the governmental CSIRT for incidents
+    member, complementary to \loc{national-gov-csirt} for incidents
     arising on or affecting the academic network perimeter;
     \item \textbf{a private-sector CSIRT}, where one exists, serving
     the private sector and non-governmental entities;
@@ -4185,8 +4185,8 @@ accommodation}) is a pillar of European anti-discrimination law:
     non-discrimination, including reasonable accommodation, in
     Article~5.
 
-    \item The \textbf{national transposition of Directive 2000/78/EC}
-    into the applicable labour law integrates the obligation of
+    \item \textbf{\loc{national-equal-treatment-law}}
+    integrates the obligation of
     reasonable adjustments into national law.
 \end{itemize}
 
