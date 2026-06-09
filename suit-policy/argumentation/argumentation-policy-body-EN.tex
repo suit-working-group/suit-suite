@@ -114,7 +114,7 @@ The validity of a proposal is best assessed on its evidence and logic, independe
     \item Evidence production for \gls{gdpr} Article~32 and \gls{nis2} compliance.
 \end{itemize}
 
-\noindent\textbf{The ``comfort'' framing is refuted by the proposal's own evidence:} the design is endorsed by NIST~\cite{nist-csf, nist-sp800-53}, ISO~27001~\cite{iso27001}, and EDUCAUSE~\cite{educause2024}, and is practiced by MIT, Stanford, Oxford, ETH~Z\"urich, CERN, and the 100-plus universities operating a \gls{sciencedmz}~\cite{nsf-cc}. If ``wanting less security'' were the true motive, these institutions and frameworks would not converge on the same model.
+\noindent\textbf{The ``comfort'' framing is refuted by the proposal's own evidence:} the design is endorsed by NIST~\cite{nist-csf, nist-sp800-53}, ISO~27001~\cite{iso27001}, and EDUCAUSE~\cite{educause2024}, and is practiced by MIT, Stanford, Oxford, ETH~Z\"urich, CERN, and the 100-plus universities operating a \gls{sciencedmz}~\cite{esnet-history,nsf-cc}. If ``wanting less security'' were the true motive, these institutions and frameworks would not converge on the same model.
 
 \medskip\noindent Constructive engagement with evidence-based proposals, as recommended by the \gls{cobit}~2019 process EDM05 (\emph{Ensure Stakeholder Engagement}), is more productive than debating motives~\cite{cobit}.
 \end{answerbox}
@@ -320,7 +320,7 @@ The \gls{sciencedmz} explicitly removes the enterprise firewall from the researc
     \item[\gls{dtn} hardening:] Data Transfer Nodes are purpose-built, minimal-service machines with a reduced attack surface.
 \end{description}
 
-This model was developed by ESnet~\cite{dart2013}, the U.S.\ Department of Energy's network serving nuclear laboratories. It is deployed at \textbf{over 100 universities} through NSF funding~\cite{nsf-cc}. If bypassing the enterprise firewall were a ``security hole by design,'' neither the DoE nor the NSF --- both security-conscious organisations --- would have funded and promoted it.
+This model was developed by ESnet~\cite{dart2013}, the U.S.\ Department of Energy's network serving nuclear laboratories. It is deployed at \textbf{over 100 universities} through NSF funding~\cite{esnet-history,nsf-cc}. If bypassing the enterprise firewall were a ``security hole by design,'' neither the DoE nor the NSF --- both security-conscious organisations --- would have funded and promoted it.
 
 \medskip\noindent\textbf{The deeper point:} a stateful firewall that, in a documented case, mishandled TCP window scaling on high-volume long-distance flows and degraded research throughput by \textbf{five- to twelve-fold}~\cite{esnet-pennstate} does not \emph{provide} security. It provides the \emph{appearance} of security while driving researchers to bypass it via shadow IT. A \gls{sciencedmz} with \gls{acl}s, \gls{ids}, and monitoring provides \emph{actual} security appropriate to the traffic profile.
 \end{answerbox}
@@ -338,7 +338,7 @@ The model is presented as state of the art and adopted by 100-plus universities.
 \medskip\noindent Three observations frame the diagnostic generically:
 \begin{enumerate}[nosep]
     \item \textbf{The substrate is often already present.} High-bandwidth \gls{nren} access (e.g.\ via \gls{geant}~\cite{geant}), a national \gls{csirt} for incident response, and an \gls{hpc} facility moving large volumes of data internationally are frequently in place. What is missing is the architectural \emph{pattern}, not the bandwidth. Current research transfer over generic enterprise paths (\texttt{rsync}, \texttt{scp}) is an enterprise-IT profile, not a research-tuned one~\cite{dart2013, esnet-cases}.
-    \item \textbf{Non-deployment tracks capacity, not merit.} A small research ecosystem with a limited pool of research-network engineers, and the absence of a dedicated funding programme equivalent to the NSF CC* line that explicitly funded Science DMZs at over 100 U.S.\ campuses~\cite{nsf-cc}, explains non-deployment without implying technical inadequacy.
+    \item \textbf{Non-deployment tracks capacity, not merit.} A small research ecosystem with a limited pool of research-network engineers, and the absence of a dedicated funding programme equivalent to the NSF CC* line that explicitly funded Science DMZs at over 100 U.S.\ campuses~\cite{esnet-history,nsf-cc}, explains non-deployment without implying technical inadequacy.
     \item \textbf{Convergent practice elsewhere is overwhelming.} ESnet, NSF, \gls{geant}, and the Medical Science DMZ pattern --- documented in implemented deployments at major U.S.\ biomedical-research institutions~\cite{medical-sdmz} --- converge on the design. ``We have not done X yet'' is a weak argument against X when every comparable research ecosystem has.
 \end{enumerate}
 

@@ -209,6 +209,12 @@ layer can be replaced within a documented time window: 3 if all
 tests in all four categories pass; 2 if interface fidelity and at
 least one of data portability or exit rehearsal pass; 1 if only
 interface fidelity passes; 0 if interface fidelity is broken.
+The index is graded against the institution's own conformance test
+set: an institution extends the illustrative reference suite
+(Table~\ref{tab:cf-suite}) to cover all four categories for each
+layer it operates, so a 3 (Robust) is attainable wherever that
+coverage is implemented --- the reference suite is a starting
+illustration, not the grading baseline.
 
 \paragraph{The index is a maturity trajectory, not a day-one gate.}
 The exit-confidence index measures where the institution stands on its
@@ -250,6 +256,13 @@ four-category tests on the layers exercised by the pilot; Wave~6
 against an Observability subset reinforced with audit-replay
 exercises; Wave~8 (Workload) against the Compute and Storage tests;
 Wave~9 (Lifecycle) against the three Orchestration tests.
+The Crypto layer (Ch.~13) is a cross-cutting foundation rather than a
+standalone wave: certificate and key services underpin Identity, so
+the layer is stood up as the technical prerequisite of Wave~1
+(Identity), and its three tests --- ACME/RFC~8555 issuance,
+key-escrow recovery, and HSM migration --- close with Wave~1's exit
+criteria. With this, all nine architecture layers are closed across
+the roadmap.
 
 \medskip
 

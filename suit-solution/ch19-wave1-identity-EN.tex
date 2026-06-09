@@ -257,9 +257,12 @@ cohort migrates.
 \section{Exit criteria}
 \label{sec:w1-exit}
 
-Wave~1 closes when the four Identity tests of the conformance
-suite of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on
-the new identity instantiation, when at least the agreed
+Wave~1 closes when the four Identity tests \emph{and} the three
+Crypto-layer tests of the conformance suite of
+\trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on the new
+identity instantiation --- certificate and key services are stood up
+here as the cryptographic prerequisite that identity depends on ---
+when at least the agreed
 percentage of applications has been migrated, and when the
 governance body has reviewed the wave outcome.
 
@@ -268,6 +271,11 @@ governance body has reviewed the wave outcome.
     institutionally controlled; SCIM export-import on alternative
     IdP preserves attributes; authentication and session events
     forensically reconstructable. (Identity conformance subset.)
+  \item ACME/RFC~8555 certificate issuance conforms against the
+    institutional CA; key-escrow recovery executes on a representative
+    escrowed key; HSM key migration preserves cryptographic identity.
+    (Crypto conformance subset --- the cryptographic foundation that
+    identity is built on.)
   \item An institutionally agreed proportion of applications --- a
     common expectation is at least eighty percent in a brownfield
     trajectory --- has been migrated, with the remainder either
