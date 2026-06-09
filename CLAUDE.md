@@ -11,7 +11,7 @@ latexmk -pdf document.tex
 ```
 
 - All temporary files go in `out/` — a document directory should contain only `.tex`, `.latexmkrc`, the shared-bib symlink, and the final `.pdf`.
-- Every directory with a `.tex` file MUST have a `.latexmkrc` (see `.claude/rules/latex-standards.md`).
+- Every directory with a **compilable top-level** `.tex` file MUST have a `.latexmkrc` (see `.claude/rules/latex-standards.md`). Input-only directories — whose `.tex` are `\input`ed by a parent document (e.g. `categories/`, `shared/`, `suit-policy/main/`, the `instantiations/` set files) — do not need one.
 - After compilation, verify: 0 undefined citations, 0 undefined references.
 
 ## Bibliography Format — MANDATORY

@@ -54,15 +54,17 @@ paths:
 - Full compilation: pdflatex → biber/bibtex → pdflatex → pdflatex
 - Target: 0 undefined citations, 0 broken cross-references
 
-## Mandatory `.latexmkrc` in Every LaTeX Directory
-- **Every directory containing a `.tex` file MUST have its own `.latexmkrc`**
+## Mandatory `.latexmkrc` in Every Compilable LaTeX Directory
+- **Every directory containing a compilable top-level `.tex` file MUST have its own `.latexmkrc`**
+- Input-only directories — whose `.tex` are `\input`ed by a parent document rather than compiled on their own (e.g. `categories/`, `shared/`, `suit-policy/main/`, the `instantiations/` set files) — do NOT need a `.latexmkrc`.
 - `latexmk` does NOT inherit `.latexmkrc` from parent directories
-- When creating a new LaTeX directory, ALWAYS create a `.latexmkrc` with:
+- When creating a new compilable LaTeX directory, ALWAYS create a `.latexmkrc` with:
   - `$pdf_mode = 1;`
   - `$pdflatex = 'pdflatex -interaction=nonstopmode %O %S';` (do NOT hard-code `-output-directory`; latexmk injects it from `$aux_dir` via `%O`)
   - `$aux_dir = 'out';` (temp/aux files go here)
   - `$out_dir = '.';` (the final PDF stays at the project root, next to the `.tex`)
   - `$clean_ext = 'synctex.gz';`
+  - `$success_cmd = 'latexmk -c %R';` — auto-clean: after a successful build the PDF is at the root, so this wipes the `out/` temporaries (and the stray `synctex.gz`) via latexmk's own cleaner. `-c` preserves the final `.pdf`. Trade-off: this also drops the incremental cache (`.fdb_latexmk`/`.bbl`), so each build runs from scratch.
   - Do NOT add `$success_cmd = 'cp out/%R.pdf ./%R.pdf';` — the PDF is produced at the root directly, so copying is both unnecessary and leaves a stale duplicate in `out/`.
 - If the document uses `biblatex`/`biber`, add: `$biber = 'biber %O %S';`
 - If the `.bib` file is in another directory, add: `$ENV{'BIBINPUTS'} = '../path/to/bib/:' . ($ENV{'BIBINPUTS'} || '');`

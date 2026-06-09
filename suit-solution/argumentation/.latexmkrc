@@ -24,3 +24,8 @@ $ENV{'BIBINPUTS'} = '../../shared/:' . ($ENV{'BIBINPUTS'} || '');
 $ENV{'TEXINPUTS'} = '../../shared/:' . ($ENV{'TEXINPUTS'} || '');
 
 $clean_ext = 'synctex.gz';
+# Auto-clean: after a successful build the PDF is at the directory root, so this
+# removes the out/ temporaries and the stray synctex.gz next to the .tex. The
+# final .pdf is preserved. Note: this also drops the incremental build cache
+# (.fdb_latexmk/.bbl), so each build runs from scratch.
+$success_cmd = 'rm -f out/%R.* %R.synctex.gz';

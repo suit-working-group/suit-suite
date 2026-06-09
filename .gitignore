@@ -15,6 +15,10 @@ out/
 *.fls
 *.fdb_latexmk
 
+# Rendered instantiation editions are build outputs of each institution's set.tex
+# — regenerable on demand, so not tracked (the wrapper .tex and set.tex are).
+instantiations/*/render/*.pdf
+
 # OS / editor cruft
 .DS_Store
 

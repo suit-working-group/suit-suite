@@ -3,7 +3,7 @@
 **Project** : SUIT — Sustainable University IT Infrastructure & Technology
 **Scope** : institution-neutral, jurisdiction-neutral reference document suite
 **Version** : 1.1
-**Components** : 11 rules, 12 skills, 7 agents (30 total)
+**Components** : 12 rules, 12 skills, 7 agents (31 total)
 
 This toolkit supports authoring the SUIT suite. The universal and genre-adaptable
 components are general-purpose; the domain layer (R8, regulatory-scanner,
