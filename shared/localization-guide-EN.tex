@@ -102,7 +102,7 @@ SUITPOLICY (3 occurrences). Generic regulatory anchor; left unchanged unless the
 \texttt{INSTITUTION\_NAME} (bib) &
 UL-suite bibliography path and citation keys &
 The adopter's own bibliography; flag UL-specific keys (e.g.\ \texttt{unilu-amenagements}, \texttt{ilr-ul-essential}) for removal or parameterization &
-SUITPOLICY, SUITPOLICYSUMMARY (5). These keys support home-institution facts and have no generic equivalent; remove/parameterize when those facts are genericized.\\
+SUITPOLICY, SUITPOLICYSUMMARY (5). These keys support home-institution facts and have no generic equivalent; remove/parameterize when localizing to the adopter's institution.\\
 \midrule
 
 % --- cost / staffing ---------------------------------------------------------
@@ -321,7 +321,7 @@ SUITPOLICY, SUITSOLUTION (3).\\
 
 \texttt{AUTHOR\_AFFILIATION} &
 Author-to-affiliation binding (named contact + UL host unit + uni.lu email) &
-Parameterize the binding everywhere it appears: self-citation \texttt{@techreport} institution/note fields (\texttt{ng-tech-ref-2026}, \texttt{ng-dossier-2026}), the title-page contact-point block, the book front-matter "Citation:" line, and the PDF \texttt{\textbackslash hypersetup} pdfauthor/pdftitle metadata. The uni.lu email domain must not survive genericization; remove the pdfauthor AI-tool string &
+Parameterize the binding everywhere it appears: self-citation \texttt{@techreport} institution/note fields (\texttt{ng-tech-ref-2026}, \texttt{ng-dossier-2026}), the title-page contact-point block, the book front-matter "Citation:" line, and the PDF \texttt{\textbackslash hypersetup} pdfauthor/pdftitle metadata. The uni.lu email domain must be parameterized, not carried into another institution's edition; remove the pdfauthor AI-tool string &
 SUITPOLICY, SUITSOLUTION (4).\\
 \midrule
 

@@ -39,7 +39,7 @@ suit-policy/         SUIT Policy (governance reference)
 suit-solution/       SUIT Solution (technical reference)
   summary/           SUIT Solution Summary (operational executive summary)
   argumentation/     Technical/operational-layer Q&A / argumentation module
-docs/                Project documentation and matrices
+docs/                Audit dispositions and per-jurisdiction regulatory profiles
 .claude/             Authoring tooling (rules, skills, agents)
 .github/             Issue templates and repository configuration
 _AUDITS/             Quality-audit outputs

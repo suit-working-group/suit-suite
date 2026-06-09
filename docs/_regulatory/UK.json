@@ -5,7 +5,7 @@
   "jurisdictionType": "post-Brexit; retained-EU-law derived, now diverging via domestic reform",
   "generated": "2026-06-09",
   "depth": "light",
-  "method": "Research over REAL primary UK regulation and authoritative secondary sources (legislation.gov.uk, ICO, NCSC, GOV.UK/GDS, Jisc). No SUIT/ITPOLICY prior document was used as a source. Each functional obligation F1-F6 is mapped to its concrete UK instrument(s), competent authority, and deadline or transfer mechanism.",
+  "method": "Research over REAL primary UK regulation and authoritative secondary sources (legislation.gov.uk, ICO, NCSC, GOV.UK/GDS, Jisc). No SUIT prior document was used as a source. Each functional obligation F1-F6 is mapped to its concrete UK instrument(s), competent authority, and deadline or transfer mechanism.",
   "note": "The UK is no longer in the EU regime: GDPR/NIS/eIDAS survive as UK-retained-and-amended instruments rather than directly applicable EU law, and accessibility/equality run on domestic statutes. The minimal functional set is invariant; only its UK instantiation differs from the EU baseline.",
   "competentAuthorities": {
     "dataProtection": "Information Commissioner's Office (ICO), transitioning to the Information Commission under the Data (Use and Access) Act 2025 (new powers from 5 February 2026)",

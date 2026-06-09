@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "SUIT accepted dispositions",
-  "description": "Design constants and standing decisions the P6 substantive audit must never re-raise as findings. Each entry is an accepted deviation: a property of the SUIT suite that has been reviewed and ratified, so audit tracks should treat it as correct-by-decision rather than a defect.",
+  "description": "Design constants and standing decisions the substantive audit must never re-raise as findings. Each entry is an accepted deviation: a property of the SUIT suite that has been reviewed and ratified, so audit tracks should treat it as correct-by-decision rather than a defect.",
   "suite": "SUIT — Sustainable University IT Infrastructure & Technology",
   "version": "1.0",
   "dispositions": [

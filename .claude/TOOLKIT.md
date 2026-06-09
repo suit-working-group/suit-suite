@@ -5,10 +5,9 @@
 **Version** : 1.1
 **Components** : 11 rules, 12 skills, 7 agents (30 total)
 
-This toolkit was transplanted from the `ng.aiday.policy` toolkit and generalized for
-SUIT. The universal and genre-adaptable components are reused verbatim; the domain
-layer (R8, regulatory-scanner, freshness-monitor) was generalized to be
-institution- and jurisdiction-neutral.
+This toolkit supports authoring the SUIT suite. The universal and genre-adaptable
+components are general-purpose; the domain layer (R8, regulatory-scanner,
+freshness-monitor) is institution- and jurisdiction-neutral.
 
 Version 1.1 adds the SUIT-specific instantiation machinery built since P0: three
 domain rules (R9 localization model, R10 instantiation model, R11 no-false-locality),
@@ -205,8 +204,8 @@ suit-solution/       SUIT Solution (technical reference)
   argumentation/     Technical-layer argumentation module
 categories/          Six Layer-1 archetypes (.tex) + README (decision tree + key×value matrix)
 instantiations/      Layer-2 editions + _TEMPLATE; lu-university-of-luxembourg = reference
-docs/                dispositions.json, genericization-matrix.json, _regulatory/*.json profiles
-_AUDITS/             dated 7-track audit outputs (report body + run changelog)
+docs/                dispositions.json, _regulatory/*.json profiles
+_AUDITS/             versioned 7-track audit outputs (report body + run changelog)
 ```
 
 ---
@@ -263,15 +262,14 @@ contribution flow, with the Luxembourg edition as the round-trip-validated refer
 REMOVE locality-as-framing (a body that reads as one institution's local artefact)
 and all migration/source-repo internals; KEEP the author's name and working-group
 provenance, the "originally developed for the University of Luxembourg" origin line,
-the author's cited works, and clearly-labelled regulatory examples. Corrects an
-earlier over-broad genericization sweep. Full decision test in the rule file.
+the author's cited works, and clearly-labelled regulatory examples. Full decision
+test in the rule file.
 
 ---
 
 ## 4. Skills — Detailed Reference
 
-S1–S10 are reused verbatim. Replace the example `ul-it-policy/...` paths from the
-source toolkit with the SUIT layout, e.g.:
+S1–S10 are general-purpose. The skills address paths in the SUIT layout, e.g.:
 
 ```
 /bib-verify shared/suit.bib

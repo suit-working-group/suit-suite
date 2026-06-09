@@ -131,13 +131,12 @@ Both the generic suite and the instantiation library are maintained under the
 ## The Luxembourg Reference Instantiation
 
 `instantiations/lu-university-of-luxembourg/` is the **reference edition**: the
-canonical named EU-PUB-RI edition whose bindings are the **original University of
-Luxembourg surface forms** from which the suite was genericized (the
-`parameterize` rows of `docs/genericization-matrix.json`). It is the worked
-exemplar every new edition is patterned on, and it is **round-trip-validated
-against the first version**: rendering the LU set must reproduce the original
-UL-specific text (round-trip closure documented in
-`docs/roundtrip-validation-lu.md`). Treat it as the standard:
+canonical named EU-PUB-RI edition whose bindings are the **University of
+Luxembourg surface forms** that the framework's localization variables
+represent. It is the worked exemplar every new edition is patterned on:
+rendering the LU set produces the complete University-of-Luxembourg edition of
+the suite, with every localization variable resolved to a concrete value and no
+dead bindings. Treat it as the standard:
 
 - It legitimately **names** Luxembourg and the University of Luxembourg — a
   concrete edition is *meant* to; it is **NOT** the generic body and must not be

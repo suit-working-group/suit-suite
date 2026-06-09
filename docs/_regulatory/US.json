@@ -85,5 +85,5 @@
     "nist-171r3",
     "nist-sp800-53"
   ],
-  "sources_note": "All entries derived from real primary regulation and authoritative secondary sources (Federal Register listings, eCFR, FTC/HHS/ED official guidance, California AG/CPPA, BIS/DDTC, and corroborating law-firm advisories, IAPP, CRS, and university research-office pages). No prior SUIT/ITPOLICY document was used. US federal regulator sites (ecfr.gov, federalregister.gov, ftc.gov, hhs.gov, bis.doc.gov, state.gov) serve 403/anti-bot redirects to automated agents; primary citations were cross-checked against multiple independent authoritative secondary sources and dated 2026-06-09."
+  "sources_note": "All entries derived from real primary regulation and authoritative secondary sources (Federal Register listings, eCFR, FTC/HHS/ED official guidance, California AG/CPPA, BIS/DDTC, and corroborating law-firm advisories, IAPP, CRS, and university research-office pages). No prior SUIT document was used. US federal regulator sites (ecfr.gov, federalregister.gov, ftc.gov, hhs.gov, bis.doc.gov, state.gov) serve 403/anti-bot redirects to automated agents; primary citations were cross-checked against multiple independent authoritative secondary sources and dated 2026-06-09."
 }

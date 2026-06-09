@@ -64,10 +64,9 @@ archetype.
 
 Every parameterised anchor must have **at least one `\loc{}`/`\Loc{}`
 consumption site**. A key that is bound (a `\setloc` exists somewhere in the
-stack or the genericization matrix) but **never consumed** is a **dead
-binding**: it silently breaks instantiation and round-trip, because changing it
-in an edition produces no visible effect and the generic↔edition mapping no
-longer covers the text it claims to cover.
+stack) but **never consumed** is a **dead binding**: it silently breaks
+instantiation, because changing it in an edition produces no visible effect and
+the generic↔edition mapping no longer covers the text it claims to cover.
 
 - Adding a `\setloc` key REQUIRES adding (or already having) a `\loc{}` site.
 - Removing the last `\loc{}` site for a key REQUIRES removing its binding (or
@@ -80,10 +79,9 @@ longer covers the text it claims to cover.
 
 The generic build is defined as "Layer 0 only". Its output is the canonical
 generic text. It MUST read as finished prose, NEVER as a literal mustache
-token (`{{INSTITUTION_NAME}}`, `<placeholder>`, `TODO`, etc.). Mustache tokens
-belong only in `docs/genericization-matrix.json` as the abstract variable name;
-in `.tex` they are always resolved through `\loc{}` against a real Layer-0
-default. Optional clauses (e.g. `author-affiliation`) default to an EMPTY value
+token (`{{INSTITUTION_NAME}}`, `<placeholder>`, `TODO`, etc.). A mustache token
+names an abstract localization variable only; in `.tex` it is always resolved
+through `\loc{}` against a real Layer-0 default. Optional clauses (e.g. `author-affiliation`) default to an EMPTY value
 that produces no stray punctuation or whitespace, not to a placeholder.
 
 ## Authoring Checklist

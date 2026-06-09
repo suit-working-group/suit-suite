@@ -1,14 +1,12 @@
-# Changelog — SUITPOLICY
+# Changelog — SUIT Policy
 
-Top-level document: `policy-EN.tex` (166 pp.). The suite-level record is in the
-repository-root `CHANGELOG.md`; this file tracks changes specific to SUITPOLICY.
+Top-level document: `policy-EN.tex`. The suite-level record is in the
+repository-root `CHANGELOG.md`; this file tracks changes specific to SUIT Policy.
 
-## Version 1.0.0 — 2026-06-09
+## v1.0.0 — 2026-06-09
 
-- Founding institution-neutral release, generalised from the University IT-Policy book (Version 2.1).
-- Argumentation Q&A wired through the shared localisation parameters; charter, governance, and
-  legal-basis material rendered generic.
-- Audit remediations folded in (see suite `CHANGELOG.md`): A1 (live-incident containment authority),
-  A2 (evidence store as a control), A3/A4 (DBIR/Rennes source-precision), A5 (Schrems II / TIA on
-  cross-border transfers), A7 (COBIT EDM05 title), plus the re-audit C-series findings.
-- Builds clean: latexmk 0 undefined citations / references.
+- Initial public release: the institution-neutral governance reference, with the
+  per-layer governance argumentation module.
+- Charter, governance, and legal-basis material expressed through the shared
+  localization parameters so the body reads as a shared international reference.
+- Builds cleanly: latexmk 0 undefined citations / references.

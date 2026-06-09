@@ -2,8 +2,8 @@
 // =============================================================================
 // Recurring 7-track substantive audit of the SUIT suite PLUS an instantiation
 // track (INST). Entirely self-contained: every path is RELATIVE to the SUIT
-// repository root (cwd at run time). There is NO source/migration repository,
-// NO ITPOLICY reference, NO absolute path, and NO clock/randomness — the run
+// repository root (cwd at run time). There is NO external repository reference,
+// NO absolute path, and NO clock/randomness — the run
 // date and skeptic count arrive via args so the run is deterministic and
 // resumable.
 //
@@ -33,7 +33,7 @@
 export const meta = {
   name: 'suit-audit',
   description:
-    '7-track adversarial audit of the SUIT suite (SCI/TECH/XCOH/LEG/CITE/APP/DEF) over the four documents + two Q&A modules, PLUS an INSTANCE track (INST: BUILD/COMPLETENESS/FIDELITY/CURRENCY per instantiation). Content-derived stable ids, adversarial verification (N skeptics, majority-refute kill), baseline-diff against the most recent _AUDITS run, dispositions-aware, retry-on-null on every agent call. Source-free and repo-relative: no source repository, no absolute paths, no ITPOLICY reference.',
+    '7-track adversarial audit of the SUIT suite (SCI/TECH/XCOH/LEG/CITE/APP/DEF) over the four documents + two Q&A modules, PLUS an INSTANCE track (INST: BUILD/COMPLETENESS/FIDELITY/CURRENCY per instantiation). Content-derived stable ids, adversarial verification (N skeptics, majority-refute kill), baseline-diff against the most recent _AUDITS run, dispositions-aware, retry-on-null on every agent call. Source-free and repo-relative: no external repository references and no absolute paths.',
   phases: [
     { title: 'Map',           detail: 'structure by title + most-recent _AUDITS baseline + dispositions' },
     { title: 'Find',          detail: 'six core content tracks in parallel' },

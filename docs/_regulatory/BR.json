@@ -6,7 +6,7 @@
   "sector": "University / higher-education IT (federal public universities as autarquias / fundações públicas)",
   "depth": "light",
   "generated": "2026-06-09",
-  "sourcePolicy": "REAL primary regulation (Planalto official consolidated texts) and authoritative secondary sources only; no prior SUIT/ITPOLICY document used.",
+  "sourcePolicy": "REAL primary regulation (Planalto official consolidated texts) and authoritative secondary sources only; no prior SUIT document used.",
   "note": "Brazil has no single omnibus cybersecurity statute; obligations are distributed across the LGPD (personal-data protection and breach notification), the federal cybersecurity strategy and incident-management decrees (cyber governance and federal incident coordination), the Inclusion Law (accessibility), the Access to Information Law (transparency) and the Federal Administrative Procedure Law (due process). Federal public universities are within scope as autarquias/fundações públicas of the federal public administration.",
   "competentAuthorities": {
     "ANPD": "Autoridade Nacional de Proteção de Dados — national data protection authority (LGPD supervisory authority)",
