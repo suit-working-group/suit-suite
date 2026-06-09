@@ -44,24 +44,51 @@ designed against a regulatory checklist; they are designed against
 the engineering question of how a research-intensive university
 can be sovereign at the architectural level, and they are then
 read against the regulations that the institution will face. This
-chapter performs that second reading. It is organised by
-regulation and, within each regulation, by article or control. Each
-mapping row identifies: the provision, the architecture element
-(layer, wave, or contract) that the institution may invoke, and
-the chapters and sections of this Reference where the
-operationalisation is described. The mapping is the consolidated
-view of the per-chapter \emph{Regulatory anchoring} paragraphs
-introduced in the layer and wave chapters.
+chapter performs that second reading at two levels. It opens with the
+shared, jurisdiction-neutral \emph{Regulatory Applicability} module,
+which abstracts the size- and jurisdiction-invariant
+functional-obligation spine (F1--F6) and its
+obligation~$\rightarrow$~mechanism matrix
+(Table~\ref{tab:reg-matrix}); that matrix is the shared anchor that the
+Policy and this Solution both reference for the
+Policy~$\leftrightarrow$~Solution traceability. It then continues with
+the detailed, per-article EU instantiation that follows the module ---
+organised by regulation and, within each regulation, by article or
+control. Each per-article mapping row identifies: the provision, the
+architecture element (layer, wave, or contract) that the institution
+may invoke, and the chapters and sections of this Reference where the
+operationalisation is described. The per-article mapping is the
+consolidated view of the per-chapter \emph{Regulatory anchoring}
+paragraphs introduced in the layer and wave chapters; it is one worked
+instantiation --- the EU/EEA regime row of the module's typology
+(\S\ref{sec:reg-eu}) --- developed to article granularity.
+
+% --- Shared Regulatory Applicability module (institution-neutral, ------------
+% --- jurisdiction-neutral). The SAME module is referenced as a shared annex --
+% --- by the Policy (SUITPOLICY). Its obligation->mechanism matrix -------------
+% --- (Table~\ref{tab:reg-matrix}) is the shared traceability anchor. ----------
+% --- The module uses \section, correctly nesting under this \chapter. ---------
+\input{../shared/regulatory-applicability-EN}
+
+\bigskip
+\noindent The remainder of this chapter develops the EU/EEA regime row
+of the module above (\S\ref{sec:reg-eu}) to per-article granularity,
+binding each provision to the specific architecture element and to the
+chapter where it is operationalised.
 
 %-----------------------------------------------------------------------------
 \section{Method, scope and limitations}
 \label{sec:rm-method}
 
-\paragraph{Perimeter.} The regulations and frameworks covered are
-those most frequently encountered by research-intensive
-universities operating internationally, presented here as one
-worked instantiation of the applicable regulatory regime that
-each adopting institution substitutes with its own. The worked
+\paragraph{Perimeter.} The regulations and frameworks covered below
+are the per-article development of the EU/EEA regime row of the shared
+module's typology (\S\ref{sec:reg-eu}); they are those most frequently
+encountered by research-intensive universities operating
+internationally, presented here as one worked instantiation of the
+applicable regulatory regime that each adopting institution substitutes
+with its own --- the spine and the obligation~$\rightarrow$~mechanism
+matrix (\S\ref{sec:reg-matrix}) being identical across regimes, only the
+instrument column changing. The worked
 instantiation comprises the applicable data-protection regime
 (here the EU \gls{gdpr}); the applicable cybersecurity baseline
 regime (here the NIS2 Directive); the applicable AI-governance
@@ -598,7 +625,7 @@ MEA03 Managed compliance with external requirements
 \section{Applicability beyond the EU jurisdiction}
 \label{sec:rm-beyond-eu}
 
-The mapping above is built primarily against EU instruments because
+The per-article mapping above is built against EU instruments because
 they are the institution's own binding context. It should not be read
 as confining the architecture to EU jurisdictions. As established in
 \trchap{ch:architectural-principles}{} (\S\ref{sec:ap-necessity}), the
@@ -606,7 +633,14 @@ functions the architecture discharges are necessary to any institution
 offering a digital infrastructure; that necessity is
 jurisdiction-invariant just as it is size-invariant. What changes
 across jurisdictions is the instrument that names the obligation, not
-the architectural element that contributes to satisfying it.
+the architectural element that contributes to satisfying it. The shared
+module that opens this chapter makes this explicit: the regime typology
+(\S\ref{sec:reg-typology}) gives worked F1--F6 instantiations for the
+EU, the US, the UK, Brazil and South Africa, and the mapping method
+(\S\ref{sec:reg-mapping}) gives an adopter in an unlisted jurisdiction a
+seven-step procedure to derive its own regime row against the same
+invariant matrix. The paragraphs below summarise how a non-EU adopter
+reads the per-article EU mapping through that lens.
 
 \paragraph{Lead with the jurisdiction-neutral spine.} A non-EU
 institution can ground its compliance argument on the international

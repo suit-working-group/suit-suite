@@ -1493,6 +1493,34 @@
   fetch_note   = {{EUR}-Lex {ELI} landing page reachable but renders via JavaScript; document existence, exact title, {OJ} reference and content cross-verified through the {EUR}-Lex search index and the Publications Office of the {EU} record (op.europa.eu). Verified June 2026.},
 }
 
+@misc{eu-dpf-adequacy-2023,
+  author       = {{European Commission}},
+  title        = {Commission Implementing Decision ({EU}) 2023/1795 of 10 July 2023
+                  pursuant to Regulation ({EU}) 2016/679 of the European Parliament
+                  and of the Council on the adequate level of protection of personal
+                  data under the {EU}--{US} Data Privacy Framework},
+  year         = {2023},
+  url          = {https://eur-lex.europa.eu/eli/dec_impl/2023/1795/oj},
+  abstract     = {Commission Implementing Decision (EU) 2023/1795 of 10 July 2023 is the GDPR Article 45 adequacy decision underpinning the EU--US Data Privacy Framework (DPF). It determines that the United States ensures an adequate level of protection for personal data transferred from the EU/EEA to organisations self-certified on the DPF List maintained by the US Department of Commerce, removing the need for Article 46 safeguards (e.g.\ Standard Contractual Clauses) for transfers to those organisations. The adequacy rests on binding US commitments introduced after the Schrems II invalidation of the Privacy Shield: Executive Order 14086 constraining signals-intelligence collection to what is necessary and proportionate, and a two-layer redress mechanism culminating in the Data Protection Review Court. The decision is subject to continuous Commission monitoring and periodic review, and was upheld by the EU General Court in September 2025. It is a primary transfer-mechanism anchor for university use of US cloud, identity and AI services.},
+  note         = {{OJ} L 231, 20 September 2023, p.~118. {CELEX}: 32023D1795. Competent authority for the adequacy determination is the European Commission; supervision of individual transfers and complaints remains with national data protection authorities coordinated by the {EDPB}. Where a recipient is not {DPF}-certified, transfers fall back to Article 46 {SCCs} (Decision ({EU}) 2021/914) plus a Transfer Impact Assessment.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {{EUR}-Lex {ELI} permalink (eli/dec\_impl/2023/1795/oj) renders via JavaScript so WebFetch returns empty; decision number, exact title, adoption date (10 July 2023), {OJ} reference and substance cross-verified through the {EUR}-Lex search index and the official {EU}--{US} Data Privacy Framework documentation. Verified 2026-06-09.},
+}
+
+@misc{eidas2-2024,
+  author       = {{European Parliament and Council of the European Union}},
+  title        = {Regulation ({EU}) 2024/1183 of the European Parliament and of the
+                  Council of 11 April 2024 amending Regulation ({EU}) No 910/2014
+                  as regards establishing the European Digital Identity Framework
+                  (eIDAS\,2)},
+  year         = {2024},
+  url          = {https://eur-lex.europa.eu/eli/reg/2024/1183/oj},
+  abstract     = {Regulation (EU) 2024/1183 (eIDAS\,2) amends the 2014 eIDAS Regulation (EU) No 910/2014 to establish the European Digital Identity Framework, with the European Digital Identity Wallet (EUDI Wallet) at its centre. It obliges every Member State to make available at least one EUDI Wallet within 24 months of entry into force (by 31 December 2026 in the implementing schedule), lets citizens, residents and businesses store and selectively disclose government-verified credentials (identity, diplomas, professional qualifications) across borders, and from 2027 obliges a wide range of public bodies and regulated private services to accept the wallet. It carries forward and extends the qualified trust-services regime (electronic signatures, seals, timestamps, registered delivery) and adds three new qualified trust services: electronic archiving, electronic ledgers, and the management of remote signature/seal creation devices. The Regulation is directly applicable and is the primary identity-and-trust-services anchor for university electronic identification, federated access, and digital diploma issuance.},
+  note         = {{OJ} L, 2024/1183, 30 April 2024. {CELEX}: 32024R1183. Entered into force 20 May 2024 (20 days after publication). Directly applicable, no national transposition; the base instrument it amends is Regulation ({EU}) No 910/2014 ({CELEX} 32014R0910). Supervision is by each Member State's designated eIDAS/trust-services supervisory body, with the European Commission setting the wallet's technical architecture and reference framework through implementing acts.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {{EUR}-Lex {ELI} permalink (eli/reg/2024/1183/oj) renders via JavaScript so WebFetch returns empty; regulation number, exact title, signature date (11 April 2024), {OJ} publication (30 April 2024) and entry into force (20 May 2024) cross-verified through the {EUR}-Lex search index, the Publications Office record and the Commission's European Digital Identity Regulation page. Verified 2026-06-09.},
+}
+
 @misc{cjue-chacon-navas,
   author       = {{CJUE}},
   title        = {Chac{\'o}n Navas c.\ Eurest Colectividades {SA}},
@@ -3287,3 +3315,393 @@
   fetch_note   = {Google Books landing page (id=kudoDQAAQBAJ), HTTP 200. Verified June 2026.},
 }
 
+
+% ---------------------------------------------------------------------------
+%  US REGULATORY REGIME FOR UNIVERSITY IT (sectoral, federal + state)
+% ---------------------------------------------------------------------------
+
+@misc{us-ferpa,
+  author       = {{United States Congress}},
+  title        = {Family Educational Rights and Privacy Act ({FERPA})},
+  howpublished = {20 U.S.C. \S~1232g; 34 C.F.R. Part 99},
+  year         = {1974},
+  url          = {https://studentprivacy.ed.gov/ferpa},
+  abstract     = {FERPA is the principal US federal statute governing the privacy of student education records, codified at 20 U.S.C. \S~1232g with implementing regulations at 34 C.F.R. Part 99. It applies to every educational agency or institution that receives funds under any program administered by the US Department of Education, which covers essentially all public and most private universities. It grants students rights of access, amendment, and consent over personally identifiable information in education records, and restricts disclosure absent consent or a statutory exception (e.g., the school-official and directory-information exceptions). Enforcement is administrative only: the Department of Education's Student Privacy Policy Office investigates and seeks voluntary compliance, and the Secretary may ultimately withhold federal funding. There is no private right of action (Gonzaga University v. Doe, 536 U.S. 273 (2002)). For university IT this defines records-confidentiality, access-control, and disclosure-logging obligations.},
+  note         = {Primary student-privacy obligation (F1) for US universities. No fixed breach-notification deadline in FERPA itself; enforced by withdrawal of federal education funding.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Statutory citation 20 U.S.C. 1232g and 34 C.F.R. Part 99, ED Student Privacy Policy Office enforcement, and absence of a private right of action (Gonzaga v. Doe) corroborated via the US Department of Education studentprivacy.ed.gov portal and the Congressional Research Service report R46799. US federal sites (ecfr.gov, ed.gov) return 403/redirect to an anti-bot gateway for automated agents; citations cross-checked against CRS and EPIC. Verified 2026-06-09.},
+}
+
+@techreport{us-hipaa-security,
+  author       = {{US Department of Health and Human Services}},
+  title        = {{HIPAA} Security Rule: Security Standards for the Protection of Electronic Protected Health Information},
+  number       = {45 C.F.R. Part 160 and Part 164, Subparts A and C},
+  institution  = {US Department of Health and Human Services, Office for Civil Rights},
+  year         = {2003},
+  url          = {https://www.hhs.gov/hipaa/for-professionals/security/laws-regulations/index.html},
+  abstract     = {The HIPAA Security Rule (45 C.F.R. Part 160 and Part 164, Subparts A and C) sets national standards for protecting electronic protected health information (ePHI) held or transmitted by covered entities and business associates. It mandates administrative, physical, and technical safeguards, a documented risk analysis, access controls, audit controls, integrity controls, and transmission security. Universities are frequently "hybrid entities" under HIPAA: only their covered components (e.g., student health centres, academic medical centres, certain research and billing units) are subject to the Rule, while the broader institution and FERPA-governed records are carved out. Enforcement is by the HHS Office for Civil Rights, which can impose civil money penalties; a December 2024 NPRM (89 FR 880, published January 6, 2025) proposes to strengthen and make mandatory several safeguards including encryption. For university IT this is the controlling security-controls regime wherever ePHI is processed.},
+  note         = {Health-data security obligation (F2/F3) for university covered components; hybrid-entity scoping is the key design move. Enforced by HHS OCR.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Security Rule location (45 C.F.R. Part 160 and Part 164 Subparts A and C) and HHS OCR enforcement confirmed via HHS.gov HIPAA professional pages; the 2024-30983 NPRM (89 FR 880, 6 January 2025) confirmed via the Federal Register listing. HHS.gov returns 403 to automated agents; corroborated through HHS summaries and multiple law-firm advisories. Verified 2026-06-09.},
+}
+
+@techreport{us-hipaa-breach,
+  author       = {{US Department of Health and Human Services}},
+  title        = {{HIPAA} Breach Notification Rule},
+  number       = {45 C.F.R. Part 164, Subpart D (\S\S~164.400--164.414)},
+  institution  = {US Department of Health and Human Services, Office for Civil Rights},
+  year         = {2009},
+  url          = {https://www.hhs.gov/hipaa/for-professionals/breach-notification/index.html},
+  abstract     = {The HIPAA Breach Notification Rule (45 C.F.R. \S\S~164.400--164.414), issued under the HITECH Act, requires covered entities to notify affected individuals, the HHS Secretary, and in larger breaches the media, following a breach of unsecured protected health information. Individual notice must be provided without unreasonable delay and in no case later than 60 calendar days after discovery of the breach. Breaches affecting 500 or more individuals must be reported to HHS contemporaneously with individual notice; smaller breaches may be logged and reported to HHS annually. Business associates must notify the covered entity. For a university operating HIPAA-covered components, this establishes the concrete incident-notification timetable (the 60-day outer limit) that complements the Security Rule's preventive controls.},
+  note         = {Health-data incident-notification deadline (F4): 60 calendar days to individuals/HHS; HHS notified contemporaneously for breaches of 500+. Enforced by HHS OCR.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {60-calendar-day individual-notice deadline, 500-individual threshold, and HHS OCR enforcement confirmed via HHS.gov breach-notification pages and 45 C.F.R. Subpart D (164.400-164.414); cross-checked against eCFR Part 164 Subpart D listing and practitioner summaries. US federal sites 403/redirect for automated agents. Verified 2026-06-09.},
+}
+
+@techreport{us-ftc-safeguards,
+  author       = {{US Federal Trade Commission}},
+  title        = {Standards for Safeguarding Customer Information ({FTC} Safeguards Rule)},
+  number       = {16 C.F.R. Part 314},
+  institution  = {US Federal Trade Commission},
+  year         = {2023},
+  url          = {https://www.ftc.gov/business-guidance/resources/ftc-safeguards-rule-what-your-business-needs-know},
+  abstract     = {The FTC Safeguards Rule (16 C.F.R. Part 314), promulgated under the Gramm-Leach-Bliley Act, requires "financial institutions" under FTC jurisdiction to implement a written information security program with a qualified individual, risk assessment, access controls, encryption, multi-factor authentication, monitoring, and an incident response plan. Higher-education institutions that participate in federal student financial aid (Title IV) are treated as financial institutions for these purposes, so US universities are squarely within scope. The strengthened controls (15 enumerated elements) had full compliance required by June 9, 2023. An October 2023 amendment added \S~314.4(j): institutions must notify the FTC as soon as possible and no later than 30 days after discovery of a notification event involving the unencrypted information of 500 or more consumers; that requirement took effect May 13, 2024. For university IT this is the controlling security-program-plus-breach-notification regime for financial-aid data.},
+  note         = {Security-program (F3) + breach-notification (F4) obligation for Title-IV universities. FTC notification: no later than 30 days after discovery for events affecting 500+ consumers (16 CFR 314.4(j)). Enforced by the FTC.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {16 C.F.R. Part 314 GLBA basis, the 9 June 2023 full-compliance date, and the 314.4(j) 30-day / 500-consumer FTC-notification trigger effective 13 May 2024 corroborated via the FTC's own business-guidance and press materials and multiple independent law-firm advisories (Arnold & Porter, Greenberg Traurig, WilmerHale). ftc.gov returns 403 to automated agents. Verified 2026-06-09.},
+}
+
+@misc{us-ccpa-cpra,
+  author       = {{California State Legislature}},
+  title        = {California Consumer Privacy Act of 2018, as amended by the California Privacy Rights Act ({CCPA/CPRA})},
+  howpublished = {Cal. Civ. Code \S\S~1798.100 et seq.; exemptions at \S~1798.145},
+  year         = {2023},
+  url          = {https://oag.ca.gov/privacy/ccpa},
+  abstract     = {The CCPA, as amended by the CPRA (effective January 1, 2023), is the leading US state consumer-privacy statute, codified at Cal. Civ. Code \S\S~1798.100 et seq. and enforced by the California Privacy Protection Agency and the California Attorney General. It grants California residents rights to know, delete, correct, and limit the use of personal information, and imposes data-minimisation and security duties on covered "businesses." Its relevance to universities is bounded by exemptions in \S~1798.145: non-profit entities fall outside the definition of a covered business, and data already governed by FERPA, HIPAA, or GLBA is exempted. Public universities are likewise outside scope. The residual exposure for universities is indirect (third-party vendors that are themselves covered businesses) and for any for-profit affiliates. The statute matters as the template for the broader wave of US state privacy laws and illustrates the state-law layer of the sectoral US regime.},
+  note         = {State consumer-privacy layer (F1). Non-profit / GLBA / HIPAA / FERPA exemptions place most universities outside direct scope; residual exposure via vendors and for-profit affiliates. Enforced by CPPA and California AG.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Codification at Cal. Civ. Code 1798.100 et seq., CPRA effective 1 January 2023, exemptions at 1798.145 (non-profit; GLBA/HIPAA/FERPA data), and CPPA/AG enforcement corroborated via the California Attorney General CCPA portal (oag.ca.gov), the CPPA FAQ, and IAPP analysis of CCPA applicability to colleges and universities. Verified 2026-06-09.},
+}
+
+@techreport{us-cmmc,
+  author       = {{US Department of Defense}},
+  title        = {Cybersecurity Maturity Model Certification ({CMMC}) Program},
+  number       = {32 C.F.R. Part 170},
+  institution  = {US Department of Defense},
+  year         = {2024},
+  url          = {https://www.federalregister.gov/documents/2024/10/15/2024-22905/cybersecurity-maturity-model-certification-cmmc-program},
+  abstract     = {The CMMC Program final rule (32 C.F.R. Part 170), published in the Federal Register on October 15, 2024 and effective December 16, 2024, codifies the Department of Defense's mechanism for verifying that contractors and subcontractors protect Federal Contract Information (FCI) and Controlled Unclassified Information (CUI). It defines three levels: Level 1 (Foundational, self-assessment, FCI), Level 2 (Advanced, aligned with NIST SP 800-171 and assessed by an authorised third-party C3PAO or self-assessment), and Level 3 (Expert, aligned with a subset of NIST SP 800-172 and DIBCAC-assessed). The companion DFARS rule (DFARS Case 2019-D041, 48 C.F.R., effective November 10, 2025) makes CMMC a contractual condition of award, phased in over roughly three years. For universities holding DoD research awards involving CUI, CMMC is the certification and transfer mechanism that turns the NIST SP 800-171 controls into an enforceable, assessed contractual requirement.},
+  note         = {Defense-research security certification (F3) and its transfer mechanism (F6). 32 CFR Part 170 effective 16 December 2024; DFARS clause effective 10 November 2025, phased over ~3 years. Administered by US DoD; Level 2 via C3PAO assessment.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {32 C.F.R. Part 170 final rule published 15 October 2024 and effective 16 December 2024, three-level structure aligned with NIST SP 800-171/172, and the DFARS Case 2019-D041 contractual mechanism effective 10 November 2025 corroborated via the Federal Register listings (2024-22905, 2025-17359) and multiple independent advisories (White & Case, Forvis Mazars, A-LIGN, Secureframe). federalregister.gov redirects automated agents to an anti-bot gateway. Verified 2026-06-09.},
+}
+
+@misc{us-ear,
+  author       = {{US Department of Commerce, Bureau of Industry and Security}},
+  title        = {Export Administration Regulations ({EAR})},
+  howpublished = {15 C.F.R. Parts 730--774; fundamental research exclusion at \S~734.8},
+  year         = {2024},
+  url          = {https://www.bis.doc.gov/index.php/regulations/export-administration-regulations-ear},
+  abstract     = {The Export Administration Regulations (15 C.F.R. Parts 730--774), administered by the Department of Commerce's Bureau of Industry and Security (BIS), control the export and "deemed export" (release to foreign nationals in the US) of dual-use commodities, software, and technology. For universities the pivotal provision is the fundamental research exclusion at \S~734.8: technology arising during or resulting from fundamental research---basic and applied research ordinarily published and shared broadly---is not subject to the EAR, which is why universities can generally involve foreign nationals without a deemed-export licence. The exclusion covers research results, not controlled inputs: sponsor-supplied proprietary or controlled technical data, publication or foreign-national restrictions, and controlled equipment can pull activity back under the EAR. For university IT this drives segregation of controlled-technology environments, access controls keyed to nationality, and technology control plans.},
+  note         = {Export-control obligation (F5) for research IT, dual-use technology. Administered by BIS; fundamental research exclusion at 15 CFR 734.8 is the operative carve-out; controlled inputs/deemed exports remain in scope.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {EAR at 15 C.F.R. Parts 730-774 administered by BIS, and the fundamental research exclusion at 15 C.F.R. 734.8, corroborated via the BIS regulations portal, the National Academies export-control guidance, and Cornell Research Services export-controls page (which cites 734.8(c)/740.13(f) and BIS administration). eCFR/bis.doc.gov apply anti-bot gateways for automated agents; citations cross-checked against university research-office sources. Verified 2026-06-09.},
+}
+
+@misc{us-itar,
+  author       = {{US Department of State, Directorate of Defense Trade Controls}},
+  title        = {International Traffic in Arms Regulations ({ITAR})},
+  howpublished = {22 C.F.R. Parts 120--130; fundamental research carve-out at \S~120.34(a)(8)},
+  year         = {2024},
+  url          = {https://www.pmddtc.state.gov/ddtc_public?id=ddtc_kb_article_page&sys_id=24d528fddbfc930044f9ff621f961987},
+  abstract     = {The International Traffic in Arms Regulations (22 C.F.R. Parts 120--130), administered by the Department of State's Directorate of Defense Trade Controls (DDTC), control defence articles, defence services, and related technical data on the US Munitions List. ITAR is materially stricter than the EAR: there is no general fundamental-research safe harbour for controlled technical data itself, though "information concerning general scientific, mathematical, or engineering principles commonly taught in schools" and information in the public domain fall outside its definition of controlled technical data (22 C.F.R. \S~120.34(a)(8) and the public-domain provisions). Release of ITAR-controlled technical data to a foreign national, including on US soil, is a deemed export requiring DDTC authorisation. For university IT, ITAR-controlled projects require strict physical and logical segregation, nationality-based access control, encryption, and a technology control plan, since the fundamental research exclusion cannot be relied on for the controlled data inputs.},
+  note         = {Strictest export-control obligation (F5) for defence-related research. Administered by DDTC; no general fundamental-research safe harbour for controlled technical data; releases to foreign nationals are deemed exports needing DDTC authorisation.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {ITAR at 22 C.F.R. Parts 120-130 administered by State/DDTC, the US Munitions List scope, deemed-export treatment of releases to foreign nationals, and the 120.34(a)(8) general-principles/public-domain carve-outs corroborated via the DDTC (pmddtc.state.gov) knowledge base, National Academies guidance, and the Cornell Research Services export-controls page (citing 22 CFR 120.34(a)(8) and 125.4(b)(10), DDTC administration). State Dept sites apply anti-bot gateways for automated agents; citations cross-checked against university research-office sources. Verified 2026-06-09.},
+}
+% =====================================================================
+% UK regulatory regime for university IT (F1-F6) — added 2026-06-09
+% Primary UK instruments + authoritative regulators (ICO, NCSC, GDS, EHRC)
+% =====================================================================
+
+@misc{uk-gdpr,
+  author       = {{United Kingdom}},
+  title        = {The {UK} {GDPR}: {Regulation} ({EU}) 2016/679 as retained, amended and incorporated into {UK} law by section~3 of the {European Union (Withdrawal)} {Act} 2018 and the {Data Protection, Privacy and Electronic Communications (Amendments etc) (EU Exit)} {Regulations} 2019},
+  year         = {2021},
+  howpublished = {Information Commissioner's Office (ICO), \url{https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/}},
+  url          = {https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/},
+  abstract     = {Post-Brexit data-protection regulation forming the UK's primary instrument for the lawful processing of personal data. The UK GDPR is the EU General Data Protection Regulation as retained in domestic law and amended for the UK context; it sits alongside the Data Protection Act 2018, which supplements and implements it. For universities it governs student, staff and research-participant data and, through Article~32 (security of processing), mandates appropriate technical and organisational measures including encryption, access control and regular testing. The Information Commissioner's Office is the competent supervisory authority, with breach notification to the ICO without undue delay and where feasible within 72 hours of becoming aware (Article~33). The regime was amended in 2025-2026 by the Data (Use and Access) Act 2025.},
+  note         = {F1 (data protection) and F2 (security of processing) anchor for the UK regime. Competent authority: ICO (transitioning to the Information Commission under the DUAA 2025). Breach notification: 72 hours to the ICO.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {ICO UK GDPR guidance hub accessible, HTTP 200. UK GDPR confirmed as retained EU 2016/679 amended by the EU Exit Regulations 2019. Verified 9 June 2026.},
+}
+
+@misc{uk-dpa-2018,
+  author       = {{United Kingdom}},
+  title        = {Data Protection Act 2018 (c.~12)},
+  year         = {2018},
+  howpublished = {The National Archives, \url{https://www.legislation.gov.uk/ukpga/2018/12/contents}},
+  url          = {https://www.legislation.gov.uk/ukpga/2018/12/contents},
+  abstract     = {Primary UK statute (2018 c.~12) that supplements and implements the UK GDPR, sets out the law-enforcement and intelligence-services processing regimes, and defines the role, powers and duties of the Information Commissioner. The Act establishes exemptions (including for education information and research), the framework for special-category and criminal-offence data, and the Commissioner's enforcement powers up to GBP~17.5 million or 4 percent of global annual turnover. For universities it is the domestic legislative vehicle through which UK GDPR security-of-processing and accountability obligations bite, read together with the UK GDPR itself.},
+  note         = {F1 (data protection) primary statute for the UK; pairs with uk-gdpr. Competent authority: Information Commissioner (ICO). Amended by the Data (Use and Access) Act 2025.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {legislation.gov.uk official consolidated text accessible, HTTP 200. Title and citation 2018 c.~12 confirmed. Verified 9 June 2026.},
+}
+
+@misc{uk-duaa-2025,
+  author       = {{United Kingdom}},
+  title        = {Data (Use and Access) Act 2025 (c.~18)},
+  year         = {2025},
+  howpublished = {The National Archives, \url{https://www.legislation.gov.uk/ukpga/2025/18/contents}},
+  url          = {https://www.legislation.gov.uk/ukpga/2025/18/contents},
+  abstract     = {UK reform statute (enacted 19 June 2025) that amends the UK GDPR, the Data Protection Act 2018 and the Privacy and Electronic Communications Regulations through targeted changes rather than a wholesale overhaul. Key amendments add recognised legitimate interests (including network-and-information-systems security), relax automated-decision-making constraints outside special-category data, replace the international-transfer essential-equivalence test with a not-materially-lower data-protection-test, and restructure the Information Commissioner's Office into the Information Commission as a statutory body. Most Part~5 data-protection provisions commenced 5 February 2026 via Commencement No.~6 Regulations 2026. Relevant to universities as the live state of the UK data-protection regime layered over UK GDPR and DPA 2018.},
+  note         = {Amends F1 (data protection) and F4 (international transfers) for the UK. Restructures the ICO into the Information Commission; key provisions in force 5 February 2026.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Act confirmed enacted 19 June 2025 (c.~18); Part~5 data-protection provisions commenced 5 February 2026 per Commencement No.~6 Regulations 2026. ICO DUAA guidance page corroborates. Verified 9 June 2026.},
+}
+
+@misc{uk-nis-2018,
+  author       = {{United Kingdom}},
+  title        = {The Network and Information Systems Regulations 2018 ({SI} 2018/506)},
+  year         = {2018},
+  howpublished = {The National Archives, \url{https://www.legislation.gov.uk/uksi/2018/506/contents}},
+  url          = {https://www.legislation.gov.uk/uksi/2018/506/contents},
+  abstract     = {The UK transposition of the EU NIS Directive (2016/1148), in force 10 May 2018, imposing security and incident-notification duties on operators of essential services (OES) and relevant digital service providers (RDSPs: online marketplaces, search engines, cloud computing). Sector-specific competent authorities (Schedule~1) oversee OES, while the Information Commissioner is the competent authority for RDSPs; the National Cyber Security Centre acts as the single point of contact and national CSIRT. Significant or substantial incidents must be notified to the relevant competent authority without undue delay and, where feasible, no later than 72~hours after becoming aware. For universities operating large-scale cloud or research-computing services, the RDSP route and general cyber-resilience duties are the principal NIS touchpoints; the regime is being replaced by the forthcoming Cyber Security and Resilience Bill.},
+  note         = {F3 (network and information security) anchor for the UK. Competent authority: sector CAs for OES, ICO for RDSPs; NCSC is SPOC/CSIRT. Notification: 72 hours.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {legislation.gov.uk confirms title and SI 2018/506, regulation~11 duty to notify incidents, ICO as RDSP registrar. Accessible HTTP 200. Verified 9 June 2026.},
+}
+
+@misc{uk-ncsc,
+  author       = {{National Cyber Security Centre}},
+  title        = {{NCSC}: the {UK} technical authority for cyber security and {NIS} single point of contact and {CSIRT}},
+  year         = {2026},
+  howpublished = {National Cyber Security Centre, \url{https://www.ncsc.gov.uk/}},
+  url          = {https://www.ncsc.gov.uk/},
+  abstract     = {The UK's national technical authority for cyber security, part of GCHQ, providing guidance, incident response and threat intelligence. Under the Network and Information Systems Regulations 2018 the NCSC performs the functions of the single point of contact (SPOC) and the national computer security incident response team (CSIRT), offering technical advice to competent authorities. For universities the NCSC publishes the Cyber Assessment Framework and sector guidance and operates the channels through which cyber incidents feed national situational awareness; it is the technical-authority counterpart to the legal competent authorities (ICO and sector regulators).},
+  note         = {F3 supporting authority for the UK: NCSC as NIS single point of contact and national CSIRT / technical authority.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {NCSC official site accessible, HTTP 200; SPOC/CSIRT role under NIS Regulations 2018 confirmed via NIS guidance. Verified 9 June 2026.},
+}
+
+@misc{uk-csr-bill,
+  author       = {{United Kingdom}},
+  title        = {Cyber Security and Resilience ({Network and Information Systems}) {Bill}},
+  year         = {2025},
+  howpublished = {UK Parliament, \url{https://bills.parliament.uk/}},
+  url          = {https://bills.parliament.uk/},
+  abstract     = {Government bill introduced to Parliament in November 2025 to update and replace the Network and Information Systems Regulations 2018, expanding scope (notably to managed service providers), strengthening incident-reporting duties and modernising the competent-authority and supervisory framework. Cited as the forthcoming instrument that an adopting UK institution must track as the successor to the NIS Regulations 2018; not yet in force at the date of writing.},
+  note         = {F3 (network and information security) — forthcoming UK successor to SI 2018/506; in legislative progress, not yet enacted.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Bill confirmed introduced to Parliament November 2025 via UK Parliament bills tracker and multiple law-firm briefings (Mayer Brown, Travers Smith). Verified 9 June 2026.},
+}
+
+@misc{uk-eidas-2016,
+  author       = {{United Kingdom}},
+  title        = {The Electronic Identification and Trust Services for Electronic Transactions Regulations 2016 ({SI} 2016/696), and {Regulation} ({EU}) No~910/2014 as retained ({UK} {eIDAS})},
+  year         = {2016},
+  howpublished = {The National Archives, \url{https://www.legislation.gov.uk/uksi/2016/696}},
+  url          = {https://www.legislation.gov.uk/uksi/2016/696},
+  abstract     = {The UK trust-services and electronic-identification framework: EU Regulation 910/2014 (eIDAS) as retained in UK law and amended by the Electronic Identification and Trust Services for Electronic Transactions (Amendment etc.) (EU Exit) Regulations 2019, with the 2016 Regulations (SI 2016/696) providing supervisory and enforcement detail. It governs electronic signatures, seals, time stamps, registered delivery and website-authentication certificates, with qualified-status granting and revocation. The Information Commissioner is the supervisory body for UK trust service providers, with powers to grant/revoke qualified status, audit, require breach reporting and enforce. Relevant to universities using qualified electronic signatures, seals and trust services for diplomas, contracts and secure transactions.},
+  note         = {F5 (electronic identification / trust services) anchor for the UK. Supervisory body: the Information Commissioner (ICO). UK eIDAS = retained Regulation (EU) 910/2014 + SI 2016/696 + 2019 EU Exit amendments.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {legislation.gov.uk confirms SI 2016/696; ICO guide-to-eIDAS confirms ICO as supervisory body and the 2019 EU Exit amendments. Verified 9 June 2026.},
+}
+
+@misc{uk-psbar-2018,
+  author       = {{United Kingdom}},
+  title        = {The Public Sector Bodies ({Websites and Mobile Applications}) ({No.~2}) Accessibility Regulations 2018 ({SI} 2018/952)},
+  year         = {2018},
+  howpublished = {The National Archives, \url{https://www.legislation.gov.uk/uksi/2018/952/contents/made}},
+  url          = {https://www.legislation.gov.uk/uksi/2018/952/contents/made},
+  abstract     = {UK regulations (SI 2018/952) requiring public sector bodies to make their websites and mobile applications accessible by conforming to the harmonised standard EN~301~549 (aligned to WCAG~2.1 Level~AA, with monitoring extended to WCAG~2.2 from October~2024) and to publish a compliant accessibility statement. Most higher and further education providers are in scope owing to their dependence on public funding. The Government Digital Service (GDS), as the designated monitoring body, samples sites and statements, while the Equality and Human Rights Commission (EHRC) holds enforcement powers (investigations, unlawful-act notices, legal proceedings). The competent enforcement chain is therefore GDS (monitoring) plus EHRC (enforcement).},
+  note         = {F6 (digital accessibility) anchor for the UK. Standard: WCAG 2.1 AA via EN 301 549 (WCAG 2.2 from Oct 2024). Monitoring: GDS; enforcement: EHRC.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {legislation.gov.uk confirms official title (No.~2) and SI 2018/952; GOV.UK guidance and GDS/EHRC roles confirmed. Accessible HTTP 200. Verified 9 June 2026.},
+}
+
+@misc{uk-idta,
+  author       = {{Information Commissioner's Office}},
+  title        = {International Data Transfer Agreement ({IDTA}) and the {UK} {Addendum} to the {EU} {SCCs}},
+  year         = {2022},
+  howpublished = {Information Commissioner's Office (ICO), \url{https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/}},
+  url          = {https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/international-transfers/},
+  abstract     = {The UK's transfer-mechanism toolkit for restricted transfers of personal data under UK GDPR Article~46: the International Data Transfer Agreement (IDTA) and the UK Addendum to the EU Standard Contractual Clauses, both issued by the Information Commissioner and in force since 21 March 2022. A restricted transfer to a country without a UK adequacy decision requires the IDTA (or EU SCCs plus the UK Addendum) together with a transfer risk assessment reflecting the Schrems~II principles. The Data (Use and Access) Act 2025 reframes UK adequacy around a not-materially-lower standard. For universities, this is the lawful route for sending student, staff and research data to cloud providers or collaborators outside the UK.},
+  note         = {F4 (international / cross-border data transfers) transfer mechanism for the UK. Authority: ICO. Mechanism: adequacy decision, else IDTA or EU SCCs + UK Addendum + transfer risk assessment.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {ICO international-transfers guidance accessible, HTTP 200; IDTA and UK Addendum in force 21 March 2022 confirmed. Verified 9 June 2026.},
+}
+
+@misc{uk-jisc-accessibility,
+  author       = {{Jisc}},
+  title        = {Accessibility regulations: what you need to know (higher and further education guidance)},
+  year         = {2024},
+  howpublished = {Jisc, \url{https://www.jisc.ac.uk/guides/accessibility-regulations-what-you-need-to-know}},
+  url          = {https://www.jisc.ac.uk/guides/accessibility-regulations-what-you-need-to-know},
+  abstract     = {Sector guidance from Jisc, the UK higher- and further-education digital agency, interpreting the Public Sector Bodies (Websites and Mobile Applications) Accessibility Regulations 2018 for universities and colleges. It explains scope (most HE/FE providers in scope through public funding), the WCAG~2.1~AA / EN~301~549 conformance target, accessibility-statement requirements, the GDS monitoring regime and EHRC enforcement. Cited as the authoritative secondary, sector-specific reading of the UK accessibility obligation as it applies to university IT estates and digital learning environments.},
+  note         = {Authoritative HE-sector secondary source for F6 (digital accessibility) in the UK.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Jisc accessibility-regulations guide accessible; corroborates WCAG 2.1 AA, GDS monitoring and EHRC enforcement for HE/FE. Verified 9 June 2026.},
+}
+
+@misc{za_popia,
+  title        = {Protection of Personal Information Act 4 of 2013 ({POPIA}), Republic of South Africa},
+  author       = {{Republic of South Africa, Parliament}},
+  year         = {2013},
+  url          = {https://popia.co.za/},
+  abstract     = {Protection of Personal Information Act 4 of 2013 (POPIA), South Africa's omnibus data-protection statute, fully effective from 1 July 2021. It codifies eight conditions for lawful processing of personal information by responsible parties. Condition 7 (Security Safeguards, section 19) requires appropriate, reasonable technical and organisational measures to secure the integrity and confidentiality of personal information against loss, damage, unauthorised destruction and unlawful access or processing, on a risk-based standard. Section 22 (Notification of security compromises) requires the responsible party to notify the Information Regulator and affected data subjects as soon as reasonably possible after a breach is discovered. Section 72 governs transborder flows, permitting transfer of personal information outside the Republic only where adequate protection (substantially similar to POPIA) is ensured by law, binding corporate rules, a binding agreement, data-subject consent, or contractual necessity. For a South African university, POPIA is the binding instrument for student, staff and research personal data, the security-of-processing obligation, the breach-notification duty and the cross-border transfer regime.},
+  note         = {F1 security of processing: s.19 (Condition 7). F2 breach notification: s.22 (notify Information Regulator and data subjects as soon as reasonably possible). F4 transborder flow: s.72 (adequate-protection / binding-agreement / consent / contractual-necessity transfer mechanism, self-assessed, no EU-style adequacy list). Competent authority: Information Regulator (South Africa).},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Consolidated text and section-level pages (s.19, s.22, s.72) accessible at popia.co.za; section 22 page confirmed Act 4 of 2013 and Information Regulator as authority, HTTP 200. Verified 9 June 2026.},
+}
+
+@misc{za_inforegulator,
+  title        = {Information Regulator (South Africa) --- supervisory authority under {POPIA} and {PAIA}},
+  author       = {{Information Regulator (South Africa)}},
+  year         = {2021},
+  url          = {https://inforegulator.org.za/},
+  abstract     = {The Information Regulator (South Africa) is the independent supervisory authority established under section 39 of the Protection of Personal Information Act 4 of 2013, accountable to the National Assembly. It monitors and enforces compliance by public and private bodies with both POPIA (data protection) and the Promotion of Access to Information Act 2 of 2000 (PAIA). Its powers include receiving and investigating complaints, conducting assessments, issuing enforcement and infringement notices, imposing administrative fines, and receiving section 22 breach (security-compromise) notifications. From 1 July 2021 it assumed the PAIA functions previously held by the South African Human Rights Commission. For a South African university it is the competent data-protection authority to which breaches are reported and to which the institution answers for processing of personal information.},
+  note         = {Competent authority for F1 (security of processing) and F2 (breach notification, s.22 recipient) under POPIA. Independent body under POPIA s.39; also enforces PAIA. Receives security-compromise notifications and may direct publicity of a compromise.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Official site confirmed mandate under POPIA s.39 and PAIA, contact and governance details, HTTP 200. Verified 9 June 2026.},
+}
+
+@misc{za_cybercrimes,
+  title        = {Cybercrimes Act 19 of 2020, Republic of South Africa},
+  author       = {{Republic of South Africa, Parliament}},
+  year         = {2020},
+  url          = {https://www.michalsons.com/focus-areas/cybercrime-law-around-the-world/cybercrimes-act-south-africa},
+  abstract     = {Cybercrimes Act 19 of 2020, assented on 26 May 2021, with most provisions commenced on 1 December 2021. It criminalises unauthorised access, interception of data, cyber fraud, forgery and extortion, and malicious communications, and confers extensive search, seizure and investigation powers on the South African Police Service (SAPS), supported by a designated 24/7 point of contact. Section 54 imposes a mandatory reporting duty: an electronic communications service provider or financial institution that becomes aware that its electronic communications system is involved in the commission of certain offences must, without undue delay and where feasible not later than 72 hours after becoming aware, report the offence to SAPS in the prescribed form and preserve information that may assist the investigation. The Act repealed the cyber-offence provisions (sections 85--88) of the ECT Act. For a university, the section 54 reporting duty is the network-and-information-security incident-reporting analogue applicable when it acts as an electronic communications service provider, and SAPS is the reporting authority.},
+  note         = {F3 incident/offence reporting: s.54 --- report to SAPS without undue delay, where feasible within 72 hours; applies to electronic communications service providers and financial institutions. Authority: South African Police Service (SAPS) with national 24/7 point of contact. Note: South Africa has no standalone unified Cybersecurity Act; the Cybercrimes Act is the operative criminal/incident instrument.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Michalsons authoritative legal summary confirmed Act 19 of 2020, assent 26 May 2021, commencement 1 December 2021, and the s.54 72-hour SAPS reporting duty, HTTP 200. Verified 9 June 2026.},
+}
+
+@misc{za_ect_act,
+  title        = {Electronic Communications and Transactions Act 25 of 2002 ({ECT} Act), Republic of South Africa},
+  author       = {{Republic of South Africa, Parliament}},
+  year         = {2002},
+  url          = {https://www.gov.za/documents/electronic-communications-and-transactions-act},
+  abstract     = {Electronic Communications and Transactions Act 25 of 2002 (ECT Act), South Africa's framework statute for electronic transactions, data messages and electronic signatures. It establishes the legal recognition and evidential weight of data messages and electronic signatures, and defines the advanced electronic signature (AES) as one created using a digital certificate issued by a service provider accredited under sections 37--40 by the accreditation authority (the South African Accreditation Authority, operating under the Department of Communications and Digital Technologies). An AES carries a rebuttable presumption of validity and is required for certain transactions (for example suretyships) where the law mandates a signature. The Act's cyber-offence provisions (sections 85--88) were repealed by the Cybercrimes Act 19 of 2020. For a university, the ECT Act is the binding instrument for trust services, electronic signatures and the legal validity of electronic records and online transactions --- the South African analogue of an eIDAS-type electronic-identity-and-trust regime.},
+  note         = {F5 electronic transactions / trust services and electronic signatures: ECT Act ss.13, 37--40 (advanced electronic signature, accreditation). Authority: South African Accreditation Authority (SAAA) under the Department of Communications and Digital Technologies. eIDAS-equivalent function; no EU-style mutual-recognition regime.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Act and AES/accreditation regime (ss.37--40) confirmed via gov.za document landing and corroborating practitioner sources (Adobe, SigniFlow); repeal of ss.85--88 by Cybercrimes Act cross-confirmed. Verified 9 June 2026.},
+}
+
+@misc{za_pepuda,
+  title        = {Promotion of Equality and Prevention of Unfair Discrimination Act 4 of 2000 ({PEPUDA} / Equality Act), Republic of South Africa},
+  author       = {{Republic of South Africa, Parliament}},
+  year         = {2000},
+  url          = {https://www.saflii.org/za/legis/consol_reg/rrttpoeapoud2003887/},
+  abstract     = {Promotion of Equality and Prevention of Unfair Discrimination Act 4 of 2000 (PEPUDA, the Equality Act), the principal South African anti-discrimination statute giving effect to the constitutional right to equality. It prohibits unfair discrimination by the State and by private bodies on prohibited grounds including disability. Under its disability provisions, failing to eliminate obstacles that unfairly limit or restrict persons with disabilities from enjoying equal opportunities, or failing to take steps to reasonably accommodate their needs, constitutes unfair discrimination. Enforcement is through the Equality Courts, supported by the South African Human Rights Commission (SAHRC). South Africa has no dedicated statutory web-accessibility standard (no EU Web Accessibility Directive analogue); the digital-accessibility obligation for a university's online services is derived from PEPUDA's reasonable-accommodation duty and the Constitution, with WCAG used as the practical benchmark.},
+  note         = {F6 digital accessibility / non-discrimination: PEPUDA s.9 and disability provisions (reasonable accommodation; removal of obstacles). Authority/forum: Equality Courts; South African Human Rights Commission (SAHRC). No standalone web-accessibility statute --- obligation is principle-based, WCAG used as de facto benchmark.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Act and 2003 regulations confirmed via SAFLII consolidated legislation and Wikipedia/SAHRC corroboration; disability reasonable-accommodation duty confirmed. Verified 9 June 2026.},
+}
+
+@misc{za_malabo,
+  title        = {African Union Convention on Cyber Security and Personal Data Protection (Malabo Convention)},
+  author       = {{African Union}},
+  year         = {2014},
+  url          = {https://au.int/en/treaties/african-union-convention-cyber-security-and-personal-data-protection},
+  abstract     = {African Union Convention on Cyber Security and Personal Data Protection (the Malabo Convention), adopted at Malabo on 27 June 2014 and entered into force on 8 June 2023 after the fifteenth ratification (Mauritania), per Article 36. It is the only binding regional treaty on cybersecurity and data protection outside Europe, setting continental baselines for electronic transactions, personal-data protection (independent authority, processing principles, data-subject rights) and cybercrime, and committing states to harmonise national law. South Africa has signed but not ratified the Convention, citing concerns about compatibility with existing national law including POPIA; it is therefore not directly binding on South African institutions but supplies the regional policy context against which POPIA, the Cybercrimes Act and the ECT Act are read. Cited as the African-regional framing analogous to the role an EU directive plays for a member state, without (for South Africa) the transfer-mechanism force of a ratified instrument.},
+  note         = {Regional context instrument (analogous to AU-level framing). Adopted 27 June 2014; in force 8 June 2023 (Art. 36, 15th ratification). South Africa: signed, NOT ratified --- no transfer/transposition obligation flows to South African institutions; provides continental policy baseline only. Depositary/authority: African Union Commission.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {AU treaty landing page confirmed adoption 27 June 2014 and treaty text/status-list availability, HTTP 200; entry-into-force 8 June 2023 and South Africa signed-not-ratified status cross-confirmed via dataprotection.africa and EJIL:Talk. Verified 9 June 2026.},
+}
+
+@misc{br-lgpd-13709,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Lei nº 13.709, de 14 de agosto de 2018 --- Lei Geral de Proteção de Dados Pessoais (LGPD)}},
+  year         = {2018},
+  howpublished = {Federal statute, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm},
+  abstract     = {Brazil's General Personal Data Protection Law (Lei Geral de Proteção de Dados Pessoais), Federal Law No. 13.709 of 14 August 2018, the foundational omnibus data-protection statute applicable to both the private and the public sector, including federal universities (autarquias and fundações públicas), whenever personal data of individuals located in Brazil is processed. The law sets out lawful processing bases, data-subject rights, and a security-and-prevention duty: Article 46 requires controllers and processors to adopt technical and administrative security measures to protect personal data, and Article 48 obliges the controller to communicate the occurrence of a security incident that may cause risk or relevant harm to the National Data Protection Authority (ANPD) and to affected data subjects. It establishes the ANPD as the competent national authority. Cited as the concrete Brazilian instrument for the data-protection functional obligation that an adopting institution maps against its own jurisdiction's instrument.},
+  note         = {Art. 46 (security of processing) and Art. 48 (incident communication to ANPD and data subjects) are the operative pegs for the data-protection and incident-notification functional obligations. Public bodies, including federal universities, are within scope (Chapter IV, public-power processing).},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200; confirmed official title ``LEI Nº 13.709, DE 14 DE AGOSTO DE 2018'', the ``Autoridade Nacional de Proteção de Dados'', and Art. 48 text (``O controlador deverá comunicar à autoridade nacional e ao titular...''). Verified 2026-06-09.},
+}
+
+@misc{br-anpd-res15-2024,
+  author       = {{Brazil, Autoridade Nacional de Proteção de Dados (ANPD)}},
+  title        = {{Resolução CD/ANPD nº 15, de 24 de abril de 2024 --- Regulamento de Comunicação de Incidente de Segurança}},
+  year         = {2024},
+  howpublished = {ANPD board resolution, Diário Oficial da União},
+  url          = {https://www.gov.br/anpd/pt-br/canais_atendimento/agente-de-tratamento/comunicado-de-incidente-de-seguranca-cis},
+  abstract     = {ANPD Board Resolution CD/ANPD No. 15 of 24 April 2024, the binding regulation that operationalises the security-incident communication duty of Article 48 of the LGPD (Law No. 13.709/2018). It fixes the notification deadline at three (3) business days from the controller's awareness that the incident affected personal data, permits a preliminary notice with justification to be supplemented within twenty (20) business days, restricts the duty to incidents that may cause risk or relevant harm to data subjects, and imposes a five-year record-keeping obligation for all incidents whether or not communicated. Cited as the concrete Brazilian deadline-and-mechanism instrument for the incident-notification functional obligation, issued by the competent supervisory authority (ANPD).},
+  note         = {Sets the operative 3-business-day notification deadline (with 20-business-day supplementation) under LGPD Art. 48. The ANPD is the competent authority. Companion to the official CIS reporting channel at gov.br/anpd.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Official ANPD security-incident-communication (CIS) page, HTTP 200; cross-checked against ANPD/DOU reporting of Resolução CD/ANPD nº 15 of 24 April 2024 (3-business-day deadline, 5-year record retention). Verified 2026-06-09.},
+}
+
+@misc{br-marco-civil-12965,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Lei nº 12.965, de 23 de abril de 2014 --- Marco Civil da Internet}},
+  year         = {2014},
+  howpublished = {Federal statute, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm},
+  abstract     = {Brazil's Civil Rights Framework for the Internet (Marco Civil da Internet), Federal Law No. 12.965 of 23 April 2014, the statute establishing principles, guarantees, rights and duties for Internet use in Brazil. It enshrines protection of privacy and of personal data, network neutrality, and security and confidentiality obligations for connection and application providers, and sets retention and due-process rules for connection and access logs. Regulated by Decree No. 8.771/2016, which details security and confidentiality standards for stored records. Cited as the baseline Internet-governance and connectivity-privacy instrument that frames, alongside the LGPD, the Brazilian data-protection and lawful-use obligations of a university operating Internet-facing services.},
+  note         = {Foundational connectivity and online-privacy framework; the granular personal-data security and breach-notification duties are carried by the LGPD (Law 13.709/2018), with Marco Civil providing the constitutional-style Internet-rights baseline.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}
+
+@misc{br-eciber-d10222,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Decreto nº 10.222, de 5 de fevereiro de 2020 --- Estratégia Nacional de Segurança Cibernética (E-Ciber)}},
+  year         = {2020},
+  howpublished = {Federal decree, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2020/decreto/d10222.htm},
+  abstract     = {Federal Decree No. 10.222 of 5 February 2020, approving Brazil's National Cybersecurity Strategy (Estratégia Nacional de Segurança Cibernética, E-Ciber) for the 2020--2023 cycle. It is the first whole-of-government strategic instrument setting cybersecurity objectives, guiding principles and strategic actions, and assigns federal public-administration bodies and entities (including federal autarquias such as public universities) responsibility for implementing the foreseen actions, under the coordination of the Institutional Security Office of the Presidency (Gabinete de Segurança Institucional, GSI). Cited as the Brazilian cybersecurity-governance and risk-management instrument for the cyber-governance functional obligation, with the GSI/PR as the coordinating competent authority.},
+  note         = {Cyber-governance baseline for the federal public administration; GSI/PR is the coordinating authority. Operational incident-handling structures are established by Decreto 10.748/2021 (Rede Federal de Gestão de Incidentes Cibernéticos, CTIR.Gov).},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}
+
+@misc{br-redeinc-d10748,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Decreto nº 10.748, de 16 de julho de 2021 --- Rede Federal de Gestão de Incidentes Cibernéticos}},
+  year         = {2021},
+  howpublished = {Federal decree, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/decreto/d10748.htm},
+  abstract     = {Federal Decree No. 10.748 of 16 July 2021, establishing the Federal Cyber Incident Management Network (Rede Federal de Gestão de Incidentes Cibernéticos). It is mandatory for the bodies and entities of the federal public administration (administração pública federal direta, autárquica e fundacional, which includes federal universities) and coordinates the prevention, treatment and response to cyber incidents, with the Government Cyber Incident Treatment and Response Centre (CTIR.Gov), part of the Information Security Department of the GSI/PR, acting as the central coordinating team. Cited as the Brazilian operational mechanism for cyber-incident notification and response within the federal public sector, distinct from the LGPD/ANPD personal-data breach channel.},
+  note         = {Establishes mandatory federal cyber-incident coordination via CTIR.Gov (GSI/PR). Together with LGPD Art. 48 + ANPD Res. 15/2024 (personal-data breaches) it forms the dual incident-notification track for a federal university.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}
+
+@misc{br-lbi-13146,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Lei nº 13.146, de 6 de julho de 2015 --- Lei Brasileira de Inclusão da Pessoa com Deficiência (Estatuto da Pessoa com Deficiência)}},
+  year         = {2015},
+  howpublished = {Federal statute, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm},
+  abstract     = {Brazil's Inclusion Law for Persons with Disabilities (Lei Brasileira de Inclusão, LBI / Estatuto da Pessoa com Deficiência), Federal Law No. 13.146 of 6 July 2015. It establishes accessibility as a right across education, employment, public services and information-and-communication technology, mandating that websites, applications and digital content maintained by or for the public power be accessible to persons with disabilities (Articles 63 and following on accessibility of information and communication). For higher education it reinforces inclusive-education duties on institutions. Cited as the Brazilian accessibility functional-obligation instrument; operational web-accessibility conformance for federal e-government services is given by the e-MAG (Modelo de Acessibilidade em Governo Eletrônico) standard.},
+  note         = {Accessibility functional obligation. Web/digital conformance is operationalised through the e-MAG standard (gov.br / governo digital); higher-education accessibility also touches MEC course-recognition requirements (Portaria MEC 3.284/2003).},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}
+
+@misc{br-lai-12527,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Lei nº 12.527, de 18 de novembro de 2011 --- Lei de Acesso à Informação (LAI)}},
+  year         = {2011},
+  howpublished = {Federal statute, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12527.htm},
+  abstract     = {Brazil's Access to Information Law (Lei de Acesso à Informação), Federal Law No. 12.527 of 18 November 2011, regulating the constitutional right of access to public information. It binds all federal, state and municipal public bodies and entities, including federal universities, to the principle of publicity as the rule and secrecy as the exception, mandating active (proactive) and passive (on-request) transparency, use of information technology for disclosure, and defined response deadlines for information requests. The Comptroller General of the Union (Controladoria-Geral da União, CGU) is the principal monitoring authority at federal level. Cited as the Brazilian transparency / access-to-information functional-obligation instrument, with Law 9.784/1999 applying subsidiarily to its procedures.},
+  note         = {Transparency functional obligation; CGU is the federal oversight authority. Procedural gaps are filled subsidiarily by the federal administrative-procedure law (Lei 9.784/1999).},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}
+
+@misc{br-procadm-9784,
+  author       = {{Brazil, Presidência da República}},
+  title        = {{Lei nº 9.784, de 29 de janeiro de 1999 --- Processo Administrativo no âmbito da Administração Pública Federal}},
+  year         = {1999},
+  howpublished = {Federal statute, Diário Oficial da União},
+  url          = {https://www.planalto.gov.br/ccivil_03/leis/l9784.htm},
+  abstract     = {Brazil's Federal Administrative Procedure Law (Lei do Processo Administrativo Federal), Federal Law No. 9.784 of 29 January 1999, establishing the baseline norms governing administrative proceedings within the direct, autarchic and foundational federal public administration --- which includes federal universities. It guarantees legality, due process (contraditório and ampla defesa), reasoned decisions, and rights of the administered before federal agencies, and applies subsidiarily across other federal procedural regimes (including the Access to Information Law). Cited as the Brazilian administrative-due-process functional-obligation instrument that governs how a federal university takes and reviews administrative decisions, including those arising from data-protection, accessibility and transparency obligations.},
+  note         = {Administrative due-process / governance functional obligation; applies to federal universities as autarquias/fundações and subsidiarily to LAI and other procedural regimes.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Planalto official consolidated text, HTTP 200. Verified 2026-06-09.},
+}

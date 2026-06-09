@@ -206,6 +206,18 @@
     left=4pt, right=4pt
 }
 
+% --- Required by the shared Regulatory Applicability annex ---
+\newtcolorbox{caveatbox}[1][]{%
+    colback=Slate!4!white,
+    colframe=Slate!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt
+}
+
 % ============================================================================
 % SECTION NUMBERING: skip chapter level (we use \part > \section directly)
 % ============================================================================
@@ -359,6 +371,27 @@ must optimise for freedom --- of ideas, activities and persons,\\physical and di
 \glsresetall
 
 \input{../argumentation/argumentation-body-EN}
+
+% ============================================================================
+\part{Regulatory Applicability}
+\label{part:reg-applicability}
+% ============================================================================
+
+% Shared annex (institution-neutral, jurisdiction-neutral). The same module is
+% referenced by the Technical Reference (SUITSOLUTION, Ch. on regulatory
+% mapping). It frames the size- and jurisdiction-invariant functional-obligation
+% spine (F1--F6), instantiates it per regime, and gives an adopter in an
+% unlisted regime a derivation method. The role-based regulatory phrasings used
+% throughout this dossier point here for the worked instantiation of "the
+% applicable regime".
+
+% Numbered sections, clearpage before each (consistent with the main part).
+\setcounter{section}{0}
+\renewcommand{\section}{\clearpage\oldsection}
+\renewcommand{\theHsection}{reg.\arabic{section}}
+\glsresetall
+
+\input{../shared/regulatory-applicability-EN}
 
 % ============================================================================
 \part{Pointer to the standalone Technical Reference}
@@ -592,11 +625,15 @@ the adopting institution and its computer science research unit, May 2026
   \item[Ch.~33\ \ Regulatory mapping]
     Interpretive mapping of the architecture contracts and migration
     waves to the regulations most likely to apply to a
-    research-intensive university in the adopting institution's
-    jurisdiction (GDPR, NIS2, EU AI Act, the applicable cross-border
-    data-transfer regime, NIST CSF~2.0, eIDAS~2,
-    ISO/IEC 27001/27002/27005, COBIT~2019), organised by regulation
-    and by article or control.
+    research-intensive university, organised by regulation and by
+    article or control as one worked EU instantiation (GDPR, NIS2, EU
+    AI Act, the applicable cross-border data-transfer regime, NIST
+    CSF~2.0, eIDAS~2, ISO/IEC 27001/27002/27005, COBIT~2019). The
+    chapter folds into the shared Regulatory Applicability annex
+    (Part~\ref{part:reg-applicability} of this dossier), whose
+    size- and jurisdiction-invariant obligation~$\rightarrow$~mechanism
+    matrix is the shared anchor for the Policy~$\leftrightarrow$~Solution
+    traceability.
 \end{description}
 
 % ============================================================================

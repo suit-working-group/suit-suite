@@ -383,4 +383,73 @@ SUITSOLUTION (8). Named products: Microsoft Entra ID, Conditional Access, Custom
 \end{longtable}
 \end{center}
 
+% ============================================================================
+% STEP 0 — SELECT YOUR REGULATORY REGIME
+% ============================================================================
+%
+% This prose step precedes the per-variable substitution above for any adopter
+% whose binding regime is not the EU/EEA baseline. It points at the shared
+% Regulatory Applicability module (shared/regulatory-applicability-EN.tex),
+% which carries the size- and jurisdiction-invariant obligation spine (F1--F6),
+% the obligation->mechanism matrix, the regime typology, and the derivation
+% method for unlisted regimes. Selecting the regime here fixes the value of the
+% legal/regulator localization variables in the table above (DATA_PROTECTION_
+% REGIME, CYBERSECURITY_BASELINE_REGIME, AI_REGULATION, EID_TRUST_SERVICES_
+% REGIME, CROSS_BORDER_TRANSFER_REGIME, NATIONAL_DPA, NIS2_SUPERVISORY_
+% AUTHORITY, NATIONAL_GOV_CSIRT, and the *_NATIONAL_TRANSPOSITION rows) in one
+% coherent move rather than row by row.
+
+\bigskip
+\noindent\textbf{Step~0 --- Select your regulatory regime (do this first).}
+The legal and regulator rows of the table above (data-protection regime,
+cybersecurity-baseline regime, AI-governance regime, eID/trust-services regime,
+cross-border-transfer regime, and the national-authority and
+national-transposition rows) are all instances of a single decision: which
+regulatory regime binds the adopting institution. Make that decision once,
+using the shared \emph{Regulatory Applicability} module
+(\texttt{shared/regulatory-applicability-EN.tex}), and the individual rows
+follow coherently. The module separates the part that does not change from the
+part that does: the size- and jurisdiction-invariant functional-obligation
+spine (F1--F6) and the obligation~$\rightarrow$~mechanism matrix are fixed for
+every adopter; only the \emph{instrument} column --- the local statute,
+competent authority and deadline --- is substituted per regime.
+
+\smallskip
+\noindent\emph{If your regime is one of the typology profiles}, read it
+directly from the module's regime typology and adopt its F1--F6 instrument
+column as your localization. The profiles shipped are:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{European Union / EEA} --- deep regime, the SUIT baseline anchor
+        (GDPR, NIS2, EU AI Act, eIDAS\,2, GDPR Chapter~V transfers);
+  \item \textbf{United States} --- deep regime, sectoral and fragmented (FERPA,
+        HIPAA, GLBA/FTC Safeguards, NIST SP~800-171 / CMMC, EAR/ITAR,
+        CCPA/CPRA);
+  \item \textbf{United Kingdom} --- light regime, post-Brexit diverging (UK
+        GDPR + DPA~2018 + DUAA~2025, NIS Regulations~2018, UK eIDAS, PSBAR);
+  \item \textbf{Brazil} --- light regime, distributed federal stack (LGPD,
+        E-Ciber, CTIR.Gov, the Inclusion Law, the Access to Information Law);
+  \item \textbf{South Africa} --- light regime, single national jurisdiction
+        (POPIA, the Cybercrimes Act, the ECT Act, PEPUDA / Equality Act).
+\end{itemize}
+
+\smallskip
+\noindent\emph{If your regime is not listed}, derive your own regime row with
+the module's seven-step mapping method
+(\texttt{regulatory-applicability-EN.tex}, ``Mapping method: deriving a row for
+an unlisted regime''): (1) identify your data-protection authority and its
+security-of-processing duty (F1); (2) identify your lawful-basis and
+risk-governance regime (F2); (3) record your shortest breach/incident
+notification deadline (F3); (4) determine your essential-/important-entity
+status and its basis (F2/F3 scope); (5) establish your cross-border transfer
+regime (F4); (6) add your sector overlays --- trust/eID, AI governance, export
+control, health, financial-aid, accessibility (F5/F6); (7) write each local
+instrument, authority and deadline into the instrument column against the
+matching F~row, leaving the SUIT control-mechanism column unchanged. The result
+is your own regime profile in the same shape as the five worked profiles, and
+the same architectural evidence base discharges it. As the module states, this
+is interpretive engineering guidance, not legal advice: confirm the mapping
+with the institution's data-protection officer, information-security officer
+and legal counsel before relying on it.
+
 \endinput
