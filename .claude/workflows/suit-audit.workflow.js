@@ -45,7 +45,8 @@ export const meta = {
   ],
 }
 
-export default async function run(rawArgs) {
+// Real Workflow runtime: the script body runs at TOP LEVEL (no function wrapper); `args` is the global.
+const rawArgs = args
   // --------------------------------------------------------------------------
   // 0. Args (may arrive as a JSON string). All paths stay REPOSITORY-RELATIVE.
   // --------------------------------------------------------------------------
@@ -453,4 +454,3 @@ export default async function run(rawArgs) {
     instances, candidates: candidates.length, confirmed: finalFindings.length,
     diff, report,
   }
-}
