@@ -1,6 +1,6 @@
 # ============================================================================
 # Configuration latexmk for the operational executive summary
-# Sovereign University IT — Operational Executive Summary of the
+# Sustainable University IT — Operational Executive Summary of the
 # Technical Reference (Architecture and Migration)
 # ============================================================================
 

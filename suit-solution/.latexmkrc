@@ -1,6 +1,6 @@
 # ============================================================================
 # Configuration latexmk for the standalone Technical Reference
-# Sovereign University IT — A Technical Reference for Architecture and Migration
+# Sustainable University IT — A Technical Reference for Architecture and Migration
 # ============================================================================
 
 use Cwd qw(abs_path getcwd);

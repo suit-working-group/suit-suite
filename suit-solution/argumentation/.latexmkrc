@@ -1,6 +1,6 @@
 # ============================================================================
 # Configuration latexmk for the solution-layer argumentation module
-# Sovereign University IT — Technical/Operational Objections and Responses
+# Sustainable University IT — Technical/Operational Objections and Responses
 # (defends the Technical Reference: solution-EN.tex)
 # ============================================================================
 

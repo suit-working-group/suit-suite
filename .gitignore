@@ -19,6 +19,10 @@ out/
 # — regenerable on demand, so not tracked (the wrapper .tex and set.tex are).
 instantiations/*/render/*.pdf
 
+# Scratch / draft folders — any directory named _TEMP, anywhere, is never tracked.
+_TEMP/
+**/_TEMP/
+
 # OS / editor cruft
 .DS_Store
 
