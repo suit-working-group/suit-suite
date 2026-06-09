@@ -68,6 +68,30 @@
       "statement": "When the source named more than one institutional entity in a single affiliation/approval/authorship reference (e.g. a faculty AND its department), the generic edition collapses them to a single generic role phrase (e.g. 'the approving academic unit'), under one localization variable, unless the distinction is load-bearing for the argument. A separate variable per entity is not required.",
       "doNotRaise": "Do not flag a single generic role phrase that subsumes a compound source affiliation as an under-modeled or missing-variable defect; this is the ratified treatment.",
       "appliesTo": ["XCOH", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-PACE-HORIZONS",
+      "kind": "design-constant",
+      "title": "5/7/10-year migration pace horizons",
+      "statement": "The migration playbook offers three named pace horizons (5-, 7- and 10-year). The three horizons are a ratified design constant, like the 5-dimension grid, the 9-layer architecture and the 10-wave rollout; only their archetype-appropriate selection is auditable, not the values themselves.",
+      "doNotRaise": "Do not flag the 5/7/10-year horizons as arbitrary, unsourced, or in need of softening; they are named design constants.",
+      "appliesTo": ["TECH", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-LABELLED-LOCAL-EXAMPLES",
+      "kind": "principle",
+      "title": "Labelled examples and \\loc-routed anchors are the ratified genericity treatment",
+      "statement": "After the 2026-06-09 genericity remediation, jurisdiction-, vendor- and institution-specific anchors are handled in one of two ratified ways: routed through a localization \\loc{} key, or kept in prose as an explicitly labelled, non-binding example ('in the EU, ...', 'e.g. ...', 'such as ... in <region>'). A named EU instrument (NIS2 / GDPR / AI Act / Schrems II / eIDAS), vendor (Microsoft / Entra / Sentinel), NREN (GEANT / RENATER / RESTENA), federation (eduGAIN / eduroam / InCommon) or sector body (REN-ISAC / EDUCAUSE / Jisc / JRES) that carries such a label or \\loc routing is correct-by-decision.",
+      "doNotRaise": "Do not flag a named jurisdiction / vendor / institution as a locality leak when it is explicitly labelled as an example or routed through \\loc{}. Only a BARE, unlabelled, unrouted local anchor presented as universal remains a defect.",
+      "appliesTo": ["APP", "XCOH", "DEF"]
+    },
+    {
+      "id": "DISPO-PRECEDENT-PANEL",
+      "kind": "principle",
+      "title": "The institutional reference panel is scoped labelled evidence",
+      "statement": "The reference panel of named institutions (e.g. MIT, Stanford, Cambridge, ETH Zurich, CERN, Michigan, EPFL) and its characterisation of them as world-leading / leading research universities is deliberately scoped labelled EVIDENCE, governed by the panel's stated selection criteria (principles vs. implementations, size-comparability). It is cited as precedent, not asserted as the universal norm for every adopter.",
+      "doNotRaise": "Do not flag the reference panel's named institutions, or its 'world-leading / leading research universities' characterisation within the panel section, as elite-as-norm overreach. This disposition does NOT license unscoped 'world-leading' framing elsewhere in the bodies.",
+      "appliesTo": ["SCI", "APP", "DEF"]
     }
   ]
 }
