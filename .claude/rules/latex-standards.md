@@ -64,7 +64,7 @@ paths:
   - `$aux_dir = 'out';` (temp/aux files go here)
   - `$out_dir = '.';` (the final PDF stays at the project root, next to the `.tex`)
   - `$clean_ext = 'synctex.gz';`
-  - `$success_cmd = 'latexmk -c %R';` — auto-clean: after a successful build the PDF is at the root, so this wipes the `out/` temporaries (and the stray `synctex.gz`) via latexmk's own cleaner. `-c` preserves the final `.pdf`. Trade-off: this also drops the incremental cache (`.fdb_latexmk`/`.bbl`), so each build runs from scratch.
+  - `$success_cmd = $ENV{'SUIT_CLEAN'} ? 'rm -f out/%R.* %R.synctex.gz' : '';` — **opt-in** auto-clean. By default (`latexmk -pdf doc.tex`) the `out/` cache is kept so rebuilds stay incremental. Set `SUIT_CLEAN=1` (e.g. `SUIT_CLEAN=1 latexmk -pdf doc.tex`) to wipe the `out/` temporaries and the stray `synctex.gz` after a successful build — the final `.pdf` (at the directory root) is preserved. The explicit `rm` is used (not `latexmk -c`) so the clean is deterministic regardless of `$clean_ext`/`$bibtex_use`.
   - Do NOT add `$success_cmd = 'cp out/%R.pdf ./%R.pdf';` — the PDF is produced at the root directly, so copying is both unnecessary and leaves a stale duplicate in `out/`.
 - If the document uses `biblatex`/`biber`, add: `$biber = 'biber %O %S';`
 - If the `.bib` file is in another directory, add: `$ENV{'BIBINPUTS'} = '../path/to/bib/:' . ($ENV{'BIBINPUTS'} || '');`
