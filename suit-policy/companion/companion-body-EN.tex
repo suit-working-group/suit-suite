@@ -138,7 +138,8 @@ Realistic training environments &
 A policy that treats financial data and research GPU clusters
 identically generates several documented effects: it concentrates
 risk on a single perimeter (a breach can affect the institution
-as a whole --- cf.\ Paris-Saclay, 2024); it correlates with the
+as a whole --- as recent breaches at major research universities
+have shown); it correlates with the
 emergence of Shadow IT (researchers may turn to unsupervised
 solutions); it is associated with talent mobility patterns toward
 institutions with more flexible IT environments; and it affects
@@ -157,16 +158,18 @@ compromising the institution as a whole}.
 core, global resilience.
 \end{principlebox}
 
-\begin{alertbox}[What the most publicised university incidents (2024--2025) actually show]
-The breaches at Paris-Saclay, Western Sydney, Texas Tech, and those caused by
-MOVEit and Oracle~EBS vulnerabilities share \textbf{the same root causes}:
+\begin{alertbox}[What the most publicised recent university incidents actually show]
+The most publicised university breaches of recent years --- whether at
+large national research universities or through shared platform and
+enterprise-software vulnerabilities such as those affecting widely used
+managed file-transfer and ERP products --- share \textbf{the same root causes}:
 third-party/supply-chain vulnerabilities, credential compromise, and
 centralised perimeters without internal boundaries.
-\textbf{None of the major 2024--2025 data breaches analysed here were caused by research-zone
+\textbf{None of the major recent data breaches analysed here were caused by research-zone
 autonomy.} Known incidents involving research infrastructure --- such as
 the 2020 European supercomputer attacks, where stolen SSH credentials
-were used for cryptomining on \gls{hpc} systems including at ETH~Zurich's
-CSCS~\cite{eu-supercomputers-2020}~--- involved unauthorized access rather than data exfiltration, and
+were used for cryptomining on \gls{hpc} systems at several national
+academic computing centres~\cite{eu-supercomputers-2020}~--- involved unauthorized access rather than data exfiltration, and
 would have been mitigated by the Trusted Activity Context mechanisms
 proposed here: credentials scoped to a specific activity context cannot
 grant lateral access to other contexts or to the infrastructure core.
@@ -183,8 +186,8 @@ context-bounded access} --- precisely what this proposal advocates.
 
 The logic is simple: \textbf{secure strongly what must be secured}
 (administrative, financial, HR data) \textbf{to liberate everything else}.
-This is what MIT, Stanford, Oxford, ETH~Zurich, Cambridge, CERN, Michigan
-and EPFL do --- and, through their national research-and-education
+This is what the world's leading research universities and laboratories
+do --- and, through their national research-and-education
 networks, what institutions of far more modest scale do as well ---
 and what NIST, ISO~27001 and \gls{cobit} recommend. These are not a
 flagship's choices to borrow but a minimal set every institution
@@ -285,8 +288,9 @@ transposition), not scope reduction.}
     and the information-security-management lead submit proposals; the
     Commission decides --- aligned with \gls{cobit}~2019's separation of governance
     (strategic direction) from management (operational execution)
-    and with the models of Oxford, ETH~Zurich, and Michigan;
-  \item \textbf{Responsibility charters} (ETH~Zurich model): autonomy
+    and with the governance models of leading research universities;
+  \item \textbf{Responsibility charters} (as practised by leading research
+    universities): autonomy
     is formalised and accountable, replacing informal exceptions;
   \item \textbf{Contextual role management:} a single individual
     (e.g.\ a researcher who also teaches and administers a laboratory)
@@ -353,22 +357,23 @@ provision of the applicable national NIS2 transposition~\cite{pl-8364}.
 \noindent
 No ``big bang'' required. The governance step is organisational and
 achievable with existing staff. The pilot and progressive extension
-rely on the national \gls{nren} and G\'{E}\-ANT services, open-source tools,
-and free-for-research platforms.
+rely on the national research-and-education network and its pan-European
+backbone services, open-source tools,
+and platforms offered free of charge for academic research.
 
 \medskip
 \noindent\textbf{Scale-appropriate reading.} Where public documentation
-evidences no Science DMZ --- nor any equivalent \gls{nren}-operated
+evidences no Science DMZ --- nor any equivalent research-and-education-network-operated
 research-data path --- deployed, neither at the institution nor at the
-national \gls{nren} level, the substrate is nonetheless frequently
-already operational: high-capacity backbone connectivity to G\'{E}ANT
-through the national \gls{nren}, an \gls{hpc} facility moving
-petabyte-scale traffic, and a national \gls{nren} CSIRT for incident
+national research-and-education network level, the substrate is nonetheless frequently
+already operational: high-capacity backbone connectivity to the
+pan-European research backbone through the national research-and-education network, an \gls{hpc} facility moving
+petabyte-scale traffic, and a national research-and-education network CSIRT for incident
 response. For institutions of modest scale, the pragmatic form is
 therefore not an institution-only deployment of the Science DMZ pattern
 but a federated research-network zone --- the same high-throughput
 research-data path realised at national, mutualised scale ---
-\emph{co-designed} with the national \gls{nren} and shared across
+\emph{co-designed} with the national research-and-education network and shared across
 partner research organisations, with a dedicated medical enclave for
 biomedical workloads where required.
 
@@ -384,7 +389,7 @@ biomedical workloads where required.
     research and teaching access to major cloud-based AI services
     (OpenAI, Anthropic, Google, HuggingFace, AWS) is now part of
     the standard scientific working environment.
-    Under the AI Act's risk-based framework, the applicable obligations
+    Under the applicable AI regulation's risk-based framework, the resulting obligations
     depend on the concrete use case and the user's role; many research
     uses of commercial AI services fall outside the high-risk categories.
     Under the proposed cooperative researcher-centred model
@@ -392,8 +397,9 @@ biomedical workloads where required.
     the central IT function + periodic audit by the data-protection
     function), the \emph{Schrems~II} cumulative regime applies to
     personal-data transfers~\cite{schrems2020}.
-    The R\&D exemption (Art.~2(6)) covers bespoke research tools, not
-    the use of commercial APIs.
+    The applicable AI regulation's research-and-development exemption (where
+    one exists --- e.g.\ Art.~2(6) of the EU AI Act) covers
+    bespoke research tools, not the use of commercial APIs.
   \item \textbf{The European regulatory framework demands it:} \gls{gdpr}
     Article~32 requires \emph{proportionate} measures; under the
     applicable national transposition of \gls{nis2}~\cite{pl-8364}, the
@@ -407,9 +413,10 @@ biomedical workloads where required.
     risk~\cite{jisc-guidance}; a segmented architecture aligned with
     \gls{nis2} Article~21 proportionality is the appropriate response.
   \item \textbf{Reference universities providing comparable openness:}
-    ETH~Zurich, EPFL, Oxford, Cambridge, MIT, Stanford and many others
+    the world's leading research universities
     provide their researchers with the autonomy and infrastructure
-    described here. The national \gls{nren} and \gls{geant} services
+    described here. The national research-and-education network and its
+    pan-European backbone interconnect
     make the same architectural primitives accessible at the
     institution's national scale.
 \end{enumerate}

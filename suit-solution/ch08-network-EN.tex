@@ -53,7 +53,8 @@ response; and providing, where the institution's research mission
 requires unobstructed high-throughput data movement, a research-data
 path that the general stateful-filtering perimeter would otherwise
 penalise --- realised, according to the institution's connectivity, as
-a Science DMZ, an \gls{nren}-operated dedicated circuit or overlay, or
+a Science DMZ, a dedicated circuit or overlay operated by the
+institution's \gls{nren}, or
 a tuned Data-Transfer-Node fabric~\cite{geant-dtn}.
 
 \begin{contractbox}[Network layer]
@@ -81,9 +82,10 @@ architecture, must:
     the decisions emitted by \trchap{ch:policy}{};
   \item provide (or document an architectural decision against) a
     high-throughput research-data path not penalised by the general
-    stateful-filtering perimeter --- a \gls{sciencedmz}, an \gls{nren}
-    dedicated circuit or lightpath, a dedicated-overlay
-    (LHCONE-style) connection, or a tuned Data-Transfer-Node
+    stateful-filtering perimeter --- a \gls{sciencedmz}, a dedicated
+    circuit or lightpath operated by the institution's \gls{nren},
+    a dedicated overlay
+    (research-community L3VPN) connection, or a tuned Data-Transfer-Node
     fabric~\cite{geant-dtn} --- kept identity- and posture-attached,
     IDS-monitored, policy-governed and flow-mirrored to observability
     (the stateful firewall is bypassed, not the trust model).
@@ -127,19 +129,19 @@ protected by IDS and access-control lists rather than by stateful
 firewalling; flows are mirrored to the observability layer.
 \end{instantiationbox}
 
-\paragraph{European and NREN-operated realisations.} The same function
-is realised in Europe and at global scale through NREN- and
+\paragraph{Research-network-operated realisations.} The same function
+is realised at national and global scale through research-network- and
 experiment-operated dedicated paths rather than a campus-perimeter
-enclave: \gls{geant}~\cite{geant} and the national networks provide
-dedicated circuits and lightpaths, and the LHC community operates the
-LHC Optical Private Network and the LHCONE L3VPN
-overlay~\cite{cern-lhcone, cern-wlcg} --- a dedicated, segmented
-research-data fabric connecting CERN and the WLCG tiers. The
-performance-measurement component, perfSONAR~\cite{perfsonar}, is
-co-maintained by \gls{geant}, ESnet and Internet2 and is common to all
-of these realisations. The contract of \S\ref{sec:nw-contract} is
-satisfied by any of them; the Science DMZ is the open campus-scale
-reference, not the only form.
+enclave: the regional and national \glsshort{nren}s
+provide dedicated circuits and lightpaths, and large research
+collaborations operate dedicated optical private networks and L3VPN
+overlays~\cite{cern-lhcone, cern-wlcg} --- a dedicated, segmented
+research-data fabric connecting the originating facility and its
+distributed data tiers. The performance-measurement component,
+perfSONAR~\cite{perfsonar}, is co-maintained by the major
+\glsshort{nren}s and is common to all of these realisations. The
+contract of \S\ref{sec:nw-contract} is satisfied by any of them; the
+Science DMZ is the open campus-scale reference, not the only form.
 
 \paragraph{Zone catalogue.} The reference catalogue, adapted from
 established practice in research-intensive institutions, includes
@@ -176,37 +178,39 @@ Management     & Reachable only from administrative jump hosts; audited at every
 is the most demanding of the layer chapters in terms of skills: it
 would typically require network engineering (VLAN, VRF, BGP), Linux
 administration (FreeRADIUS, OvS), and a working command of the
-policy layer (\trchap{ch:policy}{}). For an R1 institution, three
-to five engineers shared with adjacent duties is an indicative
-envelope; actual figures vary with the campus footprint and the
-research-network mission. The labour market is deep at the level of
+policy layer (\trchap{ch:policy}{}). For a research-intensive
+institution, a small team of engineers shared with adjacent duties
+is an indicative envelope; actual figures vary with the campus
+footprint and the research-network mission. The labour market is
+deep at the level of
 standard protocols and narrower at the level of integrating them
 into a TAC-aware attachment service.
 
-\begin{realworldbox}[ESnet Science DMZ and SUNet]
-\noindent The Science DMZ pattern was developed at Energy Sciences
-Network (ESnet, Lawrence Berkeley National Laboratory) and is the
+\begin{realworldbox}[Science DMZ adoption at scale]
+\noindent The Science DMZ pattern was developed within the
+high-performance research-networking community and is the
 subject of detailed public documentation. The pattern has been
 implemented at a number of research-intensive universities and at
-CERN at the experimental boundaries. Large university networks
-(Stanford SUNet among the frequently cited examples) would
-typically operate multi-zone architectures with explicit security
-profiles per zone, using a combination of proprietary and open
-components --- the brownfield hybrid pattern that this Reference's
+large-facility experimental boundaries. Large university networks
+would typically operate multi-zone architectures with explicit
+security profiles per zone, using a combination of proprietary and
+open components --- the brownfield hybrid pattern that this Reference's
 playbook anticipates. Specific zoning details and current deployment
 status of any named institution should be verified against current
 public documentation before being cited.
 \end{realworldbox}
 
-\begin{realworldbox}[CERN LHCOPN/LHCONE and GÉANT]
-\noindent At European and global scale the same need is met by NREN-
-and experiment-operated dedicated networks rather than by a campus
-enclave. The LHC Optical Private Network (CERN to the WLCG Tier-1s)
-and the LHCONE L3VPN overlay (Tier-1/Tier-2
-any-to-any)~\cite{cern-lhcone, cern-wlcg} carry LHC data on a
-dedicated, segmented fabric; \gls{geant}~\cite{geant} provides the
-backbone and dedicated-circuit services on which the European NRENs
-build, and the GÉANT testbed work on Data Transfer
+\begin{realworldbox}[Experiment-operated optical private networks and research backbones]
+\noindent At national and global scale the same need is met by
+research-network- and experiment-operated dedicated networks rather
+than by a campus enclave. A large-collaboration optical private
+network (originating facility to the principal data tiers) and a
+companion L3VPN overlay (any-to-any between the data
+tiers)~\cite{cern-lhcone, cern-wlcg} carry experiment data on a
+dedicated, segmented fabric; the regional and national
+\glsshort{nren}s~\cite{geant} provide the backbone and
+dedicated-circuit services on which member networks build, and
+research-network testbed work on Data Transfer
 Nodes~\cite{geant-dtn} addresses the same high-throughput transfer
 problem at the host level. These realise the same contract function as
 the Science DMZ, organised as a managed dedicated network rather than

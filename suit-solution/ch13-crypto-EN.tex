@@ -69,28 +69,32 @@ incidents whose remediation is institution-wide.
 \end{contractbox}
 
 %-----------------------------------------------------------------------------
-\section{Reference instantiation: step-ca + Vault + SoftHSM or Nitrokey HSM}
+\section{Reference instantiation: open-source ACME CA + secrets-management platform + software or hardware HSM}
 \label{sec:cr-reference}
 
 \begin{instantiationbox}[Cryptographic services]
-\noindent\textbf{Topology.} \texttt{step-ca}~\cite{step-ca}
-(Smallstep) operates the institutional certificate authority,
+\noindent\textbf{Topology.} An open-source ACME-capable certificate
+authority --- for example \texttt{step-ca}~\cite{step-ca}
+(Smallstep) --- operates the institutional certificate authority,
 exposing ACME for machine issuance and standard interfaces for
-human-driven workflows. HashiCorp Vault~\cite{vault} provides secrets
-management with the Transit engine
-for envelope encryption (consumed by \trchap{ch:storage}{}) and
-PKI engine as a complementary issuance path. The trust anchor of
-the CA hierarchy is held in an HSM exposed through PKCS\#11: the
-reference choices are SoftHSM~\cite{softhsm} for non-production environments and
-a hardware HSM (Nitrokey HSM, YubiHSM, or comparable) for
+human-driven workflows. An open-source secrets-management platform
+--- for example HashiCorp Vault~\cite{vault} --- provides secrets
+management with an envelope-encryption (transit) engine
+(consumed by \trchap{ch:storage}{}) and
+a PKI engine as a complementary issuance path. The trust anchor of
+the CA hierarchy is held in an HSM exposed through PKCS\#11:
+representative choices are a software HSM
+(such as SoftHSM~\cite{softhsm}) for non-production environments and
+a hardware HSM (such as Nitrokey HSM, YubiHSM, or comparable) for
 production. For HYOK live-path operation, the storage layer's
 encryption requests are forwarded to the HSM through a thin
 PKCS\#11 broker that the institution operates.
 \end{instantiationbox}
 
 \paragraph{Operational considerations.} The reference instantiation
-would typically require a small dedicated team --- indicatively one
-to two engineers shared with the security and identity teams ---
+would typically require a small dedicated staffing
+allocation --- a fractional engineering capacity shared with the
+security and identity teams, sized to the institution's scale ---
 plus institutional governance for the CA hierarchy (root rotation,
 intermediate rotation, revocation procedures). The principal
 recurring effort is operational discipline rather than ongoing
@@ -195,7 +199,7 @@ instantiations.}
   >{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X%
 }
 \toprule
-Dimension & Reference (step-ca + Vault + HSM) & AD CS + commercial HSM & External CA via ACME \\
+Dimension & Reference (open-source CA + secrets platform + HSM) & AD CS + commercial HSM & External CA via ACME \\
 \midrule
 Data          & 3 Robust      & 2 Established & 2 Established \\
 Technical     & 3 Robust      & 2 Established & 2 Established \\
@@ -224,11 +228,14 @@ and regulatory context.
 \noindent The cryptographic-services layer is the
 trust-anchor and key-custody substrate. It is the principal
 anchor of NIS2~Art.~21(2)(h) (cryptography policies and
-procedures) and contributes to \gls{gdpr}~Art.~32(1)(a)
-(pseudonymisation and encryption). It is also the
-operational counterpart of eIDAS~2 trust services
-(qualified electronic signatures, seals and time stamps,
-when the institution provides them). The layer
+procedures) and contributes to the applicable data
+protection regime's encryption and pseudonymisation
+obligations (in the European Union, GDPR~Art.~32(1)(a)).
+It is also the operational counterpart of the applicable
+electronic-identification and trust-services regime
+(in the European Union, eIDAS~2: qualified electronic
+signatures, seals and time stamps, when the institution
+provides them). The layer
 operationalises 27001~A.8.24 (use of cryptography) and
 contributes to NIST CSF \textsf{PROTECT} (PR.DS --- data
 security, encryption at rest and in transit). Detailed

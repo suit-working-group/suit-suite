@@ -106,7 +106,7 @@ any volume bound to the workload.
 
 \paragraph{Existing workloads.} A retrospective labelling
 exercise classifies the existing workload estate. The exercise is
-typically run faculty-by-faculty or service-by-service, with a
+typically run unit-by-unit or service-by-service, with a
 nominated classification owner per cohort. Workloads remain
 operational throughout, with an interim default (typically the
 most permissive classification consistent with the workload's
@@ -133,31 +133,35 @@ provisioned per classification class as they are needed.
 Indicative duration is four to six months.
 
 %-----------------------------------------------------------------------------
-\section{Trajectory: brownfield Microsoft-centric}
+\section{Trajectory: brownfield dominant-suite-centric}
 \label{sec:w8-brownfield-ms}
 
-For institutions whose compute estate is dominated by Microsoft
-products (Azure-aligned tenancies, Microsoft 365 workloads,
-VMware substrates with Windows-heavy clusters), Wave~8 brings
-classification to the visible workload boundary while accepting
-that some Microsoft-internal workloads remain partly opaque.
+For institutions whose compute estate is dominated by a single
+proprietary vendor suite (public-cloud tenancies aligned to that
+vendor, the vendor's productivity and collaboration workloads,
+virtualisation substrates with vendor-heavy clusters), Wave~8
+brings classification to the visible workload boundary while
+accepting that some vendor-internal workloads remain partly
+opaque.
 
 \paragraph{Pattern.} The retrospective labelling targets the
 workloads visible to the institution's provisioning surface ---
 virtual machines under institutional management, containers
-under Kubernetes the institution operates, research workspaces.
-Microsoft 365 workloads (mailboxes, document repositories,
-Teams workspaces) are addressed at the application level rather
-than at the workload level, with classification expressed as
-sensitivity labels integrated with Microsoft Information
-Protection where the institution has adopted it.
+under the institution's container-orchestration platform,
+research workspaces. The dominant suite's productivity workloads
+(mailboxes, document repositories, collaboration workspaces) are
+addressed at the application level rather than at the workload
+level, with classification expressed as sensitivity labels
+integrated with the incumbent identity-and-productivity suite
+vendor's information-protection capability where the institution
+has adopted it.
 
-\paragraph{Cluster-separation under Microsoft estate.} VMware-
-based or Azure-Stack-based clusters that host workloads of mixed
-classifications have a documented separation plan. The plan
-typically aligns with the next infrastructure refresh cycle or
-with a new cluster's provisioning, rather than with disruptive
-mid-cycle migration.
+\paragraph{Cluster-separation under a dominant-suite estate.}
+Virtualisation-based or vendor-private-cloud clusters that host
+workloads of mixed classifications have a documented separation
+plan. The plan typically aligns with the next infrastructure
+refresh cycle or with a new cluster's provisioning, rather than
+with disruptive mid-cycle migration.
 
 \paragraph{Indicative duration.} Twelve to twenty-four months,
 dominated by the retrospective labelling and by the cluster-
@@ -167,24 +171,27 @@ separation schedule.
 \section{Trajectory: brownfield hybrid}
 \label{sec:w8-brownfield-hybrid}
 
-For institutions with a multi-vendor compute estate (OpenStack
-plus VMware plus public-cloud burst, with a mix of Kubernetes
-clusters across faculties), Wave~8's principal effort is the
+For institutions with a multi-vendor compute estate (an
+open-source private cloud plus a proprietary virtualisation
+platform plus public-cloud burst, with a mix of
+container-orchestration clusters across organisational units),
+Wave~8's principal effort is the
 \emph{normalisation} of classification across these substrates.
 
 \paragraph{Pattern.} A common classification metadata interface
 is established across the substrates: the same label vocabulary
-is applied whether a workload runs on OpenStack, on VMware, or
+is applied whether a workload runs on the open-source private
+cloud, on the proprietary virtualisation platform, or
 in a cloud burst. The workload-context events of
 \trchap{ch:compute}{} carry the classification consistently;
 the storage labels of \trchap{ch:storage}{} match. The
 multi-vendor reality of the estate is preserved; the
 classification governance is unified.
 
-\paragraph{Faculty-level classification authorship.} In
+\paragraph{Unit-level classification authorship.} In
 research-intensive institutions, classification is often
-authored at faculty or research-project level rather than
-centrally. The wave operationalises this delegation: a
+authored at organisational-unit or research-project level rather
+than centrally. The wave operationalises this delegation: a
 classification owner per cohort, a central review for
 consistency, no central authority over individual labels.
 
@@ -241,9 +248,9 @@ excepted.
 
 \begin{realworldbox}[Workload classification at research institutions]
 \noindent Multi-tenant research-cloud architectures, such as
-those reported under the United States NSF ACCESS programme
-(Indiana Jetstream2 among the publicly documented examples) or
-within the European EGI federated cloud, illustrate
+those reported under large national research-computing
+allocation programmes or within continental-scale federated
+research clouds, illustrate
 classification-aware patterns at substantial scale. The mapping
 of those patterns to a single-institution context is non-trivial
 and would benefit from the institution's own pilot work
@@ -255,10 +262,11 @@ and would benefit from the institution's own pilot work
 \label{sec:w8-regulatory}
 
 \noindent Wave~8 brings classified workloads under the
-attestation discipline at scale. It contributes to
-\gls{gdpr}~Art.~32 (security of processing applied to the
-workload tier) and Art.~5(1)(c) (data minimisation through
-classification-aware tiering). It operationalises
+attestation discipline at scale. It contributes to the
+applicable data-protection regime's security-of-processing
+obligation (e.g.\ \gls{gdpr}~Art.~32, applied to the workload
+tier) and its data-minimisation principle (e.g.\ Art.~5(1)(c),
+realised through classification-aware tiering). It operationalises
 NIS2~Art.~21(2)(c) (business continuity through declarative
 redeployability) and (e) (security in development and
 maintenance, through SLSA-level supply-chain attestations).

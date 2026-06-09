@@ -82,7 +82,7 @@ both. The architecture commits to the properties; the choice of
 composition belongs to the institution.
 
 %-----------------------------------------------------------------------------
-\section{Reference instantiation: Argo Workflows + Crossplane + GitOps}
+\section{Reference instantiation: declarative GitOps reconciliation with composable workflows}
 \label{sec:or-reference}
 
 \begin{instantiationbox}[Orchestration plane]
@@ -90,16 +90,20 @@ composition belongs to the institution.
 declarative target state of the institution's composed
 infrastructure --- network attachment policies, compute namespaces,
 storage bindings, observability collectors, identity client
-registrations. A reconciler (Argo~CD~\cite{argocd} or Flux) ensures that the
-running state converges on the repository state. Workflow logic
-that does not naturally fit the declarative model --- for example,
-the multi-step provisioning of a research workspace that needs
-explicit ordering and conditional branches --- is expressed in
-Argo~Workflows~\cite{argo-workflows}, with workflow definitions also
-held in the GitOps repository.
-Crossplane~\cite{crossplane} provides the infrastructure-as-code layer
-that lets the same declarative model reach beyond Kubernetes
-itself, into OpenStack, into the network layer's RADIUS
+registrations. A declarative reconciler --- of which open-source
+continuous-delivery controllers such as Argo~CD~\cite{argocd} or
+Flux are representative --- ensures that the running state converges
+on the repository state. Workflow logic that does not naturally fit
+the declarative model --- for example, the multi-step provisioning
+of a research workspace that needs explicit ordering and conditional
+branches --- is expressed in a container-native workflow engine, of
+which Argo~Workflows~\cite{argo-workflows} is a representative
+open-source instance, with workflow definitions also held in the
+GitOps repository. A control-plane provider framework --- the
+open-source Crossplane~\cite{crossplane} project being one such
+instance --- provides the infrastructure-as-code layer that lets the
+same declarative model reach beyond Kubernetes itself, into the
+virtualisation platform, into the network layer's RADIUS
 configuration, and into the storage layer's volume management. TAC
 activation events from the policy layer are received as
 CloudEvents and trigger either a reconciliation or a workflow,
@@ -111,9 +115,9 @@ conformant to the canonical schema.
 is the most demanding of the layer chapters in terms of
 \emph{integration} skills, although each individual component is
 broadly skilled. The principal recurring effort is composition:
-keeping the GitOps repository, the Argo workflow corpus, and the
-Crossplane providers consistent with each other and with the
-upstream layers they touch. An indicative envelope, for an R1
+keeping the GitOps repository, the workflow corpus, and the
+control-plane provider definitions consistent with each other and
+with the upstream layers they touch. An indicative envelope, for an R1
 institution, would be on the order of two to four engineers shared
 with the platform-engineering function. The labour market is broad
 for the individual components and currently narrow for their
@@ -129,9 +133,13 @@ orchestration plane, even if each individual component remains
 replaceable.
 
 \begin{realworldbox}[Orchestration patterns in industrial and research settings]
-\noindent The CNCF ecosystem (Argo, Flux, Crossplane, Tekton,
-Temporal) is broadly deployed in industrial settings, with
-publicly available reference architectures from CNCF members.
+\noindent The cloud-native orchestration ecosystem --- the family of
+open-source GitOps reconcilers, container-native workflow engines,
+control-plane provider frameworks, pipeline engines, and durable
+workflow engines, of which Argo, Flux, Crossplane, Tekton, and
+Temporal are representative members --- is broadly deployed in
+industrial settings, with publicly available reference architectures
+from the projects' member organisations.
 Specific academic deployments tend to combine these patterns with
 institution-specific composition, and are less extensively
 documented in public fora. The phase-2 international university
@@ -226,7 +234,7 @@ instantiations.}
   >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
 }
 \toprule
-Dimension & Reference (Argo + Crossplane + GitOps) & ITSM + Ansible & Custom on Temporal \\
+Dimension & Reference (GitOps + control-plane providers) & ITSM + config-management & Custom durable-workflow engine \\
 \midrule
 Data          & 3 Robust      & 2 Established & 3 Robust       \\
 Technical     & 3 Robust      & 1--2 Partial  & 2 Established  \\

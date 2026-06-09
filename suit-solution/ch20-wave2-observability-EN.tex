@@ -71,9 +71,11 @@ Beyond Wave~0, four operational conditions strengthen Wave~2:
     schedule is keyed on it;
   \item the existing SIEM (or the explicit absence thereof) is
     acknowledged, with its contractual envelope documented;
-  \item the security operations function --- whether internal,
-    contracted, or distributed --- is identified, since the wave
-    will produce events that the function will consume.
+  \item the security operations function and its staffing profile
+    --- whether delivered by an internal team, by a contracted
+    managed-security provider, or by a distributed arrangement
+    shared across units --- is identified, since the wave will
+    produce events that the function will consume.
 \end{itemize}
 
 %-----------------------------------------------------------------------------
@@ -87,8 +89,9 @@ to receive its incumbent feed.
 
 \paragraph{Collector layer in shadow mode.} The new collectors are
 deployed at the event-producing sources and forward to the new
-ingestion pipeline (Vector or comparable, then Kafka or
-equivalent). Initially, the events flow only into a development or
+ingestion pipeline (an open-source log-routing agent feeding an
+open-source distributed event-streaming bus). Initially, the
+events flow only into a development or
 staging analytical store, where the institution exercises the
 canonical schema, the retention policy, and the correlation
 patterns. The production analytical store --- whether it remains
@@ -121,15 +124,18 @@ absent.
 
 For institutions whose existing observability is dominated by
 Microsoft Sentinel and Log Analytics, Wave~2 introduces an
-OpenTelemetry collector layer upstream of Sentinel, without
+open-source collector layer, built on a vendor-neutral
+telemetry-collection standard, upstream of Sentinel, without
 displacing Sentinel's role.
 
-\paragraph{Pattern.} Vector or OpenTelemetry collectors are
-deployed at every event-producing source (identity, network,
-endpoint, compute). The events are converted to the canonical TAC
+\paragraph{Pattern.} Open-source collectors, such as those built on
+a vendor-neutral telemetry-collection standard, are deployed at
+every event-producing source (identity, network, endpoint,
+compute). The events are converted to the canonical TAC
 schema and forwarded to two destinations: Sentinel (which
 continues its incumbent role for the operational SOC) and a
-parallel open-source store (OpenSearch, Loki) for portability and
+parallel open-source store (an open-source search-and-analytics
+engine or an open-source log-aggregation store) for portability and
 for the retention horizons that Sentinel's pricing makes
 unattractive. The institution retains Sentinel for the
 analytical-depth use cases and acquires the data-portability
@@ -161,10 +167,12 @@ or a comparable per-volume-priced analytical store, Wave~2
 introduces the same collector layer upstream of Splunk, with the
 same parallel open-source store, for analogous reasons.
 
-\paragraph{Pattern.} OpenTelemetry collectors deployed at every
+\paragraph{Pattern.} Open-source collectors built on a
+vendor-neutral telemetry-collection standard deployed at every
 event-producing source, with conversion to the canonical TAC
 schema. The events flow to Splunk (incumbent SOC store) and to a
-parallel OpenSearch or Loki store. Sampling decisions become
+parallel open-source search-and-analytics engine or log-aggregation
+store. Sampling decisions become
 tactical at the collector layer (D12.8: sample by TAC session, not
 by event), reducing the per-volume exposure to Splunk without
 losing the activity that the institution has chosen to make
@@ -232,12 +240,13 @@ verified.
 \noindent Several research-intensive institutions are reported to
 operate observability pipelines combining open-source collectors
 with commercial analytical stores. Specific architectures
-discussed in NREN community fora (ETH Zürich's audit pipeline
-patterns, CERN's security operations environment, regional
-NREN-CSIRT deployments) would benefit from being consulted in
-their current published form before being cited; the patterns
-described in this chapter are consistent with those reported in
-those settings.
+discussed in the fora of the national research and education
+network and its associated security incident response team, and
+in the security operations environments of large research
+infrastructures, would benefit from being consulted in their
+current published form before being cited; the patterns described
+in this chapter are consistent with those reported in those
+settings.
 \end{realworldbox}
 
 %-----------------------------------------------------------------------------
@@ -250,9 +259,13 @@ of processing, derivable from the canonical TAC schema), Art.~32
 (security of processing, monitored through measurable
 indicators) and Art.~33--34 (breach notification, supported by
 the timeline-reconstruction substrate produced by the wave). It
-also supports NIS2~Art.~21(2)(b) (incident handling) and
-prepares the ground for Art.~23 reporting timelines, fully
-exercised at Wave~7. The wave is the principal anchor of
+also supports the incident-handling obligations of the
+applicable national cybersecurity baseline regime --- the
+national transposition of the NIS2 Directive where it applies ---
+under its incident-handling provision (NIS2~Art.~21(2)(b)) and
+prepares the ground for that regime's incident-reporting
+timelines (NIS2~Art.~23), fully exercised at Wave~7. The wave
+is the principal anchor of
 27001~A.8.15 (logging) and A.8.16 (monitoring activities) and
 of NIST CSF \textsf{DETECT} (DE.CM, DE.AE). Detailed mapping in
 \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},

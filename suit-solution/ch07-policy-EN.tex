@@ -129,8 +129,9 @@ learning curve is typically reported in weeks rather than days. The
 principal recurring effort is policy testing: each policy is
 unit-tested against representative request patterns, and the test
 suite is maintained alongside the policy corpus. The operational
-team would typically be small --- indicatively one to two engineers
-shared across other duties for an R1 institution --- but the
+team would typically be small --- indicatively a fraction of the
+institution's platform-engineering staffing profile, shared across
+other duties --- but the
 institutional skill investment remains significant.
 
 \paragraph{Decision log schema.} The schema includes, at minimum:
@@ -154,8 +155,8 @@ such as OPA address overlapping concerns at different levels:
 the former is a sector-specific architecture, the latter a
 general decision engine; their combination remains a relatively
 open area for academic deployments. Industrial OPA deployments
-publicly described at organisations including Netflix, Capital
-One and Pinterest demonstrate the engine at scale; their
+publicly described by large-scale technology and financial-services
+organisations demonstrate the engine at scale; their
 transposition to academic settings is conditional on the
 institution's authorisation profile. The phase-2 international
 university network anticipated by this Reference would be one of
@@ -207,8 +208,9 @@ prefers a request-response engine.
 \begin{alternativebox}[Native IdP authorisation]
 \noindent The institution does not introduce a separate policy
 decision point. Authorisation rules are expressed in the identity
-provider's own configuration: Conditional Access expressions for
-Microsoft Entra~ID, authorisation policies and scopes for Keycloak.
+provider's own configuration: conditional-access expressions for
+the institution's incumbent proprietary identity suite, authorisation
+policies and scopes for Keycloak.
 The identity layer is also the policy layer.
 \end{alternativebox}
 
@@ -221,8 +223,8 @@ and the operational burden is lower.
 \paragraph{Where it fails.} TAC-aware decisions require composing
 multiple signals --- subject attributes, posture, resource
 classification, time, location, environment --- in expressions whose
-complexity quickly exceeds what a Conditional Access language
-accommodates without becoming unmaintainable. More fundamentally,
+complexity quickly exceeds what a proprietary conditional-access
+language accommodates without becoming unmaintainable. More fundamentally,
 encoding the policy corpus in the identity provider couples it to
 that provider: an exit from the identity provider becomes an exit
 from the policy plane as well. Native authorisation is a viable
@@ -282,12 +284,15 @@ move available in the control plane.
 \label{sec:po-regulatory}
 
 \noindent The policy layer is the per-request decision point that
-operationalises \gls{gdpr}~Art.~25 (data protection by design) and
-contributes to Art.~32 (access-control effectiveness). Under
-NIS2~Art.~21(2)(a) (risk-analysis and information-system security
-policy) and (i) (access-control policies) it is the locus where
-the institutional risk posture is enforced uniformly. Under the EU
-AI Act, Art.~5 (prohibited practices) and Art.~50 (transparency)
+operationalises the applicable data-protection regime's
+data-protection-by-design obligation and contributes to its
+access-control-effectiveness obligation. Under the applicable
+cybersecurity-baseline regime --- its risk-analysis and
+information-system security-policy requirement and its
+access-control-policy requirement --- it is the locus where
+the institutional risk posture is enforced uniformly. Under the
+applicable AI regulation, its prohibited-practices and
+transparency provisions
 admit a policy-plane enforcement: rules that gate AI-related TACs
 on context labelling and on prohibited-use classification. The
 layer operationalises 27001~A.5.15 (access control), A.5.18
@@ -335,7 +340,8 @@ it against the recorded policy version; the result must match.
 
 \begin{pitfallbox}[Hidden coupling to identity-provider attributes]
 \noindent Policies that reference identity-provider-specific
-attributes (e.g.\ Entra-specific extension claims) lose portability
+attributes (e.g.\ vendor-specific extension claims from a
+proprietary identity suite) lose portability
 when the identity provider is replaced. The mitigation is to map the
 identity-provider attributes to a stable institutional schema before
 they reach the policy plane, and to author policies against the
@@ -351,5 +357,5 @@ mitigation is to delegate authoring rights with code review:
 application owners propose policies for their resources; the central
 team reviews for consistency and conflicts. The model mirrors the
 delegation pattern that successful federated IT governance has used
-for two decades in research-intensive institutions.
+over decades across higher-education and research institutions.
 \end{pitfallbox}

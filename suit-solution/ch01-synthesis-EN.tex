@@ -176,8 +176,8 @@ Financial
 \addlinespace
 Operational
   & Are the skills required to operate the infrastructure
-    available locally or through trusted partners (NREN, peer
-    institutions)? \\
+    available locally or through trusted partners (the national
+    research and education network, peer institutions)? \\
 \addlinespace
 Institutional
   & Can the institution decline a supplier roadmap change without
@@ -299,7 +299,7 @@ Layer & Interface contract (standards) & Open reference \\
 \midrule
 Identity        & OIDC, SAML2, SCIM 2.0, federation metadata  & Keycloak + SCIM + eduGAIN \\
 Policy          & OPA REST or Cedar evaluation API            & OPA + bundle server + decision log \\
-Network         & RADIUS, NETCONF/YANG, BGP/EVPN, IPFIX       & VLAN/VRF + FreeRADIUS + Open vSwitch + research-data path (Science DMZ / NREN circuit) \\
+Network         & RADIUS, NETCONF/YANG, BGP/EVPN, IPFIX       & VLAN/VRF + FreeRADIUS + Open vSwitch + research-data path (Science DMZ / national research and education network circuit) \\
 Compute         & Kubernetes API, OpenStack API, OCI, SLSA    & OpenStack + Kubernetes + Harbor + SLSA \\
 Storage         & S3 API, KMIP, NFS v4.1                      & Ceph + Vault + label-based access \\
 Endpoint        & DDM/DEP, MS-MDM, declarative Linux config   & Munki + osquery + Ansible + MicroMDM (gap on iOS/Android at scale acknowledged) \\
@@ -329,9 +329,9 @@ that takes any institution from its current brownfield position
 toward the target architecture. Ten waves (Wave~0 to Wave~9)
 unfold under a documented dependency graph. Each wave declares
 its goal, pre-requisites, coexistence pattern, three principal
-trajectories (greenfield, brownfield Microsoft-centric, brownfield
-hybrid), reversibility criteria, and exit criteria gated by the
-conformance suite.
+trajectories (greenfield, brownfield with a dominant proprietary
+productivity suite, brownfield hybrid), reversibility criteria,
+and exit criteria gated by the conformance suite.
 
 \paragraph{Three pace options.} The playbook admits three reference
 pace options --- 5-year compressed, 7-year balanced (recommended
@@ -425,7 +425,7 @@ Wave & Goal & Principal exit criterion \\
 2 — Observability          & Pre-instrumentation in shadow mode.
                            & Source coverage; canonical schema enforced. \\
 \addlinespace
-3 — Network                & Zone catalogue, RADIUS attachment, high-throughput research-data path (Science DMZ or NREN circuit).
+3 — Network                & Zone catalogue, RADIUS attachment, high-throughput research-data path (Science DMZ or national research and education network circuit).
                            & Network conformance subset passes. \\
 \addlinespace
 4 — Policy plane           & PDP/PEP introduced in shadow before enforcing.
@@ -480,7 +480,7 @@ each answered \textbf{Y} (capacity established or robust) or
     capped?
   \item \textbf{Operational.} Are the skills for each critical
     layer present in the institution or accessible through its
-    NREN and peer network?
+    national research and education network and peer network?
   \item \textbf{Institutional.} Can the institution decline a
     supplier roadmap change without contractual penalty for the
     current procurement period?
@@ -492,7 +492,8 @@ sovereignty target; the playbook is then used as a checklist
 rather than as a roadmap. Mixed answers indicate the dominant
 trajectory: predominantly N answers on Data, Technical, and
 Institutional with a Y on Operational suggest a brownfield
-Microsoft-centric profile; mixed answers across all dimensions
+profile dominated by a single proprietary productivity suite;
+mixed answers across all dimensions
 suggest a brownfield hybrid profile; predominantly N answers
 across the board suggest that Wave~0 (governance and inventory)
 is the appropriate first step before trajectory selection.
@@ -513,7 +514,7 @@ catalogue, with the methodological caveats, is in
   \item \institution{CERN} --- federated identity at scale; experimental network isolation patterns.
   \item \institution{MIT} --- Information Technology Governance Committee (ITGC); federated IT pattern across institutional and college units.
   \item \institution{Stanford} --- SUNet multi-zone segmentation; UIT and SRCC.
-  \item \institution{ETH Z\"urich} --- Administrator Rights Agreement; ISG federated organisation.
+  \item \institution{ETH Z\"urich} --- a binding administrator-rights agreement (a contractual, proportionate transfer of root-access responsibility, on the ETH Z\"urich model); federated IT-services organisation.
   \item \institution{Cambridge} --- University Information Services (UIS); collegiate model with the University Data Network (UDN) connecting central services and the institutions of the Collegiate University.
   \item \institution{Indiana University} --- Jetstream2 research-cloud architecture (NSF ACCESS).
   \item \institution{NUS Singapore} --- Asia-Pacific federation patterns.
@@ -526,9 +527,10 @@ catalogue, with the methodological caveats, is in
 remain thinly documented in public institutional sources: policy
 plane deployments at academic scale; TAC-aware audit pipelines;
 sovereignty grid practice as a structured five-dimension
-instrument applied across an institutional portfolio. The phase-2
-international university network anticipated by this Reference is
-the locus where these gaps are intended to be closed.
+instrument applied across an institutional portfolio. The
+cross-institutional infrastructure-sovereignty programme of
+participating institutions anticipated by this Reference is the
+locus where these gaps are intended to be closed.
 
 %-----------------------------------------------------------------------------
 \section{How to use the rest of the Technical Reference}

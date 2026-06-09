@@ -173,11 +173,12 @@ S3-compatible object storage (consistent with
 \end{instantiationbox}
 
 \paragraph{Operational considerations.} The reference instantiation
-is operationally substantial: the Kafka ingest buffer, the
-OpenSearch cluster, and the cold-tier export pipeline each carry
-their own operational rhythm. An indicative envelope, for an R1
-institution operating the full pipeline, would be on the order of
-three to five engineers shared with the security operations
+is operationally substantial: the durable ingest buffer, the
+indexed-search cluster, and the cold-tier export pipeline each carry
+their own operational rhythm. An indicative envelope, for a
+research-intensive institution operating the full pipeline, would be
+the institution's observability staffing profile sized for the full
+pipeline and shared with the security operations
 function. The labour market is broad for the individual components
 and narrower for the integrated pipeline.
 
@@ -193,7 +194,8 @@ the commercial alternatives.
 \begin{realworldbox}[Audit pipeline precedents in academia]
 \noindent Public documentation of academic SIEM and observability
 pipelines is thinner than for identity or compute. Among what is
-available in NREN community fora, several research-intensive
+available in the research-and-education networking community and its
+CSIRT fora, several research-intensive
 institutions are reported to operate observability pipelines that
 combine open-source collectors with commercial analytical stores;
 the specific architectures should be confirmed against their own
@@ -315,14 +317,16 @@ make visible.
 \label{sec:ob-regulatory}
 
 \noindent The observability layer produces the records on which
-several regulatory obligations rest. Under the \gls{gdpr} it
-contributes to Art.~30 (records of processing, derivable from
-the canonical TAC schema), Art.~33--34 (breach notification,
-through detection and timeline reconstruction) and Art.~32
-(security of processing, through monitoring effectiveness).
-Under NIS2 it operationalises Art.~21(2)(b) (incident handling)
-and the Art.~23 reporting timelines (24-hour early warning,
-72-hour notification, one-month final report), with the audit
+several regulatory obligations rest. Under the applicable data
+protection regime it
+contributes to its records-of-processing obligation (derivable from
+the canonical TAC schema), its breach-notification obligations
+(through detection and timeline reconstruction) and its
+security-of-processing obligation (through monitoring effectiveness).
+Under the applicable cybersecurity baseline regime it
+operationalises the incident-handling requirement
+and the regime's incident-reporting timelines (early warning,
+full notification, and final report), with the audit
 pipeline as the primary timeline-reconstruction substrate. The
 layer is the principal anchor of 27001~A.8.15 (logging) and
 A.8.16 (monitoring activities) and contributes to NIST CSF

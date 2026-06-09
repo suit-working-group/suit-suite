@@ -11,7 +11,7 @@
 % ----------------------------------------------------------------------------
 % Decisions registered in _coherence-EN.md:
 %   D21.1 brownfield trajectory labels mapped to network reality
-%   D21.2 cut-over per building/faculty/segment, not institution-wide
+%   D21.2 cut-over per building/organizational-unit/segment, not institution-wide
 %   D21.3 Science DMZ established in this wave
 %   D21.4 exit criteria reference Network conformance subset (D16.5)
 % ============================================================================
@@ -75,12 +75,13 @@ Beyond Wave~0, four operational conditions strengthen Wave~3:
     catalogue, with sufficient address space for the planned
     research and BYOD growth;
   \item a change-window agreement with the principal user
-    constituencies (faculties, research projects, administrative
-    services), since per-segment cut-over requires scheduled
+    constituencies (academic organizational units, research
+    projects, administrative services), since per-segment cut-over
+    requires scheduled
     downtime tolerable to those constituencies;
   \item an identified accountable team for the network operation,
-    with authority to coordinate across faculty IT functions where
-    those exist independently.
+    with authority to coordinate across organizational-unit IT
+    functions where those exist independently.
 \end{itemize}
 
 %-----------------------------------------------------------------------------
@@ -90,11 +91,13 @@ Beyond Wave~0, four operational conditions strengthen Wave~3:
 Wave~3 is the wave with the most spatially distributed coexistence
 in the playbook: the legacy flat network and the new zoned network
 operate together for as long as the institution requires, with the
-boundary of coexistence drawn at the building, the faculty, or the
-network segment level rather than at the institutional level.
+boundary of coexistence drawn at the building, the organizational
+unit, or the network segment level rather than at the institutional
+level.
 
-\paragraph{Cut-over by perimeter.} Each building, faculty, or
-segment is cut over to the new segmentation as a self-contained
+\paragraph{Cut-over by perimeter.} Each building, organizational
+unit, or segment is cut over to the new segmentation as a
+self-contained
 operation: the new zone is provisioned, the attachment service is
 configured, the flow telemetry is activated, and the segment is
 moved over. The remainder of the institution continues to operate
@@ -122,13 +125,13 @@ cut-over schedule.
 \label{sec:w3-greenfield}
 
 For institutions in a genuinely greenfield network position --- a
-new building, a new campus, a research-network refoundation --- the
+new building, a new site, a research-network refoundation --- the
 trajectory is direct: the zone catalogue is implemented from the
 start, the attachment service is the new RADIUS deployment, the
 Science DMZ is a separate fabric, and the gear is procured against
 the standard-interface contract. Indicative duration is six to
 nine months for a new building of moderate size; longer for
-campus-scale greenfield, in which case the trajectory is split
+site-scale greenfield, in which case the trajectory is split
 into staged sub-projects.
 
 %-----------------------------------------------------------------------------
@@ -173,14 +176,16 @@ windows that user constituencies tolerate.
 \label{sec:w3-brownfield-hybrid}
 
 For institutions whose network is multi-vendor --- often the
-result of acquisitions, faculty-level autonomy, or research-network
-specialisation --- Wave~3's principal task is to reconcile the
+result of acquisitions, organizational-unit-level autonomy, or
+research-network specialisation --- Wave~3's principal task is to
+reconcile the
 configuration model across vendors while preserving the existing
 fabric.
 
 \paragraph{Pattern.} The institution adopts a declarative
-configuration management layer (Ansible network modules,
-NetBox-driven configuration generation, or a comparable approach)
+configuration management layer (for example an
+infrastructure-automation toolchain or a source-of-truth-driven
+configuration generator, or a comparable approach)
 that emits NETCONF/YANG to each vendor and tolerates the residual
 vendor-specific syntax for the cases where the standard does not
 yet cover the configuration in question. The zone catalogue is
@@ -192,12 +197,13 @@ attachment behaviour are realised across the multi-vendor estate;
 flow telemetry is normalised at the collector layer (D12.3)
 regardless of the vendor's IPFIX dialect; the Science DMZ is
 established with the understanding that its specific gear may
-differ from the rest of the campus and that this is acceptable.
+differ from the rest of the estate and that this is acceptable.
 The configuration is brought under version control across vendors.
 
 \paragraph{What does not change.} The vendor mix itself is not
-changed by this wave. Faculty-level network autonomy, where it
-exists, is respected; the wave provides the institutional contract
+changed by this wave. Organizational-unit-level network autonomy,
+where it exists, is respected; the wave provides the institutional
+contract
 under which the autonomy operates, not a new central authority.
 
 \paragraph{Indicative duration.} Twelve to twenty-four months,
@@ -260,12 +266,14 @@ Berkeley National Laboratory) and adopted at a number of
 research-intensive universities, is one of the most extensively
 documented patterns in academic network architecture. Multi-zone
 campus segmentation is reported in various forms across large
-research-intensive universities (Stanford SUNet, Cambridge UDN,
-ETH Zürich among the institutions whose architectural choices
-have been discussed in academic and NREN community fora). At
-European and global scale the equivalent function is met by NREN- and
-experiment-operated dedicated networks --- GÉANT dedicated circuits
-and the CERN LHCOPN/LHCONE fabric~\cite{cern-lhcone} --- rather than
+research-intensive universities, among the institutions whose
+architectural choices have been discussed in academic and
+\gls{nren} community fora. At regional and
+global scale the equivalent function is met by \gls{nren}- and
+experiment-operated dedicated networks --- the regional and national
+research and education networks' dedicated
+circuits~\cite{geant} and the
+CERN LHCOPN/LHCONE fabric~\cite{cern-lhcone} --- rather than
 by a campus enclave. Specific deployment details should be verified
 against current public documentation when cited.
 \end{realworldbox}

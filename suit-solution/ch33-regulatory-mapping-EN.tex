@@ -59,10 +59,17 @@ introduced in the layer and wave chapters.
 
 \paragraph{Perimeter.} The regulations and frameworks covered are
 those most frequently encountered by research-intensive
-universities operating internationally: the EU \gls{gdpr}; the
-NIS2 Directive; the EU AI Act; the \emph{Schrems~II} judgement and
-the EDPB transfer guidelines that operationalise it; the NIST
-Cybersecurity Framework~2.0; eIDAS~2 (the renewed framework for
+universities operating internationally, presented here as one
+worked instantiation of the applicable regulatory regime that
+each adopting institution substitutes with its own. The worked
+instantiation comprises the applicable data-protection regime
+(here the EU \gls{gdpr}); the applicable cybersecurity baseline
+regime (here the NIS2 Directive); the applicable AI-governance
+regulation (here the EU AI Act); the cross-border data-transfer
+regime (here the \emph{Schrems~II} judgement and the EDPB transfer
+guidelines that operationalise it); the NIST Cybersecurity
+Framework~2.0; the applicable electronic-identification and
+trust-services regime (here eIDAS~2, the renewed framework for
 electronic identification and trust services); the ISO/IEC 27001 /
 27002 / 27005 management-system and risk-management family; and
 COBIT~2019 as a governance framework. The selection privileges
@@ -91,23 +98,30 @@ operationalisation column points to specific sections; multiple
 references appear when several layers contribute jointly.
 
 \paragraph{Scope of binding force.} Among the references covered,
-\gls{gdpr}, NIS2 and the AI Act are binding EU instruments;
-\emph{Schrems~II} is binding case law from the CJEU; eIDAS~2 is a
-binding regulation. NIST~CSF~2.0, ISO/IEC~27001 and COBIT~2019 are
-non-binding frameworks unless made binding by contract (a research
-funder requirement, a procurement clause) or by sectoral national
-transposition. The institution must read its own contracts and
-national legal framework alongside this chapter.
+the data-protection regime, the cybersecurity baseline regime and
+the AI-governance regulation are binding statutory instruments
+within their regime (in the worked instantiation, the \gls{gdpr},
+NIS2 and the AI Act); the cross-border data-transfer regime is
+binding authority (here \emph{Schrems~II} case law from the CJEU);
+the electronic-identification and trust-services regime is a
+binding regulation (here eIDAS~2). NIST~CSF~2.0, ISO/IEC~27001 and
+COBIT~2019 are non-binding frameworks unless made binding by
+contract (a research funder requirement, a procurement clause) or
+by sectoral national transposition. The institution must read its
+own contracts and national legal framework alongside this chapter.
 
 %-----------------------------------------------------------------------------
 \section{General Data Protection Regulation (GDPR)}
 \label{sec:rm-gdpr}
 
-The \gls{gdpr}~\cite{gdpr} establishes risk-based security and
-accountability obligations applicable to all European universities
-processing personal data. The provisions below are the most
-frequently invoked in IT architecture discussions; the mapping is
-not exhaustive.
+The applicable data-protection regime establishes risk-based
+security and accountability obligations applicable to any
+institution processing personal data; in the worked instantiation
+below this regime is the \gls{gdpr}~\cite{gdpr}. The provisions
+below are the most frequently invoked in IT architecture
+discussions; the mapping is not exhaustive, and an adopting
+institution reads its own data-protection regime in place of the
+worked instantiation.
 
 \begin{table}[H]
 \centering\small
@@ -162,10 +176,14 @@ independently.
 \section{NIS2 Directive}
 \label{sec:rm-nis2}
 
-The NIS2 Directive~\cite{nis2} applies to essential and important
-entities; whether a research-intensive university falls in scope
-depends on the national transposition (research is not in itself
-a covered sector but several university activities --- digital
+The applicable cybersecurity baseline regime applies to the
+classes of entity its scoping rules designate as in scope; in the
+worked instantiation below this regime is the NIS2
+Directive~\cite{nis2}, whose classification basis distinguishes
+essential and important entities. Whether a research-intensive
+university falls in scope depends on the applicable national
+transposition of that regime (research is not in itself a covered
+sector but several university activities --- digital
 infrastructure, education-as-a-public-service in some
 jurisdictions, hospital affiliations --- may bring the
 institution within scope). The provisions below are most
@@ -225,9 +243,9 @@ Art.~23 incident reporting (24h / 72h / 1m)
 \end{tabularx}
 \end{table}
 
-\paragraph{Cumulative argument.} The NIS2 risk-management
-provisions are designed to be read as an integrated set, not
-satisfied control by control. The architecture's contribution
+\paragraph{Cumulative argument.} The cybersecurity baseline
+regime's risk-management provisions are designed to be read as an
+integrated set, not satisfied control by control. The architecture's contribution
 should be presented in the institution's compliance argument as
 the technical foundation on which the organisational measures
 (policies, drills, third-party assessments) build.
@@ -236,8 +254,10 @@ the technical foundation on which the organisational measures
 \section{EU AI Act}
 \label{sec:rm-ai-act}
 
-The EU AI Act (Regulation 2024/1689) classifies AI systems by risk
-level and imposes graduated obligations. For a university, three
+The applicable AI-governance regulation classifies AI systems by
+risk level and imposes graduated obligations; in the worked
+instantiation below this regulation is the EU AI Act (Regulation
+2024/1689). For a university, three
 contexts most frequently apply: research, testing and development of AI prior to placing it on the
 market or putting it into service (Art.~2(8)), alongside AI
 developed for the sole purpose of scientific research and
@@ -298,14 +318,16 @@ governance body would be expected to maintain this distinction.
 \section{Schrems~II and the cross-border data posture}
 \label{sec:rm-schrems2}
 
-The CJEU's \emph{Schrems~II} judgement~\cite{schrems2020}
-clarified that contractual safeguards alone do not satisfy data
-sovereignty when the data falls under a third-country
-surveillance regime. The EDPB transfer
-guidelines~\cite{edpb-guidelines} operationalise the consequences.
-The architecture's contribution to the post-\emph{Schrems~II}
-posture is concentrated in the data dimension of the sovereignty
-grid and in the storage and cryptographic layers.
+The applicable cross-border data-transfer regime governs when
+contractual safeguards alone do not satisfy data sovereignty
+because the data falls under a third-country surveillance regime;
+in the worked instantiation this regime is the CJEU's
+\emph{Schrems~II} judgement~\cite{schrems2020} together with the
+EDPB transfer guidelines~\cite{edpb-guidelines} that operationalise
+its consequences. The architecture's contribution to the
+resulting cross-border posture is concentrated in the data
+dimension of the sovereignty grid and in the storage and
+cryptographic layers.
 
 \begin{table}[H]
 \centering\small
@@ -388,9 +410,11 @@ Function & Architectural contribution & Operationalised in \\
 \section{eIDAS~2 and the trust-services dimension}
 \label{sec:rm-eidas2}
 
-The renewed framework for electronic identification and trust
-services (Regulation 2024/1183 amending Regulation 910/2014) is
-relevant to research-intensive universities in three ways:
+The applicable electronic-identification and trust-services regime
+is relevant to research-intensive universities in three ways; in
+the worked instantiation this regime is the renewed EU framework
+for electronic identification and trust services (Regulation
+2024/1183 amending Regulation 910/2014). The three ways are:
 participation in the EU Digital Identity Wallet ecosystem when
 issuing or relying on academic credentials; provision of
 qualified electronic signatures for institutional acts; and the
@@ -622,16 +646,19 @@ and sectoral regulations frequently add provisions that this
 chapter does not record:
 
 \begin{itemize}[leftmargin=1.5em,nosep]
-  \item \textbf{NIS2 transposition.} Member States vary in the
-    sectoral scope of NIS2 (whether higher-education institutions
-    are designated essential or important entities, whether
-    research is in scope), in the supervisory authority designated,
-    and in the incident-reporting thresholds and channels.
-  \item \textbf{GDPR national supplements.} Several Member States
-    have adopted national data-protection acts that operate
-    alongside the GDPR, with provisions on research exemptions,
-    employee monitoring, and identifiers that the architecture
-    must respect.
+  \item \textbf{Cybersecurity baseline transposition.}
+    Jurisdictions vary in the sectoral scope of the applicable
+    national transposition of the cybersecurity baseline regime
+    (whether higher-education institutions fall under the
+    classification basis that designates in-scope entities, whether
+    research is in scope), in the national competent authority
+    designated to supervise it, and in the incident-reporting
+    thresholds and channels.
+  \item \textbf{Data-protection national supplements.} Many
+    jurisdictions have adopted national data-protection laws that
+    operate alongside the general data-protection regime, with
+    provisions on research exemptions, employee monitoring, and
+    identifiers that the architecture must respect.
   \item \textbf{Sectoral regulations.} University hospitals,
     institutions handling government research contracts, and
     institutions operating critical national infrastructure may

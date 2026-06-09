@@ -69,10 +69,10 @@ permissible~\cite{edpb-guidelines}, conditions that operationalise the
 data dimension for any university subject to the
 \gls{gdpr}~\cite{gdpr}.
 
-For institutions outside the European Union, the analytical structure
-of the data dimension transposes: the questions of \emph{where} data
-sits, \emph{under which law}, and \emph{accessible to which actors}
-are universal, even when the binding instruments differ.
+The analytical structure of the data dimension transposes across
+jurisdictions: the questions of \emph{where} data sits, \emph{under
+which law}, and \emph{accessible to which actors} are universal, even
+when the binding instruments differ.
 
 \subsection{Technical sovereignty}
 \label{sec:sg-technical}
@@ -140,13 +140,15 @@ roadmap change, to choose a non-default integration, to deviate from
 a supplier's reference architecture without penalty, or to set internal
 priorities that the supplier has not anticipated.
 
-The European Network and Information Security Agency has emphasised
-the governance dimension of digital risk management as a distinct
-concern from the technical one~\cite{enisa-risk}; the
-\gls{nis2}~Directive codifies this distinction by requiring management
-bodies to retain accountability for security
-measures~\cite{nis2}. In a university, institutional sovereignty is
-the precondition of academic self-government over digital matters.
+Cybersecurity authorities have emphasised the governance dimension of
+digital risk management as a distinct concern from the technical one
+--- as the European Union Agency for Cybersecurity has
+done~\cite{enisa-risk} --- and the applicable cybersecurity regulatory
+regime commonly codifies this distinction by requiring management
+bodies to retain accountability for security measures, as the European
+NIS2 Directive does~\cite{nis2}. In a university, institutional
+sovereignty is the precondition of academic self-government over
+digital matters.
 
 %-----------------------------------------------------------------------------
 \section{Indicators per dimension}
@@ -205,8 +207,8 @@ Dimension & Indicator & Question (verifiable capacity) \\
 \addlinespace
 \multirow{4}{*}{\textbf{Operational}}
   & Local skills availability & Are the skills required to operate the
-    component available through the institution, its
-    \gls{nren} or peer institutions? \\
+    component available through the institution, the \gls{nren} or peer
+    institutions? \\
   & Labour-market depth & Does the underlying technology admit a
     labour market broader than the supplier's certified
     pool? \\
@@ -319,7 +321,7 @@ downstream applications.
 \toprule
 Dimension & Score & Comment \\
 \midrule
-Data          & 3 Robust       & On-premises storage, institutional key custody, no third-country disclosure regime. \\
+Data          & 3 Robust       & Storage under the institution's own data-custody and sovereignty profile, institutional key custody, no third-country disclosure regime. \\
 Technical     & 3 Robust       & Source open, standards respected, regressions auditable. \\
 Financial     & 2 Established  & Operating cost predictable, no licence; substitutability via Shibboleth or Authentik. \\
 Operational   & 2 Established  & Skills available; \gls{geant} community support; no supplier-only certification. \\
@@ -333,21 +335,21 @@ operational and financial dimensions are good but limited by the
 internal staffing burden. The principal risk is operational fragility
 if the maintaining team shrinks below critical mass.
 
-\subsection{Case 2 --- Pure commercial (Microsoft Entra ID with Conditional Access)}
+\subsection{Case 2 --- Pure commercial (a dominant commercial identity suite, e.g.\ Microsoft Entra~ID, with conditional-access policies)}
 \label{sec:sg-ex-entra}
 
-An Entra~ID tenancy operated by the supplier in a designated EU
-region, integrated through the institution's existing tenant
-arrangements.
+A managed identity tenancy from a dominant commercial suite vendor,
+operated by the supplier in a designated in-jurisdiction region and
+integrated through the institution's existing tenant arrangements.
 
 \noindent\emph{Configuration assumed.} The scoring below reflects the
-default supported configuration with EU data residency and standard
-Microsoft-managed key custody. Optional arrangements such as Customer
-Lockbox, Double Key Encryption, or \gls{hyok} integrations would
-modify the data dimension upward, but at the cost of additional
-licence and operational commitments; their adoption is itself a
-sovereignty-affecting choice that an institution should evaluate
-explicitly.
+default supported configuration with in-jurisdiction data residency and
+standard supplier-managed key custody. Optional arrangements such as
+restricted-access lockbox features, double-key encryption, or
+\gls{hyok} integrations would modify the data dimension upward, but at
+the cost of additional licence and operational commitments; their
+adoption is itself a sovereignty-affecting choice that an institution
+should evaluate explicitly.
 
 \begin{table}[H]
 \centering\small
@@ -362,8 +364,8 @@ explicitly.
 \toprule
 Dimension & Score & Comment \\
 \midrule
-Data          & 1 Partial      & EU regions designated; key custody bounded; disclosure regime under \emph{Schrems~II} analysis remains contested in the absence of \gls{hyok}. \\
-Technical     & 1 Partial      & Standards spoken with captive extensions in Conditional Access expressions; regressions traceable only via supplier diagnostics. \\
+Data          & 1 Partial      & In-jurisdiction regions designated; key custody bounded; disclosure regime under the applicable cross-border transfer analysis remains contested in the absence of \gls{hyok}. \\
+Technical     & 1 Partial      & Standards spoken with captive extensions in conditional-access policy expressions; regressions traceable only via supplier diagnostics. \\
 Financial     & 1 Partial      & Per-seat pricing with documented historical escalation; substitutability constrained by ecosystem coupling. \\
 Operational   & 3 Robust       & Skills market deep; documentation extensive; enterprise support widely available. \\
 Institutional & 1 Partial      & Roadmap supplier-driven; integration freedom limited to certified partner products. \\

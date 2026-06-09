@@ -100,13 +100,14 @@ Tekton~\cite{tekton}).
 
 \begin{instantiationbox}[Compute layer]
 \noindent\textbf{Topology.} OpenStack provides multi-tenant
-virtual-machine and bare-metal provisioning at the institutional
-scale; Kubernetes clusters --- one per major tenancy boundary
+virtual-machine and bare-metal provisioning at the scale of the
+institution; Kubernetes clusters --- one per major tenancy boundary
 (administration, teaching, research projects of comparable scale) ---
 run on top of OpenStack-provided infrastructure or on dedicated
 metal where latency or isolation requires it. Container images live
-in a self-hosted Harbor registry, scanned at push time and signed
-with cosign or an equivalent. Build pipelines (Tekton, Argo
+in a Harbor registry deployed under the custody model the
+institution has chosen for this layer, scanned at push time and
+signed with cosign or an equivalent. Build pipelines (Tekton, Argo
 Workflows, or comparable) emit SLSA-compliant provenance
 attestations alongside the image. CNI plugins (Cilium is the
 reference) implement the network policies derived from
@@ -128,23 +129,26 @@ should not share a cluster.
 is operationally non-trivial: OpenStack and Kubernetes each carry
 substantial operational depth, and integrating them with the
 identity, policy, network, and storage layers is the principal
-ongoing engineering investment. An indicative envelope, for an R1
-institution running both an institutional OpenStack and several
-Kubernetes clusters, would be on the order of four to seven
-engineers shared with adjacent duties. The labour market is broad
+ongoing engineering investment. An indicative envelope, for a
+research-intensive institution running both an institutional
+OpenStack and several Kubernetes clusters, would be the staffing
+profile recorded for this layer in the institution's
+infrastructure plan, scaled to the size and intensity of its
+research compute portfolio. The labour market is broad
 for Kubernetes itself and narrower for the integrated stack.
 
 \begin{realworldbox}[Research-cloud precedents]
 \noindent Indiana University's Jetstream2~\cite{jetstream2-2021},
-operated under the United States National Science Foundation's
-ACCESS programme,
+operated under a national research-infrastructure funding programme,
 provides a publicly documented research-cloud architecture built on
 OpenStack and serving the multi-institutional research community.
-European institutions participate in the EGI federated cloud, which
-also rests on OpenStack across multiple sites. Both should be
+Many institutions participate in a national or regional research
+high-performance computing facility, several of which also rest on
+OpenStack across multiple sites. Both should be
 consulted as primary sources for design and operational lessons,
 rather than as direct templates: each institution's compute layer
-reflects its specific research mission and its NREN context.
+reflects its specific research mission and the context of its
+national research and education network.
 \end{realworldbox}
 
 %-----------------------------------------------------------------------------
@@ -193,7 +197,7 @@ and that exit-rehearsal is practised periodically.
 
 \begin{alternativebox}[Hybrid compute]
 \noindent The institution operates a primary on-premises
-Kubernetes-and-OpenStack stack and federates additional capacity from
+open-source compute stack and federates additional capacity from
 a public-cloud provider for bounded purposes (peak demand, specific
 research workloads, geographically distributed collaboration). The
 federation occurs through standard interfaces (Kubernetes API

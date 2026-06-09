@@ -78,10 +78,10 @@ coexistence pattern admits.}
 Wave & Rollback unit & Procedure summary \\
 \midrule
 0 — Foundations             & Mandate     & Governance body dissolved or reabsorbed; sovereignty grid de-adopted (informational state preserved). \\
-1 — Identity                & Application cohort & Cohort returned to legacy IdP; federation metadata refreshed; user re-onboarded if needed. Legacy IdP kept warm 6--12 months. \\
+1 — Identity                & Application cohort & Cohort returned to the incumbent identity provider; federation metadata refreshed; user re-onboarded if needed. Incumbent identity provider kept warm 6--12 months. \\
 2 — Observability           & Collector source & New collectors removed at the source; legacy log paths unaffected throughout; parallel store decommissioned. \\
 3 — Network                 & Segment / building & Segment configuration reverted to pre-cut-over version under change control; inter-segment routing rules updated. \\
-4 — Policy                  & Policy rule & New bundle deployed reverting the rule to shadow or removing it; incumbent enforcement (CA expression, in-app rule) re-instated. \\
+4 — Policy                  & Policy rule & New bundle deployed reverting the rule to shadow or removing it; incumbent enforcement (conditional-access expression, in-app rule) re-instated. \\
 5 — Pilot                   & Pilot     & Pilot decommissioned per Wave~5 stop procedure; data exported; tenancy released. \\
 6 — Endpoint                & Population & Population returned to advisory mode; posture rule reverted in policy bundle. \\
 7 — Audit and IR            & Runbook   & Refactored runbook reverted to prior version; refactored detections reverted in detection corpus. \\
@@ -115,7 +115,7 @@ exported data is provided to the user and retained according to the
 institutional retention policy.
 
 \paragraph{Migration artefacts.} Configuration that was authored
-during the wave (Rego policies, GitOps manifests, runbook
+during the wave (policy-as-code rules, GitOps manifests, runbook
 revisions) is not discarded by the rollback. It remains in version
 control as a historical record and as a starting point for any
 future re-attempt.

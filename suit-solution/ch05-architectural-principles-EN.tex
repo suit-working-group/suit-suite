@@ -38,10 +38,12 @@ chapters is visible against an established baseline.
 
 The normative content of this architecture is the set of interface
 contracts that connect the layers. The reference instantiations
-proposed in the per-layer chapters --- Keycloak, OPA, FreeRADIUS,
-OpenStack, Vector, and so on --- are illustrative: they demonstrate
-that the contracts are realisable on open foundations, not that the
-institution must adopt these specific products.
+proposed in the per-layer chapters --- open-source implementations of
+identity providers, policy engines, network access servers, cloud
+infrastructure managers, and telemetry pipelines, among others --- are
+illustrative: they demonstrate that the contracts are realisable on
+open foundations, not that the institution must adopt these specific
+products.
 
 Three consequences follow from this primacy:
 
@@ -49,9 +51,11 @@ Three consequences follow from this primacy:
   \item \textbf{Procurement language} references standards, not
     products. An \gls{rfp} that asks for ``identity provider compatible
     with OIDC Core 1.0, SCIM 2.0, and federation metadata in
-    accordance with eduGAIN technical profile'' admits multiple
-    compliant suppliers; an \gls{rfp} that asks for ``Microsoft Entra
-    ID with Conditional Access'' admits one.
+    accordance with the applicable research-and-education identity
+    federation technical profile'' admits multiple
+    compliant suppliers; an \gls{rfp} that asks for a named
+    proprietary identity suite with its vendor-specific conditional
+    access feature admits one.
   \item \textbf{Component evaluation} consists in verifying that the
     standard is spoken correctly, not that the supplier promises a
     feature. The conformance test suite of
@@ -60,8 +64,8 @@ Three consequences follow from this primacy:
   \item \textbf{Architectural decisions} are recorded against the
     contract, not against the product. A decision to use OIDC for
     \gls{sso} survives the replacement of the identity provider; a
-    decision to use ``Entra Conditional Access expression
-    \texttt{X}'' does not.
+    decision to use a specific vendor's proprietary conditional
+    access expression \texttt{X} does not.
 \end{itemize}
 
 This principle is the operational expression of the technical
@@ -244,8 +248,9 @@ layer.
 \paragraph{Standards versus reference profiles.} Several standards
 listed above (OIDC, SAML2, OPA, OpenTelemetry) admit broad
 configuration latitude. Where the architecture relies on a specific
-profile of a standard --- for instance, the eduGAIN technical profile
-for SAML2 federation, or the OPA bundle distribution pattern --- the
+profile of a standard --- for instance, the applicable
+research-and-education identity federation technical profile for SAML2
+federation, or the OPA bundle distribution pattern --- the
 profile is named in the relevant layer chapter and treated as a
 co-normative element.
 

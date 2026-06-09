@@ -20,57 +20,61 @@ level of specific tooling, since their realisation varies with the
 products the institution operates.
 
 %-----------------------------------------------------------------------------
-\section{Pattern: \institution{Active Directory} \texorpdfstring{$\leftrightarrow$}{<->} Keycloak / institutional IdP}
+\section{Pattern: incumbent enterprise directory \texorpdfstring{$\leftrightarrow$}{<->} institutional IdP}
 \label{sec:cp-ad-keycloak}
 
-The pattern in which Active Directory remains the authoritative
-source for staff identities while a new institutional identity
-provider (Keycloak or comparable) handles federation, role
-activation, and downstream OIDC integrations.
+The pattern in which the incumbent enterprise directory remains
+the authoritative source for staff identities while a new
+institutional identity provider (an open-source IdP or comparable)
+handles federation, role activation, and downstream OIDC
+integrations.
 
-\paragraph{Bridging mechanism.} Active Directory continues to
-authenticate users at the institutional perimeter. The new IdP
-federates against AD through standard SAML2 or OIDC bridges.
-Attributes from AD --- group membership, role, organisational
-unit --- are mapped to the institutional schema (D7.7) at the
-boundary of the new IdP rather than propagated into downstream
-applications in their native form.
+\paragraph{Bridging mechanism.} The incumbent enterprise
+directory, supplied by the institution's incumbent identity-suite
+vendor, continues to authenticate users at the institutional
+perimeter. The new IdP federates against the directory through
+standard SAML2 or OIDC bridges. Attributes from the directory ---
+group membership, role, organisational unit --- are mapped to the
+institutional schema (D7.7) at the boundary of the new IdP rather
+than propagated into downstream applications in their native form.
 
 \paragraph{Synchronisation direction.} The pattern is
-unidirectional from AD toward the new IdP for the duration of
-Wave~1. Reverse synchronisation (changes made in the new IdP
-flowing back to AD) is generally avoided to keep AD's
-authoritative status unambiguous.
+unidirectional from the incumbent directory toward the new IdP for
+the duration of Wave~1. Reverse synchronisation (changes made in
+the new IdP flowing back to the directory) is generally avoided to
+keep the directory's authoritative status unambiguous.
 
 \paragraph{Drift detection and exit window.} Discrepancies
-between AD and the new IdP are surfaced through the observability
-layer. The pattern's exit window is the period during which the
-institution can return to AD-only operation if the new IdP fails;
-the window is typically aligned with the legacy IdP retirement
-schedule.
+between the directory and the new IdP are surfaced through the
+observability layer. The pattern's exit window is the period
+during which the institution can return to directory-only
+operation if the new IdP fails; the window is typically aligned
+with the legacy IdP retirement schedule.
 
 %-----------------------------------------------------------------------------
-\section{Pattern: \institution{SCCM} / \institution{Intune} \texorpdfstring{$\leftrightarrow$}{<->} Ansible / GitOps}
+\section{Pattern: incumbent endpoint-management suite \texorpdfstring{$\leftrightarrow$}{<->} declarative configuration}
 \label{sec:cp-sccm-ansible}
 
 The pattern in which the institution's existing endpoint
-configuration management (Microsoft Endpoint Manager, SCCM, or
-Intune) coexists with declarative configuration (Ansible, GitOps
-repositories) for the populations the new approach covers.
+configuration management (the incumbent vendor's unified endpoint
+management suite) coexists with declarative configuration
+(a declarative configuration-management toolchain) for
+the populations the new approach covers.
 
 \paragraph{Bridging mechanism.} Each population is governed by a
-single source. Staff Windows endpoints typically remain on the
-SCCM/Intune side; Linux servers and research workstations
-typically move to the Ansible/GitOps side; macOS endpoints can
-sit on either side depending on the institution's mature tooling.
-The boundary between the populations is documented and stable for
-the duration of the coexistence.
+single source. Staff desktop endpoints typically remain on the
+incumbent-suite side; servers and research workstations typically
+move to the declarative-configuration side; other endpoint classes
+can sit on either side depending on the institution's mature
+tooling. The boundary between the populations is documented and
+stable for the duration of the coexistence.
 
 \paragraph{Configuration overlap.} Where a single endpoint must be
 visible to both systems (rare, but it occurs in shared-use scenarios),
 the institution declares which system is authoritative for which
-configuration domain --- typically SCCM/Intune for compliance
-policy and Ansible for application configuration.
+configuration domain --- typically the incumbent suite for
+compliance policy and the declarative toolchain for application
+configuration.
 
 \paragraph{Posture export.} The unified posture schema of D11.6
 ingests posture from both sides. Policies in
@@ -79,7 +83,7 @@ do not depend on which configuration management produced the
 signal.
 
 %-----------------------------------------------------------------------------
-\section{Pattern: \institution{Splunk} \texorpdfstring{$\leftrightarrow$}{<->} \institution{OpenSearch}}
+\section{Pattern: per-volume-priced commercial SIEM \texorpdfstring{$\leftrightarrow$}{<->} open-source store}
 \label{sec:cp-splunk-opensearch}
 
 The pattern in which a per-volume-priced commercial SIEM operates
@@ -87,72 +91,75 @@ alongside an open-source store, with the institution managing the
 boundary deliberately for operational and financial reasons.
 
 \paragraph{Bridging mechanism.} The collector layer of Wave~2
-emits the canonical TAC schema to both stores. Splunk ingests the
-events that the SOC actively investigates within the
-investigation window the institution chooses to fund; OpenSearch
-ingests the longer-tail retention that Splunk's per-GB pricing
-makes unattractive. Detection content is authored in both stores
-where the institution's risk profile warrants duplication.
+emits the canonical TAC schema to both stores. The commercial SIEM
+ingests the events that the SOC actively investigates within the
+investigation window the institution chooses to fund; the
+open-source store ingests the longer-tail retention that the
+commercial SIEM's per-GB pricing makes unattractive. Detection
+content is authored in both stores where the institution's risk
+profile warrants duplication.
 
 \paragraph{Per-source routing.} Sources whose events are most
 operationally consumed by the SOC (identity, network attachment,
-endpoint posture) are routed to Splunk in full; sources whose
-events serve audit-replay rather than routine investigation
-(verbose flow records, low-severity informational events) are
-routed primarily to OpenSearch with a sampled stream to Splunk
-for context.
+endpoint posture) are routed to the commercial SIEM in full;
+sources whose events serve audit-replay rather than routine
+investigation (verbose flow records, low-severity informational
+events) are routed primarily to the open-source store with a
+sampled stream to the commercial SIEM for context.
 
-\paragraph{Migration of dashboards.} Splunk dashboards are
-migrated incrementally to OpenSearch / Grafana when the
-institution chooses to retire a Splunk content element. The
-choice to retire is informed by financial review rather than by
-technical inability.
+\paragraph{Migration of dashboards.} Commercial-SIEM dashboards are
+migrated incrementally to the open-source store and its
+visualisation layer when the institution chooses to retire a
+commercial-SIEM content element. The choice to retire is informed
+by financial review rather than by technical inability.
 
 %-----------------------------------------------------------------------------
-\section{Pattern: \institution{VMware} \texorpdfstring{$\leftrightarrow$}{<->} \institution{KubeVirt} or \institution{OpenStack}}
+\section{Pattern: incumbent commercial hypervisor \texorpdfstring{$\leftrightarrow$}{<->} open virtualisation substrate}
 \label{sec:cp-vmware-k8s}
 
-The pattern in which VMware vSphere continues to host the
-institution's existing workloads while new workloads are
-provisioned on KubeVirt (Kubernetes-native VMs) or OpenStack
-(traditional IaaS), with explicit governance of which platform
-hosts which workload.
+The pattern in which the incumbent commercial hypervisor platform
+continues to host the institution's existing workloads while new
+workloads are provisioned on an open virtualisation substrate
+(a Kubernetes-native VM platform or an open-source IaaS), with
+explicit governance of which platform hosts which workload.
 
 \paragraph{Bridging mechanism.} The governance layer (Wave~8
 classification) decides per workload class which platform is
-appropriate: existing legacy workloads stay on vSphere through
-their natural lifecycle; new workloads provision on the open
-substrate by default; specific workload classes that benefit
-from vSphere's operational features (live migration, mature DR)
-remain on vSphere by explicit decision.
+appropriate: existing legacy workloads stay on the commercial
+hypervisor through their natural lifecycle; new workloads provision
+on the open substrate by default; specific workload classes that
+benefit from the commercial platform's operational features (live
+migration, mature DR) remain on it by explicit decision.
 
 \paragraph{Live-migration boundary.} Live migration between
-substrates is technically possible (KubeVirt can import vSphere
-VMs, OpenStack supports VM-level migration) but is treated as a
-project rather than a routine operation. Cold migration on
-workload retirement / refresh is the more common pattern.
+substrates is technically possible (the open substrate can import
+the commercial platform's VMs, and supports VM-level migration) but
+is treated as a project rather than a routine operation. Cold
+migration on workload retirement / refresh is the more common
+pattern.
 
 \paragraph{Skills coexistence.} Operational teams need both
-skill sets during the coexistence. The skill investment is
+skill sets during the coexistence, and the institution's staffing
+profile must carry both for the duration. The skill investment is
 typically an explicit programme item rather than a passive
 expectation.
 
 %-----------------------------------------------------------------------------
-\section{Pattern: \institution{NetApp} \texorpdfstring{$\leftrightarrow$}{<->} Ceph}
+\section{Pattern: enterprise storage array \texorpdfstring{$\leftrightarrow$}{<->} open-source distributed storage}
 \label{sec:cp-netapp-ceph}
 
-The pattern in which enterprise storage (NetApp, Pure Storage, or
-comparable) continues to host the institution's existing data
-corpora while a Ceph cluster provides storage for new workloads
-and for the research-scale capacity the enterprise platform is
-not cost-effective for.
+The pattern in which an enterprise storage array from a commercial
+vendor continues to host the institution's existing data corpora
+while an open-source distributed storage cluster provides storage
+for new workloads and for the research-scale capacity the
+enterprise platform is not cost-effective for.
 
 \paragraph{Bridging mechanism.} The classification scheme of
 D10.4 determines which platform hosts which data class. Enterprise
-storage typically retains administrative and compliance data;
-Ceph typically holds research data, container persistent volumes,
-and the cold-tier object storage that the observability layer
-(D12.3) needs.
+storage typically retains administrative and compliance data; the
+open-source cluster typically holds research data, container
+persistent volumes, and the cold-tier object storage that the
+observability layer (D12.3) needs.
 
 \paragraph{Migration of pools.} Migration from one platform to
 the other occurs at workload boundaries: a workload migrating
@@ -226,9 +233,10 @@ deployment.
 
 \paragraph{Coexistence as a permanent feature.} Some institutions
 stabilise on a coexistence pattern and treat it as the architecture
-rather than as a transition. The pattern is not always wrong (the
-hybrid Shibboleth--Keycloak identity arrangement is a legitimate
-end-state, for example), but it should be a deliberate decision
+rather than as a transition. The pattern is not always wrong (a
+hybrid open-source federation-and-IdP identity arrangement is a
+legitimate end-state, for example), but it should be a deliberate
+decision
 rather than an accident. The mitigation is the periodic review
 under the sovereignty grid: a coexistence that has not been
 revisited in twenty-four months is reviewed against its current

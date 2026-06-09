@@ -88,11 +88,12 @@ choice be documented and that every label used be enumerable.
 \section{Reference instantiation: Ceph + Vault Transit + label-based access}
 \label{sec:st-reference}
 
-The reference instantiation combines Ceph~\cite{ceph} as the
-open-source distributed storage providing both object (RGW) and
-block (RBD) interfaces; HashiCorp Vault~\cite{vault}'s Transit
-secrets engine for envelope encryption with institutionally-held
-keys; and label-based access
+The reference instantiation combines, as representative open-source
+implementations, a distributed storage system such as
+Ceph~\cite{ceph} providing both object (RGW) and block (RBD)
+interfaces; an envelope-encryption secrets engine with
+institutionally-held keys such as HashiCorp Vault~\cite{vault}'s
+Transit engine; and label-based access
 control implemented through a policy decision integrating the
 classification label into the authorisation logic.
 
@@ -116,17 +117,19 @@ through the observability layer.
 institutional scale would typically require dedicated expertise:
 the cluster's health and recovery characteristics demand specific
 operational discipline that more conventional storage products do
-not require. An indicative envelope is two to four engineers with
-substantial Ceph familiarity, often shared with the network and
-compute teams. The labour market is broad for Ceph itself and
-narrower for the integration of Ceph with classification-aware
-access control.
+not require. The staffing envelope follows the institution's
+established operational staffing profile for distributed storage,
+typically a small dedicated team with substantial Ceph familiarity,
+often shared with the network and compute teams. The labour market
+is broad for Ceph itself and narrower for the integration of Ceph
+with classification-aware access control.
 
 \paragraph{Cryptographic posture.} Vault Transit provides envelope
 encryption that allows the encryption keys to be rotated without
 re-encrypting the data corpus. For data classifications whose
 disclosure regime warrants stronger custody, the institution would
-substitute a HYOK arrangement in which Vault never holds the
+substitute a HYOK arrangement, consistent with the institution's own
+data-custody sovereignty profile, in which Vault never holds the
 cleartext key and cryptographic operations involve the institution's
 HSM in the live path. This shifts the data-dimension score upward
 at the cost of additional operational complexity, addressed in
@@ -147,17 +150,18 @@ centres in over a dozen European nations. These references should
 be consulted as design lessons rather than as direct templates:
 the relative scale of teaching, administrative and research
 storage at a given institution may produce a substantially
-different proportion than at a research-laboratory-scale
+different proportion than at a large-scale research-computing
 environment.
 \end{realworldbox}
 
 %-----------------------------------------------------------------------------
-\section{Alternative~1 --- NetApp with KMIP-compliant HSM}
+\section{Alternative~1 --- Enterprise storage platform with KMIP-compliant HSM}
 \label{sec:st-alt1}
 
 \begin{alternativebox}[Enterprise SAN/NAS]
 \noindent The institution operates an enterprise storage platform
-(NetApp, Pure Storage, Dell EMC) that exposes the S3 API for object
+from one of the established vendors in this market that exposes the
+S3 API for object
 storage and NFS for shared file access, with encryption at rest
 keyed through a KMIP-compliant HSM under institutional control.
 Classification metadata is carried at the application level rather
@@ -192,9 +196,11 @@ the operational simplification.
 \label{sec:st-alt2}
 
 \begin{alternativebox}[Hybrid storage with BYOK]
-\noindent The institution operates an on-premises storage tier (Ceph
-or enterprise) for data whose classification requires institutional
-custody, and federates additional capacity to an S3-compatible cloud
+\noindent The institution operates a storage tier under an
+institution-controlled deployment custody model (Ceph or enterprise,
+self-hosted or otherwise kept under direct institutional control) for
+data whose classification requires institutional custody, and
+federates additional capacity to an S3-compatible cloud
 provider for less-sensitive classes of data, with all cloud-stored
 data encrypted under institutionally-held keys (BYOK, with HYOK for
 the higher-sensitivity classes that the hybrid posture would
@@ -237,7 +243,7 @@ instantiations.}
   >{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X%
 }
 \toprule
-Dimension & Reference (Ceph + Vault) & NetApp + KMIP HSM & Hybrid (on-prem + cloud) \\
+Dimension & Reference (Ceph + Vault) & Enterprise platform + KMIP HSM & Hybrid (on-prem + cloud) \\
 \midrule
 Data          & 3 Robust      & 3 Robust      & 1--2 Partial  \\
 Technical     & 3 Robust      & 1 Partial     & 2 Established \\
@@ -267,14 +273,17 @@ governance must be in place before the hybrid pattern is adopted.
 \label{sec:st-regulatory}
 
 \noindent The storage layer is the principal anchor of the
-data-dimension obligations: \gls{gdpr}~Art.~32 (security of
-processing), Art.~5(1)(c) (data minimisation through tiering),
-and Art.~44--49 (international transfers, when storage placement
-crosses jurisdictions). It is the operational counterpart of the
-post-\emph{Schrems~II} posture: storage-placement constraints,
-key-custody and per-tenant key separation are the technical
-supplementary measures that an institution can invoke alongside
-SCCs. The layer operationalises NIS2~Art.~21(2)(c) (backup) and
+data-dimension obligations under the applicable data-protection
+regime: security of processing (e.g.\ \gls{gdpr}~Art.~32), data
+minimisation through tiering (e.g.\ Art.~5(1)(c)), and the regime's
+constraints on international transfers (e.g.\ Art.~44--49), which bind
+when storage placement crosses jurisdictions. It is the operational
+counterpart of the applicable cross-border data-transfer regime:
+storage-placement constraints, key-custody and per-tenant key
+separation are the technical supplementary measures that an
+institution can invoke alongside whatever standard contractual
+transfer instruments that regime recognises. The layer
+operationalises NIS2~Art.~21(2)(c) (backup) and
 contributes to 27001~A.8.10 (information deletion), A.8.12
 (data leakage prevention) and A.8.13 (information backup). It
 contributes to NIST CSF \textsf{PROTECT} (PR.DS --- data
