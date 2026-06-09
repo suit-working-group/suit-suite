@@ -3,14 +3,14 @@
 % \glsdefine{key}{SHORT}{Long Form}{Tooltip definition}
 % ============================================================================
 %
-% SUIT NOTE (skeleton): this file is a copy of the source ul-it-policy glossary.
-% The institution-neutral entries below are retained as-is. The Luxembourg-
-% specific entries have been wrapped in a "TODO P1" block (commented out, not
-% deleted) so that the P1 generalisation phase can decide, term by term,
-% whether to (a) generalise the entry into a role-based / placeholder form
-% and re-enable it, or (b) drop it and route the local anchor through the
-% Localization Guide (shared/localization-guide-EN.tex). DO NOT silently
-% delete any commented entry: P1 owns that decision.
+% SUIT NOTE: this is the institution-neutral SUIT glossary. All entries are
+% role-based / generic. Document bodies have been genericised to role-based
+% prose, so the former Luxembourg-specific institutional anchors (national
+% CSIRT, national cybersecurity agency, national data-protection authority,
+% national NREN, highest institutional governance body, ...) are no longer
+% referenced and have been removed. Adopting institutions supply their own
+% local values via the Localization Guide (shared/localization-guide-EN.tex)
+% rather than via hard-coded glossary entries.
 % ============================================================================
 
 % --- Technical Infrastructure ---
@@ -60,44 +60,6 @@
 \glsdefine{enisa}{ENISA}{European Union Agency for Cybersecurity}{ENISA -- European Union Agency for Cybersecurity.}
 \glsdefine{dpo}{DPO}{Data Protection Officer}{Data Protection Officer -- person responsible for overseeing GDPR compliance within an organisation.}
 \glsdefine{icradp}{ICRADP}{Independent Commission for Reasonable Adjustments of Digital Policies}{ICRADP -- Independent Commission for Reasonable Adjustments of Digital Policies (proposed in this report; French: CARPN).}
-
-% ============================================================================
-% % TODO P1: generalize or drop
-% ----------------------------------------------------------------------------
-% The entries below are Luxembourg-specific institutional anchors inherited
-% from the source ul-it-policy glossary. They are NOT institution-neutral and
-% therefore violate the SUIT body-language rule (see .claude/rules/suit-domain.md).
-%
-% P1 must decide, per entry, between:
-%   (a) GENERALISE  -- replace with a role-based / placeholder form
-%                      (e.g. "national CSIRT", "national cybersecurity agency",
-%                      "national data-protection authority", "national NREN",
-%                      "highest institutional governance body") and re-enable;
-%   (b) DROP         -- remove the entry and route the local anchor through the
-%                      Localization Guide (shared/localization-guide-EN.tex),
-%                      where each adopting institution supplies its own value.
-%
-% Until P1 runs, these are COMMENTED OUT (not deleted). Do not delete them.
-% ----------------------------------------------------------------------------
-%
-% --- Luxembourg Institutional Landscape ---
-% \glsdefine{govcertlu}{GOVCERT.LU}{Governmental Computer Security Incident Response Team of Luxembourg}{GOVCERT.LU -- the governmental CSIRT hosted by HCPN, central contact point for IT incidents in the Luxembourg State, public bodies and critical infrastructure operators. Primary CSIRT for the University of Luxembourg.}
-% \glsdefine{hcpn}{HCPN}{Haut-Commissariat \`a la Protection nationale}{HCPN -- Luxembourg's High Commissariat for National Protection, under the Prime Minister; hosts GOVCERT.LU and ANSSI Luxembourg, single point of contact for NIS2 cross-border cooperation and major-crisis management.}
-% \glsdefine{anssilu}{ANSSI Luxembourg}{Agence nationale de la s\'ecurit\'e des syst\`emes d'information (Luxembourg)}{ANSSI Luxembourg -- the Luxembourg national agency for information-systems security, component of HCPN, distinct from the French ANSSI; publisher of the PSI-LU.}
-% \glsdefine{psilu}{PSI-LU}{Politique g\'en\'erale de la s\'ecurit\'e de l'information de l'\'Etat luxembourgeois}{PSI-LU -- general information-security policy of the Luxembourg State, developed by ANSSI Luxembourg and approved by the Government Council on 13 July 2018.}
-% \glsdefine{circl}{CIRCL}{Computer Incident Response Center Luxembourg}{CIRCL -- CSIRT for the private sector, communes and non-governmental entities in Luxembourg; complement to GOVCERT.LU.}
-% \glsdefine{cssf}{CSSF}{Commission de Surveillance du Secteur Financier}{CSSF -- Luxembourg's financial-sector regulatory authority, NIS2 supervisory body for the financial sector only.}
-% \glsdefine{serima}{SERIMA}{SEcurity RIsk MAnagement}{SERIMA -- Luxembourg's centralised incident-reporting platform managed by the ILR, covering NIS, NIS2, EECC, GDPR and CER reporting obligations since 2 May 2025.}
-% \glsdefine{monarc}{MONARC}{Method for an Optimised Analysis of Risks}{MONARC -- open-source risk-analysis method and tool developed by NC3 under the Luxembourg House of Cybersecurity; integrated into the SERIMA platform for NIS2-related risk analysis.}
-% \glsdefine{cnpd}{CNPD}{Commission Nationale pour la Protection des Donn\'ees}{CNPD -- Luxembourg's national data protection authority, GDPR supervisory body and partner of the ILR for cybersecurity incidents involving personal-data breaches.}
-% \glsdefine{ncss}{NCSS}{National Cybersecurity Strategy}{NCSS -- Luxembourg's National Cybersecurity Strategy, in version III since 26 January 2018, published by HCPN; Objective 7 calls for cooperation with the academic and research sphere.}
-% \glsdefine{restenacsirt}{RESTENA-CSIRT}{RESTENA Computer Security Incident Response Team}{RESTENA-CSIRT -- the CSIRT operated by the Restena Foundation for the Luxembourg research and education community, member of Trusted Introducer since 2009.}
-% \glsdefine{ilr}{ILR}{Institut Luxembourgeois de R\'egulation}{Institut Luxembourgeois de R\'egulation -- Luxembourg's national regulatory authority designated as the competent supervisory body under the NIS2 Directive transposition.}
-% \glsdefine{restena}{RESTENA}{RESTENA Luxembourg NREN}{RESTENA -- Fondation Restena, Luxembourg NREN connecting research and education institutions to GEANT.}
-% \glsdefine{bog}{BoG}{Board of Governors}{BoG -- Board of Governors of the University of Luxembourg, the institution's highest governance body.}
-% ----------------------------------------------------------------------------
-% END TODO P1 block
-% ============================================================================
 
 % --- Cross-border data transfers ---
 \glsdefine{tia}{TIA}{Transfer Impact Assessment}{Transfer Impact Assessment -- documented assessment of whether a third country offers a level of personal-data protection essentially equivalent to EU law, required by CJEU Schrems II for transfers outside the EEA when relying on Standard Contractual Clauses.}
