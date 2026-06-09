@@ -13,6 +13,20 @@
 
 $pdf_mode = 1;            # build PDF via pdflatex
 
+# Build each document in its own directory (so out/ and the final PDF land next
+# to the .tex) even when latexmk is invoked from the repo root, e.g.
+# `latexmk -pdf suit-policy/policy-EN.tex`.
+$do_cd = 1;
+
+# latexmk reads RC files only from the system, the user HOME and the
+# invocation directory (not from the source-file directory). When building a
+# sub-document from the repo root, the per-document .latexmkrc that points
+# TEXINPUTS/BIBINPUTS at ../shared/ is therefore NOT read. We replicate that
+# here so the shared .sty (bib-modes, gls-modes) and the shared .bib resolve
+# whether the target lives one or two levels below the repo root.
+$ENV{'TEXINPUTS'} = '../shared/:../../shared/:out:' . ($ENV{'TEXINPUTS'} || '');
+$ENV{'BIBINPUTS'} = '../shared/:../../shared/:' . ($ENV{'BIBINPUTS'} || '');
+
 # Do NOT hard-code -output-directory here: latexmk injects it from $aux_dir
 # through %O.
 $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode %O %S';

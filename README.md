@@ -5,11 +5,16 @@ university IT decision-makers, architects, and engineers. It sets out a
 governance and engineering reference for building, operating, and sustaining
 research and education IT infrastructure at a modern university.
 
-The four documents in this repository are the working group's own, original
-deliverables. They are written to be adopted directly by any university:
-the body of every document uses role-based, vendor-neutral, institution-neutral
-language, and a `shared/` localization guide lets each adopting institution
-instantiate the generic material to its own context.
+The four documents in this repository build on a first version — the policy, its
+executive companion, and the technical solution — created by **Nicolas Guelfi**,
+chairman of the SUIT working group, originally developed for the University of
+Luxembourg, and generalised here by the working group into an institution-neutral
+reference. They are written to be adopted directly by any university: the body of
+every document uses role-based, vendor-neutral, institution-neutral language, and
+a `shared/` localization guide lets each adopting institution instantiate the
+generic material to its own context. The institution-neutral framing exists so the
+suite reads as a shared international reference rather than one university's local
+policy — the prior work and its authorship are acknowledged, not erased.
 
 ## The four documents
 

@@ -6,6 +6,10 @@ This document defines how the **SUIT — Sustainable University IT Infrastructur
 
 SUIT is an international working group of university IT decision-makers, architects, and engineers. It produces and maintains a reference suite — Policy, Policy Summary, Solution, Solution Summary — that any university can adopt to build, operate, and sustain its research and education IT infrastructure.
 
+## Origins
+
+The SUIT suite builds on a first version — the policy, its executive companion, and the technical solution — created by **Nicolas Guelfi**, originally developed for the University of Luxembourg. The international working group generalises that foundation into an institution-neutral reference adoptable by any university. The suite is institution-neutral by design so that it reads as a shared international reference rather than a single university's local policy; the original authorship and the prior work are acknowledged, not erased.
+
 ## Core rule: no direct write access to the documents
 
 The defining governance rule of this repository:
@@ -18,7 +22,7 @@ This single point of integration is what keeps the four documents coherent in te
 
 ## Roles
 
-- **Manager / Maintainer** — owns the repository, triages tickets, makes final decisions, applies changes, cuts releases. Currently **@nicolasguelfi**.
+- **Chairman / Maintainer** — **Nicolas Guelfi** (**@nicolasguelfi**), chairman of the SUIT working group and creator of the first version of the Policy, Companion and Technical Solution. Owns the repository, triages tickets, makes final decisions, applies changes, cuts releases.
 - **Working group members** — propose changes, review proposals, and contribute evidence through tickets and discussion.
 - **Adopting institutions** — use the suite and request localization guidance through the *Localization request* template.
 
