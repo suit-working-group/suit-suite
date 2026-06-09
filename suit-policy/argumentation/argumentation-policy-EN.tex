@@ -270,7 +270,7 @@ Network segmentation multiplies the number of zones, inter-zone boundaries, and 
 
 Segmentation \emph{increases} the former but \emph{decreases} the latter. NIST SP~800-53 Rev.\,5~\cite{nist-sp800-53} explicitly recommends ``protecting internal boundaries and isolating components to reduce the attack surface and limit damage.'' The NIST Cybersecurity Framework~2.0~\cite{nist-csf} and ISO~27001:2022 control A.8.22~\cite{iso27001} both mandate network segregation precisely because it \emph{reduces} the blast radius of any single compromise.
 
-\medskip\noindent\textbf{Empirical evidence:} documented university ransomware failures of 2024--2025 demonstrate that \emph{centralised, unsegmented perimeters amplify damage}. Where an institution runs a single large administrative perimeter, an attack can disrupt the entire institution for an extended period; conversely, a segmented architecture is designed to confine a breach to a single subnet, as seen where an incident remained contained~\cite{rennes-cyber}. The Verizon 2024 DBIR~\cite{verizon-dbir2024} independently and consistently identifies segmentation as a defence against the lateral movement on which such failures depend.
+\medskip\noindent\textbf{Empirical evidence:} documented university ransomware failures of 2024--2025 demonstrate that \emph{centralised, unsegmented perimeters amplify damage}. Where an institution runs a single large administrative perimeter, an attack can disrupt the entire institution for an extended period; conversely, a segmented architecture is designed to confine a breach to a single subnet, limiting the blast radius that a flat network exposes~\cite{rennes-cyber}. The Verizon 2024 DBIR~\cite{verizon-dbir2024} documents the prevalence of lateral movement in such breaches --- the propagation path that segmentation, per the NIST and ISO controls cited above, is designed to interrupt.
 
 \medskip\noindent\textbf{Managing the configuration complexity:} the dossier's phased transition addresses this directly --- governance and charters first, a pilot on selected entities next, then gradual extension. \gls{sdn} tools and infrastructure-as-code automate rule management and reduce human error. The complexity argument is an argument for \emph{proper tooling and gradual rollout}, not for avoiding segmentation.
 \end{answerbox}
@@ -314,7 +314,7 @@ The validity of a proposal is best assessed on its evidence and logic, independe
 
 \noindent\textbf{The ``comfort'' framing is refuted by the proposal's own evidence:} the design is endorsed by NIST~\cite{nist-csf, nist-sp800-53}, ISO~27001~\cite{iso27001}, and EDUCAUSE~\cite{educause2024}, and is practiced by MIT, Stanford, Oxford, ETH~Z\"urich, CERN, and the 100-plus universities operating a \gls{sciencedmz}~\cite{esnet-history,nsf-cc}. If ``wanting less security'' were the true motive, these institutions and frameworks would not converge on the same model.
 
-\medskip\noindent Constructive engagement with evidence-based proposals, as recommended by the \gls{cobit}~2019 process EDM05 (\emph{Ensure Stakeholder Engagement}), is more productive than debating motives~\cite{cobit}.
+\medskip\noindent Constructive engagement with evidence-based proposals, as recommended by the \gls{cobit}~2019 process EDM05 (\emph{Ensured Stakeholder Engagement}), is more productive than debating motives~\cite{cobit}.
 \end{answerbox}
 
 \bigskip
@@ -331,7 +331,7 @@ The argument for segmentation leans on a forestry analogy (firebreaks). But netw
 \begin{itemize}[nosep]
     \item NIST SP~800-207 (\gls{zt} Architecture)~\cite{nist-zt}: ``assume breach, limit blast radius'';
     \item NIST SP~800-53 Rev.\,5~\cite{nist-sp800-53}: ``isolate components to reduce attack surface'';
-    \item The Verizon 2024 DBIR~\cite{verizon-dbir2024}: segmentation is consistently identified as a defence against lateral movement.
+    \item The Verizon 2024 DBIR~\cite{verizon-dbir2024}: lateral movement is a dominant breach-progression mechanism, which network segmentation is designed to interrupt.
 \end{itemize}
 
 \noindent The risk of misconfigured rules is real but is an \emph{implementation risk}, not an argument against the principle. The phased transition (pilot first, then rollout) and use of \gls{sdn} automation directly mitigate this risk.
@@ -383,6 +383,8 @@ If departments manage their own zones, the security function cannot be held resp
 \noindent At Oxford, unit heads are explicitly \emph{accountable} for information security in their area~\cite{oxford-infosec}. At Michigan, an IT Council coordinates across nineteen schools with clear responsibility lines~\cite{umich-it-council}. At ETH~Z\"urich, the Administrator Rights Agreement~\cite{eth-admin-agreement} is a binding \emph{transfer} of responsibility, not an abdication.
 
 \medskip\noindent\textbf{Key point:} the question is not ``centralised vs.\ distributed accountability'' but ``formal accountability vs.\ informal unaccountability.'' The situation in which users run shadow IT with zero accountability is the real governance failure.
+
+\medskip\noindent\textbf{Live-incident containment authority:} accountability includes the power to act during an active breach. The enclave charter pre-grants the central security function a scoped, auditable, time-bounded \emph{emergency containment authority} --- the right to force network isolation or quarantine of a zone on defined incident criteria, logged and reviewed post-hoc by the digital-policy commission --- overriding zone autonomy in real time. This is not an erosion of the federated model but its safeguard: \gls{nis2} Art.~21 (technical and operational risk-management measures) and Art.~23 (incident-reporting duty) already vest a central duty to contain; NIST CSF~2.0 Respond and ISO/IEC~27035 standardise the containment workflow; and the Oxford and ETH~Z\"urich unit-head models already subordinate the unit to a central isolation decision~\cite{oxford-infosec,eth-baseline}. The authority is operationalised in the Wave~7 audit-and-incident-response runbooks of the Technical Reference, not merely asserted here.
 \end{answerbox}
 
 \bigskip
@@ -585,7 +587,7 @@ Commercial AI cloud services are not fully \gls{gdpr}-compliant. If researchers 
 \textbf{This is a legitimate concern} and the dossier does not propose unfettered access without safeguards. It proposes a \emph{differentiated framework}:
 
 \begin{enumerate}[nosep]
-    \item \textbf{Data classification:} personal data is \emph{never} sent to non-\gls{gdpr}-compliant services without an explicit lawful basis and, where applicable, standard contractual clauses (\gls{scc}s);
+    \item \textbf{Data classification:} personal data is \emph{never} sent to a third-country service without a lawful basis and a valid transfer mechanism --- an adequacy route where one exists (e.g.\ the EU--US Data Privacy Framework for certified providers), or standard contractual clauses (\gls{scc}s) supplemented, per \emph{Schrems~II}, by a documented Transfer Impact Assessment (\gls{tia}) and supplementary technical measures (encryption, pseudonymisation, key custody), as operationalised in the regulatory mapping;
     \item \textbf{Environment separation:} research AI environments are isolated from the administrative zone, preventing accidental mixing of personal data with research API calls;
     \item \textbf{\gls{aiact} risk-based compliance:} for researchers \emph{using} commercial AI services, the applicable framework is the \gls{aiact}'s risk-based classification --- \emph{not} a blanket research exemption; the Art.~2(6)/2(8) exemptions cover bespoke, pre-market research tools, not commercial-API use~\cite{eu-ai-act};
     \item \textbf{Traceability:} logging of external API access for auditing;
@@ -823,7 +825,7 @@ Any incident can be interpreted multiple ways. Claiming that a centralised-perim
 
 \medskip\noindent\textbf{The interpretation aligns with independent sector analysis:}
 \begin{itemize}[nosep]
-    \item Verizon DBIR 2024~\cite{verizon-dbir2024}: ``compartmentalisation and segmentation'' as defences against lateral movement;
+    \item Verizon DBIR 2024~\cite{verizon-dbir2024}: lateral movement as a dominant breach-progression mechanism, which segmentation is designed to interrupt (per the NIST/ISO controls above);
     \item NIST SP~800-215~\cite{nist-sp800-215}: a guide to securing enterprise networks through segmentation;
     \item Sophos State of Ransomware in Education 2025~\cite{sophos-ransomware-edu2025}: ``exploited vulnerabilities'' and ``unknown security gaps'' as top causes --- consistent with patching and segmentation, not with restriction.
 \end{itemize}
@@ -942,6 +944,8 @@ Q8.3 and Q8.4 establish the lawful basis, DPIA and proportionality of monitoring
 \medskip\noindent\textbf{Per-zone retrieval duty.} Each zone charter carries a binding obligation to locate, return, rectify or erase the records it holds within a sub-deadline, reporting inward to the \gls{dpo} --- exactly as zones report inward to the \gls{soc} for incident notification.
 
 \medskip\noindent\textbf{Bounded retention and a locator.} The audit pipeline records minimised \emph{metadata} for a bounded period (Q8.4), so scheduled expiry makes Article~17 erasure tractable rather than a distributed deletion hunt; and the Article~30 Record of Processing Activities~\cite{gdpr}, owned by the \gls{dpo}, maps which zones and systems hold which categories of data, so any Article~15/16/17 request is routed deterministically across the federation.
+
+\medskip\noindent\textbf{The evidence store is itself a control.} The audit trail that underwrites these rights is not assumed trustworthy: it is append-only and tamper-evident (per-record signing or hash-chaining), with separation of duties between operators and readers and a four-eyes rule on retention expiry, as specified in the Technical Reference's observability chapter. The record proving accountability therefore cannot be silently altered or selectively deleted~(\gls{gdpr} Art.~32 / Art.~5(1)(f); ISO/IEC~27001 A.8.15).
 \end{answerbox}
 
 % ============================================================================
@@ -1148,7 +1152,7 @@ Q3.4 & Not deployed locally, so unsuitable & Appeal to absence; substrate often 
 \addlinespace
 Q4.1 & BYOD is inherently insecure & BYOD exists regardless; progressive interoperability + Zero Trust is safer than unmanaged \\
 \addlinespace
-Q4.2 & Commercial AI creates \gls{gdpr} liability & Differentiated framework: \gls{scc}s, data classification, AI Act risk-based classification, traceability \\
+Q4.2 & Commercial AI creates \gls{gdpr} liability & Differentiated framework: adequacy or \gls{scc}s+\gls{tia} with supplementary measures, data classification, AI Act risk-based classification, traceability \\
 \addlinespace
 Q4.3 & AI access is convenience, not necessity & Status-quo bias; AI is structural for research/teaching; blocking creates shadow AI \\
 \addlinespace

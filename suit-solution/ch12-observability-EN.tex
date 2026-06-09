@@ -89,6 +89,32 @@ as a documented institutional policy and to instantiate it in the
 chosen analytical store, never the inverse.
 
 %-----------------------------------------------------------------------------
+\section{Audit-store integrity}
+\label{sec:ob-integrity}
+
+The audit trail is load-bearing for accountability and for the lawful
+basis of monitoring, so the store that holds it must itself be
+tamper-evident. The architectural posture requires three controls,
+independent of the chosen product:
+\begin{itemize}[nosep]
+  \item \textbf{Append-only / WORM.} Audit events are written to an
+    append-only or write-once-read-many cold tier; operational
+    mutation or deletion of past records is not a supported path.
+  \item \textbf{Tamper-evidence.} Per-record or per-batch cryptographic
+    signing or hash-chaining lets any later alteration or gap be
+    detected.
+  \item \textbf{Separation of duties.} The operators who run the
+    pipeline, the analysts who read the logs, and the authority to
+    expire records under the retention schedule are distinct roles;
+    retention expiry follows a four-eyes rule.
+\end{itemize}
+This discharges \gls{gdpr} Art.~32 (integrity of processing) and
+Art.~5(1)(f), \gls{nis2} Art.~21 (logging integrity), ISO/IEC~27001
+controls A.8.15/A.8.16, and NIST SP~800-53 AU-9 (protection of audit
+information). The break-glass procedure does not bypass it: emergency
+access is itself an audited, signed event.
+
+%-----------------------------------------------------------------------------
 \section{Canonical TAC event schema}
 \label{sec:ob-schema}
 
