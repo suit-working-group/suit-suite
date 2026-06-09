@@ -32,8 +32,9 @@ box types structure every exchange:
 \noindent\textbf{Evidence methodology.} Every substantive answer is built from
 up to five independent layers, presented strongest-first and cross-corroborated:
 \begin{enumerate}[nosep,leftmargin=2em]
-  \item \keyword{Legal} --- binding instruments (EU Charter, \gls{ecthr} and
-    \gls{cjeu} case law, \gls{gdpr}, \gls{nis2}, the \gls{aiact});
+  \item \keyword{Legal} --- binding instruments of the adopter's jurisdiction; in
+    EU/CoE editions these are the EU Charter, \gls{ecthr} and \gls{cjeu} case law,
+    \gls{gdpr}, \gls{nis2} and the \gls{aiact}, used here as the worked example;
   \item \keyword{Standards} --- normative frameworks (NIST CSF~2.0, NIST SP~800
     series, ISO/IEC~27001, \gls{cobit}~2019);
   \item \keyword{Sector} --- consensus of professional bodies and surveys
@@ -445,7 +446,7 @@ The comparison is not about replicating budgets but about adopting scale-indepen
 
 \medskip\noindent\textbf{The scale argument actually favours federation:} a small institution has \emph{fewer} resources for a monolithic central team to manage everything. Federation distributes the workload to where domain expertise exists.
 
-\medskip\noindent\textbf{The deeper point: these are not larger institutions' choices to borrow, but a minimal necessary set.} The functions the architecture discharges --- authenticating users, protecting sensitive and personal data, segmenting, auditing --- are required of \emph{any} institution offering a digital infrastructure. Several are legally compelled with no size threshold: the \gls{gdpr}~\cite{gdpr} applies to every institution processing personal data, irrespective of size. The choice a small institution faces is therefore not ``afford the leading universities' model or not'', but ``discharge these already-owed obligations coherently and sovereignly, or implicitly and dependently''. Only the instantiation scales with size; the obligations do not~\cite{ng-tech-ref-2026}.
+\medskip\noindent\textbf{The deeper point: these are not larger institutions' choices to borrow, but a minimal necessary set.} The functions the architecture discharges --- authenticating users, protecting sensitive and personal data, segmenting, auditing --- are required of \emph{any} institution offering a digital infrastructure. Several are legally compelled with no size threshold: a data-protection duty applies to any institution processing personal data, irrespective of size, under \loc{data-protection-regime} (in the EU, the \gls{gdpr}~\cite{gdpr}, which applies irrespective of size). The choice a small institution faces is therefore not ``afford the leading universities' model or not'', but ``discharge these already-owed obligations coherently and sovereignly, or implicitly and dependently''. Only the instantiation scales with size; the obligations do not~\cite{ng-tech-ref-2026}.
 \end{answerbox}
 
 \bigskip
@@ -556,13 +557,13 @@ Invoking the EU Charter of Fundamental Rights, the ECHR, and human-rights case l
 \begin{answerbox}[Answer to Q6.3]
 The legal framework cited is binding, not rhetorical. Here is how it applies concretely:
 \begin{itemize}[nosep]
-    \item Article~13 of the EU Charter protects academic freedom as a \emph{fundamental right}. It applies to \emph{universities} --- that is not a stretch; it is the literal scope of the provision.
+    \item In EU jurisdictions, Article~13 of the EU Charter protects academic freedom as a \emph{fundamental right} and applies to \emph{universities} --- that is not a stretch; it is the literal scope of the provision. Comparable jurisdictions protect academic freedom under their own constitutional or statutory instruments.
     \item The \gls{ecthr} in \emph{Sorgu\c{c} v.\ Turkey}~\cite{sorguc2009} and \emph{Erdo\u{g}an v.\ Turkey}~\cite{erdogan2014} applied freedom-of-expression protections specifically to \emph{academic} contexts.
     \item The \gls{cjeu} in \emph{Scarlet Extended v.\ SABAM}~\cite{scarlet2011} ruled that \emph{systematic filtering} of Internet traffic is incompatible with Article~11 of the Charter.
     \item The Grand Chamber in \emph{B\u{a}rbulescu v.\ Romania}~\cite{barbulescu2017} established a \textbf{six-criteria proportionality test} for digital surveillance \emph{in the workplace} --- the exact context of university IT policies.
 \end{itemize}
 
-\noindent These are not abstract philosophical references. They are \emph{binding law} in the EU and Council of Europe member states. An IT policy that systematically restricts digital access and monitors communications \emph{must} satisfy the proportionality requirements of these instruments.
+\noindent These are not abstract philosophical references. They are \emph{binding law} in the EU and Council of Europe member states; where the adopter is so bound, an IT policy that systematically restricts digital access and monitors communications \emph{must} satisfy the proportionality requirements of these instruments. Elsewhere, they stand as a strongly persuasive proportionality benchmark alongside the adopter's own fundamental-rights instruments.
 
 \medskip\noindent\textbf{Scale of the claim:} the dossier does not compare university IT policies to totalitarian censorship. It argues that digital policies \emph{engage} fundamental rights and must therefore pass a proportionality test. This is a measured, legally grounded claim --- not emotional manipulation.
 \end{answerbox}
@@ -652,7 +653,7 @@ The \gls{nis2} Directive requires incident notification, risk management, and go
 
 \medskip\noindent A federated architecture with a central \gls{soc} for detection and notification, per-zone risk assessments and incident playbooks, charters documenting responsibilities and contacts, and a digital-policy commission for strategic oversight, meets every \gls{nis2} requirement while \emph{also} providing the compartmentalisation that \emph{improves} incident containment --- a core \gls{nis2} objective.
 
-\medskip\noindent\textbf{One locatable clock owner.} The central \gls{soc} owns the \gls{nis2} Article~23 reporting clock --- the 24-hour early warning, the 72-hour notification and the one-month final report~\cite{nis2} --- while the zone charters oblige each zone to report inward to the \gls{soc} within a sub-deadline. Federation therefore does not fragment the reporting obligation: it gives it a single, accountable owner.
+\medskip\noindent\textbf{One locatable clock owner.} Where the adopter is an essential or important entity under \loc{cybersecurity-baseline-regime}, the central \gls{soc} owns the incident-reporting clock --- in the EU, the \gls{nis2} Article~23 timeline of a 24-hour early warning, a 72-hour notification and a one-month final report~\cite{nis2} --- while the zone charters oblige each zone to report inward to the \gls{soc} within a sub-deadline. The single-owner pattern is generic: it applies to whatever incident-reporting regime governs the adopter, so federation does not fragment the reporting obligation but gives it a single, accountable owner.
 
 \medskip\noindent\textbf{ISO~27001 precedent:} universities that achieve ISO~27001 certification commonly scope the certification to \emph{central IT services} rather than the entire institution. Clause~4.3 of the standard~\cite{iso27001} expressly permits such a bounded \gls{isms} scope, and certifiers accept this \emph{de facto} federation as a valid scope definition.
 
@@ -689,7 +690,7 @@ The proposal introduces new processing of personal data --- per-zone monitoring,
 \begin{answerbox}[Answer to Q8.3]
 \textbf{The concern is well founded, and the lawful basis is stated here explicitly.} The proposal does introduce new processing, and under \gls{gdpr} Article~5(2) the controller must be able to demonstrate its lawful basis~\cite{gdpr}.
 
-\medskip\noindent\textbf{Lawful basis.} For a public university, the monitoring, audit and identity processing rests on Article~6(1)(e) --- processing necessary for a task carried out in the public interest (the institution's research and teaching mission and its statutory security obligations, including those under \gls{nis2}) --- and, where appropriate, Article~6(1)(f) legitimate interests (network and information security, expressly recognised in Recital~49), subject to the balancing test against data subjects' rights and freedoms. Any processing of special categories of data is conditioned on a corresponding Article~9 ground.
+\medskip\noindent\textbf{Lawful basis.} The controller identifies a lawful basis under \loc{data-protection-regime}: a public-mission body typically relies on the public-interest task, a private body on legitimate interests or consent. In the EU instantiation, for a public university the monitoring, audit and identity processing rests on \gls{gdpr} Article~6(1)(e) --- processing necessary for a task carried out in the public interest (the institution's research and teaching mission and its statutory security obligations, including those under \gls{nis2}) --- and, where appropriate, Article~6(1)(f) legitimate interests (network and information security, expressly recognised in Recital~49), subject to the balancing test against data subjects' rights and freedoms. Any processing of special categories of data is conditioned on a corresponding Article~9 ground.
 
 \medskip\noindent\textbf{DPIA.} Because the monitoring and audit pipeline use new technologies and entail systematic processing likely to result in high risk, they are expected to warrant a DPIA under Article~35(1)~\cite{gdpr}. The proposal feeds that assessment rather than replacing it: the per-scenario audit records supply the systematic description, the necessity-and-proportionality analysis and the risk treatment an Article~35 DPIA requires. The per-processing lawful basis is finalised in the DPIA and the Record of Processing Activities (Article~30), owned by the institution's \gls{dpo}.
 
@@ -724,7 +725,7 @@ The incident answers address supply-chain risk only \emph{after the fact}. \gls{
 \end{questionbox}
 
 \begin{answerbox}[Answer to Q8.5]
-\textbf{The obligation is real, forward-looking, and distinct from incident response --- and it has a named owner here.} \gls{nis2} Article~21(2)(d) requires ongoing management of supplier and supply-chain security~\cite{nis2}, not merely post-incident remediation.
+\textbf{The obligation is real, forward-looking, and distinct from incident response --- and it has a named owner here.} The supply-chain-security duty of \loc{cybersecurity-baseline-regime} (in the EU, \gls{nis2} Article~21(2)(d)~\cite{nis2}) requires ongoing management of supplier and supply-chain security, not merely post-incident remediation.
 
 \medskip\noindent\textbf{The architecture already carries the control.} The lifecycle wave, a supply-chain-attestation instantiation (signed provenance and SBOMs), and a procurement-clause workstream established in the foundations wave~\cite{ng-tech-ref-2026} produce software provenance and contractual security clauses applied to \emph{every} acquisition, regardless of which zone procures it.
 
@@ -773,7 +774,7 @@ The dossier discusses costs qualitatively but does not provide a detailed budget
     \item \textbf{Cost of inaction:} the global all-industry average data-breach cost reached \$4.88M in 2024~\cite{ibm-cost-breach-2024} (the education sector sits below this average); talent drain, Shadow IT, and lost competitiveness in funding calls are additional indirect costs.
 \end{itemize}
 
-\noindent The absence of a line-item budget in a \emph{policy proposal} is normal --- the budget is produced during the implementation study that follows the governance step. The purpose is to demonstrate that the approach is \emph{architecturally sound and appropriate for a research-intensive institution}, not to substitute for a procurement exercise.
+\noindent The absence of a line-item budget in a \emph{policy proposal} is normal --- the budget is produced during the implementation study that follows the governance step. The purpose is to demonstrate that the approach is \emph{architecturally sound and scalable from a teaching-led to a research-intensive institution}, not to substitute for a procurement exercise.
 
 \smallskip\noindent\textit{\footnotesize The standalone Technical Reference~\cite{ng-tech-ref-2026} provides indicative operational envelopes per layer, three reference pace options for the migration (5/7/10-year horizons), and explicit discussion of the financial-sovereignty dimension of every architectural choice.}
 \end{answerbox}

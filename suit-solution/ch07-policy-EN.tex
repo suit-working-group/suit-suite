@@ -14,7 +14,7 @@
 %   D7.2 reference instantiation = OPA + bundle server + decision log
 %   D7.3 alternatives are Cedar (open formal semantics) and native IdP authz
 %   D7.4 sovereignty scores for the policy layer (NEW, not in Ch. 3)
-%   D7.5 the policy plane is the most ambitious novelty for most universities
+%   D7.5 the policy plane is the most ambitious novelty for many adopters
 % ============================================================================
 
 \chapter{Policy decision and enforcement}
@@ -38,9 +38,10 @@ permitted?}. It is the layer that translates institutional rules ---
 data classification, role-activation gating, time-of-day or
 location-of-access conditions, posture requirements --- into
 machine-readable decisions consumed by the execution plane. It is
-also, for most universities at the time of writing, the most
-ambitious novelty in this architecture: very few institutions today
-operate a dedicated policy decision point separate from their
+also, for many adopters at the time of writing --- particularly
+those without a dedicated platform-engineering function --- the most
+ambitious novelty in this architecture: relatively few institutions
+today operate a dedicated policy decision point separate from their
 applications and identity provider. Adopting one is a real
 organisational change, addressed in \trchap{ch:wave4-policy}{Wave~4
 --- Policy plane}.
@@ -356,6 +357,6 @@ and accumulates a corpus that the team alone understands. The
 mitigation is to delegate authoring rights with code review:
 application owners propose policies for their resources; the central
 team reviews for consistency and conflicts. The model mirrors the
-delegation pattern that successful federated IT governance has used
-over decades across higher-education and research institutions.
+federated-governance delegation pattern common in mature
+higher-education and research IT organisations.
 \end{pitfallbox}

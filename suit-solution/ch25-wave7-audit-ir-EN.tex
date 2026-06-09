@@ -136,34 +136,35 @@ nine months, dominated by the runbook authoring and tabletop
 exercising rather than by technical configuration.
 
 %-----------------------------------------------------------------------------
-\section{Trajectory: brownfield Microsoft-centric}
+\section{Trajectory: brownfield single-suite-centric}
 \label{sec:w7-brownfield-ms}
 
 For institutions whose existing audit pipeline is built around
-Microsoft Sentinel, Wave~7 enriches Sentinel's investigative
-surface with the canonical TAC schema while keeping Sentinel as
-the primary SOC tool.
+a cloud-vendor-native SIEM (for example Microsoft Sentinel), Wave~7
+enriches the incumbent SIEM's investigative surface with the
+canonical TAC schema while keeping it as the primary SOC tool.
 
 \paragraph{Pattern.} The OpenTelemetry collector layer of Wave~2
 is configured to emit the canonical TAC schema both into
-Sentinel and into the parallel open store. SOC analysts continue
-to operate Sentinel as their primary investigative interface;
-the new investigative queries are authored as Sentinel detection
-content (KQL) consuming the canonical schema, with parallel
-queries authored against the open store for portability. Audit
-replay --- the capability to retrieve a recorded decision and
-its policy version --- is exercised against the open store,
-since the policy plane's decision log of Wave~4 was routed there
-without going through Sentinel's per-GB ingestion premium.
+the incumbent SIEM and into the parallel open store. SOC analysts
+continue to operate the incumbent SIEM as their primary
+investigative interface; the new investigative queries are authored
+as the incumbent SIEM's detection content (e.g.\ Sentinel KQL)
+consuming the canonical schema, with parallel queries authored
+against the open store for portability. Audit replay --- the
+capability to retrieve a recorded decision and its policy version
+--- is exercised against the open store, since the policy plane's
+decision log of Wave~4 was routed there without going through the
+incumbent SIEM's per-GB ingestion premium.
 
-\paragraph{What changes in Wave~7.} The KQL detection corpus is
-refactored to use the canonical schema fields rather than
-Sentinel-native field names; the runbooks reference the
-canonical investigation paths; the SOC training programme is
-refreshed.
+\paragraph{What changes in Wave~7.} The incumbent SIEM's detection
+corpus (e.g.\ Sentinel KQL) is refactored to use the canonical
+schema fields rather than vendor-native field names; the runbooks
+reference the canonical investigation paths; the SOC training
+programme is refreshed.
 
-\paragraph{What does not change.} Sentinel remains the SOC's
-primary surface; the existing notification and escalation
+\paragraph{What does not change.} The incumbent SIEM remains the
+SOC's primary surface; the existing notification and escalation
 channels with the institution's CSIRT and with
 \loc{national-gov-csirt} counterparts are preserved.
 
@@ -271,17 +272,18 @@ its closure.
 \noindent Wave~7 is the wave at which the institution becomes
 \emph{operationally accountable} for the audit-and-IR
 obligations of the regulatory framework. It is the principal
-anchor of the applicable national cybersecurity baseline regime
-(the national NIS2 transposition,
-NIS2~Art.~23: incident reporting --- 24-hour early
-warning, 72-hour notification, one-month final report) and of
-\gls{gdpr}~Art.~33--34 (notification of personal-data breaches
-to \loc{national-dpa} and to data
+anchor of \loc{cybersecurity-baseline-regime}
+(in the EU, the national NIS2 transposition --- NIS2~Art.~23:
+incident reporting, with a 24-hour early warning, 72-hour
+notification and one-month final report) and of the
+personal-data-breach notification duty of
+\loc{data-protection-regime} (in the EU, \gls{gdpr}~Art.~33--34:
+notification to \loc{national-dpa} and to data
 subjects), with the
 TAC-aware audit pipeline as the timeline-reconstruction
-substrate. The wave also operationalises the same regime's
+substrate. The wave also operationalises that regime's
 incident-handling and effectiveness-assessment duties
-(NIS2~Art.~21(2)(b) and Art.~21(2)(f), the latter
+(in the EU, NIS2~Art.~21(2)(b) and Art.~21(2)(f), the latter
 through audit-replay exercises). It is the
 operational anchor of 27001~A.8.15 (logging) and A.8.16
 (monitoring activities) at maturity, and of NIST CSF

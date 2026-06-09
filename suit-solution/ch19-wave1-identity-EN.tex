@@ -10,7 +10,7 @@
 % ----------------------------------------------------------------------------
 % Decisions registered in _coherence-EN.md:
 %   D19.1 coexistence pattern: dual IdP for 12-24 months (typical)
-%   D19.2 brownfield-MS trajectory: keep Entra, add OPA in front
+%   D19.2 brownfield single-suite-centric trajectory: keep Entra, add OPA in front
 %   D19.3 brownfield-hybrid trajectory: keep Shibboleth, add Keycloak local
 %   D19.4 exit criteria reference Identity conformance tests (D16.5)
 % ============================================================================
@@ -129,9 +129,9 @@ months.
 identity suite}
 \label{sec:w1-brownfield-ms}
 
-For the most common brownfield position --- an institution whose
-identity layer already runs on the cloud identity service of a
-dominant office-productivity suite vendor --- Wave~1 is the wave
+For a common brownfield position --- an institution whose
+identity layer already runs on \loc{incumbent-identity-suite-vendor}
+--- Wave~1 is the wave
 in which the institution's relationship with that incumbent
 proprietary identity suite
 is restructured rather than replaced. The architectural posture of
@@ -276,9 +276,8 @@ governance body has reviewed the wave outcome.
     escrowed key; HSM key migration preserves cryptographic identity.
     (Crypto conformance subset --- the cryptographic foundation that
     identity is built on.)
-  \item An institutionally agreed proportion of applications --- a
-    common expectation is at least eighty percent in a brownfield
-    trajectory --- has been migrated, with the remainder either
+  \item An institutionally agreed proportion of applications has been
+    migrated, with the remainder either
     in a documented schedule or in the documented exception
     register.
   \item The governance body has reviewed the wave outcome and

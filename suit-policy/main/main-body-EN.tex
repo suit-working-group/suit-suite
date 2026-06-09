@@ -431,7 +431,7 @@ rather than push them into shadow IT.
     using an assistive technology, or if a network filter blocks
     a resource essential to your research. The commission is
     independent of the IT Department and rules within
-    15 working days
+    \loc{icradp-decision-deadline}
     (see Section~\ref{sec:commission-ajustements}).
 \end{itemize}
 \end{stakeholderbox}
@@ -506,8 +506,11 @@ Section~\ref{sec:exemples}).
 
 \subsection{The European regulatory landscape}
 
-Four European regulatory instruments shape the cybersecurity and
-data-protection environment of universities:
+For an adopter bound by the EU/EEA regime, four European regulatory
+instruments shape the cybersecurity and data-protection environment
+of the institution (an adopter under another jurisdiction
+substitutes its own equivalents through the Regulatory Applicability
+module of the Technical Reference):
 
 \begin{description}[nosep]
     \item[\gls{gdpr} (2016, applicable since 2018).]
@@ -533,7 +536,7 @@ data-protection environment of universities:
     \textbf{Article~2(6):} bespoke research-only AI tools are
     exempt. \textbf{Recital~25:} research and innovation
     activities are to be supported and not unduly restricted.
-    For a university using commercial AI APIs (OpenAI,
+    For a university using commercial AI APIs (e.g.\ OpenAI,
     Anthropic, Google) in research and teaching, most uses fall
     outside the high-risk categories.
 
@@ -552,8 +555,10 @@ into a single integrated regime: \gls{gdpr} sets the data-protection
 baseline; NIS2 and its transposition set the cybersecurity
 governance and maturity expectations; the AI Act sets the
 AI-system classification; \emph{Schrems~II} constrains
-cross-border data flows. \textcolor{Crimson}{\textbf{The architecture of this report is
-designed to satisfy all four simultaneously.}}
+cross-border data flows. \textcolor{Crimson}{\textbf{Where the adopter is bound by these
+instruments, the architecture of this report is designed to satisfy
+them simultaneously; an adopter under another regime reads the same
+architecture against its own equivalents.}}
 
 \subsection{The institution-specific context}
 
@@ -741,8 +746,8 @@ The objectives of this report are to:
     \item Present a \textbf{state of the art} of university
     IT infrastructure architectures;
     \item Demonstrate through \textbf{concrete examples} that decentralised
-    and segmented architectures are the norm at world-leading
-    universities;
+    and segmented architectures are common across a range of
+    research-intensive universities;
     \item Present the \textbf{normative frameworks} (NIST, ISO, COBIT)
     that support this approach;
     \item Propose \textbf{infrastructure and governance solutions}
@@ -3723,7 +3728,7 @@ A predictable process replaces informal exceptions:
 Rather than managing everything alone, a university can rely on:
 
 \begin{itemize}[nosep]
-    \item \textbf{REN-ISAC}~\cite{ren-isac}: threat intelligence
+    \item \textbf{REN-ISAC} (US / North America)~\cite{ren-isac}: threat intelligence
     sharing, DNS RPZ feeds, incident notifications (700+
     member institutions);
     \item \textbf{Trusted CI}~\cite{trustedci}: center of excellence
@@ -4105,9 +4110,10 @@ these propositions.
     Kubernetes for research environments, rather than
     blocking cloud access or software installation.
 
-    \item \textbf{Participate in security communities} (REN-ISAC,
-    \gls{geant} Security, \gls{first}, JRES) to share threat intelligence
-    and best practices.
+    \item \textbf{Participate in security communities} (\gls{first}
+    globally, \gls{geant} Security in Europe, and the equivalent regional
+    body --- e.g.\ REN-ISAC in the US, JRES in France) to share threat
+    intelligence and best practices.
 
     \item \textbf{Implement \gls{zt} progressively}:
     start with identity (universal \gls{mfa}), then device
@@ -4262,10 +4268,12 @@ convictions.
 \paragraph{The fundamental freedoms at stake.}
 
 Restrictive university digital policies simultaneously engage
-several fundamental rights protected by the
-\textbf{Charter of Fundamental Rights of the EU}~\cite{eu-charter}
-and the \textbf{European Convention on Human
-Rights}~\cite{echr}:
+several fundamental rights. In EU-bound jurisdictions these are
+grounded in the \textbf{Charter of Fundamental Rights of the
+EU}~\cite{eu-charter} and the \textbf{European Convention on Human
+Rights}~\cite{echr}; in other jurisdictions the adopter's equivalent
+constitutional or human-rights instruments apply, with the
+international consensus (below) as the jurisdiction-neutral anchor:
 
 \begin{description}[style=unboxed]
     \item[Academic freedom (EU Charter, Art.~13):] \emph{``The arts
@@ -4579,9 +4587,9 @@ their fundamental rights, for reasons of:
     hierarchy or the IT department.
 
     \item \textbf{Processing deadline:} the commission rules within a
-    maximum period of 15 working days. In case of a documented medical or
+    maximum period of \loc{icradp-decision-deadline}. In case of a documented medical or
     professional emergency, a provisional adjustment may be
-    granted within 48 hours.
+    granted within \loc{icradp-emergency-deadline}.
 
     \item \textbf{Reasoned decisions:} any refusal of adjustment
     must be justified in writing, demonstrating that the requested

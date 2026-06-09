@@ -116,7 +116,7 @@ exercise.
   institution, by an external supplier, or by community consensus?
 
   \item Has the identity provider been independently audited within
-  the last twenty-four months?
+  the last \loc{assurance-recency-window}?
 \end{enumerate}
 
 %-----------------------------------------------------------------------------
@@ -157,7 +157,7 @@ exercise.
   reviewable history?
 
   \item Has the segmentation been independently penetration-tested
-  within the last twenty-four months?
+  within the last \loc{assurance-recency-window}?
 \end{enumerate}
 
 %-----------------------------------------------------------------------------
@@ -193,7 +193,7 @@ audit and IR} will refine.
   an institutional canonical schema)?
 
   \item Has an incident response drill been conducted within the last
-  twenty-four months?
+  \loc{assurance-recency-window}?
 
   \item Is there a documented procedure to preserve forensic evidence
   during an incident?
@@ -290,7 +290,7 @@ of the governance.
 
 The matrix in Table~\ref{tab:sa-trajectory} translates a profile of
 answers into a recommended dominant migration \emph{trajectory} ---
-greenfield, brownfield Microsoft-centric, or brownfield hybrid --- and
+greenfield, brownfield single-suite-centric, or brownfield hybrid --- and
 into an indicative \emph{pace} (5-, 7-, or 10-year horizon).
 
 The matrix offers heuristics, not algorithmic decisions: in particular,
@@ -320,20 +320,21 @@ Intent~$\geq$~Established on at least three dimensions &
 \textbf{Greenfield}, 5--7~year horizon. Rare; applies to new
 institutions or to a deliberate from-scratch refoundation. \\
 \addlinespace
-Mostly 1--2, with Microsoft technologies dominant in identity,
-endpoint, and observability &
+Mostly 1--2, with a single dominant commercial productivity-and-identity
+suite across identity, endpoint, and observability (e.g.\ Microsoft) &
 Intent~$\geq$~Established on Data and Institutional dimensions &
-\textbf{Brownfield Microsoft-centric}, 7--10~year horizon. The most
-common European starting point; the playbook adds an open policy
+\textbf{Brownfield single-suite-centric}, 7--10~year horizon. A common
+starting point for institutions whose estate is anchored on a single
+dominant productivity-suite incumbent; the playbook adds an open policy
 plane and an open observability collector layer in front of the
-existing Microsoft estate. \\
+existing incumbent-suite estate. \\
 \addlinespace
 Mostly 1--2, with mixed Linux / macOS / Windows estates and at least
 one open-source identity component already in production &
 Intent~$\geq$~Established on Technical and Institutional dimensions &
-\textbf{Brownfield hybrid}, 5--7~year horizon. Frequent in
-research-intensive institutions with substantial doctoral and
-research activity; the playbook progressively
+\textbf{Brownfield hybrid}, 5--7~year horizon. Frequent where
+heterogeneous estates and at least one open-source identity component
+already coexist; the playbook progressively
 substitutes proprietary components at renewal moments while
 preserving the open-source perimeter. \\
 \addlinespace
@@ -362,7 +363,7 @@ institution should not commit to faster pace at planning time.
 \paragraph{Trajectory revision.} The trajectory selected at the
 self-assessment is revised at the close of each wave
 (\trchap{ch:reversibility}{Reversibility playbook}). It is normal for
-an institution to start brownfield Microsoft-centric and migrate to
+an institution to start brownfield single-suite-centric and migrate to
 brownfield hybrid as the open policy and observability planes mature;
 it is uncommon, but possible, for a stalled brownfield trajectory to
 be re-baselined as a greenfield refoundation in a contained perimeter.

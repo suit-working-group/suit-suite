@@ -178,9 +178,11 @@ the conformance suite of \trchap{ch:conformance}{}
 \section{Pattern: eduroam \texorpdfstring{$\leftrightarrow$}{<->} TAC-aware Wi-Fi}
 \label{sec:cp-eduroam-tac}
 
-The pattern in which the institution's eduroam participation
-continues for inter-institutional roaming while a TAC-aware
-RADIUS attachment governs intra-institutional connections.
+Where the institution participates in a federated academic-roaming
+service (in the research-and-education community, eduroam), this is
+the pattern in which that participation continues for
+inter-institutional roaming while a TAC-aware RADIUS attachment
+governs intra-institutional connections.
 
 \paragraph{Bridging mechanism.} The institution's RADIUS service
 recognises both authentication paths. eduroam-routed
@@ -190,11 +192,12 @@ unchanged. Local authentications (staff and students at the
 institution's sites) carry the institutional schema with TAC-
 relevant attributes that the policy plane consumes.
 
-\paragraph{Attribute schema preservation.} The eduroam technical
-profile is treated as inviolate: extending it with institution-
-specific attributes for inter-institutional sessions would break
-federation. The institutional attributes are added only on the
-non-eduroam authentication path.
+\paragraph{Attribute schema preservation.} The federated-roaming
+technical profile (eduroam, where used) is treated as inviolate:
+extending it with institution-specific attributes for
+inter-institutional sessions would break federation. The
+institutional attributes are added only on the non-roaming
+authentication path.
 
 \paragraph{Roaming policy.} Visiting researchers receive the
 default eduroam treatment (Internet access from a guest zone)

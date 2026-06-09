@@ -119,25 +119,25 @@ analytical store at wave open, since the substitution risk is
 absent.
 
 %-----------------------------------------------------------------------------
-\section{Trajectory: brownfield Microsoft-centric}
+\section{Trajectory: brownfield single-suite-centric}
 \label{sec:w2-brownfield-ms}
 
 For institutions whose existing observability is dominated by
-Microsoft Sentinel and Log Analytics, Wave~2 introduces an
-open-source collector layer, built on a vendor-neutral
-telemetry-collection standard, upstream of Sentinel, without
-displacing Sentinel's role.
+a cloud-vendor-native SIEM (for example Microsoft Sentinel with
+Log Analytics), Wave~2 introduces an open-source collector layer,
+built on a vendor-neutral telemetry-collection standard, upstream
+of the incumbent SIEM, without displacing its role.
 
 \paragraph{Pattern.} Open-source collectors, such as those built on
 a vendor-neutral telemetry-collection standard, are deployed at
 every event-producing source (identity, network, endpoint,
 compute). The events are converted to the canonical TAC
-schema and forwarded to two destinations: Sentinel (which
-continues its incumbent role for the operational SOC) and a
+schema and forwarded to two destinations: the incumbent SIEM (which
+continues its role for the operational SOC) and a
 parallel open-source store (an open-source search-and-analytics
 engine or an open-source log-aggregation store) for portability and
-for the retention horizons that Sentinel's pricing makes
-unattractive. The institution retains Sentinel for the
+for the retention horizons that the incumbent SIEM's pricing makes
+unattractive. The institution retains the incumbent SIEM for the
 analytical-depth use cases and acquires the data-portability
 property of the architecture's contract.
 
@@ -148,10 +148,10 @@ horizon for cold-tier events that does not pay the per-GB premium
 of the production SIEM. The collector deployment is itself
 conformance-tested before the wave closes.
 
-\paragraph{What does not change.} Sentinel remains the production
-SOC tool, with its dashboards, detections, and the team's
-familiarity. The Microsoft licensing trajectory is unaffected by
-this wave; the institution gains the option to revisit it in
+\paragraph{What does not change.} The incumbent SIEM remains the
+production SOC tool, with its dashboards, detections, and the team's
+familiarity. The incumbent vendor's licensing trajectory is
+unaffected by this wave; the institution gains the option to revisit it in
 future waves without operational disruption.
 
 \paragraph{Indicative duration.} Six to twelve months, dominated by
@@ -240,8 +240,7 @@ verified.
 \noindent Several research-intensive institutions are reported to
 operate observability pipelines combining open-source collectors
 with commercial analytical stores. Specific architectures
-discussed in the fora of the national research and education
-network and its associated security incident response team, and
+discussed in the fora of \loc{nren-name} and \loc{nren-csirt}, and
 in the security operations environments of large research
 infrastructures, would benefit from being consulted in their
 current published form before being cited; the patterns described

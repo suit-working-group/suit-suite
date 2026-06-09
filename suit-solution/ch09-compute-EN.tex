@@ -148,7 +148,7 @@ OpenStack across multiple sites. Both should be
 consulted as primary sources for design and operational lessons,
 rather than as direct templates: each institution's compute layer
 reflects its specific research mission and the context of its
-national research and education network.
+national or regional research and education network, where one exists.
 \end{realworldbox}
 
 %-----------------------------------------------------------------------------
@@ -278,14 +278,16 @@ event.
 \label{sec:co-regulatory}
 
 \noindent The compute layer carries the workload-context
-attestations on which several \gls{gdpr}~Art.~32 obligations rest
-(integrity of processing, posture verification of the host that
-processes personal data). It operationalises NIS2~Art.~21(2)(c)
-(business continuity and backup, through declarative
-redeployability) and (e) (security in acquisition, development
-and maintenance, through SLSA-level supply-chain attestations on
-the container images). The layer contributes to 27001~A.8.32
-(change management) and to NIST CSF \textsf{PROTECT} (PR.PS ---
+attestations on which several security-of-processing obligations
+of \loc{data-protection-regime} rest (integrity of processing,
+posture verification of the host that processes personal data; in
+the EU, \gls{gdpr}~Art.~32). It operationalises the
+business-continuity and secure-development duties of
+\loc{cybersecurity-baseline-regime} (in the EU, NIS2~Art.~21(2)(c),
+through declarative redeployability, and (e), through SLSA-level
+supply-chain attestations on the container images). Where the
+institution adopts them, the layer also maps to ISO/IEC~27001~A.8.32
+(change management) and NIST CSF \textsf{PROTECT} (PR.PS ---
 platform security). Detailed mapping in
 \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
 \S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.

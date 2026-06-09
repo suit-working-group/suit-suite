@@ -121,7 +121,8 @@ data classification rules and a documented egress policy. The
 scenario surfaces most cross-cutting concerns at once: federated
 identity, policy decision combining role and posture, network
 attachment to a research zone, third-country data egress under
-\gls{gdpr}~Art.~32 and the \emph{Schrems~II} framework, audit
+\loc{cross-border-transfer-regime} (in the EU, \gls{gdpr}~Art.~32
+read with the \emph{Schrems~II} doctrine), audit
 aggregation across layers.
 
 \paragraph{Activation sequence.} The researcher authenticates
@@ -139,10 +140,11 @@ under the canonical TAC schema.
 
 \paragraph{Why this scenario.} The cross-jurisdiction data flow is
 the most institutionally consequential aspect of the scenario. A
-pilot that demonstrates a documented egress policy under
-\emph{Schrems~II} conditions produces an artefact that the
-institution can show to its governance body, its data protection
-officer, and the regulators that may inspect its operations.
+pilot that demonstrates a documented egress policy under the
+conditions of \loc{cross-border-transfer-regime} (in the EU, the
+\emph{Schrems~II} doctrine) produces an artefact that the
+institution can show to its governance body, its data-protection
+function, and the regulators that may inspect its operations.
 
 \subsection{Scenario B: Teaching cyber-range}
 \label{sec:w5-scenario-cyber}
@@ -190,11 +192,12 @@ varies in its integration burden but not in its essential form.
     there is no incumbent to coexist with. The wave is
     correspondingly compressed (indicative duration four to six
     months).
-  \item \textbf{Brownfield Microsoft-centric.} The pilot operates
-    against the institution's existing Entra-based identity and
-    Microsoft~365 estate, with policy decisions evaluated by the
+  \item \textbf{Brownfield single-suite-centric.} The pilot operates
+    against the institution's existing incumbent identity suite and
+    office-productivity estate (e.g.\ Entra-based identity with a
+    Microsoft~365 estate), with policy decisions evaluated by the
     Wave~4 OPA deployment. Integration testing focuses on the
-    Entra-to-OPA decision chain.
+    incumbent-IdP-to-policy-plane decision chain.
   \item \textbf{Brownfield hybrid.} The pilot operates against
     the existing Shibboleth federation and the Wave~1 Keycloak
     activation layer. Integration testing focuses on the
@@ -271,11 +274,12 @@ each institution's own context rather than transposed wholesale.
 \noindent Wave~5 is the first wave that exercises the
 architecture end-to-end on a research-class TAC. Its regulatory
 profile depends on the pilot scenario chosen. The
-Researcher-LLM-API scenario is the principal locus where the EU
-AI Act applies: Art.~2(6) (research exemption, when the pilot is
-conducted as research and not as a production service) is
-typically invoked, with Art.~50 (transparency obligations) still
-applicable when end-users interact with AI-generated content.
+Researcher-LLM-API scenario is the principal locus where
+\loc{ai-regulation} bites; in the EU, the AI Act Art.~2(6)
+(research exemption, when the pilot is conducted as research and
+not as a production service) is typically invoked, with Art.~50
+(transparency obligations) still applicable when end-users
+interact with AI-generated content.
 For all pilot scenarios, \gls{gdpr}~Art.~25 (data protection by
 design) and Art.~35 (DPIA where the pilot processes personal
 data on a non-trivial scale) frame the documentation duty. The

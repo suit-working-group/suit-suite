@@ -62,8 +62,7 @@ architecture, must:
   \item accept and emit identity provisioning over
     SCIM~2.0~\cite{rfc-7643-scim-core,rfc-7644-scim-protocol};
   \item be capable of publishing federation metadata interoperable
-    with the institution's applicable research-and-education identity
-    federation profile or an equivalent regional federation, and do so
+    with \loc{identity-federation-profile}, and do so
     where the institution participates in inter-institutional
     federation;
   \item express attributes in a documented schema, with an
@@ -96,9 +95,8 @@ where it exists.
 The reference instantiation comprises a self-hosted open-source
 identity-provider deployment --- Keycloak~\cite{keycloak} is one
 mature representative --- a \gls{scim} provisioning bus,
-and participation in the institution's research-and-education identity
-federation~\cite{edugain} through its national research-and-education
-federation operator.
+and participation in \loc{identity-federation-profile}~\cite{edugain}
+through its national research-and-education federation operator.
 
 \begin{instantiationbox}[Identity layer]
 \noindent\textbf{Topology.} An open-source identity-provider realm
@@ -118,8 +116,7 @@ in OpenTelemetry format to the observability layer.
 \paragraph{Operational considerations.} The reference instantiation
 is expected to sustain the identity needs of a research-intensive
 institution within a small operating team sized to the institution's
-own staffing profile --- a handful of engineers shared across other
-duties --- provided that the lifecycle
+own staffing profile --- provided that the lifecycle
 automation (SCIM upstream and downstream) is robust. Actual envelopes
 vary with the application portfolio and the federation
 participation. The principal recurring effort is the
@@ -156,8 +153,7 @@ being cited in derivative work.
 \label{sec:id-alt1}
 
 \begin{alternativebox}[Incumbent commercial identity suite]
-\noindent A tenancy of the institution's incumbent commercial
-identity-suite vendor~\cite{microsoft-entra}, operated by the supplier in a
+\noindent A tenancy of \loc{incumbent-identity-suite-vendor}~\cite{microsoft-entra}, operated by the supplier in a
 designated EU (or analogous regional) region, integrated through the
 institution's existing tenant arrangements, with the vendor's
 conditional-access policy engine
@@ -171,8 +167,8 @@ or via the OpenTelemetry collectors of
 
 \paragraph{Where it adds value.} The operational dimension benefits
 from a deep and broadly available skills market, extensive
-documentation, and integration with the dominant office-and-collaboration
-suite already present in the majority of universities. The cost
+documentation, and integration with an incumbent office-and-collaboration
+suite, where one is already dominant in the institution. The cost
 of activation, in operational time, is lower than for a self-hosted
 solution.
 
@@ -192,7 +188,7 @@ configuration to the standard interface and forgoes those extensions
 in critical paths.
 
 \paragraph{When it is the right choice.} An institution with a
-mature deployment of the dominant office-and-collaboration suite,
+mature deployment of an incumbent office-and-collaboration suite,
 limited identity-engineering capacity,
 and a sovereignty position that accepts a Partial score on data,
 technical and institutional dimensions in exchange for a Robust score
@@ -244,8 +240,7 @@ significant existing investment in an open-source federation engine, a
 research-intensive profile that already values open-source identity,
 and a pace constraint that does not permit a wholesale migration in
 the immediate term. The pattern is also a stable end-state, not only
-a transition: many research-intensive institutions sustain it for
-ten or more years.
+a transition.
 
 %-----------------------------------------------------------------------------
 \section{Sovereignty grid applied}

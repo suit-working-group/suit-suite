@@ -338,7 +338,7 @@ incumbent stays viable, the wave is undone by re-routing to it.
 reversibility windows. Pace options: \emph{5-year compressed}
 (parallelised, higher risk tolerance), \emph{7-year balanced} (recommended
 default), \emph{10-year gradual} (renewal-aligned, lower risk). Trajectory
-varies by starting estate (greenfield, brownfield Microsoft-centric,
+varies by starting estate (greenfield, brownfield single-suite-centric,
 brownfield hybrid, selective, deferred).}
 \end{table}
 
@@ -433,7 +433,7 @@ not measurements}; size your own estate by direct workload measurement.
 \midrule
 Identity &
   Auths/s: a few--tens steady, hundreds at peak; concurrent sessions
-  thousands; eduGAIN tens--hundreds of thousands/day. & 2--4 \\
+  thousands; \loc{identity-federation-profile} tens--hundreds of thousands/day. & 2--4 \\
 \addlinespace
 Policy &
   Tens--low hundreds decisions/s; $<$10\,ms p95 online decision; bundle
@@ -524,9 +524,9 @@ a minimal-core envelope of $\sim$3--5 shared engineer-equivalents.
     enterprise array $\leftrightarrow$ distributed storage:} new workloads
     default to the open side; legacy migrates at its natural lifecycle
     boundary, validated by checksum.
-  \item \textbf{eduroam $\leftrightarrow$ TAC-aware Wi-Fi:} keep the eduroam
-    profile inviolate; add institutional/TAC attributes only on the
-    non-eduroam path.
+  \item \textbf{eduroam $\leftrightarrow$ TAC-aware Wi-Fi:} keep the federated-roaming
+    profile (eduroam) inviolate; add institutional/TAC attributes only on
+    the non-roaming path.
 \end{itemize}
 \end{principlebox}
 
