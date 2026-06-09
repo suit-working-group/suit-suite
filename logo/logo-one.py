@@ -59,6 +59,11 @@ ROW_HEIGHT = 180            # hauteur du canevas en ligne
 ROW_MARGIN = 44             # marge gauche/droite
 ROW_STEP   = 144            # pas horizontal constant entre centres (+20 %)
 
+# Placement (version COLONNE = la composition en ligne, mise à la verticale)
+# Quatre figures empilées, centres équidistants : cercle (haut) -> carré (bas).
+COL_MARGIN = 44             # marge sur les quatre côtés
+COL_STEP   = 144            # pas vertical constant entre centres successifs
+
 # ----------------------------------------------------------------------
 # THÈMES — une couleur assignable à CHAQUE élément
 #   bg            fond
@@ -68,15 +73,15 @@ ROW_STEP   = 144            # pas horizontal constant entre centres (+20 %)
 #   link          arêtes de liaison ET contour du carré extérieur
 #                 (même couleur, par construction)
 # ----------------------------------------------------------------------
-def _mono(fg):
-    """Thème monochrome : toutes les formes de la couleur fg, fond transparent."""
-    return {"bg": None, "circle": fg, "triangle": fg,
+def _mono(fg, bg=None):
+    """Thème monochrome : toutes les formes de la couleur fg sur fond bg."""
+    return {"bg": bg, "circle": fg, "triangle": fg,
             "square_inner": fg, "link": fg}
 
 # bg = None  =>  fond transparent (aucun rectangle de fond émis).
 THEMES = {
-    "light": _mono("#000000"),   # formes noires (sur fond clair)
-    "dark":  _mono("#ffffff"),   # formes blanches (sur fond sombre)
+    "light": _mono("#000000", bg="#ffffff"),  # lignes noires sur FOND BLANC
+    "dark":  _mono("#ffffff"),                # formes blanches, fond transparent
     # Version 1 — « dégradé d'ouverture » : vert -> orange -> rouge VIFS, la
     # teinte se réchauffe et la valeur s'assombrit du cercle (ouvert) vers
     # le carré (fermé). Le contour du carré reprend la couleur des arêtes.
@@ -236,12 +241,55 @@ def svg_logo_row(theme="light"):
 
 
 # ----------------------------------------------------------------------
+# MISE EN PAGE COLONNE — la composition en ligne, mise à la verticale
+#   cercle (haut)  -  triangle 1  -  triangle 2  -  carré (bas)
+# ----------------------------------------------------------------------
+def svg_logo_col(theme="light"):
+    t = _theme(theme)
+
+    # Quatre centres équidistants empilés (pas constant COL_STEP).
+    half_top    = CIRCLE_R + STROKE / 2          # centre cercle -> haut d'encre
+    half_bottom = SQUARE_OUTER / 2 + STROKE / 2  # centre carré  -> bas d'encre
+    height = 3 * COL_STEP + half_top + half_bottom + 2 * COL_MARGIN
+
+    # Largeur : la figure la plus large est le triangle (base = 2·TRI_HALF_W).
+    half_width = max(CIRCLE_R + STROKE / 2, TRI_HALF_W, SQUARE_OUTER / 2 + STROKE / 2)
+    width = 2 * (half_width + COL_MARGIN)
+    cx = width / 2
+
+    cy_circle = COL_MARGIN + half_top
+    cy_tri1   = cy_circle + COL_STEP
+    cy_tri2   = cy_circle + 2 * COL_STEP
+    cy_square = cy_circle + 3 * COL_STEP
+
+    # Triangles pointe-en-haut centrés géométriquement sur leur slot.
+    apex1, base1 = triangle_from_center(cy_tri1)
+    apex2, base2 = triangle_from_center(cy_tri2)
+
+    parts = []
+    # Figure 1 : un cercle creux (en haut)
+    parts.append(draw_circle(cx, cy_circle, t["circle"]))
+    # Figures 2 & 3 : deux triangles reliés par une arête VERTICALE (centre à centre)
+    parts.append(draw_link(cx, cy_tri1, cx, cy_tri2, t["link"]))
+    parts.append(draw_triangle(cx, apex1, base1, t["triangle"]))
+    parts.append(draw_triangle(cx, apex2, base2, t["triangle"]))
+    # Figure 4 : le carré (en bas ; contour extérieur = couleur des arêtes)
+    parts.append(draw_square(cx, cy_square, t["link"], t["square_inner"]))
+
+    return svg_document(width, height, t["bg"], "\n".join(parts))
+
+
+# ----------------------------------------------------------------------
 def save_logo():
-    # Chaque thème est rendu dans les deux dispositions (verticale + ligne).
+    # Chaque thème est rendu dans les trois dispositions :
+    #   - svg_logo      : verticale « riche » (3 cercles / 2 triangles / carré)
+    #   - svg_logo_row  : composition en ligne (cercle · triangles · carré)
+    #   - svg_logo_col  : la même composition, mise à la verticale
     files = {}
     for theme in THEMES:
         files[f"suit_logo_{theme}.svg"]     = svg_logo(theme)
         files[f"suit_logo_row_{theme}.svg"] = svg_logo_row(theme)
+        files[f"suit_logo_col_{theme}.svg"] = svg_logo_col(theme)
 
     for name, content in files.items():
         Path(name).write_text(content, encoding="utf-8")
