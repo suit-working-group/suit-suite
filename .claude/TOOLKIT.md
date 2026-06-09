@@ -261,9 +261,9 @@ contribution flow, with the Luxembourg edition as the round-trip-validated refer
 
 REMOVE locality-as-framing (a body that reads as one institution's local artefact)
 and all migration/source-repo internals; KEEP the author's name and working-group
-provenance, the "originally developed for the University of Luxembourg" origin line,
-the author's cited works, and clearly-labelled regulatory examples. Full decision
-test in the rule file.
+attribution, the author's cited works, and clearly-labelled regulatory examples.
+The "originally developed for the University of Luxembourg" origin is an
+instantiation detail, not generic-suite content. Full decision test in the rule file.
 
 ---
 

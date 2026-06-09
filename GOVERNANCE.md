@@ -1,16 +1,16 @@
-# Governance
+# 🏛️ Governance
 
 This document defines how the **SUIT — Sustainable University IT Infrastructure & Technology** suite is governed and maintained.
 
-## Mission
+## 🎯 Mission
 
-SUIT is an international working group of university IT decision-makers, architects, and engineers. It produces and maintains a reference suite — Policy, Policy Summary, Solution, Solution Summary — that any university can adopt to build, operate, and sustain its research and education IT infrastructure.
+SUIT is an international working group of academic-community members that includes university IT decision-makers, architects, engineers, teachers, researchers and students. It produces and maintains a reference suite — Policy, Policy Summary, Solution, Solution Summary — that any university can adopt to build, operate, and sustain its research and education IT infrastructure.
 
-## Origins
+## 🌱 Origins
 
-The SUIT suite builds on a first version — the policy, its executive companion, and the technical solution — created by **Nicolas Guelfi**, originally developed for the University of Luxembourg. The international working group generalises that foundation into an institution-neutral reference adoptable by any university. The suite is institution-neutral by design so that it reads as a shared international reference rather than a single university's local policy; the original authorship and the prior work are acknowledged, not erased.
+The SUIT suite builds on a first version — the policy and the technical solution together with their respective executive companion — created by **Nicolas Guelfi**, chair of the SUIT working group. The international working group generalises that foundation into an institution-neutral reference adoptable by any university. The suite is institution-neutral by design so that it reads as a shared international reference rather than a single university's local policy; the original authorship and the prior work are acknowledged, not erased.
 
-## Core rule: no direct write access to the documents
+## 🔒 Core rule: no direct write access to the documents
 
 The defining governance rule of this repository:
 
@@ -20,29 +20,33 @@ The defining governance rule of this repository:
 
 This single point of integration is what keeps the four documents coherent in terminology, evidence, and cross-references.
 
-## Roles
+## 👥 Roles
 
-- **Chairman / Maintainer** — **Nicolas Guelfi** (**@nicolasguelfi**), chairman of the SUIT working group and creator of the first version of the Policy, Companion and Technical Solution. Owns the repository, triages tickets, makes final decisions, applies changes, cuts releases.
-- **Working group members** — propose changes, review proposals, and contribute evidence through tickets and discussion.
+- **Chairman / Maintainer** — **Nicolas Guelfi** (**@nicolasguelfi**), chair of the SUIT working group and creator of the first version of the policy and technical solution and their executive companions. Owns the repository, triages tickets, makes final decisions, applies changes, cuts releases. Contact: [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu).
+- **Working group members** — propose changes, review proposals, and contribute evidence through tickets and discussion. Membership is open to the whole academic community — decision-makers, architects, engineers, teachers, researchers and students.
 - **Adopting institutions** — use the suite and request localization guidance through the *Localization request* template.
 
-## Decision process
+## 🤝 Joining the working group
+
+The working group is open and we actively welcome new members. To join — to propose changes, contribute evidence, or deposit your institution's instantiation — write to **Nicolas Guelfi** at [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu), or open an issue through the templates in `.github/ISSUE_TEMPLATE/`.
+
+## 🔁 Decision process
 
 1. A change is proposed as a **Document change request** ticket (with target, current text, proposal, rationale, evidence).
 2. The maintainer triages: accept / refine / decline, with a rationale recorded on the ticket.
 3. Accepted changes are applied by the maintainer, verified by a clean `latexmk` build (0 undefined citations/references), and recorded in `CHANGELOG.md` with the ticket id.
 4. Substantive or contested changes may be put to the working group for input before a decision.
 
-## Release cadence
+## 🚀 Release cadence
 
 - Releases are versioned (`vMAJOR.MINOR.PATCH`) and tagged.
 - A release bundles the four documents in a consistent state; the `CHANGELOG.md` lists every applied change since the previous release with its ticket id.
 
-## Localization
+## 🌍 Localization
 
 The documents are institution-neutral by design. An adopting university instantiates the generic material via `shared/localization-guide-EN.tex`. Localization questions are handled through the *Localization request* template; localization forks are encouraged and remain under the suite's licenses.
 
-## The instantiation library
+## 🧩 The instantiation library
 
 The generic suite is the shared baseline; the **instantiation library** at `instantiations/` is where it is turned into concrete, build-clean editions and made available to the whole working group.
 
@@ -52,7 +56,7 @@ The generic suite is the shared baseline; the **instantiation library** at `inst
 
 The maintainer keeps the library coherent: the six archetypes and the localization key catalogue remain centrally governed, so that instantiations stay comparable across institutions and continue to build against the current generic suite.
 
-## Enforcing the model on GitHub (maintainer setup)
+## ⚙️ Enforcing the model on GitHub (maintainer setup)
 
 The no-direct-write rule is enforced by repository configuration (manual GitHub settings, to be applied before publication):
 

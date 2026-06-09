@@ -103,8 +103,9 @@ detail in this file — follow the cross-reference.
 - **No-false-locality rule** — document BODIES must read as institution-neutral,
   role-based prose: route every local anchor (institution/NREN/governing-body/
   jurisdiction name) through `\loc{}`, and carry no migration/source-repo
-  internals. Provenance is the explicit exception that is KEPT: the author's
-  name (chairman of the working group, creator of the first version), the
-  "originally developed for the University of Luxembourg" origin line, the
-  author's cited works, and clearly-labelled regulatory examples all stay.
-  See `no-false-locality.md`.
+  internals. Authorship is the explicit exception that is KEPT: the author's
+  name (chair of the working group, creator of the first version), the author's
+  cited works, and clearly-labelled regulatory examples all stay. The
+  geographic-origin line ("originally developed for the University of
+  Luxembourg") is NOT carried in the generic suite — it belongs to the
+  Luxembourg instantiation. See `no-false-locality.md`.

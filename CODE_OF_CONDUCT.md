@@ -16,6 +16,6 @@ This Code of Conduct applies within all project spaces — issues, pull requests
 
 ## Reporting
 
-To report unacceptable behaviour, open a **confidential** matter with the maintainer. Because this repository is ticket-centralized, sensitive reports should not be filed as public issues: contact the maintainer directly through their GitHub profile (**@nicolasguelfi**). All reports will be reviewed and investigated promptly and fairly.
+To report unacceptable behaviour, open a **confidential** matter with the maintainer. Because this repository is ticket-centralized, sensitive reports should not be filed as public issues: contact the maintainer directly — by email at [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu), or through their GitHub profile (**@nicolasguelfi**). All reports will be reviewed and investigated promptly and fairly.
 
 Enforcement follows the Contributor Covenant's **Enforcement Guidelines** (Correction → Warning → Temporary Ban → Permanent Ban), as described in the linked full text.

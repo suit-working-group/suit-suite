@@ -44,7 +44,7 @@ Once accepted, your `instantiations/<institution>/` — the `set.tex`, the rende
   ```bash
   latexmk -pdf <document>.tex
   ```
-  Temporary files go to `out/`; the final `.pdf` sits next to its `.tex`.
+  Temporary files go to `out/`; the final `.pdf` sits next to its `.tex`. Set `SUIT_CLEAN=1` (e.g. `SUIT_CLEAN=1 latexmk -pdf <document>.tex`) to wipe the `out/` temporaries after a successful build.
 - After every build, verify **0 undefined citations** and **0 undefined references**.
 - Bibliography entries must carry `abstract`, `fetch_status`, and `fetch_note` (see `.claude/rules/bibliography-curation.md`).
 - Documents stay **institution-neutral**; localization variables live in `shared/localization-guide-EN.tex`.

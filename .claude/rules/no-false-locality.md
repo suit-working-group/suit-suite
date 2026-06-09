@@ -35,38 +35,49 @@ be REMOVED; three things are explicitly VALUED and KEPT.
 
 ## KEEP — what is valued and must be preserved
 
-3. **Authorship and provenance of the first version.** Nicolas Guelfi is the
-   **chairman of the working group** and the **creator of the first version** of
-   this policy. This is a fact of record, not a locality leak. Keep:
+3. **Authorship of the first version.** Nicolas Guelfi is the **chair of the
+   working group** and the **creator of the first version** of this policy and
+   technical solution. This is a fact of record, not a locality leak. Keep:
    - the author's name on title pages, author fields, and acknowledgments;
-   - the provenance statement that the policy was **"originally developed for the
-     University of Luxembourg"** — phrased as historical origin/credit, NOT as
-     the document's current scope or subject.
+   - the credit "creator of the first version" / "chair of the SUIT working group".
+
+   Do NOT, however, state the **geographic origin** ("originally developed for /
+   at the University of Luxembourg") in the GENERIC suite prose or bibliography.
+   The front-door framing (README) credits the author and the working group
+   **without naming the origin institution**. The University-of-Luxembourg origin
+   is an **instantiation** detail: it belongs to the Luxembourg edition under
+   `instantiations/lu-university-of-luxembourg/`, and any edition may express it
+   through `\loc{author-affiliation}`.
 
    **The author's name is NOT a forbidden token.** Removing "Nicolas Guelfi" in
-   the name of genericity is an error. Provenance ≠ locality-as-framing: a credit
-   line records *where the work came from*; it does not make the body read as a
-   local solution.
+   the name of genericity is an error. Authorship ≠ locality-as-framing: a credit
+   line records *who created the work*; it does not make the body read as a local
+   solution.
 4. **Cited scientific works of the author.** The author's own publications cited
    as evidence (`\cite{...}` with their `.bib` entries) are scholarly references,
    not locality. They stay, under the normal evidence and bibliography rules.
-5. **Locality tokens as PROVENANCE/acknowledgments and as REGULATORY EXAMPLES.**
+5. **Locality tokens as REGULATORY EXAMPLES and in the Luxembourg instantiation.**
    University-of-Luxembourg and Luxembourg/EU tokens are legitimate when used:
-   - in **provenance and acknowledgment** passages (origin, working-group credit);
    - as **regulatory examples** inside the regulatory module and the
      **localization guide** — i.e. as a *named worked example* of how the generic
      policy instantiates against one jurisdiction, clearly marked as an example,
-     not as the body's default subject.
+     not as the body's default subject;
+   - in the **Luxembourg instantiation** (`instantiations/lu-university-of-luxembourg/`),
+     which legitimately names Luxembourg and the University of Luxembourg as its
+     concrete edition.
 
-   In those two roles the tokens are content, not leakage. Elsewhere in the body,
-   they must be parameterised (`\loc{}`) or removed.
+   In those roles the tokens are content, not leakage. In the GENERIC suite body
+   they must be parameterised (`\loc{}`) or removed — including the geographic
+   origin of the first version (keep the author / chair credit, not the origin
+   institution name).
 
 ## Decision Test
 
 For any occurrence of a University-of-Luxembourg or Luxembourg/EU token, ask:
 
-- Is it **provenance/acknowledgment** (where the work came from, who chaired it)?
-  → KEEP, phrased as origin/credit.
+- Is it the **author / chair credit** (who created the first version, who chairs
+  the working group)? → KEEP. But the **geographic origin institution** is NOT
+  generic-suite provenance — keep it only in the Luxembourg instantiation.
 - Is it a **labelled regulatory example** in the regulatory module or
   localization guide? → KEEP, clearly marked as an example.
 - Is it the **author's name or a cited work of the author**? → KEEP.
@@ -83,8 +94,9 @@ former, neutralise the latter.
 - A generic build (Layer 0 only, per `localization-model.md`) MUST read as a
   complete institution-neutral policy: no local org-unit, NREN, governing-body,
   or jurisdiction string as a body subject; 0 migration/source-repo tokens.
-- The author's name, the "originally developed for the University of Luxembourg"
-  provenance line, and the author's cited works MUST survive that build intact.
+- The author's name (with the chair / creator-of-first-version credit) and the
+  author's cited works MUST survive that build intact; the generic build does NOT
+  name the University of Luxembourg as the origin institution.
 - Before commit: grep bodies for source-repo/branch/conflicted-copy vocabulary
   (must be 0) and confirm every retained locality token is provenance, an
   acknowledgment, or a labelled regulatory example.
