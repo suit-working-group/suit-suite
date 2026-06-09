@@ -62,4 +62,23 @@
   \fi
 }
 
+% --- \suitmetablock : the unified, generic document title-page metadata block -
+%     Single source of truth for every document's version/visibility/status
+%     line. All variable parts are localization keys, so an edition overrides
+%     them via \setloc. Renders centred-friendly (uses \\), at \small.
+%       Document Version <doc-version>
+%       Visibility: <doc-visibility>          (INTERNAL / PUBLIC)
+%       Status: Approved by <authority> on <date>
+%       Based on the SUIT Working Group [ref]
+%       Print date: <today>
+\newcommand{\suitmetablock}{%
+  \begingroup\small
+  Document Version~\loc{doc-version}\\[2pt]
+  Visibility:~\loc{doc-visibility}\\[2pt]
+  Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]
+  Based on the SUIT Working Group~\cite{suit-wg}\\[2pt]
+  Print date:~\today
+  \par\endgroup
+}
+
 \endinput
