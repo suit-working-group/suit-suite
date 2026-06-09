@@ -1165,16 +1165,20 @@
       "icradp-emergency-deadline",
       "assurance-recency-window"
     ],
-    "deadBindingsResolved": [
-      "institution-type",
-      "cybersecurity-baseline-regime",
-      "data-protection-regime",
-      "incumbent-identity-suite-vendor",
-      "identity-federation-profile",
-      "research-backbone-scale"
-    ],
     "extraFixNotInAudit": "GEN-most-universities-mutual-ignorance duplicate paraphrase in ch01-synthesis-EN.tex (per-file audit could not see the cross-chapter copy).",
     "leftByDecisionNote": "pace-horizons / doc-version date anchors / ch30 24-month review kept as accepted design constants or editorial re-date per release (decision J.5).",
-    "buildVerification": "latexmk: 6 generic documents (solution-EN, policy-EN, argumentation-solution-EN, argumentation-policy-EN, solution-summary-EN, policy-summary-EN) and the Luxembourg reference edition (solution-EN, policy-EN) build clean: 0 undefined citations/references, 0 undefined localization keys, 0 ??key?? tokens."
+    "buildVerification": "latexmk: 6 generic documents (solution-EN, policy-EN, argumentation-solution-EN, argumentation-policy-EN, solution-summary-EN, policy-summary-EN) and the Luxembourg reference edition (solution-EN, policy-EN) build clean: 0 undefined citations/references, 0 undefined localization keys, 0 ??key?? tokens.",
+    "localizationCoverage": {
+      "deadBindingsRemaining": 0,
+      "note": "All 57 Layer-0 keys have >=1 consumption site. Remediation substantially increased coverage rather than resurrecting dead keys (an earlier scan that reported some keys as 'dead' used a grep pattern that mishandled the brace literal; corrected here).",
+      "examplesBeforeAfter": {
+        "institution-type": "1 -> 11",
+        "data-protection-regime": "1 -> 10",
+        "cybersecurity-baseline-regime": "1 -> 9",
+        "identity-federation-profile": "1 -> 5",
+        "incumbent-identity-suite-vendor": "1 -> 3",
+        "research-backbone-scale": "1 -> 2"
+      }
+    }
   }
 }
