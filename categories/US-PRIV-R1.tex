@@ -1,0 +1,111 @@
+% ============================================================================
+% US-PRIV-R1.tex — CATEGORY ARCHETYPE: US private research university (R1)
+% ----------------------------------------------------------------------------
+% LAYER 1.5 (CATEGORY) localization overrides.
+%
+% WHO THIS ARCHETYPE FITS
+%   A United States PRIVATE, doctoral / very-high-research-activity (Carnegie
+%   "R1") university: a non-profit institution governed by a self-perpetuating
+%   board of trustees, led by a president with a provost as chief academic
+%   officer, running its own campus network, identity estate and
+%   research-computing facilities, and connecting to the national research and
+%   education backbone through a state/regional R&E network. Exemplars of the
+%   shape (named only to fix the archetype, not to bind any one institution):
+%   Stanford, MIT, Harvard, Princeton, Yale, Caltech, Johns Hopkins, Columbia,
+%   Cornell, Carnegie Mellon, Duke, Northwestern, Vanderbilt, Rice, Emory,
+%   USC, NYU, the University of Chicago, the University of Pennsylvania. It
+%   does NOT fit US PUBLIC / state universities (different governing-board and
+%   public-records posture — use a US-PUBLIC-R1 archetype), liberal-arts
+%   colleges, or community colleges.
+%
+% WHAT THIS FILE BINDS
+%   A PARTIAL set of \setloc overrides. It rebinds the STRUCTURAL localization
+%   keys (governance ladder, executive leadership, constituent units, NREN
+%   tier, identity federation, deployment-scale and data-custody model, pilot
+%   units, operational roles) to this archetype's concrete-but-generic value,
+%   and points the REGULATORY keys at the United States regime worked in the
+%   shared Regulatory Applicability module (shared/regulatory-applicability-EN.tex,
+%   "United States — deep regime (sectoral and fragmented)").
+%
+%   It deliberately leaves the ~3 COUNTRY-SPECIFIC NAME keys at their generic
+%   Layer-0 default, because they are filled by an INSTITUTION-LEVEL set that
+%   \input{}s this archetype after the defaults:
+%       \setloc{national-dpa}{...}        % no US omnibus DPA; per-institution
+%       \setloc{national-gov-csirt}{...}  % e.g. CISA / sector ISAC binding
+%       \setloc{nren-csirt}{...}          % the institution's regional-network/
+%                                         %   InCommon-side security contact
+%   (the institution-level set may also pin nren-name to its concrete regional
+%   network — e.g. CENIC, MERIT, OSHEAN, NYSERNet, MCNC — and name its own
+%   president/provost/board if a non-generic edition is wanted.)
+%
+% LOAD ORDER
+%   localization.sty  ->  localization-defaults.tex  ->  THIS FILE
+%   ->  (optional) institution-level set  ->  document body.
+%   Requires localization.sty (\setloc / \loc). Input AFTER the defaults so
+%   these overrides win; an institution set input AFTER this wins over it.
+% ============================================================================
+
+% --- Subject institution & profile ------------------------------------------
+\setloc{institution-type}{a US private, doctoral / very-high-research-activity (Carnegie R1) university}
+\setloc{staffing-profile}{a well-resourced private research university that sets research excellence as a strategic objective and funds a dedicated IT and information-security organisation}
+
+% --- Institutional units & pilots -------------------------------------------
+\setloc{cs-research-unit}{the university's computer-science / electrical-engineering-and-computer-science department}
+\setloc{security-research-centre}{a cybersecurity-focused interdisciplinary research institute or center}
+\setloc{institution-hpc-facility}{the university's central research-computing / advanced-research-computing facility and team}
+\setloc{pilot-entities}{the university's research-computing facility and team, with the computer-science department as co-pilot}
+
+% --- Institutional governance roles -----------------------------------------
+% US private-university governance ladder: a self-perpetuating board of
+% trustees delegates broad operating authority to a president; the provost is
+% chief academic officer; the faculty/academic senate holds delegated academic
+% and research-policy authority.
+\setloc{executive-leadership}{the university's president and provost (the president as chief executive, the provost as chief academic officer)}
+\setloc{governing-board}{the university's board of trustees (the self-perpetuating non-profit governing board)}
+\setloc{academic-governing-bodies}{the faculty senate / academic senate and its standing committees}
+
+% --- Research & education network and its services --------------------------
+% US NREN tier: Internet2 is the national R&E backbone; institutions connect
+% through a state/regional R&E network; InCommon is the national identity
+% federation, interfederated globally via eduGAIN.
+\setloc{nren-name}{the national research-and-education backbone (Internet2) reached through the institution's state/regional R\&E network}
+\setloc{peer-nren-roster}{peer state and regional R\&E networks across the United States, each aggregating campus connections onto the Internet2 national backbone and offering security, identity and data-transfer services}
+\setloc{nren-service-catalogue}{the Internet2 / regional-network service catalogue (eduroam federated Wi-Fi, the InCommon Certificate Service, performance monitoring (perfSONAR), and managed research-data transfer)}
+\setloc{nren-research-cloud}{the Internet2 cloud-brokerage and peering arrangements with hyperscale providers (Internet2 NET+ / cloud connect), in place of a single sovereign national research cloud}
+\setloc{research-backbone-scale}{the Internet2 national backbone (400--800\,Gbps coast-to-coast) aggregating 300+ universities through 35+ state and regional R\&E networks, with campus connections in the 10--100\,Gbps range}
+\setloc{identity-federation-profile}{the InCommon identity federation, interfederated globally through eduGAIN}
+
+% --- High-performance computing ---------------------------------------------
+% No EuroHPC analogue; national-scale capability is reached through the NSF
+% national cyberinfrastructure (ACCESS, formerly XSEDE) and DOE leadership
+% facilities, alongside campus clusters.
+\setloc{national-hpc-facility}{a national cyberinfrastructure allocation (NSF ACCESS, formerly XSEDE) or a DOE/NSF leadership-class facility}
+
+% --- Deployment topology & data custody -------------------------------------
+% US private R1 posture is cloud-PERMISSIVE: the default is a hybrid estate
+% combining campus-operated core services with major US hyperscale cloud under
+% institutional contracts, governed by data classification rather than a
+% sovereignty mandate.
+\setloc{deployment-custody-model}{the university operates a hybrid estate — campus-operated core services alongside major US hyperscale cloud under institutional agreements (with FedRAMP / enclave tiers for regulated data) — under data-classification-driven custody controls}
+\setloc{data-custody-sovereignty-profile}{a data-classification-driven custody arrangement: open and internal data may sit in commercial US cloud, while controlled data (CUI, export-controlled, PHI) is held in segregated, access-restricted enclaves to satisfy the applicable sector and contract regime}
+
+% --- Regulatory regime (United States — from the Regulatory Applicability module)
+% These keys instantiate the US "deep, sectoral and fragmented" regime worked
+% in shared/regulatory-applicability-EN.tex, sec. "United States". There is no
+% omnibus federal statute: the spine is assembled from sector statutes,
+% federal-contracting baselines and export-control regimes.
+\setloc{regulatory-regime}{binding US federal and state law (a sectoral, fragmented stack with no omnibus privacy statute), applicable to the university's jurisdiction}
+\setloc{cybersecurity-baseline-regime}{the applicable US federal sectoral and contracting framework (FTC Safeguards Rule, HIPAA Security Rule, NIST CSF 2.0 as the voluntary baseline, NIST SP~800-171 / CMMC for federal-contract data)}
+\setloc{data-protection-regime}{the applicable US sectoral privacy regime (FERPA for student records, the HIPAA Privacy Rule for the health component, GLBA / FTC Safeguards for financial-aid data, and the CCPA/CPRA-style state-privacy layer)}
+\setloc{eid-trust-services-regime}{the US framework for electronic records and signatures (ESIGN Act / UETA) together with the export-control regime (EAR, ITAR) governing controlled technology and technical data}
+\setloc{ai-regulation}{the applicable US AI-governance regime (the NIST AI Risk Management Framework as the voluntary baseline, layered with sectoral and emerging state AI law)}
+\setloc{cross-border-transfer-regime}{the US deemed-export regime (EAR/ITAR), which functions as the operative cross-border control for research data in the absence of an EU-style transfer-adequacy mechanism}
+\setloc{essential-entity-classification-basis}{universities brought into scope by the function performed or sector served — Title-IV participation engaging the FTC Safeguards Rule, a health component engaging HIPAA, and federal-contract performance engaging NIST SP~800-171 / CMMC — rather than by a single essential-entity designation}
+
+% --- US-regime equivalents of the national-instrument keys -------------------
+\setloc{national-cyber-strategy}{the US National Cybersecurity Strategy and the federal research-security directives (NSPM-33 and agency research-security program requirements)}
+\setloc{national-public-sector-isp}{the federal-contracting information-security baseline (NIST SP~800-171 for CUI, FISMA / NIST SP~800-53 for federal information systems)}
+\setloc{national-risk-method}{a NIST-aligned risk-management process (the NIST Risk Management Framework, SP~800-37 / SP~800-30), with ISO/IEC 27005 as an accepted equivalent}
+\setloc{national-equal-treatment-law}{US federal anti-discrimination and accessibility law applicable to the university (Title~VI, Title~IX, Section~504 of the Rehabilitation Act and the ADA)}
+
+\endinput

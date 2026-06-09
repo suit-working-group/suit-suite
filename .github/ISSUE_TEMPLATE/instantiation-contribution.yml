@@ -1,0 +1,86 @@
+name: Instantiation contribution
+description: Propose or deposit a concrete institution instantiation of the SUIT suite, produced with the instantiation methodology.
+title: "[instantiation] <institution> (<country>) — <archetype>"
+labels: ["instantiation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this ticket to **deposit an instantiation** you have produced by applying the methodology in
+        `instantiations/_TEMPLATE/README.md`. You copy `_TEMPLATE/` to `instantiations/<institution>/`,
+        pick your archetype from `categories/README.md`, fill your `set.tex`, build the four documents
+        clean with `latexmk`, and propose them here. The maintainer brings your
+        `instantiations/<institution>/` into the library under the ticket-centralized flow
+        (see `CONTRIBUTING.md` and `GOVERNANCE.md`); your concrete edition then becomes available to every
+        other participant. The library grows with the working group, one institution at a time.
+  - type: input
+    id: institution
+    attributes:
+      label: Institution
+      description: The adopting institution this instantiation is for. You may keep it anonymous-by-class (e.g. "an EU public research university") if you prefer not to name it.
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country / jurisdiction
+      description: The jurisdiction of establishment whose binding regime applies.
+    validations:
+      required: true
+  - type: dropdown
+    id: archetype
+    attributes:
+      label: Chosen archetype (Layer 1)
+      description: The category file from categories/ your set.tex \input's. Use the §2 decision tree in categories/README.md to choose.
+      options:
+        - "EU-PUB-RI — European public, research-intensive university (EU/EEA)"
+        - "US-PUB-R1 — US public (state-chartered) research university (R1/R2)"
+        - "US-PRIV-R1 — US private (non-profit) doctoral / very-high-research"
+        - "UK-RES — UK chartered/statutory research-intensive university"
+        - "LATAM-PUB — Latin American public (federal/national) university"
+        - "AFR-PUB — African public, comprehensive university"
+        - "Closest archetype + recorded deltas (none fit exactly)"
+    validations:
+      required: true
+  - type: textarea
+    id: deltas
+    attributes:
+      label: Local deltas recorded in set.tex
+      description: Every key you re-bound because your institution does not match the archetype exactly (NREN-tier delta, governance delta, a regulatory row derived via the sec:reg-mapping method). Write "none" if the archetype fit cleanly.
+    validations:
+      required: true
+  - type: checkboxes
+    id: completeness
+    attributes:
+      label: Completeness checklist
+      description: Confirm the instantiation is complete before depositing.
+      options:
+        - label: I copied instantiations/_TEMPLATE/ to instantiations/<institution>/ and edited only set.tex (plus deltas).
+          required: true
+        - label: "\\instcategory in set.tex is set to my chosen archetype."
+          required: true
+        - label: "Every country-specific NAME key my archetype leaves at default is filled (no REPLACE: placeholders remain)."
+          required: true
+        - label: No ??key?? placeholders and no "Undefined localization key" warnings appear in any build log.
+          required: true
+        - label: All four documents are present as built PDFs (policy, solution, policy-summary, solution-summary).
+          required: true
+  - type: checkboxes
+    id: build-clean
+    attributes:
+      label: Build-clean confirmation
+      description: The deposit bar is a clean build of all four documents with latexmk.
+      options:
+        - label: I built all four documents with `latexmk -pdf` (not pdflatex/biber directly), with policy-EN built before policy-summary-EN.
+          required: true
+        - label: Each build reports 0 undefined citations and 0 undefined references.
+          required: true
+        - label: Build by-products (render/out/) are excluded; I deposit set.tex, the render wrappers, the symlinks, and the four PDFs.
+          required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes for the maintainer (optional)
+      description: Anything useful for review — e.g. an unlisted regulatory regime you derived, an archetype-fit judgement call, or a localization-guide gap you hit.
+    validations:
+      required: false

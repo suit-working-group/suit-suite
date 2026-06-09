@@ -1,0 +1,102 @@
+% ============================================================================
+% AFR-PUB.tex — category archetype: African public university
+% ----------------------------------------------------------------------------
+% A PARTIAL \setloc override set that binds the STRUCTURAL localization keys
+% (governance ladder, executive leadership, constituent units, NREN tier,
+% identity federation, deployment-scale model, data-custody posture, pilot
+% units, operational roles) to the concrete generic shape of a public
+% university in a sub-Saharan / Southern African jurisdiction, and points the
+% REGULATORY keys at the South Africa (ZA) light-regime profile worked in the
+% Regulatory Applicability module (shared/regulatory-applicability-EN.tex,
+% \ref{sec:reg-za}: POPIA + Cybercrimes Act + ECT Act + PEPUDA/Equality Act).
+%
+% FITS: public, state-funded, comprehensive teaching-and-research universities
+% in Southern / sub-Saharan Africa whose national research-and-education
+% network is a distributed operator-plus-builder NREN (the South African model
+% — TENET operating, the SANReN/CSIR group building — being the worked
+% instance), whose campuses connect over a shared national backbone at
+% constrained, contended capacity, and whose data-protection duty rests on a
+% single national statute with no member-state transposition layer. The ZA
+% public-university sector (e.g. the 26 public universities served by TENET)
+% is the reference instance; the archetype also fits public universities in
+% peer SADC/sub-Saharan jurisdictions that route through the UbuntuNet
+% Alliance regional backbone, after swapping the three NAME keys below.
+%
+% LOAD ORDER: \input after shared/localization-defaults.tex. This file
+% overrides only a SUBSET of keys; every key it does NOT touch keeps its
+% canonical generic default.
+%
+% DELIBERATELY LEFT AT GENERIC DEFAULT (country-specific NAME keys):
+% an INSTITUTION-LEVEL set fills these with the concrete national bodies —
+%   \setloc{nren-name}{...}           % e.g. SANReN/TENET (the SA NREN)
+%   \setloc{national-dpa}{...}        % e.g. the Information Regulator (ZA)
+%   \setloc{national-gov-csirt}{...}  % e.g. the national/sectoral CSIRT/SAPS
+% They are NAME bindings, not structural ones, so they are out of scope here.
+%
+% Requires localization.sty (\setloc / \loc).
+% ============================================================================
+
+% --- Institution profile (structural: public, comprehensive, resource-aware)-
+\setloc{institution-type}{a public, state-funded comprehensive university with both a teaching and a research mission, operating under constrained infrastructure and cost envelopes}
+\setloc{staffing-profile}{a public university that pursues excellence as a strategic objective within constrained staffing and cost envelopes, where shared and managed services are preferred over duplicated local build-out}
+
+% --- Governance ladder (structural) -----------------------------------------
+% Public-university council-and-senate shape: a statutory governing Council,
+% an executive accountable to it, and academic deliberative Senate/Faculty
+% Boards. Role-based, not a named office.
+\setloc{governing-board}{the university's statutory governing Council (its highest accountable body)}
+\setloc{executive-leadership}{the Vice-Chancellorate (the Vice-Chancellor and executive management as the institution's central executive leadership)}
+\setloc{academic-governing-bodies}{the academic deliberative bodies (the Senate and its Faculty Boards)}
+
+% --- Constituent units & pilots (structural) --------------------------------
+\setloc{cs-research-unit}{a Department of Computer Science (or School of IT / Computing) as a domain-expert host unit}
+\setloc{security-research-centre}{a cybersecurity-focused research group or centre within the Faculty of Science / Engineering}
+\setloc{institution-hpc-facility}{the university's central high-performance / research-computing unit, where one exists, otherwise its shared central ICT services}
+\setloc{pilot-entities}{the university's central research-computing / ICT unit together with a domain-expert academic department}
+
+% --- NREN tier & federated services (structural) ----------------------------
+% Distributed NREN model: an operating member (TENET) running the network and
+% services, and a builder group (SANReN, hosted at the national science
+% council/CSIR) procuring and rolling out capacity. Shared national backbone
+% reaching campuses at constrained, contended capacity.
+\setloc{nren-csirt}{the NREN's computer-security incident-response capability operated by the network operator}
+\setloc{peer-nren-roster}{peer African and SADC NRENs reached through the regional research backbone (the UbuntuNet Alliance), each providing a shared national backbone, an incident-response capability, and federated identity and trusted-certificate services}
+\setloc{nren-service-catalogue}{the NREN-provided federated-service catalogue (federated Wi-Fi / eduroam, a trusted certificate service, performance monitoring, and managed research-data transfer), operated by the national network operator}
+\setloc{nren-research-cloud}{a regional or NREN-provided research cloud where one exists, otherwise a managed-provider arrangement under the network operator's framework}
+\setloc{research-backbone-scale}{a shared national research backbone with metropolitan rings reaching campuses at constrained, contended capacity (campus connections typically in the 1--100 Gbps range, with backbone upgrades trailing well-resourced regions)}
+
+% --- Identity federation (structural) ---------------------------------------
+% National academic identity federation, eduGAIN-interfederated — SAFIRE is
+% the worked instance (first fully participating African eduGAIN member).
+\setloc{identity-federation-profile}{the national academic identity federation, interfederated through eduGAIN}
+
+% --- HPC / compute sourcing (structural) ------------------------------------
+\setloc{national-hpc-facility}{a national high-performance computing facility (a national research / science-council supercomputing centre), accessed as a shared national resource}
+
+% --- Deployment-scale model & data-custody posture (structural) -------------
+% Resource-aware default: shared / managed-service-first rather than a
+% fully self-hosted estate; custody guarantees are contracted where the
+% institution does not operate the component itself.
+\setloc{deployment-custody-model}{the university operates its core components where capacity allows, and otherwise procures them as shared NREN or managed services under equivalent contractual custody and data-handling guarantees}
+\setloc{data-custody-sovereignty-profile}{a custody arrangement that keeps personal-data processing and key custody under the institution's (or a domestic provider's) control to satisfy the national data-protection duty and minimise cross-border-transfer exposure}
+
+% --- Operational roles (structural) -----------------------------------------
+\setloc{internal-emergency-incident-contact}{the university's internal ICT security / incident-reporting contact (mandatory reporting to the institution's information-security officer)}
+
+% ============================================================================
+% Regulatory keys — bound to the South Africa (ZA) light regime
+% (shared/regulatory-applicability-EN.tex, \ref{sec:reg-za}). Single national
+% jurisdiction, no member-state transposition layer, no standalone unified
+% Cybersecurity Act; POPIA carries data protection, breach notification and
+% cross-border transfer.
+% ============================================================================
+\setloc{regulatory-regime}{binding law in South Africa (the single national jurisdiction in which the institution operates)}
+\setloc{data-protection-regime}{the Protection of Personal Information Act (POPIA, Act 4 of 2013), enforced by the Information Regulator}
+\setloc{cybersecurity-baseline-regime}{POPIA Condition~7 security safeguards read together with the Cybercrimes Act baseline (no standalone unified Cybersecurity Act)}
+\setloc{cross-border-transfer-regime}{the POPIA s.72 cross-border-transfer regime (adequacy self-assessed and documented per transfer; no national adequacy list)}
+\setloc{eid-trust-services-regime}{the Electronic Communications and Transactions Act (ECT Act, Act 25 of 2002), with advanced electronic signatures accredited by the South African Accreditation Authority}
+\setloc{ai-regulation}{the adopter's applicable AI-governance regime (no dedicated binding AI statute in force; principle-based and sectoral guidance applies)}
+\setloc{national-equal-treatment-law}{the Promotion of Equality and Prevention of Unfair Discrimination Act (PEPUDA / Equality Act, Act 4 of 2000), with its standing reasonable-accommodation duty}
+\setloc{national-risk-method}{an ISO/IEC 27005-aligned risk-analysis method (POPIA prescribes appropriate, reasonable technical and organisational measures without a fixed method)}
+
+\endinput

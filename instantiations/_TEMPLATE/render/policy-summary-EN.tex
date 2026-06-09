@@ -1,0 +1,189 @@
+% ============================================================================
+% RENDER WRAPPER — POLICY SUMMARY (executive companion), instantiated edition
+% ----------------------------------------------------------------------------
+% Document 3 of 4. Renders the generic Policy Summary (the executive companion)
+% with THIS institution's localization stack applied:
+%
+%     localization.sty
+%       Layer 0: shared/localization-defaults.tex   (generic role phrases)
+%         Layer 1: categories/<ARCHETYPE>.tex        (via ../set.tex)
+%           Layer 2: ../set.tex                       (institution values + deltas)
+%             generic companion body (companion-body-EN) (unchanged, \input'd)
+%
+% Thin shell around suit-policy/companion/policy-summary-EN.tex: its preamble is
+% copied here, the localization stack is loaded after the Layer-0 defaults and
+% the generic companion's local \setloc tweaks (so ../set still wins over them),
+% and the factored body companion-body-EN is \input from suit-policy/companion/.
+%
+% NOTE — cross-references: the generic summary imports section labels from the
+% assembled Policy book via \externaldocument{../out/policy-EN}. Here that is
+% re-pointed at THIS instantiation's own Policy build (render/out/policy-EN),
+% so \nameref{} resolves against the edition you built. Build policy-EN.tex in
+% this directory FIRST if you want those cross-references to resolve.
+%
+% Build (from THIS directory; never call pdflatex/biber directly):
+%     latexmk -pdf policy-summary-EN.tex
+% Verify after build: 0 undefined citations, 0 undefined references.
+% ============================================================================
+\documentclass[12pt,a4paper]{article}
+
+% --- relative paths ---------------------------------------------------------
+\newcommand{\genericroot}{../../..}
+\newcommand{\catdir}{\genericroot/categories}% consumed by ../set.tex
+\newcommand{\compsrc}{\genericroot/suit-policy/companion}% generic companion source
+
+% --- Encoding and language ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% --- Page layout (compact for 2-3 pages) ---
+\usepackage[top=1.8cm,bottom=1.6cm,left=2.2cm,right=2.2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.05}
+
+% --- Typography ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Graphics and colours ---
+\usepackage[dvipsnames,table]{xcolor}
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% --- Lists / symbols ---
+\usepackage{enumitem}
+\usepackage{pifont}
+\setlist{nosep,leftmargin=1.5em}
+
+% --- Links ---
+\usepackage{xr-hyper}% before hyperref; imports section labels from the book
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,urlcolor=BrickRed]{hyperref}
+% Import section labels from THIS instantiation's assembled Policy build so
+% \nameref{} resolves against the edition (build policy-EN.tex here first).
+\externaldocument{out/policy-EN}
+
+% --- Bibliography ---
+\usepackage[backend=biber,style=numeric,sorting=none,sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{suit-consolidated.bib}
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% --- Glossary with tooltips ---
+\usepackage{gls-modes}
+\input{\genericroot/shared/glossary-defs}
+
+% ============================================================================
+% LOCALIZATION STACK
+% Load order: localization.sty -> Layer 0 defaults -> the generic companion's
+% own \setloc tweaks (reproduced below, so behaviour matches the generic
+% summary) -> ../set.tex (which \input's the category, then institution values,
+% and therefore WINS over both Layer 0 and the generic tweaks).
+% ============================================================================
+\usepackage{localization}
+\input{\genericroot/shared/localization-defaults}
+% --- generic companion's local bindings (from the generic summary wrapper) ---
+\setloc{nren-name}{national research-and-education network}
+\setloc{governing-board}{top governing board}
+\setloc{pilot-entities}{institution's \gls{hpc} team}
+\setloc{ai-regulation}{applicable AI-governance regime}
+\setloc{nis2-national-transposition}{national NIS2 transposition}
+\setloc{national-notification-platform}{national reporting platform}
+\setloc{nis2-supervisory-authority}{competent authority}
+% --- institution stack (Layer 1 category + Layer 2 institution) -------------
+\input{../set}
+
+% --- Boxes ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% --- Headers ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{Executive Summary --- University IT Infrastructure}}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- No section numbering ---
+\setcounter{secnumdepth}{0}
+
+% --- Compact sections ---
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.5em}{0.2em}
+\titleformat{\section}{\normalsize\bfseries\color{NavyBlue}}{}{}{}
+\titleformat{\subsection}{\small\bfseries\color{MidnightBlue}}{}{}{}
+
+% --- Reference-to-main-document command ---
+\newcommand{\mainref}[1]{%
+  \par\vspace{1pt}
+  {\footnotesize\color{gray}\itshape
+  $\triangleright$~Full analysis and references: #1
+  in the complete dossier~\cite{ng-dossier-2026}.}\par\vspace{2pt}}
+
+% --- Box palette ---
+\newtcolorbox{principlebox}[1][]{%
+  colback=NavyBlue!5!white, colframe=NavyBlue!70!black,
+  fonttitle=\bfseries, title=#1, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+\newtcolorbox{alertbox}[1][]{%
+  colback=BrickRed!5!white, colframe=BrickRed!70!black,
+  fonttitle=\bfseries, title=#1, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+\newtcolorbox{actionbox}[1][]{%
+  colback=OliveGreen!5!white, colframe=OliveGreen!70!black,
+  fonttitle=\bfseries, title=#1, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+
+\raggedbottom
+
+% ============================================================================
+\begin{document}
+
+% --- Title block (inlined from the generic wrapper) ---
+\begin{center}
+\vspace*{-0.2cm}
+{\Large\bfseries The University Spirit in the Digital Age}
+\smallskip
+{\normalsize\itshape For an Open, Secure and Mission-Aligned Digital Infrastructure}
+\smallskip
+{\small Executive Summary addressed to the University Bodies}
+\smallskip
+{\scriptsize Companion to: \emph{``Infrastructure and Organisation of Information Systems
+for the adopting university --- Analysis, State of the Art and Propositions''}}
+\smallskip
+{\small Document Version 2.1 / May 7, 2026}
+\smallskip
+{\small Print date: \today}
+\smallskip
+{\footnotesize\itshape First version created by Nicolas Guelfi, Chairman of the SUIT Working Group.}
+\medskip
+\begin{tcolorbox}[colback=NavyBlue!8!white,colframe=NavyBlue!85!black,boxrule=1.2pt,
+    arc=3pt,left=10pt,right=10pt,top=8pt,bottom=8pt,halign=center]
+{\normalsize\bfseries A segmented architecture with flexible secure contexts\\[3pt]
+for a modern university --- where digital security\\[3pt]
+and academic missions reinforce each other}
+\end{tcolorbox}
+\end{center}
+
+\smallskip
+\noindent{\footnotesize\textcolor{OliveGreen}{\textbf{INTERNAL Document version 2.1 approved by:} the approving academic units of \loc{institution-name}.}}
+
+\smallskip
+\noindent\rule{\textwidth}{0.6pt}
+
+\input{\compsrc/companion-body-EN}
+
+\vspace{1em}
+\noindent\rule{\textwidth}{0.4pt}
+\printbibliography[title={\normalsize References}]
+
+\printabstractappendix
+
+\end{document}

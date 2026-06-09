@@ -577,8 +577,8 @@ is given in the Regulatory Applicability annex).
     \item[Supervisory chain.] The national NIS2 supervisory
     authority oversees compliance. The national or governmental
     \gls{csirt} is the operational incident-response team
-    for public-sector entities, and the national information-security
-    agency publishes the State information-security policy that
+    for public-sector entities, and \loc{national-infosec-agency}
+    publishes the State information-security policy that
     applies to public bodies.
 
     \item[Notification platform.] A single national
@@ -629,7 +629,7 @@ report:
     maturity dashboard (an ISO/IEC~27005-aligned risk-analysis
     method or tool, such as a nationally provided open-source
     methodology), producing the annual maturity report
-    submitted to the national NIS2 supervisory authority where
+    submitted to \loc{nis2-supervisory-authority} where
     the transposition so requires.
 \end{enumerate}
 
@@ -997,7 +997,7 @@ its national transposition, the
 Commission Implementing Regulation~(EU)~2024/2690~\cite{eu-regulation-2024-2690}),
 the binding case law (CJEU \emph{Schrems~II}~\cite{schrems2020}),
 and the national instruments (the national public-sector
-information-security policy and the national cybersecurity strategy's
+information-security policy and \loc{national-cyber-strategy}'s
 academic-cooperation objective) cited throughout. The
 analysis is produced by the contributors of this report acting in
 their academic-community capacity; it has not been formally
@@ -1068,7 +1068,7 @@ This report recommends that the institution accept this classification,
 where it applies, as the binding operational basis of its \gls{nis2}
 compliance. Acceptance of the outcome does not entail suspension of
 intellectual scrutiny over the classification protocol itself: as a
-public knowledge institution hosting a computer-science department whose
+public knowledge institution hosting \loc{cs-research-unit} whose
 research portfolio covers information-systems security, the institution
 retains and is invited by this report to exercise a duty to contribute
 technical and methodological input to the supervisory authorities'
@@ -1132,8 +1132,7 @@ non-overlapping responsibilities towards the institution:
     this team.
     \item[The national single point of contact.] The body responsible
     for cross-border NIS2 cooperation and major-incident escalation;
-    it commonly hosts both the governmental CSIRT and the national
-    information-security agency.
+    it commonly hosts both the governmental CSIRT and \loc{national-infosec-agency}.
 \end{description}
 
 \noindent Two further categories of body may exist for ecosystem
@@ -1183,7 +1182,7 @@ detailing the ten obligation families listed in NIS2 Article~21(2).
 
 The public-sector information-security baseline is typically governed
 by a national public-sector information-security policy, developed
-by the national information-security agency and applicable to State
+by \loc{national-infosec-agency} and applicable to State
 administrations. Such a baseline establishes the objectives of
 confidentiality, integrity, availability and risk-based
 security-measure adoption. The multi-zone architecture
@@ -1489,20 +1488,19 @@ pseudonymised personal data in research contexts, in addition to
 the AI Act Articles~2(6) and~2(8) exemptions for bespoke research
 tools and pre-market R\&D. This report indicates that the
 institution could contribute to a national or EU consultation on
-this framework, consistent with the national cybersecurity strategy's
+this framework, consistent with \loc{national-cyber-strategy}'s
 academic-cooperation objective and with the cooperative declaration
 model articulated in Section~\ref{sec:safeguards-ai}.
 
 \paragraph{Position D --- Methodological contribution to the supervisory authority.}
-As a public knowledge institution hosting a computer-science
-department whose research portfolio covers information-systems
+As a public knowledge institution hosting \loc{cs-research-unit}
+whose research portfolio covers information-systems
 security, the institution holds an intellectual and moral
 responsibility that exceeds mere compliance: a responsibility to
 share rigorous technical and scientific input with the bodies
 that design and operate the national cybersecurity-regulation
 protocols (the national supervisory authority, the national single
-point of contact and governmental CSIRT, and the national
-information-security agency).
+point of contact and governmental CSIRT, and \loc{national-infosec-agency}).
 The present report is itself the first concrete expression of
 this contribution; the domains listed below are offered without
 commitment of resources or specific deliverables, on a
@@ -2742,7 +2740,7 @@ The \emph{building blocks} required for a \gls{sciencedmz} are
 frequently already operational: high-bandwidth \gls{geant}
 connectivity through the national NREN, the NREN's CSIRT for
 incident response, and an institutional HPC facility with
-petabyte-scale research traffic to a national/EuroHPC supercomputer
+petabyte-scale research traffic to \loc{national-hpc-facility}
 and to international partners.
 What is missing is the architectural \emph{pattern}: a dedicated
 zone, \gls{dtn}s, perfSONAR observability, and the governance
@@ -3758,8 +3756,7 @@ Rather than managing everything alone, a university can rely on:
 A university entering the third millennium will be, above all, a
 \textbf{digital university}. The quality, security, and flexibility of
 its digital infrastructure condition every academic activity: research,
-teaching, administration, and international collaboration. For an
-institution that sets excellence as a strategic objective, it
+teaching, administration, and international collaboration. For \loc{staffing-profile}, it
 is both coherent and necessary that this standard of excellence extend
 to the digital infrastructure that underpins all academic missions.
 
@@ -3840,8 +3837,7 @@ art}, \textbf{costs} and context~\cite{gdpr}.
     \item \textbf{Progressive implementation:} starting with governance
     (Digital Policy Commission, charters, service catalogue), followed
     by a pilot deployment on the entities with the strongest domain
-    expertise (a computer-science department, a cybersecurity-focused
-    interdisciplinary research centre, and the institution's HPC team),
+    expertise (\loc{cs-research-unit}, \loc{security-research-centre}, and the institution's HPC team),
     then gradual extension to other faculties, departments and centres
     as results are validated (see Section~\ref{sec:transition}).
     \item \textbf{Comparative cost factors:} indirect costs
@@ -3906,9 +3902,7 @@ is developed in Part~III of the same document.}
 \midrule
 \textbf{2. Pilot} &
     Pilot deployment of the segmented architecture and Trusted Activity
-    Contexts on the entities with the strongest domain expertise (a
-    computer-science department, a cybersecurity-focused
-    interdisciplinary research centre, and the institution's HPC team) \\
+    Contexts on the entities with the strongest domain expertise (\loc{cs-research-unit}, \loc{security-research-centre}, and the institution's HPC team) \\
 & Installation of \gls{dtn} + perfSONAR + Zeek \\
 & PoC micro-segmentation (\gls{sdn} overlay) \\
 & Pilot \gls{byod} zone with progressive interoperability \\
@@ -3941,8 +3935,7 @@ is developed in Part~III of the same document.}
 
 \noindent The governance step is predominantly organisational and can be
 carried out with existing staff. The pilot confines initial deployment
-to the entities with the strongest domain expertise --- a
-computer-science department, a cybersecurity-focused research centre,
+to the entities with the strongest domain expertise --- \loc{cs-research-unit}, a cybersecurity-focused research centre,
 and the institution's HPC team --- whose expertise in
 computer science, cybersecurity, and high-performance infrastructure
 makes them natural candidates for validating the architecture.

@@ -1,0 +1,113 @@
+% ============================================================================
+% categories/LATAM-PUB.tex — CATEGORY ARCHETYPE: Latin American public
+%                            (federal/national) university
+% ----------------------------------------------------------------------------
+% LAYER 1 (category archetype) of the suite localization model. This file is
+% \input AFTER shared/localization-defaults.tex (Layer 0) and BEFORE an
+% institution-level set (Layer 2). It overrides the subset of localization keys
+% that the "Latin American public university" archetype binds to a concrete
+% generic value; every key it does NOT set keeps its Layer-0 default.
+%
+% ----------------------------------------------------------------------------
+% WHICH UNIVERSITIES THIS ARCHETYPE FITS
+% ----------------------------------------------------------------------------
+% A research-active PUBLIC university in Latin America that is funded and
+% supervised by the State (a federal or national ministry of education),
+% holds the legal form of a public-law entity (in Brazil an autarquia or
+% fundacao publica of special regime; the Spanish-speaking analogue is the
+% autonomous national/state university), is governed by an elected rector
+% with a collegial university council, and reaches the academic Internet
+% through a State-backed national research-and-education network that is in
+% turn federated regionally (RedCLARA) and globally (eduGAIN). It assumes a
+% PUBLIC-SECTOR, BUDGET-CONSTRAINED estate: shared and NREN-provided
+% infrastructure is the norm rather than the exception, and data custody is
+% predominantly national/on-soil. Worked regulatory instance: BRAZIL (LGPD,
+% E-Ciber, CTIR.Gov, the federal autarquia model, RNP as the NREN, CAFe as the
+% identity federation). It generalises to other Latin American national public
+% universities, whose RedCLARA-member NRENs and emerging data-protection
+% regimes occupy the same structural roles.
+%
+% WHAT THIS FILE DELIBERATELY DOES NOT SET
+%   * The ~3 country-specific NAME keys --- the specific national NREN, the
+%     national data-protection authority, and the national/governmental CSIRT
+%     --- are LEFT at their Layer-0 generic default. They are filled by a
+%     Layer-2 institution-level set (e.g. RNP / ANPD / CTIR.Gov for a Brazilian
+%     adopter, or the corresponding national bodies for another LATAM country),
+%     because they vary by COUNTRY within this regional archetype.
+%   * The regulatory keys below bind to the BRAZIL (BR) regime profile of the
+%     shared Regulatory Applicability module
+%     (shared/regulatory-applicability-EN.tex, "Brazil --- light regime"),
+%     stated in ROLE terms so a non-Brazilian LATAM adopter can re-point them
+%     without forking this file.
+%
+% Keys are kebab-case. Requires localization.sty (\setloc / \loc) and a prior
+% \input of shared/localization-defaults.tex.
+% ============================================================================
+
+% ============================================================================
+% STRUCTURAL OVERRIDES
+% ============================================================================
+
+% --- Subject institution & profile ------------------------------------------
+\setloc{institution-type}{a State-funded public research university (a public-law entity supervised by the national ministry of education)}
+\setloc{staffing-profile}{a public university operating under a State-appropriated budget, where IT capacity is constrained and shared/NREN-provided infrastructure is the default rather than the exception}
+
+% --- Governance ladder ------------------------------------------------------
+%     Public LATAM model: an elected rector heads the executive (reitoria /
+%     rectorado); a collegial university council is the supreme deliberative
+%     organ; the State ministry of education supervises the whole.
+\setloc{executive-leadership}{the rectorate (the elected rector and the central executive administration of the public university)}
+\setloc{governing-board}{the university council (the supreme collegial deliberative body) acting under the supervision of the national ministry of education}
+\setloc{academic-governing-bodies}{the collegial academic councils (university, teaching-and-research, and faculty/unit councils)}
+
+% --- Constituent units ------------------------------------------------------
+\setloc{cs-research-unit}{a computing/informatics institute or department of the public university}
+\setloc{security-research-centre}{a public-university research group or laboratory focused on cybersecurity and information security}
+\setloc{institution-hpc-facility}{the university's shared high-performance-computing facility / team (often co-funded through the NREN or a regional consortium)}
+
+% --- Pilot units ------------------------------------------------------------
+\setloc{pilot-entities}{the university's shared HPC facility / team together with its computing/informatics institute}
+
+% --- Operational roles ------------------------------------------------------
+\setloc{internal-emergency-incident-contact}{the public university's information-security office / CSIRT as the internal incident-reporting contact, escalating to the national/governmental CSIRT}
+
+% --- NREN tier & its services -----------------------------------------------
+%     State-backed national NREN, regionally federated via RedCLARA, globally
+%     via eduGAIN. Role-stated so a Brazilian adopter reads RNP and another
+%     LATAM adopter reads its own RedCLARA-member NREN.
+\setloc{nren-name}{the State-backed national research and education network (the country's RedCLARA-member NREN)}
+\setloc{nren-csirt}{the national NREN's security team / CSIRT}
+\setloc{peer-nren-roster}{peer Latin American NRENs federated through RedCLARA, each operating a national academic backbone, a CSIRT, and federated identity and shared-infrastructure services}
+\setloc{nren-service-catalogue}{the national NREN's federated-service catalogue (federated identity, eduroam, video/collaboration, security monitoring and managed research-data transfer)}
+\setloc{nren-research-cloud}{a national-NREN or RedCLARA-provided shared research cloud / e-infrastructure, where one exists}
+\setloc{research-backbone-scale}{the regional research backbone (RedCLARA membership and backbone capacity across Latin America), with campus connections in the 1--100\,Gbps range subject to national funding}
+
+% --- Identity federation ----------------------------------------------------
+\setloc{identity-federation-profile}{the national academic identity federation (a RedCLARA-region federation interoperating with eduGAIN)}
+
+% --- HPC tier ---------------------------------------------------------------
+\setloc{national-hpc-facility}{a national or regional academic supercomputer (a State-funded national HPC centre or a RedCLARA/SCALAC-coordinated regional facility)}
+
+% --- Deployment-scale model & data custody ----------------------------------
+\setloc{deployment-custody-model}{the public university operates a shared or NREN-hosted deployment of its core components, or procures it under equivalent national-custody guarantees, sizing the estate to a constrained State-appropriated budget}
+\setloc{data-custody-sovereignty-profile}{a national/on-soil custody arrangement (institution-, NREN- or domestic-provider-hosted) that keeps personal data under the national data-protection regime and minimises cross-border disclosure-regime exposure}
+
+% ============================================================================
+% REGULATORY OVERRIDES — BRAZIL (BR) regime profile
+% ----------------------------------------------------------------------------
+% Bound to the "Brazil --- light regime" row of the shared Regulatory
+% Applicability module. Stated in role terms; a non-Brazilian LATAM adopter
+% re-points these to its own jurisdiction via the module's 7-step method.
+% NOTE: the country-specific NAME keys (national-dpa, national-gov-csirt,
+% national NREN name) are intentionally NOT set here — see header.
+% ============================================================================
+
+\setloc{regulatory-regime}{binding national law in the adopter's Latin American jurisdiction (worked instance: the Brazilian federal stack — LGPD and the national cyber framework)}
+\setloc{cybersecurity-baseline-regime}{the national cybersecurity framework carried, absent a single omnibus cyber statute, by the security limb of the national data-protection law and the national cyber strategy (worked instance: Brazil's LGPD Art.~46 with the E-Ciber strategy)}
+\setloc{data-protection-regime}{the national general data-protection law (worked instance: Brazil's LGPD, Lei n\textsuperscript{o}~13.709/2018)}
+\setloc{eid-trust-services-regime}{the national electronic-signature / trust-services and digital-inclusion regime (worked instance: Brazil's ICP-Brasil and the e-MAG accessibility standard under the Inclusion Law)}
+\setloc{ai-regulation}{the adopter's national AI-governance regime as it emerges (worked instance: Brazil's pending AI bill, PL~2338/2023)}
+\setloc{cross-border-transfer-regime}{the national international-transfer regime (self-assessed adequacy / safeguards / consent, with no EU-style adequacy list; worked instance: LGPD Chapter~V supervised by the national DPA)}
+\setloc{essential-entity-classification-basis}{public universities as public-administration bodies in scope of the national data-protection and federal cyber-incident regimes (worked instance: federal universities as autarquias / fundacoes publicas of the federal public administration)}
+
+\endinput

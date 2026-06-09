@@ -56,6 +56,21 @@
 \usepackage{gls-modes}
 \input{../../shared/glossary-defs}
 
+% --- Localization (key/value layer 0: generic defaults) ---
+% \loc{key} routes a generic role-phrase through the suite localization layer.
+% The shared defaults are the canonical generic values; the overrides below
+% bind each key used in THIS companion to the exact generic role-phrase already
+% present in its prose, so the generic edition renders byte-for-byte unchanged.
+\usepackage{localization}
+\input{../../shared/localization-defaults}
+\setloc{nren-name}{national research-and-education network}
+\setloc{governing-board}{top governing board}
+\setloc{pilot-entities}{institution's \gls{hpc} team}
+\setloc{ai-regulation}{applicable AI-governance regime}
+\setloc{nis2-national-transposition}{national NIS2 transposition}
+\setloc{national-notification-platform}{national reporting platform}
+\setloc{nis2-supervisory-authority}{competent authority}
+
 % --- Boxes ---
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}

@@ -42,6 +42,16 @@ This single point of integration is what keeps the four documents coherent in te
 
 The documents are institution-neutral by design. An adopting university instantiates the generic material via `shared/localization-guide-EN.tex`. Localization questions are handled through the *Localization request* template; localization forks are encouraged and remain under the suite's licenses.
 
+## The instantiation library
+
+The generic suite is the shared baseline; the **instantiation library** at `instantiations/` is where it is turned into concrete, build-clean editions and made available to the whole working group.
+
+- **What an instantiation is.** A participant who applies the instantiation methodology (`instantiations/_TEMPLATE/README.md`) selects a category archetype from `categories/`, fills the country-specific values in a single `set.tex`, and builds the four documents (Policy, Policy Summary, Solution, Solution Summary) through thin render wrappers. The wrappers `\input` the **unchanged** generic bodies, so an instantiation is a shell over the canonical suite, never a fork of its content — it keeps tracking the suite as the suite evolves.
+- **How it is deposited.** A participant deposits `instantiations/<institution>/` (the `set.tex`, the render wrappers, and the four built PDFs) through the **Instantiation contribution** ticket (`.github/ISSUE_TEMPLATE/instantiation-contribution.yml`) and the PR flow. The same **no-direct-write** rule applies: the maintainer reviews the ticket, verifies the build is clean (0 undefined citations/references, 0 undefined localization keys), and brings the instantiation into the library, recording it in `CHANGELOG.md` against its ticket id.
+- **Why it is shared.** Once accepted, the full concrete documents for that institution are available to **all other participants**. Each deposited archetype-and-edition is a worked example others can learn from, compare against, or adapt. **The library grows with the working group** — every applied instantiation adds one institution to the shared set.
+
+The maintainer keeps the library coherent: the six archetypes and the localization key catalogue remain centrally governed, so that instantiations stay comparable across institutions and continue to build against the current generic suite.
+
 ## Enforcing the model on GitHub (maintainer setup)
 
 The no-direct-write rule is enforced by repository configuration (manual GitHub settings, to be applied before publication):

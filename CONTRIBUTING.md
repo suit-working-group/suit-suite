@@ -24,6 +24,20 @@ Open an issue using the **Document change request** template and provide:
 
 Requests that arrive with evidence are review-ready and are processed faster. For adopting universities, use the **Localization request** template; for anything else, the **Question** template.
 
+## Contributing an instantiation (the instantiation library)
+
+Beyond proposing changes to the generic suite, you can **apply the instantiation methodology and deposit your institution's concrete edition** into the shared library at `instantiations/`. This is how the suite turns from one generic reference into a growing set of worked, build-clean editions that every participant can read and reuse.
+
+The flow:
+
+1. **Copy the template.** Copy `instantiations/_TEMPLATE/` to `instantiations/<institution>/`. You edit exactly one content file, `set.tex`; the `render/` wrappers and `.latexmkrc` are build machinery.
+2. **Pick your archetype.** Run the §2 self-identification decision tree in `categories/README.md` to land on one of the six category archetypes (or the closest one plus recorded deltas). Set `\instcategory` in `set.tex` accordingly.
+3. **Fill your values.** Replace the country-specific NAME keys your archetype leaves at default (NREN, data-protection authority, national CSIRT, …) and record any local deltas with `\setloc`. See `instantiations/_TEMPLATE/README.md` for the full walk-through.
+4. **Build clean.** From `render/`, build all four documents with `latexmk -pdf` (build `policy-EN` before `policy-summary-EN`). The deposit bar is **0 undefined citations, 0 undefined references, and 0 undefined localization keys**, with no `REPLACE:` or `??key??` text left in the PDFs.
+5. **Deposit via the ticket/PR flow.** Open an **Instantiation contribution** issue (`.github/ISSUE_TEMPLATE/instantiation-contribution.yml`) declaring your institution, country, archetype, completeness checklist, and build-clean confirmation. The maintainer brings `instantiations/<institution>/` into the library under the same ticket-centralized rule that governs the generic documents.
+
+Once accepted, your `instantiations/<institution>/` — the `set.tex`, the render wrappers, and the four built PDFs — is available to all other participants. **The library grows with the working group, one institution at a time.** Each instantiation is a thin shell over the unchanged generic documents, so it keeps tracking the suite as the suite evolves; it never forks the generic content.
+
 ## Build and bibliography conventions (for maintainers)
 
 - Build every document with **`latexmk`** — never call `pdflatex`/`biber` directly:
