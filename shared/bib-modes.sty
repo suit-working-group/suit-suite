@@ -24,6 +24,15 @@
 \RequirePackage{xcolor}
 
 % ============================================================================
+% BIBLIOGRAPHY FONT — suite-wide
+% ----------------------------------------------------------------------------
+% The reference list is set two steps smaller than body text (\footnotesize)
+% across every document of the suite. Single source of truth: change it here.
+% biblatex is loaded before this package, so \bibfont already exists.
+% ============================================================================
+\renewcommand*{\bibfont}{\footnotesize}
+
+% ============================================================================
 % MODE TOGGLES
 % ============================================================================
 
