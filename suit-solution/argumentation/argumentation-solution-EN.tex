@@ -33,6 +33,7 @@
 
 % === Graphics and colours ===
 \usepackage{graphicx}
+\usepackage{suit-logo}
 \usepackage[dvipsnames,table]{xcolor}
 \definecolor{Slate}{RGB}{70,70,90}
 \definecolor{Crimson}{RGB}{220,20,60}
@@ -88,7 +89,9 @@
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[RE]{\textit{Sustainable University IT --- Technical Objections \& Responses}}
 \fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
 % === Miscellaneous ===
 \usepackage{csquotes}
@@ -180,7 +183,11 @@
 \hypersetup{pageanchor=false}
 \begin{titlepage}
 \centering
-\vspace*{1cm}
+\vspace*{0.5cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
 
 {\Huge\bfseries Sustainable University IT}
 

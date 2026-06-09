@@ -3,7 +3,7 @@
 % Companion to: "Infrastructure and Organisation of Information Systems
 %                for the adopting university"
 %============================================================================
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper,twoside]{article}
 
 % --- Encoding and language ---
 \usepackage[utf8]{inputenc}
@@ -75,14 +75,20 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 
+% --- Logo ---
+\usepackage{graphicx}
+\usepackage{suit-logo}
+
 % --- Headers ---
 \usepackage{fancyhdr}
 \setlength{\headheight}{15pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textit{Executive Summary --- University IT Infrastructure}}
-\fancyhead[R]{\small\thepage}
+\fancyhead[LO,RE]{\small\textit{Executive Summary --- University IT Infrastructure}}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyfoot[C]{\suitfootlogo}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
 % --- Watermark (temporarily disabled) ---
 %\usepackage[pages=all]{background}
@@ -155,6 +161,9 @@
 \begin{center}
 \vspace*{-0.2cm}
 
+{\suittitlelogo[0.30\textwidth]}
+
+\smallskip
 {\Large\bfseries The University Spirit in the Digital Age}
 
 \smallskip

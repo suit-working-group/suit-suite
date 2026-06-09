@@ -83,6 +83,10 @@
 \usepackage{epigraph}
 \setlength{\epigraphwidth}{0.8\textwidth}
 
+% --- Logo ---
+\usepackage{graphicx}
+\usepackage{suit-logo}
+
 % --- Headers ---
 \usepackage{fancyhdr}
 \setlength{\headheight}{15pt}
@@ -91,7 +95,9 @@
 \fancyhead[LE,RO]{\thepage}
 \fancyhead[RE]{\textit{University IT Infrastructure --- Questions and Answers}}
 \fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
 % --- Semantic commands (mirror the suite) ---
 \providecommand{\keyword}[1]{\textbf{#1}}
@@ -145,7 +151,11 @@
 % --- Title block ---
 \begin{titlepage}
 \centering
-\vspace*{1.2cm}
+\vspace*{0.6cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
 
 {\Huge\bfseries Questions and\\[0.25cm] Evidence-Based Answers}
 
