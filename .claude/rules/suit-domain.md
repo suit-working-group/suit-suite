@@ -67,3 +67,44 @@ architectures, spanning multiple countries and governance systems:
 - **NRENs**: National Research and Education Networks (each country operates one; e.g., RENATER, SWITCH, DFN, JANET/Jisc) — name the adopter's own NREN via the Localization Guide
 - **eduroam**: Federated Wi-Fi authentication across participating countries
 - **InCommon / eduGAIN**: Federated identity management
+
+## SUIT-Specific Machinery (cross-references — do not duplicate here)
+
+The institution-neutrality promised above is enforced by dedicated machinery
+built since P0. These are domain concepts every contributor must know; the full
+contracts live in the rule and module each item points to. Do not restate their
+detail in this file — follow the cross-reference.
+
+- **Localization model** — the suite renders as clean generic prose by default
+  and as a named edition when an instantiation is loaded, both from ONE
+  `\setloc`/`\loc` key/value mechanism over a 3-layer override stack
+  (Layer 0 generic defaults → Layer 1 category archetype → Layer 2 institution
+  set). Generic render = Layer 0 only = finished prose, never a mustache token;
+  unbound keys fail loudly as `??key??`. See `localization-model.md`.
+- **Instantiation categories & library** — the generic suite turns into a
+  growing library of build-clean editions via two scoped directories:
+  `categories/` (the six worked Layer-1 archetypes spanning EU/US/UK/LATAM/AFR,
+  selected by the §2 decision tree) and `instantiations/` (Layer-2 editions,
+  each a **thin shell over the UNCHANGED generic bodies — never a fork**), with
+  Luxembourg/University of Luxembourg as the round-trip-validated reference
+  edition. The SUIT functional set is **size-invariant** (scale sets pace, not
+  archetype). See `instantiation-model.md`.
+- **Regulatory Applicability module + obligation→mechanism matrix** —
+  `shared/regulatory-applicability-EN.tex` frames the size- and
+  jurisdiction-invariant **functional-obligation spine F1–F6** (personal-data
+  protection, cyber-risk governance, incident notification, cross-border
+  transfers, eID/trust services, accountability/logging), maps each obligation
+  to its invariant SUIT control mechanism in the obligation→mechanism matrix,
+  then instantiates the spine per regime from the verified profiles in
+  `docs/_regulatory/*.json` (EU/US/UK/BR/ZA). An unlisted regime fills only the
+  instrument column via the Steps 1–7 mapping method (`sec:reg-mapping`); the
+  spine and control set stay fixed. This is interpretive engineering guidance,
+  not legal advice.
+- **No-false-locality rule** — document BODIES must read as institution-neutral,
+  role-based prose: route every local anchor (institution/NREN/governing-body/
+  jurisdiction name) through `\loc{}`, and carry no migration/source-repo
+  internals. Provenance is the explicit exception that is KEPT: the author's
+  name (chairman of the working group, creator of the first version), the
+  "originally developed for the University of Luxembourg" origin line, the
+  author's cited works, and clearly-labelled regulatory examples all stay.
+  See `no-false-locality.md`.
