@@ -134,7 +134,7 @@ The argument for segmentation leans on a forestry analogy (firebreaks). But netw
 \begin{itemize}[nosep]
     \item NIST SP~800-207 (\gls{zt} Architecture)~\cite{nist-zt}: ``assume breach, limit blast radius'';
     \item NIST SP~800-53 Rev.\,5~\cite{nist-sp800-53}: ``isolate components to reduce attack surface'';
-    \item The Verizon 2024 DBIR~\cite{verizon-dbir2024}: lateral movement is a dominant breach-progression mechanism, which network segmentation is designed to interrupt.
+    \item The Verizon 2024 DBIR~\cite{verizon-dbir2024}: credential abuse and ransomware dominate the measured breach patterns --- the in-network progression that segmentation (per the NIST controls above) is designed to interrupt.
 \end{itemize}
 
 \noindent The risk of misconfigured rules is real but is an \emph{implementation risk}, not an argument against the principle. The phased transition (pilot first, then rollout) and use of \gls{sdn} automation directly mitigate this risk.
@@ -628,7 +628,7 @@ Any incident can be interpreted multiple ways. Claiming that a centralised-perim
 
 \medskip\noindent\textbf{The interpretation aligns with independent sector analysis:}
 \begin{itemize}[nosep]
-    \item Verizon DBIR 2024~\cite{verizon-dbir2024}: lateral movement as a dominant breach-progression mechanism, which segmentation is designed to interrupt (per the NIST/ISO controls above);
+    \item Verizon DBIR 2024~\cite{verizon-dbir2024}: credential abuse and ransomware as the dominant measured breach patterns, whose in-network progression segmentation is designed to interrupt (per the NIST/ISO controls above);
     \item NIST SP~800-215~\cite{nist-sp800-215}: a guide to securing enterprise networks through segmentation;
     \item Sophos State of Ransomware in Education 2025~\cite{sophos-ransomware-edu2025}: ``exploited vulnerabilities'' and ``unknown security gaps'' as top causes --- consistent with patching and segmentation, not with restriction.
 \end{itemize}
@@ -715,6 +715,16 @@ Q6.3 invokes the B\u{a}rbulescu six-criteria proportionality test against restri
   \item \textbf{Safeguards:} \gls{soc} access controls, retention limits, \gls{dpo} oversight and the DPIA (Q8.3) provide the safeguards B\u{a}rbulescu requires --- especially the bar on routine content access.
 \end{enumerate}
 \noindent Far from exempting itself, the proposal's segmented, metadata-level design is what \emph{lets} it satisfy the B\u{a}rbulescu criteria more readily than the uniform monitoring it replaces.
+
+\medskip
+\noindent\textbf{Collective dimension.} B\u{a}rbulescu governs the
+\emph{individual} proportionality test; in several jurisdictions a
+\emph{collective} step precedes it: consultation or co-determination
+of \loc{staff-representation-body} before workplace-monitoring tools
+are deployed. The Technical Reference makes that consultation a
+Wave-2 precondition where the adopter's labour law so requires, and
+the \gls{icradp} seat gives staff a standing voice once the
+pipeline operates.
 \end{answerbox}
 
 \bigskip
@@ -810,7 +820,7 @@ This dossier asks the governing bodies to adopt the policy; the detailed, situat
 \textbf{The detailed, situation-specific cost analysis is the CIO's to produce once the governing bodies request it; the dossier's task is to give the board a defensible order of magnitude and a cost shape, not to pre-empt that analysis.}
 \begin{enumerate}[nosep]
   \item \textbf{Cost shape.} The governance step (commission, charters, digital-policy commission) is \emph{cost-neutral} --- existing staff, no procurement. Cost-bearing items sit in later, optional waves (segmentation, Science~DMZ, observability storage), each gated by the validated results of the prior step.
-  \item \textbf{A scalable benchmark.} Rather than invent a figure, the order of magnitude can be read from sector benchmarks: industry guidance places information-security spend at roughly 8--15\% of the IT budget depending on threat exposure~\cite{gartner-security-spend2024}, whereas higher education currently allocates only about 3.6\%~\cite{educause-spending}. A board can therefore size the likely envelope from its enrolment and current IT budget, and ask the CIO to refine it.
+  \item \textbf{A scalable benchmark.} Rather than invent a figure, the order of magnitude can be read from sector benchmarks: higher education currently allocates only about 3.6\% of the IT budget to information security~\cite{educause-spending}, below the cross-industry averages reported in vendor benchmark data~\cite{gartner-security-spend2024}. A board can therefore size the likely envelope from its enrolment and current IT budget, and ask the CIO to refine it.
   \item \textbf{Cost of inaction.} The status quo is not free: the global all-industry average data-breach cost reached \$4.88M in 2024~\cite{ibm-cost-breach-2024} (the education sector below it), with talent drain and Shadow-IT exposure growing with delay.
 \end{enumerate}
 \noindent This frames precisely the decision the dossier asks of the governing bodies --- to commission a costed implementation study --- with enough quantified context (a scalable percentage and a quantified downside) to make that decision defensible, while leaving the precise TCO to the CIO.
@@ -831,6 +841,71 @@ The cost objection has a sharper, operational form: the reference stack names he
   \item \textbf{Optional layers stay optional.} Components justified only at scale --- the Science~DMZ, dedicated observability storage --- can be deferred entirely without weakening the rest of the architecture.
 \end{enumerate}
 \noindent The operational burden therefore scales with the chosen instantiation, not with the architecture: a small institution adopts the same principles at a managed-service realisation it can actually run.
+\end{answerbox}
+
+\bigskip
+
+% --- Q9.5 ---
+\begin{questionbox}[Q9.5 --- ``Our cyber-insurer's questionnaire forbids this: EDR everywhere, no unmanaged admin rights, full perimeter inspection --- adopting the proposal voids our coverage'']
+Typical underwriting questionnaires require endpoint detection on
+every host, prohibit unmanaged administrator rights, and assume
+perimeter inspection of all traffic. Accountable researcher root
+access and a \gls{sciencedmz} that bypasses the enterprise firewall
+facially contradict all three. Whatever the architecture's merits,
+the institution cannot operate uninsured.
+\end{questionbox}
+
+\begin{answerbox}[Response Q9.5]
+\textbf{This concern has merit in its premise:} insurability is a
+genuine external gate, and ``the architecture is sound'' is not an
+answer an underwriter accepts. The response, however, runs in three
+steps --- and its order matters.
+
+\begin{enumerate}[nosep]
+  \item \textbf{The proposal strengthens the insurable posture.}
+  Network segmentation, institution-wide \gls{mfa}, federated
+  identity and classification-driven observability are precisely
+  the control families underwriting commonly rewards; researcher
+  root access is \emph{accountable}, not unmanaged --- charter-bound,
+  logged, revocable, with a named risk owner per zone (the enclave
+  charter); and the \gls{sciencedmz} is disclosable as a
+  compensating-control architecture (ACL+IDS profile, dedicated
+  transfer nodes, no general-purpose hosts --- the documented ESnet
+  pattern). The per-zone evidence of P14 and the maturity reporting
+  produce, as a by-product, the documentation underwriters ask for
+  at renewal.
+
+  \item \textbf{Where the questionnaire still conflicts, the first
+  reflex is to renegotiate the contract, not the mission.} The
+  report's \keyword{liberty-first rule} is that constraint is never
+  preferred to freedom by default: a contract that would suppress an
+  academic freedom is a contract to renegotiate. Concretely: engage the
+  insurer or broker at Wave~0 with the zone catalogue and charters
+  in hand; declare deviations as documented exceptions with
+  compensating controls rather than letting a generic corporate
+  questionnaire default the institution to ``non-compliant''; and
+  seek academic-context underwriting terms. Freedom has a price the
+  governance body can knowingly choose to pay --- retention of a
+  residual risk, an alternative carrier, or sector mutualisation ---
+  rather than letting a standard form rewrite the institution's
+  mission.
+
+  \item \textbf{At sector scale, the response is collective.} Where
+  imposed terms would make academic digital freedom uninsurable by
+  default, universities act together --- through their consortia,
+  NREN communities and sector bodies, in the same spirit as the
+  dossier's Position~C (influence and reform): engaging insurers,
+  and where necessary the bodies that regulate them, so that the
+  insurability of a university is assessed against the controls it
+  actually operates, not against a template written for a
+  single-perimeter corporation.
+\end{enumerate}
+
+\noindent\textbf{Bottom line.} The questionnaire is an input to a
+negotiation, not a design authority. The proposal gives the
+institution both better terms to ask for and the evidence to ask
+with; the truly unanswerable position is the undocumented flat
+network.
 \end{answerbox}
 
 % ============================================================================
@@ -991,9 +1066,11 @@ Q9.1 & No concrete budget numbers & Normal for policy documents; budget produced
 \addlinespace
 Q9.2 & Timeline is too optimistic & Phased structure absorbs delays; status quo worsens with time \\
 \addlinespace
-Q9.3 & Economic case is asserted, not shown & Cost shape + scalable benchmark (8--15\% vs 3.6\%) + cost of inaction frame the board decision \\
+Q9.3 & Economic case is asserted, not shown & Cost shape + scalable benchmark (higher education's 3.6\% vs cross-industry averages) + cost of inaction frame the board decision \\
 \addlinespace
 Q9.4 & Small team cannot operate the stack & Reference stack is the high-scale instantiation; layers degrade to managed/mutualised realisations \\
+\addlinespace
+Q9.5 & Insurer's questionnaire forbids researcher root / Science DMZ & Underwriting credits + disclosable compensating controls; renegotiate for academic-context terms (questionnaire is negotiation input, not design authority); collective action in the spirit of Position~C \\
 \addlinespace
 Q10.1 & Document is biased & Extensively referenced, counter-arguments addressed, risk register honest \\
 \addlinespace

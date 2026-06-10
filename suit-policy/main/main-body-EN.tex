@@ -23,13 +23,13 @@ interdisciplinary centres, services, IT departments, DPO, CISO)
 and independent of any institutional hierarchy or formal mandate.
 The single objective of this report is to be considered by the
 institution's academic governing bodies (the collegial academic councils and
-the top governing board) and, if found substantive, to
-be propagated by the top governing board to all concerned components
+\loc{governing-board}) and, if found substantive, to
+be propagated by \loc{governing-board} to all concerned components
 for deliberation through the appropriate institutional channels.}
 \end{tcolorbox}
 
 % --- Top governing board / executive leadership ---
-\begin{stakeholderbox}[Message to the top governing board and executive leadership]{blue}
+\begin{stakeholderbox}[Message to \loc{governing-board} and executive leadership]{blue}
 \textbf{Strategic issue:} The university's capacity to attract
 and retain world-class researchers, to compete for European and
 international funding, and to meet its legal obligations under
@@ -110,16 +110,16 @@ compromise.
 
 \medskip
 \textbf{Request for consideration by the academic governing bodies and
-propagation by the top governing board.} The present
+propagation by \loc{governing-board}.} The present
 report is a voluntary contribution produced by members of the
 academic community acting in their scientific and technical
 capacity, independent of any institutional hierarchy or formal
 mandate. Its propositions are offered to the institution's academic
-governing bodies (the collegial academic councils and the top governing board) for
+governing bodies (the collegial academic councils and \loc{governing-board}) for
 consideration alongside the cybersecurity strengthening initiatives
-already approved by the top governing board. The contributors of
+already approved by \loc{governing-board}. The contributors of
 this report request that, if the analysis is found substantive,
-the document be propagated by the top governing board to all
+the document be propagated by \loc{governing-board} to all
 concerned components (the central executive leadership, faculties, interdisciplinary
 centres, services, IT departments, DPO, CISO) so that integration
 with existing initiatives can be deliberated through the
@@ -157,10 +157,10 @@ boundaries as recurring causes.
 \begin{enumerate}[nosep]
     \item The report is submitted to the institution's academic
     governing bodies (the collegial academic councils and
-    the top governing board) for consideration within
+    \loc{governing-board}) for consideration within
     their respective remits; each body may issue a position
     statement on the propositions.
-    \item If endorsed by the top governing board, the central
+    \item If endorsed by \loc{governing-board}, the central
     executive leadership
     --- in collaboration with the CISO, the DPO, the academic
     representatives and the contributors of this report ---
@@ -217,7 +217,7 @@ movement, not by accountable autonomy in research or teaching zones.
     \item \textbf{Measurable security posture:} each Trusted
     Activity Context produces its own logging baseline and
     compliance metrics --- enabling you to report zone-by-zone
-    security status to the top governing board, rather than a
+    security status to \loc{governing-board}, rather than a
     single aggregate score that masks local weaknesses;
     \item Current Shadow IT (hidden servers, personal clouds, unauthorised
     \gls{vpn}s) is replaced by authorised and auditable pathways;
@@ -230,8 +230,10 @@ movement, not by accountable autonomy in research or teaching zones.
 undifferentiated perimeter means that every exception is ad hoc,
 every research server is a potential blind spot, and a breach
 anywhere is a breach everywhere. The Verizon
-DBIR~\cite{verizon-dbir2024} consistently identifies lateral
-movement within flat networks as a primary breach amplifier.
+DBIR~\cite{verizon-dbir2024} consistently identifies credential
+abuse and ransomware as leading breach patterns; NIST guidance
+identifies segmentation as the control that interrupts their
+lateral progression across a flat network~\cite{nist-sp800-215}.
 The proposed architecture does not weaken your mandate ---
 it makes it enforceable.
 \end{stakeholderbox}
@@ -443,8 +445,8 @@ rather than push them into shadow IT.
 
 This section provides a pedagogical overview intended for
 non-specialist decision-makers, particularly members of the
-institution's collegial academic councils and the
-top governing board. It introduces the regulatory
+institution's collegial academic councils and
+\loc{governing-board}. It introduces the regulatory
 landscape, the academic-domain specificities, the institutional
 context and the architectural proposition of this report. Each
 sub-section is designed for a five-minute read; cross-references
@@ -497,7 +499,9 @@ federated governance.
 
 The institution does not operate in isolation: its national
 research-and-education network (NREN)
-connects it to the European backbone \gls{geant},
+connects it to its continental research backbone (in Europe,
+\gls{geant}; Internet2/ESnet, RedCLARA, UbuntuNet or APAN in other
+regions),
 providing identical infrastructure primitives (eduroam, eduGAIN,
 identity federations) at the national scale. The architectural
 choices proposed in this report are consistent with the practice
@@ -522,12 +526,13 @@ module of the Technical Reference):
     this applies to student records, HR data, and research data
     containing personal information.
 
-    \item[\gls{nis2} (2022, applicable since 17~October~2024).]
+    \item[\gls{nis2} (2022, transposition deadline 17~October~2024; national measures apply from 18~October~2024).]
     Cybersecurity for \emph{essential} and \emph{important}
     entities. Where the institution's jurisdiction has transposed
     the Directive into national law, a public research-and-teaching
-    institution is typically classified as an \emph{essential entity}
-    on the basis of its public-institution status (Section~\ref{sec:nis2}).
+    institution \emph{may} be classified as an \emph{essential entity},
+    depending on the national transposition --- the public-administration
+    route being a common basis (Section~\ref{sec:nis2}).
     Essential-entity supervision is proactive (audits, maturity
     reports), with sanctions \loc{nis2-sanction-ceiling}.
 
@@ -569,9 +574,10 @@ statute applicable in its own jurisdiction (the worked instantiation
 is given in the Regulatory Applicability annex).
 
 \begin{description}[nosep]
-    \item[Status.] A public research-and-teaching institution is
-    typically classified as an \emph{essential entity} under the
-    national NIS2 transposition, on three cumulative legal pegs:
+    \item[Status.] Depending on the national transposition, a public
+    research-and-teaching institution may be classified as an
+    \emph{essential entity}; in the worked transposition example, the
+    classification rests on three cumulative legal pegs:
     the public-administration entity definition, the essential-%
     regardless-of-size clause, and the research-organisation track
     (which is often explicitly closed for teaching establishments).
@@ -589,7 +595,7 @@ is given in the Regulatory Applicability annex).
     incident-notification platform is typically the entry point for
     \gls{nis2}, \gls{gdpr} and CER notifications. The binding
     cadence is 24~hours (early warning) / 72~hours (incident
-    notification) / 30~days (final report).
+    notification) / one month (final report).
 
     \item[National strategy hook.] National cybersecurity strategies
     commonly identify cooperation between the State and the
@@ -653,10 +659,10 @@ The report is structured for several reading paths:
 
 \begin{itemize}[nosep]
     \item \textbf{For decision-makers (the collegial academic
-    councils and the top governing board):}
+    councils and \loc{governing-board}):}
     Section~\ref{sec:stakeholders} presents per-audience
     messages; the accompanying executive summary (companion
-    document) provides a four-page synthesis.
+    document) provides a condensed synthesis.
     \item \textbf{For legal review (CISO, DPO, legal service):}
     Section~\ref{sec:reglementation} contains the full regulatory
     analysis, with the methodology note at its entry;
@@ -685,6 +691,28 @@ The report is structured for several reading paths:
 university governance must optimise for freedom for ideas and persons,
 physical or digital. The digital infrastructure should reflect this
 fundamental distinction.
+
+\paragraph{The liberty-first rule.}
+\label{par:liberty-first}
+This report applies one standing rule wherever freedom and constraint
+collide: \keyword{constraint is never preferred to freedom by
+default}, and the burden of proof always rests on the restriction.
+The rule escalates through three levels. \emph{(i)~Design:} every
+control is proportionate, documented, and limited to what is strictly
+necessary; the default is freedom, the exception is justified.
+\emph{(ii)~Contracts:} an engagement already entered into --- a vendor
+agreement, an insurance policy --- that would limit an academic
+freedom is, first of all, a contract to \keyword{renegotiate} so as to
+maximise freedom in the academic context; freedom has a price, and the
+governance bodies may knowingly choose to pay it (residual-risk
+retention, an alternative counterparty, sector mutualisation) rather
+than surrender the mission. \emph{(iii)~Regulation:} where the
+constraint comes from law or regulation, the institution engages ---
+collectively, with the national and international university
+community --- in the influence-and-reform processes of
+Section~\ref{sec:advocacy} (Position~C), so that legislators and
+regulators do not impose regimes, insurance terms included, whose only
+outcome would be the deprivation of academic digital freedoms.
 
 \medskip
 Universities are, by nature, open spaces dedicated to the creation
@@ -767,7 +795,7 @@ amounts to treating a scientific instrument like a secretarial workstation.
 \subsection{Shadow IT: documented effects of restrictive policies}
 \label{subsec:shadow-it}
 
-A case study from the University of Maryland (UMBC) revealed that
+A case study from the University of Maryland, Baltimore County (UMBC) revealed that
 Shadow IT emerges to satisfy \emph{``unmet functional
 needs''} and provide \emph{``innovation and flexibility''}~\cite{shadow-it-umbc}.
 When central tools are unsuitable or too locked down,
@@ -998,7 +1026,8 @@ Directive~\cite{nis2} and its national transposition, the
 Critical Entities Resilience (CER) Directive~(EU)~2022/2557 and
 its national transposition, the
 \gls{gdpr}~\cite{gdpr}, the European AI Act~\cite{eu-ai-act}, and
-Commission Implementing Regulation~(EU)~2024/2690~\cite{eu-regulation-2024-2690}),
+for digital-sector entities, Commission Implementing
+Regulation~(EU)~2024/2690~\cite{eu-regulation-2024-2690}),
 the binding case law (CJEU \emph{Schrems~II}~\cite{schrems2020}),
 and the national instruments (the national public-sector
 information-security policy and \loc{national-cyber-strategy}'s
@@ -1050,10 +1079,11 @@ freedoms, provided that each domain has:
 
 Where the institution's jurisdiction has transposed the \gls{nis2}
 Directive~\cite{nis2}, a public research-and-teaching institution is
-typically classified --- on written confirmation by the national
-competent authority (the NIS2 supervisory authority) --- as an
-\keyword{essential entity} on the basis of its status
-as a public institution (NIS2 Annex~I). This classification is
+may be classified --- depending on the national transposition, on
+written confirmation by the national competent authority (the NIS2
+supervisory authority) --- as an \keyword{essential entity}, the
+public-administration entry of NIS2 Annex~I being the basis in the
+worked example. This classification is
 independent of the institution's research activities and applies to the
 institution as a whole.
 
@@ -1088,11 +1118,15 @@ This classification has three direct consequences:
     \item \textbf{Higher level of obligations.} Essential entities are
     subject to proactive (\emph{ex-ante}) supervision rather than the
     reactive (\emph{ex-post}) oversight applicable to important
-    entities, with heavier sanctions (Article~34) and stricter incident
-    reporting obligations (Article~23).
-    \item \textbf{Continuous compliance evidence.} The institution is
-    required to submit a regular compliance and maturity report to the
-    competent authorities, which presupposes governance, audit and
+    entities, with heavier sanctions (Article~34); the Article~23
+    reporting cadence itself is the same for both classes --- the
+    differential lies in supervision and sanctions.
+    \item \textbf{Continuous compliance evidence.} Where the national
+    transposition so provides (as in the worked example), the
+    institution is required to submit a regular compliance and
+    maturity report to the competent authorities --- a national
+    mechanism reflecting the directive's \emph{ex-ante} supervision
+    powers (Article~32) --- which presupposes governance, audit and
     incident-management evidence at the level of the entire
     institution.
 \end{enumerate}
@@ -1156,7 +1190,7 @@ supervisory authority in partnership with the national cybersecurity
 bodies and \loc{national-dpa}. The institution,
 as an essential entity, discharges its NIS2 incident-notification
 obligations through such a platform on the binding 24-hour / 72-hour /
-30-day cadence (\gls{nis2} Article~23) and submits its annual maturity
+one-month cadence (\gls{nis2} Article~23) and submits its annual maturity
 report through the same channel.
 
 \subsubsection{National strategy hook}
@@ -1177,11 +1211,14 @@ essential under NIS2. A given institution may or may not be designated
 as a CER critical entity; the cross-reference is provided for
 regulatory-neighbourhood completeness.
 
-The technical baseline applicable to NIS2 essential entities is
-further specified by Commission Implementing
+Commission Implementing
 Regulation~(EU)~2024/2690~\cite{eu-regulation-2024-2690} of
-17~October~2024, directly applicable across the European Union and
-detailing the ten obligation families listed in NIS2 Article~21(2).
+17~October~2024 details the ten obligation families of NIS2
+Article~21(2) for the digital-sector entity classes within its
+Article~1 scope; for other essential or important entities ---
+universities included --- it is not directly binding but serves as
+persuasive state-of-the-art guidance, the binding baseline being set
+by the national transposition.
 
 \subsubsection{Public-sector reference framework}
 
@@ -1219,48 +1256,50 @@ Section~\ref{sec:propositions}. Two mapping tables make this visible.
     \textbf{Propositions covering} \\
 \midrule
 1. Risk-analysis and SI security policy &
-    Art.~21(2)(1\textdegree) & P1 (risk-based approach),
+    Art.~21(2)(a) & P1 (risk-based approach),
     P14 (per-zone evidence) \\
 \addlinespace
-2. Incident handling & Art.~21(2)(2\textdegree) &
+2. Incident handling & Art.~21(2)(b) &
     P12 (security communities), P14 (evidence) \\
 \addlinespace
 3. Business continuity (backup, recovery, crisis) &
-    Art.~21(2)(3\textdegree) & P9 (\gls{sciencedmz}),
+    Art.~21(2)(c) & P9 (\gls{sciencedmz}),
     P11 (secure alternatives) \\
 \addlinespace
-4. Supply-chain security & Art.~21(2)(4\textdegree) &
+4. Supply-chain security & Art.~21(2)(d) &
     P6 (open-source by default), P7 (enclave charters) \\
 \addlinespace
 5. SI acquisition, development, maintenance security &
-    Art.~21(2)(5\textdegree) & P11 (secure alternatives),
+    Art.~21(2)(e) & P11 (secure alternatives),
     P6 (open-source) \\
 \addlinespace
 6. Effectiveness measurement &
-    Art.~21(2)(6\textdegree) & P14 (per-zone evidence +
+    Art.~21(2)(f) & P14 (per-zone evidence +
     maturity dashboard) \\
 \addlinespace
 7. Cyber-hygiene practices and training &
-    Art.~21(2)(7\textdegree) & P5 (Digital Policy Commission),
+    Art.~21(2)(g) & P5 (Digital Policy Commission),
     training in P10 / P12 \\
 \addlinespace
-8. Cryptography policies & Art.~21(2)(8\textdegree) &
+8. Cryptography policies & Art.~21(2)(h) &
     P11 (secure alternatives), implicit in P3 (BYOD \gls{mfa}) \\
 \addlinespace
 9. HR security, access control, asset management &
-    Art.~21(2)(9\textdegree) & P3 (BYOD), P7 (charters),
+    Art.~21(2)(i) & P3 (BYOD), P7 (charters),
     P8 (autonomy with minimums), P10 (federated identity) \\
 \addlinespace
 10. \gls{mfa} and secured communications &
-    Art.~21(2)(10\textdegree) & P13 (Zero Trust + \gls{mfa}),
+    Art.~21(2)(j) & P13 (Zero Trust + \gls{mfa}),
     P10 (federated identity) \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\noindent The technical baselines for each family are detailed in
-Commission Implementing Regulation (EU)~2024/2690~\cite{eu-regulation-2024-2690},
-directly applicable across the European Union.
+\noindent For the digital-sector entity classes within its
+Article~1 scope, the technical baselines for each family are
+detailed in Commission Implementing Regulation
+(EU)~2024/2690~\cite{eu-regulation-2024-2690}; for other entities
+they serve as persuasive state-of-the-art guidance.
 
 \begin{table}[H]
 \centering
@@ -1285,7 +1324,7 @@ Ex-ante supervision & \gls{nis2} essential-entity regime &
     Architecture is audit-ready & Internal-audit cycle feeding
     the maturity report \\
 \addlinespace
-Incident notification 24h / 72h / 30~days &
+Incident notification 24\,h / 72\,h / 1~month &
     \gls{nis2} Art.~23 &
     Section~\ref{sec:lu-landscape} introduces the platform &
     Incident-response procedure integrated with the platform's cadence \\
@@ -1363,7 +1402,7 @@ NIS2 (essential entity) & Holistic perimeter, proactive supervision,
     Article~21 proportionality via multi-zone segmentation; enclave
     registry, incident playbooks, formalised federated governance \\
 \addlinespace
-NIS2 (operational cadence) & 24h/72h/30-day incident notification
+NIS2 (operational cadence) & 24\,h/72\,h/1-month incident notification
     via the national notification platform + annual maturity report to
     the supervisory authority & Incident-response procedure integrated
     with the national platform; institution-level maturity dashboard
@@ -1781,9 +1820,10 @@ administrative traffic}
     transfers, using Globus~\cite{globus} (HTTPS-based managed transfer),
     optimised for high-throughput flows.
     \item[Security through ACLs:] while modern next-generation firewalls
-    can technically achieve 100+~Gbps threat prevention throughput, they
-    cost an order of magnitude more than the \gls{sciencedmz} approach and
-    introduce latency, jitter, and state-tracking overhead detrimental to
+    advertise threat-prevention throughput in the 100-Gbps class,
+    inspecting research flows at that rate carries substantially higher
+    cost than the \gls{sciencedmz} approach and
+    introduces latency, jitter, and state-tracking overhead detrimental to
     sustained bulk transfers. Router-based access control lists (\gls{acl}s)
     can provide an appropriate control profile for the well-characterised,
     high-throughput traffic profiles typical of research data transfers,
@@ -1826,17 +1866,19 @@ activities or to the infrastructure core.
 \toprule
 \textbf{University} & \textbf{Result} & \textbf{Ref.} \\
 \midrule
-U. of Florida & \textbf{x20} performance increase from the first
-    phase; scaling up to 200~Gbps for LHC/CMS data &
+U. of Florida & \textbf{x10} from the bandwidth upgrade alone,
+    \textbf{x20} once the Science DMZ was added; 200~Gbps campus
+    capacity for LHC/CMS data &
     \cite{esnet-uflorida} \\
 \addlinespace
 CU Boulder & \emph{Core Split} architecture separating research and
     admin from the border router; resolution of firewall
     bottlenecks & \cite{esnet-cuboulder} \\
 \addlinespace
-Penn State & Increase from 50~Mbps to 250~Mbps (sending) and 600~Mbps
-    (receiving) by bypassing a firewall that violated RFC~1323
-    (TCP Window Scaling) --- \textbf{x5 to x12} gain & \cite{esnet-pennstate} \\
+Penn State & From a 50~Mbps baseline, \textbf{$\sim$x5} (inbound) and
+    \textbf{$\sim$x12} (outbound) gain after disabling the firewall
+    TCP-flow-sequence-checking feature that violated RFC~1323
+    (TCP Window Scaling) & \cite{esnet-pennstate} \\
 \addlinespace
 U. Michigan & Science DMZ with dedicated DTNs and perfSONAR; firewall
     repositioned near data sources rather than in the research
@@ -2056,12 +2098,13 @@ criteria:
     federated identity, Science DMZ, BYOD zoning --- are governance
     and design choices that translate across scales of institution.
     \item \textbf{Shared backbone services.} All institutions in
-    the panel access the same \gls{nren}/\gls{geant} backbone
-    services. The adopting institution's own NREN is a peer member
-    of the same federation (see Section~\ref{sec:lu-landscape}),
+    the panel access equivalent NREN backbone services (\gls{geant}
+    in Europe, Internet2/ESnet in North America), interconnected
+    into one global research fabric. The adopting institution's own
+    NREN is a peer in that fabric (see Section~\ref{sec:lu-landscape}),
     providing equivalent primitives at the national scale.
     \item \textbf{Size-comparable institutions.} The panel includes
-    \institution{EPFL} ($\sim$12\,000 students, comparable to a
+    \institution{EPFL} (comparable in size to a
     mid-sized research university)~\cite{epfl-rcp}, \institution{CERN}
     (governance model translatable to research-and-teaching
     consortia)~\cite{cern-network}, and Paris-Saclay
@@ -2085,8 +2128,8 @@ from the \keyword{Project Athena}
 (1983--1991)~\cite{mit-athena}.
 
 \begin{description}
-    \item[Network:] \institution{MITnet} provides a 100~Gbps campus
-    backbone connected to Internet2 and commercial
+    \item[Network:] \institution{MITnet} provides a high-throughput
+    campus backbone connected to Internet2 and commercial
     ISPs~\cite{mit-facts}.
     \item[Departmental autonomy:] laboratories (CSAIL, Lincoln
     Laboratory, Media Lab, Koch Institute) operate their own IT staff,
@@ -2246,7 +2289,7 @@ colleges has its own IT organisation.
     research network operated by Merit Network connecting U-M,
     Michigan State and Wayne State~\cite{umich-core-network}.
     Michigan co-founded Merit Network~\cite{umich-merit} and was among
-    the 34 founding universities of Internet2.
+    the founding universities of Internet2.
     \item[Federated governance:]
     \begin{itemize}[nosep]
         \item An \emph{IT Council}~\cite{umich-it-council} serves as an
@@ -2294,8 +2337,9 @@ architectures in the world~\cite{cern-network}.
     control) is \emph{strongly isolated by firewalls and strict \gls{acl}s}
     from the general network (GPN) for critical system
     security~\cite{cern-tn}.
-    \item[WLCG:] tiered architecture (Tier-0 at CERN, 14 Tier-1 centers,
-    $\sim$150 Tier-2 sites, university Tier-3 clusters) distributing
+    \item[WLCG:] tiered architecture (Tier-0 at CERN, national Tier-1
+    centres and university Tier-2/Tier-3 sites --- around
+    160~computing centres in more than 40~countries) distributing
     worldwide computing via LHCONE~\cite{cern-lhcone, cern-wlcg}.
     \item[Security model:] CERN balances perimeter controls
     (closed-by-default outer firewall) with extensive \emph{monitoring
@@ -2499,7 +2543,7 @@ and \keyword{isolation of activity contexts} as defences, not to blanket restric
     website and digital services were severely disrupted. The attack
     reportedly involved theft of around 1\,TB of data and compromise of
     employee credentials (infostealer activity). Recovery lasted months; the
-    university did not pay the ransom and worked with the French national
+    university worked with the French national
     cybersecurity agency (ANSSI). \textbf{Relevant point:} the systems
     targeted were \emph{central} administrative and email infrastructure ---
     a large, undifferentiated perimeter. The incident illustrates the
@@ -2515,9 +2559,11 @@ and \keyword{isolation of activity contexts} as defences, not to blanket restric
     consistent with the benefit of \keyword{network segmentation}; the
     incident does not support the argument that flexible or segmented
     policies are inherently riskier~\cite{rennes-cyber}.
-    \item[\institution{Sorbonne Universit\'e}:] Also reported a
-    cyberattack with data theft in 2024; less detailed public information
-    is available~\cite{paris-sorbonne-cyber}.
+    \item[\institution{Universit\'e Paris~1 Panth\'eon-Sorbonne}:]
+    Reported an October~2024 cyberattack in which directory data of
+    about 73\,000 students and staff (names, email addresses, photos,
+    status) was extracted; the university notified the national
+    data-protection authority~\cite{paris-sorbonne-cyber}.
 \end{description}
 
 \subsubsection{United States and international (2021--2024)}
@@ -2531,9 +2577,8 @@ and \keyword{isolation of activity contexts} as defences, not to blanket restric
     sciences} and administrative perimeter, not research openness.
     \item \textbf{MOVEit supply-chain attacks} (2023--2024): The Cl0p
     group exploited a vulnerability in Progress MOVEit Transfer software.
-    Many universities were affected (e.g.\ UCLA, Stanford School of
-    Medicine, University of Missouri, Rutgers, University of Georgia,
-    Yeshiva). \textbf{These breaches were caused by a \emph{third-party
+    Many universities were affected (e.g.\ UCLA and the University
+    System of Georgia, among many others). \textbf{These breaches were caused by a \emph{third-party
     software vulnerability}, not by institutional policies on openness or
     segmentation.} Affected institutions patched the product and improved
     vendor oversight; the lesson is supply-chain and vendor risk, not
@@ -2658,8 +2703,7 @@ federated services and shared security.
 \begin{description}
     \item[GÉANT~\cite{geant}:] pan-European backbone network connecting
     around 40 \gls{nren}s across Europe, serving 50 million users
-    in 10\,000+ institutions. Backbone capacity: multiple wavelengths
-    at 400~Gbps.
+    in 10\,000+ institutions. Backbone capacity: up to 500~Gbps.
     \item[RENATER~\cite{renater}:] French \gls{nren} connecting all
     universities, research laboratories (CNRS, INRIA, CEA, INSERM)
     and French grandes écoles. Multi-100~Gbps backbone.
@@ -2859,14 +2903,9 @@ framework for an Information Security Management System (ISMS).
 
 \subsubsection{ISO 27001 certified universities}
 
-Several universities have obtained certification, typically for
-specific scopes:
-\begin{itemize}[nosep]
-    \item University of Leeds (UK) --- IT services;
-    \item University of Warwick (UK) --- IT services;
-    \item Eindhoven University of Technology (Netherlands);
-    \item Various universities in Germany, Australia and Japan.
-\end{itemize}
+Several universities --- in the United Kingdom, the Netherlands,
+Germany, Australia and Japan among others --- have obtained
+certification, typically for specific scopes.
 
 \textbf{Observation:} in most cases, certification covers
 \emph{central IT services} and not the entire institution, which
@@ -3066,8 +3105,9 @@ Six items detail the framework:
         \item \emph{Non-personal or fully anonymised data}:
         free transfer (\gls{gdpr} not applicable);
         \item \emph{Pseudonymised personal data}: transfer permitted
-        under \gls{scc} + supplementary measures (encryption with key
-        separation, reinforced contractual clauses);
+        under \gls{scc} + documented \gls{tia} + supplementary
+        measures (encryption with key separation, reinforced
+        contractual clauses);
         \item \emph{Identifying personal data}: transfer requires
         explicit informed consent (or another Art.~6 lawful basis)
         + \gls{scc} + supplementary measures + documented
@@ -3834,8 +3874,9 @@ art}, \textbf{costs} and context~\cite{gdpr}.
     low-sensitivity research and teaching traffic; the ``high security''
     perimeter becomes \emph{smaller and cheaper to harden and monitor}.
     \item \textbf{Reuse of existing ecosystems:} many components are
-    \emph{low-cost or cost-free}: \gls{nren}/\gls{geant} connectivity and
-    security services, REN-ISAC and \gls{geant} Security (threat intelligence,
+    \emph{low-cost or cost-free}: connectivity and security services
+    from the NREN and its continental research backbone (in Europe,
+    \gls{geant}), REN-ISAC and \gls{geant} Security (threat intelligence,
     \gls{csirt}), open-source tools (perfSONAR, Zeek, Apache Guacamole,
     JupyterHub, Globus). \gls{sciencedmz} patterns are documented and
     adopted by 100+ universities~\cite{esnet-history,nsf-cc} without requiring proprietary
@@ -3903,7 +3944,7 @@ is developed in Part~III of the same document.}
 & Adoption of the differentiated responsibility charter
     (ETH Zurich model) \\
 & Service catalogue and formalised exception path \\
-& Executive-training programme for the top governing board
+& Executive-training programme for \loc{governing-board}
     (\gls{nis2} Art.~20(2), see Section~\ref{sec:exec-training}) \\
 \midrule
 \textbf{2. Pilot} &
@@ -3933,7 +3974,7 @@ is developed in Part~III of the same document.}
 & \gls{dpo} audit cycle covering the cooperative declaration
     register for non-EU AI cloud access
     (Section~\ref{sec:safeguards-ai}) \\
-& Executive-training refresh for the top governing board
+& Executive-training refresh for \loc{governing-board}
     (\gls{nis2} Art.~20(2), Section~\ref{sec:exec-training}) \\
 \bottomrule
 \end{tabularx}
@@ -4029,7 +4070,8 @@ below are ordered so that \emph{governance and quick wins} come first
 little or no additional infrastructure and deliver immediate clarity
 of responsibilities. \emph{Pilot deployment} (one department, one zone)
 then validates the model at contained cost before any institution-wide
-rollout. The heavy use of shared services (\gls{nren}, \gls{geant}, REN-ISAC,
+rollout. The heavy use of shared services (the \gls{nren}, its continental
+research backbone --- in Europe, \gls{geant} ---, REN-ISAC,
 open-source tooling) and the absence of a single ``critical path''
 vendor reduce both implementation risk and total cost of ownership.
 The cost-benefit and feasibility discussion in
@@ -4077,8 +4119,9 @@ these propositions.
 
     \item \textbf{Adopt open-source and open-science tools as default
     institutional choices}, reducing vendor lock-in, increasing
-    auditability and transparency, and aligning with the European
-    Commission's open-source strategy for public administrations.
+    auditability and transparency, and aligning with public-sector
+    open-source strategies (e.g., the European Commission's
+    open-source strategy in the EU).
 
     \item \textbf{Formalize autonomy} through enclave charters
     (ETH Zurich / Oxford model) and Data Stewards in
@@ -4103,7 +4146,10 @@ these propositions.
     \item \textbf{Implement federated identity} via
     \gls{eduroam} and the national NREN-operated identity
     federation (linked to eduGAIN), enabling inter-institutional
-    \gls{sso} and researcher mobility.
+    \gls{sso} and researcher mobility --- where a national identity
+    federation operates; otherwise deploy the standards-based
+    identity layer with interoperable federation metadata and defer
+    participation until one exists (Technical Reference, Ch.~6).
 
     \item \textbf{Offer secure alternatives} rather than
     banning: OpenStack private cloud, \gls{vdi} for teaching,
@@ -4338,7 +4384,8 @@ international consensus (below) as the jurisdiction-neutral anchor:
     \textbf{condemns} measures aimed at intentionally preventing or disrupting
     access to information online.
     \item Resolution A/HRC/RES/47/16~\cite{unhrc2021} (2021),
-    adopted by 43 votes to 0, condemns Internet shutdowns and
+    adopted without a vote (by consensus) and co-sponsored by some
+    70 states, condemns Internet shutdowns and
     online censorship.
     \item The \textbf{UNESCO Recommendation on Science and
     Scientific Researchers}~\cite{unesco2017} (2017, 195 countries)
@@ -4347,7 +4394,7 @@ international consensus (below) as the jurisdiction-neutral anchor:
     \emph{``free access to libraries and other sources
     of information''}.
     \item The \textbf{Magna Charta Universitatum}~\cite{magna-charta}
-    (Bologna, 1988, over 1\,000 signatories from 94 countries, revised in 2020)
+    (Bologna, 1988, signed by university rectors from around the world, revised in 2020)
     states that \emph{``research and teaching must be
     intellectually and morally independent of all political
     authority and economic power''}.
@@ -4788,7 +4835,8 @@ strengthen both security and the university's core missions.
 The \textbf{feasibility and cost} of the proposed measures have been
 addressed explicitly: implementation is \emph{phased} (governance
 $\rightarrow$ pilot $\rightarrow$ rollout), relies on existing
-\gls{nren}/\gls{geant} ecosystems and open-source or shared tools where possible,
+\gls{nren} and continental research-backbone ecosystems (in Europe,
+\gls{geant}) and open-source or shared tools where possible,
 and concentrates investment on the administrative enclave rather than
 on the whole perimeter. This makes the approach both \emph{implementable}
 within typical university budgets and \emph{proportionate} to risk, as

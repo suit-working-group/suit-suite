@@ -105,7 +105,10 @@ state is tracked against an institutional repository.
 \textbf{macOS} endpoints are configured through Munki~\cite{munki}
 for software distribution and through MDM commands delivered by an
 open-source MDM server (MicroMDM~\cite{micromdm} or NanoMDM, or a
-comparable project) speaking Apple's DDM/DEP protocols; posture is
+comparable project) speaking Apple's MDM protocol with DEP/ADE
+enrolment, and Declarative Device Management (DDM) where the chosen
+open server and its companion services support it --- a coverage
+currently partial relative to commercial MDMs; posture is
 queried through osquery. \textbf{Windows} endpoints are partially
 covered by declarative configuration through Ansible with the
 WinRM/PowerShell-DSC integration, with the explicit observation

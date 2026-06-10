@@ -7,8 +7,8 @@ This document is the executive summary of a voluntary contribution
 produced by members of the academic community acting in their
 scientific and technical capacity, addressed to the
 institution's governing bodies (the unit-level deliberative body,
-the institution-wide council, and the \loc{governing-board}) for
-consideration and, if found substantive, propagation by the
+the institution-wide council, and \loc{governing-board}) for
+consideration and, if found substantive, propagation by
 \loc{governing-board} to all concerned components.}
 
 \bigskip
@@ -28,7 +28,10 @@ consideration and, if found substantive, propagation by the
 \begin{itemize}[nosep, leftmargin=1em]
     \item \textbf{Digital freedom is the rule} in a university; restrictions
     must be proportionate, documented, and limited to what is strictly
-    necessary.
+    necessary. When a contract or a regulation would invert that order,
+    the institution's first reflex is to renegotiate or to engage in
+    reform --- not to comply by default (the main report's
+    liberty-first rule).
     \item \textbf{Segment to protect, liberate to excel:} a multi-zone
     architecture with Trusted Activity Contexts strengthens security
     for sensitive data while granting autonomy to research and teaching.
@@ -209,13 +212,15 @@ that a breach in one context cannot cascade to the rest of the
 institution.
 
 Conceptually, the university information system is organised in
-\textbf{concentric layers} (the executive view of the structural
-layers detailed in the technical reference): a small, strongly protected
+\textbf{concentric layers} (the executive view of the five structural
+layers detailed in the main report): a small, strongly protected
 \textbf{infrastructure core} (identity, network backbone, backups,
 supervision) that forms the \emph{dependability foundation} of the
 institution; \textbf{common services} (messaging, \gls{lms}, collaboration)
 available to all; \textbf{autonomous zones} (research, teaching) with
-local freedom and bounded impact; and \textbf{user networks} (\gls{byod},
+local freedom and bounded impact; \textbf{exposed zones} (public-facing
+services and portals, isolated from the internal system by DMZ-type
+architectures); and \textbf{user networks} (\gls{byod},
 Wi-Fi) that are open but isolated from the core. Protecting the small
 critical core is what makes it possible to liberate everything else.
 
@@ -277,7 +282,7 @@ controls follows the risk-proportionality principle of that regime --- the
 \gls{nis2} Article~21 measure families in the worked EU instantiation --- not
 scope reduction. The function this discharges is the cybersecurity
 risk-governance obligation (F2) of the Regulatory Applicability annex
-(Part~\ref{part:reg-applicability}); read your own regime's instrument for
+(Part~\ref{part:reg-applicability} of the complete dossier); read your own regime's instrument for
 that obligation in the regime typology there.}
 
 \mainref{the sections \nameref{sec:etat-art}, \nameref{sec:exemples},
@@ -309,8 +314,8 @@ that obligation in the regime typology there.}
     auditability, and maps naturally onto the zone structure;
   \item \textbf{Open-source and open-science tools as default
     institutional choices}, reducing vendor lock-in, increasing
-    transparency, and aligning with the European Commission's
-    open-source strategy;
+    transparency, and aligning with public-sector open-source
+    strategies (e.g., the European Commission's in the EU);
   \item \textbf{Independent Commission for Reasonable Adjustments
     of Digital Policies} (\gls{icradp}): any employee can
     challenge a disproportionate restriction --- for medical, personal,
@@ -332,7 +337,7 @@ continuous-improvement mechanism, materialised in the annual
 compliance and maturity report submitted to the competent cybersecurity
 authority~\cite{ilr-ul-essential} pursuant to the continuous-improvement
 provision of the applicable regime --- see the Regulatory Applicability annex
-(Part~\ref{part:reg-applicability}), the accountability-and-conformity
+(Part~\ref{part:reg-applicability} of the complete dossier), the accountability-and-conformity
 obligation (F6) under your regime profile, instantiated in the worked EU
 example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
 
@@ -371,8 +376,8 @@ example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
 \noindent
 No ``big bang'' required. The governance step is organisational and
 achievable with existing staff. The pilot and progressive extension
-rely on the \loc{nren-name} and its pan-European
-backbone services, open-source tools,
+rely on the \loc{nren-name} and its international
+research-backbone services, open-source tools,
 and platforms offered free of charge for academic research.
 
 \medskip
@@ -381,7 +386,7 @@ evidences no Science DMZ --- nor any equivalent research-and-education-network-o
 research-data path --- deployed, neither at the institution nor at the
 \loc{nren-name} level, the substrate is nonetheless frequently
 already operational: high-capacity backbone connectivity to the
-pan-European research backbone through the \loc{nren-name}, an \gls{hpc} facility moving
+international research backbone through the \loc{nren-name}, an \gls{hpc} facility moving
 petabyte-scale traffic, and \loc{nren-csirt} for incident
 response. For institutions of modest scale, the pragmatic form is
 therefore not an institution-only deployment of the Science DMZ pattern
@@ -405,7 +410,8 @@ biomedical workloads where required.
     the standard scientific working environment.
     Under the \loc{ai-regulation}'s risk-based framework --- the
     technology-governance obligation (F5) of the Regulatory Applicability annex
-    (Part~\ref{part:reg-applicability}) --- the resulting obligations
+    (Part~\ref{part:reg-applicability} of the complete dossier) --- the
+    resulting obligations
     depend on the concrete use case and the user's role; many research
     uses of commercial AI services fall outside the high-risk categories.
     Under the proposed cooperative researcher-centred model
@@ -433,12 +439,13 @@ biomedical workloads where required.
     instruments named here are the EU instantiation of a
     jurisdiction-invariant obligation spine; an adopter reads its own
     regime's instruments for these obligations in the Regulatory
-    Applicability annex (Part~\ref{part:reg-applicability}).
+    Applicability annex (Part~\ref{part:reg-applicability} of the
+    complete dossier).
   \item \textbf{Reference universities providing comparable openness:}
     reference research institutions
     provide their researchers with the autonomy and infrastructure
     described here. The \loc{nren-name} and its
-    pan-European backbone interconnect
+    international backbone interconnect
     make the same architectural primitives accessible at the
     institution's national scale.
 \end{enumerate}
@@ -462,9 +469,9 @@ through blanket restrictions that drive talent away and fuel Shadow~IT.
 \textbf{Short-term objectives:}
 \begin{enumerate}
   \item That the \textbf{unit-level deliberative body}, subsequently the
-    \textbf{institution-wide council}, and finally the
+    \textbf{institution-wide council}, and finally
     \textbf{\loc{governing-board}} endorse a position statement derived
-    from the present five-page document, \emph{``The University Spirit
+    from the present executive summary, \emph{``The University Spirit
     in the Digital Age''};
   \item That the \textbf{executive leadership}, in collaboration with IT
     experts and academic representatives, define a short- to

@@ -14,6 +14,8 @@ This keeps terminology, evidence, colours, and cross-document references consist
 
 ## Filing a change request
 
+💡 *CLI shortcut:* `tools/file-ticket.sh <change|instantiation|localization|question>` composes the chosen issue template's fields interactively, previews the ticket, and submits it via the GitHub CLI after your confirmation; working-group members using the authoring toolkit can run the `/suit-ticket` skill for the assisted, conversational version of the same flow.
+
 Open an issue using the **Document change request** template and provide:
 
 - the **target document** and **section**,
@@ -26,7 +28,7 @@ Requests that arrive with evidence are review-ready and are processed faster. Fo
 
 ## Contributing an instantiation (the instantiation library)
 
-Beyond proposing changes to the generic suite, you can **apply the instantiation methodology and deposit your institution's concrete edition** into the shared library at `instantiations/`. This is how the suite turns from one generic reference into a growing set of worked, build-clean editions that every participant can read and reuse.
+Beyond proposing changes to the generic suite, you can **apply the instantiation methodology and deposit your institution's concrete edition** into the shared library at `instantiations/`. This is how the suite turns from one generic reference into a growing set of worked, build-clean editions that every participant can read and reuse. The library front door is `instantiations/README.md`; the deposited **University of Luxembourg reference edition** (`instantiations/lu-university-of-luxembourg/`) retraces the whole process step by step and is the worked example to pattern your edition on.
 
 The flow:
 

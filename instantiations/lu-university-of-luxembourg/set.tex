@@ -59,6 +59,7 @@
 \setloc{executive-leadership}{the Rectorate (the Rector and the central executive team)}
 \setloc{governing-board}{the Board of Governors (the Conseil de Gouvernance)}
 \setloc{academic-governing-bodies}{the academic deliberative bodies (the Faculty Councils and the University Council)}
+\setloc{staff-representation-body}{the staff delegation (d\'el\'egation du personnel)}
 
 % Approving academic units for the internal-approval byline (the original UL
 % surface form: the named STM faculty and Computer Science department domains):
@@ -85,7 +86,16 @@
 % Rendered as the OPTIONAL trailing byline clause via \loc{author-affiliation}
 % (see localization-defaults.tex): a leading space + a closing full stop yield a
 % clean second sentence after the working-group attribution.
-\setloc{author-affiliation}{ Department of Computer Science, University of Luxembourg, Luxembourg (nicolas.guelfi@uni.lu).}
+\setloc{author-affiliation}{ Department of Computer Science, University of Luxembourg, Luxembourg (nicolas.guelfi@uni.lu). The suite was originally developed for the University of Luxembourg.}
+
+% --- Title-block keys (consumed by \suitmetablock on the four title pages) ---
+% Edition facts for the LU edition; bound explicitly so the edition is immune
+% to Layer-0 default changes and never renders the Layer-0 approval-date
+% placeholder (audit 260609-2153, INST-47f3e9e5).
+\setloc{doc-version}{2.1}
+\setloc{doc-visibility}{INTERNAL}
+\setloc{doc-approval-authority}{\loc{approving-academic-units}}
+\setloc{doc-approval-date}{May 7, 2026}
 
 % --- Staffing / FTE profile -------------------------------------------------
 % ANCHOR-FTE-ENVELOPE: the original UL framing (R1 institution, small operating
@@ -184,34 +194,36 @@
 % ============================================================================
 % 6. NOTE ON THE REMAINING UNCONSUMED BINDINGS (substance-in-prose orphans)
 % ----------------------------------------------------------------------------
-% A handful of keys bound above have no \loc{} consumption site in the four SUIT
-% documents AS RENDERED, yet are deliberately retained:
+% Some keys bound above have no \loc{} consumption site in the four SUIT
+% documents AS RENDERED, yet are deliberately retained (recounted by grep on
+% 2026-06-10, audit 260609-2153, INST-4fbe80b2):
 %
-%   - Composite regime/profile anchors: regulatory-regime, data-protection-regime,
-%     cybersecurity-baseline-regime, eid-trust-services-regime,
-%     data-custody-sovereignty-profile, identity-federation-profile,
-%     incumbent-identity-suite-vendor, institution-type, institution-hpc-facility,
-%     academic-governing-bodies, research-backbone-scale,
+%   - Declared orphans (no consumption site today): regulatory-regime,
+%     eid-trust-services-regime, data-custody-sovereignty-profile,
+%     institution-hpc-facility, academic-governing-bodies,
 %     internal-emergency-incident-contact, institution-macro-set, author-name,
 %     essential-entity-classification-basis, and the reference-only authority
 %     bindings noted above (national-legislature, national-executive-department,
 %     national-cyber-commissariat-founding-law).
 %
 % These are NOT regressions: the LU-applicable substance they carry is already
-% present verbatim in the generic prose (Microsoft Entra ID, on-prem HSM key
-% custody, the EU/EEA sovereignty posture, the GEANT/RESTENA backbone tier, the
-% eduGAIN/eduTEAMS identity federation, the NIS2 essential-entity route, the
-% internal emergency contact pattern, etc.), so the round-trip already closes
-% for them through the body text. They remain bound here as authoritative
-% parameterize anchors so that (a) other editions/archetypes that DO add a
-% consumption site inherit the correct LU value, and (b) the matrix's
+% present in the generic prose (on-prem HSM key custody, the EU/EEA sovereignty
+% posture, the internal emergency contact pattern, etc.), so the round-trip
+% already closes for them through the body text. They remain bound here as
+% authoritative parameterize anchors so that (a) other editions/archetypes that
+% DO add a consumption site inherit the correct LU value, and (b) the matrix's
 % parameterize intent is recorded against a real value rather than dropped.
-% The 11 keys with a NEW consumption site added in this retrofit
+% All other bound keys have at least one \loc{} consumption site in the
+% generic suite and render in the LU edition --- including the retrofit set
 % (national-dpa, national-gov-csirt, national-public-sector-isp,
 % cer-national-transposition, national-equal-treatment-law, author-affiliation,
 % approving-academic-units, national-spoc-authority,
 % national-cyber-competence-centre, national-risk-method, nren-csirt,
-% nis2-sanction-ceiling, executive-leadership) now render in the LU edition.
+% nis2-sanction-ceiling, executive-leadership), the six formerly listed here as
+% orphans and consumed since (institution-type, data-protection-regime,
+% cybersecurity-baseline-regime, identity-federation-profile,
+% incumbent-identity-suite-vendor, research-backbone-scale), and the newer
+% staff-representation-body and doc-* title-block keys.
 % ============================================================================
 
 \endinput

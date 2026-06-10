@@ -151,8 +151,8 @@
 }
 
 \newtcolorbox{clarificationbox}[1][]{
-    colback=orange!3!white,
-    colframe=orange!60!black,
+    colback=NavyBlue!3!white,
+    colframe=NavyBlue!60!black,
     fonttitle=\bfseries,
     title={#1},
     breakable,
@@ -277,7 +277,7 @@ The response is given in a \textcolor{OliveGreen!60!black}{\textbf{answer
 box}} that follows a strict \keyword{concession-then-rebuttal} pattern:
 it first concedes the legitimate core of the objection, then rebuts the
 overreach. Where a point needs disambiguation rather than refutation, an
-\textcolor{orange!60!black}{\textbf{clarification box}} is used instead.
+\textcolor{NavyBlue!60!black}{\textbf{clarification box}} is used instead.
 
 \paragraph{The five-layer evidence methodology.}
 No response rests on assertion. Each rebuttal is built from up to five
@@ -285,8 +285,10 @@ No response rests on assertion. Each rebuttal is built from up to five
 the chain of support:
 
 \begin{description}[leftmargin=2.2cm,style=nextline]
-  \item[\evlegal] binding legal and regulatory instruments
-        (\institution{GDPR}, \institution{NIS2}, sectoral law).
+  \item[\evlegal] binding legal and regulatory instruments of the
+        adopter's jurisdiction (\institution{GDPR},
+        \institution{NIS2} and sectoral law in the worked EU
+        instantiation).
   \item[\evstd] open technical standards and normative frameworks
         (\institution{IETF}, \institution{OASIS}, \institution{NIST},
         \institution{ISO}).
@@ -373,6 +375,59 @@ the interface contracts intact (\trref{Sizing reference points}). The model
 is the vocabulary; the deployment is sized to the institution.
 \end{clarificationbox}
 
+\begin{questionbox}[O1.2 --- ``Identity and policy become institution-wide single points of failure, with no availability story --- a commercial SLA beats this.'']
+Per-session policy decision routes every activation through the
+identity and policy planes. If either is down, nobody works. A
+managed commercial identity service at least carries a contractual
+SLA for that risk; the Reference proposes to self-operate the most
+critical planes of the institution.
+\end{questionbox}
+
+\begin{answerbox}[Response O1.2]
+\textbf{Concession.} The mediation-point risk is real, and it is
+\emph{created by the architecture itself}: making activation
+explicit concentrates what a flat estate leaves diffuse. Any
+deployment that treated the identity provider or the policy
+decision point as ordinary single-instance services would deserve
+this objection in full.
+
+\medskip
+\textbf{Rebuttal.} The Reference engineers the risk rather than
+insuring against it (\trref{Architectural principles}, availability
+and failure semantics of the mediation planes): each critical plane
+runs redundantly with a declared availability target measured
+through the observability layer; policy enforcement points cache
+decisions for the activation-token lifetime, so a policy-plane
+outage blocks \emph{new} activations without invalidating
+established sessions; and each zone class declares its fail mode
+(fail-closed for administrative and sensitive zones, fail-degraded
+with audit where connectivity availability prevails).
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Zero-trust guidance itself requires exactly this
+        engineering: NIST SP~800-207 treats PDP/PEP availability
+        and decision caching as design obligations of the model
+        \citep{nist-zt}.
+  \item \evstd The reference components are built for clustered
+        operation --- replicated identity providers, policy engines
+        evaluating from locally distributed bundles
+        \citep{opa-project} --- so redundancy is configuration, not
+        custom engineering.
+  \item \evinst The failure semantics are testable, not asserted:
+        availability targets are measured by the observability
+        layer, and the fail-mode declarations are part of each
+        zone's published security profile, exercised through the
+        conformance suite (\trref{Conformance and replaceability
+        tests}).
+\end{itemize}
+
+\textbf{Bottom line.} An SLA is a remedy after the fact; declared,
+rehearsed failure semantics are a design. The architecture does not
+leave the mediation planes' availability to contract --- it
+engineers it, measures it, and makes outage behaviour a
+per-zone-class policy choice.
+\end{answerbox}
+
 % ----------------------------------------------------------------------------
 \section{Open-source coverage gaps}
 \label{sec:arg-oss-gaps}
@@ -439,6 +494,56 @@ the endpoint interface contract is a conforming instantiation, not a
 counter-example.
 \end{answerbox}
 
+\begin{questionbox}[O2.2 --- ``Open source is itself the supply-chain risk: unmaintained dependencies, no vendor CVE-response SLA, nobody to sue.'']
+The open-foundations default trades a contractual security
+relationship for a volunteer one. Open components ship unmaintained
+transitive dependencies, carry no committed CVE-response time, and
+offer no counterparty bearing liability when something breaks.
+\end{questionbox}
+
+\begin{answerbox}[Response O2.2]
+\textbf{Concession.} The failure mode is real: abandonware exists,
+and an open licence confers no right to a fix. A deployment that
+consumed anonymous code with no support arrangement, no provenance
+control, and no maintenance assessment would deserve the objection
+in full.
+
+\medskip
+\textbf{Rebuttal.} The architecture does not consume anonymous
+code; it procures open components under the same discipline as any
+supplier.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evsector Where a committed CVE-response time is required,
+        the institution buys a commercial support subscription for
+        the open component --- procured and assessed like any
+        vendor relationship \citep{hecvat}; the counterparty
+        exists, and what remains open is the exit.
+  \item \evstd Supply-chain provenance is a named control, not a
+        hope: SLSA provenance for built artefacts
+        \citep{slsa-spec}, with the supply-chain-security ownership
+        established for NIS2 Art.~21(2)(d) by the policy module's
+        Q8.5.
+  \item \evinst The sovereignty grid's \emph{Operational} dimension
+        scores maintenance reality --- skills, community,
+        certification paths --- per layer \emph{before} adoption
+        (\trref{The sovereignty grid}); a component nobody can
+        sustain scores itself out.
+  \item \evstd ``Nobody to sue'' cuts both ways: a contractual
+        remedy does not produce a patch, while source access and
+        the replaceability conditions (O5.1) let the institution
+        patch, fork, or replace --- bounding the blast radius of
+        any single project's abandonment.
+\end{itemize}
+
+\textbf{Bottom line.} Supply-chain risk attaches to unmanaged
+consumption, not to licence type. The architecture pairs open
+components with support contracts where SLAs matter, provenance
+controls where builds matter, and an operational-sustainability
+score before adoption --- with replaceability as the final
+backstop.
+\end{answerbox}
+
 % ----------------------------------------------------------------------------
 \section{Sizing realism}
 \label{sec:arg-sizing}
@@ -467,7 +572,10 @@ hosted services. This is a guardrail \emph{against} overclaim, not an
 instance of it.
 
 \begin{itemize}[leftmargin=1.4em,itemsep=2pt]
-  \item \evlegal The size-invariant core is anchored in law: \institution{GDPR}
+  \item \evlegal The size-invariant core is anchored in law ---
+        \loc{data-protection-regime} and
+        \loc{cybersecurity-baseline-regime}, worked here through the
+        EU instruments: \institution{GDPR}
         imposes accountability, security of processing, and breach
         obligations with \emph{no de-minimis threshold} ---
         a five-person institution owes the same duties as a flagship
@@ -475,8 +583,10 @@ instance of it.
         records-of-processing derogation for organisations below
         250~persons under Article~30(5), is itself conditional and does not
         touch the security, accountability, or breach duties at issue here.)
-        \institution{NIS2} likewise attaches obligations to
-        the function performed, not to headcount \citep{nis2}.
+        \institution{NIS2} likewise scales nothing down: once an
+        entity is in scope (by sector-and-size, or by a
+        size-independent designation route), its duties apply in
+        full regardless of headcount \citep{nis2}.
   \item \evstd The minimal set maps to baseline controls that are stated
         independently of scale \citep{nist-csf,iso27001,nist-zt}; the
         controls are mandatory, the deployment topology is sized.
@@ -534,8 +644,10 @@ the heterogeneity the objection raises (\trref{Coexistence patterns library};
         \citep{cobit,weill-ross,educause-governance}.
   \item \evempirical The waves are ordered to address the most-exploited
         attack patterns first: identity, segmentation, and observability
-        lead because credential abuse and lateral movement dominate breach
-        data \citep{verizon-dbir2024,ibm-cost-breach-2024}. The ordering is
+        lead because credential abuse dominates measured breach data
+        \citep{verizon-dbir2024,ibm-cost-breach-2024} and segmentation
+        interrupts its in-network progression \citep{nist-sp800-215}.
+        The ordering is
         an evidence-informed prioritisation of the measured exposure, so
         early waves buy down the most-exploited risk before any large
         investment.
@@ -575,8 +687,9 @@ sticky \citep{samuelson-zeckhauser}.
 \medskip
 \textbf{Rebuttal.} The architecture does not claim replaceability \emph{from}
 choosing open products. It claims replaceability \emph{from} four explicit
-conditions enforced by a conformance suite: open interfaces, data
-portability, no single-vendor control point, and a demonstrated exit. The
+conditions enforced by a conformance suite: standard interfaces, open
+state and configuration formats, documented exit-data export, and no
+hidden dependencies. The
 named open instantiation is an \emph{example} that satisfies these
 conditions; a proprietary component that satisfies the same conditions is
 equally acceptable. Lock-in is defeated by the \keyword{contract}, not by the
@@ -634,12 +747,17 @@ known failure mode in procurement.
 \medskip
 \textbf{Rebuttal.} The conformance suite is constructed as an
 \keyword{executable, evidence-producing test}, not a questionnaire. It
-defines categories of test --- interface fidelity, data portability, control
-independence, and demonstrated exit --- each of which yields an artefact: a
+defines categories of test --- interface fidelity, data portability, exit
+rehearsal, and decision auditability --- each of which yields an artefact: a
 captured export consumed by an alternative, a replay against a documented
 schema, a recorded migration on a representative subset
 (\trref{Conformance and replaceability tests}). The test is passed by
-\emph{producing the artefact}, not by asserting compliance.
+\emph{producing the artefact}, not by asserting compliance. Where
+sound practice makes a nominal artefact unobtainable ---
+non-exportable HSM trust-anchor keys being the canonical case ---
+the layer contract declares the substitute artefact (a key-rotation
+and re-anchoring rehearsal under dual control), so the gate is
+passable without weakening key custody.
 
 \begin{itemize}[leftmargin=1.4em,itemsep=2pt]
   \item \evstd Conformance-to-interface as the unit of verification is the
@@ -701,8 +819,10 @@ discharges it \emph{proportionately} rather than maximally.
 \begin{itemize}[leftmargin=1.4em,itemsep=2pt]
   \item \evlegal Security of processing and breach-detection duties under
         \institution{GDPR} \citep{gdpr} and the technical risk-management
-        requirements of \institution{NIS2} and its implementing rules
-        \citep{nis2,eu-regulation-2024-2690} \emph{require} adequate logging;
+        requirements of \institution{NIS2} \citep{nis2} \emph{require}
+        adequate logging --- with the Commission's technical
+        articulation for digital-sector entities applied here by
+        analogy \citep{eu-regulation-2024-2690};
         the same legal frame caps it through data minimisation and purpose
         limitation \citep{gdpr}. Audit is mandated; over-collection is
         prohibited --- proportionality is the lawful design point.
@@ -713,8 +833,9 @@ discharges it \emph{proportionately} rather than maximally.
         rather than sprawling
         \citep{rfc-5424-syslog,rfc-7011-ipfix,opentelemetry-spec}.
   \item \evempirical Breach economics reward exactly this: faster detection
-        and containment measurably reduce breach cost, and mean dwell time is
-        the dominant cost driver
+        and containment measurably reduce breach cost --- breaches
+        contained faster cost measurably less, the breach lifecycle
+        being a major cost driver
         \citep{ibm-cost-breach-2024,verizon-dbir2024}. Proportionate
         observability is the highest-return control, not overhead.
   \item \evinst Research universities run classification-driven observability
@@ -817,10 +938,20 @@ Unmatched complexity is a real risk &
 Std, Sector, Inst &
 Layers name functions a campus already runs; contracts \emph{bound} complexity, not add it. \\
 
+O1.2 & Identity/policy are single points of failure; an SLA beats this &
+Mediation-point risk is real and architecture-created &
+Std, Inst &
+Redundancy per plane, PEP caching over token lifetime, declared per-zone fail modes --- engineered, measured, rehearsed. \\
+
 O2.1 & Open-source MDM cannot manage iOS/Android &
 No mature open mobile MDM at scale (true) &
 Legal, Std, Sector, Emp, Inst &
 Open-foundations means contract-bounded replaceability; a conforming proprietary MDM is a valid instantiation. \\
+
+O2.2 & Open source is itself the supply-chain risk &
+Abandonware is real; a licence confers no fix &
+Std, Sector, Inst &
+Support subscriptions where SLAs matter, SLSA provenance, Operational-dimension scoring, replaceability as backstop. \\
 
 O3.1 & Sizing is fantasy for small institutions &
 One-size instantiation would be unserious &

@@ -321,7 +321,12 @@ const rawArgs = args
     'defensibility GAP. Emit DEF findings (id "DEF-<short hash of persona + normalised rejection-vector-stem>", ' +
     'track="DEF") only for cases (c) and thin (b), each with persona, rejectionVector, currentCoverage ' +
     '("Answered in <Q-item/chapter/box>" | "Partially answered (where + what is thin)" | "UNANSWERED — gap"), and ' +
-    'gap=true/false; weight an UNANSWERED vector a single persona could refuse on as CRITICAL. ' + SCOPE_GUARD + '\n' +
+    'gap=true/false; weight an UNANSWERED vector a single persona could refuse on as CRITICAL. ' +
+    'ALSO test LIBERTY-POSTURE COHERENCE (the suite liberty-first rule, main report par:liberty-first / ' +
+    'docs/dispositions.json DISPO-LIBERTY-FIRST): flag as a DEF finding any passage that resolves a ' +
+    'freedom-vs-constraint tension by default compliance with a contract, questionnaire or regulation, without the ' +
+    'renegotiate-then-reform ladder (design proportionality -> contract renegotiation -> collective ' +
+    'influence/reform, Position C); compliance-by-default phrasing is itself a defensibility defect. ' + SCOPE_GUARD + '\n' +
     'Do NOT invent factual defects (those belong to the content/instance tracks); only decide whether residual ' +
     'exposure is pre-empted. Candidates:\n' + JSON.stringify(compact),
     { phase: 'Defensibility', schema: FINDINGS, label: 'find:DEF' },

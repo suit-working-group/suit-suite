@@ -27,7 +27,7 @@
 decisions from \trchap{ch:policy}{} (in particular for attachment
 authorisation and east-west allowance), it produces flow records
 consumed by \trchap{ch:observability}{}, and it relies on standards
-from \S5.3. The layer belongs to the \emph{Execution plane}.
+from \S\ref{sec:ap-standards}. The layer belongs to the \emph{Execution plane}.
 \end{caveatbox}
 
 The network layer answers a question that is operationally simple
@@ -64,7 +64,9 @@ architecture, must:
 \begin{itemize}[leftmargin=1.5em,nosep]
   \item declare a zone catalogue with, for each zone, a published
     security profile (filtering rules, egress policy, audit
-    obligations, posture requirements);
+    obligations, posture requirements) and a \keyword{zone
+    responsibility charter} --- the dossier's \emph{enclave
+    charter} --- naming the accountable owner of that profile;
   \item authenticate and attach subjects via
     RADIUS~\cite{rfc-2865-radius} using attributes that carry, at
     minimum, the role activated and the assigned zone;
@@ -277,7 +279,7 @@ VM boundaries.
 micro-segmentation overlays (NSX, Illumio, ACI) have substantial
 licence costs and tend to express policy in supplier-specific
 languages whose translation to other products is non-trivial; the
-exit-rehearsal condition of \S5.2 is most challenged here. Cilium
+exit-rehearsal condition of \S\ref{sec:ap-replaceability} is most challenged here. Cilium
 and other open alternatives are more recent and less broadly skilled
 than their commercial counterparts.
 

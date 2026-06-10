@@ -23,8 +23,8 @@
 \begin{caveatbox}[Dependencies]
 \noindent This chapter applies the architectural principles of
 \trchap{ch:architectural-principles}{} to the identity layer. It
-references the standards table of \S5.3 and the four conditions of
-replaceability of \S5.2. The sovereignty profiles given in
+references the standards table of \S\ref{sec:ap-standards} and the four conditions of
+replaceability of \S\ref{sec:ap-replaceability}. The sovereignty profiles given in
 \S\ref{sec:id-sovereignty} are consistent with the worked examples of
 \trchap{ch:sovereignty-grid}{} (Cases 1--3). The layer belongs to the
 \emph{Subject and trust plane}.
@@ -223,7 +223,7 @@ Activation is short-lived,
 local, and benefits from the policy expressiveness and modern
 extensibility of an open-source activation identity provider. Each
 component speaks the standards of
-\S5.3; the bridge between them is the authentication context emitted
+\S\ref{sec:ap-standards}; the bridge between them is the authentication context emitted
 by the federation engine and consumed by the activation provider.
 
 \paragraph{Operational implications.} The hybrid pattern carries a
@@ -255,7 +255,7 @@ indicator level.
 \centering\small
 \caption{Per-dimension sovereignty profile of the three identity
 instantiations. Scores are consistent with
-\trchap{ch:sovereignty-grid}{} \S3.4.}
+\trchap{ch:sovereignty-grid}{} \S\ref{sec:sg-examples}.}
 \label{tab:id-sovereignty}
 \begin{tabularx}{\textwidth}{%
   >{\hsize=0.80\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%

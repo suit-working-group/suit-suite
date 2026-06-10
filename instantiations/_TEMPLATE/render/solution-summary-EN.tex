@@ -1,31 +1,21 @@
 % ============================================================================
-% RENDER WRAPPER — SOLUTION SUMMARY (operational summary), instantiated edition
-% ----------------------------------------------------------------------------
-% Document 4 of 4. Renders the generic operational summary of the Technical
-% Reference with THIS institution's localization stack applied:
-%
-%     localization.sty
-%       Layer 0: shared/localization-defaults.tex   (generic role phrases)
-%         Layer 1: categories/<ARCHETYPE>.tex        (via ../set.tex)
-%           Layer 2: ../set.tex                       (institution values + deltas)
-%             generic operational-summary body (inlined below)
-%
-% IMPORTANT — this generic document is FULLY GENERIC: it contains no \loc{}
-% calls today, so an instantiated edition is, at present, identical to the
-% generic operational summary. The localization stack is loaded all the same so
-% that (a) the four edition documents share one consistent build path, and
-% (b) any \loc{} added to the generic operational summary in future is honoured
-% here automatically. The generic operational-summary body is NOT factored into
-% a separate file, so it is reproduced verbatim below (no institution-specific
-% content); keep it in sync with suit-solution/summary/solution-summary-EN.tex.
-%
-% Build (from THIS directory; never call pdflatex/biber directly):
-%     latexmk -pdf solution-summary-EN.tex
-% Verify after build: 0 undefined citations, 0 undefined references.
+% RENDER WRAPPER (solution-summary-EN) --- instantiated edition. GENERATED FILE.
+% Produced by tools/regen-instance-wrappers.sh from the generic source.
+% Sanctioned delta ONLY: \genericroot remap of shared paths + \input{../set}
+% after the Layer-0 defaults. Do NOT edit content here; edit the generic
+% source and regenerate. Build: latexmk -pdf solution-summary-EN.tex
 % ============================================================================
-\documentclass[11pt,a4paper]{article}
-
-% --- relative paths ---------------------------------------------------------
+%============================================================================
+% OPERATIONAL EXECUTIVE SUMMARY of the Technical Reference
+% Sustainable University IT --- A Technical Reference for Architecture and Migration
+%
+% Audience: CISO, CTO, infrastructure / network team leads (operational).
+% Derived from: ../solution-EN.tex and its chapters (the "Technical Reference").
+% Methodology: /companion, applied with an OPERATIONAL framing.
+% Fully generic: no institution named.
+%============================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+% --- instantiation paths (sanctioned delta) ---
 \newcommand{\genericroot}{../../..}
 \newcommand{\catdir}{\genericroot/categories}% consumed by ../set.tex
 
@@ -45,6 +35,7 @@
 
 % --- Graphics and colours ---
 \usepackage{graphicx}
+\usepackage{suit-logo}
 \usepackage[dvipsnames,table]{xcolor}
 \definecolor{Slate}{RGB}{70,70,90}
 \definecolor{Crimson}{RGB}{220,20,60}
@@ -70,10 +61,15 @@
 % --- Quotation handling (required by biblatex) ---
 \usepackage{csquotes}
 
-% --- Bibliography ---
-\usepackage[backend=biber,style=numeric,sorting=none,sortcites=true,
+% --- Bibliography: biblatex + biber (shared consolidated bib) ---
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
             maxbibnames=99]{biblatex}
-\addbibresource{../../../shared/suit-consolidated.bib}
+\addbibresource{\genericroot/shared/suit-consolidated.bib}
+
+% --- Bibliography display modes (standard / annotated / full) ---
 \usepackage{bib-modes}
 \setbibmode{linked}
 
@@ -81,13 +77,9 @@
 \usepackage{gls-modes}
 \input{\genericroot/shared/glossary-defs}
 
-% ============================================================================
-% LOCALIZATION STACK (future-proofing; the generic body has no \loc today)
-% Load order: localization.sty -> Layer 0 defaults -> ../set.tex
-% ============================================================================
+% === Localization (key/value layer 0: generic defaults) ===
 \usepackage{localization}
 \input{\genericroot/shared/localization-defaults}
-\input{../set}
 
 % --- Boxes ---
 \usepackage{tcolorbox}
@@ -98,11 +90,13 @@
 \setlength{\headheight}{15pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\textit{Operational Summary --- Sustainable University IT}}
-\fancyhead[R]{\small\thepage}
+\fancyhead[LO,RE]{\small\textit{Operational Summary --- Sustainable University IT}}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyfoot[C]{\suitfootlogo}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
 
-% --- Semantic commands ---
+% --- Semantic commands (aligned with the rest of the suite) ---
 \newcommand{\keyword}[1]{\textbf{#1}}
 \newcommand{\institution}[1]{\textsc{#1}}
 \newcommand{\framework}[1]{\textsf{#1}}
@@ -117,60 +111,76 @@
 \titleformat{\section}{\normalsize\bfseries\color{NavyBlue}}{}{}{}
 \titleformat{\subsection}{\small\bfseries\color{MidnightBlue}}{}{}{}
 
-% --- Cross-reference helpers back to the full Technical Reference ---
+%----------------------------------------------------------------------------
+% Cross-reference helpers back to the full Technical Reference (SUITSOLUTION).
+% Self-contained: the summary names the target chapter explicitly so that the
+% pointer resolves without building the full Reference first.
+%----------------------------------------------------------------------------
+% \trchap{N}{title} -> "Chapter N (title) of the Technical Reference"
 \newcommand{\trchap}[2]{%
   Chapter~#1%
-  \ifx\\#2\\\else\space(\emph{#2})\fi\space of the Technical Reference}
+  \ifx\\#2\\\else\space(\emph{#2})\fi\space of the Technical Reference%
+}
+% \mainref{...} -> grey italic pointer line into the full Reference
 \newcommand{\mainref}[1]{%
   \par\vspace{1pt}
   {\footnotesize\color{gray}\itshape
   $\triangleright$~Full treatment, contracts and references: #1,
   in the Technical Reference~\cite{ng-tech-ref-2026}.}\par\vspace{2pt}}
 
-% --- Operational box palette ---
+% --- Operational box palette (consistent with the suite) ---
+% principle (NavyBlue) / alert (BrickRed) / action (OliveGreen)
 \newtcolorbox{principlebox}[1][]{%
   colback=NavyBlue!5!white, colframe=NavyBlue!70!black,
   fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
   left=6pt, right=6pt, top=4pt, bottom=4pt}
+
 \newtcolorbox{alertbox}[1][]{%
   colback=BrickRed!5!white, colframe=BrickRed!70!black,
   fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
   left=6pt, right=6pt, top=4pt, bottom=4pt}
+
 \newtcolorbox{actionbox}[1][]{%
   colback=OliveGreen!5!white, colframe=OliveGreen!70!black,
   fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
   left=6pt, right=6pt, top=4pt, bottom=4pt}
 
+% --- Prevent vertical stretching ---
 \raggedbottom
 
-% ============================================================================
-% BODY
-% ----------------------------------------------------------------------------
-% The generic operational summary's body is reproduced verbatim from
-% suit-solution/summary/solution-summary-EN.tex (it is not factored into a
-% separate inputtable file). It carries no institution-specific value. If the
-% generic operational summary is ever factored into a body file, replace this
-% whole block with a single \input of that file.
-% ============================================================================
+%============================================================================
+\input{../set}% Layer-1+2: archetype + institution values (sanctioned delta; loaded LAST so edition values override any document-scope \setloc of the generic shell)
 \begin{document}
 
+% --- Title block (no separate title page --- space is precious) ---
 \begin{center}
 \vspace*{-0.2cm}
+
+{\suittitlelogo[0.30\textwidth]}
+
+\smallskip
 {\Large\bfseries Sustainable University IT --- Operational Summary}
-\par\smallskip
-{\normalsize\itshape Reference Architecture, Migration Waves and Acceptance Gates, at a Glance}
-\par\smallskip
+
+\smallskip
+{\normalsize\itshape Reference Architecture, Migration Waves and Acceptance Gates,
+at a Glance}
+
+\smallskip
 {\small For the CISO, the CTO, and infrastructure / network team leads}
-\par\smallskip
+
+\smallskip
 {\scriptsize Operational companion to: \emph{``Sustainable University IT ---
 A Technical Reference for Architecture and Migration''}}
-\par\smallskip
-{\small Document Version 2.1 / May 2026 \quad\textbullet\quad Print date: \today}
-\par\smallskip
-{\footnotesize\itshape First version created by Nicolas Guelfi, Chairman of the SUIT Working Group.\loc{author-affiliation}}
-\par\medskip
-\begin{tcolorbox}[colback=NavyBlue!8!white,colframe=NavyBlue!85!black,
-    boxrule=1.2pt,arc=3pt,left=10pt,right=10pt,top=8pt,bottom=8pt,halign=center]
+
+\smallskip
+\suitmetablock
+
+\medskip
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white, colframe=NavyBlue!85!black,
+    boxrule=1.2pt, arc=3pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt, halign=center]
 {\normalsize\bfseries Nine layers, three planes, ten waves ---
 each wave reversible, each closure proven\\[3pt]
 by conformance, every component replaceable through a published interface.}
@@ -339,7 +349,7 @@ incumbent stays viable, the wave is undone by re-routing to it.
 reversibility windows. Pace options: \emph{5-year compressed}
 (parallelised, higher risk tolerance), \emph{7-year balanced} (recommended
 default), \emph{10-year gradual} (renewal-aligned, lower risk). Trajectory
-varies by starting estate (greenfield, brownfield Microsoft-centric,
+varies by starting estate (greenfield, brownfield single-suite-centric,
 brownfield hybrid, selective, deferred).}
 \end{table}
 
@@ -348,8 +358,8 @@ A constrained team may legitimately adopt \keyword{less}, not later: Wave~0
 (governance/inventory) + Wave~1 (sovereign identity) + Wave~2 (observability
 / audit trail), with Wave~4 (policy) the natural next step. This delivers
 exactly the size-invariant, legally compelled functions (authentication,
-audit, segmentation discipline under \gls{gdpr} and, where in scope,
-\gls{nis2}) and is a legitimate \emph{steady state}, not an abandoned
+audit, segmentation discipline under the applicable data-protection
+regime --- \gls{gdpr} in the EU, with \gls{nis2} where in scope) and is a legitimate \emph{steady state}, not an abandoned
 migration. Defer or mutualise the rest along the same dependency graph.
 \end{principlebox}
 
@@ -412,11 +422,11 @@ self-run test.
 \mainref{\trchap{16}{Conformance and replaceability tests}}
 
 %============================================================================
-\section{Sizing reference points (R-tier institution) for capacity planning}
+\section{Sizing reference points (research-intensive reference profile) for capacity planning}
 %============================================================================
 
 \begin{principlebox}[Status of these figures]
-Indicative orders of magnitude for a \keyword{research-intensive (R-tier)}
+Indicative orders of magnitude for a \keyword{research-intensive}
 reference profile: $\sim$25{,}000 active subjects, $\sim$1{,}500 elevated-access
 staff, $\sim$500 active research projects. These are \emph{planning aids,
 not measurements}; size your own estate by direct workload measurement.
@@ -434,7 +444,7 @@ not measurements}; size your own estate by direct workload measurement.
 \midrule
 Identity &
   Auths/s: a few--tens steady, hundreds at peak; concurrent sessions
-  thousands; eduGAIN tens--hundreds of thousands/day. & 2--4 \\
+  thousands; \loc{identity-federation-profile} tens--hundreds of thousands/day. & 2--4 \\
 \addlinespace
 Policy &
   Tens--low hundreds decisions/s; $<$10\,ms p95 online decision; bundle
@@ -525,9 +535,9 @@ a minimal-core envelope of $\sim$3--5 shared engineer-equivalents.
     enterprise array $\leftrightarrow$ distributed storage:} new workloads
     default to the open side; legacy migrates at its natural lifecycle
     boundary, validated by checksum.
-  \item \textbf{eduroam $\leftrightarrow$ TAC-aware Wi-Fi:} keep the eduroam
-    profile inviolate; add institutional/TAC attributes only on the
-    non-eduroam path.
+  \item \textbf{eduroam $\leftrightarrow$ TAC-aware Wi-Fi:} keep the federated-roaming
+    profile (eduroam) inviolate; add institutional/TAC attributes only on
+    the non-roaming path.
 \end{itemize}
 \end{principlebox}
 
@@ -563,7 +573,7 @@ develops the five-dimension sovereignty grid, the Trusted Activity Context,
 the nine-layer / three-plane reference architecture on open foundations, the
 ten-wave migration playbook with per-wave trajectories and reversibility, the
 conformance suite, the sizing reference points, and the regulatory mapping
-(\gls{gdpr}, \gls{nis2}, the EU AI Act, eIDAS~2, Schrems~II) against the
+(in the EU instantiation: \gls{gdpr}, \gls{nis2}, the EU AI Act, eIDAS~2, Schrems~II) against the
 jurisdiction-neutral standards spine. It is the shared technical baseline for
 the international university network anticipated in phase~2 of the SUIT
 initiative.}

@@ -550,7 +550,7 @@ the adopting institution and its computer science research unit, May 2026
     Intune; Workspace ONE.
   \item[Ch.~12\ \ Observability and audit]
     Canonical TAC event schema (required and recommended fields). Reference:
-    Vector + Kafka + OpenSearch + Loki. Alternatives: Splunk;
+    Vector + Kafka + OpenSearch + Grafana Loki + Grafana. Alternatives: Splunk;
     Microsoft Sentinel.
   \item[Ch.~13\ \ Cryptographic services]
     Reference: step-ca + Vault + SoftHSM or Nitrokey HSM.
@@ -608,9 +608,13 @@ the adopting institution and its computer science research unit, May 2026
     Per-wave rollback procedures; data preservation;
     communication during rollback.
   \item[Ch.~30\ \ Coexistence patterns library]
-    AD~$\leftrightarrow$~Keycloak; SCCM~$\leftrightarrow$~Ansible;
-    Splunk~$\leftrightarrow$~OpenSearch; VMware~$\leftrightarrow$~K8s;
-    NetApp~$\leftrightarrow$~Ceph;
+    Incumbent enterprise directory~$\leftrightarrow$~institutional
+    IdP; incumbent endpoint-management
+    suite~$\leftrightarrow$~declarative configuration;
+    per-volume-priced commercial SIEM~$\leftrightarrow$~open-source
+    store; incumbent commercial hypervisor~$\leftrightarrow$~open
+    virtualisation substrate; enterprise storage
+    array~$\leftrightarrow$~open-source distributed storage;
     eduroam~$\leftrightarrow$~TAC-aware Wi-Fi.
 \end{description}
 
@@ -618,11 +622,11 @@ the adopting institution and its computer science research unit, May 2026
 
 \begin{description}[leftmargin=4em,style=nextline,nosep,font=\bfseries]
   \item[Ch.~31\ \ Institutional precedents]
-    Public-documentation review of identified university IT
-    architectures (CERN, MIT, Stanford, ETH Z\"urich, Cambridge,
-    Indiana, NUS Singapore, USP Brazil, Michigan, KU Leuven,
-    Oxford, ANU Australia, Tsinghua, UNAM Mexico, Toronto and
-    others).
+    Public-documentation review of university and
+    research-organisation IT architectures by precedent class
+    (European, North American, Asia-Pacific and Latin American
+    institutions; regional research networks and consortium
+    initiatives), closing on the documented gaps.
   \item[Ch.~32\ \ External references and standards]
     NIST publications, ISO/IEC, EU regulatory framework, sector
     publications, open-source specifications.

@@ -109,7 +109,8 @@ independent of the chosen product:
     retention expiry follows a four-eyes rule.
 \end{itemize}
 This discharges \gls{gdpr} Art.~32 (integrity of processing) and
-Art.~5(1)(f), \gls{nis2} Art.~21 (logging integrity), ISO/IEC~27001
+Art.~5(1)(f), \gls{nis2} Art.~21(2)(b)/(f) (incident handling;
+effectiveness assessment), ISO/IEC~27001
 controls A.8.15/A.8.16, and NIST SP~800-53 AU-9 (protection of audit
 information). The break-glass procedure does not bypass it: emergency
 access is itself an audited, signed event.
@@ -179,7 +180,7 @@ removing a baseline field, redefining its semantics --- is a
 governance event, not a product-driven one.
 
 %-----------------------------------------------------------------------------
-\section{Reference instantiation: Vector + Kafka + OpenSearch + Grafana}
+\section{Reference instantiation: Vector + Kafka + OpenSearch + Grafana Loki + Grafana}
 \label{sec:ob-reference}
 
 \begin{instantiationbox}[Observability layer]

@@ -92,6 +92,14 @@
       "statement": "The reference panel of named institutions (e.g. MIT, Stanford, Cambridge, ETH Zurich, CERN, Michigan, EPFL) and its characterisation of them as world-leading / leading research universities is deliberately scoped labelled EVIDENCE, governed by the panel's stated selection criteria (principles vs. implementations, size-comparability). It is cited as precedent, not asserted as the universal norm for every adopter.",
       "doNotRaise": "Do not flag the reference panel's named institutions, or its 'world-leading / leading research universities' characterisation within the panel section, as elite-as-norm overreach. This disposition does NOT license unscoped 'world-leading' framing elsewhere in the bodies.",
       "appliesTo": ["SCI", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-LIBERTY-FIRST",
+      "kind": "principle",
+      "title": "Liberty-first rule: constraint is never preferred to freedom by default",
+      "statement": "The suite's standing posture is that freedom is the default and constraint the justified exception, escalating through three levels: (i) design — restrictions are proportionate, documented and minimal, with the burden of proof on the restriction; (ii) contracts — an engagement (vendor agreement, insurance policy) that would limit an academic freedom is first renegotiated to maximise freedom in the academic context, the governance bodies remaining free to knowingly pay the price of freedom (residual-risk retention, alternative counterparty, sector mutualisation) rather than surrender the mission; (iii) regulation — where the constraint comes from law or regulation, the institution engages collectively, with the national and international university community, in influence and reform (the main report's Position C) so that imposed regimes, insurance terms included, do not foreclose academic digital freedoms.",
+      "doNotRaise": "Do not flag renegotiation-first or influence-and-reform postures as non-compliance, naivety or scope creep, and do not propose compliance-by-default fixes that would surrender an academic freedom a renegotiation or reform path could preserve. Conversely, a passage that resolves a freedom-vs-constraint tension by default compliance WITHOUT this ladder is a legitimate DEF finding.",
+      "appliesTo": ["DEF", "LEG", "APP", "SCI"]
     }
   ]
 }

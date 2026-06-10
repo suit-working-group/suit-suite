@@ -113,9 +113,14 @@ A couple of notes on the wrappers (informational; you do not edit them):
 - The Policy book wrapper inlines the generic title page and the Part V pointer
   prose (the generic book inlines them too — they are not factored into
   separate files). Everything institution-specific flows through `\loc{}`.
-- The Solution Summary is currently a fully generic document (no `\loc` yet);
-  its edition is therefore identical to the generic operational summary today.
-  The localization stack is still loaded so any future `\loc` is honoured.
+- The Solution Summary consumes the localization layer too (for instance the
+  identity-federation profile), so the edition can differ from the generic
+  operational summary wherever your `set.tex` binds the consumed keys.
+- The wrappers are **GENERATED** by `tools/regen-instance-wrappers.sh` (the
+  executable definition of the sanctioned delta; your edition `set.tex` is
+  loaded last, just before `\begin{document}`, so its values always win).
+  Never edit a wrapper by hand — the release gate `tools/suite-gates.sh` (G6)
+  fails on any drift from a fresh regeneration.
 
 ## 4. Deposit your instantiation
 

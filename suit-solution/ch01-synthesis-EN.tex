@@ -48,13 +48,15 @@ point the reader to the development that they may wish to
 consult next.
 
 \paragraph{Where this chapter sits in the suite.} The Technical
-Reference is one of three documents in the dossier on university
-IT infrastructure: a policy-and-analysis main report, an
-argumentation document anticipating objections, and the present
-practitioner-oriented Technical Reference. In the all-in-one book
-edition of the dossier, this chapter is reproduced as the
-technical-annex part; in the standalone Technical Reference, it
-is the opening chapter.
+Reference is one of the four documents of the suite on university
+IT infrastructure: the policy dossier --- a policy-and-analysis
+main report with its executive-summary companion and its
+question-and-answer part --- and the present
+practitioner-oriented Technical Reference, with its operational
+summary and its own question-and-answer module. The dossier does
+not reproduce this chapter: it carries a pointer-and-capsule part
+orienting its readers to the standalone Reference, of which this
+chapter is the opening chapter.
 
 %-----------------------------------------------------------------------------
 \section{The TAC concept at a glance}
@@ -303,7 +305,7 @@ Network         & RADIUS, NETCONF/YANG, BGP/EVPN, IPFIX       & VLAN/VRF + FreeR
 Compute         & Kubernetes API, OpenStack API, OCI, SLSA    & OpenStack + Kubernetes + Harbor + SLSA \\
 Storage         & S3 API, KMIP, NFS v4.1                      & Ceph + Vault + label-based access \\
 Endpoint        & DDM/DEP, MS-MDM, declarative Linux config   & Munki + osquery + Ansible + MicroMDM (gap on iOS/Android at scale acknowledged) \\
-Observability   & OpenTelemetry, CloudEvents, syslog          & Vector + Kafka + OpenSearch + Loki + Grafana \\
+Observability   & OpenTelemetry, CloudEvents, syslog          & Vector + Kafka + OpenSearch + Grafana Loki + Grafana \\
 Crypto          & PKCS\#11, ACME, KMIP                        & step-ca + Vault + SoftHSM or Nitrokey HSM \\
 Orchestration   & Event-driven, idempotent, observable, reversible (no single standard) & Argo Workflows + Crossplane + GitOps \\
 \bottomrule
@@ -329,8 +331,9 @@ that takes any institution from its current brownfield position
 toward the target architecture. Ten waves (Wave~0 to Wave~9)
 unfold under a documented dependency graph. Each wave declares
 its goal, pre-requisites, coexistence pattern, three principal
-trajectories (greenfield, brownfield with a dominant proprietary
-productivity suite, brownfield hybrid), reversibility criteria,
+trajectories (greenfield, brownfield single-suite-centric --- a
+dominant proprietary productivity suite --- and brownfield hybrid),
+reversibility criteria,
 and exit criteria gated by the conformance suite.
 
 \paragraph{Three pace options.} The playbook admits three reference
@@ -373,6 +376,7 @@ the pace is a normal part of operating the playbook.
 \draw[arrow] (w2) -- (w4);
 % Wave 1+2+3+4 to 5
 \draw[arrow] (w1) to[bend right=15] (w5);
+\draw[arrow] (w2) to[bend right=10] (w5);
 \draw[arrow] (w3) -- (w5);
 \draw[arrow] (w4) -- (w5);
 % Wave 1+4 to 6
@@ -380,8 +384,10 @@ the pace is a normal part of operating the playbook.
 \draw[arrow] (w4) -- (w6);
 % Wave 2+4+5 to 7
 \draw[arrow] (w2) to[bend left=10] (w7);
+\draw[arrow] (w4) to[bend right=10] (w7);
 \draw[arrow] (w5) -- (w7);
 % Wave 1+3+4 to 8
+\draw[arrow] (w1) to[bend left=20] (w8);
 \draw[arrow] (w3) to[bend left=10] (w8);
 \draw[arrow] (w4) to[bend left=15] (w8);
 % Wave 1-8 to 9

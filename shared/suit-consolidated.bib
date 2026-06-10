@@ -2,6 +2,12 @@
 % Bibliographie — Infrastructures IT Universitaires
 % Format BibTeX standard — Février 2026
 % =============================================================================
+% CURATED RESERVE — entries below are maintained but cited by no .tex file as
+% of the June 2026 release gate (audit 260609-2153, CITE-aa80e781). Kept as a
+% documented curated reserve; re-assess (cite or prune) at the next release
+% gate: bird2014, boldyn-zt, hanemann2005, internet2, rfc-6749-oauth2,
+% shadow-ai-campustech.
+% =============================================================================
 
 % ---------------------------------------------------------------------------
 %  SCIENCE DMZ ET RÉSEAUX DE RECHERCHE
@@ -1167,7 +1173,7 @@
   title        = {Higher Education Under Siege: The 2025 University Data Breach Crisis},
   year         = {2025},
   howpublished = {Breached.company},
-  note         = {Oracle {EBS} {CVE-2025-61882}, Cl0p campaign; Phoenix, Harvard, Penn, Dartmouth, Baker, etc. --- From Ivy League to For-Profit: How Clop's Oracle Campaign and Social Engineering Attacks Have Exposed Millions of Student Records. The 2025 academic year will be remembered as one of the most devastating periods for higher education cybersecurity in history, with a perfect storm of zero-day exploits, sophisticated social engineering campaigns, and chronic underfunding of university security programs.},
+  note         = {Oracle {EBS} {CVE-2025-61882}, Cl0p campaign; Phoenix, Harvard, Penn, Dartmouth, Baker, etc. --- From Ivy League to For-Profit: How Clop's Oracle Campaign and Social Engineering Attacks Have Exposed Millions of Student Records. The 2025 academic year will be remembered as one of the most devastating periods for higher education cybersecurity in history, with a perfect storm of zero-day exploits, sophisticated social engineering campaigns, and chronic underfunding of university security programs. Per-institution figures as carried by the article (re-verified on page June 2026): University of Phoenix --- 3.5 million current and former students, employees, faculty and suppliers exposed, CVE-2025-61882 exploited 13--22 August 2025 per the institution's SEC filing; Harvard --- listed on the Cl0p leak site 12 October 2025, 1.3~TB of data subsequently published; Dartmouth --- Social Security numbers and bank details of over 35\,000 individuals stolen (compromise 9--12 August 2025).},
   url          = {https://breached.company/higher-education-under-siege-the-2025-university-data-breach-crisis/},
   abstract      = {The 2025 academic year will be remembered as one of the most devastating periods for higher education cybersecurity in history. A perfect storm of zero-day exploits, sophisticated social engineering campaigns, and chronic underfunding of university security programs has resulted in breaches affecting tens of millions of students, faculty, staff, alumni, and donors across dozens of institutions.},
   fetch_status  = {OK},
@@ -2429,10 +2435,10 @@
   year         = {2024},
   howpublished = {Gartner Newsroom},
   url          = {https://www.gartner.com/en/newsroom/press-releases/2024-08-28-gartner-forecasts-global-information-security-spending-to-grow-15-percent-in-2025},
-  abstract     = {Gartner forecasts and planning guidance for worldwide information-security and risk-management spending. Gartner's guidance places typical enterprise security spend at roughly 8--12 percent of the IT budget, rising to about 10--15 percent for organisations facing high threat exposure. Used as the cross-industry reference point against which sector-specific allocations (such as higher education's lower ~3.6 percent) can be compared when sizing a security investment.},
-  note         = {Cross-industry guidance: security ~8--12\% of IT budget (typical), ~10--15\% under high threat exposure.},
+  abstract     = {Gartner newsroom forecast of worldwide end-user spending on information security: global security spending is forecast to grow 15 percent in 2025, driven by the threat environment, cloud adoption and generative-AI-related risk. Used in the suite as the cross-industry reference point that security investment is a rising, board-level budget line across sectors, against which higher education's lower allocation (about 3.6 percent of the IT budget per EDUCAUSE) is compared.},
+  note         = {Cross-industry benchmark context: Gartner IT Key Metrics data report security spend varying roughly between 1\% and 13\% of the IT budget depending on context, with cross-industry averages in the mid single digits (5.7\% of IT spend in 2019, per Gartner data as reported by Cybersecurity Dive, Oct 2020). Earlier versions of this entry carried an unverified 8--15\% range; removed June 2026.},
   fetch_status = {VERIFIED},
-  fetch_note   = {Gartner newsroom forecast; the 8--12\% / 10--15\% guidance corroborated via Gartner and industry benchmark reporting. Verified June 2026.},
+  fetch_note   = {Gartner newsroom page behind bot protection (HTTP 403, Cloudflare). Title and forecast content verified via web search. Verified June 2026.},
 }
 
 @article{klotz2019,
@@ -2554,7 +2560,7 @@
   note         = {Reference document suite of the SUIT Working Group, chaired by Nicolas Guelfi. Always-living document.},
   abstract     = {The SUIT (Sustainable University IT Infrastructure \& Technology) reference document suite: an institution-neutral policy, its executive companion, a technical solution reference and its operational summary, with anticipatory argumentation modules, parameterised for per-institution instantiation. Produced by the SUIT Working Group as a shared international reference for building, operating and sustaining university IT infrastructure.},
   fetch_status = {OK},
-  fetch_note   = {Working-group's own reference suite (self-reference).},
+  fetch_note   = {Self-reference to the working group's own suite repository; URL not publicly resolvable at verification time (HTTP 404 --- repository private or not yet published). Checked June 2026.},
 }
 
 %--- TECHNICAL REFERENCE: STANDARDS (IETF, OASIS, OpenID Foundation) ---
@@ -2692,15 +2698,36 @@
   fetch_note   = {Public IETF datatracker page. Verified May 2026.},
 }
 
-@misc{rfc-5661-nfs41,
-  author       = {Shepler, S. and Eisler, M. and Noveck, D.},
+@misc{rfc-8881-nfs41,
+  author       = {Noveck, D. and Lever, C.},
   title        = {{Network File System (NFS) Version 4 Minor Version 1 Protocol}},
-  year         = {2010},
-  howpublished = {RFC 5661, Internet Engineering Task Force},
-  url          = {https://datatracker.ietf.org/doc/html/rfc5661},
-  abstract     = {IETF specification of NFS version 4.1, the network file system protocol that adds session-based reliability, parallel I/O (pNFS), and operation compounding to NFS v4. The architecture's storage layer recognises NFS v4.1 as the standard for shared-file access where shared-file semantics are required, complementing object storage (S3 API) and block storage. The protocol's open specification makes shared-file access portable across NFS-compliant servers and operating-system clients.},
+  year         = {2020},
+  howpublished = {RFC 8881, Internet Engineering Task Force (obsoletes RFC 5661)},
+  url          = {https://datatracker.ietf.org/doc/html/rfc8881},
+  abstract     = {IETF specification of NFS version 4.1, the network file system protocol that adds session-based reliability, parallel I/O (pNFS), and operation compounding to NFS v4. RFC 8881 is the current consolidated specification, obsoleting RFC 5661 (2010). The architecture's storage layer recognises NFS v4.1 as the standard for shared-file access where shared-file semantics are required, complementing object storage (S3 API) and block storage. The protocol's open specification makes shared-file access portable across NFS-compliant servers and operating-system clients.},
   fetch_status = {OK},
-  fetch_note   = {Public IETF datatracker page. Verified May 2026.},
+  fetch_note   = {Public IETF datatracker page, HTTP 200. Verified June 2026.},
+}
+
+@misc{rfc-2866-radius-acct,
+  author       = {Rigney, C.},
+  title        = {{RADIUS Accounting}},
+  year         = {2000},
+  howpublished = {RFC 2866, Internet Engineering Task Force},
+  url          = {https://datatracker.ietf.org/doc/html/rfc2866},
+  abstract     = {IETF specification of the accounting companion to the RADIUS protocol: it defines the Accounting-Request/Accounting-Response exchange and the start/stop/interim usage records by which a network access server reports session usage to an accounting server. The base RADIUS specification (RFC 2865) covers authentication and authorisation only; accounting is specified here. The architecture's network layer relies on the RADIUS family for network access authentication and accounting (e.g. federated Wi-Fi), so the accounting half of that claim is anchored by this document.},
+  fetch_status = {OK},
+  fetch_note   = {Public IETF datatracker page, HTTP 200. Verified June 2026.},
+}
+
+@misc{cni-spec,
+  author       = {{CNCF containernetworking project}},
+  title        = {{Container Network Interface (CNI) Specification}},
+  howpublished = {CNCF containernetworking/cni repository, SPEC.md (living specification)},
+  url          = {https://github.com/containernetworking/cni/blob/main/SPEC.md},
+  abstract     = {The CNCF specification of the Container Network Interface: the plugin contract between container runtimes and network plugins, defining plugin invocation, the ADD/DEL/CHECK operations, the network configuration format and the result schema. It is the vendor-neutral interface through which Kubernetes networking is pluggable. The architecture's network layer cites this specification (rather than any implementing product) as the Kubernetes network plugin model; implementations such as Cilium instantiate it and remain replaceable behind it.},
+  fetch_status = {OK},
+  fetch_note   = {GitHub specification page accessible, HTTP 200. Verified June 2026.},
 }
 
 @misc{rfc-8446-tls13,

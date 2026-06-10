@@ -188,18 +188,18 @@ Layer & Standard & Role in the architecture & Status \\
   & OIDC Core~1.0~\cite{oidc-core-1.0}      & Federated authentication, identity assertion & Stable \\
   & SAML~2.0~\cite{saml-core-2.0}           & Federated authentication (legacy compatibility) & Stable \\
   & SCIM~2.0~\cite{rfc-7643-scim-core,rfc-7644-scim-protocol} & Identity provisioning across systems & Stable \\
-  & OAuth~2.1~\cite{oauth-2-1}              & Authorisation framework underpinning OIDC & Maturing \\
+  & OAuth~2.1~\cite{oauth-2-1}              & Authorisation framework underpinning OIDC & Emerging \\
   & OpenID Federation  & Trust establishment between federations & Emerging \\
 \addlinespace
 \multirow{2}{*}{Policy}
-  & OPA REST API~\cite{opa-project}         & Policy decision point query interface & Mature \\
-  & Cedar evaluation API~\cite{cedar-project} & Alternative policy decision interface & Emerging \\
+  & OPA REST API~\cite{opa-project}         & Policy decision point query interface (de facto project API) & Mature \\
+  & Cedar evaluation API~\cite{cedar-project} & Alternative policy decision interface (project specification) & Emerging \\
 \addlinespace
 \multirow{5}{*}{Network}
-  & RADIUS~\cite{rfc-2865-radius}           & Network access authentication and accounting & Stable \\
+  & RADIUS~\cite{rfc-2865-radius,rfc-2866-radius-acct} & Network access authentication and accounting & Stable \\
   & NETCONF~\cite{rfc-6241-netconf}\,/\,YANG~\cite{rfc-7950-yang} & Network device configuration and modelling & Stable \\
   & BGP / EVPN         & Routing and overlay signalling & Stable \\
-  & eBPF / CNI~\cite{cilium}        & Kubernetes network plugin model & Mature \\
+  & CNI~\cite{cni-spec} / eBPF        & Kubernetes network plugin model (CNCF project specification) & Mature \\
   & IPFIX~\cite{rfc-7011-ipfix}             & Flow record export & Stable \\
 \addlinespace
 \multirow{4}{*}{Compute}
@@ -211,12 +211,12 @@ Layer & Standard & Role in the architecture & Status \\
 \multirow{3}{*}{Storage}
   & S3 API             & Object storage interface (de facto standard) & Stable \\
   & KMIP~\cite{kmip-oasis}                  & Key management interoperability & Stable \\
-  & NFS v4.1~\cite{rfc-5661-nfs41}          & Network file system & Stable \\
+  & NFS v4.1~\cite{rfc-8881-nfs41}          & Network file system & Stable \\
 \addlinespace
 \multirow{3}{*}{Endpoint}
-  & DDM / DEP          & Apple declarative device management & Stable \\
-  & MS-MDM             & Microsoft device management open specification & Stable \\
-  & Declarative Linux config~\cite{osquery,ansible} & Linux endpoint posture and configuration & Mature \\
+  & DDM / DEP          & Apple declarative device management (vendor specification) & Stable \\
+  & MS-MDM             & Microsoft device management (published vendor specification) & Stable \\
+  & Declarative Linux config~\cite{osquery,ansible} & Linux endpoint posture and configuration (project tooling, no standards-body specification) & Mature \\
 \addlinespace
 \multirow{3}{*}{Observability}
   & OpenTelemetry~\cite{opentelemetry-spec} & Telemetry collection (traces, metrics, logs) & Stable \\
@@ -244,6 +244,13 @@ the architecture's most honest gap; \trchap{ch:orchestration}{The
 orchestration plane} discusses how to bound the consequences and how
 the institution can avoid creating a new captive dependency in this
 layer.
+
+\paragraph{The policy-interface choice.} Unlike the orchestration
+plane, the policy plane does have a standards-body specification ---
+OASIS XACML --- which the architecture deliberately does not adopt:
+the de facto project APIs it retains (OPA REST, Cedar) are the
+interfaces its reference instantiations implement, and the table
+records their project status accordingly.
 
 \paragraph{Standards versus reference profiles.} Several standards
 listed above (OIDC, SAML2, OPA, OpenTelemetry) admit broad
@@ -354,6 +361,48 @@ Control plane; the Control plane writes to the Execution plane.
 Observability (dashed) collects events from every layer.}
 \label{fig:ap-layers}
 \end{figure}
+
+%-----------------------------------------------------------------------------
+\section{Availability and failure semantics of the mediation planes}
+\label{sec:ap-availability}
+
+Per-session policy decision makes the identity and policy planes
+mediation points for the whole institution: left unspecified, their
+unavailability would be everyone's unavailability. The architecture
+therefore treats availability and failure semantics as first-class
+design obligations of the mediation planes, on a par with
+replaceability.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Redundant deployment per critical plane.] The identity
+    provider, the policy decision point, and the certificate and
+    secrets services run in redundant deployments --- active-active,
+    or active-passive with a documented and rehearsed failover ---
+    with an availability target declared per plane and measured
+    through the observability layer. The reference components
+    support clustered operation; the sizing envelopes of
+    \trchap{ch:sizing}{} assume it.
+  \item[A policy-plane outage must not interrupt established work.]
+    Policy enforcement points cache decisions for the lifetime of
+    the activation token: an outage of the decision point prevents
+    \emph{new} activations but does not invalidate sessions already
+    activated. Token lifetime is the institution's tunable
+    trade-off between revocation latency and outage tolerance,
+    declared per zone class.
+  \item[Fail-mode policy per zone class.] Each zone's security
+    profile declares its fail mode for new attachments during a
+    mediation-plane outage: \emph{fail-closed} for administrative
+    and sensitive zones; \emph{fail-degraded with audit} where the
+    availability of teaching or BYOD connectivity outweighs the
+    interception of new sessions. Absent a declared choice, the
+    default is fail-closed.
+  \item[The commercial-SLA comparison.] A managed identity or
+    policy service answers the same single-point-of-failure risk
+    with a contractual remedy after the fact; this architecture
+    answers it with engineered redundancy under institutional
+    control and with declared degradation semantics that the
+    institution can design, rehearse, and audit.
+\end{description}
 
 %-----------------------------------------------------------------------------
 \section{What this reference architecture is and is not}

@@ -22,7 +22,7 @@
 
 The contracts of Chapters~6--14 are stated as obligations on
 component behaviour; the conditions of replaceability of
-\trchap{ch:architectural-principles}{} (\S5.2) are stated as
+\trchap{ch:architectural-principles}{} (\S\ref{sec:ap-replaceability}) are stated as
 properties. Without a mechanism to verify that the obligations are
 met and the properties hold, both reduce to declarations. This
 chapter operationalises them through a structured test suite that
@@ -80,7 +80,7 @@ Tests are organised in four categories.
 \end{description}
 
 \noindent The four categories together correspond to the four
-conditions of replaceability of \S5.2. A layer that scores well on
+conditions of replaceability of \S\ref{sec:ap-replaceability}. A layer that scores well on
 fidelity but poorly on exit rehearsal is, despite appearances,
 captive.
 
@@ -150,7 +150,7 @@ Layer & Cat. & Test \\
 \multirow{3}{*}{Crypto (Ch. 13)}
   & F & ACME issuance conforms to RFC 8555 against the institutional CA. \\
   & A & Key-escrow recovery procedure executes successfully on a representative escrowed key. \\
-  & X & HSM key migration to an alternative HSM preserves the key's cryptographic identity on a representative subset. \\
+  & X & HSM key migration to an alternative HSM preserves the key's cryptographic identity on a representative subset; for non-exportable trust-anchor keys, the key-rotation / re-anchoring rehearsal declared in the Ch.~13 contract executes under dual control. \\
 \addlinespace
 \multirow{3}{*}{Orchestration (Ch. 14)}
   & F & Identical TAC activation inputs, replayed, produce identical end state (idempotency). \\

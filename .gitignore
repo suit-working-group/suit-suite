@@ -15,9 +15,11 @@ out/
 *.fls
 *.fdb_latexmk
 
-# Rendered instantiation editions are build outputs of each institution's set.tex
-# — regenerable on demand, so not tracked (the wrapper .tex and set.tex are).
-instantiations/*/render/*.pdf
+# Deposited instantiation editions DO track their four built PDFs — the deposit
+# bar requires them so readers get the documents without a TeX install
+# (instantiation-model.md). Only the _TEMPLATE scaffold keeps its render PDFs
+# untracked: the template is copied, its builds are throwaway.
+instantiations/_TEMPLATE/render/*.pdf
 
 # Scratch / draft folders — any directory named _TEMP, anywhere, is never tracked.
 _TEMP/

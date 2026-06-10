@@ -14,6 +14,12 @@ latexmk -pdf document.tex
 - Every directory with a **compilable top-level** `.tex` file MUST have a `.latexmkrc` (see `.claude/rules/latex-standards.md`). Input-only directories — whose `.tex` are `\input`ed by a parent document (e.g. `categories/`, `shared/`, `suit-policy/main/`, the `instantiations/` set files) — do not need one.
 - After compilation, verify: 0 undefined citations, 0 undefined references.
 
+## Release Gates — MANDATORY
+
+- Before any commit touching `.tex`/`.bib`: run `tools/suite-gates.sh` — it must print `SUITE GATES: PASS`.
+- Instantiation `render/*.tex` wrappers are **GENERATED files**: never edit them by hand. After any change to a generic shell document, regenerate with `tools/regen-instance-wrappers.sh instantiations/<institution>` and rebuild the edition (deposit bar: 0 undefined citations/references, 0 undefined localization keys, 0 `??key??`).
+- The claim-to-record reconciliation pass (every numeric/institutional claim adjacent to a `\cite` must be supported by the entry's verified abstract/note) is a human review pass at release — it is not mechanised by the gates.
+
 ## Bibliography Format — MANDATORY
 
 Every `.bib` entry MUST include (see `.claude/rules/bibliography-curation.md`):

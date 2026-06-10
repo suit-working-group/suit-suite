@@ -28,16 +28,24 @@ The four documents in this repository build on a first version — the policy an
 
 | Document | Directory | Audience | Purpose |
 |---|---|---|---|
-| 📘 **SUIT Policy** | `suit-policy/` | Academic community, university leadership, decision-makers | The governance reference: principles, obligations, and the policy framework for sustainable university IT. |
-| 📗 **SUIT Policy Summary** | `suit-policy/companion/` | University leadership (rectorate / executive board) | An executive companion to the Policy: the decisions and their justification, condensed for governance bodies. |
-| 📙 **SUIT Solution** | `suit-solution/` | Architects, engineers, infrastructure and network teams | The technical reference: architecture, controls, and operational design that realise the Policy. |
-| 📕 **SUIT Solution Summary** | `suit-solution/summary/` | CISO, CTO, infrastructure and network leads | An operational executive summary of the Solution: what to build, in what order, and why. |
+| 📘 **[SUIT Policy](suit-policy/policy-EN.pdf)** | `suit-policy/` | Academic community, university leadership, decision-makers | The governance reference: principles, obligations, and the policy framework for sustainable university IT. |
+| 📗 **[SUIT Policy Summary](suit-policy/companion/policy-summary-EN.pdf)** | `suit-policy/companion/` | University leadership (rectorate / executive board) | An executive companion to the Policy: the decisions and their justification, condensed for governance bodies. |
+| 📙 **[SUIT Solution](suit-solution/solution-EN.pdf)** | `suit-solution/` | Architects, engineers, infrastructure and network teams | The technical reference: architecture, controls, and operational design that realise the Policy. |
+| 📕 **[SUIT Solution Summary](suit-solution/summary/solution-summary-EN.pdf)** | `suit-solution/summary/` | CISO, CTO, infrastructure and network leads | An operational executive summary of the Solution: what to build, in what order, and why. |
 
-💬 Each document is accompanied by a per-layer anticipatory **argumentation** module (`suit-policy/argumentation/`, `suit-solution/argumentation/`) that answers the questions and objections each audience is expected to raise, on five independent evidence layers — legal, standards, sector, empirical, and institutional.
+💬 Each document is accompanied by a per-layer anticipatory **argumentation** module ([governance-layer PDF](suit-policy/argumentation/argumentation-policy-EN.pdf) in `suit-policy/argumentation/`, [technical-layer PDF](suit-solution/argumentation/argumentation-solution-EN.pdf) in `suit-solution/argumentation/`) that answers the questions and objections each audience is expected to raise, on five independent evidence layers — legal, standards, sector, empirical, and institutional.
 
 ## 🧩 Adoption &amp; localization
 
-The suite is written once, generically, and adopted everywhere. A three-layer localization system keeps every local fact in one place: generic defaults in `shared/localization-defaults.tex`, a per-family archetype in `categories/` (worked archetypes span Europe, North and South America, and Africa), and a per-institution edition that fills the country-specific names. A worked reference edition lives under `instantiations/`. The functional core is size- and jurisdiction-invariant; only the instantiation scales. See `shared/localization-guide-EN.tex` for the full adoption guide.
+The suite is written once, generically, and adopted everywhere. A three-layer localization system keeps every local fact in one place: generic defaults in `shared/localization-defaults.tex`, a per-family archetype in `categories/` (worked archetypes span Europe, North and South America, and Africa), and a per-institution edition that fills the country-specific names. The functional core is size- and jurisdiction-invariant; only the instantiation scales. See `shared/localization-guide-EN.tex` for the full adoption guide.
+
+## 🏛️ The instantiation library
+
+The generic suite renders as concrete, named **editions**: each lives in `instantiations/<institution>/` as a thin shell — one `set.tex` of institution values over the unchanged generic documents — and deposits its four built PDFs so anyone can read it without a TeX install.
+
+The **University of Luxembourg edition** is the deposited reference instantiation (archetype `EU-PUB-RI`, round-trip validated): [Policy dossier](instantiations/lu-university-of-luxembourg/render/policy-EN.pdf) · [Executive summary](instantiations/lu-university-of-luxembourg/render/policy-summary-EN.pdf) · [Technical reference](instantiations/lu-university-of-luxembourg/render/solution-EN.pdf) · [Operational summary](instantiations/lu-university-of-luxembourg/render/solution-summary-EN.pdf).
+
+To produce your institution's edition, follow the process in [`instantiations/README.md`](instantiations/README.md) — the [Luxembourg edition](instantiations/lu-university-of-luxembourg/README.md) retraces it step by step as the worked example to pattern yours on.
 
 ## 🗂️ Repository layout
 
@@ -50,7 +58,7 @@ suit-solution/       SUIT Solution (technical reference)
   summary/           SUIT Solution Summary (operational executive summary)
   argumentation/     Technical/operational-layer Q&A / argumentation module
 categories/          Per-family adopter archetypes (EU-PUB-RI, US-PUB-R1, US-PRIV-R1, UK-RES, LATAM-PUB, AFR-PUB)
-instantiations/      Per-institution editions + a worked reference edition
+instantiations/      The instantiation library: per-institution editions (reference: lu-university-of-luxembourg) + the _TEMPLATE scaffold
 docs/                Audit dispositions and per-jurisdiction regulatory profiles
 .claude/             Authoring tooling (rules, skills, agents)
 .github/             Issue templates and repository configuration
@@ -79,7 +87,7 @@ The suite builds on a first version created by **Nicolas Guelfi**, chair of the 
 This repository uses a split license:
 
 - 📄 **Documents and their content** — everything that constitutes the deliverables (`.tex` sources, generated `.pdf`, `.bib` bibliography, prose, figures, and the contents of `shared/`, `suit-policy/`, `suit-solution/`, `docs/`) are licensed under **Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA-4.0)**. See [`LICENSE-DOCS`](LICENSE-DOCS).
-- 🛠️ **Tooling** — the authoring toolkit under `.claude/` and the reusable LaTeX style packages (`.sty`) are licensed under the **MIT License**. See [`LICENSE-TOOLING`](LICENSE-TOOLING).
+- 🛠️ **Tooling** — the authoring toolkit under `.claude/`, the release-gate and wrapper-generation scripts under `tools/`, and the reusable LaTeX style packages (`.sty`) are licensed under the **MIT License**. See [`LICENSE-TOOLING`](LICENSE-TOOLING).
 
 When a single file could fall under both (for example, a `.sty` package shipped alongside the documents), the MIT terms in `LICENSE-TOOLING` govern that file.
 

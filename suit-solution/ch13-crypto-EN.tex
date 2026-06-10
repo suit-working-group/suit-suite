@@ -50,7 +50,12 @@ incidents whose remediation is institution-wide.
 \begin{itemize}[leftmargin=1.5em,nosep]
   \item operate an institutional certificate authority hierarchy
     whose trust anchor is held in hardware (HSM accessed through
-    PKCS\#11~\cite{pkcs11-oasis}) under institutional custody;
+    PKCS\#11~\cite{pkcs11-oasis}) under institutional custody; the
+    key-protection policy declares at procurement whether
+    trust-anchor keys are wrap-exportable for migration and, where
+    they are non-exportable (a common HSM best practice), defines
+    the alternative exit artefact: a planned key-rotation and
+    re-anchoring rehearsal under dual control;
   \item issue end-entity certificates through
     ACME~\cite{rfc-8555-acme} for machine-readable workflows, and
     through a documented manual or automated procedure for endpoint
