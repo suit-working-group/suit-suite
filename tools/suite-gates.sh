@@ -80,5 +80,80 @@ for inst in instantiations/*/; do
   ;; esac
 done
 
+# --- G7: machinery self-consistency -------------------------------------------
+g7=""
+for f in suit-policy/policy-EN.tex suit-policy/companion/policy-summary-EN.tex \
+         suit-solution/solution-EN.tex suit-solution/summary/solution-summary-EN.tex \
+         suit-policy/argumentation/argumentation-policy-EN.tex \
+         suit-solution/argumentation/argumentation-solution-EN.tex \
+         docs/dispositions.json categories/README.md; do
+  [ -f "$f" ] || g7+="fichier référencé par la machinerie manquant: $f"$'\n'
+done
+python3 -c "import json; json.load(open('docs/dispositions.json'))" 2>/dev/null \
+  || g7+="docs/dispositions.json: JSON invalide"$'\n'
+for d in $(grep -ohE 'DISPO-[A-Z0-9-]+[A-Z0-9]' .claude/workflows/suit-audit.workflow.js 2>/dev/null | sort -u); do
+  grep -q "\"$d\"" docs/dispositions.json || g7+="le workflow cite une disposition inconnue: $d"$'\n'
+done
+for s in tools/*.sh; do bash -n "$s" 2>/dev/null || g7+="erreur de syntaxe: $s"$'\n'; done
+# Spec-first lockstep: the canonical plan and the orchestrator must agree.
+PLANF=_AUDITS/AUDIT-PLAN.md
+WF=.claude/workflows/suit-audit.workflow.js
+if [ ! -f "$PLANF" ]; then
+  g7+="plan canonique manquant: $PLANF"$'\n'
+else
+  grep -q "PLAN-VERSION:" "$PLANF" || g7+="$PLANF: marqueur PLAN-VERSION absent"$'\n'
+  for k in SCI TECH XCOH LEG CITE APP GOV INST ARCH DEF; do
+    grep -q "<!-- TRACK:$k -->" "$PLANF" || g7+="$PLANF: section TRACK:$k absente"$'\n'
+    grep -q "<!-- /TRACK:$k -->" "$PLANF" || g7+="$PLANF: fermeture /TRACK:$k absente"$'\n'
+    open_l=$(grep -n "<!-- TRACK:$k -->" "$PLANF" | head -1 | cut -d: -f1)
+    close_l=$(grep -n "<!-- /TRACK:$k -->" "$PLANF" | head -1 | cut -d: -f1)
+    if [ -n "$open_l" ] && [ -n "$close_l" ] && [ $((close_l - open_l)) -lt 3 ]; then
+      g7+="$PLANF: section TRACK:$k vide ou quasi vide"$'\n'
+    fi
+    # A track is referenced either literally ("TRACK:INST") or dynamically
+    # ("TRACK:' + t.k" with the key declared as k: '<K>').
+    if ! grep -q "TRACK:$k" "$WF"; then
+      if grep -q "TRACK:' + t.k" "$WF" && grep -q "k: '$k'" "$WF"; then :; else
+        g7+="$WF: la piste $k du plan n'est référencée par aucun prompt"$'\n'
+      fi
+    fi
+  done
+  for s in SCOPE SEVERITY IDS DISPOSITIONS VERIFY SYNTHESIS REPORT; do
+    grep -q "<!-- SECTION:$s -->" "$PLANF" || g7+="$PLANF: section SECTION:$s absente"$'\n'
+  done
+  for k in $(grep -oE "k: '[A-Z]+'" "$WF" | sed "s/k: '//;s/'//" | sort -u); do
+    grep -q "<!-- TRACK:$k -->" "$PLANF" || g7+="$WF: piste $k sans section TRACK:$k dans le plan"$'\n'
+  done
+  for f in $(grep -oE '\.claude/rules/[a-z-]+\.md' "$PLANF" | sort -u); do
+    [ -f "$f" ] || g7+="$PLANF: contrat pointé manquant: $f"$'\n'
+  done
+fi
+if [ -n "$g7" ]; then bad G7 "auto-cohérence machinerie + lockstep plan<->orchestrateur" "$g7"; else ok G7 "chemins DOCS, dispositions, syntaxe tools/, et lockstep plan<->workflow cohérents"; fi
+
+# --- G8: governance / diffusion coherence --------------------------------------
+g8=""
+# 8a — relative markdown links resolve (README, library front door, contributing)
+for md in README.md CONTRIBUTING.md instantiations/README.md \
+          instantiations/lu-university-of-luxembourg/README.md; do
+  [ -f "$md" ] || { g8+="fichier manquant: $md"$'\n'; continue; }
+  base=$(dirname "$md")
+  while IFS= read -r tgt; do
+    case "$tgt" in http*|mailto:*|\#*) continue ;; esac
+    tgt="${tgt%%#*}"; [ -z "$tgt" ] && continue
+    [ -e "$base/$tgt" ] || g8+="$md -> lien mort: $tgt"$'\n'
+  done < <(grep -oE '\]\([^)]+\)' "$md" | sed -E 's/^\]\((.*)\)$/\1/')
+done
+# 8b — deposited editions track their four PDFs (deposit bar vs .gitignore)
+for inst in instantiations/*/; do
+  inst="${inst%/}"
+  case "$inst" in *_TEMPLATE*) continue ;; esac
+  for doc in policy-EN policy-summary-EN solution-EN solution-summary-EN; do
+    p="$inst/render/$doc.pdf"
+    [ -f "$p" ] || g8+="PDF déposé manquant: $p"$'\n'
+    git check-ignore -q "$p" 2>/dev/null && g8+="PDF déposé ignoré par .gitignore: $p"$'\n'
+  done
+done
+if [ -n "$g8" ]; then bad G8 "cohérence gouvernance/diffusion" "$g8"; else ok G8 "liens des READMEs et dépôt des PDFs d'édition cohérents"; fi
+
 echo
 if [ "$fail" -ne 0 ]; then echo "SUITE GATES: FAIL"; exit 1; else echo "SUITE GATES: PASS"; fi

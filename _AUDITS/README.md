@@ -1,39 +1,55 @@
 # `_AUDITS/` — Quality audits
 
-This directory holds the SUIT suite's quality-audit outputs. The methodology is
-defined once in [`AUDIT-PLAN.md`](AUDIT-PLAN.md); this file explains how runs are
-organised and how to produce one.
+This directory holds the SUIT suite's quality-audit methodology and the LOCAL
+outputs of audit runs. The methodology is defined **once, canonically and
+machine-consumed**, in [`AUDIT-PLAN.md`](AUDIT-PLAN.md): the audit agents read
+its marked sections verbatim as their grids at run time, and the orchestrator
+(`.claude/workflows/suit-audit.workflow.js`) carries scheduling only. To
+change what an audit checks, edit the PLAN — the release gate
+`tools/suite-gates.sh` (G7) enforces plan↔orchestrator lockstep.
 
-## Run-folder convention
+## Run independence
 
-Each audit run is a single folder named for the version it audits (or the run date
-for an interim audit):
+**Every audit run is self-contained**: it judges the current repository state
+only, against the plan and `docs/dispositions.json` — it never reads, and
+never depends on, any prior run. There is no baseline and no diff stage.
+Finding ids are content-derived and stable, so two independently produced
+reports remain comparable by a human when useful; that comparison is not part
+of a run.
+
+## Tracking policy (what is on GitHub)
+
+Under `_AUDITS/`, **only two files are tracked**: `AUDIT-PLAN.md` (the
+canonical methodology) and this `README.md`. Every run folder is a local
+working artefact (`.gitignore: _AUDITS/*` with those two exceptions) — audit
+history never pollutes the repository's change tracking. Quality statements
+for a release are carried by `CHANGELOG.md`, which records each release's
+audit outcome (run label, plan version, scores, blocking-gate status).
+
+## Run-folder convention (local)
 
 ```
-_AUDITS/<version-or-date>/
-  AUDIT-REPORT.md      atemporal report body: dimension scores, clustered findings, blocking gates
-  AUDIT-CHANGELOG.md   run metadata: version, date, tracks exercised, finding counts
-  findings.json        machine-readable findings with stable ids — the baseline for the next diff
+_AUDITS/<date>/
+  AUDIT-REPORT-<date>.md   atemporal report: scores, root causes, findings, blocking gates
+  AUDIT-CHANGELOG.md       run metadata: PLAN-VERSION, git HEAD, tracks, skeptic tallies
+  findings.json            machine-readable findings with stable ids
 ```
-
-The most recent run is the **baseline**; the next run diffs against its
-`findings.json` (see the baseline-diff convention in `AUDIT-PLAN.md`).
-
-The shipped baseline for the current release is `_AUDITS/v1.0.0/`.
 
 ## Running an audit
 
-The recurring audit is implemented as a workflow at
-`.claude/workflows/suit-audit.workflow.js`. It is repo-relative and source-free:
-run it from the repository root. It exercises the seven document tracks plus the
-INST track for any instantiations, applies adversarial verification, respects
-`docs/dispositions.json`, and diffs against the most recent `_AUDITS` run.
-
-The run date and the skeptic count are supplied as arguments so a run is
-deterministic and reproducible.
+The recurring audit is the `suit-audit` workflow
+(`.claude/workflows/suit-audit.workflow.js`), repo-relative and source-free;
+run it from the repository root with a `date` argument (deterministic — never
+read from the clock) and optionally `skepticCount`, `concurrency`,
+`includeGov`. It exercises the content tracks, the INST track per deposited
+instantiation, the ARCH archetype rotation and the cross-cutting DEF track,
+and applies N-skeptic adversarial verification. The single-instance,
+on-demand form is the `/instance-audit` skill (same `TRACK:INST` grid from
+the plan).
 
 ## Cadence
 
-Audit **before each release** (see `GOVERNANCE.md`). A release candidate is clean
-only when every blocking gate (CRITICAL + HIGH) is remediated or formally
-dispositioned in `docs/dispositions.json`.
+Audit **before each release** (see `GOVERNANCE.md`). A release candidate is
+clean only when every blocking gate (CRITICAL + HIGH) is remediated or
+formally dispositioned in `docs/dispositions.json`; the release's CHANGELOG
+entry records the audit outcome.

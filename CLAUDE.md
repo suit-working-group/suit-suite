@@ -20,6 +20,11 @@ latexmk -pdf document.tex
 - Instantiation `render/*.tex` wrappers are **GENERATED files**: never edit them by hand. After any change to a generic shell document, regenerate with `tools/regen-instance-wrappers.sh instantiations/<institution>` and rebuild the edition (deposit bar: 0 undefined citations/references, 0 undefined localization keys, 0 `??key??`).
 - The claim-to-record reconciliation pass (every numeric/institutional claim adjacent to a `\cite` must be supported by the entry's verified abstract/note) is a human review pass at release — it is not mechanised by the gates.
 
+## Audit Methodology — SPEC-FIRST
+
+- `_AUDITS/AUDIT-PLAN.md` is the **canonical, machine-consumed** audit methodology: the audit agents read its marked sections verbatim as their grids. To change audit behaviour, edit the PLAN — never the prompts of `.claude/workflows/suit-audit.workflow.js` (orchestration only). G7 enforces plan↔orchestrator lockstep.
+- **Run independence**: every audit run is self-contained (no baseline, no diff, no reading of prior runs). Under `_AUDITS/`, only `AUDIT-PLAN.md` and `README.md` are tracked; run folders are local working artefacts. Release quality outcomes are recorded in `CHANGELOG.md`.
+
 ## Bibliography Format — MANDATORY
 
 Every `.bib` entry MUST include (see `.claude/rules/bibliography-curation.md`):

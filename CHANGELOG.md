@@ -59,6 +59,24 @@ All four generic documents, both standalone Q&A modules, the LU edition and
 the template build clean (`latexmk`; 0 undefined citations, references and
 localization keys); `tools/suite-gates.sh` passes.
 
+- **Audit governance — spec-first, self-contained, untracked outputs.** The
+  audit methodology is now SPEC-FIRST: `_AUDITS/AUDIT-PLAN.md`
+  (PLAN-VERSION 2.0) is the canonical, machine-consumed single source whose
+  marked sections the audit agents read verbatim as their grids; the
+  workflow is orchestration-only; the `/instance-audit` skill defers to the
+  plan's `TRACK:INST` section; gate G7 enforces plan↔orchestrator lockstep.
+  New tracks: ARCH (one unbound `categories/` archetype per run, in
+  deterministic rotation) and optional GOV (governance/diffusion meta files,
+  `args.includeGov`); the DEF track additionally tests liberty-posture
+  coherence. Every audit run is now **self-contained** — no baseline, no
+  diff, no reading of prior runs. Under `_AUDITS/`, only `AUDIT-PLAN.md` and
+  `README.md` are tracked: all run folders (including the formerly tracked
+  `2026-06-09-genericity`, `260609-2153` and the `v1.0.0` baseline folder,
+  retired from the repository by this change) are local working artefacts,
+  and release quality outcomes are recorded here in `CHANGELOG.md`. For the
+  record: the 260609-2153 run closed with all 74 findings remediated, all 13
+  blocking gates cleared, suite score 73/100 pre-remediation.
+
 ## v1.0.0 — 2026-06-09 — Initial public release of the SUIT suite
 
 The first public release of the SUIT reference suite: four institution-neutral
