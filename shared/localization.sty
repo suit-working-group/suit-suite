@@ -62,10 +62,34 @@
   \fi
 }
 
+% --- Canonical suite-document titles (single source of truth) ----------------
+%     Every site that cites a suite document by its title (its own cover, the
+%     "Companion to" boxes and footers of the other documents, citation lines)
+%     MUST use these macros, never a literal copy: a literal copy is exactly
+%     how a stale title survives a renaming. The two-part variants exist so a
+%     cover can place its own line break (\suitpolicytitlemain\\
+%     \suitpolicytitlerest) while running text uses the joined form.
+\newcommand{\suitpolicytitlemain}{The University Spirit}
+\newcommand{\suitpolicytitlerest}{in the Digital Age}
+\newcommand{\suitpolicytitle}{\suitpolicytitlemain\ \suitpolicytitlerest}
+\newcommand{\suitpolicysubtitle}{For an Open, Secure and Mission-Aligned Digital Infrastructure}
+\newcommand{\suitsolutiontitle}{Sustainable University IT}
+\newcommand{\suitsolutionsubtitlemain}{A Technical Reference}
+\newcommand{\suitsolutionsubtitlerest}{for Architecture and Migration}
+\newcommand{\suitsolutionsubtitle}{\suitsolutionsubtitlemain\ \suitsolutionsubtitlerest}
+
+% --- \suiteditionline : prominent edition identity on every title page -------
+%     Renders \loc{edition-name} so the edition a PDF belongs to is visible at
+%     a glance on the cover. Layer 0 self-identifies the uninstantiated build
+%     ("Generic reference edition..."); each edition overrides edition-name in
+%     its set.tex. Optional argument = size command for compact title blocks.
+\newcommand{\suiteditionline}[1][\Large]{{#1\bfseries \loc{edition-name}\par}}
+
 % --- \suitmetablock : the unified, generic document title-page metadata block -
 %     Single source of truth for every document's version/visibility/status
 %     line. All variable parts are localization keys, so an edition overrides
 %     them via \setloc. Renders centred-friendly (uses \\), at \small.
+%       Edition: <edition-name>
 %       Document Version <doc-version>
 %       Visibility: <doc-visibility>          (INTERNAL / PUBLIC)
 %       Status: Approved by <authority> on <date>
@@ -73,6 +97,7 @@
 %       Print date: <today>
 \newcommand{\suitmetablock}{%
   \begingroup\small
+  Edition:~\loc{edition-name}\\[2pt]
   Document Version~\loc{doc-version}\\[2pt]
   Visibility:~\loc{doc-visibility}\\[2pt]
   Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]

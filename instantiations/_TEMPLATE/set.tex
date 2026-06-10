@@ -59,12 +59,18 @@
 % \setloc{nren-csirt}{REPLACE: your state/regional R&E network security team}
 
 % ============================================================================
-% 3. OPTIONAL: INSTITUTION IDENTITY (pin only if a non-generic edition is wanted)
+% 3. EDITION IDENTITY (banner REQUIRED) — INSTITUTION IDENTITY (optional)
 % ----------------------------------------------------------------------------
+% edition-name is REQUIRED for every deposit: it is rendered prominently on
+% each title page (\suiteditionline) and in \suitmetablock, so every PDF says
+% at a glance which edition it belongs to. An anonymous edition names itself
+% by its archetype instead of the institution.
+% ============================================================================
+\setloc{edition-name}{REPLACE: Edition of the University of Example (or: Edition for a continental-European public research university)}
+
 % Uncomment and fill to render a named edition rather than a generic-by-class
 % one. Leaving these commented keeps the institution anonymous behind its
 % archetype, which is a legitimate deposit.
-% ============================================================================
 % \setloc{institution-name}{REPLACE: the University of Example}
 % \setloc{institution-type}{REPLACE: a public, research-intensive university established under the law of ...}
 % \setloc{executive-leadership}{REPLACE: the rectorate / the President and Provost / the Vice-Chancellorate}

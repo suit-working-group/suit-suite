@@ -76,6 +76,20 @@ localization keys); `tools/suite-gates.sh` passes.
   and release quality outcomes are recorded here in `CHANGELOG.md`. For the
   record: the 260609-2153 run closed with all 74 findings remediated, all 13
   blocking gates cleared, suite score 73/100 pre-remediation.
+- **Title single-sourcing and visible edition identity.** The "Companion to
+  the report" box of the Technical Reference (and the summary footers) cited
+  the main report under a retired title; every site that cites a suite
+  document by title now consumes the canonical title macros
+  (`\suitpolicytitle`/`\suitpolicysubtitle`,
+  `\suitsolutiontitle`/`\suitsolutionsubtitle` in `shared/localization.sty`),
+  so a renaming can no longer go stale. NEW `edition-name` localization key:
+  every title page now carries a prominent edition banner
+  (`\suiteditionline`) and `\suitmetablock` an `Edition:` line — the LU
+  edition reads "Edition of the University of Luxembourg", an uninstantiated
+  build self-identifies as "Generic reference edition (not instantiated)",
+  and the template requires the binding (`REPLACE:`). Audit plan
+  (PLAN-VERSION 2.1): XCOH gains the cited-title-concordance check, INST the
+  edition-identity-visible gate.
 
 ## v1.0.0 — 2026-06-09 — Initial public release of the SUIT suite
 

@@ -1,6 +1,6 @@
 # SUIT Audit Plan — Canonical Methodology
 
-<!-- PLAN-VERSION: 2.0 -->
+<!-- PLAN-VERSION: 2.1 -->
 
 This file is **the single source of truth for the SUIT suite audit**. It is
 written for two readers at once:
@@ -166,6 +166,16 @@ may be orphaned (lacking a Policy justification). Report unmapped items in
 EITHER direction and set traceDirection on each traceability finding
 (policy->solution for an unrealised obligation, solution->policy for an
 unjustified mechanism).
+
+PLUS cited-title concordance: every site where one suite document cites
+another by title (the "Companion to" cover boxes and footers, the
+"Full document:" / "Citation:" lines, header comments) must render the CITED
+document's CURRENT cover title. Verify the sites consume the canonical title
+macros of `shared/localization.sty` (`\suitpolicytitle`, `\suitpolicysubtitle`,
+`\suitsolutiontitle`, `\suitsolutionsubtitle`) rather than a literal copy: a
+literal copy of a suite-document title outside `shared/localization.sty` is a
+finding (defectType `stale-cited-title` if it diverges, `literal-title-copy`
+if it merely duplicates).
 <!-- /TRACK:XCOH -->
 
 <!-- TRACK:LEG -->
@@ -249,6 +259,13 @@ and emit a finding per real defect:
   is internally consistent and plausible for the declared jurisdiction (real
   NREN / national DPA / governmental CSIRT / transposition instruments, no
   cross-jurisdiction contamination).
+- **COMPLETENESS (edition identity)**: `set.tex` binds `edition-name` and the
+  edition identity is VISIBLE on the title page of each of the four deposited
+  PDFs (the `\suiteditionline` banner and the `Edition:` line of
+  `\suitmetablock` must render the edition's own name, never the Layer-0
+  "Generic reference edition" self-identification). An instance PDF that does
+  not say which edition it is, is a HIGH finding (defectType
+  `edition-identity-missing`).
 - **CURRENCY**: the instance still TRACKS the current generic suite — no
   parameterize key added to `shared/localization-defaults.tex` or the
   archetype since the deposit is left silently defaulted; the generic body
