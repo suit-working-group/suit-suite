@@ -1,0 +1,570 @@
+% ============================================================================
+% Chapter 2 --- Conceptual frame
+% ----------------------------------------------------------------------------
+% Purpose : establish a shared mental model of the TAC (Trusted Activity
+%           Context) and the perimeter of the document. Provides:
+%             §2.1 formal definition of TAC for the standalone reader;
+%             §2.2 end-to-end activation sequence with figure placeholder;
+%             §2.3 endpoint OS integration matrix;
+%             §2.4 lifecycle state machine of a TAC;
+%             §2.5 out-of-scope statement.
+% Page target: ~10 pages (revised upward from ~6 after F3 decision).
+% Dependencies: introduces concepts used by every subsequent chapter.
+% Cross-document: the formal TAC definition aligns with Section 3.6 of the
+%                 main report; the technical reference's standalone status
+%                 means the definition is fully reproduced here, not recapped.
+% ============================================================================
+
+\chapter{Conceptual frame}
+\label{ch:conceptual-frame}
+
+This chapter establishes the conceptual material that the rest of
+the Technical Reference applies. It develops the formal definition
+of the Trusted Activity Context (TAC), the end-to-end activation
+sequence that turns a TAC declaration into running infrastructure,
+the endpoint operating-system integration matrix, and the
+lifecycle state machine that governs a TAC from draft to archival.
+A reader who has consulted the companion main report will find
+parts of this material familiar; the chapter is nevertheless
+written to be self-contained for the standalone reader.
+
+%-----------------------------------------------------------------------------
+\section{The Trusted Activity Context concept}
+\label{sec:cf-tac-concept}
+
+\paragraph{Definition.} A \keyword{Trusted Activity Context}
+(\gls{tac}) is a coherent, validated environment that assembles
+the data, tools, services, and access rights required for a
+specific activity --- a research project, a digital examination,
+an administrative process, a teaching session --- under
+documented institutional governance. Within a TAC, the
+identity of subjects, the classification of resources, the
+network attachment, the policy decisions, the cryptographic
+posture, and the audit trail are aligned with the activity's
+objectives and risk level, and are operationally bounded by the
+TAC's declared scope.
+
+\paragraph{Why ``trusted''.} The qualifier follows the
+dependability tradition of Avizienis et al.~\cite{avizienis2004}:
+an entity is \emph{trusted} when it delivers service that can
+justifiably be relied upon. The trust in a TAC is consequently not
+assumed; it is the result of the contractual obligations placed on
+each layer by the architecture of Part~II and verified by the
+conformance suite of \trchap{ch:conformance}{}. A TAC is trusted
+because its properties are checkable.
+
+\paragraph{Why ``activity''.} The qualifier is the central
+innovation. Existing access-control and isolation frameworks are
+typically organised around either subjects (who a user is) or
+resources (what a service contains). A TAC is organised around
+\emph{what is being done}: the same subject, holding the same
+attributes, accessing the same resource, may operate in a
+different TAC depending on the activity engaged. This re-frames
+several recurring difficulties in academic IT --- the
+researcher who is also a teacher, the visiting collaborator who
+is also a host, the administrative process that touches research
+data --- as switches between TACs rather than as exceptions to a
+single role-based model.
+
+\paragraph{Why ``context''.} A TAC is not a single object; it is
+the assembled configuration that an activity requires. It
+includes:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item a \emph{subject set}, typically with specific role
+    activations rather than blanket role memberships;
+  \item a \emph{resource set} --- data, tools, services ---
+    consistent with the activity's classification;
+  \item a \emph{network attachment} appropriate to the activity's
+    zone (research, teaching, administration, sensitive);
+  \item a \emph{policy envelope} that admits the operations the
+    activity requires and denies those it does not;
+  \item a \emph{cryptographic posture} (key custody, certificate
+    chain) consistent with the resource classification;
+  \item a \emph{logging and audit trail} that allows every
+    consequential decision under the TAC to be reconstructed.
+\end{itemize}
+
+The TAC is the unit of \emph{governance} that brings these
+elements together, so that they can be specified, reviewed,
+provisioned, audited, and decommissioned as a coherent whole
+rather than as a coincidence of separately managed
+configurations.
+
+\paragraph{Disambiguation.} The term \emph{Trusted Activity
+Context} should not be confused with IBM~DB2's identically named
+database connection feature, nor with the Trusted Computing
+concepts of the Trusted Computing Group. Here the term has the
+specific meaning developed above.
+
+\paragraph{Position relative to existing frameworks.} The TAC
+concept draws on and extends several established frameworks
+without being identical to any of them. Role-based access
+control (RBAC)~\cite{sandhu-rbac-1996} provides session-bounded
+role activation but does not assemble resources, network, and
+audit into a single governance unit. Task-Based Authorization
+Controls (TBAC)~\cite{thomas-sandhu-tbac-1997} tie permissions to
+task lifecycles and supply part of the lifecycle intuition but do
+not extend to the cross-layer contractual obligations.
+Attribute-Based Access Control (ABAC, NIST SP
+800-162)~\cite{nist-sp800-162} provides the per-decision evaluation
+model that the TAC policy envelope uses, but does not extend to
+the governance-level abstraction. The contextual-awareness
+technique of NIST SP 800-160 Vol.~2 names contextual factors as
+inputs to security decisions but does not propose a unit of
+operational governance over those inputs. Workspace and tenancy
+products (cloud workspaces, Kubernetes namespaces with RBAC)
+operationalise aspects of the pattern but at the level of a
+single platform, not at the level of an institutional contract
+spanning identity, network, compute, storage, observability and
+governance.
+
+\paragraph{Four founding principles.} A TAC, in this Reference's
+sense, satisfies four properties:
+
+\begin{description}[leftmargin=2em,nosep,style=nextline,font=\bfseries]
+  \item[Trustworthiness] Each context is technically bounded
+    and monitored so that the institution can grant a high
+    degree of autonomy within it without surrendering control
+    of the institutional perimeter.
+  \item[Dependability] Failures, misconfigurations, or security
+    incidents within one context remain contained and do not
+    compromise the institutional core or other contexts.
+  \item[User-centricity] The digital environment adapts to the
+    user's current activity rather than imposing a uniform
+    security model on every situation. Restriction is the
+    consequence of activity-specific risk, not of
+    institutional default.
+  \item[Observability] Every action within a TAC is logged and
+    reconstructable, so that autonomy is accompanied by
+    accountability.
+\end{description}
+
+\paragraph{Isolation as enabling, not restrictive.} The TAC
+model reverses the conventional framing of isolation. In the
+conventional framing, isolation \emph{restricts} users; in the
+TAC model, isolation \emph{enables} autonomy by guaranteeing
+that mistakes, experiments, and attacks within a context cannot
+escape it. The forestry analogy applies: a forest is not made
+safer by planting trees in a single continuous mass; the
+\emph{construction of firebreaks} is what prevents a blaze from
+spreading to the entire woodland. TACs are the institutional
+firebreaks of the digital infrastructure.
+
+\paragraph{Relation to segmentation.} A mature institution
+combines a relatively stable network segmentation (zones, as
+described in \trchap{ch:network}{}) with multiple dynamic TACs
+that operate within those zones. Segmentation is spatial and
+relatively stable; TACs are activity-bound and relatively
+dynamic. The two mechanisms are complementary: segmentation
+limits where flows can circulate; TACs determine in what
+validated environment an activity proceeds.
+
+%-----------------------------------------------------------------------------
+\section{End-to-end activation sequence}
+\label{sec:cf-activation-sequence}
+
+A TAC is realised by the cross-layer cooperation of the
+architecture of Part~II. The activation sequence below describes
+what happens, end to end, when a subject activates a TAC for a
+specific activity. The sequence is presented at the level of
+named functional roles; the actual products that play these
+roles depend on the institution's chosen instantiation
+(\trchap{ch:identity}{} through \trchap{ch:orchestration}{}).
+
+\paragraph{Functional roles in the sequence.} The sequence
+involves: \textsc{Identity} (the institution's identity provider,
+\trchap{ch:identity}{}); \textsc{Policy} (the policy decision
+point, \trchap{ch:policy}{}); \textsc{Network} (the network
+attachment and segmentation infrastructure,
+\trchap{ch:network}{}); \textsc{Compute}, \textsc{Storage}, and
+\textsc{Endpoint} (the execution-plane layers,
+\trchap{ch:compute}{}--\trchap{ch:endpoint}{});
+\textsc{Crypto} (cryptographic services,
+\trchap{ch:crypto}{}); \textsc{Audit} (the observability layer,
+\trchap{ch:observability}{}); \textsc{Orchestration} (the
+cross-layer glue, \trchap{ch:orchestration}{}).
+
+\paragraph{The activation sequence.} The numbered steps below
+correspond to a typical TAC activation. Steps may overlap in time
+in a real implementation; the numbering reflects logical order,
+not strict serial execution.
+
+\begin{enumerate}[leftmargin=2em,nosep,label=\arabic*.]
+  \item \textsc{Subject authentication.} The subject authenticates
+    against \textsc{Identity}; a short-lived assertion is issued
+    carrying the institutional attribute schema.
+  \item \textsc{Activity declaration.} The subject (directly, or
+    through an institutional service such as a research-workspace
+    portal) requests activation of a named TAC for a stated
+    activity.
+  \item \textsc{Policy evaluation.} \textsc{Policy} receives the
+    activation request, combines the subject attributes with the
+    TAC declaration (resource set, classification, environment),
+    and produces a decision. The decision is one of \texttt{allow},
+    \texttt{deny}, or \texttt{indeterminate}, accompanied by
+    structured obligations (session timeout, audit class,
+    additional factor required).
+  \item \textsc{Orchestration triggers.} On \texttt{allow},
+    \textsc{Orchestration} receives the decision and dispatches
+    cross-layer commands to realise the TAC.
+  \item \textsc{Network attachment.} \textsc{Network} attaches
+    the subject's session to the appropriate zone, with
+    per-session attributes (zone, egress allowance, rate limits)
+    derived from the policy decision.
+  \item \textsc{Compute provisioning.} \textsc{Compute}
+    provisions or attaches the workload context (a virtual
+    machine, a container namespace, a research workspace) with
+    the institutional schema's attributes propagated.
+  \item \textsc{Storage binding.} \textsc{Storage} binds the
+    appropriate volumes, applying classification-derived access
+    controls and ensuring keys are obtained from
+    \textsc{Crypto} consistent with the resource classification.
+  \item \textsc{Endpoint posture verification.} \textsc{Endpoint}
+    confirms that the subject's device meets the posture
+    requirements declared by the policy decision; mismatch is
+    fed back to \textsc{Policy} for re-evaluation or
+    quarantine.
+  \item \textsc{Audit correlation.} \textsc{Audit} receives
+    events from every layer with the same TAC correlation
+    identifier, allowing the activation chain to be reconstructed
+    end-to-end.
+  \item \textsc{Activity proceeds.} The subject conducts the
+    activity within the bounded context. Each subsequent
+    consequential operation under the TAC produces events
+    correlated to the same identifier.
+  \item \textsc{Deactivation.} On the activity's natural end
+    (timeout, explicit deactivation, lifecycle transition;
+    \S\ref{sec:cf-lifecycle}), \textsc{Orchestration} reverses
+    the consequential changes. \textsc{Audit} records the
+    deactivation; \textsc{Storage} preserves classification
+    metadata on persistent artefacts; \textsc{Network} releases
+    the attachment; \textsc{Compute} releases the workload
+    context.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\footnotesize},
+    role/.style = {rectangle, rounded corners=2pt,
+                   draw=NavyBlue!70!black, fill=NavyBlue!10,
+                   minimum width=15mm, minimum height=7mm,
+                   line width=0.4pt, align=center, font=\footnotesize\bfseries},
+    msg/.style = {-{Stealth[length=1.8mm]}, draw=NavyBlue!60!black,
+                  line width=0.4pt},
+    return/.style = {-{Stealth[length=1.8mm]}, draw=Slate!60!black,
+                     line width=0.35pt, dashed},
+    lifeline/.style = {draw=Slate!50, line width=0.3pt, dashed}
+]
+% Role headers (top)
+\foreach \name/\x in {Subject/0, Identity/1.5, Policy/3.2,
+                       Orchestr./4.9, Network/6.6, Compute/8.3,
+                       Storage/9.8, Endpoint/11.5, Audit/13.2} {
+  \node[role] (\name) at (\x,0) {\name};
+}
+
+% Lifelines
+\foreach \x in {0,1.5,3.2,4.9,6.6,8.3,9.8,11.5,13.2} {
+  \draw[lifeline] (\x,-0.4) -- (\x,-14.5);
+}
+
+% Messages (numbered 1-11) -- 50% increased vertical spacing
+\draw[msg] (0,-1.0) -- node[above,font=\scriptsize]{1.\,authenticate} (1.5,-1.0);
+\draw[msg] (0,-1.9) -- node[above,font=\scriptsize]{2.\,activate TAC} (3.2,-1.9);
+\draw[msg] (3.2,-2.8) -- node[above,font=\scriptsize]{3.\,decision} node[below,font=\scriptsize]{(allow + obligations)} (4.9,-2.8);
+\draw[msg] (4.9,-4.0) -- node[above,font=\scriptsize]{4.\,attach} (6.6,-4.0);
+\draw[msg] (4.9,-4.9) -- node[above,font=\scriptsize]{5.\,provision} (8.3,-4.9);
+\draw[msg] (4.9,-5.8) -- node[above,font=\scriptsize]{6.\,bind volumes} (9.8,-5.8);
+\draw[msg] (4.9,-6.7) -- node[above,font=\scriptsize]{7.\,verify posture} (11.5,-6.7);
+\draw[return] (11.5,-7.6) -- node[above,font=\scriptsize]{posture OK} (3.2,-7.6);
+\draw[msg] (6.6,-8.5) to[bend right=10] node[below,font=\scriptsize]{8.\,audit events} (13.2,-8.5);
+\draw[msg] (8.3,-9.4) to[bend right=8]  (13.2,-9.4);
+\draw[msg] (9.8,-10.3) to[bend right=8]  (13.2,-10.3);
+\draw[msg] (11.5,-11.2) -- (13.2,-11.2);
+
+% Activity proceeds (loop)
+\draw[draw=Slate!60, line width=0.3pt]
+  (0,-11.8) rectangle (13.5,-12.7);
+\node[font=\scriptsize\itshape, anchor=west] at (0.1,-12.25) {%
+  9.--10.\,Activity proceeds; subsequent operations correlate to same
+  \texttt{correlation\_id}; events emitted to Audit};
+
+% Deactivation
+\draw[msg] (0,-13.3) -- node[above,font=\scriptsize]{11.\,deactivate} (4.9,-13.3);
+\draw[return] (4.9,-14.2) -- node[above,font=\scriptsize\itshape,
+              color=Slate!70!black]{reverse: release attachment, workload, volumes; archive}
+              (13.2,-14.2);
+
+% Correlation_id thread (vertical Crimson line)
+\draw[Crimson!70!black, line width=0.8pt, dotted]
+  (-0.5,-1.0) -- (-0.5,-14.2);
+\node[Crimson!70!black, font=\scriptsize\bfseries, rotate=90, anchor=south]
+  at (-0.5,-7.5) {TAC correlation\_id};
+\end{tikzpicture}
+\caption{End-to-end TAC activation sequence: eleven steps across
+the subject and the principal functional-role lifelines
+(cryptographic services participate within the certificate- and
+key-acquisition steps rather than as a separate lifeline). The TAC \texttt{correlation\_id}
+(Crimson) propagates through every step; deactivation reverses
+every consequential change.}
+\label{fig:cf-activation-sequence}
+\end{figure}
+
+\paragraph{What the sequence guarantees.} If every layer respects
+the contracts of Part~II, the sequence produces three
+guarantees: every TAC activation is the consequence of a recorded
+policy decision; every consequential change is reversible by
+the deactivation path; every layer's actions can be correlated
+through the TAC identifier for forensic and audit reconstruction.
+These guarantees are the operational expression of the four
+founding principles of \S\ref{sec:cf-tac-concept}.
+
+%-----------------------------------------------------------------------------
+\section{Endpoint operating-system integration matrix}
+\label{sec:cf-endpoint-matrix}
+
+The TAC model relies on the endpoint to enforce a subset of
+the policy decisions and to report posture to the policy plane.
+The endpoint operating systems encountered at \loc{institution-type}
+have differing capabilities and
+differing maturity for TAC integration. The matrix in
+Table~\ref{tab:cf-endpoint-matrix} sketches the principal
+capabilities; \trchap{ch:endpoint}{} develops the operational
+detail and the OSS-vs-commercial trade-offs.
+
+\begin{table}[H]
+\centering\small
+\caption{Sketch of endpoint integration capabilities by operating
+system. Each cell is indicative; specific institutional
+deployments vary.}
+\label{tab:cf-endpoint-matrix}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.9\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.0\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.0\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.1\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Capability &
+  \textbf{Linux (managed)} &
+  \textbf{macOS (managed/BYOD)} &
+  \textbf{Windows (corporate)} \\
+\midrule
+Federated identity &
+  SSSD or realmd against AD/LDAP; OIDC clients for web apps &
+  Apple Platform SSO with the IdP extension; Jamf~Connect as
+  alternative &
+  Entra~ID join with Conditional Access; Hello~for~Business \\
+\addlinespace
+Posture verification &
+  Custom checks via \texttt{osquery}; package-manager state &
+  MDM compliance profile (Jamf, Mosyle, Kandji); built-in
+  managed-client signals &
+  Intune compliance policies; Defender for Endpoint signals \\
+\addlinespace
+TAC-scoped tunnel &
+  WireGuard or OpenVPN profile pushed by configuration management
+  &
+  Per-app VPN configuration profile delivered via MDM &
+  Always-On VPN profile via Intune; SSE alternatives \\
+\addlinespace
+Configuration policy &
+  Ansible, Puppet, Salt; declarative GitOps repositories &
+  Munki, configuration profiles, Jamf, Apple Business Manager
+  &
+  GPO for AD environments; Intune for cloud-managed estates \\
+\addlinespace
+Audit ingestion &
+  \texttt{auditd}, journald, syslog forwarder &
+  Unified log forwarder (e.g.\ \texttt{log show} stream, EDR
+  agent) &
+  Windows Event Forwarding; EDR agent telemetry \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Mobile platforms.} \institution{iOS} and
+\institution{Android} share much with the
+\institution{macOS}/\institution{Windows} columns through the
+same MDM platforms (Jamf, Intune, Workspace ONE), with the
+additional constraint that posture and configuration depend on
+what each operating system exposes to enterprise management. As
+\trchap{ch:endpoint}{} discusses explicitly, the open-source
+ecosystem for iOS and Android at institutional scale is, at the
+time of writing, less mature than for the desktop platforms; the
+matrix above accordingly emphasises desktop coverage.
+
+\paragraph{Other platforms.} \institution{BSD} and
+\institution{illumos} environments, where present in the
+research-computing footprint, can be brought into the matrix
+through the same patterns as Linux for posture
+(\texttt{osquery} has reasonable cross-platform coverage) and
+through declarative configuration management. They are not
+listed in the matrix because their institutional footprint is
+typically small.
+
+%-----------------------------------------------------------------------------
+\section{Lifecycle of a TAC}
+\label{sec:cf-lifecycle}
+
+A TAC is not provisioned eternally; it has a lifecycle that the
+institution governs. The state machine in
+Figure~\ref{fig:cf-lifecycle} (and Table~\ref{tab:cf-lifecycle})
+describes the principal states and the transitions between them.
+
+\begin{table}[H]
+\centering\small
+\caption{TAC lifecycle: states and transition triggers.}
+\label{tab:cf-lifecycle}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.5\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.5\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.0\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+State & Meaning & Principal transitions out \\
+\midrule
+\textbf{Drafted}
+  & The TAC declaration exists in the institutional registry but
+    has not yet been validated. No infrastructure is provisioned.
+  & to \emph{Validated} on review approval; to \emph{Discarded}
+    on rejection. \\
+\addlinespace
+\textbf{Validated}
+  & The TAC has passed institutional review (data classification
+    confirmed, policy envelope reviewed, governance approval
+    recorded). It can be activated on request.
+  & to \emph{Provisioned} on first activation; to
+    \emph{Decommissioned} if validity expires. \\
+\addlinespace
+\textbf{Provisioned}
+  & The infrastructure to realise the TAC is in place but the
+    activity is not currently running.
+  & to \emph{Active} on activity start; to \emph{Suspended} on
+    institutional pause. \\
+\addlinespace
+\textbf{Active}
+  & The activity is in progress; subjects operate under the
+    TAC; events are being correlated.
+  & to \emph{Provisioned} (or \emph{Suspended}) on activity end. \\
+\addlinespace
+\textbf{Suspended}
+  & The TAC is operationally paused: pending compliance review,
+    stakeholder absence, or institutional pause. No activity
+    proceeds.
+  & to \emph{Active} on resumption; to \emph{Decommissioned} on
+    permanent pause decision. \\
+\addlinespace
+\textbf{Decommissioned}
+  & The infrastructure has been released; classification metadata
+    on persistent artefacts is preserved per the institutional
+    retention schedule.
+  & to \emph{Archived} after the retention period expires. \\
+\addlinespace
+\textbf{Archived}
+  & The TAC is closed. The audit trail and metadata remain
+    available to institutional inquiry per retention policy; no
+    further activity is possible.
+  & terminal state. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    node distance = 14mm and 18mm,
+    every node/.style = {font=\small},
+    state/.style = {rectangle, rounded corners=2pt, draw=NavyBlue!70!black,
+                    fill=NavyBlue!5, minimum width=24mm, minimum height=8mm,
+                    align=center, line width=0.5pt},
+    terminal/.style = {state, fill=Slate!10, draw=Slate!70!black},
+    arrow/.style = {-{Stealth[length=2mm]}, draw=NavyBlue!60!black,
+                    line width=0.4pt}
+]
+\node[state] (drafted)        {Drafted};
+\node[state, right=of drafted] (validated)      {Validated};
+\node[state, right=of validated] (provisioned)  {Provisioned};
+\node[state, right=of provisioned] (active)     {Active};
+\node[state, below=of provisioned] (suspended)  {Suspended};
+\node[state, below=of validated] (decommissioned) {Decommissioned};
+\node[terminal, below=of drafted] (archived)    {Archived};
+
+\draw[arrow] (drafted)      -- node[above,font=\scriptsize]{review} (validated);
+\draw[arrow] (validated)    -- node[above,font=\scriptsize]{first activation} (provisioned);
+\draw[arrow] (provisioned)  -- node[above,font=\scriptsize]{activity start} (active);
+\draw[arrow] (active.south west) to[bend left=10] node[below,font=\scriptsize]{activity end} (provisioned.south east);
+\draw[arrow] (provisioned) -- node[right,font=\scriptsize]{pause} (suspended);
+\draw[arrow] (active.south) to[bend left=20] (suspended.east);
+\draw[arrow] (suspended.north west) to[bend left=15] node[left,font=\scriptsize]{resume} (provisioned.south west);
+\draw[arrow] (suspended) -- node[above,font=\scriptsize]{permanent} (decommissioned);
+\draw[arrow] (validated.south) to[bend right=10] node[right,font=\scriptsize]{expiry} (decommissioned.north);
+\draw[arrow] (decommissioned) -- node[above,font=\scriptsize]{retention} (archived);
+\end{tikzpicture}
+\caption{TAC lifecycle state machine. Seven states with their
+principal transitions. Each transition is a recorded
+governance decision; the audit trail is preserved across
+\emph{Decommissioned} and \emph{Archived}.}
+\label{fig:cf-lifecycle}
+\end{figure}
+
+\paragraph{Governance over transitions.} Each transition is the
+consequence of a recorded decision, not of an automated default.
+The institutional registry that holds TAC declarations records
+who validated, who activated, who suspended, who decommissioned;
+the record is itself an audit artefact governed under the
+canonical TAC schema of \trchap{ch:observability}{}. A TAC's
+lifecycle is consequently fully reconstructable from the audit
+trail.
+
+\paragraph{Implications for procurement.} The lifecycle requires
+that every component of the architecture support the full set
+of transitions: provisioning on activation, release on
+deactivation, preservation of classification metadata on
+decommission, and read-only access to archived audit trails.
+These properties are part of the procurement clauses developed in
+\trchap{ch:cross-cutting}{} (\S\ref{sec:cc-procurement}).
+
+%-----------------------------------------------------------------------------
+\section{Out of scope}
+\label{sec:cf-out-of-scope}
+
+This Technical Reference does not address several adjacent
+domains that an institution implementing the architecture will
+need to engage separately.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Human-resources policy.} Decisions about which
+    subjects hold which roles, how role changes are processed in
+    the institutional system of record, and how role lifecycle
+    interacts with employment lifecycle are addressed by the
+    institution's HR governance, not by this Reference.
+  \item \textbf{Pedagogical training.} The training of academic
+    staff and students in the practical use of TAC-aware
+    services is an institutional learning-and-development
+    function. The Reference's training discussion
+    (\trchap{ch:cross-cutting}{} \S\ref{sec:cc-training}) addresses
+    operational-team skills, not end-user pedagogy.
+  \item \textbf{Procurement law.} The Reference proposes
+    procurement language (\trchap{ch:cross-cutting}{}
+    \S\ref{sec:cc-procurement}) consistent with the architecture
+    but does not engage the specifics of any jurisdiction's
+    procurement law. Institutions verify the language with their
+    own legal counsel.
+  \item \textbf{Physical security.} The Reference assumes that
+    the physical infrastructure on which the architecture
+    operates is secured to a level appropriate for its
+    classification. Physical-security framework selection and
+    operation is out of scope.
+  \item \textbf{Disaster recovery beyond reversibility.} The
+    reversibility playbook of \trchap{ch:reversibility}{}
+    addresses migration-wave reversal. Broader disaster-recovery
+    planning (data-centre loss, regional outage) is engaged by
+    the institution's existing DR framework and is not
+    superseded by this Reference.
+\end{itemize}
+
+\noindent The boundaries above are deliberate. The Reference is
+intended to be useful in any institution's existing governance
+ecosystem, not to displace that ecosystem.

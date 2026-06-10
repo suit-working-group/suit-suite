@@ -1,0 +1,294 @@
+% ============================================================================
+% Chapter 25 --- Wave 7: TAC-aware audit and IR
+% ----------------------------------------------------------------------------
+% Purpose : enrich audit pipeline with TAC correlation; refresh IR runbooks
+%           against the architecture's actual operational behaviour observed
+%           in Wave 5 pilot.
+% Page target: ~5 pages.
+% Dependencies: Waves 2, 4, 5 required (D17.3); reference layer Ch. 12;
+%               canonical schema D12.2; TAC-session sampling D12.8.
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D25.1 IR runbooks refreshed against the architecture's emergent behaviour
+%   D25.2 SOC trained on TAC-correlated investigation queries
+%   D25.3 enriched correlation is additive --- legacy paths preserved
+%   D25.4 exit criteria reference Observability conformance subset reinforced
+%         with audit-replay exercises (D16.5 Wave 7 mapping)
+% ============================================================================
+
+\chapter{Wave~7 --- TAC-aware audit and IR}
+\label{ch:wave7-audit-ir}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~7 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Required pre-requisites are
+Wave~2 (observability baseline), Wave~4 (policy plane producing
+decision logs) and Wave~5 (pilot demonstrating end-to-end
+correlation). It applies the canonical TAC event schema of
+\trchap{ch:observability}{} (\S\ref{sec:ob-schema}, D12.2) and
+the TAC-session sampling rule (D12.8). Closure is gated by the
+Observability conformance subset of \trchap{ch:conformance}{}
+reinforced with audit-replay exercises.
+\end{caveatbox}
+
+Wave~7 transforms the observability pipeline from a passive
+collection layer into an active investigative resource. The TAC
+correlation that the canonical schema makes possible becomes the
+primary axis of forensic and operational investigation; the
+incident-response runbooks of the institution are refreshed against
+the architecture's actual operational behaviour, observed during
+the Wave~5 pilot. The wave is consequently both a technical
+configuration effort and an organisational training exercise.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w7-goal}
+
+The goal of Wave~7 is to operationalise three capabilities that
+the preceding waves have made technically possible but
+organisationally unexercised:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{TAC-correlated investigation.} The Security
+    Operations team (whether internal, contracted, or
+    distributed) is trained to investigate incidents along the
+    TAC correlation axis: starting from a suspect activity,
+    retrieving the full activation chain across layers, and
+    bounding the scope of the incident by TAC session rather than
+    by host or by user.
+  \item \textbf{Refreshed IR runbooks.} Existing
+    incident-response runbooks are updated to incorporate the
+    new investigative paths and the new containment options
+    (TAC suspension, per-TAC re-evaluation, scoped revocation)
+    that the architecture admits.
+  \item \textbf{Audit replay.} The capability to replay
+    consequential decisions against their recorded inputs and
+    policy versions becomes part of routine audit rather than
+    only of post-incident analysis.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w7-prereq}
+
+Beyond Waves~2, 4 and 5, four operational conditions strengthen
+Wave~7:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the Wave~5 pilot has produced a structured wave-closure
+    report identifying the cross-layer behaviours that the
+    runbooks must accommodate;
+  \item the Security Operations function is engaged at the
+    workshop level rather than at the consultation level: the
+    team that will use the new runbooks has authored or co-
+    authored them;
+  \item the canonical TAC event schema is operating across the
+    layers exercised by the pilot, with a verified
+    \texttt{correlation\_id} propagation;
+  \item the institution's existing incident-response framework
+    (CSIRT or CSIRT-equivalent function, MoUs with
+    \loc{national-gov-csirt} and the \gls{nren}-CSIRT where applicable)
+    is documented
+    so that the new runbooks integrate with it rather than
+    supersede it.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w7-coexistence}
+
+Wave~7 is structurally additive: existing incident-response
+runbooks remain authoritative throughout the wave, and the
+TAC-aware extensions are added as enrichments rather than as
+replacements. The pattern reduces the operational risk of the
+wave to acceptable levels --- a wave that introduces new
+investigative procedures cannot afford to disrupt the
+institution's incident-response capacity.
+
+\paragraph{Per-runbook update.} Each runbook is updated as a
+self-contained exercise: the existing version is preserved, an
+enriched version is authored, the two are exercised in parallel
+on tabletop scenarios, and the enriched version replaces the
+existing one only when the SOC team has demonstrated proficiency
+on the new investigative path. The order of runbook update is
+typically determined by the Wave~5 pilot's findings: the runbooks
+most exercised by the pilot's scope are updated first.
+
+\paragraph{Detection rules.} Detection rules in the analytical
+store (whether SIEM-native or expressed in the open store of
+\trchap{ch:observability}{}) are refactored to consume the
+canonical schema. Existing rules are not deleted; they remain
+parallel until the refactored rules are demonstrated equivalent
+on a representative observation window.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w7-greenfield}
+
+For institutions in a greenfield position, Wave~7 is the wave in
+which the IR function itself is built around the TAC correlation
+model from the start. There is no incumbent runbook corpus to
+update, but the absence is itself a challenge: the institution
+must author a complete runbook set without the incremental
+benefit of an existing baseline. Indicative duration is six to
+nine months, dominated by the runbook authoring and tabletop
+exercising rather than by technical configuration.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w7-brownfield-ms}
+
+For institutions whose existing audit pipeline is built around
+a cloud-vendor-native SIEM (for example Microsoft Sentinel), Wave~7
+enriches the incumbent SIEM's investigative surface with the
+canonical TAC schema while keeping it as the primary SOC tool.
+
+\paragraph{Pattern.} The OpenTelemetry collector layer of Wave~2
+is configured to emit the canonical TAC schema both into
+the incumbent SIEM and into the parallel open store. SOC analysts
+continue to operate the incumbent SIEM as their primary
+investigative interface; the new investigative queries are authored
+as the incumbent SIEM's detection content (e.g.\ Sentinel KQL)
+consuming the canonical schema, with parallel queries authored
+against the open store for portability. Audit replay --- the
+capability to retrieve a recorded decision and its policy version
+--- is exercised against the open store, since the policy plane's
+decision log of Wave~4 was routed there without going through the
+incumbent SIEM's per-GB ingestion premium.
+
+\paragraph{What changes in Wave~7.} The incumbent SIEM's detection
+corpus (e.g.\ Sentinel KQL) is refactored to use the canonical
+schema fields rather than vendor-native field names; the runbooks
+reference the canonical investigation paths; the SOC training
+programme is refreshed.
+
+\paragraph{What does not change.} The incumbent SIEM remains the
+SOC's primary surface; the existing notification and escalation
+channels with the institution's CSIRT and with
+\loc{national-gov-csirt} counterparts are preserved.
+
+\paragraph{Indicative duration.} Six to twelve months.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w7-brownfield-hybrid}
+
+For institutions whose existing audit pipeline is built around
+Splunk or a comparable per-volume-priced analytical store,
+Wave~7 produces a parallel pattern with one important
+distinction: the volume management of Wave~2's collector layer
+has by now demonstrated its operational discipline, and Wave~7
+formalises the corresponding cost management.
+
+\paragraph{Pattern.} The collector layer of Wave~2 routes
+canonical events to Splunk for the SOC's primary investigative
+surface, and to the open store for retention beyond the
+cost-managed Splunk window. Detection content in Splunk is
+refactored to consume canonical fields. Audit replay queries
+the open store for the longer-horizon material that Splunk no
+longer holds.
+
+\paragraph{What changes in Wave~7.} The split between Splunk's
+investigative window and the open store's longer retention
+becomes operationally formalised --- runbooks for incidents
+older than the Splunk window are explicitly authored against the
+open store. The TAC-session sampling rule of D12.8 is applied
+to bound the Splunk ingestion volume without losing correlation
+within preserved sessions.
+
+\paragraph{What does not change.} Splunk remains the SOC's
+primary surface within its window; the institution's existing IR
+relationships are preserved.
+
+\paragraph{Indicative duration.} Six to twelve months.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w7-reversibility}
+
+Wave~7 is structurally additive and is reversible at the
+runbook level throughout the wave. Beyond the wave, reversal is
+operationally possible but is treated as a runbook re-authoring
+exercise rather than as a wave rollback.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Per-runbook reversal: a runbook whose enriched version
+    proves operationally inferior is reverted to the existing
+    version, with the divergence diagnosed before any further
+    runbook is updated.
+  \item Detection content reversal: refactored detection rules
+    that produce false-positive rates inconsistent with the
+    SOC's tolerance are reverted to the prior version while the
+    rule is re-tuned.
+  \item The canonical schema itself is not subject to wave-level
+    reversal (it was frozen by D12.2 at the architecture level).
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w7-exit}
+
+Wave~7 closes when the Observability conformance subset of
+\trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) passes against
+the enriched pipeline, when the audit-replay exercises succeed
+on a representative sample, when the agreed runbook set has
+been updated, and when the SOC has demonstrated proficiency on
+the new investigative paths.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Observability conformance subset passes (canonical
+    schema enforced, retention verified, cross-layer correlation
+    succeeds, alternative-store re-routing succeeds);
+  \item Audit replay: a sampled set of decisions from
+    \trchap{ch:policy}{}'s log is replayed against recorded
+    inputs and policy versions, with verdicts identical;
+  \item Runbook coverage: the institutionally agreed set of
+    runbooks has been updated; the remaining runbooks are in a
+    documented schedule;
+  \item SOC proficiency: tabletop exercises on TAC-correlated
+    investigation have been conducted with documented outcomes,
+    and at least one exercise has been conducted with
+    institutional CSIRT or \gls{nren}-CSIRT participation.
+\end{itemize}
+
+\begin{realworldbox}[Audit and IR practice in research-intensive institutions]
+\noindent Patterns reported in NREN community fora and at
+REN-ISAC indicate that research-intensive institutions
+typically operate IR functions in close coordination with
+their \gls{nren}-CSIRT counterparts and with sector incident-sharing
+networks. Specific runbook structures and exercise cadences
+vary substantially across institutions and should be developed
+locally rather than imported from external precedents. The
+institutional CSIRT relationships, where they exist, would
+benefit from being engaged early in the wave rather than at
+its closure.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w7-regulatory}
+
+\noindent Wave~7 is the wave at which the institution becomes
+\emph{operationally accountable} for the audit-and-IR
+obligations of the regulatory framework. It is the principal
+anchor of \loc{cybersecurity-baseline-regime}
+(in the EU, the national NIS2 transposition --- NIS2~Art.~23:
+incident reporting, with a 24-hour early warning, 72-hour
+notification and one-month final report) and of the
+personal-data-breach notification duty of
+\loc{data-protection-regime} (in the EU, \gls{gdpr}~Art.~33--34:
+notification to \loc{national-dpa} and to data
+subjects), with the
+TAC-aware audit pipeline as the timeline-reconstruction
+substrate. The wave also operationalises that regime's
+incident-handling and effectiveness-assessment duties
+(in the EU, NIS2~Art.~21(2)(b) and Art.~21(2)(f), the latter
+through audit-replay exercises). It is the
+operational anchor of 27001~A.8.15 (logging) and A.8.16
+(monitoring activities) at maturity, and of NIST CSF
+\textsf{DETECT} (DE) and \textsf{RESPOND} (RS) functions in
+their entirety. Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.

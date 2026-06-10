@@ -1,0 +1,34 @@
+% ============================================================================
+% suit-logo.sty — SUIT working-group logo helpers (title page + page footer)
+% ----------------------------------------------------------------------------
+% Single source of truth for logo insertion across the whole suite.
+%   \suittitlelogo[<width>]  two-line logo for the title page / near the title
+%                            (default width 0.42\textwidth).
+%   \suitfootlogo            one-line logo preceded by the © copyright mark,
+%                            for a centred page footer (height ~8pt).
+%
+% The logo PDFs live in shared/ (converted once from the SVG masters in logo/).
+% \graphicspath lists every depth at which a document sits in the suite so the
+% assets resolve whether the document is one, two or three levels below the
+% repository root. Requires graphicx (loaded before this package, or here).
+% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{suit-logo}[2026/06/09 v1.0 SUIT logo + footer helpers]
+
+\RequirePackage{graphicx}
+
+% Resolve shared logo assets from any document depth (1, 2 or 3 levels deep).
+\graphicspath{{../shared/}{../../shared/}{../../../shared/}}
+
+% Two-line logo, for the title page (proportional scaling by width).
+\newcommand{\suittitlelogo}[1][0.42\textwidth]{%
+  \includegraphics[width=#1]{suit-logo-row}%
+}
+
+% One-line logo with leading copyright mark, for a centred footer.
+\newcommand{\suitfootlogo}{%
+  {\footnotesize\raisebox{-0.25ex}{\copyright}}\,%
+  \raisebox{-0.30\height}{\includegraphics[height=8pt]{suit-logo-inline}}%
+}
+
+\endinput

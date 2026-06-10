@@ -1,0 +1,295 @@
+% ============================================================================
+% Chapter 13 --- Cryptographic services
+% ----------------------------------------------------------------------------
+% Purpose : PKI, secrets management, HSM, ACME. Belongs to the Subject and
+%           Trust plane (D5.1). Addresses the live-path HSM integration
+%           anticipated by D10.6 (HYOK for higher-classification storage).
+% Page target: ~3 pages.
+% Dependencies: Ch. 5 (PKCS#11, ACME, KMIP, OpenID Federation),
+%               Ch. 6 (PKI underpins identity assertions),
+%               Ch. 10 (HYOK live-path for storage),
+%               Ch. 11 (device certificates and secrets).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D13.1 minimum compliance set for cryptographic services
+%   D13.2 reference instantiation = step-ca + Vault + SoftHSM/Nitrokey HSM
+%   D13.3 alternatives = AD CS + commercial HSM; external CA via ACME
+%   D13.4 HYOK live-path requirement from D10.6 addressed here
+%   D13.5 cryptographic services sovereignty scores
+% ============================================================================
+
+\chapter{Cryptographic services}
+\label{ch:crypto}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the cryptographic-services layer. It
+underpins the assertions of \trchap{ch:identity}{}, the encryption
+at rest of \trchap{ch:storage}{} (including the HYOK live-path of
+D10.6), and the device certificates of \trchap{ch:endpoint}{}. The
+layer belongs to the \emph{Subject and trust plane}.
+\end{caveatbox}
+
+The cryptographic-services layer is the foundation on which the
+trustworthy assertions of every other layer rest: the certificates
+that authenticate institutional services, the secrets that
+applications consume, the keys that protect data at rest. It is
+also the layer where errors are the most consequential: a
+compromised intermediate certificate authority, an unrotatable key,
+or a secrets store whose backup is missing each translate into
+incidents whose remediation is institution-wide.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:cr-contract}
+
+\begin{contractbox}[Cryptographic services]
+\noindent A compliant cryptographic-services layer must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item operate an institutional certificate authority hierarchy
+    whose trust anchor is held in hardware (HSM accessed through
+    PKCS\#11~\cite{pkcs11-oasis}) under institutional custody; the
+    key-protection policy declares at procurement whether
+    trust-anchor keys are wrap-exportable for migration and, where
+    they are non-exportable (a common HSM best practice), defines
+    the alternative exit artefact: a planned key-rotation and
+    re-anchoring rehearsal under dual control;
+  \item issue end-entity certificates through
+    ACME~\cite{rfc-8555-acme} for machine-readable workflows, and
+    through a documented manual or automated procedure for endpoint
+    certificates;
+  \item provide a secrets-management facility (key-value, dynamic
+    secrets, transit encryption) accessible through documented APIs
+    and integrable with the policy layer for access decisions;
+  \item support a Bring-Your-Own-Key arrangement for any external
+    service that consumes institutional cryptographic material;
+  \item provide a Hold-Your-Own-Key live-path arrangement for the
+    higher-classification data of \trchap{ch:storage}{} (D10.6),
+    in which keys never leave the institutional HSM in cleartext;
+  \item produce audit events conformant to the canonical TAC
+    schema of \trchap{ch:observability}{} (\S\ref{sec:ob-schema}).
+\end{itemize}
+\end{contractbox}
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: open-source ACME CA + secrets-management platform + software or hardware HSM}
+\label{sec:cr-reference}
+
+\begin{instantiationbox}[Cryptographic services]
+\noindent\textbf{Topology.} An open-source ACME-capable certificate
+authority --- for example \texttt{step-ca}~\cite{step-ca}
+(Smallstep) --- operates the institutional certificate authority,
+exposing ACME for machine issuance and standard interfaces for
+human-driven workflows. An open-source secrets-management platform
+--- for example HashiCorp Vault~\cite{vault} --- provides secrets
+management with an envelope-encryption (transit) engine
+(consumed by \trchap{ch:storage}{}) and
+a PKI engine as a complementary issuance path. The trust anchor of
+the CA hierarchy is held in an HSM exposed through PKCS\#11:
+representative choices are a software HSM
+(such as SoftHSM~\cite{softhsm}) for non-production environments and
+a hardware HSM (such as Nitrokey HSM, YubiHSM, or comparable) for
+production. For HYOK live-path operation, the storage layer's
+encryption requests are forwarded to the HSM through a thin
+PKCS\#11 broker that the institution operates.
+\end{instantiationbox}
+
+\paragraph{Operational considerations.} The reference instantiation
+would typically require a small dedicated staffing
+allocation --- a fractional engineering capacity shared with the
+security and identity teams, sized to the institution's scale ---
+plus institutional governance for the CA hierarchy (root rotation,
+intermediate rotation, revocation procedures). The principal
+recurring effort is operational discipline rather than ongoing
+engineering: most of the value comes from following the
+documented procedures, not from continuously evolving the
+configuration.
+
+\begin{realworldbox}[Public infrastructure precedents]
+\noindent The ACME ecosystem at internet scale, exemplified by
+Let's Encrypt and the IETF RFC 8555 specification, demonstrates
+that automated certificate issuance is operationally robust. Most
+research and education networks operate certificate services for
+their members with comparable patterns; specific institutional
+configurations should be confirmed against current public
+documentation when cited.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Active Directory Certificate Services + commercial HSM}
+\label{sec:cr-alt1}
+
+\begin{alternativebox}[AD CS]
+\noindent The institution operates a Microsoft Active Directory
+Certificate Services hierarchy with a commercial HSM (Thales
+Luna, Entrust nShield, or comparable) holding the trust anchor.
+ACME is exposed through a connector or front-end so that the
+certificate-issuance interface to applications matches the
+reference contract.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} For institutions whose Microsoft
+estate already includes AD CS, the operational simplification of
+keeping the certificate authority in the same administrative
+boundary is substantial. Commercial HSMs have well-documented
+certifications (FIPS 140 levels) that may be required by specific
+research mandates or regulatory contexts.
+
+\paragraph{Where it constrains the institution.} ADCS expresses
+issuance policy in templates whose semantics are
+Microsoft-specific; bridging to the standard contract requires the
+ACME connector to translate faithfully, and the connector becomes
+itself a critical component. Commercial HSMs introduce per-device
+licensing and a vendor relationship in the cryptographic-services
+layer that the reference instantiation avoids.
+
+\paragraph{When it could be the right choice.} An institution with
+mature AD CS operations and either a regulatory or research
+requirement that the chosen HSM specifically satisfies, where the
+operational continuity outweighs the sovereignty cost on the
+technical and financial dimensions.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- External CA via ACME standard}
+\label{sec:cr-alt2}
+
+\begin{alternativebox}[External CA via ACME]
+\noindent The institution does not operate its own institutional
+CA hierarchy beyond what is required for internal services, and
+relies on an external commercial CA (Sectigo, DigiCert, GlobalSign)
+or on Let's Encrypt for public-facing certificates, all consumed
+through the ACME standard. Internal services and HYOK arrangements
+remain on the institutional Vault and HSM.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} For public-facing certificates, an
+external CA whose trust roots are pre-installed in browsers and
+operating systems eliminates an institutional concern (browser
+trust) that the reference instantiation would have to address
+through manual root distribution. Let's Encrypt in particular has
+demonstrated that an external CA exposed through ACME is
+operationally compatible with the architecture's standards-only
+posture.
+
+\paragraph{Where it constrains the institution.} The institution
+depends on the external CA's continued operation and on its
+acceptance criteria. For public-facing services this dependency is
+modest (multiple CAs are interchangeable through ACME); for
+research-specific or regulatory contexts it may be more
+constraining. The financial dimension is excellent for Let's
+Encrypt and predictable for commercial CAs; the technical dimension
+inherits the CA's open or proprietary posture.
+
+\paragraph{When it could be the right choice.} As a complement,
+not a substitute, for the institutional CA: external CAs handle
+public-facing certificates while the institution retains
+sovereignty over its internal hierarchy.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:cr-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the cryptographic-services
+instantiations.}
+\label{tab:cr-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (open-source CA + secrets platform + HSM) & AD CS + commercial HSM & External CA via ACME \\
+\midrule
+Data          & 3 Robust      & 2 Established & 2 Established \\
+Technical     & 3 Robust      & 2 Established & 2 Established \\
+Financial     & 2 Established & 1 Partial     & 3 Robust      \\
+Operational   & 2 Established & 3 Robust      & 3 Robust      \\
+Institutional & 3 Robust      & 2 Established & 2 Established \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The cryptographic-services layer is the layer in which the
+sovereignty trade-offs are typically the smallest in absolute terms
+(none of the alternatives is structurally below Established on any
+dimension when adopted with discipline) and the largest in practical
+consequence (a misalignment here propagates to every layer that
+depends on cryptographic assertions). The architectural posture is
+to keep the trust anchor under institutional custody regardless of
+the operational instantiation, and to choose the operational
+instantiation according to the institution's existing investments
+and regulatory context.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:cr-regulatory}
+
+\noindent The cryptographic-services layer is the
+trust-anchor and key-custody substrate. It is the principal
+anchor of the applicable cybersecurity-baseline regime's
+cryptography requirements (in the European Union, NIS2~Art.~21(2)(h)
+--- cryptography policies and procedures) and contributes to the
+applicable data protection regime's encryption and pseudonymisation
+obligations (in the European Union, GDPR~Art.~32(1)(a)).
+It is also the operational counterpart of the applicable
+electronic-identification and trust-services regime
+(in the European Union, eIDAS~2: qualified electronic
+signatures, seals and time stamps, when the institution
+provides them). The layer
+operationalises 27001~A.8.24 (use of cryptography) and
+contributes to NIST CSF \textsf{PROTECT} (PR.DS --- data
+security, encryption at rest and in transit). Detailed
+mapping in \trchap{ch:regulatory-mapping}{}
+\S\ref{sec:rm-gdpr}, \S\ref{sec:rm-nis2},
+\S\ref{sec:rm-eidas2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:cr-pitfalls}
+
+\begin{pitfallbox}[Trust anchor without an HSM]
+\noindent An institutional CA whose root or intermediate keys live
+on a workstation or a server filesystem is one disk image away
+from an institution-wide trust collapse. The mitigation is to hold
+the trust anchor in an HSM under institutional custody, and to
+exercise the recovery procedure periodically as part of
+\trchap{ch:conformance}{}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Key escrow drift]
+\noindent The institution declares a key-escrow policy (which keys
+are escrowed, where, accessible by whom, under which procedure)
+and maintains it nominally; the actual escrowed keys, the actual
+custodians, and the actual procedure drift from the policy over
+years. Discovery typically occurs during a custodian transition
+or an incident. The mitigation is to verify the escrow state at
+the same cadence as the sovereignty grid (annual + event-driven).
+\end{pitfallbox}
+
+\begin{pitfallbox}[ACME outage with no fallback]
+\noindent An ACME-driven certificate renewal pipeline whose
+upstream CA is temporarily unavailable can produce service
+outages: certificates expire because the renewal pipeline cannot
+issue new ones. The mitigation is to provision certificates with a
+margin against renewal failures (renew well before expiry), to
+monitor the renewal pipeline through the observability layer, and
+to maintain a documented manual-issuance fallback procedure for
+the highest-criticality services.
+\end{pitfallbox}
+
+\begin{pitfallbox}[CA hierarchy not documented]
+\noindent The institutional CA hierarchy --- root, intermediates,
+issuing CAs, their key strengths, their validity periods, their
+rotation schedules --- is documented either incompletely or in a
+form that is not currently accessible. Replacement or extension
+becomes a recurring archaeology project. The mitigation is to
+maintain the hierarchy documentation under version control, with
+the same review cadence as the policy corpus.
+\end{pitfallbox}

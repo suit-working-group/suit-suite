@@ -1,0 +1,341 @@
+% ============================================================================
+% Chapter 10 --- Storage and data classification
+% ----------------------------------------------------------------------------
+% Purpose : object/block storage, classification-aware access, BYOK.
+%           Belongs to the Execution plane (D5.1).
+% Page target: ~4 pages.
+% Dependencies: Ch. 5 (S3 API, KMIP, NFS v4.1), Ch. 7 (policy decisions
+%               for classification-driven access), Ch. 9 (Ceph-CSI as
+%               reference --- cross-link from D9.2), Ch. 13 (cryptographic
+%               services for KMS).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D10.1 minimum compliance set for the storage layer
+%   D10.2 reference instantiation = Ceph + Vault Transit + label-based access
+%   D10.3 alternatives = NetApp/KMIP, hybrid on-prem + cloud with strict BYOK
+%   D10.4 storage classification scheme is institutional, not prescribed
+%   D10.5 storage sovereignty scores
+% ============================================================================
+
+\chapter{Storage and data classification}
+\label{ch:storage}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the storage layer. It consumes
+classification-driven policy decisions from \trchap{ch:policy}{}, it
+binds to compute workloads through the CSI plugins referenced in
+\trchap{ch:compute}{}, and it relies on the cryptographic services
+of \trchap{ch:crypto}{}. The layer belongs to the \emph{Execution
+plane}.
+\end{caveatbox}
+
+The storage layer is where the data dimension of sovereignty is
+most directly tested. A network configuration can be revised in
+weeks; a misclassified or mislocated data corpus is rarely revised at
+all. The architectural commitment of this layer is consequently
+modest in scope but strict in observance: standard interfaces,
+explicit classification, institutional key custody, and an
+exit-data export procedure that is exercised, not assumed.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:st-contract}
+
+The storage layer is responsible for: providing object and block
+storage to workloads through standard interfaces; carrying a data
+classification label that the policy layer consults; encrypting
+data at rest with keys whose custody is governed; permitting the
+extraction of institutional data in documented open formats; and
+producing access events ingestible by the observability layer.
+
+\begin{contractbox}[Storage layer]
+\noindent A compliant storage layer, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item expose object storage through the S3 API \emph{or} an
+    interface broadly compatible with it;
+  \item expose shared-file access through NFS~v4.1~\cite{rfc-8881-nfs41}
+    or an equivalent standard, where shared-file access is required;
+  \item carry, for each stored object or volume, a
+    classification label from a documented institutional scheme,
+    accessible to \trchap{ch:policy}{};
+  \item encrypt data at rest, with key custody held in a system that
+    speaks KMIP~\cite{kmip-oasis} \emph{or} an equivalent open
+    key-management interface, and that admits a Bring-Your-Own-Key
+    arrangement;
+  \item produce access events (object created, read, written,
+    deleted, exported) ingestible by the observability layer in a
+    schema consistent with \trchap{ch:observability}{};
+  \item document an exit-data export procedure that delivers stored
+    data in a documented open format, and exercise it periodically
+    as part of \trchap{ch:conformance}{}.
+\end{itemize}
+\end{contractbox}
+
+\paragraph{Classification scheme.} The contract requires a documented
+classification scheme but does not prescribe one. In practice,
+institutions tend to adopt either a Traffic Light Protocol variant,
+a domain-specific scheme (for example, those used in medical or
+defence-adjacent research), or an institution-specific scheme that
+maps to the regulatory regimes the institution operates under. The
+choice belongs to the institution; the contract requires that the
+choice be documented and that every label used be enumerable.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: Ceph + Vault Transit + label-based access}
+\label{sec:st-reference}
+
+The reference instantiation combines, as representative open-source
+implementations, a distributed storage system such as
+Ceph~\cite{ceph} providing both object (RGW) and block (RBD)
+interfaces; an envelope-encryption secrets engine with
+institutionally-held keys such as HashiCorp Vault~\cite{vault}'s
+Transit engine; and label-based access
+control implemented through a policy decision integrating the
+classification label into the authorisation logic.
+
+\begin{instantiationbox}[Storage layer]
+\noindent\textbf{Topology.} Ceph clusters provide block storage to
+\trchap{ch:compute}{} workloads via Ceph-CSI (consistent with
+\S\ref{sec:co-reference}), object storage via the RGW gateway
+exposing the S3 API, and file storage via CephFS where shared-file
+semantics are required. Encryption at rest is enabled at the OSD
+level, with keys wrapped through Vault Transit; the institutional
+key-management policy resolves to either a Vault-internal master
+key or, for higher-classification data, an HSM-backed master key
+exposed through PKCS\#11. Each object or volume carries a
+classification label as metadata; the policy decision for read or
+modify access combines the subject attributes from
+\trchap{ch:identity}{} with the label, and the decision is logged
+through the observability layer.
+\end{instantiationbox}
+
+\paragraph{Operational considerations.} Operating Ceph at
+institutional scale would typically require dedicated expertise:
+the cluster's health and recovery characteristics demand specific
+operational discipline that more conventional storage products do
+not require. The staffing envelope follows the institution's
+established operational staffing profile for distributed storage,
+typically a small dedicated team with substantial Ceph familiarity,
+often shared with the network and compute teams. The labour market
+is broad for Ceph itself and narrower for the integration of Ceph
+with classification-aware access control.
+
+\paragraph{Cryptographic posture.} Vault Transit provides envelope
+encryption that allows the encryption keys to be rotated without
+re-encrypting the data corpus. For data classifications whose
+disclosure regime warrants stronger custody, the institution would
+substitute a HYOK arrangement, consistent with the institution's own
+data-custody sovereignty profile, in which Vault never holds the
+cleartext key and cryptographic operations involve the institution's
+HSM in the live path. This shifts the data-dimension score upward
+at the cost of additional operational complexity, addressed in
+\trchap{ch:crypto}{}.
+
+\begin{realworldbox}[Research storage precedents]
+\noindent CERN's EOS distributed file system, designed for high-
+energy physics datasets, is one of the most extensively documented
+research-storage architectures and reflects the operational scale
+that physical-sciences research can require. European research
+institutions participate in the EUDAT Collaborative Data
+Infrastructure (EUDAT~CDI), whose B2 services suite (B2SAFE for
+replication, B2SHARE for publication, B2STAGE for compute access,
+B2DROP for sync, B2FIND for discovery, B2ACCESS for federated
+authorisation, B2HANDLE for persistent identifiers) operates
+across a network of more than twenty research and computing
+centres in over a dozen European nations. These European research-computing references should
+be consulted for their design lessons rather than as direct
+templates --- adopters in other regions have analogous national or
+regional research-data infrastructures --- since the relative scale
+of teaching, administrative and research storage at a given
+institution may produce a substantially different proportion than
+at a large-scale research-computing environment.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Enterprise storage platform with KMIP-compliant HSM}
+\label{sec:st-alt1}
+
+\begin{alternativebox}[Enterprise SAN/NAS]
+\noindent The institution operates an enterprise storage platform
+from one of the established vendors in this market that exposes the
+S3 API for object
+storage and NFS for shared file access, with encryption at rest
+keyed through a KMIP-compliant HSM under institutional control.
+Classification metadata is carried at the application level rather
+than natively in the storage system.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} A mature platform with predictable
+performance characteristics, vendor support, and integration with
+existing operational tooling. For institutions whose storage is
+predominantly transactional rather than research-scale, the
+operational simplicity may be substantial.
+
+\paragraph{Where it constrains the institution.} Two recurring
+constraints. First, classification metadata typically lives outside
+the storage system and must be reconciled with it through
+application or integration logic; the reconciliation is a
+non-trivial engineering effort that the reference instantiation
+avoids. Second, exit-data export from proprietary storage platforms
+is variable in cost and contractually framed; the
+exit-cost-proportionality indicator of
+\trchap{ch:sovereignty-grid}{} should be evaluated explicitly at
+procurement.
+
+\paragraph{When it could be the right choice.} An institution with
+limited research-storage requirements, a mature operational
+relationship with an enterprise storage supplier, and a
+sovereignty posture that accepts the trade-offs in exchange for
+the operational simplification.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Hybrid (on-premises + S3-compatible cloud with strict BYOK)}
+\label{sec:st-alt2}
+
+\begin{alternativebox}[Hybrid storage with BYOK]
+\noindent The institution operates a storage tier under an
+institution-controlled deployment custody model (Ceph or enterprise,
+self-hosted or otherwise kept under direct institutional control) for
+data whose classification requires institutional custody, and
+federates additional capacity to an S3-compatible cloud
+provider for less-sensitive classes of data, with all cloud-stored
+data encrypted under institutionally-held keys (BYOK, with HYOK for
+the higher-sensitivity classes that the hybrid posture would
+admit).
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Capacity flexibility for
+research-data corpora whose growth profile would over-provision an
+on-premises footprint, and geographic redundancy for data whose
+classification permits multi-jurisdiction storage.
+
+\paragraph{Where it constrains the institution.} The data dimension
+of \trchap{ch:sovereignty-grid}{} is permanently bounded by the
+weakest disclosure regime applicable to any portion of the corpus.
+The institutional governance of which data classes are eligible for
+the cloud tier becomes a structural concern, addressed through the
+policy layer (\trchap{ch:policy}{}) and the data-classification
+scheme.
+
+\paragraph{When it could be the right choice.} An institution
+whose research storage profile combines a sensitive on-premises core
+with a substantial volume of less-sensitive data (publication-stage
+artefacts, public datasets), and whose classification governance is
+mature enough to enforce the boundary reliably.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:st-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the storage
+instantiations.}
+\label{tab:st-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (Ceph + Vault) & Enterprise platform + KMIP HSM & Hybrid (on-prem + cloud) \\
+\midrule
+Data          & 3 Robust      & 3 Robust      & 1--2 Partial  \\
+Technical     & 3 Robust      & 1 Partial     & 2 Established \\
+Financial     & 2 Established & 1 Partial     & 2 Established \\
+Operational   & 2 Established & 3 Robust      & 2 Established \\
+Institutional & 3 Robust      & 2 Established & 2 Established \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Driving indicators by dimension.} Data: storage location,
+key custody, disclosure regime --- this is the dimension on which
+the storage layer is most often constrained. Technical: source
+visibility and the reconciliation of classification with the
+storage system. Financial: cost predictability and exit-cost
+proportionality. Operational: depth of the skills market for the
+chosen technology. Institutional: control over the storage
+roadmap.
+
+\noindent The hybrid pattern's data-dimension score is bounded by
+the cloud-tier disclosure regime, even when the on-premises tier
+scores Robust. This is the structural reason why classification
+governance must be in place before the hybrid pattern is adopted.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:st-regulatory}
+
+\noindent The storage layer is the principal anchor of the
+data-dimension obligations under the applicable data-protection
+regime: security of processing (e.g.\ \gls{gdpr}~Art.~32), data
+minimisation through tiering (e.g.\ Art.~5(1)(c)), and the regime's
+constraints on international transfers (e.g.\ Art.~44--49), which bind
+when storage placement crosses jurisdictions. It is the operational
+counterpart of \loc{cross-border-transfer-regime}:
+storage-placement constraints, key-custody and per-tenant key
+separation are the technical supplementary measures that an
+institution can invoke alongside whatever standard contractual
+transfer instruments that regime recognises. The layer
+operationalises NIS2~Art.~21(2)(c) (backup) and
+contributes to 27001~A.8.10 (information deletion), A.8.12
+(data leakage prevention) and A.8.13 (information backup). It
+contributes to NIST CSF \textsf{PROTECT} (PR.DS --- data
+security). Detailed mapping in \trchap{ch:regulatory-mapping}{}
+\S\ref{sec:rm-gdpr}, \S\ref{sec:rm-schrems2},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:st-pitfalls}
+
+\begin{pitfallbox}[Classification drift]
+\noindent The classification labels attached to data corpora at
+creation time tend to remain unchanged as the data evolves --- as
+new fields are added, as additional populations are sampled, as
+linkages with other corpora are introduced. The classification
+becomes increasingly disconnected from the actual sensitivity. The
+mitigation is to schedule a classification review at data-corpus
+events (substantial expansion, linkage with another corpus,
+publication) and to record the classification history alongside the
+data.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Key-management lock-in]
+\noindent A storage system whose encryption keys can only be managed
+through the supplier's own key-management product creates a
+structural exit cost: the keys cannot be transferred to another
+storage system without re-encrypting the entire corpus. The
+mitigation is to require KMIP (or an equivalent open interface) at
+procurement, and to verify that the institution's keys can in fact
+be operated through a non-supplier key-management product.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Opaque snapshots and replicas]
+\noindent Storage systems take snapshots and create replicas as part
+of normal operation; the location, retention, and access regime of
+those snapshots is not always documented to the institution. A
+data-dimension audit that ignores snapshots can score a corpus as
+Robust on storage location while replicas of it sit elsewhere. The
+mitigation is to enumerate snapshots and replicas as part of the
+data-dimension self-assessment, and to bring their location under
+the same governance as the primary storage.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Cross-region replication outside jurisdiction]
+\noindent Cloud-tier storage often defaults to multi-region
+replication for durability; the regions selected by the supplier
+may sit outside the institution's intended jurisdiction. The
+mitigation is to declare region restrictions explicitly at
+provisioning, to verify them through the access events of
+\trchap{ch:observability}{}, and to test the assumption
+periodically through deliberate write-and-read patterns that would
+surface unexpected replication.
+\end{pitfallbox}

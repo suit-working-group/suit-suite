@@ -1,0 +1,1102 @@
+%============================================================================
+% ARGUMENTATION DOCUMENT (POLICY LAYER) --- BODY ONLY
+% Body-only version of argumentation-policy-EN.tex for inclusion by the suite
+% assembler (policy-EN.tex). No preamble, no \begin{document}, no titlepage,
+% no \tableofcontents and no \printbibliography --- those are provided by the
+% parent dossier. The standalone argumentation-policy-EN.tex remains the
+% authoritative source; this file mirrors its sectional Q&A body.
+%============================================================================
+
+%============================================================================
+% READER'S GUIDE
+%============================================================================
+\section*{How to read this module}
+\addcontentsline{toc}{section}{How to read this module}
+
+This module anticipates the objections most frequently raised against the
+policy-layer proposals of the dossier and answers each on the evidence. Three
+box types structure every exchange:
+
+\begin{description}[nosep,leftmargin=2em]
+  \item[\textcolor{red!60!black}{\textbf{Question}}] a good-faith technical or
+    governance objection, reformulated at its strongest before it is answered.
+  \item[\textcolor{orange!70!black}{\textbf{Insidious framing}}] an objection
+    that smuggles in a premise, a motive, or a rhetorical trap; the answer
+    addresses the framing, not only the surface claim.
+  \item[\textcolor{OliveGreen!60!black}{\textbf{Answer}}] an
+    evidence-based response following the concession-then-rebuttal pattern:
+    partial merit is conceded honestly, then the objection is answered across
+    independent evidence layers.
+\end{description}
+
+\noindent\textbf{Evidence methodology.} Every substantive answer is built from
+up to five independent layers, presented strongest-first and cross-corroborated:
+\begin{enumerate}[nosep,leftmargin=2em]
+  \item \keyword{Legal} --- binding instruments of the adopter's jurisdiction; in
+    EU/CoE editions these are the EU Charter, \gls{ecthr} and \gls{cjeu} case law,
+    \gls{gdpr}, \gls{nis2} and the \gls{aiact}, used here as the worked example;
+  \item \keyword{Standards} --- normative frameworks (NIST CSF~2.0, NIST SP~800
+    series, ISO/IEC~27001, \gls{cobit}~2019);
+  \item \keyword{Sector} --- consensus of professional bodies and surveys
+    (EDUCAUSE, \gls{geant}, Verizon DBIR, Sophos);
+  \item \keyword{Empirical} --- quantified measurements and incident
+    root-cause analysis;
+  \item \keyword{Institutional} --- named universities and research
+    organisations with publicly documented practice.
+\end{enumerate}
+\noindent A thesis is treated as robust only when at least three layers sustain
+it independently; where a layer is contestable, the answer says so. The
+institutional precedents named below (MIT, Stanford, Oxford, ETH~Z\"urich,
+CERN, Michigan, and others) are cited as \emph{evidence}, not as models any
+particular institution must replicate.
+
+% ============================================================================
+\section{Questions on network segmentation}
+\label{sec:q-segmentation}
+% ============================================================================
+
+\epigraph{``For every complex problem there is an answer that is neat, simple, and wrong.''}{--- H.\,L.\ Mencken, \textit{Prejudices: Second Series}, 1920}
+
+% --- Q1.1 ---
+\begin{questionbox}[Q1.1 --- ``Segmentation increases complexity and therefore the attack surface'']
+Network segmentation multiplies the number of zones, inter-zone boundaries, and firewall rules. More boundaries mean more configuration points, more potential misconfigurations, and therefore a \emph{larger} attack surface. A single, well-managed perimeter is simpler and therefore safer.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q1.1]
+\textbf{Partial merit acknowledged:} segmentation does increase \emph{configuration complexity}. This is a genuine engineering concern, not a straw-man.
+
+\medskip\noindent\textbf{However, the question conflates two distinct concepts:}
+\begin{enumerate}[nosep]
+    \item \emph{Configuration complexity} (the number of rules to manage) and
+    \item \emph{Attack surface} (the set of points an attacker can exploit).
+\end{enumerate}
+
+Segmentation \emph{increases} the former but \emph{decreases} the latter. NIST SP~800-53 Rev.\,5~\cite{nist-sp800-53} explicitly recommends ``protecting internal boundaries and isolating components to reduce the attack surface and limit damage.'' The NIST Cybersecurity Framework~2.0~\cite{nist-csf} and ISO~27001:2022 control A.8.22~\cite{iso27001} both mandate network segregation precisely because it \emph{reduces} the blast radius of any single compromise.
+
+\medskip\noindent\textbf{Empirical evidence:} documented university ransomware failures of 2024--2025 demonstrate that \emph{centralised, unsegmented perimeters amplify damage}. Where an institution runs a single large administrative perimeter, an attack can disrupt the entire institution for an extended period; conversely, a segmented architecture is designed to confine a breach to a single subnet, limiting the blast radius that a flat network exposes~\cite{rennes-cyber}. The Verizon 2024 DBIR~\cite{verizon-dbir2024} documents the prevalence of lateral movement in such breaches --- the propagation path that segmentation, per the NIST and ISO controls cited above, is designed to interrupt.
+
+\medskip\noindent\textbf{Managing the configuration complexity:} the dossier's phased transition addresses this directly --- governance and charters first, a pilot on selected entities next, then gradual extension. \gls{sdn} tools and infrastructure-as-code automate rule management and reduce human error. The complexity argument is an argument for \emph{proper tooling and gradual rollout}, not for avoiding segmentation.
+\end{answerbox}
+
+\bigskip
+
+% --- Q1.2 ---
+\begin{questionbox}[Q1.2 --- ``A single perimeter is easier to monitor and defend'']
+With all traffic passing through a single firewall, the security team has full visibility. Segmentation creates blind spots between zones.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q1.2]
+This argument assumes that \emph{centralised inspection} equals \emph{comprehensive visibility}. The opposite is frequently true in practice:
+
+\begin{itemize}[nosep]
+    \item A single perimeter firewall handling research traffic at 10--100\,Gbps cannot perform deep packet inspection without creating bottlenecks --- a documented case measured a \textbf{five- to twelve-fold throughput degradation} when research traffic traversed an enterprise firewall~\cite{esnet-pennstate}.
+    \item When performance degrades, researchers route around the firewall (Shadow IT), creating \emph{actual} blind spots far worse than managed inter-zone boundaries.
+    \item In a segmented architecture, each zone has \emph{its own} monitoring (a Zeek \gls{ids} on the \gls{sciencedmz}, \gls{ids}/\gls{ips} on the administrative zone, per-zone logging baselines). Total observability is \emph{greater}, not lesser.
+\end{itemize}
+
+\noindent CERN explicitly operates zone-specific monitoring alongside backbone monitoring~\cite{cern-security-freedom}. The University of Michigan deploys per-zone security classifications and dedicated sensitive-data environments~\cite{umich-safecomputing}. These institutions have demonstrably \emph{better} visibility than a single-perimeter model, not worse.
+\end{answerbox}
+
+\bigskip
+
+% --- Q1.3 ---
+\begin{clarificationbox}[Q1.3 --- ``You just want less security to make researchers' lives easier'']
+The real motivation behind this document is not improved security but reduced control. Researchers want to do whatever they want without oversight. This is a \emph{comfort} argument dressed up in security language.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q1.3]
+The validity of a proposal is best assessed on its evidence and logic, independently of the motives attributed to its authors --- attacking the imputed motive rather than the argument is an \emph{ad hominem}. The proposals must be evaluated on their \emph{substance}.
+
+\medskip\noindent\textbf{On the substance:} the dossier proposes \emph{more} security for sensitive data, not less. The administrative enclave is \emph{smaller, easier to harden and easier to monitor}. The security function gains:
+\begin{itemize}[nosep]
+    \item A reduced and well-defined perimeter for the most sensitive assets;
+    \item Charters replacing informal exceptions with accountable, auditable autonomy;
+    \item Zone-specific monitoring replacing a single, overwhelmed checkpoint;
+    \item Evidence production for \gls{gdpr} Article~32 and \gls{nis2} compliance.
+\end{itemize}
+
+\noindent\textbf{The ``comfort'' framing is refuted by the proposal's own evidence:} the design is endorsed by NIST~\cite{nist-csf, nist-sp800-53}, ISO~27001~\cite{iso27001}, and EDUCAUSE~\cite{educause2024}, and is practiced by MIT, Stanford, Oxford, ETH~Z\"urich, CERN, and the 100-plus universities operating a \gls{sciencedmz}~\cite{esnet-history,nsf-cc}. If ``wanting less security'' were the true motive, these institutions and frameworks would not converge on the same model.
+
+\medskip\noindent Constructive engagement with evidence-based proposals, as recommended by the \gls{cobit}~2019 process EDM05 (\emph{Ensured Stakeholder Engagement}), is more productive than debating motives~\cite{cobit}.
+\end{answerbox}
+
+\bigskip
+
+% --- Q1.4 ---
+\begin{questionbox}[Q1.4 --- ``The analogy with firebreaks is misleading --- a forest is not a network'']
+The argument for segmentation leans on a forestry analogy (firebreaks). But networks are not forests: a misconfigured inter-zone rule \emph{is} a vulnerability, unlike a physical firebreak.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q1.4]
+\textbf{Partial merit:} all analogies have limits, and pushing any metaphor too far weakens the argument. The firebreak analogy illustrates one principle only: \emph{compartmentalisation limits propagation}. It is not a complete model of network security.
+
+\medskip\noindent However, the principle itself does not depend on the analogy. It is established by:
+\begin{itemize}[nosep]
+    \item NIST SP~800-207 (\gls{zt} Architecture)~\cite{nist-zt}: ``assume breach, limit blast radius'';
+    \item NIST SP~800-53 Rev.\,5~\cite{nist-sp800-53}: ``isolate components to reduce attack surface'';
+    \item The Verizon 2024 DBIR~\cite{verizon-dbir2024}: credential abuse and ransomware dominate the measured breach patterns --- the in-network progression that segmentation (per the NIST controls above) is designed to interrupt.
+\end{itemize}
+
+\noindent The risk of misconfigured rules is real but is an \emph{implementation risk}, not an argument against the principle. The phased transition (pilot first, then rollout) and use of \gls{sdn} automation directly mitigate this risk.
+
+\smallskip\noindent\textit{\footnotesize Technical implementation: the segmentation contract, zone catalogue, and migration approach are developed in the standalone Technical Reference~\cite{ng-tech-ref-2026}.}
+\end{answerbox}
+
+\bigskip
+
+% --- Q1.5 ---
+\begin{questionbox}[Q1.5 --- ``You claim Zero Trust but exclude SASE/ZTNA and never map to NIST SP~800-207'']
+You claim a Zero-Trust posture, yet you exclude SASE and ZTNA --- the two products the market equates with Zero Trust --- and never demonstrate Zero-Trust maturity against the actual standard, NIST SP~800-207.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q1.5]
+\textbf{Excluding SASE/ZTNA from the structural foundation is a sovereignty choice, not a rejection of Zero Trust --- and the architecture maps directly to NIST SP~800-207~\cite{nist-zt}.} SASE and ZTNA are commercial \emph{packagings} of Zero-Trust ideas in which a supplier operates the data plane and terminates TLS; that is precisely the data- and technical-sovereignty loss the dossier argues against. Zero Trust is a set of principles, not a product, and the reference architecture realises them structurally:
+\begin{enumerate}[nosep]
+  \item \textbf{Resources, secured everywhere} (Tenets~1--2): every layer is a protected resource and communication is secured regardless of network location.
+  \item \textbf{Identity-based, per-session access} (Tenets~3,~6): access is mediated by federated identity (\gls{sso}-capable identity providers, eduGAIN) and authorised per session, strictly enforced before access.
+  \item \textbf{Dynamic policy} (Tenet~4): the policy plane decides on identity, role, posture and environment; zones default-deny.
+  \item \textbf{Posture and monitoring} (Tenet~5): endpoint posture signals and the observability layer continuously measure asset integrity.
+  \item \textbf{Telemetry to improve posture} (Tenet~7): an event pipeline collects decision and access telemetry used to refine policy.
+\end{enumerate}
+\noindent The architecture therefore adopts Zero Trust \emph{by SP~800-207 tenet}, while declining the SASE/ZTNA \emph{deployment model} whose supplier-operated data plane is incompatible with the institution's sovereignty objectives. SASE may still be adopted tactically where sovereignty is not at stake; it is not the structural foundation.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on governance models}
+\label{sec:q-governance}
+% ============================================================================
+
+\epigraph{``The price of freedom is eternal vigilance.''}{--- Attributed to Thomas Jefferson}
+
+% --- Q2.1 ---
+\begin{questionbox}[Q2.1 --- ``Federated governance creates accountability gaps --- who is responsible when a breach occurs?'']
+If departments manage their own zones, the security function cannot be held responsible for their failures. Accountability becomes diffuse and no one is truly in charge.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q2.1]
+\textbf{This is a genuine concern} and the dossier addresses it explicitly through \keyword{enclave charters} modelled on Oxford~\cite{oxford-infosec} and ETH~Z\"urich~\cite{eth-baseline}:
+
+\begin{enumerate}[nosep]
+    \item Each zone has an \emph{identified owner} (unit head or delegate);
+    \item The charter specifies incident contacts, logging baselines, and minimum security standards;
+    \item The central security function defines the \emph{standards} and operates the \gls{soc}; departments \emph{implement} within their perimeter;
+    \item This is not \emph{less} accountability but \emph{more granular} accountability --- a model where one officer is nominally responsible for everything but cannot actually control departmental behaviour creates the \emph{real} accountability gap.
+\end{enumerate}
+
+\noindent At Oxford, unit heads are explicitly \emph{accountable} for information security in their area~\cite{oxford-infosec}. At Michigan, an IT Council coordinates across nineteen schools with clear responsibility lines~\cite{umich-it-council}. At ETH~Z\"urich, the Administrator Rights Agreement~\cite{eth-admin-agreement} is a binding \emph{transfer} of responsibility, not an abdication.
+
+\medskip\noindent\textbf{Key point:} the question is not ``centralised vs.\ distributed accountability'' but ``formal accountability vs.\ informal unaccountability.'' The situation in which users run shadow IT with zero accountability is the real governance failure.
+
+\medskip\noindent\textbf{Live-incident containment authority:} accountability includes the power to act during an active breach. The enclave charter pre-grants the central security function a scoped, auditable, time-bounded \emph{emergency containment authority} --- the right to force network isolation or quarantine of a zone on defined incident criteria, logged and reviewed post-hoc by the digital-policy commission --- overriding zone autonomy in real time. This is not an erosion of the federated model but its safeguard: \gls{nis2} Art.~21 (technical and operational risk-management measures) and Art.~23 (incident-reporting duty) already vest a central duty to contain; NIST CSF~2.0 Respond and ISO/IEC~27035 standardise the containment workflow; and the Oxford and ETH~Z\"urich unit-head models already subordinate the unit to a central isolation decision~\cite{oxford-infosec,eth-baseline}. The authority is operationalised in the Wave~7 audit-and-incident-response runbooks of the Technical Reference, not merely asserted here.
+\end{answerbox}
+
+\bigskip
+
+% --- Q2.2 ---
+\begin{questionbox}[Q2.2 --- ``Departments will treat autonomy as the absence of responsibility'']
+Giving departments autonomy over their IT will lead to neglect: unpatched servers, exposed databases, abandoned research machines connected to the network.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q2.2]
+\textbf{This risk is real} and is identified in the dossier's risk register (rated Medium probability / High impact).
+
+\medskip\noindent\textbf{Mitigations are built into the proposal:}
+\begin{itemize}[nosep]
+    \item \textbf{Charters with accountability:} mandatory incident contacts, logging baseline, periodic reviews;
+    \item \textbf{Baseline monitoring by the \gls{soc}:} the central security team monitors all zones for anomalies, including research zones;
+    \item \textbf{Default-deny at internal boundaries:} a neglected zone cannot propagate to other zones;
+    \item \textbf{ETH~Z\"urich isolation model:} non-compliant resources are placed in isolated network zones~\cite{eth-baseline} so that weaknesses are not exploitable from outside;
+    \item \textbf{Periodic audits:} a digital-policy governance body reviews zone compliance.
+\end{itemize}
+
+\noindent\textbf{Counter-question:} under the current monolithic model, are departmental ``servers under desks'' patched, monitored, and accountable? The answer is typically \emph{no} --- they exist as shadow IT with \emph{zero} oversight. Formalised autonomy with charters is strictly \emph{better} than informal unmanaged autonomy.
+\end{answerbox}
+
+\bigskip
+
+% --- Q2.3 ---
+\begin{clarificationbox}[Q2.3 --- ``This proposal undermines the security function's authority'']
+By proposing that academic representatives sit on a digital-policy commission, and that an independent commission can override IT policy decisions, the proposal effectively strips the security function of the authority needed to protect the institution.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q2.3]
+This question rests on a distinction that governance frameworks draw explicitly. The proposal does not remove the security function's authority --- it \emph{positions it correctly} within a governance structure. There is a fundamental distinction between:
+
+\begin{description}[nosep]
+    \item[Governance:] strategic direction and risk appetite (the digital-policy commission);
+    \item[Management:] operational execution (the security function and IT department).
+\end{description}
+
+This distinction is foundational in \gls{cobit}~2019~\cite{cobit} and in the work of Weill and Ross~\cite{weill-ross} on IT governance. De~Haes and Van~Grembergen~\cite{dehaes2015} explicitly warn against conflating governance with management: the security function \emph{executes} security policy; the governance body \emph{defines} the risk appetite and resolves conflicts between security and the institutional mission.
+
+\medskip\noindent No security officer at MIT, Stanford, Oxford, Michigan, or ETH~Z\"urich has \emph{unilateral} authority over all IT decisions~\cite{umich-it-council, oxford-infosec}. In all these institutions, governance bodies with academic representation define policy, and the security function implements it. This is not a diminishment --- it is professional governance.
+
+\medskip\noindent\textbf{The real question:} should a single operational officer have the authority to make decisions affecting academic freedom, research competitiveness, and the fundamental rights of employees \emph{without external oversight}? Every governance framework says no.
+\end{answerbox}
+
+\bigskip
+
+% --- Q2.4 ---
+\begin{clarificationbox}[Q2.4 --- ``Academics should not interfere with security --- they lack expertise'']
+Security is a technical discipline. Putting academics on a digital-policy commission is like putting passengers in the cockpit.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q2.4]
+A more precise analogy might be surgeons having input on hospital operating-theatre design --- academics are \emph{the people whose work the infrastructure exists to serve}, not passive passengers. No hospital would exclude surgeons from that process and defer entirely to the facilities manager.
+
+\medskip\noindent\textbf{The expertise argument conflates two levels:}
+\begin{itemize}[nosep]
+    \item \emph{Technical implementation} (firewall rules, \gls{ids} configuration): this is the security function's domain --- no one disputes this;
+    \item \emph{Policy direction} (what should be restricted, what autonomy is needed, what risk appetite is acceptable): this is a \emph{governance} question requiring input from all stakeholders.
+\end{itemize}
+
+\noindent NIST CSF~2.0 Govern (GV) function~\cite{nist-csf} explicitly integrates ``stakeholder needs'' into cybersecurity strategy. ISO~27001 Clause~4.2~\cite{iso27001} requires understanding ``the needs and expectations of interested parties.'' EDUCAUSE~\cite{educause-governance} recommends governance structures including academic representation. Excluding the primary users of the infrastructure from governance decisions violates every major IT governance framework.
+
+\medskip\noindent Furthermore, in a university context, many academics \emph{are} technical experts: computer-science researchers, cybersecurity specialists, network engineers. Dismissing their expertise because they are ``academics'' is a category error.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on research zone autonomy and local administrative privileges}
+\label{sec:q-autonomy}
+% ============================================================================
+
+\epigraph{``Discovery consists in seeing what everybody else has seen and thinking what nobody has thought.''}{--- Attributed to Erwin Schr\"odinger}
+
+% --- Q3.1 ---
+\begin{questionbox}[Q3.1 --- ``Giving researchers root access creates unacceptable risk'']
+Root access means researchers can disable security tools, install vulnerable software, and create backdoors. One compromised research machine can become a launchpad for attacks against the entire institution.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q3.1]
+\textbf{Partial merit:} root access is indeed a powerful privilege that can be misused. This is why the dossier does not propose \emph{unrestricted} root access but \emph{accountable} root access within dedicated zones.
+
+\medskip\noindent\textbf{The ETH~Z\"urich model~\cite{eth-admin-agreement}:}
+\begin{enumerate}[nosep]
+    \item The user requests root rights for a documented purpose (thesis, research project);
+    \item By signing the agreement, the user accepts \emph{personal responsibility} for maintenance;
+    \item The user commits not to disable basic security mechanisms (logs, updates);
+    \item Non-compliant machines are placed in isolated network zones~\cite{eth-baseline};
+    \item It is a \emph{transfer of responsibility}, not an abdication of control.
+\end{enumerate}
+
+\noindent\textbf{Why this is safer than the alternative:} when root access is denied, researchers jailbreak managed machines, use hidden VMs, connect lab equipment via personal hotspots, or deploy entirely unmanaged servers under desks. These shadow systems have \emph{no} logging, \emph{no} patching, \emph{no} accountability, and \emph{no} isolation. Formal root access with charters, accountability, and network isolation is strictly safer than informal root access with no controls.
+
+\medskip\noindent\textbf{The ``launchpad'' fear:} in a segmented architecture, a compromised research machine cannot reach the administrative enclave --- this is the entire point of segmentation. At CERN, experiment networks are isolated from the general network by strict firewalls and \gls{acl}s~\cite{cern-tn}, yet physicists retain extensive local control.
+\end{answerbox}
+
+\bigskip
+
+% --- Q3.2 ---
+\begin{questionbox}[Q3.2 --- ``Researcher autonomy = researcher liability --- this unfairly burdens academics'']
+By transferring responsibility via charters, the institution offloads security risk onto academics who are not trained for it. This is unfair and possibly illegal under employment law.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q3.2]
+\textbf{This concern has merit when pushed to extremes} --- researchers should not be expected to be full-time system administrators. The dossier addresses this through multiple mechanisms:
+
+\begin{itemize}[nosep]
+    \item Central IT still provides the backbone, \gls{iam}, \gls{soc}, and baseline monitoring --- researchers are not ``on their own'';
+    \item ETH~Z\"urich deploys \emph{Data Stewards}~\cite{eth-data-stewardship} and departmental IT staff (ISGs)~\cite{eth-isg-infk} who bridge the gap between central IT and researchers;
+    \item The charter defines \emph{proportionate} responsibilities: a researcher who installs a notebook server has lighter obligations than one running a public-facing web service;
+    \item The progressive transition includes training of local IT correspondents by the IT services.
+\end{itemize}
+
+\noindent\textbf{On the legal point:} the charter model is an established, documented practice at institutions such as ETH~Z\"urich and Oxford~\cite{eth-admin-agreement, oxford-infosec}. The responsibility is \emph{contractual and proportionate}, not a blanket transfer of institutional liability.
+
+\medskip\noindent\textbf{Counter-question:} under the current model, when a researcher deploys shadow IT that is breached, who is liable? The answer is unclear --- which is precisely the governance failure that charters resolve.
+\end{answerbox}
+
+\bigskip
+
+% --- Q3.3 ---
+\begin{questionbox}[Q3.3 --- ``The Science DMZ bypasses security controls --- this is a security hole by design'']
+The \gls{sciencedmz} explicitly removes the enterprise firewall from the research data path. This means research traffic is not inspected. This is an indefensible gap in security posture.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q3.3]
+\textbf{The premise is factually incorrect.} The \gls{sciencedmz} does \emph{not} remove security --- it replaces one type of security (a stateful firewall, designed for enterprise traffic) with another appropriate for research traffic:
+
+\begin{description}[nosep]
+    \item[\gls{acl}s on routers:] whitelist-based filtering at line speed;
+    \item[Zeek (formerly Bro) \gls{ids}:] a dedicated intrusion-detection system monitoring all \gls{sciencedmz} traffic~\cite{paxson1999};
+    \item[perfSONAR:] active performance monitoring that detects anomalies~\cite{perfsonar};
+    \item[\gls{dtn} hardening:] Data Transfer Nodes are purpose-built, minimal-service machines with a reduced attack surface.
+\end{description}
+
+This model was developed by ESnet~\cite{dart2013}, the U.S.\ Department of Energy's network serving nuclear laboratories. It is deployed at \textbf{over 100 universities} through NSF funding~\cite{esnet-history,nsf-cc}. If bypassing the enterprise firewall were a ``security hole by design,'' neither the DoE nor the NSF --- both security-conscious organisations --- would have funded and promoted it.
+
+\medskip\noindent\textbf{The deeper point:} a stateful firewall that, in a documented case, mishandled TCP window scaling on high-volume long-distance flows and degraded research throughput by \textbf{five- to twelve-fold}~\cite{esnet-pennstate} does not \emph{provide} security. It provides the \emph{appearance} of security while driving researchers to bypass it via shadow IT. A \gls{sciencedmz} with \gls{acl}s, \gls{ids}, and monitoring provides \emph{actual} security appropriate to the traffic profile.
+\end{answerbox}
+
+\bigskip
+
+% --- Q3.4 ---
+\begin{questionbox}[Q3.4 --- ``If the Science DMZ were so good, our network operator would already have deployed it'']
+The model is presented as state of the art and adopted by 100-plus universities. Yet neither our national research network nor our HPC team publishes any Science DMZ today. The absence is itself an argument: if it were the right answer for us, our \gls{nren} or our \gls{hpc} team would already have built it.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q3.4]
+\textbf{The factual premise may be correct; the inference is not --- this is an appeal to absence.} That an institution or its \gls{nren} has not yet deployed a pattern is not evidence that the pattern is unsuitable; it is, in most cases, evidence about \emph{capacity and funding routes}.
+
+\medskip\noindent Three observations frame the diagnostic generically:
+\begin{enumerate}[nosep]
+    \item \textbf{The substrate is often already present.} High-bandwidth \gls{nren} access (e.g.\ via \gls{geant}~\cite{geant}), a national \gls{csirt} for incident response, and an \gls{hpc} facility moving large volumes of data internationally are frequently in place. What is missing is the architectural \emph{pattern}, not the bandwidth. Current research transfer over generic enterprise paths (\texttt{rsync}, \texttt{scp}) is an enterprise-IT profile, not a research-tuned one~\cite{dart2013, esnet-cases}.
+    \item \textbf{Non-deployment tracks capacity, not merit.} A small research ecosystem with a limited pool of research-network engineers, and the absence of a dedicated funding programme equivalent to the NSF CC* line that explicitly funded Science DMZs at over 100 U.S.\ campuses~\cite{esnet-history,nsf-cc}, explains non-deployment without implying technical inadequacy.
+    \item \textbf{Convergent practice elsewhere is overwhelming.} ESnet, NSF, \gls{geant}, and the Medical Science DMZ pattern --- documented in implemented deployments at major U.S.\ biomedical-research institutions~\cite{medical-sdmz} --- converge on the design. ``We have not done X yet'' is a weak argument against X when every comparable research ecosystem has.
+\end{enumerate}
+
+\medskip\noindent\textbf{The realistic form is mutualised.} The proposal is not a siloed institution-only Science DMZ but a federated research-network zone --- with a Medical Science DMZ enclave for biomedical workloads --- \emph{co-designed} across the research-active institutions and the \gls{nren}. Mutualisation is the form in which the operational and economic case closes at small scale.
+
+\medskip\noindent\textbf{One honest caveat.} A 2024 quantitative study confirms that Science~DMZ benefits are not automatic: without deliberate tuning of hosts, protocol stacks and measurement, latency on long-RTT paths can even degrade~\cite{sciencedmz-perf}. This argues for operational ownership and tuning, not for inaction.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on BYOD and AI cloud services}
+\label{sec:q-byod-ai}
+% ============================================================================
+
+\epigraph{``The best way to predict the future is to invent it.''}{--- Alan Kay, Xerox PARC, 1971}
+
+% --- Q4.1 ---
+\begin{questionbox}[Q4.1 --- ``BYOD is inherently insecure --- personal devices cannot be trusted'']
+Personal devices are not managed, may be infected, may lack encryption, and may be shared with family members. Allowing them on the network is an unnecessary risk.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q4.1]
+\textbf{\gls{byod} is not a policy choice --- it is a reality.} Faculty members use personal laptops. Researchers use personal phones. Visiting scholars arrive with their own devices. The question is not whether \gls{byod} exists but whether it is \emph{managed or unmanaged}.
+
+\medskip\noindent The dossier proposes \emph{progressive interoperability}:
+\begin{enumerate}[nosep]
+    \item \textbf{Without authentication:} Internet only (guest zone);
+    \item \textbf{With \gls{mfa} authentication:} access to teaching and research resources matching the user's profile;
+    \item \textbf{With a compliant device (verified posture):} extended access including administrative resources via a secure \gls{vdi}.
+\end{enumerate}
+
+This is precisely the \gls{zt} approach recommended by NIST SP~800-207~\cite{nist-zt}: access decisions based on identity and device posture, not on whether the device is ``managed'' or ``personal.''
+
+\medskip\noindent\textbf{\gls{eduroam}}~\cite{eduroam} --- the global academic federated Wi-Fi system --- has operated successfully for two decades on exactly this principle: authenticate users, not devices.
+
+\medskip\noindent The alternative --- banning \gls{byod} --- pushes devices onto personal hotspots and creates genuinely unmanaged, invisible connections. This is \emph{less} secure than a dedicated \gls{byod} subnet with progressive access.
+\end{answerbox}
+
+\bigskip
+
+% --- Q4.2 ---
+\begin{questionbox}[Q4.2 --- ``Giving researchers free access to non-EU AI cloud services creates GDPR liability'']
+Commercial AI cloud services are not fully \gls{gdpr}-compliant. If researchers send personal data to these services, the institution faces regulatory sanctions.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q4.2]
+\textbf{This is a legitimate concern} and the dossier does not propose unfettered access without safeguards. It proposes a \emph{differentiated framework}:
+
+\begin{enumerate}[nosep]
+    \item \textbf{Data classification:} personal data is \emph{never} sent to a third-country service without a lawful basis and a valid transfer mechanism --- an adequacy route where one exists (e.g.\ the EU--US Data Privacy Framework for certified providers), or standard contractual clauses (\gls{scc}s) supplemented, per \emph{Schrems~II}, by a documented Transfer Impact Assessment (\gls{tia}) and supplementary technical measures (encryption, pseudonymisation, key custody), as operationalised in the regulatory mapping;
+    \item \textbf{Environment separation:} research AI environments are isolated from the administrative zone, preventing accidental mixing of personal data with research API calls;
+    \item \textbf{\gls{aiact} risk-based compliance:} for researchers \emph{using} commercial AI services, the applicable framework is the \gls{aiact}'s risk-based classification --- \emph{not} a blanket research exemption; the Art.~2(6)/2(8) exemptions cover bespoke, pre-market research tools, not commercial-API use~\cite{eu-ai-act};
+    \item \textbf{Traceability:} logging of external API access for auditing;
+    \item \textbf{Training:} researcher awareness of \gls{gdpr} implications.
+\end{enumerate}
+
+\noindent\textbf{The alternative is worse:} when access is blocked, researchers use personal accounts on personal devices outside the institutional network, sending the same data with \emph{zero} institutional safeguards, \emph{zero} \gls{scc}s, and \emph{zero} traceability. The institution's \gls{gdpr} exposure is \emph{higher}, not lower, when it refuses to provide a managed pathway.
+
+\medskip\noindent\textbf{Competitive reality:} leading research universities increasingly provide researchers with \emph{managed} access to global AI platforms rather than prohibiting them outright. An institution that blocks such access risks putting its researchers at a competitive disadvantage relative to peers who provide a governed pathway.
+\end{answerbox}
+
+\bigskip
+
+% --- Q4.3 ---
+\begin{clarificationbox}[Q4.3 --- ``The AI access proposal is about convenience, not necessity'']
+Researchers managed perfectly well before generative AI. AI cloud access is a luxury, not a structural need for research. The institution should not compromise its security posture for fashionable tools.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q4.3]
+This perspective may underestimate the pace of change in research methodologies. Behavioural research on decision-making~\cite{samuelson-zeckhauser} documents \emph{status-quo bias}: the tendency to prefer the current state of affairs simply because it is familiar, regardless of evolving evidence.
+
+\medskip\noindent\textbf{On the facts:} foundation models and generative AI are \emph{not} optional luxuries for research in computer science, NLP, machine learning, data science, computational biology, digital humanities, and increasingly the social sciences. Major conferences (NeurIPS, ICML, ACL, CVPR) feature a large and growing share of work relying on cloud AI platforms, and funding agencies explicitly fund AI-based research.
+
+\medskip\noindent Dismissing AI as ``fashionable tools'' is analogous to dismissing the Internet in 1995 or statistical software in 1985. The question is not \emph{whether} universities will use AI cloud services but \emph{whether they will do so through managed, secure channels or through ungoverned shadow IT}.
+
+\medskip\noindent\textbf{Structural need:} AI research \emph{requires} access to APIs (for model comparison, fine-tuning, evaluation), cloud accelerators (for training), and open-source model repositories. These are not interchangeable with local-only tools. Teaching advanced AI courses without API access is like teaching chemistry without a laboratory. The differentiating factor is not the tool but the \emph{governed workflow}: managed access with classification and logging improves outcomes, while a blanket ban displaces the same activity into the ungoverned shadow.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on institutional comparisons and transferability}
+\label{sec:q-comparisons}
+% ============================================================================
+
+\epigraph{``In theory, there is no difference between theory and practice. In practice, there is.''}{--- Attributed to Yogi Berra}
+
+% --- Q5.1 ---
+\begin{clarificationbox}[Q5.1 --- ``You are comparing us to MIT and Stanford --- this is absurd'']
+MIT has a multi-billion endowment; Stanford has thousands of IT staff. We are a small institution. These comparisons are meaningless and the models cannot transfer.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q5.1]
+The comparison is not about replicating budgets but about adopting scale-independent architectural principles. The question assumes that the only relevant difference is scale, and that smaller institutions cannot adopt principles from larger ones --- a \emph{false equivalence} between ``adopting a principle'' and ``replicating a budget''.
+
+\medskip\noindent\textbf{The dossier does not propose replicating any institution's budget.} It proposes adopting \emph{architectural principles} (segmentation, federation, charters) that are \emph{scale-independent}:
+\begin{itemize}[nosep]
+    \item \textbf{\gls{vlan} segmentation} requires no additional \emph{hardware} budget --- it is a configuration decision on existing switches; the cost is design and operational labour, not procurement;
+    \item \textbf{Charters} are documents, not infrastructure purchases;
+    \item \textbf{The \gls{sciencedmz}} uses open-source tools (perfSONAR, Zeek) and \gls{nren} services already available through \gls{geant}~\cite{geant, perfsonar};
+    \item \textbf{Federated governance} is an organisational choice, not a technology procurement.
+\end{itemize}
+
+\noindent\textbf{The evidence base deliberately spans institutions of different sizes:} not only MIT and Stanford, but also smaller European universities, ETH~Z\"urich, Michigan, NC~State, Penn State and Wisconsin-Madison~\cite{ncsu-governance, pennstate-it, uw-madison, umich-it-council}. The architectural principles are consistent across all sizes.
+
+\medskip\noindent\textbf{The scale argument actually favours federation:} a small institution has \emph{fewer} resources for a monolithic central team to manage everything. Federation distributes the workload to where domain expertise exists.
+
+\medskip\noindent\textbf{The deeper point: these are not larger institutions' choices to borrow, but a minimal necessary set.} The functions the architecture discharges --- authenticating users, protecting sensitive and personal data, segmenting, auditing --- are required of \emph{any} institution offering a digital infrastructure. Several are legally compelled with no size threshold: a data-protection duty applies to any institution processing personal data, irrespective of size, under \loc{data-protection-regime} (in the EU, the \gls{gdpr}~\cite{gdpr}, which applies irrespective of size). The choice a small institution faces is therefore not ``afford the leading universities' model or not'', but ``discharge these already-owed obligations coherently and sovereignly, or implicitly and dependently''. Only the instantiation scales with size; the obligations do not~\cite{ng-tech-ref-2026}.
+\end{answerbox}
+
+\bigskip
+
+% --- Q5.2 ---
+\begin{questionbox}[Q5.2 --- ``Cherry-picking successful models ignores failed federations'']
+The dossier only cites universities where federation works. What about universities that tried federation and failed, reverting to centralisation?
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q5.2]
+\textbf{This is a fair challenge.} Any honest analysis must consider counter-examples.
+
+\medskip\noindent\textbf{However:}
+\begin{enumerate}[nosep]
+    \item The evidence base spans \textbf{a broad set of reference universities} across the US, UK, Switzerland and continental Europe, plus CERN, plus the wider \gls{nren} ecosystem. This is not cherry-picking --- it is the \emph{dominant pattern} in high-performing universities worldwide.
+    \item The EDUCAUSE Top~10 IT Issues~\cite{educause2024} and EDUCAUSE IT-governance resources~\cite{educause-governance} consistently recommend federated governance for higher education. This is sector consensus, not anecdote.
+    \item Counter-examples of ``failed federation'' typically involve institutions that \emph{federated without accountability mechanisms} (no charters, no \gls{soc} oversight, no minimum standards). The charter-based model addresses this risk directly.
+\end{enumerate}
+
+\noindent\textbf{The burden of evidence is symmetrical:} if the questioner claims that federation fails, they should cite specific examples and show that the failures were caused by \emph{federation itself} rather than by the absence of the governance mechanisms proposed here.
+\end{answerbox}
+
+\bigskip
+
+% --- Q5.3 ---
+\begin{clarificationbox}[Q5.3 --- ``Those universities were built federated --- we cannot retrofit federation onto a centralised institution'']
+MIT, Cambridge, and Stanford were \emph{born} decentralised. Their federation is historical, not deliberate. You cannot impose federation on an institution that has been centralised for years.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q5.3]
+\textbf{Factually incorrect for several documented universities:}
+\begin{itemize}[nosep]
+    \item \textbf{NC~State} explicitly \emph{redesigned} its IT governance for digital transformation, as documented in EDUCAUSE Review~\cite{ncsu-governance};
+    \item \textbf{Penn State} \emph{unified} IT professionals from centralised units while introducing participatory governance and SLAs~\cite{pennstate-it};
+    \item \textbf{Wisconsin-Madison} adopted federation as a deliberate ``modernisation and federation'' strategy~\cite{uw-madison};
+    \item \textbf{University of Michigan} evolved from a more centralised model to formal federation with the creation of an IT Council~\cite{umich-it-council}.
+\end{itemize}
+
+\noindent Federation is not a ``natural state'' --- it is a \emph{governance choice} that can be adopted, with appropriate transition planning. The progressive transition plan (governance first, then pilot on selected entities, then gradual extension) is designed precisely for institutions moving \emph{from} centralisation \emph{to} federation.
+\end{answerbox}
+
+\bigskip
+
+% --- Q5.4 ---
+\begin{questionbox}[Q5.4 --- ``The reversibility claim rests on soft, single-vendor conformance tests'']
+The lock-in answer rests on exit tests and a reversibility playbook; if those tests are anchored on single-vendor specifications, the guarantee is soft.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q5.4]
+\textbf{The exit tests are cross-implementation by design, not single-vendor.} Each replaceable layer is tested against an \emph{alternative} implementation: \gls{scim} user/group export to an alternative identity provider, policy bundles re-imported into an alternative engine, container images to an alternative OCI registry, switch configuration to an alternative-vendor device, the analytical store re-pointed, and object-store operations against an independent S3-compatible implementation. Reversibility is therefore tested behaviour, not a vendor promise --- developed in full in the standalone Technical Reference~\cite{ng-tech-ref-2026}.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on the independent adjustments commission}
+\label{sec:q-iac}
+% ============================================================================
+
+\epigraph{``Injustice anywhere is a threat to justice everywhere.''}{--- Martin Luther King Jr., \textit{Letter from Birmingham Jail}, 1963}
+
+% --- Q6.1 ---
+\begin{questionbox}[Q6.1 --- ``An independent adjustments commission creates bureaucratic overhead and slows down IT decisions'']
+Adding an independent commission that can override IT policy decisions introduces delays and bureaucracy into what should be agile operational decisions.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q6.1]
+\textbf{The \gls{icradp} does not ``override'' operational decisions.} It provides an \emph{adjustment} mechanism for \emph{individual} cases where a \emph{general} policy creates a disproportionate obstacle for a specific person. This is analogous to a court system: the existence of courts does not slow down legislation; it corrects general rules that produce unjust outcomes in specific cases.
+
+\medskip\noindent\textbf{On timing:}
+\begin{itemize}[nosep]
+    \item The commission rules within a short, published deadline --- faster than many IT change-management processes;
+    \item In documented emergencies (medical, professional), a provisional adjustment can be granted within a sharply shorter window;
+    \item The commission handles \emph{exceptions}, not routine operations. The segmented architecture, by providing appropriate zones for most needs, \emph{reduces} the number of adjustment requests.
+\end{itemize}
+
+\noindent\textbf{Cost of the alternative:} without a formal mechanism, adjustment requests are handled through \emph{informal negotiations} with the IT department --- a process that is slower, less predictable, less fair, and produces no auditable record. The \gls{icradp} \emph{streamlines} exception handling by centralising and formalising it.
+\end{answerbox}
+
+\bigskip
+
+% --- Q6.2 ---
+\begin{clarificationbox}[Q6.2 --- ``The commission is a Trojan horse to override IT security decisions'']
+Under the guise of ``reasonable adjustments,'' every dissatisfied user will appeal to the commission to bypass security controls. The commission will become a mechanism for institutional circumvention of IT policy.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q6.2]
+This concern is understandable; the following structural safeguards are designed precisely to prevent abuse:
+
+\begin{enumerate}[nosep]
+    \item \emph{Documented justification:} requests must specify medical, personal, professional, or fundamental-rights grounds;
+    \item \emph{Proportionality assessment:} the commission evaluates whether the adjustment creates a disproportionate security risk (not merely an inconvenience for IT);
+    \item \emph{Reasoned refusals:} the commission can and will refuse requests that do not meet the criteria;
+    \item \emph{Annual transparency report:} statistics on granted/refused requests, preventing either systematic overriding or systematic refusal;
+    \item \emph{The security function is heard:} the security perspective is formally considered in every decision.
+\end{enumerate}
+
+\noindent\textbf{Precedent:} reasonable-adjustment committees that support students and staff operate on similar principles across many institutions and have not devolved into mechanisms for ``bypassing'' academic standards. Courts, ombudsmen, and appeal mechanisms exist in every well-governed institution without destroying the authority of the decision-makers they review.
+
+\medskip\noindent\textbf{The deeper issue:} an IT department that cannot withstand \emph{reasoned, independent review} of its policies is an IT department whose policies may not be defensible. Accountability mechanisms strengthen governance; they do not undermine it.
+\end{answerbox}
+
+\bigskip
+
+% --- Q6.3 ---
+\begin{clarificationbox}[Q6.3 --- ``Citing fundamental rights for IT policy is emotional manipulation'']
+Invoking the EU Charter of Fundamental Rights, the ECHR, and human-rights case law for a discussion about firewall rules is disproportionate and emotionally manipulative. This conflates totalitarian censorship with ordinary IT administration.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q6.3]
+The legal framework cited is binding, not rhetorical. Here is how it applies concretely:
+\begin{itemize}[nosep]
+    \item In EU jurisdictions, Article~13 of the EU Charter protects academic freedom as a \emph{fundamental right} and applies to \emph{universities} --- that is not a stretch; it is the literal scope of the provision. Comparable jurisdictions protect academic freedom under their own constitutional or statutory instruments.
+    \item The \gls{ecthr} in \emph{Sorgu\c{c} v.\ Turkey}~\cite{sorguc2009} and \emph{Erdo\u{g}an v.\ Turkey}~\cite{erdogan2014} applied freedom-of-expression protections specifically to \emph{academic} contexts.
+    \item The \gls{cjeu} in \emph{Scarlet Extended v.\ SABAM}~\cite{scarlet2011} ruled that \emph{systematic filtering} of Internet traffic is incompatible with Article~11 of the Charter.
+    \item The Grand Chamber in \emph{B\u{a}rbulescu v.\ Romania}~\cite{barbulescu2017} established a \textbf{six-criteria proportionality test} for digital surveillance \emph{in the workplace} --- the exact context of university IT policies.
+\end{itemize}
+
+\noindent These are not abstract philosophical references. They are \emph{binding law} in the EU and Council of Europe member states; where the adopter is so bound, an IT policy that systematically restricts digital access and monitors communications \emph{must} satisfy the proportionality requirements of these instruments. Elsewhere, they stand as a strongly persuasive proportionality benchmark alongside the adopter's own fundamental-rights instruments.
+
+\medskip\noindent\textbf{Scale of the claim:} the dossier does not compare university IT policies to totalitarian censorship. It argues that digital policies \emph{engage} fundamental rights and must therefore pass a proportionality test. This is a measured, legally grounded claim --- not emotional manipulation.
+\end{answerbox}
+
+\bigskip
+
+% --- Q6.4 ---
+\begin{questionbox}[Q6.4 --- ``Technostress and moral injury are not real occupational hazards --- this is pseudoscience'']
+Technostress is a buzzword. Moral injury applies to soldiers, not to academics who cannot install software. Citing these concepts to argue against IT policies is scientifically dubious.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q6.4]
+\textbf{The scientific evidence is extensive and peer-reviewed:}
+
+\begin{description}[nosep]
+    \item[Technostress:] La~Torre et al.~\cite{latorre2019} published a systematic review of \textbf{105 studies} in the \emph{International Archives of Occupational and Environmental Health} (Springer), establishing technostress as a documented occupational risk with measurable effects on well-being and productivity. Tarafdar et al.~\cite{tarafdar2007} demonstrated its impact on role stress and performance in the \emph{Journal of Management Information Systems}. Ragu-Nathan et al.~\cite{ragunathan2008} validated the construct empirically in \emph{Information Systems Research}. These are top-tier peer-reviewed journals, not ``buzzword'' sources.
+
+    \item[Moral injury:] Litz et al.~\cite{litz2009} introduced the construct in the \emph{Clinical Psychology Review}. Williamson et al.~\cite{williamson2018} published a systematic review and meta-analysis in the \emph{British Journal of Psychiatry}, extending the concept to \emph{occupational} contexts. Hanna et al.~\cite{hanna2023} specifically studied moral injury in \emph{university staff}. The concept is not limited to military contexts --- it is a well-established framework in occupational psychology.
+\end{description}
+
+\noindent Dismissing peer-reviewed systematic reviews as ``pseudoscience'' without engaging the evidence is itself an unscientific position. One may disagree with the \emph{policy implications} drawn from this literature, but denying the documented phenomena requires counter-evidence, not dismissal. These findings describe documented risks; the dossier pairs them with the mitigation it proposes (proportionate policy and an adjustments mechanism), not with a claim that restriction is always harmful.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions prompted by recent incidents}
+\label{sec:q-incidents}
+% ============================================================================
+
+\epigraph{``Data is not information, information is not knowledge, knowledge is not understanding, understanding is not wisdom.''}{--- Russell L.\ Ackoff, \textit{From Data to Wisdom}, 1989}
+
+% --- Q7.1 ---
+\begin{clarificationbox}[Q7.1 --- ``Recent university breaches prove we need MORE restriction, not less'']
+The headlines are clear: universities are under siege from ransomware and supply-chain compromises. This is not the time to relax security by giving departments autonomy.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q7.1]
+This is a frequently heard interpretation that warrants careful factual examination. Sector incident analysis points consistently to a small set of root causes:
+
+\begin{itemize}[nosep]
+    \item \textbf{Third-party software vulnerabilities (supply chain):} neither ``more restriction'' on research zones nor ``less department autonomy'' would have prevented them. The mitigation is vendor risk management, patching, and \emph{isolation of critical applications} --- which is what segmentation achieves.
+    \item \textbf{Centralised administrative perimeters:} ransomware that exploits a single undifferentiated perimeter is amplified by the \emph{absence} of segmentation, where email, data servers, and administrative services share one perimeter.
+    \item \textbf{Credential compromise and lateral movement:} segmentation is the standard defence against lateral movement~\cite{verizon-dbir2024}.
+    \item \textbf{Contained incidents:} where an incident \emph{is} confined to a subnet, that is a demonstration that segmentation \emph{works}~\cite{rennes-cyber}.
+\end{itemize}
+
+\noindent\textbf{None of these incident classes were caused by ``openness,'' ``federation,'' or ``research-zone autonomy.''} They were caused by third-party vulnerabilities, credential compromise without segmentation, and centralised perimeters that became single points of failure. The Sophos State of Ransomware in Education 2025~\cite{sophos-ransomware-edu2025} identifies ``exploited vulnerabilities'' and ``unknown security gaps'' as top causes --- consistent with patching and segmentation, not with restriction. The proposed mechanisms (segmentation, enclaves, charters, zone-specific monitoring) \emph{directly address} every one of these root causes; the ``more restriction'' response does not.
+\end{answerbox}
+
+\bigskip
+
+% --- Q7.2 ---
+\begin{questionbox}[Q7.2 --- ``The incident analysis is biased --- it selectively interprets failures to support its thesis'']
+Any incident can be interpreted multiple ways. Claiming that a centralised-perimeter breach proves the need for \emph{less} centralisation is tendentious when it could equally prove the need for \emph{stronger} centralisation.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q7.2]
+\textbf{This is a fair methodological challenge.} Let us examine it rigorously.
+
+\medskip\noindent The claim that a centralised-perimeter breach proves ``stronger centralisation'' would need to show that (i) the breach was caused by a \emph{decentralised} part of the infrastructure, and (ii) a more centralised architecture would have prevented the specific attack vector.
+
+\medskip\noindent The available evidence on the canonical cases shows the opposite: such attacks target \emph{central administrative services} (email, data servers), and the damage is amplified because these services sit in a single, undifferentiated perimeter. Centralising \emph{more} services into that perimeter would have \emph{increased} the blast radius.
+
+\medskip\noindent\textbf{The interpretation aligns with independent sector analysis:}
+\begin{itemize}[nosep]
+    \item Verizon DBIR 2024~\cite{verizon-dbir2024}: credential abuse and ransomware as the dominant measured breach patterns, whose in-network progression segmentation is designed to interrupt (per the NIST/ISO controls above);
+    \item NIST SP~800-215~\cite{nist-sp800-215}: a guide to securing enterprise networks through segmentation;
+    \item Sophos State of Ransomware in Education 2025~\cite{sophos-ransomware-edu2025}: ``exploited vulnerabilities'' and ``unknown security gaps'' as top causes --- consistent with patching and segmentation, not with restriction.
+\end{itemize}
+
+\noindent The analysis is not ``selective interpretation'' --- it is alignment with the independent analysis of Verizon, Sophos, and NIST. The burden is on the questioner to show how ``stronger centralisation'' addresses the documented root causes.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on regulatory interpretation}
+\label{sec:q-regulatory}
+% ============================================================================
+
+\epigraph{``The law is reason, free from passion.''}{--- Aristotle, \textit{Politics}}
+
+% --- Q8.1 ---
+\begin{questionbox}[Q8.1 --- ``NIS2 may actually require MORE centralisation, not federation'']
+The \gls{nis2} Directive requires incident notification, risk management, and governance. These requirements are easier to demonstrate with a single, centralised IT authority. Federation makes compliance harder.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.1]
+\textbf{\gls{nis2} is requirements-based, not architecture-prescriptive.} The Directive specifies \emph{what} must be achieved (risk management, incident containment, governance) but does \emph{not} prescribe \emph{how} the infrastructure must be organised.
+
+\medskip\noindent A federated architecture with a central \gls{soc} for detection and notification, per-zone risk assessments and incident playbooks, charters documenting responsibilities and contacts, and a digital-policy commission for strategic oversight, meets every \gls{nis2} requirement while \emph{also} providing the compartmentalisation that \emph{improves} incident containment --- a core \gls{nis2} objective.
+
+\medskip\noindent\textbf{One locatable clock owner.} Where the adopter is an essential or important entity under \loc{cybersecurity-baseline-regime}, the central \gls{soc} owns the incident-reporting clock --- in the EU, the \gls{nis2} Article~23 timeline of a 24-hour early warning, a 72-hour notification and a one-month final report~\cite{nis2} --- while the zone charters oblige each zone to report inward to the \gls{soc} within a sub-deadline. The single-owner pattern is generic: it applies to whatever incident-reporting regime governs the adopter, so federation does not fragment the reporting obligation but gives it a single, accountable owner.
+
+\medskip\noindent\textbf{ISO~27001 precedent:} universities that achieve ISO~27001 certification commonly scope the certification to \emph{central IT services} rather than the entire institution. Clause~4.3 of the standard~\cite{iso27001} expressly permits such a bounded \gls{isms} scope, and certifiers accept this \emph{de facto} federation as a valid scope definition.
+
+\medskip\noindent\textbf{The evidence argument:} a multi-zone architecture with per-zone logging, incident playbooks and regular testing \emph{produces more auditable evidence} than a single monolithic perimeter.
+\end{answerbox}
+
+\bigskip
+
+% --- Q8.2 ---
+\begin{questionbox}[Q8.2 --- ``The GDPR `risk-based' argument is too convenient --- it could justify anything'']
+Saying that \gls{gdpr} Article~32 requires measures ``appropriate to the risk'' does not mean an institution can decide to accept more risk. A supervisory authority could still sanction insufficient security even if the institution claims it assessed the risk.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.2]
+\textbf{Correct --- the risk-based approach is not a carte blanche.} \gls{gdpr} Article~32 requires measures appropriate to the risk, taking into account the ``state of the art, costs, context, and the likelihood/severity of risks''~\cite{gdpr}. The institution must demonstrate that its choices are \emph{justified}, not merely \emph{convenient}.
+
+\medskip\noindent\textbf{However, this argument applies equally to the monolithic approach:}
+\begin{itemize}[nosep]
+    \item A monolithic approach that \emph{over-restricts} research and teaching while \emph{under-protecting} the administrative enclave (because the same firewall handles both) may also fail the ``appropriate to the risk'' test --- for different reasons;
+    \item The ``state of the art'' element explicitly requires considering what comparable institutions do. The state of the art in higher education \emph{is} segmented, federated architecture; an institution that ignores it may be \emph{more} exposed to regulatory challenge, not less;
+    \item The \gls{edpb}~\cite{edpb-guidelines} and \gls{enisa}~\cite{enisa-risk} confirm the risk-based interpretation and that measures must be \emph{adapted to context} --- not uniformly maximal.
+\end{itemize}
+
+\noindent The dossier does not argue for ``less security.'' It argues for \emph{differentiated} security: maximum where the risk is highest (administrative data), proportionate where the risk is lower (research). This is precisely what \gls{gdpr} Article~32 contemplates.
+\end{answerbox}
+
+\bigskip
+
+% --- Q8.3 ---
+\begin{questionbox}[Q8.3 --- ``The proposal never states a GDPR lawful basis or a DPIA trigger'']
+The proposal introduces new processing of personal data --- per-zone monitoring, the audit pipeline (which logs subject and decision identifiers), AI-API access logging, and federated identity --- yet it never states the \gls{gdpr} Article~6 lawful basis, nor identifies an Article~35 DPIA trigger. Under the Article~5(2) accountability principle, a controller must be able to demonstrate its lawful basis; as written, a \gls{dpo} could refuse the proposal on the ground that none is stated.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.3]
+\textbf{The concern is well founded, and the lawful basis is stated here explicitly.} The proposal does introduce new processing, and under \gls{gdpr} Article~5(2) the controller must be able to demonstrate its lawful basis~\cite{gdpr}.
+
+\medskip\noindent\textbf{Lawful basis.} The controller identifies a lawful basis under \loc{data-protection-regime}: a public-mission body typically relies on the public-interest task, a private body on legitimate interests or consent. In the EU instantiation, for a public university the monitoring, audit and identity processing rests on \gls{gdpr} Article~6(1)(e) --- processing necessary for a task carried out in the public interest (the institution's research and teaching mission and its statutory security obligations, including those under \gls{nis2}) --- and, where appropriate, Article~6(1)(f) legitimate interests (network and information security, expressly recognised in Recital~49), subject to the balancing test against data subjects' rights and freedoms. Any processing of special categories of data is conditioned on a corresponding Article~9 ground.
+
+\medskip\noindent\textbf{DPIA.} Because the monitoring and audit pipeline use new technologies and entail systematic processing likely to result in high risk, they are expected to warrant a DPIA under Article~35(1)~\cite{gdpr}. The proposal feeds that assessment rather than replacing it: the per-scenario audit records supply the systematic description, the necessity-and-proportionality analysis and the risk treatment an Article~35 DPIA requires. The per-processing lawful basis is finalised in the DPIA and the Record of Processing Activities (Article~30), owned by the institution's \gls{dpo}.
+
+\medskip\noindent\textbf{This strengthens, rather than weakens, the proposal.} A monolithic perimeter that monitors all traffic uniformly faces the \emph{same} Article~6 and Article~35 obligations with \emph{less} ability to scope and minimise. The segmented, context-bounded design keeps monitoring proportionate --- per-zone scope, minimised audit fields, access-controlled logs --- which is exactly what the necessity-and-proportionality test of Article~35 rewards.
+\end{answerbox}
+
+\bigskip
+
+% --- Q8.4 ---
+\begin{questionbox}[Q8.4 --- ``Barbulescu is wielded outward but never applied to the proposal's own monitoring'']
+Q6.3 invokes the B\u{a}rbulescu six-criteria proportionality test against restrictive monitoring, but the proposal's own per-zone monitoring, \gls{soc} oversight and audit pipeline (logging subject and decision identifiers) are themselves surveillance --- which the proposal never runs through the same six criteria. A reviewer could call this an asymmetry.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.4]
+\textbf{Fair point --- the same test must, and does, apply to the proposal's own monitoring.} The architecture's monitoring is surveillance in the B\u{a}rbulescu~\cite{barbulescu2017} sense and is assessed here against its six criteria:
+\begin{enumerate}[nosep]
+  \item \textbf{Prior notification:} monitoring is disclosed in advance through the zone charters and the institution's transparency notices.
+  \item \textbf{Extent and intrusion:} the audit pipeline records \emph{metadata} (subject and decision identifiers, verdicts, timestamps), not communication \emph{content}; monitoring is scoped per zone, not blanket, and retained for a bounded period.
+  \item \textbf{Legitimate justification:} the aim is network and information security and the institution's \gls{nis2}/\gls{gdpr} duties --- not performance or behavioural surveillance; access to any content would require the weightier justification B\u{a}rbulescu demands.
+  \item \textbf{Least intrusive means:} context-bounded, metadata-level monitoring is \emph{less} intrusive than the blanket content inspection a monolithic perimeter tends toward.
+  \item \textbf{Consequences and use:} logs feed security operations and incident response under access controls; they are not a routine input to disciplinary or performance decisions.
+  \item \textbf{Safeguards:} \gls{soc} access controls, retention limits, \gls{dpo} oversight and the DPIA (Q8.3) provide the safeguards B\u{a}rbulescu requires --- especially the bar on routine content access.
+\end{enumerate}
+\noindent Far from exempting itself, the proposal's segmented, metadata-level design is what \emph{lets} it satisfy the B\u{a}rbulescu criteria more readily than the uniform monitoring it replaces.
+
+\medskip
+\noindent\textbf{Collective dimension.} B\u{a}rbulescu governs the
+\emph{individual} proportionality test; in several jurisdictions a
+\emph{collective} step precedes it: consultation or co-determination
+of \loc{staff-representation-body} before workplace-monitoring tools
+are deployed. The Technical Reference makes that consultation a
+Wave-2 precondition where the adopter's labour law so requires, and
+the \gls{icradp} seat gives staff a standing voice once the
+pipeline operates.
+\end{answerbox}
+
+\bigskip
+
+% --- Q8.5 ---
+\begin{questionbox}[Q8.5 --- ``Federated procurement leaves NIS2 supply-chain security (Art.~21(2)(d)) without an owner'']
+The incident answers address supply-chain risk only \emph{after the fact}. \gls{nis2} Article~21(2)(d) imposes a \emph{forward}, standing duty to manage security in the supply chain and supplier relationships. Where zones and faculties procure their own tools, a security officer could refuse the proposal on the ground that no one owns supply-chain assurance \emph{across} autonomous zones.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.5]
+\textbf{The obligation is real, forward-looking, and distinct from incident response --- and it has a named owner here.} The supply-chain-security duty of \loc{cybersecurity-baseline-regime} (in the EU, \gls{nis2} Article~21(2)(d)~\cite{nis2}) requires ongoing management of supplier and supply-chain security, not merely post-incident remediation.
+
+\medskip\noindent\textbf{The architecture already carries the control.} The lifecycle wave, a supply-chain-attestation instantiation (signed provenance and SBOMs), and a procurement-clause workstream established in the foundations wave~\cite{ng-tech-ref-2026} produce software provenance and contractual security clauses applied to \emph{every} acquisition, regardless of which zone procures it.
+
+\medskip\noindent\textbf{One accountable owner, mirroring the Article~23 clock.} Just as the central \gls{soc} owns the \gls{nis2} reporting clock (Q8.1), a central security-governance owner maintains the supplier-assurance baseline --- the approved-supplier register, the mandatory procurement clauses, and the attestation requirements --- while each zone charter binds local procurement to that baseline. Federation therefore does not fragment supply-chain assurance: it gives it a single, locatable owner with per-zone obligations reporting inward.
+\end{answerbox}
+
+\bigskip
+
+% --- Q8.6 ---
+\begin{questionbox}[Q8.6 --- ``Data-subject rights are unfulfillable across federated zones and a distributed audit store'']
+Q8.3 and Q8.4 establish the lawful basis, DPIA and proportionality of monitoring, but never explain how the institution actually fulfils a data subject's Article~15 access, Article~16 rectification or Article~17 erasure request when identity is federated and the audit log is distributed across autonomous zones. A \gls{dpo} could refuse on the ground that rights become unfulfillable in a distributed design.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q8.6]
+\textbf{The concern is well founded, and the same single-accountable-owner logic that locates the Article~23 clock (Q8.1) locates rights fulfilment.} Distribution raises a genuine operability question; the design answers it with one front door, one map, and per-zone duties.
+
+\medskip\noindent\textbf{Central intake (one front door).} A data-subject request is received and tracked at a single \gls{dpo}-owned intake point, so the data subject never has to address individual zones.
+
+\medskip\noindent\textbf{Per-zone retrieval duty.} Each zone charter carries a binding obligation to locate, return, rectify or erase the records it holds within a sub-deadline, reporting inward to the \gls{dpo} --- exactly as zones report inward to the \gls{soc} for incident notification.
+
+\medskip\noindent\textbf{Bounded retention and a locator.} The audit pipeline records minimised \emph{metadata} for a bounded period (Q8.4), so scheduled expiry makes Article~17 erasure tractable rather than a distributed deletion hunt; and the Article~30 Record of Processing Activities~\cite{gdpr}, owned by the \gls{dpo}, maps which zones and systems hold which categories of data, so any Article~15/16/17 request is routed deterministically across the federation.
+
+\medskip\noindent\textbf{The evidence store is itself a control.} The audit trail that underwrites these rights is not assumed trustworthy: it is append-only and tamper-evident (per-record signing or hash-chaining), with separation of duties between operators and readers and a four-eyes rule on retention expiry, as specified in the Technical Reference's observability chapter. The record proving accountability therefore cannot be silently altered or selectively deleted~(\gls{gdpr} Art.~32 / Art.~5(1)(f); ISO/IEC~27001 A.8.15).
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on costs and feasibility}
+\label{sec:q-costs}
+% ============================================================================
+
+\epigraph{``There is nothing more expensive than a missed opportunity.''}{--- Attributed to H.\ Jackson Brown Jr.}
+
+% --- Q9.1 ---
+\begin{questionbox}[Q9.1 --- ``The cost analysis lacks concrete numbers --- how much will this actually cost?'']
+The dossier discusses costs qualitatively but does not provide a detailed budget. Without concrete figures, the cost-benefit analysis is speculative.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q9.1]
+\textbf{This is a fair request} and one that can only be fully addressed through a detailed implementation study specific to the institution's current infrastructure, contracts, and staffing.
+
+\medskip\noindent\textbf{What the dossier does provide:}
+\begin{itemize}[nosep]
+    \item \textbf{The governance step} (commission, charters, digital-policy commission): predominantly \emph{organisational} --- no new infrastructure, implementable with existing staff;
+    \item \textbf{The pilot step} (selected entities with domain expertise): standard open-source tools and \gls{nren} services already available through \gls{geant}~\cite{geant};
+    \item \textbf{The extension step:} gradual rollout aligned with validated results;
+    \item \textbf{Cost of inaction:} the global all-industry average data-breach cost reached \$4.88M in 2024~\cite{ibm-cost-breach-2024} (the education sector sits below this average); talent drain, Shadow IT, and lost competitiveness in funding calls are additional indirect costs.
+\end{itemize}
+
+\noindent The absence of a line-item budget in a \emph{policy proposal} is normal --- the budget is produced during the implementation study that follows the governance step. The purpose is to demonstrate that the approach is \emph{architecturally sound and scalable from a teaching-led to a research-intensive institution}, not to substitute for a procurement exercise.
+
+\smallskip\noindent\textit{\footnotesize The standalone Technical Reference~\cite{ng-tech-ref-2026} provides indicative operational envelopes per layer, three reference pace options for the migration (5/7/10-year horizons), and explicit discussion of the financial-sovereignty dimension of every architectural choice.}
+\end{answerbox}
+
+\bigskip
+
+% --- Q9.2 ---
+\begin{questionbox}[Q9.2 --- ``The transition plan is too optimistic'']
+Institutional change at universities is notoriously slow. The proposed progressive transition may face delays due to institutional inertia.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q9.2]
+\textbf{The progressive structure is designed to absorb delays:}
+\begin{itemize}[nosep]
+    \item NC~State completed a governance redesign within a comparable scope~\cite{ncsu-governance};
+    \item NSF CC* grants that fund \gls{sciencedmz} deployments typically run two to three years for full deployment at a single campus~\cite{nsf-cc};
+    \item The governance step is primarily \emph{commission, charters, and documents} --- it does not require infrastructure procurement, the usual bottleneck.
+\end{itemize}
+
+\noindent\textbf{The transition is incremental, not deadline-driven.} The progressive structure ensures that delays in one step do not create systemic risk --- the institution benefits incrementally from each completed step.
+
+\medskip\noindent\textbf{The alternative timeline is worse:} the current state (monolithic restriction, Shadow IT, regulatory uncertainty) does not improve with time. Every month of delay is a month of talent drain, Shadow IT risk, and missed compliance opportunities.
+\end{answerbox}
+
+\bigskip
+
+% --- Q9.3 ---
+\begin{questionbox}[Q9.3 --- ``The economic case is asserted, not shown --- the board cannot decide without figures'']
+This dossier asks the governing bodies to adopt the policy; the detailed, situation-specific costing would properly be commissioned from the CIO once they decide to proceed. But a board still needs an order of magnitude to take that decision --- and as written the dossier gives no figures, so a CIO could note that the economic case has not been framed.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q9.3]
+\textbf{The detailed, situation-specific cost analysis is the CIO's to produce once the governing bodies request it; the dossier's task is to give the board a defensible order of magnitude and a cost shape, not to pre-empt that analysis.}
+\begin{enumerate}[nosep]
+  \item \textbf{Cost shape.} The governance step (commission, charters, digital-policy commission) is \emph{cost-neutral} --- existing staff, no procurement. Cost-bearing items sit in later, optional waves (segmentation, Science~DMZ, observability storage), each gated by the validated results of the prior step.
+  \item \textbf{A scalable benchmark.} Rather than invent a figure, the order of magnitude can be read from sector benchmarks: higher education currently allocates only about 3.6\% of the IT budget to information security~\cite{educause-spending}, below the cross-industry averages reported in vendor benchmark data~\cite{gartner-security-spend2024}. A board can therefore size the likely envelope from its enrolment and current IT budget, and ask the CIO to refine it.
+  \item \textbf{Cost of inaction.} The status quo is not free: the global all-industry average data-breach cost reached \$4.88M in 2024~\cite{ibm-cost-breach-2024} (the education sector below it), with talent drain and Shadow-IT exposure growing with delay.
+\end{enumerate}
+\noindent This frames precisely the decision the dossier asks of the governing bodies --- to commission a costed implementation study --- with enough quantified context (a scalable percentage and a quantified downside) to make that decision defensible, while leaving the precise TCO to the CIO.
+\end{answerbox}
+
+\bigskip
+
+% --- Q9.4 ---
+\begin{questionbox}[Q9.4 --- ``Even if it is affordable, a small IT team cannot operate a heavyweight open-source stack'']
+The cost objection has a sharper, operational form: the reference stack names heavyweight platforms whose day-to-day operation demands specialist staff a small or teaching-led institution does not have. Affordability of acquisition is not the same as feasibility of operation.
+\end{questionbox}
+
+\begin{answerbox}[Answer to Q9.4]
+\textbf{The reference stack is the research-intensive instantiation, not a mandatory floor; the architecture is defined by its functional layers and the sovereignty grid, and each layer degrades to a managed or mutualised realisation as scale decreases.}
+\begin{enumerate}[nosep]
+  \item \textbf{Operate by responsibility, not by platform.} A down-scaled profile draws compute and storage from a national research cloud, an \gls{nren} service, or a managed provider under a data-processing agreement~\cite{ng-tech-ref-2026}: the institution retains sovereignty over \emph{where} and \emph{under what terms} data sits without operating the underlying platforms itself.
+  \item \textbf{Roles are not headcount.} The role inventory describes responsibilities that, in a small institution, several of which are discharged by the same person; it is not summed into a minimum specialist team.
+  \item \textbf{Optional layers stay optional.} Components justified only at scale --- the Science~DMZ, dedicated observability storage --- can be deferred entirely without weakening the rest of the architecture.
+\end{enumerate}
+\noindent The operational burden therefore scales with the chosen instantiation, not with the architecture: a small institution adopts the same principles at a managed-service realisation it can actually run.
+\end{answerbox}
+
+\bigskip
+
+% --- Q9.5 ---
+\begin{questionbox}[Q9.5 --- ``Our cyber-insurer's questionnaire forbids this: EDR everywhere, no unmanaged admin rights, full perimeter inspection --- adopting the proposal voids our coverage'']
+Typical underwriting questionnaires require endpoint detection on
+every host, prohibit unmanaged administrator rights, and assume
+perimeter inspection of all traffic. Accountable researcher root
+access and a \gls{sciencedmz} that bypasses the enterprise firewall
+facially contradict all three. Whatever the architecture's merits,
+the institution cannot operate uninsured.
+\end{questionbox}
+
+\begin{answerbox}[Response Q9.5]
+\textbf{This concern has merit in its premise:} insurability is a
+genuine external gate, and ``the architecture is sound'' is not an
+answer an underwriter accepts. The response, however, runs in three
+steps --- and its order matters.
+
+\begin{enumerate}[nosep]
+  \item \textbf{The proposal strengthens the insurable posture.}
+  Network segmentation, institution-wide \gls{mfa}, federated
+  identity and classification-driven observability are precisely
+  the control families underwriting commonly rewards; researcher
+  root access is \emph{accountable}, not unmanaged --- charter-bound,
+  logged, revocable, with a named risk owner per zone (the enclave
+  charter); and the \gls{sciencedmz} is disclosable as a
+  compensating-control architecture (ACL+IDS profile, dedicated
+  transfer nodes, no general-purpose hosts --- the documented ESnet
+  pattern). The per-zone evidence of P14 and the maturity reporting
+  produce, as a by-product, the documentation underwriters ask for
+  at renewal.
+
+  \item \textbf{Where the questionnaire still conflicts, the first
+  reflex is to renegotiate the contract, not the mission.} The
+  report's \keyword{liberty-first rule} is that constraint is never
+  preferred to freedom by default: a contract that would suppress an
+  academic freedom is a contract to renegotiate. Concretely: engage the
+  insurer or broker at Wave~0 with the zone catalogue and charters
+  in hand; declare deviations as documented exceptions with
+  compensating controls rather than letting a generic corporate
+  questionnaire default the institution to ``non-compliant''; and
+  seek academic-context underwriting terms. Freedom has a price the
+  governance body can knowingly choose to pay --- retention of a
+  residual risk, an alternative carrier, or sector mutualisation ---
+  rather than letting a standard form rewrite the institution's
+  mission.
+
+  \item \textbf{At sector scale, the response is collective.} Where
+  imposed terms would make academic digital freedom uninsurable by
+  default, universities act together --- through their consortia,
+  NREN communities and sector bodies, in the same spirit as the
+  dossier's Position~C (influence and reform): engaging insurers,
+  and where necessary the bodies that regulate them, so that the
+  insurability of a university is assessed against the controls it
+  actually operates, not against a template written for a
+  single-perimeter corporation.
+\end{enumerate}
+
+\noindent\textbf{Bottom line.} The questionnaire is an input to a
+negotiation, not a design authority. The proposal gives the
+institution both better terms to ask for and the evidence to ask
+with; the truly unanswerable position is the undocumented flat
+network.
+\end{answerbox}
+
+% ============================================================================
+\section{Questions on methodology, process and credibility}
+\label{sec:q-meta}
+% ============================================================================
+
+\epigraph{``The important thing is not to stop questioning. Curiosity has its own reason for existing.''}{--- Albert Einstein, \textit{LIFE Magazine}, 1955}
+
+% --- Q10.1 ---
+\begin{clarificationbox}[Q10.1 --- ``This document is biased --- it was written to support a predetermined conclusion'']
+The dossier reads as an advocacy document, not an objective analysis. It selects evidence that supports federation and ignores evidence that supports centralisation.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q10.1]
+\textbf{Every policy document has a thesis.} The distinction between a biased document and a well-argued one is whether the argument is supported by evidence and whether counter-arguments are addressed.
+
+\medskip\noindent\textbf{The evidence base:}
+\begin{itemize}[nosep]
+    \item An extensive, fully referenced bibliography with verified sources;
+    \item multiple reference university case studies across several countries;
+    \item Major normative frameworks (NIST, ISO, \gls{cobit}, EU regulations);
+    \item Sector organisations (EDUCAUSE, \gls{geant});
+    \item Independent sector reports (Verizon DBIR, Sophos);
+    \item A body of court decisions and legal instruments.
+\end{itemize}
+
+\noindent\textbf{Counter-arguments are addressed:} the incident analysis (Q7.1, Q7.2) directly engages with the strongest evidence that could be used \emph{against} the thesis and demonstrates that it actually supports it. The risk register honestly catalogues the risks of the proposed approach. This very module demonstrates willingness to engage with criticism.
+
+\medskip\noindent It is worth noting that maintaining the status quo is also a policy position that benefits from the same evidence-based scrutiny. The status quo is itself a position that should be defended with evidence --- not treated as the neutral default.
+\end{answerbox}
+
+\bigskip
+
+% --- Q10.2 ---
+\begin{clarificationbox}[Q10.2 --- ``This is an attack on the IT department / on the security function personally'']
+The dossier criticises the current approach so extensively that it amounts to a vote of no confidence in the IT department's competence.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q10.2]
+\textbf{The dossier critiques an \emph{approach}, not \emph{people}.} The monolithic restriction approach is common in many institutions and is often adopted in good faith by competent professionals responding to genuine threats. The argument is that a \emph{different} approach is more effective for a \emph{university context} --- not that the IT department is incompetent.
+
+\medskip\noindent\textbf{The proposals benefit the IT department:}
+\begin{itemize}[nosep]
+    \item \emph{Reduced perimeter:} the IT department focuses on the administrative enclave rather than trying to manage everything;
+    \item \emph{End of ad hoc exceptions:} charters and the \gls{icradp} replace informal, time-consuming negotiations;
+    \item \emph{Clear accountability:} departments take formal responsibility for their zones instead of blaming central IT when things go wrong;
+    \item \emph{Better regulatory posture:} an evidence-producing architecture strengthens the security function's position in audits.
+\end{itemize}
+
+\noindent Policy evolution is a normal institutional process. Every institution periodically re-evaluates its approaches; this dossier is a contribution to that ongoing dialogue, not an indictment.
+\end{answerbox}
+
+\bigskip
+
+% --- Q10.3 ---
+\begin{clarificationbox}[Q10.3 --- ``The document was partially written with AI tools --- therefore it cannot be trusted'']
+The dossier acknowledges using AI tools in its composition. This undermines its credibility as a serious academic contribution.
+\end{clarificationbox}
+
+\begin{answerbox}[Answer to Q10.3]
+\textbf{This is a \emph{genetic fallacy}:} evaluating an argument by its origin rather than its content. The validity of the dossier depends on:
+\begin{enumerate}[nosep]
+    \item The accuracy of its factual claims (verifiable through its extensive base of cited sources);
+    \item The soundness of its reasoning (evaluable on its logical merits);
+    \item The robustness of its recommendations (assessable against established frameworks).
+\end{enumerate}
+
+\noindent None of these are affected by whether the text was drafted with AI assistance, a typewriter, or a quill pen. The \gls{aiact} itself recognises this: it regulates AI \emph{systems deployed in the real world}, not AI used as a writing tool~\cite{eu-ai-act}. LLMs produce nothing without human direction; the differentiating factor is the disciplined, review-bound workflow around the tool, not the tool itself.
+
+\medskip\noindent\textbf{Transparency:} the explicit disclosure of AI-assisted composition is an act of intellectual honesty, not a weakness. Demanding disclosure and then using the disclosure to discredit the work is a rhetorical trap.
+
+\medskip\noindent\textbf{Scientific standard:} the relevant question for any document is whether the claims are accurate, the sources verifiable, and the reasoning sound. These criteria apply regardless of the drafting tools used.
+\end{answerbox}
+
+% ============================================================================
+\section{Summary: quick-reference table}
+\label{sec:summary}
+% ============================================================================
+
+\begin{longtable}{>{\raggedright}p{1cm} >{\raggedright}p{5.5cm} >{\raggedright\arraybackslash}p{7.5cm}}
+\caption{Quick-reference summary of questions and key points} \label{tab:arg-summary} \\
+\toprule
+\textbf{Ref.} & \textbf{Question (summary)} & \textbf{Key points} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Ref.} & \textbf{Question (summary)} & \textbf{Key points} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\footnotesize\itshape Continued on next page} \\
+\endfoot
+\bottomrule
+\endlastfoot
+
+Q1.1 & Segmentation increases complexity & Complexity $\neq$ attack surface; NIST mandates segmentation; phased rollout + SDN mitigate \\
+\addlinespace
+Q1.2 & Single perimeter = better visibility & Single firewall creates bottlenecks; per-zone monitoring gives greater total observability \\
+\addlinespace
+Q1.3 & ``You just want less security'' & \emph{Ad hominem}; proposals endorsed by NIST, ISO, EDUCAUSE, and a broad set of reference universities \\
+\addlinespace
+Q1.4 & Firebreak analogy is misleading & Analogy has limits; principle stands on NIST/Verizon evidence independently \\
+\addlinespace
+Q1.5 & Zero Trust claimed but SASE/ZTNA excluded & Maps to all seven SP~800-207 tenets; SASE/ZTNA declined as a sovereignty choice, not Zero Trust \\
+\addlinespace
+Q2.1 & Federation creates accountability gaps & Charters + SOC + zone owners create \emph{more} granular accountability \\
+\addlinespace
+Q2.2 & Departments will be irresponsible & Risk acknowledged; mitigated by charters, SOC, default-deny, isolation, audits \\
+\addlinespace
+Q2.3 & Undermines the security function's authority & COBIT/Weill-Ross: governance $\neq$ management; no major university gives one officer unilateral authority \\
+\addlinespace
+Q2.4 & Academics lack security expertise & Distinction between technical implementation and policy direction; every framework requires stakeholder input \\
+\addlinespace
+Q3.1 & Root access is unacceptable risk & ETH model: accountable root access + isolation is safer than shadow root access \\
+\addlinespace
+Q3.2 & Autonomy unfairly burdens researchers & Central IT still provides backbone/SOC; Data Stewards + local ISGs bridge the gap \\
+\addlinespace
+Q3.3 & Science DMZ bypasses security & Replaces firewall with \gls{acl}s + Zeek \gls{ids}; endorsed by DoE/NSF; 100+ deployments \\
+\addlinespace
+Q3.4 & Not deployed locally, so unsuitable & Appeal to absence; substrate often present; non-deployment reflects funding routes, not merit; mutualised form proposed \\
+\addlinespace
+Q4.1 & BYOD is inherently insecure & BYOD exists regardless; progressive interoperability + Zero Trust is safer than unmanaged \\
+\addlinespace
+Q4.2 & Commercial AI creates \gls{gdpr} liability & Differentiated framework: adequacy or \gls{scc}s+\gls{tia} with supplementary measures, data classification, AI Act risk-based classification, traceability \\
+\addlinespace
+Q4.3 & AI access is convenience, not necessity & Status-quo bias; AI is structural for research/teaching; blocking creates shadow AI \\
+\addlinespace
+Q5.1 & We are not MIT/Stanford & False equivalence; principles are scale-independent; evidence spans institutions of all sizes \\
+\addlinespace
+Q5.2 & Cherry-picked success stories & Broad set of reference universities + sector consensus (EDUCAUSE); counter-examples welcome \\
+\addlinespace
+Q5.3 & Cannot retrofit federation & NC State, Penn State, Wisconsin-Madison, Michigan deliberately transitioned to federation \\
+\addlinespace
+Q5.4 & Reversibility rests on single-vendor tests & Exit tests are cross-implementation by design; tested behaviour, not vendor promise \\
+\addlinespace
+Q6.1 & Adjustments commission creates bureaucracy & Short published deadlines; handles exceptions, not routine; formalises existing informal process \\
+\addlinespace
+Q6.2 & Commission could be misused & Structural safeguards: documented justification, proportionality, security function heard, transparency \\
+\addlinespace
+Q6.3 & Citing rights is disproportionate & Binding EU/ECHR law, not philosophy; CJEU/ECtHR case law directly applies \\
+\addlinespace
+Q6.4 & Technostress is pseudoscience & 105-study systematic review (La Torre 2019); peer-reviewed in top journals \\
+\addlinespace
+Q7.1 & Recent breaches prove need for restriction & Root causes are supply chain, credentials, lack of segmentation --- not openness \\
+\addlinespace
+Q7.2 & Incident analysis is biased & Interpretation aligns with Verizon DBIR, NIST, Sophos independently \\
+\addlinespace
+Q8.1 & NIS2 requires centralisation & NIS2 is requirements-based, not architecture-prescriptive; federation meets all requirements with one clock owner \\
+\addlinespace
+Q8.2 & Risk-based argument is too convenient & Applies symmetrically; state of the art is segmented architecture; EDPB/ENISA confirm \\
+Q8.3 & No \gls{gdpr} lawful basis / DPIA trigger stated & Art.~6(1)(e)/(f) basis stated; Art.~35 DPIA expected; segmentation aids data minimisation \\
+Q8.4 & B\u{a}rbulescu not applied to own monitoring & Metadata-only, per-zone, disclosed monitoring satisfies the six criteria \\
+Q8.5 & NIS2 supply-chain (Art.~21(2)(d)) unowned & Attestation + procurement clauses; central assurance owner, per-zone duties \\
+Q8.6 & Data-subject rights unfulfillable when federated & Central \gls{dpo} intake + per-zone retrieval duty + bounded retention + Art.~30 RoPA locator \\
+\addlinespace
+Q9.1 & No concrete budget numbers & Normal for policy documents; budget produced after governance step; open-source/NREN tools minimise cost \\
+\addlinespace
+Q9.2 & Timeline is too optimistic & Phased structure absorbs delays; status quo worsens with time \\
+\addlinespace
+Q9.3 & Economic case is asserted, not shown & Cost shape + scalable benchmark (higher education's 3.6\% vs cross-industry averages) + cost of inaction frame the board decision \\
+\addlinespace
+Q9.4 & Small team cannot operate the stack & Reference stack is the high-scale instantiation; layers degrade to managed/mutualised realisations \\
+\addlinespace
+Q9.5 & Insurer's questionnaire forbids researcher root / Science DMZ & Underwriting credits + disclosable compensating controls; renegotiate for academic-context terms (questionnaire is negotiation input, not design authority); collective action in the spirit of Position~C \\
+\addlinespace
+Q10.1 & Document is biased & Extensively referenced, counter-arguments addressed, risk register honest \\
+\addlinespace
+Q10.2 & Attack on the IT department & Critiques approach, not people; proposals benefit IT department \\
+\addlinespace
+Q10.3 & AI-assisted = untrustworthy & Genetic fallacy; validity depends on accuracy/reasoning, not drafting tools \\
+
+\end{longtable}
+
+% ============================================================================
+\section{Summary and outlook}
+\label{sec:arg-conclusion}
+% ============================================================================
+
+\epigraph{``The test of a first-rate intelligence is the ability to hold two opposed ideas in mind at the same time and still retain the ability to function.''}{--- F.\ Scott Fitzgerald, \textit{The Crack-Up}, 1936}
+
+The systematic treatment of the frequently raised questions above supports four conclusions:
+
+\begin{enumerate}
+    \item \textbf{No question invalidates the core thesis.} Every genuine concern (complexity, accountability, costs, feasibility) is met by a specific mechanism (phased rollout, charters, \gls{soc} oversight, open-source tooling). Some questions have partial merit and highlight implementation risks that must be managed; the risk register acknowledges these.
+
+    \item \textbf{Several questions rest on premises that, on examination, require correction or additional context.} These are addressed through clarification rather than rebuttal, and the underlying concerns are taken seriously in each case.
+
+    \item \textbf{The evidence base is robust:} an extensive, fully referenced base, multiple documented university case studies, and alignment with NIST, ISO, \gls{cobit}, the EU regulatory framework, EDUCAUSE, and independent sector reports. Engaging constructively with this evidence is the most productive path toward sound IT governance decisions.
+
+    \item \textbf{The strongest argument is convergence:} MIT, Stanford, Cambridge, Oxford, ETH~Z\"urich, CERN, Michigan, Wisconsin-Madison, NC~State, Penn State --- and the 100-plus universities operating a \gls{sciencedmz} --- converge on segmented, federated architectures, while NIST, ISO, EDUCAUSE, \gls{geant}, and the EU regulatory framework all support risk-based, proportionate security. When both practice and theory converge this strongly, an institution choosing a fundamentally different path should articulate the evidence supporting that alternative.
+\end{enumerate}
+
+\medskip\noindent The proposals are grounded in extensive evidence, aligned with major governance frameworks, and internationally validated. Their implementation will require careful management, but they offer a robust foundation for constructive dialogue. Further questions are welcome.

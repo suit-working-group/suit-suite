@@ -1,0 +1,707 @@
+% ============================================================================
+% regulatory-applicability-EN.tex — SUIT Regulatory Applicability module (EN)
+% ============================================================================
+%
+% STATUS: populated, institution-neutral shared module.
+%
+% ----------------------------------------------------------------------------
+% PURPOSE
+% ----------------------------------------------------------------------------
+% This is a SHARED, INPUT-ONLY module (no \documentclass): it is \input into a
+% host SUIT document that supplies the preamble. The host must provide:
+%   * biblatex + \addbibresource{suit-consolidated.bib} (the shared bib symlink)
+%   * booktabs, longtable, tabularx, array, multirow
+%   * tcolorbox with a "caveatbox" environment (as in the suite documents)
+%   * the gls-modes glossary (keys gdpr, nis2, aiact are referenced)
+%   * the semantic macros \keyword, \framework, \institution
+% No macro is redefined here; if a host lacks the caveatbox environment it can
+% supply a one-line \newenvironment{caveatbox}[1][]{\par\noindent}{\par} stub.
+%
+% The module is jurisdiction-neutral. It frames the size- and
+% jurisdiction-INVARIANT functional-obligation spine (F1..F6) as the transferable
+% proof, then instantiates that spine per regime from the verified regime
+% profiles in docs/_regulatory/*.json, and finally gives an adopter in an
+% UNLISTED regime a playbook to derive its own row.
+%
+% ----------------------------------------------------------------------------
+% SOURCING
+% ----------------------------------------------------------------------------
+% Every per-regime row is sourced from a verified regime profile authored from
+% real primary regulation and authoritative secondary sources; every citation
+% key used below resolves to a VERIFIED or OK entry in suit-consolidated.bib.
+% The mapping is interpretive engineering guidance, NOT legal advice.
+% ============================================================================
+
+\section{Regulatory applicability: the invariant obligation spine}
+\label{sec:reg-applicability}
+
+\begin{caveatbox}[Status and scope of this module]
+\noindent This module records an interpretive engineering mapping
+between a small set of functional obligations that every modern
+data-and-cyber regulatory regime imposes on a university, and the
+\framework{SUIT} control set that an institution can invoke to
+discharge them. It is \emph{not} legal advice. The named instruments,
+authorities and deadlines are the worked instantiation of each regime
+as of mid-2026; an adopting institution must have its mapping reviewed
+by qualified counsel and by its own data-protection and
+information-security officers before relying on it for a compliance
+argument. National transpositions, sectoral overlays and
+funder-imposed clauses may add provisions this module does not record.
+\end{caveatbox}
+
+The architecture and the playbook of the \framework{SUIT} suite are
+not designed against a regulatory checklist; they are designed against
+the engineering question of how a university can be
+sovereign at the architectural level, and they are then \emph{read}
+against the regulations the institution faces. This module performs
+that reading at the level of the regime, not the article. Its claim is
+deliberately narrow and therefore transferable: across every regime we
+examined --- and, we argue, across every regime an adopter will meet
+--- the same short list of \keyword{functional obligations} recurs.
+The instruments that carry them, the competent authorities that
+enforce them and the exact deadlines differ by jurisdiction; the
+\emph{functions} do not. That invariant list is the proof an adopter
+can carry from one jurisdiction to the next.
+
+\subsection{The functional-obligation spine (F1--F6)}
+\label{sec:reg-spine}
+
+We name the spine in role terms so that it survives translation across
+regimes. Each obligation is a \emph{function the regulator requires the
+institution to perform}, independent of the statute that happens to
+require it in a given country.
+
+\begin{description}[leftmargin=2.2em,style=nextline]
+  \item[F1 --- Personal-data protection / security of processing.]
+    Classify personal data and apply appropriate technical and
+    organisational measures to protect its confidentiality, integrity
+    and availability. This is the omnibus data-protection duty
+    (\gls{gdpr} Art.~32 in the baseline; an equivalent exists in every
+    regime examined).
+  \item[F2 --- Cybersecurity risk governance.]
+    Run a documented, risk-based information-security programme ---
+    risk analysis, accountable owner, cyber-hygiene, network and
+    information-system security measures --- attaching to the
+    \emph{function performed} rather than to headcount.
+  \item[F3 --- Incident and breach notification.]
+    Detect security and personal-data incidents and notify the
+    competent authority (and, where the risk is high, affected
+    individuals) within a regime-specific deadline.
+  \item[F4 --- Cross-border / international data transfers.]
+    Establish a lawful route to move personal data outside the home
+    jurisdiction for cloud, identity, research-collaboration and AI
+    services.
+  \item[F5 --- Electronic identification, trust services and
+    AI / technology governance.]
+    Provide trustworthy electronic identification, signatures and
+    seals, and govern the controlled technologies the institution
+    deploys (AI systems; export-controlled or otherwise restricted
+    technology) under the applicable risk-based regime.
+  \item[F6 --- Accountability, auditable logging and conformity.]
+    Retain auditable logs and records and be able to \emph{demonstrate}
+    that F1--F5 are in place --- the cross-cutting evidentiary duty
+    that makes the other five reviewable.
+\end{description}
+
+\paragraph{Why the spine is size-invariant.} The spine is a
+\keyword{minimal necessary set}: it is the smallest collection of
+functions below which an institution is not compliant in \emph{any} of
+the regimes examined, and it does not grow with the size of the
+institution. The anchor for the claim is the data-protection regime's
+\emph{absence of a de-minimis threshold} for the security,
+accountability and breach duties: under the baseline \gls{gdpr}, the
+only size-conditioned relief is the Art.~30(5) records-of-processing
+derogation below 250 persons, which is itself conditional and does not
+touch security, accountability or breach duties~\cite{gdpr}. The
+cybersecurity regime attaches the same way: where NIS2 captures an
+entity --- by sector-and-size under Art.~2(1), or regardless of size
+under Art.~2(2) (e.g. public-administration designation) --- its
+Art.~21/23 duties apply in full, with no headcount-scaled
+relief~\cite{nis2}. A small
+institution therefore performs the same six functions as a large one;
+only the \emph{instantiation} --- the number of systems, the size of
+the team, the volume of logs --- scales. This is the transferable
+core: an adopter that can show it discharges F1--F6 has shown the
+regulator-facing minimum, whatever its size and wherever it sits.
+
+\subsection{The obligation \texorpdfstring{$\rightarrow$}{->}
+mechanism matrix}
+\label{sec:reg-matrix}
+
+The spine becomes operational when each function is mapped to the
+\framework{SUIT} control set that contributes to discharging it. The
+matrix below is the size- and jurisdiction-invariant core: it is read
+identically in every regime, and only the \emph{instrument} column (the
+local statute, authority and deadline) is substituted per jurisdiction
+in Section~\ref{sec:reg-typology}. The control-set references are
+role-based --- they name architectural \emph{capabilities}, not
+products --- so the matrix transfers without editing.
+
+\begin{table}[H]
+\centering\small
+\caption{Obligation~$\rightarrow$~mechanism matrix --- the
+invariant core. Each functional obligation maps to the SUIT control
+capabilities that contribute to discharging it; only the regulatory
+instrument is substituted per jurisdiction.}
+\label{tab:reg-matrix}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.42\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.28\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.30\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Functional obligation & SUIT control mechanism (invariant) &
+What the regulator can be shown \\
+\midrule
+F1 Personal-data protection / security of processing
+  & Identity, policy, network and cryptographic-services capabilities
+    as the technical chain enforcing access control and confidentiality;
+    storage-placement constraints; the sovereignty-grid data dimension
+  & A documented technical-measures chain proportionate to risk,
+    keyed to the data classification \\
+F2 Cybersecurity risk governance
+  & The ISO/IEC~27005-aligned risk-analysis method; the policy and
+    governance capabilities; network segmentation and cyber-hygiene
+    baselines; the conformance suite as evidence of effectiveness
+  & A risk-based, owner-accountable security programme with current
+    risk analysis and tested controls \\
+F3 Incident and breach notification
+  & Observability capability (logging, monitoring, detection); the
+    audit pipeline for timeline reconstruction; the documented
+    incident-response procedure with a notification path
+  & Detection-to-notification within the regime deadline, with an
+    evidenced timeline \\
+F4 Cross-border / international data transfers
+  & Storage-placement and key-custody controls; the sovereignty-grid
+    data dimension recording the disclosure-regime exposure; transfer
+    safeguards (encryption, pseudonymisation) as supplementary measures
+  & A lawful-transfer route with a documented transfer-risk assessment
+    and supplementary technical measures \\
+F5 Electronic identification, trust services and
+    AI / technology governance
+  & Identity and cryptographic-services capabilities (qualified
+    signatures/seals); the technology-control and segregation patterns
+    for restricted technology; AI-system inventory and human-oversight
+    hooks
+  & Trustworthy e-identification and a governed inventory of
+    controlled technologies with oversight evidence \\
+F6 Accountability, auditable logging and conformity
+  & The auditable-logging and records capability; the conformance
+    suite producing assessment artefacts; the sovereignty grid as the
+    design-decision record
+  & A standing evidence base demonstrating that F1--F5 are in place
+    and reviewable on request \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{How to use the matrix.} The left column is fixed: it is the
+spine of Section~\ref{sec:reg-spine}. The middle column is fixed: it
+is the \framework{SUIT} capability set, named in role terms. Only the
+binding \emph{instrument} changes per regime --- which statute imposes
+F1, which authority enforces F3, what the F3 deadline is. The regime
+typology that follows fills exactly that variable part, regime by
+regime; the mapping method of Section~\ref{sec:reg-mapping} lets an
+adopter in an unlisted regime fill it for itself.
+
+% ============================================================================
+\section{Regime typology}
+\label{sec:reg-typology}
+
+Regimes differ in \keyword{depth}, not in the spine they impose. A
+\keyword{deep} regime (here the EU and the US) carries the spine through
+a dense, multi-instrument stack with hard deadlines and conformity
+machinery; it earns a full F1--F6 table plus a worked applicability
+demonstration. A \keyword{light} regime (here the United Kingdom,
+Brazil and South Africa) carries the same spine through a more compact
+instrument set; it earns a concise but real F1--F6 table. The five
+profiles below span Europe, North America, South America and Africa.
+Each is one worked instantiation an adopter substitutes with its own.
+
+% ----------------------------------------------------------------------------
+\subsection{European Union / EEA --- deep regime (baseline anchor)}
+\label{sec:reg-eu}
+
+The EU/EEA is the \framework{SUIT} baseline anchor: a deep,
+directly-applicable stack in which the spine is carried by named
+Regulations and a Directive, each with its own competent authority and
+operative deadline. The data-protection authority is each Member
+State's national DPA, made consistent by the European Data Protection
+Board; the cybersecurity authority is the national NIS2 competent
+authority and CSIRT, coordinated by ENISA; trust services run through
+the national eIDAS supervisory body; AI through national
+market-surveillance authorities and the European AI Office; and
+transfer adequacy is decided by the European Commission.
+
+\begin{table}[H]
+\centering\small
+\caption{EU/EEA --- F1--F6 instantiation of the invariant spine.}
+\label{tab:reg-eu}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.34\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.46\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Obligation & Instrument and authority & Deadline / mechanism \\
+\midrule
+F1 Data protection / security of processing
+  & \gls{gdpr} Art.~32~\cite{gdpr}; national DPA, EDPB for consistency
+  & Directly applicable since 25 May 2018; standing duty, no size
+    threshold \\
+F2 Cybersecurity risk governance
+  & NIS2 Directive (EU)~2022/2555, with Implementing Regulation
+    (EU)~2024/2690 where the institution provides an in-scope digital
+    service (otherwise a persuasive technical
+    reference)~\cite{nis2,eu-regulation-2024-2690,enisa-risk};
+    national NIS2 competent authority / CSIRT, ENISA
+  & Transposed by 17 Oct 2024; ten Art.~21(2) measure families
+    (MFA, cryptography, access control, supply-chain); function-based
+    scope \\
+F3 Incident and breach notification
+  & \gls{gdpr} Arts.~33--34~\cite{gdpr,edpb-guidelines}; NIS2 Art.~23
+    reporting~\cite{nis2}; national DPA and NIS2 authority
+  & GDPR: notify DPA without undue delay, $\le$72\,h; NIS2 tiered:
+    early warning $\le$24\,h, full notice $\le$72\,h, final report
+    $\le$1 month \\
+F4 Cross-border transfers
+  & \gls{gdpr} Chapter~V: adequacy (Art.~45), SCCs (Art.~46,
+    Decision~2021/914), EU--US DPF
+    adequacy~\cite{gdpr,eu-sccs2021,eu-dpf-adequacy-2023}; European
+    Commission (adequacy), DPAs/EDPB (safeguards)
+  & Transfer mechanism: adequacy where it exists, else SCCs + a
+    post-\emph{Schrems II} transfer-impact assessment and
+    supplementary measures \\
+F5 eID, trust and AI governance
+  & eIDAS\,2 --- Reg.~(EU)~910/2014 as amended by
+    2024/1183~\cite{eidas2-2024}; AI Act
+    Reg.~(EU)~2024/1689~\cite{eu-ai-act}; \gls{aiact} via national
+    market-surveillance authorities and the European AI Office
+  & eIDAS\,2 in force 20 May 2024, EUDI Wallet by end-2026; AI Act
+    phased: prohibited practices Feb 2025, GPAI Aug 2025, high-risk
+    Aug 2026 (research/R\&D exemptions) \\
+F6 Accountability, logging, conformity
+  & \gls{gdpr} Arts.~5(2), 24, 30~\cite{gdpr}; NIS2 Art.~21 logging /
+    Art.~23 reporting~\cite{nis2,eu-regulation-2024-2690}; national
+    single-window platforms~\cite{serima}
+  & Standing: records of processing on DPA request; NIS2 logging /
+    maturity reporting through the national reporting platform \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Worked applicability demonstration (EU).} Take a
+mid-sized research-intensive university operating only in one Member
+State, with no defence research and a single national campus. Does the
+spine apply, and at what depth? \emph{F1} applies in full and
+unconditionally: the \gls{gdpr} security duty has no de-minimis
+threshold, so the institution must run the technical-measures chain
+keyed to its data classification regardless of size~\cite{gdpr}.
+\emph{F2} applies because, once the university is in scope --- by
+sector-and-size (Art.~2(1)) or by a size-independent route
+(Art.~2(2), e.g. public-administration designation) --- the Art.~21
+duties apply in full, irrespective of headcount~\cite{nis2}.
+\emph{F3} therefore bites at two deadlines simultaneously --- the
+\gls{gdpr} 72-hour breach clock to the DPA and the NIS2 tiered clock
+(24\,h / 72\,h / 1 month) to the cyber authority --- so the
+observability and incident-response capability must satisfy the
+\emph{shorter} of the applicable clocks. \emph{F4} engages the moment
+the institution uses a non-EEA cloud or collaborates with a
+third-country partner: it needs an adequacy route or SCCs plus a
+transfer-impact assessment~\cite{eu-sccs2021,eu-dpf-adequacy-2023}.
+\emph{F5} engages partially: eIDAS\,2 governs any qualified
+signing/sealing of diplomas and contracts~\cite{eidas2-2024}, and the
+AI Act engages \emph{only} for deployed (not pure-research) AI
+systems, with the high-risk obligations arriving Aug
+2026~\cite{eu-ai-act}. \emph{F6} is standing throughout: the auditable
+log and records capability is what lets the institution \emph{show} the
+DPA and the cyber authority that F1--F5 are in place. The
+demonstration shows the method: walk the six functions, mark each as
+full / partial / conditional, and record \emph{which} clock or
+mechanism governs --- the architecture's contribution is identical in
+each case; only the trigger and deadline are read from the instrument
+column.
+
+% ----------------------------------------------------------------------------
+\subsection{United States --- deep regime (sectoral and fragmented)}
+\label{sec:reg-us}
+
+The US carries the same spine through a \emph{sectoral and fragmented}
+stack: no omnibus statute, but federal sector statutes (FERPA for
+student records, HIPAA for health data, GLBA / FTC Safeguards for
+financial-aid data), federal-contracting baselines (NIST
+SP~800-171, CMMC, FISMA), export-control regimes (EAR, ITAR) and a
+growing state-privacy layer (CCPA/CPRA). Enforcement is distributed
+across the Department of Education, HHS Office for Civil Rights, the
+FTC, the DoD, Commerce/BIS, State/DDTC and state Attorneys General.
+
+\begin{table}[H]
+\centering\small
+\caption{United States --- F1--F6 instantiation of the invariant spine.}
+\label{tab:reg-us}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.34\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.46\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Obligation & Instrument and authority & Deadline / mechanism \\
+\midrule
+F1 Data protection / privacy
+  & FERPA (20 U.S.C. \S1232g; 34 C.F.R. Part 99)~\cite{us-ferpa};
+    HIPAA Privacy Rule for covered health components; CCPA/CPRA as the
+    state-law layer~\cite{us-ccpa-cpra}; ED/SPPO, HHS OCR, state AGs
+  & FERPA: no fixed breach deadline, administrative enforcement via
+    funding withdrawal; CCPA/CPRA largely exempts universities except
+    via vendors / for-profit affiliates \\
+F2 Risk governance / written security programme
+  & FTC Safeguards Rule (16 C.F.R. Part 314)~\cite{us-ftc-safeguards};
+    HIPAA Security Rule risk analysis~\cite{us-hipaa-security}; NIST
+    CSF~2.0 (voluntary baseline)~\cite{nist-csf}; FTC, HHS OCR
+  & Safeguards full-compliance 9 Jun 2023 (written programme,
+    qualified individual, risk assessment); HIPAA risk analysis a
+    continuing duty; Title-IV pulls in essentially all universities \\
+F3 Incident / breach notification
+  & HIPAA Breach Notification Rule (45 C.F.R. \S\S164.400--414)~%
+    \cite{us-hipaa-breach}; FTC Safeguards
+    notification~\cite{us-ftc-safeguards}; state breach
+    statutes~\cite{us-ccpa-cpra}; HHS OCR, FTC, state AGs
+  & HIPAA: notify individuals and HHS $\le$60 days (500+ contemporaneous);
+    FTC: notify $\le$30 days for events affecting 500+ consumers
+    (since 13 May 2024); state timelines layer on top \\
+F4 Cross-border transfers
+  & Handled functionally through export control rather than a
+    transfer-adequacy regime --- see F5; CCPA/CPRA vendor flow-down for
+    consumer data~\cite{us-ccpa-cpra}
+  & No EU-style adequacy list; the operative cross-border control for
+    research data is the deemed-export regime (F5) \\
+F5 Trust / AI / technology governance (export control)
+  & EAR (15 C.F.R. 730--774, fundamental-research exclusion
+    \S734.8)~\cite{us-ear}; ITAR (22 C.F.R. 120--130)~\cite{us-itar};
+    Commerce/BIS, State/DDTC
+  & Licensing + deemed-export: releasing controlled
+    technology/technical data to foreign nationals (even on US soil)
+    is an export; operationalised via technology-control plans and
+    segregated environments \\
+F6 Conformity assessment / certification
+  & CMMC Program (32 C.F.R. Part 170) with DFARS
+    implementation~\cite{us-cmmc}; NIST SP~800-171 Rev.~3 as the
+    assessed control set~\cite{nist-171,nist-171r3,nist-sp800-53};
+    DoD (CMMC PMO, DIBCAC), C3PAOs
+  & CMMC final rule effective 16 Dec 2024; DFARS clause effective
+    10 Nov 2025, phased over ~3 years; Level~2 (CUI) requires a C3PAO
+    assessment; artefacts retained six years \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Worked applicability demonstration (US).} Take the same
+mid-sized research university, now with a Title-IV financial-aid office,
+a small health clinic and one DoD-funded research project. The spine
+applies, but it is \emph{assembled} from sector statutes rather than
+read off one instrument. \emph{F1} is anchored by FERPA over student
+records~\cite{us-ferpa}; CCPA/CPRA mostly does \emph{not} reach the
+institution directly but reaches its vendors~\cite{us-ccpa-cpra}.
+\emph{F2} is triggered the moment the institution participates in
+Title-IV: the FTC Safeguards Rule classifies it as a financial
+institution and requires the written security programme with a
+qualified individual~\cite{us-ftc-safeguards}; the clinic adds the
+HIPAA Security Rule risk analysis~\cite{us-hipaa-security}. \emph{F3}
+gives the institution \emph{two} breach clocks --- HIPAA's 60-day outer
+limit and the FTC's 30-day / 500-consumer trigger --- plus any state
+clock; as in the EU case, the architecture must meet the
+\emph{shortest} applicable deadline~\cite{us-hipaa-breach}. \emph{F4}
+is unusual: there is no adequacy regime, so the cross-border control
+that bites is the \emph{deemed-export} concept --- releasing the
+DoD-project's controlled technical data to a foreign-national
+researcher, even on campus, is an export needing a license or a
+technology-control plan~\cite{us-ear,us-itar}. \emph{F5} therefore
+\emph{is} the cross-border control here, which is why F4 and F5 fold
+together in the US column. \emph{F6} is where the US regime is most
+distinctive: CMMC converts the NIST SP~800-171 controls into a
+\emph{contractually enforceable, third-party-assessed} certification
+that the DoD-funded project cannot be awarded without~\cite{us-cmmc,
+nist-171r3}. The demonstration shows the same six functions resolving
+to a different instrument geometry --- the spine is invariant, the
+assembly is sectoral.
+
+% ----------------------------------------------------------------------------
+\subsection{United Kingdom --- light regime (post-Brexit, diverging)}
+\label{sec:reg-uk}
+
+The UK carries the spine through retained-and-amended EU-derived
+instruments now diverging via domestic reform. The data-protection
+authority is the ICO (becoming the Information Commission under the
+Data (Use and Access) Act 2025); cyber resilience runs through the NIS
+Regulations 2018 with sector competent authorities and the NCSC;
+accessibility runs on domestic statute.
+
+\begin{table}[H]
+\centering\small
+\caption{United Kingdom --- F1--F6 instantiation (light regime).}
+\label{tab:reg-uk}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.40\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.42\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.18\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Obligation & Instrument and authority & Deadline / mechanism \\
+\midrule
+F1 Data protection / security of processing
+  & UK GDPR with the Data Protection Act 2018, amended by the Data
+    (Use and Access) Act 2025~\cite{uk-gdpr,uk-dpa-2018,uk-duaa-2025};
+    ICO / Information Commission
+  & Standing security-of-processing duty (Art.~32); DUAA 2025 key
+    provisions in force 5 Feb 2026 \\
+F2 Cybersecurity risk governance
+  & NIS Regulations 2018 (SI 2018/506); forthcoming Cyber Security and
+    Resilience Bill~\cite{uk-nis-2018,uk-ncsc,uk-csr-bill}; sector
+    competent authorities, ICO (RDSPs), NCSC
+  & Risk-management duty; NCSC Cyber Assessment Framework; CSR Bill
+    expands scope (e.g. managed service providers), not yet in force \\
+F3 Incident / breach notification
+  & UK GDPR Art.~33~\cite{uk-gdpr}; NIS Regs reg.~11~\cite{uk-nis-2018};
+    ICO; sector competent authority / NCSC
+  & GDPR breach to ICO $\le$72\,h; significant NIS incident to the
+    competent authority $\le$72\,h \\
+F4 Cross-border transfers
+  & UK GDPR Chapter~V; ICO IDTA and the UK Addendum to the EU
+    SCCs~\cite{uk-idta,uk-gdpr,uk-duaa-2025}; ICO, Secretary of State
+    (adequacy)
+  & Adequacy where it exists, else IDTA / Addendum + a transfer-risk
+    assessment; DUAA 2025 ``not-materially-lower'' data-protection test \\
+F5 eID / trust services
+  & UK eIDAS (retained Reg.~910/2014 as amended; SI
+    2016/696)~\cite{uk-eidas-2016}; ICO as supervisory body
+  & Conformity / qualified-status mechanism: ICO grants/revokes
+    qualified status with breach reporting and audits \\
+F6 Accountability / accessibility conformity
+  & Public Sector Bodies Accessibility Regulations 2018 (SI 2018/952),
+    WCAG~2.1 AA / EN~301~549~\cite{uk-psbar-2018,uk-jisc-accessibility};
+    GDS (monitoring), EHRC (enforcement)
+  & Standing conformance + published accessibility statement; GDS
+    samples, EHRC may issue unlawful-act notices \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ----------------------------------------------------------------------------
+\subsection{Brazil --- light regime (distributed federal stack)}
+\label{sec:reg-br}
+
+Brazil carries the spine through a distributed federal stack with no
+single omnibus cybersecurity statute: the LGPD (data protection and
+breach notification), the national cyber strategy and federal
+incident-management decrees, the Inclusion Law (accessibility), the
+Access to Information Law (transparency) and the Federal Administrative
+Procedure Law (due process). Federal public universities are in scope
+as \emph{autarquias / funda\c{c}\~oes p\'ublicas} of the federal public
+administration.
+
+\begin{table}[H]
+\centering\small
+\caption{Brazil --- F1--F6 instantiation (light regime).}
+\label{tab:reg-br}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.40\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.42\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.18\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Obligation & Instrument and authority & Deadline / mechanism \\
+\midrule
+F1 Data protection / security of processing
+  & LGPD (Lei n\textsuperscript{o}~13.709/2018), esp. Art.~46~%
+    \cite{br-lgpd-13709}; ANPD
+  & Continuous duty: technical and administrative security measures;
+    ANPD may set minimum standards; applies to public-power controllers \\
+F2 Cybersecurity governance / risk management
+  & E-Ciber national cyber strategy (Decreto
+    n\textsuperscript{o}~10.222/2020)~\cite{br-eciber-d10222};
+    Marco Civil da Internet baseline~\cite{br-marco-civil-12965};
+    GSI/PR
+  & Federal bodies (incl. universities) implement strategic actions
+    under GSI coordination; strategy-cycle instrument plus GSI
+    normative instructions \\
+F3 Incident / breach notification
+  & LGPD Art.~48 operationalised by Resolu\c{c}\~ao CD/ANPD
+    n\textsuperscript{o}~15/2024~\cite{br-anpd-res15-2024}; federal
+    cyber track via Decreto n\textsuperscript{o}~10.748/2021
+    (CTIR.Gov)~\cite{br-redeinc-d10748}; ANPD, GSI/PR--CTIR.Gov
+  & Personal-data breaches: notify ANPD and subjects $\le$3 business
+    days (supplementable $\le$20 business days); 5-year retention;
+    federal cyber incidents via CTIR.Gov \\
+F4 Cross-border transfers
+  & LGPD international-transfer regime (Chapter~V of Lei
+    13.709/2018)~\cite{br-lgpd-13709}; ANPD
+  & Transfer on an adequacy / safeguards / consent / contractual
+    basis; ANPD supervises (no EU-style adequacy list) \\
+F5 Accessibility / inclusion (trust-equivalent duty)
+  & Lei Brasileira de Inclus\~ao (Lei n\textsuperscript{o}~13.146/2015),
+    Arts.~63\,ff., operationalised by e-MAG~\cite{br-lbi-13146}; MEC,
+    Governo Digital
+  & Standing accessibility duty assessed against e-MAG; conditions MEC
+    course authorisation/recognition \\
+F6 Accountability / transparency / due process
+  & Access to Information Law (Lei n\textsuperscript{o}~12.527/2011)~%
+    \cite{br-lai-12527}; Federal Administrative Procedure Law (Lei
+    n\textsuperscript{o}~9.784/1999)~\cite{br-procadm-9784}; CGU,
+    each federal body
+  & Active + passive disclosure with statutory response deadlines;
+    baseline procedural guarantees governing decisions arising from
+    F1--F5 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ----------------------------------------------------------------------------
+\subsection{South Africa --- light regime (single national jurisdiction)}
+\label{sec:reg-za}
+
+South Africa carries the spine through a single national jurisdiction
+with no member-state transposition layer and no standalone unified
+Cybersecurity Act. POPIA supplies data protection, breach notification
+and cross-border transfer; the Cybercrimes Act supplies incident /
+offence reporting; the ECT Act supplies trust services; and
+accessibility is principle-based under the Equality Act. The African
+Union's Malabo Convention is regional \emph{context} only --- South
+Africa has signed but not ratified it, so no transfer obligation flows
+from it to ZA institutions~\cite{za_malabo}.
+
+\begin{table}[H]
+\centering\small
+\caption{South Africa --- F1--F6 instantiation (light regime).}
+\label{tab:reg-za}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.40\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.42\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.18\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Obligation & Instrument and authority & Deadline / mechanism \\
+\midrule
+F1 Data protection / security of processing
+  & POPIA (Act 4 of 2013), Condition~7,
+    s.19~\cite{za_popia,za_inforegulator}; Information Regulator
+  & Continuous risk-based duty: appropriate, reasonable technical and
+    organisational measures; no threshold / size carve-out \\
+F2 Cybersecurity risk governance
+  & POPIA Condition~7 security safeguards read with the Cybercrimes
+    Act baseline~\cite{za_popia,za_cybercrimes}; Information Regulator,
+    SAPS
+  & Risk-based security duty; no standalone unified Cybersecurity Act,
+    so the security limb is carried by POPIA \\
+F3 Incident / breach notification
+  & POPIA s.22~\cite{za_popia}; Cybercrimes Act s.54
+    (offence reporting)~\cite{za_cybercrimes}; Information Regulator,
+    SAPS
+  & POPIA: notify Regulator and subjects as soon as reasonably
+    possible after discovery (no hour-count); Cybercrimes Act: report
+    qualifying offence $\le$72\,h where the university is an ECS provider \\
+F4 Cross-border transfers
+  & POPIA s.72~\cite{za_popia,za_inforegulator}; Information Regulator
+    (oversight), responsible party self-assesses adequacy
+  & Transfer on adequate-protection / BCR / binding-agreement /
+    consent / contractual-necessity basis; adequacy self-assessed and
+    documented per transfer (no adequacy list) \\
+F5 eID / trust services
+  & ECT Act (Act 25 of 2002), ss.13 and
+    37--40~\cite{za_ect_act}; South African Accreditation Authority
+  & Legal recognition of data messages and signatures; advanced
+    electronic signature requires an accredited provider's certificate
+    (rebuttable presumption of validity) \\
+F6 Accountability / accessibility (non-discrimination)
+  & PEPUDA / Equality Act (Act 4 of 2000), s.9~\cite{za_pepuda};
+    Equality Courts, SAHRC
+  & Standing reasonable-accommodation duty; no dedicated
+    web-accessibility statute, WCAG as de-facto benchmark \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ============================================================================
+\section{Mapping method: deriving a row for an unlisted regime}
+\label{sec:reg-mapping}
+
+The five profiles above are worked instantiations, not an exhaustive
+list. An adopter in any other jurisdiction derives its own row by the
+same procedure: the spine of Section~\ref{sec:reg-spine} is fixed, the
+control set of Table~\ref{tab:reg-matrix} is fixed, and only the
+\emph{instrument} column has to be filled. The playbook below fills it.
+
+\begin{description}[leftmargin=2.2em,style=nextline]
+  \item[Step 1 --- Identify your data-protection authority and its
+    security duty (F1).]
+    Find the competent authority for personal data (a national DPA, a
+    sectoral regulator, or --- as in the US --- several). Locate its
+    \emph{security-of-processing} duty and confirm whether a
+    size/de-minimis threshold exists. In every regime examined, the
+    security duty has \emph{no} size exemption; treat its absence as
+    the default and verify it explicitly. Map the duty to the F1 row of
+    Table~\ref{tab:reg-matrix}.
+  \item[Step 2 --- Identify your lawful-basis and risk-governance
+    regime (F2).]
+    Determine the lawful basis on which the institution processes
+    personal data (public task, legitimate interest, consent) and the
+    statute or framework that requires a documented, risk-based
+    security programme. Where no dedicated cyber statute exists (as in
+    Brazil or South Africa), the risk-governance duty is usually
+    carried by the security limb of the data-protection law; record
+    which instrument carries it.
+  \item[Step 3 --- Identify your breach / incident deadline (F3).]
+    Find every applicable notification clock --- the data-protection
+    breach clock and any cyber-incident clock --- and record the
+    \emph{shortest} one, because the observability and
+    incident-response capability must satisfy the tightest deadline
+    that can bite. Note both the recipient (DPA, CSIRT, police) and the
+    trigger (risk-of-harm, affected-count, offence type).
+  \item[Step 4 --- Identify your essential-entity / cyber-duty status
+    (F2/F3 scope).]
+    Determine whether the institution falls into an essential- or
+    important-entity (or equivalent) category, and on what basis ---
+    function-performed (as under NIS2) or sector listing. This sets the
+    depth at which F2 and F3 apply and whether tiered (24\,h / 72\,h /
+    final) reporting is in scope.
+  \item[Step 5 --- Identify your transfer regime (F4).]
+    Establish how personal data may lawfully leave the jurisdiction:
+    an adequacy-list mechanism (EU/UK style), self-assessed adequacy
+    plus safeguards (Brazil / South Africa style), or a functional
+    substitute such as export control (US style). Record the documented
+    artefact the regime expects (transfer-impact assessment, binding
+    agreement, technology-control plan).
+  \item[Step 6 --- Identify your sector overlays (F5/F6).]
+    Add the sector-specific layers the institution triggers: a
+    trust-services / eID regime for signed diplomas and contracts; an
+    AI-governance regime for deployed AI; export / controlled-technology
+    rules for restricted research; health, financial-aid or
+    accessibility statutes for the relevant units. Each overlay maps to
+    F5 (governed technology) or F6 (conformity / accountability).
+  \item[Step 7 --- Bind each finding to the control set.]
+    For each of Steps~1--6, write the local instrument, authority and
+    deadline into the instrument column against the corresponding F
+    row, leaving the SUIT control-mechanism column of
+    Table~\ref{tab:reg-matrix} unchanged. The result is the adopter's
+    own regime profile in the same shape as the five worked profiles
+    above --- and the same architectural evidence base discharges it.
+\end{description}
+
+\paragraph{Closing note on transferability.} The procedure terminates
+because the spine is finite and size-invariant: there are six functions,
+each maps to a fixed control capability, and the only per-jurisdiction
+work is reading the local instrument that carries each function. An
+adopter that completes Steps~1--7 has reproduced, for its own regime,
+the proof the five worked profiles already carry --- that discharging
+F1--F6 is the regulator-facing minimum, and that the
+\framework{SUIT} control set is the same in every jurisdiction. The
+mapping is interpretive engineering guidance and must be confirmed
+against the adopter's own legal framework and counsel before being
+relied upon.
+
+\endinput

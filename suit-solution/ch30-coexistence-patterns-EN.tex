@@ -1,0 +1,254 @@
+% ============================================================================
+% Chapter 30 --- Coexistence patterns library
+% ----------------------------------------------------------------------------
+% Purpose : the recurring dual-stack situations encountered during a
+%           migration, with their bridging patterns. Closes Part III.
+% Page target: ~5 pages.
+% Dependencies: Ch. 18-27 (each wave invokes coexistence as a principle).
+% ============================================================================
+
+\chapter{Coexistence patterns library}
+\label{ch:coexistence-patterns}
+
+The wave chapters of Part~III each declare a coexistence pattern as
+the operational state of the wave. Several of those patterns recur
+across waves and across institutions; this chapter consolidates the
+six most frequently encountered, presents their bridging mechanisms,
+and notes the anti-patterns that recur with them. The patterns are
+described at the level of operational principle rather than at the
+level of specific tooling, since their realisation varies with the
+products the institution operates.
+
+%-----------------------------------------------------------------------------
+\section{Pattern: incumbent enterprise directory \texorpdfstring{$\leftrightarrow$}{<->} institutional IdP}
+\label{sec:cp-ad-keycloak}
+
+The pattern in which the incumbent enterprise directory remains
+the authoritative source for staff identities while a new
+institutional identity provider (an open-source IdP or comparable)
+handles federation, role activation, and downstream OIDC
+integrations.
+
+\paragraph{Bridging mechanism.} The incumbent enterprise
+directory, supplied by the institution's incumbent identity-suite
+vendor, continues to authenticate users at the institutional
+perimeter. The new IdP federates against the directory through
+standard SAML2 or OIDC bridges. Attributes from the directory ---
+group membership, role, organisational unit --- are mapped to the
+institutional schema (D7.7) at the boundary of the new IdP rather
+than propagated into downstream applications in their native form.
+
+\paragraph{Synchronisation direction.} The pattern is
+unidirectional from the incumbent directory toward the new IdP for
+the duration of Wave~1. Reverse synchronisation (changes made in
+the new IdP flowing back to the directory) is generally avoided to
+keep the directory's authoritative status unambiguous.
+
+\paragraph{Drift detection and exit window.} Discrepancies
+between the directory and the new IdP are surfaced through the
+observability layer. The pattern's exit window is the period
+during which the institution can return to directory-only
+operation if the new IdP fails; the window is typically aligned
+with the legacy IdP retirement schedule.
+
+%-----------------------------------------------------------------------------
+\section{Pattern: incumbent endpoint-management suite \texorpdfstring{$\leftrightarrow$}{<->} declarative configuration}
+\label{sec:cp-sccm-ansible}
+
+The pattern in which the institution's existing endpoint
+configuration management (the incumbent vendor's unified endpoint
+management suite) coexists with declarative configuration
+(a declarative configuration-management toolchain) for
+the populations the new approach covers.
+
+\paragraph{Bridging mechanism.} Each population is governed by a
+single source. Staff desktop endpoints typically remain on the
+incumbent-suite side; servers and research workstations typically
+move to the declarative-configuration side; other endpoint classes
+can sit on either side depending on the institution's mature
+tooling. The boundary between the populations is documented and
+stable for the duration of the coexistence.
+
+\paragraph{Configuration overlap.} Where a single endpoint must be
+visible to both systems (rare, but it occurs in shared-use scenarios),
+the institution declares which system is authoritative for which
+configuration domain --- typically the incumbent suite for
+compliance policy and the declarative toolchain for application
+configuration.
+
+\paragraph{Posture export.} The unified posture schema of D11.6
+ingests posture from both sides. Policies in
+\trchap{ch:policy}{} are authored against the unified schema and
+do not depend on which configuration management produced the
+signal.
+
+%-----------------------------------------------------------------------------
+\section{Pattern: per-volume-priced commercial SIEM \texorpdfstring{$\leftrightarrow$}{<->} open-source store}
+\label{sec:cp-splunk-opensearch}
+
+The pattern in which a per-volume-priced commercial SIEM operates
+alongside an open-source store, with the institution managing the
+boundary deliberately for operational and financial reasons.
+
+\paragraph{Bridging mechanism.} The collector layer of Wave~2
+emits the canonical TAC schema to both stores. The commercial SIEM
+ingests the events that the SOC actively investigates within the
+investigation window the institution chooses to fund; the
+open-source store ingests the longer-tail retention that the
+commercial SIEM's per-GB pricing makes unattractive. Detection
+content is authored in both stores where the institution's risk
+profile warrants duplication.
+
+\paragraph{Per-source routing.} Sources whose events are most
+operationally consumed by the SOC (identity, network attachment,
+endpoint posture) are routed to the commercial SIEM in full;
+sources whose events serve audit-replay rather than routine
+investigation (verbose flow records, low-severity informational
+events) are routed primarily to the open-source store with a
+sampled stream to the commercial SIEM for context.
+
+\paragraph{Migration of dashboards.} Commercial-SIEM dashboards are
+migrated incrementally to the open-source store and its
+visualisation layer when the institution chooses to retire a
+commercial-SIEM content element. The choice to retire is informed
+by financial review rather than by technical inability.
+
+%-----------------------------------------------------------------------------
+\section{Pattern: incumbent commercial hypervisor \texorpdfstring{$\leftrightarrow$}{<->} open virtualisation substrate}
+\label{sec:cp-vmware-k8s}
+
+The pattern in which the incumbent commercial hypervisor platform
+continues to host the institution's existing workloads while new
+workloads are provisioned on an open virtualisation substrate
+(a Kubernetes-native VM platform or an open-source IaaS), with
+explicit governance of which platform hosts which workload.
+
+\paragraph{Bridging mechanism.} The governance layer (Wave~8
+classification) decides per workload class which platform is
+appropriate: existing legacy workloads stay on the commercial
+hypervisor through their natural lifecycle; new workloads provision
+on the open substrate by default; specific workload classes that
+benefit from the commercial platform's operational features (live
+migration, mature DR) remain on it by explicit decision.
+
+\paragraph{Live-migration boundary.} Live migration between
+substrates is technically possible (the open substrate can import
+the commercial platform's VMs, and supports VM-level migration) but
+is treated as a project rather than a routine operation. Cold
+migration on workload retirement / refresh is the more common
+pattern.
+
+\paragraph{Skills coexistence.} Operational teams need both
+skill sets during the coexistence, and the institution's staffing
+profile must carry both for the duration. The skill investment is
+typically an explicit programme item rather than a passive
+expectation.
+
+%-----------------------------------------------------------------------------
+\section{Pattern: enterprise storage array \texorpdfstring{$\leftrightarrow$}{<->} open-source distributed storage}
+\label{sec:cp-netapp-ceph}
+
+The pattern in which an enterprise storage array from a commercial
+vendor continues to host the institution's existing data corpora
+while an open-source distributed storage cluster provides storage
+for new workloads and for the research-scale capacity the
+enterprise platform is not cost-effective for.
+
+\paragraph{Bridging mechanism.} The classification scheme of
+D10.4 determines which platform hosts which data class. Enterprise
+storage typically retains administrative and compliance data; the
+open-source cluster typically holds research data, container
+persistent volumes, and the cold-tier object storage that the
+observability layer (D12.3) needs.
+
+\paragraph{Migration of pools.} Migration from one platform to
+the other occurs at workload boundaries: a workload migrating
+between platforms (Wave~8) typically migrates its storage at the
+same time. Storage-only migration without workload migration is
+operationally costly and is reserved for specific drivers
+(end-of-support, cost reset, disclosure-regime change).
+
+\paragraph{Data-integrity validation.} A migration between
+platforms validates data integrity through documented checksums
+or content-addressable verification. The validation is part of
+the conformance suite of \trchap{ch:conformance}{}
+(data-portability category).
+
+%-----------------------------------------------------------------------------
+\section{Pattern: eduroam \texorpdfstring{$\leftrightarrow$}{<->} TAC-aware Wi-Fi}
+\label{sec:cp-eduroam-tac}
+
+Where the institution participates in a federated academic-roaming
+service (in the research-and-education community, eduroam), this is
+the pattern in which that participation continues for
+inter-institutional roaming while a TAC-aware RADIUS attachment
+governs intra-institutional connections.
+
+\paragraph{Bridging mechanism.} The institution's RADIUS service
+recognises both authentication paths. eduroam-routed
+authentications (visiting researchers from peer institutions,
+staff roaming abroad) follow the eduroam attribute schema
+unchanged. Local authentications (staff and students at the
+institution's sites) carry the institutional schema with TAC-
+relevant attributes that the policy plane consumes.
+
+\paragraph{Attribute schema preservation.} The federated-roaming
+technical profile (eduroam, where used) is treated as inviolate:
+extending it with institution-specific attributes for
+inter-institutional sessions would break federation. The
+institutional attributes are added only on the non-roaming
+authentication path.
+
+\paragraph{Roaming policy.} Visiting researchers receive the
+default eduroam treatment (Internet access from a guest zone)
+unless an explicit institutional arrangement (a hosted research
+project, a long-stay visitor) provisions a TAC for them.
+
+%-----------------------------------------------------------------------------
+\section{Common anti-patterns}
+\label{sec:cp-anti-patterns}
+
+The patterns above describe how coexistence is managed. The
+anti-patterns below describe how it goes wrong.
+
+\paragraph{Long-running dual stack without exit date.} A coexistence
+period whose end is not declared at the wave's start tends to
+become permanent. The institution operates two of everything
+indefinitely, and the cost grows. The mitigation is to declare the
+exit date at wave open, to track it through the programme
+governance, and to escalate when the date drifts.
+
+\paragraph{Unspecified bridging ownership.} The bridge between two
+systems requires operational ownership. When ownership is implicit,
+the bridge fails silently --- a synchronisation job stops, a
+metadata refresh expires, a policy mapping drifts --- and the
+discovery is during an incident. The mitigation is to name the
+bridge owner explicitly at wave open, with documented escalation
+path.
+
+\paragraph{Bidirectional sync without conflict resolution.} A
+bridge that synchronises in both directions without a documented
+conflict-resolution rule produces silent data loss when the two
+sides diverge. The mitigation is unidirectional sync wherever
+possible; where bidirectional is unavoidable, an explicit
+conflict-resolution rule documented and tested before production
+deployment.
+
+\paragraph{Coexistence as a permanent feature.} Some institutions
+stabilise on a coexistence pattern and treat it as the architecture
+rather than as a transition. The pattern is not always wrong (a
+hybrid open-source federation-and-IdP identity arrangement is a
+legitimate end-state, for example), but it should be a deliberate
+decision
+rather than an accident. The mitigation is the periodic review
+under the sovereignty grid: a coexistence that has not been
+revisited in twenty-four months is reviewed against its current
+costs and benefits.
+
+\medskip
+
+\noindent The patterns and anti-patterns above are the principal
+operational shapes of coexistence in the playbook. Their explicit
+documentation in the institution's wave plans turns coexistence
+from an unplanned consequence of migration into a deliberate
+engineering artefact.

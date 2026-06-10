@@ -1,0 +1,410 @@
+% ============================================================================
+% Chapter 12 --- Observability and audit
+% ----------------------------------------------------------------------------
+% Purpose : TAC-correlated event schema, ingestion pipeline, retention,
+%           SIEM integration. Belongs to the Control and Governance plane.
+%           One additional section (12.2 event schema) compared to the
+%           standard layer template (D6.5 extended).
+% Page target: ~5 pages.
+% Dependencies: Ch. 5 (OpenTelemetry, CloudEvents, syslog RFC 5424),
+%               Ch. 7 (D7.6 makes this chapter the canonical schema owner),
+%               Ch. 6 / 8 / 9 / 10 / 11 (all layers feed this layer),
+%               Ch. 25 (Wave 7 audit/IR builds on this layer).
+% Mirrors layer template, plus dedicated event-schema section.
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D12.1 minimum compliance set for the observability layer
+%   D12.2 canonical TAC event schema (frozen, referenced everywhere)
+%   D12.3 reference instantiation = Vector + Kafka + OpenSearch + Grafana Loki
+%   D12.4 alternatives = Splunk + OTel collectors; Sentinel + Log Analytics
+%   D12.5 observability sovereignty scores
+%   D12.6 retention is policy-driven, not product-driven
+% ============================================================================
+
+\chapter{Observability and audit}
+\label{ch:observability}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the observability layer, with one
+additional section (\S\ref{sec:ob-schema}) that defines the
+canonical TAC event schema referenced from \trchap{ch:policy}{}
+(D7.6) and from every other layer chapter that produces audit
+events. The chapter's outputs are consumed by
+\trchap{ch:wave7-audit-ir}{Wave~7 --- TAC-aware audit and IR}. The
+layer belongs to the \emph{Control and governance plane}.
+\end{caveatbox}
+
+The observability layer is the place where the activity of every
+other layer becomes visible to the institution. It is also the
+place where two structural risks accumulate quietly: a per-volume
+ingestion cost that grows faster than the institution's monitoring
+capacity, and a schema drift between sources that makes correlation
+unreliable precisely when it is most needed --- during an incident.
+The architectural commitment of this layer is consequently to fix
+the schema at the institutional level and to keep the ingestion
+pipeline portable.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:ob-contract}
+
+The observability layer is responsible for: collecting audit-grade
+events from every other layer in a uniform schema; transporting
+them through a portable ingestion pipeline; retaining them
+according to data-classification-driven policies; making them
+searchable for routine operations and forensic investigation; and
+producing alerting on policy-relevant patterns.
+
+\begin{contractbox}[Observability layer]
+\noindent A compliant observability layer, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item collect events from every layer in the canonical TAC schema
+    of \S\ref{sec:ob-schema};
+  \item transport events through
+    OpenTelemetry-compatible~\cite{opentelemetry-spec} collectors
+    and an open intermediary (Kafka~\cite{kafka}, NATS or
+    equivalent), so that the analytical store can be substituted
+    without re-instrumenting the sources;
+  \item retain events under a documented retention schedule keyed
+    on data classification, with the schedule reviewable and
+    contractually enforceable;
+  \item provide search and correlation capabilities sufficient for
+    routine operations and for the incident-response runbooks of
+    \trchap{ch:wave7-audit-ir}{};
+  \item emit alerts on policy-relevant patterns in a form
+    consumable by the institution's chosen incident-response
+    workflow.
+\end{itemize}
+\end{contractbox}
+
+\paragraph{Retention is policy-driven, not product-driven.}
+Retention durations are determined by the regulatory regime, the
+classification of the events, and the institution's incident
+response and audit obligations --- not by the storage tier of the
+chosen product. The architectural posture is to express retention
+as a documented institutional policy and to instantiate it in the
+chosen analytical store, never the inverse.
+
+%-----------------------------------------------------------------------------
+\section{Audit-store integrity}
+\label{sec:ob-integrity}
+
+The audit trail is load-bearing for accountability and for the lawful
+basis of monitoring, so the store that holds it must itself be
+tamper-evident. The architectural posture requires three controls,
+independent of the chosen product:
+\begin{itemize}[nosep]
+  \item \textbf{Append-only / WORM.} Audit events are written to an
+    append-only or write-once-read-many cold tier; operational
+    mutation or deletion of past records is not a supported path.
+  \item \textbf{Tamper-evidence.} Per-record or per-batch cryptographic
+    signing or hash-chaining lets any later alteration or gap be
+    detected.
+  \item \textbf{Separation of duties.} The operators who run the
+    pipeline, the analysts who read the logs, and the authority to
+    expire records under the retention schedule are distinct roles;
+    retention expiry follows a four-eyes rule.
+\end{itemize}
+This discharges \gls{gdpr} Art.~32 (integrity of processing) and
+Art.~5(1)(f), \gls{nis2} Art.~21(2)(b)/(f) (incident handling;
+effectiveness assessment), ISO/IEC~27001
+controls A.8.15/A.8.16, and NIST SP~800-53 AU-9 (protection of audit
+information). The break-glass procedure does not bypass it: emergency
+access is itself an audited, signed event.
+
+%-----------------------------------------------------------------------------
+\section{Canonical TAC event schema}
+\label{sec:ob-schema}
+
+The canonical TAC event schema is the institutional contract that
+every event-producing layer satisfies. Its purpose is to make
+correlation across layers possible and to make the audit trail
+reconstructable. Table~\ref{tab:ob-schema} lists the required and
+recommended fields. The schema is presented as an abstract structure;
+its concrete representation in an institutional deployment may use
+OpenTelemetry, CloudEvents, or a JSON schema, provided that the
+abstract structure is preserved.
+
+\begin{table}[H]
+\centering\small
+\caption{Canonical TAC event schema. \textbf{R} required for every
+event; \textbf{c} required when the field is meaningful for the
+producing layer; \textbf{o} optional but recommended.}
+\label{tab:ob-schema}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.8\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=2.0\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Field & Req. & Description \\
+\midrule
+\texttt{timestamp}              & R & Event time, UTC, ISO~8601, microsecond precision when available. \\
+\texttt{correlation\_id}        & R & TAC session identifier or activity correlation identifier; ties events across layers. \\
+\texttt{event\_id}              & R & Unique identifier of this event. \\
+\texttt{layer}                  & R & Producing layer (identity, policy, network, compute, storage, endpoint, crypto, orchestration). \\
+\texttt{event\_type}            & R & Layer-specific event type (e.g.\ \texttt{auth.success}, \texttt{policy.decision}, \texttt{storage.read}). \\
+\texttt{subject\_id}            & R & Institutional identifier of the subject involved, where applicable; otherwise \texttt{system}. \\
+\texttt{subject\_attributes}    & c & Role activated, group memberships, posture summary at the moment of the event. \\
+\texttt{resource\_id}           & c & Identifier of the resource accessed (workload, dataset, endpoint, configuration object). \\
+\texttt{resource\_classification} & c & Data classification label of the resource, where applicable. \\
+\texttt{environment}            & c & Zone, time-of-day, location signals, posture flags. \\
+\texttt{decision\_verdict}      & c & For policy-relevant events: \texttt{allow}, \texttt{deny}, \texttt{indeterminate}. \\
+\texttt{decision\_obligations}  & c & Obligations applied as part of the decision (timeout, additional factor, audit class). \\
+\texttt{policy\_version}        & c & Version of the policy bundle that produced the decision. \\
+\texttt{duration\_ms}           & c & Evaluation or processing duration, milliseconds. \\
+\texttt{source}                 & R & Producing component, instance, version. \\
+\texttt{severity}               & R & \texttt{info}, \texttt{notice}, \texttt{warn}, \texttt{error}. \\
+\texttt{message}                & o & Free-text description for human readers. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Correlation identifier.} The \texttt{correlation\_id} is
+the field that turns a stream of events into a navigable activity
+trace. It is set when a TAC is activated and propagated to every
+event emitted under that activation, across layers, until the TAC
+is decommissioned. The mechanism for propagating the identifier is
+implementation-specific (HTTP header, message attribute, log field);
+the architectural requirement is that propagation occur and that
+the identifier be preserved in the event store.
+
+\paragraph{Schema evolution.} The schema as published is the
+institutional baseline. Extensions are admissible provided they do
+not displace the baseline fields and provided they are documented
+in the institution's observability governance. Schema breakage ---
+removing a baseline field, redefining its semantics --- is a
+governance event, not a product-driven one.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: Vector + Kafka + OpenSearch + Grafana Loki + Grafana}
+\label{sec:ob-reference}
+
+\begin{instantiationbox}[Observability layer]
+\noindent\textbf{Topology.} Vector~\cite{vector-project} collectors
+are deployed at every event-producing source and convert local
+formats to the canonical TAC schema; Kafka~\cite{kafka} serves as
+the durable ingestion buffer; events are partitioned by
+classification and routed to two stores:
+OpenSearch~\cite{opensearch} for indexed search and structured
+analytics, and Grafana Loki~\cite{grafana-loki} for high-volume log
+lines whose retention is shorter. Grafana~\cite{grafana} dashboards
+present operational and audit views;
+alerting flows to the institution's chosen incident-response
+workflow. Cold-tier retention beyond the indexed window is held in
+S3-compatible object storage (consistent with
+\S\ref{sec:st-reference}).
+\end{instantiationbox}
+
+\paragraph{Operational considerations.} The reference instantiation
+is operationally substantial: the durable ingest buffer, the
+indexed-search cluster, and the cold-tier export pipeline each carry
+their own operational rhythm. An indicative envelope, for a
+research-intensive institution operating the full pipeline, would be
+the institution's observability staffing profile sized for the full
+pipeline and shared with the security operations
+function. The labour market is broad for the individual components
+and narrower for the integrated pipeline.
+
+\paragraph{Volume management.} The principal recurring effort is
+volume management: not every event is equally valuable, and a
+naive ingestion strategy floods the analytical store with noise
+that obscures the signal. The architectural posture is to define
+event-class retention and indexing tiers as part of the schema
+governance, and to enforce them at the collector or buffer rather
+than at the analytical store. This reverses the per-GB economy of
+the commercial alternatives.
+
+\begin{realworldbox}[Audit pipeline precedents in academia]
+\noindent Public documentation of academic SIEM and observability
+pipelines is thinner than for identity or compute. Among what is
+available in the research-and-education networking community and its
+CSIRT fora, several research-intensive
+institutions are reported to operate observability pipelines that
+combine open-source collectors with commercial analytical stores;
+the specific architectures should be confirmed against their own
+published material when available.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Splunk Enterprise with OpenTelemetry collectors upstream}
+\label{sec:ob-alt1}
+
+\begin{alternativebox}[Splunk + OTel]
+\noindent The institution operates Splunk Enterprise~\cite{splunk} as the
+analytical store and SIEM, with OpenTelemetry collectors as the
+upstream collection layer that feeds Splunk while also feeding,
+optionally, a parallel open-source store for portability. The
+canonical schema of \S\ref{sec:ob-schema} is enforced at the
+collector layer, not at Splunk's ingestion.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Splunk's analytical depth, alerting
+sophistication, and the depth of its skills market are substantial.
+Forensic investigation and complex correlation are well supported.
+For institutions with mature Splunk operations, the productivity
+gain over a self-built pipeline can be significant.
+
+\paragraph{Where it constrains the institution.} Per-GB ingestion
+pricing is the principal financial concern, and one that has been
+the subject of considerable institutional revisiting in recent
+years. The architectural mitigation is to keep the collectors
+portable, so that data flow can be adjusted (sampled, tiered,
+re-routed) without re-instrumenting the sources, and so that exit
+from Splunk would be a re-routing of the collector layer rather
+than a re-foundation of the audit pipeline.
+
+\paragraph{When it could be the right choice.} An institution with
+mature Splunk operations, a financial framework that absorbs the
+per-GB exposure, and a sovereignty posture that accepts the data
+and institutional dimensions trade-offs in exchange for the
+analytical depth.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Microsoft Sentinel with Log Analytics}
+\label{sec:ob-alt2}
+
+\begin{alternativebox}[Microsoft Sentinel]
+\noindent The institution operates Microsoft Sentinel~\cite{microsoft-sentinel} on Log
+Analytics in a designated regional tenancy. Integration with
+Entra~ID-based identity and Microsoft 365 estate is direct;
+integration with non-Microsoft layers (Linux compute, OpenStack,
+Ceph) flows through OpenTelemetry collectors that translate to
+the Log Analytics ingest format.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Tight integration with the
+Microsoft estate, where one is already in place, and the
+cloud-native operating model that reduces
+the institutional infrastructure burden.
+
+\paragraph{Where it constrains the institution.} The data
+dimension considerations of \trchap{ch:sovereignty-grid}{} apply
+here as in \S\ref{sec:nw-sase}: Sentinel processes the institution's
+audit events in the supplier's cloud, under conditions that the
+institution should evaluate explicitly against its disclosure
+regime. The technical and institutional dimensions are bounded by
+Sentinel's product roadmap.
+
+\paragraph{When it could be the right choice.} An institution
+already operating its identity and endpoint layers on Microsoft
+products, where Sentinel's integration depth produces a meaningful
+operational simplification, and where the data-dimension trade-off
+has been evaluated explicitly.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:ob-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the observability
+instantiations.}
+\label{tab:ob-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.5\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.1\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (Vector+Kafka+OpenSearch+Loki) & Splunk + OTel & Sentinel + Log Analytics \\
+\midrule
+Data          & 3 Robust      & 2 Established & 1 Partial      \\
+Technical     & 3 Robust      & 1--2 Partial  & 1 Partial      \\
+Financial     & 2 Established & 1 Partial     & 1--2 Partial   \\
+Operational   & 2 Established & 3 Robust      & 3 Robust       \\
+Institutional & 3 Robust      & 1 Partial     & 1 Partial      \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Driving indicators by dimension.} Data: storage location,
+disclosure regime, retention policy. Technical: source visibility,
+schema preservation across the pipeline. Financial: cost
+predictability under volume growth, exit cost. Operational: skills
+market depth and analytical sophistication. Institutional: roadmap
+control over the schema and over the alerting model.
+
+\noindent The observability layer surfaces the financial dimension
+of the sovereignty grid more sharply than most others, because the
+per-volume pricing of the commercial alternatives interacts directly
+with the institution's instrumentation discipline: the more visible
+the institution makes itself to itself, the more it pays the
+supplier. The architectural mitigation is to decouple instrumentation
+from analytical-store choice, so that the institution can manage
+volume tactically without losing the activity it has chosen to
+make visible.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:ob-regulatory}
+
+\noindent The observability layer produces the records on which
+several regulatory obligations rest. Under the applicable data
+protection regime it
+contributes to its records-of-processing obligation (derivable from
+the canonical TAC schema), its breach-notification obligations
+(through detection and timeline reconstruction) and its
+security-of-processing obligation (through monitoring effectiveness).
+Under the applicable cybersecurity baseline regime it
+operationalises the incident-handling requirement
+and the regime's incident-reporting timelines (early warning,
+full notification, and final report), with the audit
+pipeline as the primary timeline-reconstruction substrate. The
+layer is the principal anchor of 27001~A.8.15 (logging) and
+A.8.16 (monitoring activities) and contributes to NIST CSF
+\textsf{DETECT} (DE.CM, DE.AE) and \textsf{RESPOND} (RS.AN ---
+analysis). Detailed mapping in \trchap{ch:regulatory-mapping}{}
+\S\ref{sec:rm-gdpr}, \S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:ob-pitfalls}
+
+\begin{pitfallbox}[Per-GB cost trap]
+\noindent A commercial SIEM whose pricing scales with ingestion
+volume creates an incentive to under-instrument: events are
+sampled, dropped, or routed elsewhere to keep the bill manageable,
+and the visibility of the institution to itself becomes a financial
+variable rather than a security one. The mitigation is the
+collector-layer decoupling described in
+\S\ref{sec:ob-reference}: ingestion volume becomes a tactical
+question that does not require re-instrumenting the sources.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Schema drift between sources]
+\noindent Each producing layer expresses events in its own format;
+without a canonical schema enforced at the collector, the
+analytical store accumulates events whose fields cannot be
+reliably correlated. Incident response that depends on
+\texttt{correlation\_id} discovers, mid-incident, that the field
+is present only on some sources. The mitigation is to make the
+canonical schema of \S\ref{sec:ob-schema} a contractual obligation
+of the collector layer, and to verify the obligation in the
+conformance suite of \trchap{ch:conformance}{}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Undocumented retention]
+\noindent The retention duration of the analytical store is the
+result of the chosen storage tier, the cleanup job's schedule, and
+the supplier's defaults --- which together produce an actual
+retention different from the institution's intended policy. The
+mitigation is to publish the retention schedule per event class
+and to verify it through deliberate retrieval at the documented
+horizon.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Sampling that breaks correlation]
+\noindent Volume management often takes the form of sampling: keep
+one event in $N$ for a given class. Sampling that drops events from
+the middle of a TAC activation breaks correlation: the surviving
+events of the activation lose their context. The mitigation is to
+sample by TAC session, not by event: either an entire session is
+retained, or none is. Per-event sampling should be reserved for
+event classes that do not participate in correlation.
+\end{pitfallbox}

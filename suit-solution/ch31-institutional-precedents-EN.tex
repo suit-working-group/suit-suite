@@ -1,0 +1,322 @@
+% ============================================================================
+% Chapter 31 --- Institutional precedents
+% ----------------------------------------------------------------------------
+% Purpose : annotated catalogue of named institutions whose publicly
+%           documented practices feed the architecture and the playbook.
+%           Designed to be expanded by the international university
+%           network in phase 2.
+% Page target: ~5 pages.
+% Dependencies: cited from Ch. 1 (synthesis), Ch. 18-27 (real-world
+%               reference boxes).
+% ============================================================================
+
+\chapter{Institutional precedents}
+\label{ch:institutional-precedents}
+
+\begin{caveatbox}[Status of this chapter]
+\noindent The institutional precedents in this chapter are
+identified as starting points for the institution's own research,
+not as direct templates. The architectural choices, operational
+practices, and contractual arrangements at any cited institution
+should be confirmed against that institution's own current public
+documentation before being cited as precedent in derivative work.
+This chapter records the institutions that have appeared in
+public discussion of the patterns this Reference draws on; it
+does not claim independent verification of every aspect of every
+deployment.
+\end{caveatbox}
+
+The architecture and playbook of this Reference do not invent
+their structural patterns from first principles --- they
+consolidate patterns visible at research institutions whose practices
+have been the subject of public discussion. This chapter records
+the institutional patterns that have appeared most consistently as
+references, organised by region and by the practice they
+illustrate. The catalogue is intended for the international
+university network anticipated in phase~2 of this initiative as a
+starting point that the network will refine and extend with
+direct contributions from each member.
+
+%-----------------------------------------------------------------------------
+\section{Method}
+\label{sec:ip-method}
+
+The institutions below are identified through three methodological
+filters: appearance in research-and-education-network community
+fora and at regional higher-education associations (such as EDUCAUSE
+in North America) in recent publications; reference in NIST or ISO/IEC publications
+that draw on academic deployments;
+mention in publicly available research-network case material
+(regional and national research-network case studies). The filters
+bias the catalogue toward institutions that
+publish their architectures --- in practice, larger and flagship
+institutions that maintain public architecture documentation;
+institutions whose practice is mature but undocumented, and smaller or
+teaching-led institutions that consume the same primitives as shared
+services rather than documenting their own builds, are necessarily
+under-represented. This is a documentation bias, not a statement about
+which institutions the architecture can serve (see
+\S\ref{sec:ip-beyond-flagship}).
+
+\paragraph{What is and is not claimed.} The catalogue claims that
+each pattern has been the subject of public discussion at the kind
+of institution to which it is attributed. The catalogue does \emph{not} claim
+that the institution's current architecture matches the description;
+that the institution endorses the pattern's use in this Reference;
+or that the cited practice is the institution's authoritative
+position. Each entry should be treated as a starting point for the
+reader's own research.
+
+\paragraph{Refresh cadence.} The catalogue would benefit from
+annual review: institutional architectures evolve, public
+documentation is revised or withdrawn, NREN community discussions
+move forward. The phase-2 international network is the natural
+locus for this refresh.
+
+%-----------------------------------------------------------------------------
+\section{European institutions}
+\label{sec:ip-europe}
+
+\paragraph{A large research organisation.} A large European
+research organisation operating a multi-institutional
+collaboration across many countries illustrates the pattern of an
+identity federation, an audit pipeline, and a high-performance
+experimental network architecture maintained under a strong
+public-documentation practice. The migration of such an
+organisation's identity and access management from a proprietary
+federation service to a Keycloak-based open-source single
+sign-on is documented in conference
+proceedings~\cite{cern-keycloak-2020}. Scale and an open
+documentation practice make this class of organisation one of the
+most frequently cited research-organisation references for
+research-intensive university IT.
+
+\paragraph{A federal institute of technology.} A federal
+institute of technology illustrates the model of granting local
+administrator rights through a documented procedure (request, IT
+risk assessment, approval by an authorised person in the
+applicant's organisational unit) and an IT-services group
+federated across departments. The pattern of distributed IT
+authority within a coherent institutional framework is a
+recurring point of reference in this Reference's
+federated-governance discussions.
+
+\paragraph{A collegiate university.} At a collegiate university,
+a central information-services function operates the institution's
+technology while an institutional data-network backbone connects
+the central services and the constituent colleges. The collegiate
+model illustrates a federated-network pattern under a coherent
+institutional architecture.
+
+\paragraph{A second collegiate university.} Distributed IT under
+a central information-security policy framework is similarly
+documented at other collegiate institutions. The pattern is
+similar in spirit to the preceding case but differs in
+operational details that each institution's own documentation
+should be consulted for.
+
+\paragraph{A national flagship research university.} A national
+flagship research-intensive university operating a central IT
+function is a typical European reference institution for
+research-data infrastructure. Public documentation at such an
+institution is often more limited than at the larger
+network-anchored institutions.
+
+%-----------------------------------------------------------------------------
+\section{North American institutions}
+\label{sec:ip-north-america}
+
+\paragraph{A research-intensive institute of technology.} At a
+research-intensive institute of technology, a central
+information-systems function, an information-technology governance
+committee reporting to the chief academic and executive officers,
+and a flagship laboratory's technical-infrastructure group appear
+recurrently as references for the federated-IT-governance pattern.
+Such a governance committee typically operates with a set of
+related committees (infrastructure steering, policy, project) that
+consult on different aspects of IT strategy. Public documentation
+at this class of institution is extensive and accessible.
+
+\paragraph{A large research-intensive university.} A
+campus-network function, a central university-IT organisation, and
+a dedicated research-computing centre appear as references for
+large-scale research-intensive university IT. The public
+documentation of the multi-zone segmentation pattern at such
+institutions is a frequently cited starting point.
+
+\paragraph{A network-anchored public research university.} A
+central IT-services organisation, an information-technology
+council, and a regional research-network relationship illustrate
+the network-anchored pattern at a large research-intensive
+university. A college of engineering's own computing network is a
+typical instance of faculty-level IT autonomy under institutional
+governance.
+
+\paragraph{A national research-cloud deployment.} A
+research-cloud architecture~\cite{jetstream2-2021}, operated under
+a national science-funding agency's access programme, is one of
+the most extensively documented research-cloud deployments. It is
+cited recurrently in this Reference's discussion of compute and
+research-storage patterns.
+
+\paragraph{A federated research university.} A research-intensive
+university is frequently cited for its identity-federation
+participation and for the integration of faculty IT with central
+services. Public documentation is accessible through such an
+institution's IT-services pages.
+
+%-----------------------------------------------------------------------------
+\section{Asia-Pacific institutions}
+\label{sec:ip-asia-pacific}
+
+\paragraph{A regional federation hub.} A leading
+national research university in the region has been cited for
+federation patterns at the regional scale and for the integration
+of multi-jurisdiction research collaborations. Public
+documentation is often partial, with the accessibility of
+English-language material varying across regional references.
+
+\paragraph{A federation-participating national university.} A
+national university's participation in its country's access
+federation and in network-anchored research networking is a
+publicly documented reference for Asia-Pacific research-network
+patterns.
+
+\paragraph{A research-intensive university with limited public
+documentation.} Some of the most-cited references in the region
+maintain only limited English-language public documentation
+relative to the European and North American institutions
+discussed above. Direct engagement with such an institution would
+be necessary for any precedent claim.
+
+%-----------------------------------------------------------------------------
+\section{Latin American institutions}
+\label{sec:ip-latin-america}
+
+\paragraph{A national flagship research university.} A national
+flagship research university is one of the principal references
+for Latin American research-network patterns. Its participation in
+the national research and education network and in the national
+identity federation provides documented federation precedent.
+
+\paragraph{A large public research university.} A national
+flagship public research university is a reference for large-scale
+public-university IT. Public documentation in the national
+language is often extensive, with English-language material more
+limited.
+
+%-----------------------------------------------------------------------------
+\section{NRENs and consortium initiatives}
+\label{sec:ip-nrens}
+
+National Research and Education Networks and their consortia are
+the principal multipliers of the patterns this Reference
+develops. They produce shared documentation, operate shared
+services, and host community fora in which architectural
+discussions take place.
+
+\paragraph{The regional research-network backbone.} The
+research-network backbone serving the institution's region
+connects the national research and education networks of that
+region and operates the federated-identity and federated-access
+services on which the Reference's identity and attachment
+patterns rest --- typically a federated single-sign-on
+interconnect, a collaborative-identity service, and a roaming
+network-access service. Its community fora are a principal venue
+for the discussions feeding this Reference.
+
+\paragraph{The institution's national research and education
+network.} The national research and education network connects
+the country's research and education community to the regional
+backbone and operates institutional services, commonly including
+a national computer security incident response capability. The
+national network's role as a shared operator is relevant to
+several of the architecture's mutualisation patterns.
+
+\paragraph{Regional research-network consortia.} Beyond the
+national network, regional research-network consortia operate
+services analogous to the backbone's and serve as the principal
+venues for community discussion of architectural patterns at
+research-intensive universities in their respective regions.
+
+\paragraph{Sector service organisations.} National and regional
+research-and-education service organisations operate the country
+or region's academic backbone network and support a large body of
+community guidance on which the Reference's patterns draw; several
+also operate the national or regional identity federation.
+
+%-----------------------------------------------------------------------------
+\section{The precedents illustrate the architecture; they do not gate it}
+\label{sec:ip-beyond-flagship}
+
+The catalogue above is dominated by large, research-intensive
+institutions for the methodological reason stated in
+\S\ref{sec:ip-method}: such institutions maintain extensive public
+architecture documentation, so their practice is citable. This must
+not be read as an admissibility bar. As established in
+\trchap{ch:architectural-principles}{} (\S\ref{sec:ap-necessity}), the
+functions the architecture discharges are a minimal necessary set for
+any institution offering a digital infrastructure, several of them
+legally compelled regardless of size; the precedents illustrate
+\emph{how} those functions are realised at scale, they do not define
+\emph{which} institutions the architecture serves.
+
+\paragraph{The shared-service channel.} A national
+research and education network exists to serve its country's entire
+research and education community, not its flagship institutions alone;
+national networks are mandated accordingly, a mandate documented for
+European national operators, e.g.~\cite{restena,dfn,switch-nren},
+with comparable mandates in other regions. Through such
+operators, federated identity through the national or regional
+identity-federation profile~\cite{edugain}, collaborative
+identity~\cite{eduteams}, and federated network access are available
+to a small or teaching-led institution as managed services, without
+that institution operating the underlying infrastructure;
+\loc{research-backbone-scale} carries the same primitives across
+borders (in the EU, GÉANT~\cite{geant}). A precedent need not be a flagship to be
+relevant: an institution that consumes federated identity through its
+national research and education network is exercising exactly the
+identity-layer pattern of \trchap{ch:wave1-identity}{}, at a
+realisation it can sustain.
+
+\paragraph{Implication for the catalogue.} The phase-2 international
+network (\S\ref{sec:ip-method}) is the natural locus for recording
+such adoptions explicitly and broadening the catalogue beyond the
+publication-rich flagships that necessarily dominate it today;
+sector-guidance bodies such as Jisc in the UK~\cite{jisc-guidance},
+and their regional analogues elsewhere, already document these patterns
+for institutions across the size range.
+
+%-----------------------------------------------------------------------------
+\section{Documented gaps}
+\label{sec:ip-gaps}
+
+Several areas of the architecture remain thinly documented in
+public institutional sources:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Policy plane deployments at academic scale.} The
+    industrial OPA and Cedar deployments provide most public
+    documentation; academic deployments are reported informally
+    in NREN fora but are rarely the subject of detailed public
+    architecture documents.
+  \item \textbf{TAC-aware audit pipelines.} The canonical TAC
+    schema and the cross-layer correlation pattern are not, at
+    the time of writing, the subject of any single publicly
+    documented academic deployment. Various aspects are visible
+    at various institutions; the consolidated pattern is novel
+    to this Reference.
+  \item \textbf{Sovereignty grid practice.} The grid is novel to
+    this Reference. Adjacent practice exists (procurement
+    sovereignty clauses, exit-data-export contractual language)
+    but a structured five-dimension grid applied across an
+    institutional IT portfolio has not, to the author's
+    knowledge, been the subject of public institutional
+    documentation.
+\end{itemize}
+
+\noindent The phase-2 international university network is the
+locus where these gaps would be addressed: institutions that
+adopt the architecture would publish their experience, and the
+catalogue of precedents would acquire entries that this version
+cannot yet record.

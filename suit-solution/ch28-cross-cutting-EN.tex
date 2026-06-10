@@ -1,0 +1,239 @@
+% ============================================================================
+% Chapter 28 --- Cross-cutting concerns
+% ----------------------------------------------------------------------------
+% Purpose : the organisational and process concerns that determine whether
+%           the playbook actually works in practice. Not a wave; addresses
+%           topics that span every wave.
+% Page target: ~5 pages.
+% Dependencies: Ch. 17--27 (the playbook); Ch. 3 (sovereignty grid for the
+%               financial dimension).
+% ============================================================================
+
+\chapter{Cross-cutting concerns}
+\label{ch:cross-cutting}
+
+The waves of the playbook describe \emph{what} the institution
+does, in what sequence, against which criteria. The cross-cutting
+concerns of this chapter describe \emph{how} the institution does
+it: the organisational disciplines, the communication patterns,
+the financial framework, the procurement adjustments without which
+the technical work of the waves does not produce the institutional
+outcome the playbook intends. They are presented as topical
+guidance rather than as prescriptions, since each institution's
+existing arrangements differ substantially.
+
+%-----------------------------------------------------------------------------
+\section{Change management}
+\label{sec:cc-change}
+
+The architecture's transformation interacts with the institution's
+existing change-management process. Three patterns recur and merit
+explicit handling.
+
+\paragraph{Per-wave change-management cadence.} Each wave produces
+a stream of changes that the institution's change advisory board
+(or equivalent) must review. The stream is bounded by the wave's
+scope and predictable in volume; the cadence agreed at wave open
+ensures that the engineering team's pace and the change-management
+process's pace are aligned. Misalignment in either direction --- a
+backlog of unreviewed changes, or a change-management process
+calibrated for a slower pace --- typically produces the wave's
+most visible operational difficulties.
+
+\paragraph{ITIL or COBIT integration.} For institutions whose
+service-management framework is built on ITIL or COBIT, the
+playbook's vocabulary maps onto familiar concepts: a wave is a
+change programme, an exit criterion is a change closure, a
+reversibility window is a back-out window. The architectural
+posture is to use the institution's existing vocabulary where it
+fits, rather than imposing the playbook's vocabulary as a
+parallel.
+
+\paragraph{Change windows during waves.} Several waves
+(particularly Wave~3 network segmentation, Wave~6 endpoint, and
+Wave~9 lifecycle) require scheduled disruption of services that
+the institution's user constituencies tolerate at agreed
+windows. Coordinating these windows across faculties, with
+academic-calendar awareness, is a persistent organisational
+effort that the playbook does not eliminate.
+
+%-----------------------------------------------------------------------------
+\section{Communication}
+\label{sec:cc-communication}
+
+A transformation programme of the playbook's scope requires
+communication at three levels, each with its own audience,
+cadence, and tone.
+
+\paragraph{Governance communication.} The programme governance
+body (established in Wave~0) receives structured updates at its
+regular cadence: progress against the wave plan, conformance
+results from \trchap{ch:conformance}{}, sovereignty grid drift
+since the last review, and risk register updates. The governance
+update is concise and decision-oriented; it is not a technical
+report.
+
+\paragraph{Faculty and operational communication.} Faculties,
+departments, and research projects receive communication at the
+events that affect them: the cut-over schedule for their building
+or service, the changes to their endpoint posture, the
+introduction of self-service for their consumers. The pattern is
+\emph{advance notice plus contact point}: the affected
+constituency is informed before the change, with a named person
+to whom they can address concerns.
+
+\paragraph{Institutional and public communication.} The
+sovereignty position itself --- the institution's commitment to
+the grid, the migration trajectory it has chosen, the precedents
+it draws on --- is suitable for communication beyond the IT
+audience. The phase-2 international peer comparison anticipated
+by this Reference is one of the contexts in which institutional
+communication of sovereignty positioning becomes valuable.
+
+%-----------------------------------------------------------------------------
+\section{Training and skills development}
+\label{sec:cc-training}
+
+The architecture's operation requires skills that may not be
+fully present in the institution at the playbook's start. Three
+categories of skill investment merit explicit planning.
+
+\paragraph{Per-layer skill development.} Each layer of Part~II
+implies specific skills (policy-language authoring for the policy
+layer, distributed-storage operation for the storage layer,
+container-orchestration administration for the compute layer,
+policy-driven infrastructure composition for the orchestration
+layer). The institution's training plan addresses these skills
+proportionately to its chosen trajectory: a brownfield trajectory
+anchored on an incumbent commercial platform invests less in
+distributed storage and more in the bridging logic between that
+platform and the open policy layer; a brownfield-hybrid trajectory
+invests more uniformly across the layers.
+
+\paragraph{Research-network and peer-institution mutualisation.}
+Several skills the playbook requires are scarce in any single
+institution. The institution's relationship with its national
+research and education network, with peer institutions through
+its regional research-network federation, and
+with any cross-institutional academic network it joins, are
+opportunities for shared
+training, shared on-call, and shared expertise that no single
+institution would sustain alone.
+
+\paragraph{Long-horizon skill investment.} The skills the
+playbook builds are not transitional. The institution that
+operates the architecture five years after Wave~9 needs the same
+skill mix it had at Wave~9. The training investment is
+consequently a continuing operational expense rather than a
+project expense.
+
+%-----------------------------------------------------------------------------
+\section{Risk register}
+\label{sec:cc-risk}
+
+A wave-aware risk register is part of the programme's deliverables
+from Wave~0 forward. The register's structure follows the
+institution's existing risk methodology where one is in place
+(\loc{national-risk-method}, ISO/IEC~27005, FAIR, or comparable); the recommendation
+of this chapter is that the register be \emph{wave-tagged} so that
+each risk is associated with the wave or waves in which it is most
+acute.
+
+\paragraph{Per-wave risk profile.} Each wave chapter implicitly
+identifies risks: identity-migration risk (Wave~1), policy
+miscalibration risk (Wave~4), classification-drift risk (Wave~8).
+The register makes these risks explicit and tracks them through
+the wave's life. A risk that materialises is documented; a risk
+that does not materialise is documented as such at wave closure.
+
+\paragraph{Cross-wave risks.} Some risks span multiple waves: the
+risk that the engineering team's capacity is exceeded by parallel
+waves; the risk that an institutional change (leadership
+transition, funding shift) disrupts the programme's continuity;
+the risk that supplier consolidation alters the financial
+projections of the chosen trajectory. These risks have no
+single-wave home; they are reviewed by the programme governance
+at every cycle.
+
+\paragraph{Risk acceptance.} Some risks are accepted explicitly
+rather than mitigated. The acceptance is documented, with the
+sovereignty-grid dimension on which the risk falls, the
+reasoning, and the review schedule.
+
+%-----------------------------------------------------------------------------
+\section{Financial planning}
+\label{sec:cc-financial}
+
+The playbook implies a financial trajectory that the institution
+plans against. Three observations recur across institutional
+contexts.
+
+\paragraph{CAPEX-to-OPEX shift.} The reference architecture
+typically shifts a portion of the institution's IT spending from
+capital expenditure (large infrastructure refreshes) to operating
+expenditure (continuous engineering, supplier subscriptions,
+training). The shift is not absolute --- substantial CAPEX
+remains for compute, storage and network refreshes --- but the
+proportion changes in a manner the institution's financial
+planning should anticipate.
+
+\paragraph{Sovereignty reinvestment.} A portion of the operating
+expenditure that earlier flowed to a single dominant supplier
+(licence renewals, premium support, captive services) is
+reinvested in institutional capability: engineer salaries, peer
+participation, training, contribution to open-source projects on
+which the architecture rests. The reinvestment is the financial
+form of sovereignty: the same money produces institutional
+capability rather than supplier revenue.
+
+\paragraph{Multi-year horizon.} The 5/7/10-year pace options of
+\trchap{ch:playbook-reading}{} imply matching financial
+horizons. An institution whose financial planning operates on a
+single-year cycle will struggle to commit to the playbook
+durably. The wave's incremental structure mitigates this --- each
+wave can be financially scoped --- but the cumulative trajectory
+benefits from a multi-year envelope.
+
+%-----------------------------------------------------------------------------
+\section{Procurement adjustments}
+\label{sec:cc-procurement}
+
+The sovereignty grid translates into procurement clauses. The
+institution's existing \gls{rfp} templates can absorb the
+playbook's requirements through targeted additions rather than
+through wholesale rewriting.
+
+\paragraph{Standard-interface clauses.} For every procurement
+that touches a layer of Part~II, the \gls{rfp} requires the
+candidate to demonstrate conformance with the relevant standard
+interface (OIDC for identity, OPA REST for policy, NETCONF/YANG
+for network, S3 API for object storage, OpenTelemetry for
+observability, and so on). The conformance is verified during
+the procurement evaluation against the test categories of
+\trchap{ch:conformance}{}.
+
+\paragraph{Exit-assistance clauses.} The contract includes a
+documented exit-assistance procedure: data export in agreed
+formats, configuration export in re-deployable form, support
+during a transition period whose duration is set in advance.
+The exit cost is bounded contractually and is proportionate to
+the genuine migration work rather than to the supplier's
+commercial preference.
+
+\paragraph{Sovereignty-gating language.} The institution may
+adopt explicit sovereignty gates for specified workload classes:
+\emph{the data-dimension score must be Established or better for
+sensitive workloads}, \emph{the financial dimension must be
+Robust or better for institution-critical components}, and so
+on. The gates are declared before the candidate is scored, not
+after, and they apply uniformly to commercial and open
+candidates alike.
+
+\paragraph{Multi-supplier capability.} For each layer, the
+institution preserves the realistic possibility of substituting
+the supplier within an agreed window. The procurement framework
+ensures that the practical exercise of this possibility is not
+prevented by contractual terms (no exclusivity that would
+prevent parallel evaluation, no licence terms that would
+penalise reduced consumption during transition, no data formats
+that would prevent independent re-import).

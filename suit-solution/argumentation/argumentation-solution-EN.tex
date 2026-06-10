@@ -1,0 +1,1003 @@
+% ============================================================================
+% SOLUTION-LAYER ARGUMENTATION MODULE (standalone)
+% Sustainable University IT — Technical and Operational Objections and Responses
+% Defends: ../solution-EN.tex
+%          "A Technical Reference for Architecture and Migration"
+%
+% Scope: TECHNICAL / OPERATIONAL objections only —
+%   architecture complexity, open-source coverage gaps (iOS/Android MDM, ...),
+%   sizing realism, brownfield migration and coexistence, vendor lock-in vs
+%   replaceability, conformance-test rigour, observability/audit load,
+%   reversibility.
+%
+% Method: questionbox / answerbox / clarificationbox environments,
+%   concession-then-rebuttal pattern, and the FIVE-LAYER evidence
+%   methodology (legal > standards > sector > empirical > institutional)
+%   with citations from the shared bibliography. Fully GENERIC.
+% ============================================================================
+\documentclass[11pt,a4paper,twoside]{book}
+
+% === Encoding and language ===
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% === Page layout ===
+\usepackage[top=2.5cm,bottom=1.75cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.0}
+
+% === Typography and fonts ===
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% === Graphics and colours ===
+\usepackage{graphicx}
+\usepackage{suit-logo}
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{Slate}{RGB}{70,70,90}
+\definecolor{Crimson}{RGB}{220,20,60}
+
+% === Tables ===
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+
+% === Lists ===
+\usepackage{enumitem}
+
+% === Symbols (checkmarks, crosses) ===
+\usepackage{pifont}
+
+% === Links ===
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,
+            urlcolor=BrickRed,plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{bookmark}
+\bookmarksetup{numbered}
+\usepackage{xurl}
+
+% === Fix bookmark level: \section is used directly under \part (no \chapter) ===
+\makeatletter
+\renewcommand{\toclevel@section}{1}
+\renewcommand{\toclevel@subsection}{2}
+\renewcommand{\toclevel@subsubsection}{3}
+\makeatother
+
+% === Bibliography ===
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{../../shared/suit-consolidated.bib}
+
+% === Citation display mode ===
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% === natbib compatibility ===
+\let\citep\parencite
+\let\citet\textcite
+
+% === Headers ===
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{Sustainable University IT --- Technical Objections \& Responses}}
+\fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% === Miscellaneous ===
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% === Glossary with tooltips ===
+\usepackage{gls-modes}
+\input{../../shared/glossary-defs}
+
+% === Localization (key/value layer 0: generic defaults) ===
+\usepackage{localization}
+\input{../../shared/localization-defaults}
+
+% ============================================================================
+% CUSTOM COMMANDS (aligned with the rest of the suite)
+% ============================================================================
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\institution}[1]{\textsc{#1}}
+\newcommand{\framework}[1]{\textsf{#1}}
+
+% Five-layer evidence markers (legal > standards > sector > empirical > institutional)
+\newcommand{\evlegal}{\textcolor{BrickRed}{\textbf{[Legal]}}\space}
+\newcommand{\evstd}{\textcolor{NavyBlue}{\textbf{[Standards]}}\space}
+\newcommand{\evsector}{\textcolor{Plum}{\textbf{[Sector]}}\space}
+\newcommand{\evempirical}{\textcolor{OliveGreen}{\textbf{[Empirical]}}\space}
+\newcommand{\evinst}{\textcolor{Slate}{\textbf{[Institutional]}}\space}
+
+% Cross-reference to a chapter of the Technical Reference being defended
+\newcommand{\trref}[1]{the Technical Reference (\emph{#1})}
+
+% ============================================================================
+% CUSTOM TCOLORBOX ENVIRONMENTS (suite question/answer convention)
+% ============================================================================
+\newtcolorbox{questionbox}[1][]{
+    colback=red!3!white,
+    colframe=red!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{answerbox}[1][]{
+    colback=OliveGreen!3!white,
+    colframe=OliveGreen!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{clarificationbox}[1][]{
+    colback=NavyBlue!3!white,
+    colframe=NavyBlue!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+% ============================================================================
+% SECTION NUMBERING: skip chapter level (we use \part > \section directly)
+% ============================================================================
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% === Prevent vertical stretching ===
+\raggedbottom
+
+% === Part title on right page, content starts immediately on next page ===
+\makeatletter
+\renewcommand{\@endpart}{\vfil\newpage}
+\makeatother
+
+% ============================================================================
+\begin{document}
+
+% === Title page ===
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
+
+{\Huge\bfseries Sustainable University IT}
+
+\vspace{0.5cm}
+{\LARGE\itshape Technical and Operational\\Objections and Responses}
+
+\vspace{1.2cm}
+{\large An anticipatory argumentation module defending\\
+the reference architecture, the sovereignty grid,\\
+and the brownfield migration playbook}
+
+\vspace{2cm}
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white,
+    colframe=NavyBlue!85!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=12pt, right=12pt, top=8pt, bottom=8pt,
+    width=0.88\textwidth,
+    halign=center
+]
+{\large\bfseries Companion to\\
+``Sustainable University IT --- A Technical Reference\\
+for Architecture and Migration''}
+\end{tcolorbox}
+
+\vspace{1cm}
+\suitmetablock
+
+\vspace{0.9cm}
+
+\begin{minipage}{0.85\textwidth}
+\centering
+{\large\bfseries SUIT}\\[3pt]
+{\normalsize\itshape International Working Group\\on Sustainable University IT in the AI Era}\\[4pt]
+{\small\itshape (in formation)}
+\end{minipage}
+
+\vspace{0.9cm}
+
+\begin{minipage}{0.85\textwidth}
+\centering\small\itshape
+This module addresses good-faith technical and operational objections
+to the Technical Reference. It is intended for chief technology officers,
+information-security officers, network and platform engineers, procurement
+officers, and the governance bodies that mandate them. Every response is
+constructed on five independent evidence layers --- legal, standards,
+sector, empirical, and institutional --- and remains generic across
+institutions and jurisdictions.
+\end{minipage}
+
+\vspace{0.6cm}
+
+\begin{minipage}{0.85\textwidth}
+\small\noindent\textbf{Note on the process:}\\
+\textit{This document is an always living document. It is provided for
+constructive feedback and revision in order to improve its quality. The
+engineering of this document was partially supported by digital tools, some
+of which incorporate Artificial Intelligence features.}\\[3pt]
+\textcolor{Crimson}{\textit{This document contains a portion of imprecisions,
+missing content, errors or possibly hallucinations. We believe that a
+supportive and cooperative approach by the readers will make its content
+quality increase over time.}}
+\end{minipage}
+
+\vspace{1.5cm}
+\end{titlepage}
+
+% === Frontmatter ===
+\frontmatter
+\hypersetup{pageanchor=true}
+
+\chapter*{How to read this module}
+\addcontentsline{toc}{chapter}{How to read this module}
+
+This module anticipates the \keyword{technical and operational}
+objections most likely to be raised against \trref{Architecture and
+Migration}. It deliberately excludes political, budgetary-in-principle,
+and academic-freedom objections, which are treated in the policy-layer
+argumentation; here the question is always the same: \emph{does the
+proposed engineering hold up under adversarial scrutiny?}
+
+Each objection is stated in a \textcolor{red!60!black}{\textbf{question
+box}} in the words a sceptical engineer or architect would actually use.
+The response is given in a \textcolor{OliveGreen!60!black}{\textbf{answer
+box}} that follows a strict \keyword{concession-then-rebuttal} pattern:
+it first concedes the legitimate core of the objection, then rebuts the
+overreach. Where a point needs disambiguation rather than refutation, an
+\textcolor{NavyBlue!60!black}{\textbf{clarification box}} is used instead.
+
+\paragraph{The five-layer evidence methodology.}
+No response rests on assertion. Each rebuttal is built from up to five
+\emph{independent} evidence layers, marked inline so the reader can audit
+the chain of support:
+
+\begin{description}[leftmargin=2.2cm,style=nextline]
+  \item[\evlegal] binding legal and regulatory instruments of the
+        adopter's jurisdiction (\institution{GDPR},
+        \institution{NIS2} and sectoral law in the worked EU
+        instantiation).
+  \item[\evstd] open technical standards and normative frameworks
+        (\institution{IETF}, \institution{OASIS}, \institution{NIST},
+        \institution{ISO}).
+  \item[\evsector] higher-education and research-sector practice,
+        toolkits, and sector bodies.
+  \item[\evempirical] measured outcomes --- breach data, incident
+        reports, performance studies, cost figures.
+  \item[\evinst] named institutional precedents operating the relevant
+        pattern in production.
+\end{description}
+
+A response is considered sound when at least \emph{three} of these layers
+converge independently --- the same minimum-three-layer rule applied
+throughout the suite.
+
+\tableofcontents
+
+% ============================================================================
+\mainmatter
+% ============================================================================
+
+\part{Technical and Operational Objections}
+
+% ----------------------------------------------------------------------------
+\section{Architecture complexity}
+\label{sec:arg-complexity}
+
+\begin{questionbox}[O1.1 --- ``The nine-layer architecture is over-engineered for a university.'']
+The reference architecture decomposes the estate into nine layers ---
+identity, network, compute, storage, observability, cryptography,
+orchestration, policy, endpoint --- each with its own interface contract.
+A university is not a hyperscaler. This is enterprise-architecture theatre
+that no campus IT team can realistically operate; the layering adds
+cognitive load and failure modes without adding value.
+\end{questionbox}
+
+\begin{answerbox}[Response O1.1]
+\textbf{Concession.} The objection is right that \emph{a large number of
+moving parts is itself a risk}. Architectural complexity that is not
+matched by operational capacity degrades reliability rather than improving
+it; this is the central lesson of dependable-systems engineering, where
+each added component is an added fault source unless it is contained by a
+clear interface \citep{avizienis2004}.
+
+\medskip
+\textbf{Rebuttal.} The objection mistakes \emph{decomposition} for
+\emph{addition}. The nine layers are not nine new systems; they are nine
+\emph{names for functions that already exist} in every university estate ---
+identity, network, storage, and so on are present whether or not they are
+drawn as layers. The architecture does not add them; it makes their
+\keyword{interfaces explicit} so that complexity becomes \emph{bounded and
+auditable} instead of tangled.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Layered decomposition behind stable interfaces is the
+        canonical method for managing, not multiplying, complexity in
+        secure systems engineering \citep{nist-sp800-160v2,avizienis2004}.
+        \institution{Zero Trust} architecture is itself defined as a set of
+        separated planes (policy decision, policy enforcement, data) for
+        exactly this reason \citep{nist-zt}.
+  \item \evsector The sector's own governance frameworks treat
+        function-by-function decomposition as the prerequisite for
+        manageability, not its enemy \citep{cobit,dehaes2015}.
+  \item \evinst Research-intensive institutions already operate this decomposition in
+        production --- separated identity, network, and storage planes are
+        visible, for example, at \institution{MIT} \citep{mit-ist,mit-kerberos},
+        \institution{Stanford} \citep{stanford-uit,stanford-sunet}, and
+        \institution{University of Michigan} \citep{umich-its,umich-core-network}.
+        None is a hyperscaler; all operate a layered decomposition along the
+        same functional planes, whatever local labels they use.
+\end{itemize}
+
+\textbf{Bottom line.} The architecture does not impose nine systems on a
+campus that had one. It gives names and contracts to the functions a campus
+already runs, so the irreducible complexity is \emph{governed} rather than
+\emph{hidden}.
+\end{answerbox}
+
+\begin{clarificationbox}[Clarification --- complexity is instantiated to scale]
+The nine-layer \emph{model} is invariant; its \emph{instantiation} is not.
+A teaching-led institution may realise several layers as a single managed
+service or a hosted offering, collapsing operational surface while keeping
+the interface contracts intact (\trref{Sizing reference points}). The model
+is the vocabulary; the deployment is sized to the institution.
+\end{clarificationbox}
+
+\begin{questionbox}[O1.2 --- ``Identity and policy become institution-wide single points of failure, with no availability story --- a commercial SLA beats this.'']
+Per-session policy decision routes every activation through the
+identity and policy planes. If either is down, nobody works. A
+managed commercial identity service at least carries a contractual
+SLA for that risk; the Reference proposes to self-operate the most
+critical planes of the institution.
+\end{questionbox}
+
+\begin{answerbox}[Response O1.2]
+\textbf{Concession.} The mediation-point risk is real, and it is
+\emph{created by the architecture itself}: making activation
+explicit concentrates what a flat estate leaves diffuse. Any
+deployment that treated the identity provider or the policy
+decision point as ordinary single-instance services would deserve
+this objection in full.
+
+\medskip
+\textbf{Rebuttal.} The Reference engineers the risk rather than
+insuring against it (\trref{Architectural principles}, availability
+and failure semantics of the mediation planes): each critical plane
+runs redundantly with a declared availability target measured
+through the observability layer; policy enforcement points cache
+decisions for the activation-token lifetime, so a policy-plane
+outage blocks \emph{new} activations without invalidating
+established sessions; and each zone class declares its fail mode
+(fail-closed for administrative and sensitive zones, fail-degraded
+with audit where connectivity availability prevails).
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Zero-trust guidance itself requires exactly this
+        engineering: NIST SP~800-207 treats PDP/PEP availability
+        and decision caching as design obligations of the model
+        \citep{nist-zt}.
+  \item \evstd The reference components are built for clustered
+        operation --- replicated identity providers, policy engines
+        evaluating from locally distributed bundles
+        \citep{opa-project} --- so redundancy is configuration, not
+        custom engineering.
+  \item \evinst The failure semantics are testable, not asserted:
+        availability targets are measured by the observability
+        layer, and the fail-mode declarations are part of each
+        zone's published security profile, exercised through the
+        conformance suite (\trref{Conformance and replaceability
+        tests}).
+\end{itemize}
+
+\textbf{Bottom line.} An SLA is a remedy after the fact; declared,
+rehearsed failure semantics are a design. The architecture does not
+leave the mediation planes' availability to contract --- it
+engineers it, measures it, and makes outage behaviour a
+per-zone-class policy choice.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Open-source coverage gaps}
+\label{sec:arg-oss-gaps}
+
+\begin{questionbox}[O2.1 --- ``Open-source MDM cannot manage iOS and Android, so the open-foundations claim is false.'']
+The whole document rests on a reference instantiation built on open
+foundations. But there is no credible open-source mobile-device-management
+stack for \institution{iOS} and \institution{Android} at scale. The moment
+a university has a real fleet of phones and tablets, it must buy a
+proprietary suite. The ``open foundations'' claim collapses at the endpoint.
+\end{questionbox}
+
+\begin{answerbox}[Response O2.1]
+\textbf{Concession.} This is the strongest technical objection in the
+document, and it is conceded \emph{in full on the facts}. There is no mature
+open-source MDM that matches a commercial suite for supervised
+\institution{iOS} and managed \institution{Android} at fleet scale. Open
+tooling for Apple platforms is real and production-grade for enrolment and
+software management \citep{micromdm,munki}, and \institution{osquery}
+provides open posture telemetry across operating systems
+\citep{osquery}; but a turnkey, vendor-supported mobile MDM on fully open
+foundations does not exist today. The Technical Reference says exactly this,
+in the open, rather than hiding it.
+
+\medskip
+\textbf{Rebuttal.} The objection then over-reaches: it treats one bounded
+gap as the collapse of the whole. The open-foundations claim is a claim
+about \keyword{replaceability through contracts}, not about purism. The
+architecture's test is not ``is every component open?'' but ``can every
+component be replaced without re-architecting?'' --- and a proprietary MDM
+that exports configuration profiles to a documented format and feeds posture
+to the policy plane through a standard interface \emph{passes that test}.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd The endpoint contract is defined by open interfaces, not by
+        the product behind them: posture and identity flow over
+        \institution{SCIM} \citep{rfc-7643-scim-core}, \institution{OIDC}
+        \citep{oidc-core-1.0}, and standard telemetry --- so a proprietary
+        suite is a conforming \emph{instantiation}, not an exception.
+  \item \evsector The sector already procures exactly this way: the
+        \institution{HECVAT} toolkit exists precisely because universities
+        buy assessed proprietary endpoint products under a common
+        contract \citep{hecvat}. Commercial suites such as
+        \citep{jamf,intune} are named in the reference as legitimate
+        instantiations for the iOS/Android portion of the estate.
+  \item \evempirical Endpoint compromise --- not MDM ideology --- is where
+        the measured risk lives: ransomware and credential-driven breaches
+        dominate education-sector incident data
+        \citep{sophos-ransomware-edu2025,verizon-dbir2024}. The architecture
+        prioritises \emph{posture and replaceability} over provenance
+        precisely because that is what the breach data rewards.
+  \item \evinst Mixed open/proprietary endpoint estates are common at
+        research-intensive institutions, which run a dedicated Apple-platform suite
+        alongside open configuration management and \institution{osquery}
+        for Linux and servers (\institution{MIT}, \institution{Stanford},
+        \institution{University of Michigan}
+        \citep{mit-ist,stanford-uit,umich-safecomputing}).
+\end{itemize}
+
+\textbf{Bottom line.} The iOS/Android MDM gap is real and acknowledged. It
+does not falsify the open-foundations claim, because that claim is about
+\keyword{contract-bounded replaceability}, and a proprietary MDM that honours
+the endpoint interface contract is a conforming instantiation, not a
+counter-example.
+\end{answerbox}
+
+\begin{questionbox}[O2.2 --- ``Open source is itself the supply-chain risk: unmaintained dependencies, no vendor CVE-response SLA, nobody to sue.'']
+The open-foundations default trades a contractual security
+relationship for a volunteer one. Open components ship unmaintained
+transitive dependencies, carry no committed CVE-response time, and
+offer no counterparty bearing liability when something breaks.
+\end{questionbox}
+
+\begin{answerbox}[Response O2.2]
+\textbf{Concession.} The failure mode is real: abandonware exists,
+and an open licence confers no right to a fix. A deployment that
+consumed anonymous code with no support arrangement, no provenance
+control, and no maintenance assessment would deserve the objection
+in full.
+
+\medskip
+\textbf{Rebuttal.} The architecture does not consume anonymous
+code; it procures open components under the same discipline as any
+supplier.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evsector Where a committed CVE-response time is required,
+        the institution buys a commercial support subscription for
+        the open component --- procured and assessed like any
+        vendor relationship \citep{hecvat}; the counterparty
+        exists, and what remains open is the exit.
+  \item \evstd Supply-chain provenance is a named control, not a
+        hope: SLSA provenance for built artefacts
+        \citep{slsa-spec}, with the supply-chain-security ownership
+        established for NIS2 Art.~21(2)(d) by the policy module's
+        Q8.5.
+  \item \evinst The sovereignty grid's \emph{Operational} dimension
+        scores maintenance reality --- skills, community,
+        certification paths --- per layer \emph{before} adoption
+        (\trref{The sovereignty grid}); a component nobody can
+        sustain scores itself out.
+  \item \evstd ``Nobody to sue'' cuts both ways: a contractual
+        remedy does not produce a patch, while source access and
+        the replaceability conditions (O5.1) let the institution
+        patch, fork, or replace --- bounding the blast radius of
+        any single project's abandonment.
+\end{itemize}
+
+\textbf{Bottom line.} Supply-chain risk attaches to unmanaged
+consumption, not to licence type. The architecture pairs open
+components with support contracts where SLAs matter, provenance
+controls where builds matter, and an operational-sustainability
+score before adoption --- with replaceability as the final
+backstop.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Sizing realism}
+\label{sec:arg-sizing}
+
+\begin{questionbox}[O3.1 --- ``The sizing reference points are fantasy; a small university cannot run this.'']
+The architecture may suit a flagship research university with hundreds of
+network engineers, but it is unaffordable and unstaffable for a small
+teaching-led institution. Prescribing a nine-layer estate to a college with
+a five-person IT team is sizing fantasy.
+\end{questionbox}
+
+\begin{answerbox}[Response O3.1]
+\textbf{Concession.} Conceded that \emph{a one-size instantiation would be
+fantasy}. A small institution genuinely cannot operate the same realisation
+as a multi-petabyte research university, and any document that demanded it
+would be unserious about operations.
+
+\medskip
+\textbf{Rebuttal.} The architecture does not demand a single realisation. It
+distinguishes the \keyword{minimal necessary functional set} --- which is
+size-invariant --- from its \keyword{instantiation} --- which scales. The
+functions an institution must perform (authenticate subjects, segment the
+network, classify and protect data, retain auditable logs) do not disappear
+at small scale; they are simply realised more compactly, often as managed or
+hosted services. This is a guardrail \emph{against} overclaim, not an
+instance of it.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evlegal The size-invariant core is anchored in law ---
+        \loc{data-protection-regime} and
+        \loc{cybersecurity-baseline-regime}, worked here through the
+        EU instruments: \institution{GDPR}
+        imposes accountability, security of processing, and breach
+        obligations with \emph{no de-minimis threshold} ---
+        a five-person institution owes the same duties as a flagship
+        \citep{gdpr}. (The one narrow size-based relief, the
+        records-of-processing derogation for organisations below
+        250~persons under Article~30(5), is itself conditional and does not
+        touch the security, accountability, or breach duties at issue here.)
+        \institution{NIS2} likewise scales nothing down: once an
+        entity is in scope (by sector-and-size, or by a
+        size-independent designation route), its duties apply in
+        full regardless of headcount \citep{nis2}.
+  \item \evstd The minimal set maps to baseline controls that are stated
+        independently of scale \citep{nist-csf,iso27001,nist-zt}; the
+        controls are mandatory, the deployment topology is sized.
+  \item \evsector \institution{EDUCAUSE} governance guidance frames IT
+        provision as a function of mission and risk, explicitly supporting
+        shared-service and consortial realisations for smaller institutions
+        \citep{educause-governance,educause-isg}.
+  \item \evinst National research and education networks
+        (e.g.\ \institution{GÉANT}, \institution{RENATER}, \institution{RESTENA}
+        in Europe) exist precisely so that small institutions consume identity,
+        connectivity, and security as shared services rather than building
+        them alone \citep{geant,renater,restena,eduroam,edugain}.
+\end{itemize}
+
+\textbf{Bottom line.} The minimal functional set is size-invariant because
+the \emph{obligations} are; the instantiation scales down to managed and
+shared services. The sizing chapter prescribes envelopes, not a single
+mandatory plant.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Brownfield migration and coexistence}
+\label{sec:arg-migration}
+
+\begin{questionbox}[O4.1 --- ``This is a greenfield design; no real university can rip-and-replace its estate.'']
+The wave-based playbook reads like a clean-sheet build. Real universities
+have decades of accreted systems, in-flight contracts, and departments that
+will not be coordinated. A migration that assumes you can stop the world and
+rebuild is dead on arrival.
+\end{questionbox}
+
+\begin{answerbox}[Response O4.1]
+\textbf{Concession.} Conceded that \emph{a rip-and-replace migration would
+fail}. Estates are heterogeneous, contracts are mid-term, and federated
+governance means no central team can mandate a flag day. Any playbook that
+ignored this would be unusable.
+
+\medskip
+\textbf{Rebuttal.} The objection describes a design the Technical Reference
+explicitly rejects. The playbook is \keyword{brownfield by construction}: it
+is wave-based precisely so that each step is independently valuable,
+reversible, and \emph{coexists} with incumbent systems. A dedicated
+coexistence-patterns library and a reversibility playbook exist for exactly
+the heterogeneity the objection raises (\trref{Coexistence patterns library};
+\trref{Reversibility playbook}).
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Incremental adoption behind stable interfaces is the
+        standard path for cyber-resilient transformation
+        \citep{nist-sp800-160v2}; \institution{Zero Trust} migration is
+        itself specified as incremental and coexistence-friendly, never as
+        a flag day \citep{nist-zt}.
+  \item \evsector Sector governance treats migration as portfolio change
+        managed against mission risk, not as a single cutover
+        \citep{cobit,weill-ross,educause-governance}.
+  \item \evempirical The waves are ordered to address the most-exploited
+        attack patterns first: identity, segmentation, and observability
+        lead because credential abuse dominates measured breach data
+        \citep{verizon-dbir2024,ibm-cost-breach-2024} and segmentation
+        interrupts its in-network progression \citep{nist-sp800-215}.
+        The ordering is
+        an evidence-informed prioritisation of the measured exposure, so
+        early waves buy down the most-exploited risk before any large
+        investment.
+  \item \evinst Coexistence is the lived reality at research-intensive
+        institutions such as \institution{MIT} and
+        \institution{University of Michigan}, where federated
+        identity overlays a heterogeneous estate \citep{mit-kerberos,umich-its},
+        and \institution{Science DMZ} deployments coexist with the general
+        campus network rather than replacing it
+        \citep{science-dmz-2013,esnet-cases}.
+\end{itemize}
+
+\textbf{Bottom line.} The playbook is the opposite of greenfield: each wave
+is independently valuable and reversible, and coexistence with incumbents is
+a first-class design goal, not an afterthought.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Vendor lock-in versus replaceability}
+\label{sec:arg-lockin}
+
+\begin{questionbox}[O5.1 --- ``Standardising on a stack just swaps one lock-in for another.'']
+You criticise proprietary lock-in, then prescribe a specific open stack ---
+a particular identity provider, a particular orchestrator, a particular
+storage system. That is still lock-in; you have only changed the vendor. The
+``replaceability'' claim is rhetorical.
+\end{questionbox}
+
+\begin{answerbox}[Response O5.1]
+\textbf{Concession.} Conceded that \emph{naming open products does not by
+itself defeat lock-in}. An open component can still trap an institution
+through bespoke configuration, undocumented data formats, or unique
+operational dependencies. Open licensing is necessary but not sufficient for
+replaceability; status-quo bias makes any incumbent --- open or not ---
+sticky \citep{samuelson-zeckhauser}.
+
+\medskip
+\textbf{Rebuttal.} The architecture does not claim replaceability \emph{from}
+choosing open products. It claims replaceability \emph{from} four explicit
+conditions enforced by a conformance suite: standard interfaces, open
+state and configuration formats, documented exit-data export, and no
+hidden dependencies. The
+named open instantiation is an \emph{example} that satisfies these
+conditions; a proprietary component that satisfies the same conditions is
+equally acceptable. Lock-in is defeated by the \keyword{contract}, not by the
+\keyword{logo}.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Every layer's interface is pinned to an open standard ---
+        \institution{OIDC}/\institution{SAML}/\institution{SCIM} for identity
+        \citep{oidc-core-1.0,saml-core-2.0,rfc-7643-scim-core},
+        \institution{KMIP}/\institution{PKCS\#11} for key management
+        \citep{kmip-oasis,pkcs11-oasis}, \institution{TLS}~1.3 and
+        \institution{ACME} on the wire \citep{rfc-8446-tls13,rfc-8555-acme},
+        \institution{OpenTelemetry} and \institution{IPFIX} for telemetry
+        \citep{opentelemetry-spec,rfc-7011-ipfix}, and
+        \institution{OCI} image formats for workloads \citep{oci-image-spec}.
+        Replaceability is the property of conforming to these, regardless of
+        the product.
+  \item \evlegal Replaceability is also a compliance asset: \institution{GDPR}
+        portability and the ability to change processors presuppose that data
+        can leave a system in a usable form \citep{gdpr}; standard-contractual
+        and processor-change mechanisms assume exit is possible
+        \citep{eu-sccs2021}.
+  \item \evsector \institution{HECVAT} institutionalises exactly this
+        vendor-neutral, contract-based assessment for the sector
+        \citep{hecvat}.
+  \item \evinst Multi-vendor, standards-pinned identity federations
+        (\institution{eduGAIN} and \institution{eduroam} globally, with regional
+        federations such as \institution{InCommon})
+        demonstrate that replaceability through interfaces is an operating
+        reality, not a slogan \citep{edugain,incommon,eduroam}.
+\end{itemize}
+
+\textbf{Bottom line.} The defence against lock-in is the four replaceability
+conditions and the conformance suite that tests them --- not allegiance to
+any product, open or proprietary.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Conformance-test rigour}
+\label{sec:arg-conformance}
+
+\begin{questionbox}[O6.1 --- ``The conformance tests are a checklist, not a real guarantee.'']
+``Replaceability conditions'' and a ``conformance day'' sound reassuring, but
+a checklist is not proof. Without an enforced, repeatable, and independently
+verifiable test, conformance is a self-graded exercise that every vendor will
+claim to pass.
+\end{questionbox}
+
+\begin{answerbox}[Response O6.1]
+\textbf{Concession.} Conceded that \emph{an unenforced checklist is
+worthless}. A conformance claim that cannot be re-run by a third party, on
+representative data, is marketing. Self-attestation without evidence is a
+known failure mode in procurement.
+
+\medskip
+\textbf{Rebuttal.} The conformance suite is constructed as an
+\keyword{executable, evidence-producing test}, not a questionnaire. It
+defines categories of test --- interface fidelity, data portability, exit
+rehearsal, and decision auditability --- each of which yields an artefact: a
+captured export consumed by an alternative, a replay against a documented
+schema, a recorded migration on a representative subset
+(\trref{Conformance and replaceability tests}). The test is passed by
+\emph{producing the artefact}, not by asserting compliance. Where
+sound practice makes a nominal artefact unobtainable ---
+non-exportable HSM trust-anchor keys being the canonical case ---
+the layer contract declares the substitute artefact (a key-rotation
+and re-anchoring rehearsal under dual control), so the gate is
+passable without weakening key custody.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Conformance-to-interface as the unit of verification is the
+        standard discipline: the open interfaces themselves
+        (\institution{SCIM}, \institution{KMIP}, \institution{OCI},
+        \institution{OpenTelemetry}) carry normative conformance criteria
+        that a test can mechanically check
+        \citep{rfc-7643-scim-core,kmip-oasis,oci-image-spec,opentelemetry-spec}.
+  \item \evsector The sector already operates standardised, repeatable
+        third-party assessment through \institution{HECVAT}, and research
+        cybersecurity centres publish reusable assessment methods
+        \citep{hecvat,trustedci}.
+  \item \evempirical Tests are weighted toward the data: control categories
+        track the attack patterns that actually cause breaches --- exfiltration
+        paths, credential reuse, and unpatched transfer software ---
+        as reported in incident data
+        \citep{verizon-dbir2024,moveit-breach}.
+  \item \evinst The artefact-based discipline is already routine in the
+        sector, if for a different property: \institution{perfSONAR} and
+        \institution{Science DMZ} deployments verify end-to-end behaviour
+        against measured baselines rather than vendor claims
+        \citep{perfsonar,science-dmz-2013,sciencedmz-perf}. This establishes
+        that re-runnable, evidence-producing conformance is an operating
+        norm on the research network, the same discipline the replaceability
+        suite applies to exit and portability.
+\end{itemize}
+
+\textbf{Bottom line.} Conformance is defined as the production of a
+re-runnable artefact against an open interface, not a self-graded checklist;
+the artefact is what a third party verifies.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Observability and audit load}
+\label{sec:arg-observability}
+
+\begin{questionbox}[O7.1 --- ``Mandating observability everywhere creates a surveillance and cost burden.'']
+The observability layer asks for logs, traces, and metrics across the estate.
+That is a privacy hazard, a storage cost explosion, and an alert-fatigue
+generator. The audit load you create may be worse than the threats you
+mitigate.
+\end{questionbox}
+
+\begin{answerbox}[Response O7.1]
+\textbf{Concession.} Conceded that \emph{indiscriminate collection is harmful}.
+Collecting everything is a privacy hazard, a storage liability, and a path to
+alert fatigue --- and over-collected personal data is itself a compliance and
+breach-exposure risk, not a control.
+
+\medskip
+\textbf{Rebuttal.} The objection conflates \emph{indiscriminate} collection
+with \emph{purpose-bound, classified} observability. The architecture
+specifies observability tied to data classification and retention policy:
+what is collected, why, for how long, and who may read it are constrained by
+design, not maximised (\trref{Observability and audit}). Auditability is a
+legal obligation that exists independently of this document; the architecture
+discharges it \emph{proportionately} rather than maximally.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evlegal Security of processing and breach-detection duties under
+        \institution{GDPR} \citep{gdpr} and the technical risk-management
+        requirements of \institution{NIS2} \citep{nis2} \emph{require}
+        adequate logging --- with the Commission's technical
+        articulation for digital-sector entities applied here by
+        analogy \citep{eu-regulation-2024-2690};
+        the same legal frame caps it through data minimisation and purpose
+        limitation \citep{gdpr}. Audit is mandated; over-collection is
+        prohibited --- proportionality is the lawful design point.
+  \item \evstd Detect-and-respond functions are baseline controls
+        \citep{nist-csf,nist-sp800-53,iso27001}; structured, standard
+        telemetry (\institution{syslog}, \institution{IPFIX},
+        \institution{OpenTelemetry}) makes collection efficient and bounded
+        rather than sprawling
+        \citep{rfc-5424-syslog,rfc-7011-ipfix,opentelemetry-spec}.
+  \item \evempirical Breach economics reward exactly this: faster detection
+        and containment measurably reduce breach cost --- breaches
+        contained faster cost measurably less, the breach lifecycle
+        being a major cost driver
+        \citep{ibm-cost-breach-2024,verizon-dbir2024}. Proportionate
+        observability is the highest-return control, not overhead.
+  \item \evinst Research universities run classification-driven observability
+        in production through their security operations and incident-response
+        capabilities \citep{umich-safecomputing,stanford-uit}, and the
+        sector operates shared trust and incident infrastructure
+        (e.g.\ \institution{REN-ISAC} in the US, \institution{FIRST} globally) on this basis
+        \citep{ren-isac,first}.
+\end{itemize}
+
+\textbf{Bottom line.} The mandate is proportionate, classified observability
+--- legally required to exist and legally bounded in extent --- not blanket
+surveillance; the standard telemetry interfaces keep its cost bounded.
+\end{answerbox}
+
+% ----------------------------------------------------------------------------
+\section{Reversibility}
+\label{sec:arg-reversibility}
+
+\begin{questionbox}[O8.1 --- ``Reversibility is a comforting promise that never survives contact with production.'']
+You promise that each wave is reversible. In practice, once identity,
+network, and policy changes are live, rolling back is a fantasy --- the
+dependencies entangle, the data has moved, and nobody dares revert. The
+reversibility playbook is reassurance, not engineering.
+\end{questionbox}
+
+\begin{answerbox}[Response O8.1]
+\textbf{Concession.} Conceded that \emph{reversibility is not free and is
+often claimed without being engineered}. A rollback that was never designed,
+rehearsed, or tested will indeed fail under pressure, and entangled
+dependencies can make a naive revert impossible.
+
+\medskip
+\textbf{Rebuttal.} That is precisely why reversibility is treated as a
+\keyword{designed and rehearsed property}, not an aspiration. Each wave
+defines its rollback preconditions, its data-preservation guarantees, and a
+tested revert path \emph{before} the wave is committed; coexistence with the
+incumbent during a wave is what keeps the revert path open
+(\trref{Reversibility playbook}; \trref{Coexistence patterns library}).
+Reversibility here is a fault-tolerance requirement, engineered like any
+other.
+
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+  \item \evstd Designed recoverability and graceful rollback are core
+        cyber-resilience and dependable-systems requirements, not optional
+        extras \citep{nist-sp800-160v2,avizienis2004}; resilient systems are
+        specified to fail back to a known-good state.
+  \item \evlegal Reversibility is also a continuity and exit obligation:
+        processor-change and data-portability provisions presuppose that a
+        configuration can be unwound and data recovered in usable form
+        \citep{gdpr,eu-sccs2021}.
+  \item \evsector Change managed with explicit rollback gates is standard IT
+        governance practice \citep{cobit,dehaes2015}.
+  \item \evinst Coexistence-based migrations preserve the revert path in
+        production: \institution{Science DMZ} runs alongside the general
+        network so the institution can fall back, and federated identity
+        overlays --- rather than replaces --- incumbent systems during
+        transition
+        \citep{science-dmz-2013,esnet-cases,mit-kerberos,umich-its}.
+\end{itemize}
+
+\textbf{Bottom line.} Reversibility is engineered and rehearsed per wave, and
+kept open by coexistence with the incumbent --- it is a fault-tolerance
+requirement, not a comforting promise.
+\end{answerbox}
+
+% ============================================================================
+\part{Quick-Reference Summary}
+% ============================================================================
+
+\section{Objection map}
+\label{sec:arg-summary}
+
+The table below summarises every objection in this module, its concession,
+the dominant evidence layers, and the one-line rebuttal. \evlegal{}Legal,
+\evstd{}Standards, \evsector{}Sector, \evempirical{}Empirical, and
+\evinst{}Institutional mark the converging evidence layers used in each
+response (minimum three per response).
+
+\renewcommand{\arraystretch}{1.35}
+\begin{longtable}{@{}p{0.06\textwidth}p{0.20\textwidth}p{0.20\textwidth}p{0.13\textwidth}p{0.29\textwidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Objection} & \textbf{Conceded core} &
+\textbf{Evidence} & \textbf{One-line rebuttal} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Objection} & \textbf{Conceded core} &
+\textbf{Evidence} & \textbf{One-line rebuttal} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\footnotesize\itshape continued on next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+O1.1 & Architecture is over-engineered for a university &
+Unmatched complexity is a real risk &
+Std, Sector, Inst &
+Layers name functions a campus already runs; contracts \emph{bound} complexity, not add it. \\
+
+O1.2 & Identity/policy are single points of failure; an SLA beats this &
+Mediation-point risk is real and architecture-created &
+Std, Inst &
+Redundancy per plane, PEP caching over token lifetime, declared per-zone fail modes --- engineered, measured, rehearsed. \\
+
+O2.1 & Open-source MDM cannot manage iOS/Android &
+No mature open mobile MDM at scale (true) &
+Legal, Std, Sector, Emp, Inst &
+Open-foundations means contract-bounded replaceability; a conforming proprietary MDM is a valid instantiation. \\
+
+O2.2 & Open source is itself the supply-chain risk &
+Abandonware is real; a licence confers no fix &
+Std, Sector, Inst &
+Support subscriptions where SLAs matter, SLSA provenance, Operational-dimension scoring, replaceability as backstop. \\
+
+O3.1 & Sizing is fantasy for small institutions &
+One-size instantiation would be unserious &
+Legal, Std, Sector, Inst &
+Minimal functional set is size-invariant (no-threshold law); instantiation scales to shared/managed services. \\
+
+O4.1 & Greenfield design; no rip-and-replace is possible &
+Rip-and-replace would fail &
+Std, Sector, Emp, Inst &
+Playbook is brownfield by construction: waves coexist with incumbents and are independently valuable. \\
+
+O5.1 & Open stack just swaps one lock-in for another &
+Open licensing alone does not defeat lock-in &
+Legal, Std, Sector, Inst &
+Replaceability comes from four conditions + conformance tests, not from the logo. \\
+
+O6.1 & Conformance tests are a checklist, not a guarantee &
+An unenforced checklist is worthless &
+Std, Sector, Emp, Inst &
+Conformance = a re-runnable artefact against an open interface, third-party verifiable. \\
+
+O7.1 & Observability is surveillance and cost burden &
+Indiscriminate collection is harmful &
+Legal, Std, Emp, Inst &
+Mandate is proportionate, classified observability --- legally required and legally bounded. \\
+
+O8.1 & Reversibility never survives production &
+Un-rehearsed rollback fails &
+Legal, Std, Sector, Inst &
+Reversibility is designed and rehearsed per wave, kept open by coexistence. \\
+
+\end{longtable}
+
+\bigskip
+\noindent\textbf{Methodological note.} Every response in this module concedes
+the legitimate core of its objection before rebutting the overreach, and
+each rests on at least three independent evidence layers. The recurring
+defensive structure --- \emph{size-invariant minimal functional set},
+\emph{contract-bounded replaceability}, and \emph{brownfield coexistence} ---
+is what allows the architecture to be simultaneously rigorous and applicable
+across institutions of very different scale and jurisdiction.
+
+% ============================================================================
+\backmatter
+% ============================================================================
+
+\printbibliography[heading=bibintoc]
+
+\end{document}

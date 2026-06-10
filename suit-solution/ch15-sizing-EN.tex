@@ -1,0 +1,310 @@
+% ============================================================================
+% Chapter 15 --- Sizing reference points
+% ----------------------------------------------------------------------------
+% Purpose : indicative orders of magnitude per layer for a typical
+%           research-intensive institution. Methodological chapter — the figures are ranges,
+%           the assumptions are explicit, the figures are not measurements.
+% Page target: ~3 pages.
+% Dependencies: Ch. 6--14 (each layer's reference instantiation).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D15.1 reference profile: research-intensive institution, ~25k users, ~1.5k staff,
+%         ~500 active research projects
+%   D15.2 all figures are indicative ranges, not measurements
+%   D15.3 the chapter does NOT replace local sizing exercises
+% ============================================================================
+
+\chapter{Sizing reference points}
+\label{ch:sizing}
+
+\begin{caveatbox}[Status of this chapter]
+\noindent The figures presented in this chapter are \emph{indicative
+orders of magnitude} for a reference institution profile defined in
+\S\ref{sec:sz-method}. They are not measurements, and they do not
+substitute for the institution's own sizing exercises. Their
+purpose is to give the reader a sense of the scale at which the
+architecture has been considered, and to flag the points at which
+the architecture may need reshaping. Any institutional procurement
+or capacity-planning decision should be informed by direct
+measurement of the institution's actual workload, not by the
+ranges below.
+\end{caveatbox}
+
+%-----------------------------------------------------------------------------
+\section{Method and assumptions}
+\label{sec:sz-method}
+
+\paragraph{Reference profile.} The figures in this chapter assume a
+research-intensive university with the following indicative
+characteristics:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item approximately twenty-five thousand active subjects (staff,
+    students, contractors, visiting researchers combined);
+  \item approximately one thousand five hundred staff members with
+    administrative or research roles requiring elevated access;
+  \item on the order of five hundred active research projects with
+    distinct workspace requirements;
+  \item a mix of institutional, organisational-unit-level, and
+    project-level workloads, including a non-trivial research-data
+    footprint.
+\end{itemize}
+
+\paragraph{Scope of the figures.} For each layer, two kinds of
+figures are given: \emph{steady-state} ranges describing the load
+the layer is expected to sustain, and \emph{peak} ranges describing
+the load the layer should be provisioned to absorb. Peak figures are
+not multiples of steady-state; they are the result of distinct
+phenomena (start-of-semester authentication surges, conference
+deadline storage pressure, end-of-year research-data ingestion).
+
+\paragraph{Sources of variation.} Actual figures at any institution
+are influenced by factors the reference profile does not capture:
+the proportion of remote versus on-campus subjects, the depth of
+the research-computing footprint, the mix of teaching modalities,
+the institutional federation activity, the openness posture toward
+visiting researchers. The ranges below would typically span the
+P25--P75 of institutions in the broad reference profile, with
+substantial overflow on either side.
+
+%-----------------------------------------------------------------------------
+\section{Identity layer sizing}
+\label{sec:sz-identity}
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Authentications per second, steady state: indicatively
+    \emph{a few to tens}; peak (start-of-day, post-incident
+    re-authentication storms): indicatively \emph{hundreds}.
+  \item Concurrent active sessions: indicatively \emph{thousands};
+    peak: indicatively \emph{a few thousand}.
+  \item Federation transactions per day (\loc{identity-federation-profile}
+    inbound and outbound combined): indicatively \emph{tens to hundreds of
+    thousands}.
+  \item SCIM provisioning operations per day: indicatively
+    \emph{thousands during steady state}; peak around academic-
+    year boundaries can be substantially higher for a bounded
+    period.
+\end{itemize}
+
+\noindent The principal sizing variable is not the user count but
+the authentication frequency, which is driven by session-lifetime
+conventions: institutions with short sessions and frequent
+re-challenge have peak rates an order of magnitude higher than
+institutions with long sessions.
+
+%-----------------------------------------------------------------------------
+\section{Policy layer sizing}
+\label{sec:sz-policy}
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Decisions per second, steady state: indicatively
+    \emph{tens to low hundreds}; peak: indicatively \emph{a few
+    hundred}.
+  \item Decision latency budget: indicatively \emph{below ten
+    milliseconds at the 95th percentile} for online decisions
+    (network attachment, application authorisation); higher
+    budgets are admissible for asynchronous decisions (workload
+    admission, batch operations).
+  \item Bundle refresh cadence: indicatively \emph{minutes}, with
+    the ability to push out-of-band for urgent policy changes.
+\end{itemize}
+
+\noindent Policy-decision rate is dominated by the integration
+choices, not by the user population: a single authorisation check
+embedded in a frequently-called API endpoint can produce more
+decisions per second than the rest of the institution combined.
+
+%-----------------------------------------------------------------------------
+\section{Network layer sizing}
+\label{sec:sz-network}
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Campus backbone capacity: indicatively in the range of
+    \emph{40--400~Gb/s aggregate}, with research-intensive
+    institutions toward the upper end.
+  \item Science DMZ throughput, where present: indicatively
+    \emph{at the same order as the backbone}, with the explicit
+    architectural choice that the Science DMZ is not penalised by
+    enterprise filtering.
+  \item NAC transactions per day (wired plus wireless attachment
+    and re-attachment): indicatively \emph{hundreds of thousands
+    to low millions}.
+  \item IPFIX flow records per day: indicatively \emph{hundreds of
+    millions}, depending on flow-export sampling rate and on
+    research traffic volume.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Audit and observability layer sizing}
+\label{sec:sz-audit}
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Events per day, steady state: indicatively \emph{tens of
+    millions to hundreds of millions}, depending on the
+    instrumentation density.
+  \item Storage volume per day, steady state: indicatively
+    \emph{tens to low hundreds of gigabytes} after standard
+    compression; peak can substantially exceed steady-state during
+    incidents.
+  \item Retention scenario (illustrative): hot-tier (indexed,
+    searchable) for ninety days; warm-tier for one year;
+    cold-tier (object storage, retrievable) for the period required
+    by regulatory and audit obligations, typically several years.
+\end{itemize}
+
+\noindent The audit-layer figures are the most variable in this
+chapter: an institution that has not yet operationalised the
+canonical schema of \trchap{ch:observability}{} will produce a
+small fraction of these volumes; an institution that instruments
+aggressively without volume-management discipline can produce
+multiples of them.
+
+%-----------------------------------------------------------------------------
+\section{FTE indicators per layer}
+\label{sec:sz-fte}
+
+The table below consolidates the indicative operational envelopes
+introduced in the layer chapters. Each row is a range, not a point
+estimate; rows are not additive (engineers are typically shared
+across layers within the same operational team).
+
+\begin{table}[H]
+\centering\small
+\caption{Indicative operational envelopes per layer (engineer-equivalents,
+shared with adjacent duties). Ranges are not additive.}
+\label{tab:sz-fte}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.45\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.80\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Layer & Indicative range & Notes \\
+\midrule
+Identity (Ch. 6)         & 2--4   & Reference instantiation; subject lifecycle automation reduces the upper bound. \\
+Policy (Ch. 7)           & 1--2   & Skill investment substantial relative to the headcount. \\
+Network (Ch. 8)          & 3--5   & Largest envelope; reflects the integrated stack. \\
+Compute (Ch. 9)          & 4--7   & Sustained engineering investment for OpenStack + Kubernetes. \\
+Storage (Ch. 10)         & 2--4   & Ceph operations require dedicated familiarity. \\
+Endpoint (Ch. 11)        & 3--6   & Multi-OS coverage drives the count. \\
+Observability (Ch. 12)   & 3--5   & Often shared with security operations. \\
+Crypto (Ch. 13)          & 1--2   & Operational discipline more than ongoing engineering. \\
+Orchestration (Ch. 14)   & 2--4   & Composition is the principal effort. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Build versus run split.} The ranges above describe
+steady-state operations. The build phase --- the migration waves of
+Part~III --- typically requires an additional one to two
+engineer-equivalents per active wave for the duration of the wave,
+on top of the steady-state figures. Institutions running multiple
+waves in parallel should plan for the cumulative figure rather than
+expect efficient resource sharing across waves.
+
+%-----------------------------------------------------------------------------
+\section{Scaling levers and breakpoints}
+\label{sec:sz-scaling}
+
+The reference figures imply scaling decisions at certain
+breakpoints. The breakpoints below are indicative thresholds at
+which the architecture would benefit from reshaping; the exact
+threshold for any institution depends on its growth profile and on
+its operational patterns.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Identity above approximately fifty thousand
+    subjects.} The single-cluster Keycloak deployment of the
+    reference would benefit from horizontal partitioning, either
+    by population (staff / student / external) or by federation
+    role. Federation participation strategies may also need
+    reshaping.
+  \item \textbf{Audit above approximately five hundred gigabytes
+    per day.} The single-cluster OpenSearch deployment of the
+    reference would benefit from data-tier separation (hot indexed
+    cluster, warm searchable cluster, cold object storage), and
+    the analytical-store choice may need to be revisited if the
+    institution had committed to a per-GB priced alternative.
+  \item \textbf{Policy above approximately five thousand decisions
+    per second.} The single-instance OPA deployment of the
+    reference would benefit from sidecar deployment per critical
+    application, with bundle distribution coordinated centrally.
+  \item \textbf{Storage above the multi-petabyte threshold.} The
+    single-cluster Ceph deployment of the reference would benefit
+    from federation across multiple Ceph clusters with metadata
+    coordination, and the operational team would need substantial
+    expansion.
+  \item \textbf{Multi-site institutions.} Institutions with
+    multiple physical sites or with a research-cloud presence in
+    multiple jurisdictions face additional design decisions
+    (cross-site identity federation, cross-site policy
+    consistency, cross-site audit correlation) that the
+    single-site reference does not address. These would form the
+    subject of a future revision of this chapter.
+\end{itemize}
+
+\noindent The breakpoints above are indicative thresholds; the
+architecture remains valid beyond them, but the specific composition
+of the reference instantiation may require adaptation. The
+sovereignty grid of \trchap{ch:sovereignty-grid}{} continues to
+apply at any scale; the per-layer instantiations do not.
+
+\section{Down-scaled profile for smaller and teaching-led institutions}
+\label{sec:sz-downscale}
+
+The reference instantiation is sized for a research-intensive
+university; it is not a floor below which the architecture ceases to
+apply. The same nine layers and the same sovereignty grid hold for a
+smaller or teaching-led institution, but their instantiation collapses
+to a lighter profile:
+
+\begin{itemize}[nosep]
+  \item \textbf{Collapsed tiers.} The administrative, teaching and
+    research planes that a large institution separates physically can
+    be realised as logical segments on shared hardware; the
+    distinction is enforced by policy and identity rather than by
+    dedicated fabric.
+  \item \textbf{Managed or mutualised compute and storage.} Where an
+    institution lacks the scale to operate its own virtualisation and
+    object-storage layers, these can be drawn from a national research
+    cloud, a national research and education network service, or a
+    managed provider under
+    an appropriate data-processing agreement --- the sovereignty
+    requirement constrains \emph{where} and \emph{under what terms}
+    data sits, not whether the institution owns the metal.
+  \item \textbf{Optional Science DMZ.} The Science~DMZ is justified by
+    sustained high-volume research data transfer; a teaching-led
+    institution without that traffic profile can defer it entirely
+    without weakening the rest of the architecture.
+  \item \textbf{Non-additive minimum team.} The role inventory of
+    \S\ref{sec:sz-fte} describes responsibilities, not headcount: in a
+    small institution several roles are discharged by the same person,
+    and the figures there are not summed into a minimum staff count.
+\end{itemize}
+
+\noindent\textbf{Down-scaling counterpart to the breakpoints.}
+Just as \S\ref{sec:sz-scaling} identifies the thresholds at which the
+reference instantiation must grow, the same logic read downward
+identifies what a smaller institution may legitimately omit or
+mutualise: each layer degrades gracefully to a managed or shared
+realisation as scale decreases, and the architecture is judged by the
+sovereignty grid it satisfies, not by the size of the estate that
+satisfies it. The conformance expectation for this profile is read
+accordingly: the exit-confidence index of \trchap{ch:conformance}{}
+(\S\ref{sec:cf-reporting}) is a maturity trajectory, and for a
+mutualised layer the institution's confidence rests on the provider's
+contractual exit terms rather than on a self-run test.
+
+\paragraph{A concrete minimal-core envelope.} For planning purposes, a
+teaching-led institution adopting only the minimal core --- Wave~0
+governance, the Identity layer and the Observability layer, with compute
+and storage mutualised as above --- can expect an indicative steady-state
+envelope on the order of three to five engineer-equivalents, shared across
+the roles rather than summed per layer. Mutualising compute and storage
+converts their local engineering effort into provider-management overhead
+rather than headcount; the Network layer collapses to logical segmentation
+on shared hardware; and the optional Science~DMZ is deferred. Consistent
+with the rest of this chapter, the figure is an order-of-magnitude planning
+aid, not a floor or a conformance threshold: an institution that mutualises
+further layers trends toward the lower bound, and the responsibilities of
+\S\ref{sec:sz-fte} remain role descriptions discharged by shared staff.

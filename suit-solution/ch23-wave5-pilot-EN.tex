@@ -1,0 +1,293 @@
+% ============================================================================
+% Chapter 23 --- Wave 5: TAC pilot
+% ----------------------------------------------------------------------------
+% Purpose : exercise the full stack on a contained scenario. Absorbs the
+%           original A.3 (minimum-viable pilot) content. First wave that
+%           exercises the architecture end-to-end.
+% Page target: ~6 pages.
+% Dependencies: Waves 1, 2, 3, 4 closed (D17.3); reference layers Ch. 6-14.
+% Adapts wave template (D18.2): three illustrative pilot scenarios in
+% addition to (or in place of) the three starting-position trajectories,
+% since the pilot's defining variable is the scenario chosen, not the
+% institution's starting position.
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D23.1 Wave 5 adapts the wave template: scenarios in place of trajectories
+%   D23.2 three illustrative pilot scenarios published
+%   D23.3 pilot lives in an isolated zone, no production impact
+%   D23.4 exit criteria reference the union of all conformance subsets
+%         exercised by the pilot
+% ============================================================================
+
+\chapter{Wave~5 --- TAC pilot}
+\label{ch:wave5-pilot}
+
+\begin{caveatbox}[Dependencies and template adaptation]
+\noindent Wave~5 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{} with one adaptation: the principal
+differentiating variable is the chosen pilot scenario rather than
+the institution's starting position, so the chapter develops three
+illustrative scenarios (\S\ref{sec:w5-scenarios}) and consolidates
+the trajectory discussion (\S\ref{sec:w5-trajectories}). Required
+pre-requisites are Waves~1, 2, 3 and 4. Closure is gated by the
+union of conformance subsets corresponding to the layers the pilot
+exercises.
+\end{caveatbox}
+
+Wave~5 is the wave in which the architecture is exercised
+end-to-end, in production conditions, on a contained scope. It is
+the first wave that demonstrates the integration of the
+preceding waves, and the first opportunity for the institution to
+encounter the architecture's emergent behaviour --- the
+combination effects that no single layer's testing can surface.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w5-goal}
+
+The goal of Wave~5 is to operate one or more Trusted Activity
+Contexts in production, on a scope contained enough that failure
+of the pilot does not affect institutional services, and to
+extract from the experience the learnings that subsequent waves
+(Endpoint, Audit-and-IR, Workload, Lifecycle) will apply at
+larger scale. The pilot is consequently both a technical
+demonstration and an organisational learning event.
+
+\paragraph{Pilot, not deployment.} The wave does not promise
+generalisation of the chosen scenario across the institution. A
+pilot that succeeds operationally has produced what the wave
+required; further deployment is the work of subsequent waves and
+of the institution's own scaling decisions.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w5-prereq}
+
+Beyond the closure of Waves~1 to 4, three operational conditions
+strengthen Wave~5:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item a participating faculty, research project, or service that
+    has accepted to host the pilot, with named accountable
+    contacts who will engage with the engineering team
+    throughout;
+  \item a pilot-specific governance arrangement, typically a small
+    steering group composed of the pilot host, the programme
+    sponsor, and the engineering lead, meeting at a higher cadence
+    than the broader programme governance;
+  \item a documented success-and-failure framework agreed at wave
+    open, so that the pilot's outcome can be evaluated against
+    declared criteria rather than against retrospective
+    interpretation.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w5-coexistence}
+
+Wave~5's coexistence pattern is structurally simpler than the
+preceding waves: the pilot operates in an isolated zone of the
+network and on isolated tenancies of the compute and storage
+layers, without affecting production services. Coexistence is
+spatial rather than temporal --- the pilot and the production
+services share the institution's infrastructure but do not share
+critical operational paths.
+
+\paragraph{Bounded blast radius.} The architectural commitment of
+Wave~5 is that an incident within the pilot --- a misconfiguration,
+a security event, a performance regression --- does not propagate
+to production. The mechanisms that bound the blast radius (zone
+isolation, separate identity attribution, separate audit
+correlation) are part of the pilot's design.
+
+%-----------------------------------------------------------------------------
+\section{Three illustrative pilot scenarios}
+\label{sec:w5-scenarios}
+
+The three scenarios below are illustrative; institutions choose
+the scenario that aligns with their strategic priorities, with
+their willingness to engage the pilot host, and with the
+sovereignty grid's current emphasis. The scenarios are not
+exclusive --- an institution may run more than one pilot in
+sequence or in parallel --- but a single first pilot is generally
+preferable to ensure the team's full attention.
+
+\subsection{Scenario A: Researcher-LLM-API}
+\label{sec:w5-scenario-llm}
+
+A research group requests scoped, audited access to a
+generative-AI cloud endpoint from a dedicated research zone, with
+data classification rules and a documented egress policy. The
+scenario surfaces most cross-cutting concerns at once: federated
+identity, policy decision combining role and posture, network
+attachment to a research zone, third-country data egress under
+\loc{cross-border-transfer-regime} (in the EU, \gls{gdpr}
+Chapter~V, Arts.~44--49, read with the \emph{Schrems~II} doctrine),
+audit
+aggregation across layers.
+
+\paragraph{Activation sequence.} The researcher authenticates
+through the institutional SSO and requests activation of a
+\emph{Researcher-LLM-API} role. The identity layer issues a
+short-lived assertion. The policy layer evaluates the request
+against the institutional rules: role granted, posture verified,
+classification of the data the researcher intends to access
+permitted under the egress policy. The network layer attaches the
+researcher's session to the research zone with the appropriate
+egress allowance. The compute layer provisions or attaches the
+research workspace. The storage layer binds the project volumes
+with the classification labels active. Every step emits events
+under the canonical TAC schema.
+
+\paragraph{Why this scenario.} The cross-jurisdiction data flow is
+the most institutionally consequential aspect of the scenario. A
+pilot that demonstrates a documented egress policy under the
+conditions of \loc{cross-border-transfer-regime} (in the EU,
+\gls{gdpr} Chapter~V read with the \emph{Schrems~II} doctrine)
+produces an artefact that the
+institution can show to its governance body, its data-protection
+function, and the regulators that may inspect its operations.
+
+\subsection{Scenario B: Teaching cyber-range}
+\label{sec:w5-scenario-cyber}
+
+A teaching department requests a time-bounded laboratory
+environment for cybersecurity instruction: students receive
+isolated networks within a controlled zone, instructors hold
+elevated roles for the class duration, and the entire environment
+is decommissioned when the term ends.
+
+\paragraph{Why this scenario.} The teaching cyber-range exercises
+the lifecycle of a TAC --- activation at term start,
+re-activation per class session, decommissioning at term end ---
+more rigorously than other scenarios. It also exercises
+multi-tenant isolation at a scale (typically tens of student
+contexts simultaneously active) that other pilots do not.
+
+\subsection{Scenario C: Administrative compliance workspace}
+\label{sec:w5-scenario-compliance}
+
+An administrative service handling regulated data (research-ethics
+reviews involving sensitive subject data, compliance reporting
+toward regulatory bodies) requests a workspace with stricter
+audit, restricted egress, and disclosure-regime guarantees. The
+scenario exercises the higher-classification end of the
+data-dimension spectrum.
+
+\paragraph{Why this scenario.} The compliance scenario exercises
+HYOK arrangements (\trchap{ch:storage}{} D10.6), the strictest
+audit-retention obligations, and the integration with existing
+institutional compliance processes. It is the scenario that most
+directly engages the institution's governance bodies beyond the IT
+function.
+
+%-----------------------------------------------------------------------------
+\section{Trajectories (consolidated)}
+\label{sec:w5-trajectories}
+
+Across the three principal trajectories of the playbook, Wave~5
+varies in its integration burden but not in its essential form.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Greenfield.} The pilot is the institution's first
+    operational TAC; the integration burden is minimal because
+    there is no incumbent to coexist with. The wave is
+    correspondingly compressed (indicative duration four to six
+    months).
+  \item \textbf{Brownfield single-suite-centric.} The pilot operates
+    against the institution's existing incumbent identity suite and
+    office-productivity estate (e.g.\ Entra-based identity with a
+    Microsoft~365 estate), with policy decisions evaluated by the
+    Wave~4 OPA deployment. Integration testing focuses on the
+    incumbent-IdP-to-policy-plane decision chain.
+  \item \textbf{Brownfield hybrid.} The pilot operates against
+    the existing Shibboleth federation and the Wave~1 Keycloak
+    activation layer. Integration testing focuses on the
+    cross-component activation sequence.
+\end{itemize}
+
+\paragraph{Indicative duration.} Six to nine months for brownfield
+trajectories, with the variability driven by the chosen scenario
+and by the institutional change-management cadence.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w5-reversibility}
+
+Wave~5 is structurally reversible: the pilot can be stopped at
+any time without affecting production services, and the data
+generated during the pilot is preserved according to the
+institutional classification scheme.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Pilot stop procedure: documented, exercised in tabletop
+    form before pilot start, and invoked without escalation when
+    the pilot host requests it.
+  \item Data preservation: research data, teaching artefacts, or
+    administrative artefacts produced during the pilot are
+    exported in documented formats before the pilot
+    decommissions.
+  \item Learning preservation: the technical and organisational
+    learnings from the pilot are documented in a wave-closure
+    report whose content is preserved regardless of whether the
+    pilot was operationally successful.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w5-exit}
+
+Wave~5 closes when the conformance subsets corresponding to the
+layers exercised by the pilot pass on the pilot configuration,
+when the pilot host has reported its operational experience, and
+when the wave-closure report has been reviewed by the governance
+body.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Conformance: the union of the relevant Identity, Policy,
+    Network, Compute, Storage and Observability tests passes
+    against the pilot configuration. The exact subset depends on
+    the chosen scenario.
+  \item User experience: the pilot host has produced a structured
+    report describing the operational experience --- what worked,
+    what did not, what should be revised before any broader
+    deployment.
+  \item Wave-closure report: technical learnings, organisational
+    learnings, and recommendations for subsequent waves are
+    consolidated and reviewed by the programme governance.
+\end{itemize}
+
+\begin{realworldbox}[Research-cloud pilot precedents]
+\noindent Indiana University's Jetstream2, operated under the
+United States National Science Foundation's ACCESS programme, is
+a publicly documented research-cloud architecture from which
+pilot patterns can be drawn. European institutions participating
+in the EGI federated cloud and in EUDAT-aligned research-data
+projects have produced comparable patterns. The institutional
+specifics --- pilot scope, success criteria, durations --- vary
+substantially across institutions and should be evaluated against
+each institution's own context rather than transposed wholesale.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w5-regulatory}
+
+\noindent Wave~5 is the first wave that exercises the
+architecture end-to-end on a research-class TAC. Its regulatory
+profile depends on the pilot scenario chosen. The
+Researcher-LLM-API scenario is the principal locus where
+\loc{ai-regulation} bites; in the EU, the applicable frame for
+commercial-API use is the AI Act's risk-based classification, with
+Art.~50 (transparency obligations) applicable when end-users
+interact with AI-generated content --- the Art.~2(6)/2(8) research
+exemptions cover bespoke, pre-market research tools, not the
+consumption of a commercial API.
+For all pilot scenarios, \gls{gdpr}~Art.~25 (data protection by
+design) and Art.~35 (DPIA where the pilot processes personal
+data on a non-trivial scale) frame the documentation duty. The
+wave is the first integration test for the
+\gls{gdpr}-Art.~32 / NIS2-Art.~21(2)(a) measures introduced by
+Waves~1--4. Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-ai-act}.

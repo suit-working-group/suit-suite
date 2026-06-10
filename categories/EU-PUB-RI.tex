@@ -1,0 +1,112 @@
+% ============================================================================
+% categories/EU-PUB-RI.tex — CATEGORY ARCHETYPE: European public
+%                            research-intensive university
+% ----------------------------------------------------------------------------
+% Layer 1 of the suite localization model (Layer 0 = localization-defaults.tex).
+% A category archetype is a PARTIAL set of \setloc overrides that binds the
+% STRUCTURAL localization keys to the concrete generic value shared by every
+% institution in this category, while leaving the country-specific NAME keys at
+% their Layer-0 generic default. It is \input AFTER localization-defaults.tex
+% and BEFORE any institution-level set, so it overrides the canonical generic
+% defaults and is in turn overridable per institution.
+%
+% ----------------------------------------------------------------------------
+% WHICH UNIVERSITIES THIS ARCHETYPE FITS
+% ----------------------------------------------------------------------------
+% EU-PUB-RI — a PUBLIC, RESEARCH-INTENSIVE university established under the law
+% of an EU/EEA Member State, whose binding regime is the European Union regime
+% (the SUIT baseline anchor in the Regulatory Applicability module). The
+% structural profile that follows is shared across this category:
+%
+%   * COLLEGIAL / COLLEGIATE GOVERNANCE — a tripartite ladder of an academic
+%     deliberative body (senate / academic council), a strategic governing
+%     board with external lay members, and a central executive (a rector /
+%     president / vice-chancellor and the rectorate), as is normal for a public
+%     university constituted by national higher-education statute.
+%   * SINGLE NATIONAL NREN + GEANT — exactly one national research and
+%     education network per Member State, all interconnected at the pan-European
+%     tier by the GEANT backbone; the national federations are joined through
+%     the eduGAIN interfederation; the supranational HPC tier is EuroHPC JU.
+%   * EU-SOVEREIGNTY-CONSCIOUS DATA CUSTODY — a custody posture that keeps the
+%     core estate within the EU/EEA and minimises GDPR Chapter V third-country
+%     transfer/disclosure exposure (an EU-hosted, EU-operated deployment as the
+%     structural optimum).
+%
+% Representative members (illustrative, NOT exhaustive): KU Leuven, TU Delft,
+% Sorbonne Universite, LMU Munich, University of Helsinki, Uppsala University,
+% University of Vienna, Universidad Complutense de Madrid, the University of
+% Luxembourg. It does NOT fit private/foundation universities, teaching-led
+% institutions, non-EU/EEA universities (use the matching national archetype),
+% or universities whose binding regime is not the EU regime.
+%
+% ----------------------------------------------------------------------------
+% WHAT THIS FILE BINDS AND WHAT IT DELIBERATELY LEAVES ALONE
+% ----------------------------------------------------------------------------
+% BOUND HERE (structural, category-wide):
+%   governance ladder, executive leadership, constituent units, NREN tier,
+%   identity federation, deployment-scale / custody model, data-custody
+%   posture, pilot units, operational roles, and the regulatory keys (which
+%   reference the EU regime of the Regulatory Applicability module).
+%
+% LEFT AT GENERIC DEFAULT (country-specific NAME keys — an INSTITUTION-LEVEL set
+% fills these, since they differ per Member State even within this category):
+%   national-nren (the specific national NREN, e.g. DFN / RENATER / SURF /
+%       RESTENA), national-dpa (the specific national data-protection
+%       authority), national-gov-csirt (the specific national/governmental
+%       CSIRT). These remain bound to their Layer-0 role phrases.
+%
+% Keys are kebab-case. Requires localization.sty (\setloc / \loc) and assumes
+% localization-defaults.tex has already been \input.
+% ============================================================================
+
+% --- Subject institution & profile ------------------------------------------
+\setloc{institution-type}{a public, research-intensive university established under the law of an EU/EEA Member State}
+
+% --- Governance ladder (collegial / collegiate) -----------------------------
+\setloc{executive-leadership}{the rectorate (the rector/president and the central executive team)}
+\setloc{governing-board}{the university's governing board (a strategic, fiduciary body including external lay members)}
+\setloc{academic-governing-bodies}{the academic deliberative bodies (the senate / academic council and the faculty councils)}
+
+% --- Constituent units & pilots ---------------------------------------------
+\setloc{cs-research-unit}{a faculty computer-science / informatics department}
+\setloc{security-research-centre}{a cybersecurity-focused interdisciplinary research centre or institute}
+\setloc{institution-hpc-facility}{the university's central HPC facility / HPC team}
+\setloc{pilot-entities}{the university's HPC facility / team together with its strongest-expertise units (a computer-science department and a security research centre)}
+
+% --- Research & education network tier (single national NREN + GEANT) --------
+\setloc{nren-name}{the Member State's single national research and education network (NREN)}
+\setloc{nren-csirt}{the national NREN's CSIRT}
+\setloc{peer-nren-roster}{the peer national NRENs of the other EU/EEA Member States, each operating a national backbone, a CSIRT, and federated identity/storage/IaaS services, all interconnected by the GEANT pan-European backbone}
+\setloc{nren-service-catalogue}{the national NREN's federated-service catalogue delivered over GEANT (federated Wi-Fi via eduroam, the trusted certificate service, performance monitoring, and managed research-data transfer)}
+\setloc{nren-research-cloud}{the national NREN's research-cloud offering or a GEANT-brokered EU research cloud, where one exists}
+\setloc{research-backbone-scale}{the GEANT pan-European research backbone (Member-State NREN membership and multi-100\,Gbps backbone capacity), with campus connections in the 10--100\,Gbps range}
+
+% --- Identity federation (national federation via eduGAIN) -------------------
+\setloc{identity-federation-profile}{the national academic identity federation, interconnected through the eduGAIN interfederation}
+
+% --- High-performance computing (supranational tier = EuroHPC JU) -----------
+\setloc{national-hpc-facility}{a national or EuroHPC JU supercomputer}
+
+% --- Deployment scale & data-custody posture (EU-sovereignty-conscious) ------
+\setloc{deployment-custody-model}{the university operates, or procures under equivalent custody guarantees, an EU-hosted and EU-operated deployment of its core components}
+\setloc{data-custody-sovereignty-profile}{a custody arrangement that keeps the core estate within the EU/EEA and minimises GDPR Chapter~V third-country transfer and disclosure exposure}
+
+% --- Operational roles ------------------------------------------------------
+\setloc{internal-emergency-incident-contact}{the university's internal emergency / incident-reporting contact, reporting to the ISO/CISO}
+
+% ============================================================================
+% REGULATORY KEYS — bound to the EU REGIME of the Regulatory Applicability
+% module (shared/regulatory-applicability-EN.tex). These fix the supranational
+% instruments; the country-specific NAME keys (national-dpa, national-gov-csirt,
+% the *-national-transposition rows) are left at their generic default for an
+% institution-level set to fill per Member State.
+% ============================================================================
+\setloc{regulatory-regime}{the European Union regime (the SUIT baseline anchor): binding EU and EEA law in the Member State of establishment}
+\setloc{cybersecurity-baseline-regime}{the EU network-and-information-security regime (the NIS2 Directive (EU) 2022/2555, as transposed in the Member State)}
+\setloc{data-protection-regime}{the EU General Data Protection Regulation (Regulation (EU) 2016/679, GDPR)}
+\setloc{eid-trust-services-regime}{the EU eIDAS\,2 trust-services regime (Regulation (EU) No~910/2014 as amended by Regulation (EU) 2024/1183)}
+\setloc{ai-regulation}{the EU AI Act (Regulation (EU) 2024/1689)}
+\setloc{cross-border-transfer-regime}{the GDPR Chapter~V cross-border data-transfer regime}
+\setloc{essential-entity-classification-basis}{the university's status as an essential (or important) entity under the NIS2 essential-entity regime}
+
+\endinput

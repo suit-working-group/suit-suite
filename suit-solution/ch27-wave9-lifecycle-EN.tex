@@ -1,0 +1,268 @@
+% ============================================================================
+% Chapter 27 --- Wave 9: Lifecycle automation and maturity
+% ----------------------------------------------------------------------------
+% Purpose : self-service provisioning, GitOps discipline at scale, mature
+%           operational stage. Last wave of the playbook.
+% Page target: ~4 pages.
+% Dependencies: Waves 1-8 in some form (D17.3); reference layer Ch. 14
+%               (orchestration plane four properties D14.1, composition
+%               discipline D14.4, no admissible third path D14.7).
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D27.1 self-service is rolled out per consumer group, not institution-wide
+%   D27.2 GitOps repository becomes the operational source of truth
+%   D27.3 ticket-driven legacy flows preserved during transition
+%   D27.4 exit criteria reference Orchestration conformance subset + service
+%         metrics
+% ============================================================================
+
+\chapter{Wave~9 --- Lifecycle automation and maturity}
+\label{ch:wave9-lifecycle}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~9 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. The required pre-requisite is
+the closure of Waves~1--8 in some form: not every wave must have
+reached its full scope, but each must have closed the elements
+on which Wave~9 builds. It applies the orchestration contract of
+\trchap{ch:orchestration}{} (the four properties of D14.1, the
+composition discipline of D14.4, the no-third-path rule of
+D14.7). Closure is gated by the four Orchestration tests of
+\trchap{ch:conformance}{}.
+\end{caveatbox}
+
+Wave~9 is the wave in which the architecture acquires the
+operational ergonomics of a mature platform. The provisioning
+that earlier waves have established as technically possible
+becomes a self-service capability for the institution's
+consumers. The GitOps discipline that earlier waves have
+respected becomes the operational source of truth. The wave is
+consequently both the last wave of the playbook and the wave in
+which the institution stops thinking about ``the playbook'' and
+starts thinking about routine operations.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w9-goal}
+
+The goal of Wave~9 is to make the architecture's day-to-day
+operation sustainable without continuous engineering intervention.
+Three concrete objectives follow:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item self-service provisioning of TACs by their authorised
+    consumers (researchers requesting research workspaces,
+    teaching staff requesting lab environments,
+    administrative staff requesting compliance workspaces),
+    with the policy plane gating the request;
+  \item GitOps repository elevated to the operational source of
+    truth: changes to the architecture's running state are made
+    by repository commit, reviewed under the same discipline as
+    application code, and reconciled into running state by the
+    orchestration plane;
+  \item operational stability metrics agreed and reported, so
+    that the institution can recognise when the architecture is
+    operating at maturity.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w9-prereq}
+
+The closure of Waves~1--8 is the principal pre-requisite. Three
+operational conditions strengthen the wave when present:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the orchestration plane's GitOps repository is in active
+    use by the engineering team, with established review and
+    merge cadences;
+  \item the policy plane has accumulated sufficient policy
+    coverage that consumer-initiated provisioning requests do
+    not require ad hoc human authorisation in the routine case;
+  \item the conformance suite of \trchap{ch:conformance}{} has
+    been exercised at least twice, so that the institution has
+    a baseline for the maturity metrics that Wave~9 will use.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w9-coexistence}
+
+Wave~9's coexistence is between ticket-driven provisioning
+(the institution's incumbent service-management pattern) and
+self-service provisioning (the wave's target pattern).
+
+\paragraph{Per-consumer-group rollout.} Self-service is rolled
+out group by group rather than institution-wide. Typical
+sequence: a research group with mature DevOps practice first,
+then teaching environments where the requester is the
+instructor, then administrative services where the requester is
+typically a unit manager. Each group's rollout is evaluated
+against the maturity metrics before the next group begins.
+
+\paragraph{Ticket-driven legacy preserved.} Throughout the wave,
+the existing ticket-driven flows remain available. Consumers
+who do not yet have self-service for their use case continue
+through tickets; the engineering team operates both flows
+without requiring consumers to choose. The ticket-driven flow
+is gradually retired only when the corresponding self-service
+flow has demonstrated stability for an institutionally agreed
+period (indicatively three to six months).
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w9-greenfield}
+
+For institutions in a greenfield position, Wave~9 establishes
+self-service and GitOps from the start of the institution's
+production operation. There is no incumbent ticket-driven flow
+to preserve, and the wave is correspondingly compressed.
+Indicative duration is four to six months for the technical
+configuration; the maturity metrics require additional time to
+accumulate.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w9-brownfield-ms}
+
+For institutions whose existing service-management is built
+around ServiceNow, Microsoft Service Management, or a
+comparable ITSM platform, Wave~9 introduces the self-service
+capability alongside the ITSM platform rather than in
+replacement of it.
+
+\paragraph{Pattern.} The ITSM platform continues to operate for
+the use cases that genuinely benefit from its workflow features
+(approval chains involving multiple stakeholders, financial
+authorisation, regulated processes). Self-service is introduced
+for the use cases where the policy plane's authorisation is
+sufficient and where the platform's workflow features add
+ceremony rather than value. The ITSM platform may itself become
+a consumer of the policy plane and the orchestration plane: an
+ITSM-initiated request becomes a GitOps commit through a thin
+adapter.
+
+\paragraph{What changes in Wave~9.} The boundary between
+self-service and ITSM-driven provisioning is documented and
+governed; the institution's consumers know which path applies
+to their request. The GitOps repository becomes the
+authoritative state, with the ITSM platform acting as a
+trigger rather than as the system of record.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months,
+dominated by the per-consumer-group rollout and by the
+ITSM--GitOps boundary work.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w9-brownfield-hybrid}
+
+For institutions with a multi-vendor compute estate and an
+organisational-unit-level service-management heterogeneity, Wave~9
+operationalises a unified self-service interface across the
+heterogeneous substrate.
+
+\paragraph{Pattern.} A common self-service portal (or, where
+preferred, a CLI plus IaC pattern) is exposed across the
+substrates that Waves~3, 8 and 9 have brought under common
+governance. The portal does not eliminate organisational-unit-level
+autonomy in service management; it provides the institutional
+baseline that organisational-unit-specific extensions build on.
+
+\paragraph{What changes in Wave~9.} The institution acquires a
+shared provisioning surface that respects organisational-unit
+autonomy while delivering consistent classification, audit, and
+sovereignty properties across the estate.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w9-reversibility}
+
+Wave~9 is reversible at the per-consumer-group level for as
+long as the ticket-driven legacy flow remains operational.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Per-group rollback: a consumer group whose self-service
+    rollout produces unworkable behaviour is returned to the
+    ticket-driven flow while the divergence is diagnosed.
+  \item Self-service portal disable switch: a tested mechanism
+    for switching the portal to read-only or fully off within
+    minutes is part of the wave's deliverables.
+  \item Manual fallback procedure: for the case in which both
+    self-service and ITSM are unavailable, a documented manual
+    procedure ensures that the architecture's critical
+    operations can still be exercised.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w9-exit}
+
+Wave~9 closes when the four Orchestration tests of the
+conformance suite of \trchap{ch:conformance}{}
+(\S\ref{sec:cf-suite}) pass, when the agreed self-service
+ratio is achieved, and when the institution's operational
+stability metrics are within agreed thresholds.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Orchestration conformance subset (idempotency,
+    deactivation reverses consequential changes, GitOps repo
+    suffices to rebuild state, workflow portability across
+    engines).
+  \item Self-service ratio: the institutionally agreed
+    proportion of provisioning requests is fulfilled through
+    self-service rather than through tickets. The ratio is
+    typically expressed per consumer group rather than as a
+    single institutional figure.
+  \item Operational stability metrics: agreed thresholds for
+    incident frequency, change-failure rate, and deactivation
+    completeness are met over an institutionally agreed
+    window.
+\end{itemize}
+
+\paragraph{Beyond Wave~9.} The closure of Wave~9 marks the end
+of the playbook and the beginning of routine operations. The
+sovereignty grid (\trchap{ch:sovereignty-grid}{}) continues to
+apply at every renewal; the conformance suite
+(\trchap{ch:conformance}{}) is exercised on its established
+cadence; the international peer comparison anticipated in
+phase~2 begins to operate against the institution's
+longitudinal record.
+
+\begin{realworldbox}[Self-service patterns]
+\noindent Self-service provisioning patterns at research-
+intensive institutions are reported in NREN community fora and
+in EDUCAUSE publications. Some institutions operate
+sophisticated self-service portals for research-cloud
+provisioning (typically those participating in NSF ACCESS or
+EGI federations); others operate hybrid arrangements with
+ITSM-mediated approval for sensitive provisioning. The
+specific portal designs and approval thresholds vary
+substantially with the institution's research mix and
+governance culture; no single design is universally
+appropriate.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w9-regulatory}
+
+\noindent Wave~9 closes the supply-chain and lifecycle loop. It
+is the principal anchor of the supply-chain security obligation
+of the applicable national NIS2 transposition (Art.~21(2)(d) of
+the directive) operationalised through SLSA / Sigstore attestations
+and through provenance-aware orchestration. Under \loc{ai-regulation} (in the EU, Art.~53 of the AI Act ---
+obligations for providers of general-purpose AI models, including
+model documentation and provenance), the wave's lifecycle
+discipline applies to AI artefacts. The wave operationalises 27001~A.8.30 (outsourced
+development) and contributes to NIST CSF \textsf{GOVERN}
+(GV.SC --- supply-chain risk management) and \textsf{IDENTIFY}
+(ID.AM --- asset management). It also operationalises
+COBIT~APO10 (managed vendors) and BAI03 (managed solutions
+identification and build). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-nis2},
+\S\ref{sec:rm-ai-act}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}, \S\ref{sec:rm-cobit}.

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Code of Conduct
+    url: https://www.contributor-covenant.org/version/2/1/code_of_conduct/
+    about: This project follows the Contributor Covenant 2.1. Report sensitive matters privately to the maintainer (see CODE_OF_CONDUCT.md).

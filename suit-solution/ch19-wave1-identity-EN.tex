@@ -1,0 +1,320 @@
+% ============================================================================
+% Chapter 19 --- Wave 1: Identity and federation
+% ----------------------------------------------------------------------------
+% Purpose : align the identity layer with the contract of Ch. 6. First wave
+%           with substantial trajectory differentiation. Sets the example
+%           for Ch. 20-27.
+% Page target: ~6 pages.
+% Dependencies: Wave 0 (Ch. 18); reference layer Ch. 6.
+% Mirrors the wave chapter template established in Ch. 18 (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D19.1 coexistence pattern: dual IdP for 12-24 months (typical)
+%   D19.2 brownfield single-suite-centric trajectory: keep Entra, add OPA in front
+%   D19.3 brownfield-hybrid trajectory: keep Shibboleth, add Keycloak local
+%   D19.4 exit criteria reference Identity conformance tests (D16.5)
+% ============================================================================
+
+\chapter{Wave~1 --- Identity and federation}
+\label{ch:wave1-identity}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~1 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Its pre-requisite is Wave~0
+(governance and inventory in place). It instantiates the identity
+contract of \trchap{ch:identity}{}, and its closure is gated by
+the four Identity tests of the conformance suite of
+\trchap{ch:conformance}{} (\S\ref{sec:cf-suite}).
+\end{caveatbox}
+
+Wave~1 is, in most institutions, the wave that produces the most
+visible operational change. The identity layer is touched by
+nearly every institutional service; a wave that succeeds here
+demonstrates that the playbook is operationally feasible, and a
+wave that struggles here typically reveals limitations in the
+governance established by Wave~0. The wave is consequently both
+critical and instructive.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w1-goal}
+
+The goal of Wave~1 is to bring the institution's identity layer
+into conformance with the contract of \trchap{ch:identity}{}: a
+documented identity provider speaking standard interfaces (OIDC,
+SAML2, SCIM~2.0), a federation participation aligned with the
+applicable regional research-and-education identity federation,
+an attribute schema reviewable by
+the institution, and an authentication and assertion log
+ingestible by the observability layer.
+
+\paragraph{What the wave does not undertake.} Wave~1 does not
+introduce policy-as-code (Wave~4), does not refactor endpoint
+posture verification (Wave~6), and does not extend authentication
+to workloads beyond what the identity layer naturally supports.
+These are deferred to their respective waves; Wave~1's success
+criterion is the contract, not the wider activation logic.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w1-prereq}
+
+Wave~1 has Wave~0 as its only required pre-requisite, but four
+operational conditions strengthen the wave when present:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the existing identity provider is inventoried, with its
+    federation contracts, attribute schema, and downstream
+    application set documented;
+  \item the institution's source-of-truth for staff and student
+    populations is identified, with the lifecycle events
+    (creation, role change, departure) understood operationally;
+  \item federation-policy responsibilities are clarified --- the
+    institution knows which contracts it has signed with which
+    federations and what attribute releases those contracts
+    obligate;
+  \item the network attachment of \trchap{ch:network}{} is in a
+    stable state (not being actively migrated under Wave~3),
+    since identity changes that interact with network attachment
+    are best made against a stable substrate.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w1-coexistence}
+
+The principal engineering effort of Wave~1 is the coexistence of
+the legacy and the incoming identity providers during the migration
+period. Indicative durations are twelve to twenty-four months for
+brownfield trajectories and substantially shorter for greenfield;
+the actual duration is determined by the application portfolio's
+re-federation pace.
+
+\paragraph{Federation bridge.} The two identity providers are
+brought into a federation relationship: each issues assertions
+that the other can verify, applications can choose which provider
+to trust during the migration, and a session begun on one is
+recognisable to the other. The bridge is built on standard
+interfaces (SAML2 metadata exchange, OIDC discovery), so that
+neither provider becomes captive to the bridge configuration.
+
+\paragraph{Application migration cohorts.} Applications are
+migrated to the new provider in cohorts, typically organised by
+risk profile (least-critical first), by organisational unit (one
+unit at a
+time for distributed institutions), or by technical similarity
+(all OIDC-native applications, then SAML2-only). Each cohort's
+migration is reversible within an agreed window; the next cohort
+begins only when the previous cohort's reversibility window has
+passed without incident.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w1-greenfield}
+
+For institutions in a greenfield position --- no significant
+incumbent identity provider, or a deliberate decision to refound
+the identity layer ---  Wave~1 is the most direct of the three
+trajectories. The reference instantiation of
+\S\ref{sec:id-reference} (an open-source identity provider with
+SCIM provisioning, joined to the applicable regional
+research-and-education identity federation) is built
+without the burden of coexistence; federation participation is
+established once; the application portfolio is integrated as it
+is built. Indicative duration is on the order of six to nine
+months.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield on an incumbent proprietary
+identity suite}
+\label{sec:w1-brownfield-ms}
+
+For a common brownfield position --- an institution whose
+identity layer already runs on \loc{incumbent-identity-suite-vendor}
+--- Wave~1 is the wave
+in which the institution's relationship with that incumbent
+proprietary identity suite
+is restructured rather than replaced. The architectural posture of
+the playbook is to retain the incumbent suite as the identity
+provider for
+operational reasons (skills market, integration with the
+institution's existing office-productivity estate) while adding the
+infrastructure that prevents that suite from becoming the
+institution's
+policy plane in addition to its identity plane.
+
+\paragraph{Pattern: incumbent suite retained, external policy
+engine added in parallel.} The
+institution retains the incumbent proprietary identity suite for
+authentication, federation
+participation, and SCIM provisioning. A new policy plane (Wave~4)
+is prepared in parallel, which will eventually take over the
+authorisation logic that the suite's proprietary conditional-access
+expressions currently
+encode. During Wave~1, that conditional-access configuration is
+documented, simplified where possible, and pinned to expressions
+whose translation to an open declarative policy language is known
+to be
+tractable. The objective is to bring Wave~1's exit criteria within
+reach \emph{without} blocking on Wave~4.
+
+\paragraph{What changes in Wave~1.} The federation metadata is
+audited and, where necessary, brought into the applicable regional
+research-and-education identity federation
+in conformance with that federation's technical profile. The
+attribute schema released to downstream applications is reviewed
+and, where appropriate, reduced. The authentication and assertion
+logs are routed to the observability layer through OpenTelemetry
+collectors deployed in this wave. SCIM provisioning is verified
+end-to-end against an alternative IdP test environment, to
+demonstrate that exit-data export works.
+
+\paragraph{What does not change.} The conditional-access logic
+itself remains in place; it will be partially reproduced in the
+external policy engine
+during Wave~4. The office-productivity estate is unaffected. The
+institution's existing procurement framework for the incumbent
+suite continues
+through this wave.
+
+\paragraph{Indicative duration.} Twelve to eighteen months,
+dominated by the application portfolio's federation review and the
+SCIM provisioning verification.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w1-brownfield-hybrid}
+
+For research-intensive institutions with a mature, SAML-based
+inter-institutional federation stack (for example a Shibboleth
+deployment), Wave~1 is structured around the preservation of
+that investment. The architectural posture is that the existing
+federation stack
+remains authoritative for inter-institutional federation, and a
+local OIDC identity broker (for example a Keycloak instance) is
+introduced for local role activation, attribute
+enrichment, and the TAC session model that subsequent waves will
+exercise.
+
+\paragraph{Pattern: federation stack retained, local OIDC broker
+added for local
+activation.} Federation participation continues through the
+existing federation deployment, with its
+applicable-federation metadata,
+attribute-release commitments, and operational team unchanged. A
+new local broker instance is deployed as a component that
+consumes the federation's assertions, enriches them with
+institution-specific attributes, and emits short-lived OIDC tokens
+that downstream applications consume.
+
+\paragraph{What changes in Wave~1.} The local OIDC broker is
+provisioned and
+integrated with the existing source-of-truth via SCIM; the
+authentication flow ``federation stack $\rightarrow$ local broker
+$\rightarrow$
+application'' is established for a first cohort of applications;
+the observability layer receives events from both the federation
+stack and the local broker. The federation contracts are not
+renegotiated; the
+metadata is not reissued.
+
+\paragraph{What does not change.} Inter-institutional federation
+behaviour, registration with the applicable identity federation,
+and the relationships with peer
+institutions remain unaffected. The applications that have not
+yet adopted the local broker continue to authenticate directly
+against the existing federation stack.
+
+\paragraph{Indicative duration.} Nine to fifteen months. Shorter
+than the incumbent-proprietary-suite trajectory because the
+federation work
+is largely already done; longer than the greenfield trajectory
+because the dual stack must be operated with discipline.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w1-reversibility}
+
+Wave~1 is reversible at acceptable cost throughout the application
+migration period and for an additional grace period after the last
+cohort migrates.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item The legacy identity provider is kept warm --- operational
+    but with no new applications onboarding to it --- for an
+    indicative period of six to twelve months after the final
+    cohort migration.
+  \item Per-cohort rollback is the unit of reversal: a cohort that
+    encounters difficulties is rolled back to the legacy provider
+    while the diagnostic proceeds; only when the diagnostic is
+    closed is the next cohort moved.
+  \item The full-wave rollback procedure is documented at wave
+    open and exercised in a tabletop manner before any production
+    cohort migration.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w1-exit}
+
+Wave~1 closes when the four Identity tests \emph{and} the three
+Crypto-layer tests of the conformance suite of
+\trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on the new
+identity instantiation --- certificate and key services are stood up
+here as the cryptographic prerequisite that identity depends on ---
+when at least the agreed
+percentage of applications has been migrated, and when the
+governance body has reviewed the wave outcome.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item OIDC discovery endpoint conformant; attribute schema
+    institutionally controlled; SCIM export-import on alternative
+    IdP preserves attributes; authentication and session events
+    forensically reconstructable. (Identity conformance subset.)
+  \item ACME/RFC~8555 certificate issuance conforms against the
+    institutional CA; key-escrow recovery executes on a representative
+    escrowed key; HSM key migration preserves cryptographic identity.
+    (Crypto conformance subset --- the cryptographic foundation that
+    identity is built on.)
+  \item An institutionally agreed proportion of applications has been
+    migrated, with the remainder either
+    in a documented schedule or in the documented exception
+    register.
+  \item The governance body has reviewed the wave outcome and
+    formally closed it, releasing the resources for the next
+    waves.
+\end{itemize}
+
+\begin{realworldbox}[Identity migration precedents]
+\noindent Several research-intensive institutions are reported to
+have undertaken multi-year identity migrations of comparable scope.
+Among the publicly discussed: CERN's migration to an open-source
+SSO platform, ETH~Z\"urich's federation evolution, and various
+campus
+deployments described in the research-and-education networking
+community (including national research and education network and
+EDUCAUSE community fora).
+Specific durations, application coverage, and operational outcomes
+should be confirmed against current public documentation before
+being cited; the patterns reported above are consistent with the
+trajectories described in this chapter.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w1-regulatory}
+
+\noindent Wave~1 establishes the identity-and-federation
+substrate. It contributes to \gls{gdpr}~Art.~32(1)(b)
+(access-control effectiveness) and Art.~25 (data minimisation
+through controlled attribute release), and operationalises
+NIS2~Art.~21(2)(i) (HR security and access control) and (j)
+(MFA and secured communications). It also operationalises
+eIDAS~2 trust services and notified-eID interoperability for
+institutions that participate in the EUDI Wallet ecosystem. The
+wave is the principal anchor of 27001~A.5.16, A.8.2 and A.8.5
+and contributes to NIST CSF \textsf{PROTECT} (PR.AA --- identity
+management, authentication and access control). Detailed mapping
+in \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-eidas2},
+\S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.

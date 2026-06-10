@@ -1,0 +1,277 @@
+% ============================================================================
+% Chapter 16 --- Conformance and replaceability tests
+% ----------------------------------------------------------------------------
+% Purpose : operationalise the interface contracts of Ch. 6--14 and the four
+%           replaceability conditions of Ch. 5 through a structured test
+%           suite. Closes Part II.
+% Page target: ~3 pages.
+% Dependencies: Ch. 5 (replaceability conditions), Ch. 6--14 (each layer's
+%               contract), Ch. 18--27 (each wave closes via this suite).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D16.1 four test categories: interface fidelity, data portability,
+%         exit rehearsal, decision auditability
+%   D16.2 reference test suite across the nine layers
+%   D16.3 conformance day procedure
+%   D16.4 reporting template with exit-confidence index per layer
+%   D16.5 each wave in Part III closes by passing the relevant subset
+% ============================================================================
+
+\chapter{Conformance and replaceability tests}
+\label{ch:conformance}
+
+The contracts of Chapters~6--14 are stated as obligations on
+component behaviour; the conditions of replaceability of
+\trchap{ch:architectural-principles}{} (\S\ref{sec:ap-replaceability}) are stated as
+properties. Without a mechanism to verify that the obligations are
+met and the properties hold, both reduce to declarations. This
+chapter operationalises them through a structured test suite that
+the institution exercises at agreed cadences and at every wave
+closure of Part~III.
+
+%-----------------------------------------------------------------------------
+\section{Why a conformance suite}
+\label{sec:cf-why}
+
+A contract that cannot be checked is a slogan. The conformance suite
+is the artefact that turns each layer's contract from a procurement
+clause into a verifiable property of the running infrastructure.
+Three uses follow:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Acceptance.} A component is acceptable into
+    production when it passes the tests applicable to its layer.
+  \item \textbf{Drift detection.} A component that previously
+    passed and now fails reveals operational or configuration
+    drift before the drift becomes incident.
+  \item \textbf{Wave closure.} A migration wave (Part~III) closes
+    by passing the relevant subset of the suite, not by the
+    subjective judgement that ``the migration is done''.
+\end{itemize}
+
+The suite does not replace security testing, performance testing,
+or functional testing of the institution's applications. It tests
+that the architecture's contracts and replaceability properties
+hold, which is a different and structurally narrower question.
+
+%-----------------------------------------------------------------------------
+\section{Test categories}
+\label{sec:cf-categories}
+
+Tests are organised in four categories.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Interface fidelity.] The component speaks the standard
+    interface correctly. The test exercises the standard's defined
+    behaviour and verifies the response.
+  \item[Data portability.] The institution's data and configuration
+    can be exported in a documented open format and re-imported into
+    an alternative component without loss.
+  \item[Exit rehearsal.] The replacement of the component by an
+    alternative can be performed within a documented time window,
+    with the institution's data preserved and its operations
+    sustained. The test is performed on a representative subset; it
+    is rehearsed, not merely simulated.
+  \item[Decision auditability.] The events and decisions emitted
+    by the component are sufficient to reconstruct any consequential
+    action. The test takes a recorded decision and verifies that it
+    can be replayed against the recorded inputs and policy version
+    to produce the same result.
+\end{description}
+
+\noindent The four categories together correspond to the four
+conditions of replaceability of \S\ref{sec:ap-replaceability}. A layer that scores well on
+fidelity but poorly on exit rehearsal is, despite appearances,
+captive.
+
+%-----------------------------------------------------------------------------
+\section{Reference test suite per layer}
+\label{sec:cf-suite}
+
+The reference suite below organises the conformance tests
+in four categories across the nine layers. The suite is illustrative and is intended to
+seed the institution's own; tests should be added or removed as the
+institutional context warrants.
+
+\begin{table}[H]
+\centering\small
+\caption{Reference test suite (illustrative). Categories: F~=~Interface
+fidelity, P~=~Data portability, X~=~Exit rehearsal, A~=~Decision
+auditability.}
+\label{tab:cf-suite}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.25\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=2.15\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Layer & Cat. & Test \\
+\midrule
+\multirow{4}{*}{Identity (Ch. 6)}
+  & F & OIDC discovery endpoint returns metadata conformant to OpenID Connect Discovery 1.0. \\
+  & F & Authentication assertion carries the institutional attribute schema, with no captive extensions in the assertion path. \\
+  & P & SCIM 2.0 user export and re-import on an alternative IdP preserves attributes and group memberships. \\
+  & A & Authentication and session-lifecycle events allow forensic reconstruction of any session. \\
+\addlinespace
+\multirow{4}{*}{Policy (Ch. 7)}
+  & F & PDP query API returns decisions in the canonical \texttt{\{verdict, obligations, policy\_version\}} shape. \\
+  & A & Recorded decision replayed against recorded inputs and policy version produces an identical verdict. \\
+  & P & Policy bundle exported, re-imported into an alternative engine, produces identical decisions on a representative input set. \\
+  & F & Shadow-mode decisions are logged with the same fidelity as enforcing-mode decisions. \\
+\addlinespace
+\multirow{4}{*}{Network (Ch. 8)}
+  & F & NETCONF/YANG configuration apply succeeds without recourse to the supplier's management console (D8.7). \\
+  & F & RADIUS attachment yields the expected zone assignment given a representative subject. \\
+  & F & IPFIX flow records carry the canonical \texttt{correlation\_id}. \\
+  & X & Configuration exported and partially re-imported on an alternative-vendor switch restores expected connectivity on a test segment. \\
+\addlinespace
+\multirow{3}{*}{Compute (Ch. 9)}
+  & F & Kubernetes API passes upstream conformance tests on the production cluster. \\
+  & P & Container image migration from the production registry to an alternative OCI-compliant registry preserves the image digest. \\
+  & A & SLSA attestations verify against expected provenance for a representative artefact. \\
+\addlinespace
+\multirow{4}{*}{Storage (Ch. 10)}
+  & F & S3 API operations on the production object store interoperate with an independent S3-compatible implementation on a representative test set. \\
+  & P & KMIP key migration to an alternative key manager preserves the key material's usability. \\
+  & A & Snapshot inventory matches the published retention policy without orphans. \\
+  & P & Classification labels preserved across an export-import cycle. \\
+\addlinespace
+\multirow{3}{*}{Endpoint (Ch. 11)}
+  & F & Posture data from each managed OS arrives at the policy layer in the canonical schema. \\
+  & F & Decommissioning of a representative endpoint executes the documented procedure end-to-end. \\
+  & P & MDM configuration profiles export to a documented format that an alternative MDM can consume on a representative subset. \\
+\addlinespace
+\multirow{4}{*}{Observability (Ch. 12)}
+  & F & Events from every layer arrive at the analytical store conformant to the canonical TAC schema. \\
+  & F & Retention horizon verified by deliberate retrieval at the documented limit. \\
+  & A & Cross-layer correlation via \texttt{correlation\_id} succeeds for a representative TAC activation. \\
+  & X & Event re-routing from the primary analytical store to an alternative produces the same query results on a sampling window. \\
+\addlinespace
+\multirow{3}{*}{Crypto (Ch. 13)}
+  & F & ACME issuance conforms to RFC 8555 against the institutional CA. \\
+  & A & Key-escrow recovery procedure executes successfully on a representative escrowed key. \\
+  & X & HSM key migration to an alternative HSM preserves the key's cryptographic identity on a representative subset; for non-exportable trust-anchor keys, the key-rotation / re-anchoring rehearsal declared in the Ch.~13 contract executes under dual control. \\
+\addlinespace
+\multirow{3}{*}{Orchestration (Ch. 14)}
+  & F & Identical TAC activation inputs, replayed, produce identical end state (idempotency). \\
+  & A & TAC deactivation reverses every consequential change recorded under the activation. \\
+  & X & Workflow definitions exported and re-imported on an alternative engine reproduce the same outcome on a representative case. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{How to run a conformance day}
+\label{sec:cf-day}
+
+A \emph{conformance day} is a scheduled, time-boxed exercise of the
+suite, conducted by a cross-functional team. The reference structure
+is:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Scope.} The subset of tests applicable to the
+    current scope (full institutional review, single layer, single
+    wave closure).
+  \item \textbf{Participants.} One engineer per affected layer,
+    one observability operator (to retrieve replay material), one
+    note-taker, and the operational owner of the scope.
+  \item \textbf{Duration.} Indicatively, half a day for a single
+    layer; one day for a full institutional review.
+  \item \textbf{Output.} A structured report (\S\ref{sec:cf-reporting})
+    and a remediation timeline for any test that did not pass.
+\end{itemize}
+
+\paragraph{Cadence.} For the layers the institution operates itself,
+the full applicable suite is exercised at a regular cadence (a yearly
+minimum is a reasonable default for a research-intensive operator; a
+down-scaled adopter sets the cadence in proportion to the layers it
+self-operates). Layer-specific subsets are exercised at the closure of each
+relevant wave (Part~III), and ad hoc when a component is replaced or
+when its supplier announces a material change.
+
+%-----------------------------------------------------------------------------
+\section{Reporting template}
+\label{sec:cf-reporting}
+
+The conformance report records, for each test exercised:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the test identifier and category;
+  \item the result: \emph{pass}, \emph{conditional pass} (with
+    documented condition), \emph{fail};
+  \item the evidence: log excerpt, command output, screenshot, or
+    artefact reference;
+  \item the remediation owner and timeline, if applicable.
+\end{itemize}
+
+\paragraph{Exit-confidence index per layer.} A summary index, on the
+same four-point scale as the sovereignty grid (0 Absent, 1 Partial,
+2 Established, 3 Robust), is produced per layer based on the test
+results. The index reflects the institution's confidence that the
+layer can be replaced within a documented time window: 3 if all
+tests in all four categories pass; 2 if interface fidelity and at
+least one of data portability or exit rehearsal pass; 1 if only
+interface fidelity passes; 0 if interface fidelity is broken.
+The index is graded against the institution's own conformance test
+set: an institution extends the illustrative reference suite
+(Table~\ref{tab:cf-suite}) to cover all four categories for each
+layer it operates, so a 3 (Robust) is attainable wherever that
+coverage is implemented --- the reference suite is a starting
+illustration, not the grading baseline.
+
+\paragraph{The index is a maturity trajectory, not a day-one gate.}
+The exit-confidence index measures where the institution stands on its
+path to replaceability; it is not a pass/fail compliance verdict and
+no institution is expected to reach 3 (Robust) on every layer at the
+outset. The starting baseline is diagnosed by the self-assessment of
+\trchap{ch:self-assessment}{}, on the same four-point scale, and the
+trajectory and pace toward higher confidence are set by the playbook
+(\trchap{ch:playbook-reading}{}); the index then records progress
+along that trajectory. A smaller or teaching-led institution following
+the down-scaled profile (\trchap{ch:sizing}{},
+\S\ref{sec:sz-downscale}) may legitimately target a steady-state index
+below 3 on layers it consumes as managed or mutualised services: for
+such a layer the replaceability question is answered by the provider's
+contractual exit terms rather than by a test the institution runs
+itself.
+
+%-----------------------------------------------------------------------------
+\section{Linkage with wave closure}
+\label{sec:cf-linkage}
+
+Every wave of Part~III closes by passing the conformance subset
+applicable to its scope. This is the mechanism that prevents the
+common failure mode of migration programmes: the change of product
+disguised as architectural progress. A wave that delivered a new
+identity provider but did not pass the identity-layer
+data-portability and exit-rehearsal tests has not closed; the
+institution has merely changed supplier.
+
+\paragraph{Wave-to-test mapping.} The mapping is published in each
+wave chapter (Chapters~18--27) under the \emph{exit criteria}
+heading. The reference mapping is, briefly:
+Wave~1 (Identity) closes against the Identity-layer tests; Wave~2
+(Observability) against the Observability-layer tests; Wave~3
+(Network) against the Network-layer tests; Wave~4 (Policy) against
+the Policy-layer tests; Wave~5 (Pilot) against the tests on the
+layers exercised by the pilot, across the categories they implement;
+Wave~6 (Endpoint) against the Endpoint-layer tests; Wave~7 (Audit and IR)
+against an Observability subset reinforced with audit-replay
+exercises; Wave~8 (Workload) against the Compute and Storage tests;
+Wave~9 (Lifecycle) against the Orchestration-layer tests.
+The Crypto layer (Ch.~13) is a cross-cutting foundation rather than a
+standalone wave: certificate and key services underpin Identity, so
+the layer is stood up as the technical prerequisite of Wave~1
+(Identity), and its three tests --- ACME/RFC~8555 issuance,
+key-escrow recovery, and HSM migration --- close with Wave~1's exit
+criteria. With this, all nine architecture layers are closed across
+the roadmap.
+
+\medskip
+
+\noindent The conformance suite is not a one-time effort. Its value
+accumulates over time, as the suite reflects the institution's
+specific risks, as the test results form a longitudinal record of
+the architecture's health, and as the suite itself becomes an
+artefact that the institution can share with peers, where it
+participates in a peer or research-network community.

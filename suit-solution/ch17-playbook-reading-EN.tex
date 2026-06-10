@@ -1,0 +1,352 @@
+% ============================================================================
+% Chapter 17 --- How to read this playbook
+% ----------------------------------------------------------------------------
+% Purpose : establish vocabulary, dependencies, trajectory selection and
+%           pace options for the migration playbook. Opens Part III.
+% Page target: ~4 pages.
+% Dependencies: Ch. 4 (self-assessment feeds the trajectory selection),
+%               Ch. 16 (conformance suite closes each wave),
+%               Ch. 18--27 (the wave chapters apply the framework here).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D17.1 stable vocabulary for Part III (frozen)
+%   D17.2 ten waves: Wave 0 to Wave 9
+%   D17.3 dependency map between waves
+%   D17.4 trajectory selection matrix consistent with D4.5 (five profiles)
+%   D17.5 three pace options: 5y / 7y / 10y
+%   D17.6 reversibility philosophy: every wave reversible at acceptable
+%         cost during a published window
+% ============================================================================
+
+\chapter{How to read this playbook}
+\label{ch:playbook-reading}
+
+\begin{caveatbox}[Dependencies]
+\noindent The playbook of Part~III applies the architecture of
+Part~II under the framework of Part~I. It expects the reader to
+have completed the self-assessment of \trchap{ch:self-assessment}{},
+and to be familiar with the sovereignty grid of
+\trchap{ch:sovereignty-grid}{} and with the conformance suite of
+\trchap{ch:conformance}{}, which closes every wave.
+\end{caveatbox}
+
+The playbook is structured as ten waves (Wave~0 to Wave~9) that, in
+combination, take an institution from its current brownfield
+position to the target architecture of Part~II. The waves are not
+calendar phases: their sequencing is governed by their pre-requisite
+graph, and their pace is a function of the institution's
+operational rhythm rather than of an externally imposed timeline.
+
+%-----------------------------------------------------------------------------
+\section{Objectives of the playbook}
+\label{sec:pr-objectives}
+
+The playbook serves four institutional objectives that the wave
+structure of Chapters~18--27 then operationalises.
+
+\begin{enumerate}[leftmargin=2em,nosep]
+  \item \textbf{Move from brownfield to target.} The principal
+    objective is to take the institution from its current
+    brownfield position --- whatever that may be --- to the
+    target architecture of Part~II. The waves are the units of
+    that movement, and the institution's chosen trajectory
+    (\S\ref{sec:pr-trajectories}) determines how that movement
+    is paced.
+  \item \textbf{Operationalise the sovereignty grid.} The grid of
+    \trchap{ch:sovereignty-grid}{} is a deliberation instrument;
+    the playbook makes it operational by turning it into the
+    gating mechanism at procurement, at wave closure, and at
+    every renewal. A wave that closes against the grid produces
+    a documented sovereignty profile per affected component; a
+    procurement that follows the playbook is informed by the
+    grid before it is decided.
+  \item \textbf{Preserve reversibility.} Every wave is reversible
+    at acceptable cost during a published window. The playbook
+    treats reversibility as non-negotiable
+    (\trchap{ch:reversibility}{}). The institution that follows
+    the playbook does not commit to a one-way change.
+  \item \textbf{Generate a longitudinal record.} Conformance
+    results, post-mortems, and re-assessment outcomes accumulate
+    into a record that the institution uses for its own
+    governance and that the international peer-comparison phase
+    of this initiative depends on. The playbook is consequently
+    not only a transformation tool but also a documentation
+    discipline.
+\end{enumerate}
+
+\paragraph{What the playbook does not promise.} The playbook does
+not promise that every institution will reach the target
+architecture in a fixed period, that every wave will succeed at
+its first attempt, or that the architecture will be operationally
+identical at every adopting institution. The first two are
+managed through the pace options of \S\ref{sec:pr-pace} and the
+reversibility playbook of \trchap{ch:reversibility}{}; the third
+is a feature, since the sovereignty grid permits institutional
+differentiation within the shared contract.
+
+\paragraph{Failure mode to avoid.} The most common failure mode
+of architecture-transformation programmes is the substitution of
+products without architectural progress: a new identity provider
+replaces an old one, but the institution has not gained
+sovereignty, replaceability, or auditability. The playbook
+guards against this through the conformance suite of
+\trchap{ch:conformance}{}: a wave closes only when the
+conformance subset passes, and conformance verifies that the
+contracts of Part~II hold --- not merely that products have
+changed.
+
+%-----------------------------------------------------------------------------
+\section{Vocabulary}
+\label{sec:pr-vocabulary}
+
+The chapters of Part~III use the following terms in stable senses.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Wave.] One discrete stage of the migration, with a stated
+    goal, declared pre-requisites, a coexistence pattern that
+    governs the period of the wave, exit criteria that close it,
+    and reversibility criteria that allow it to be undone. Waves
+    are numbered Wave~0 to Wave~9.
+  \item[Trajectory.] One of the five migration paths through the
+    waves, distinguished by the institution's starting position:
+    \emph{greenfield}, \emph{brownfield single-suite-centric},
+    \emph{brownfield hybrid}, \emph{selective adoption}, or
+    \emph{deferred}. Each wave chapter develops the three
+    principal trajectories (greenfield, brownfield
+    single-suite-centric, brownfield hybrid) in detail, with selective
+    adoption and deferred treated as cases that diverge from the
+    framework.
+  \item[Coexistence pattern.] A documented bridging arrangement
+    between an incumbent and an incoming component during a wave.
+    Coexistence is the operational state of the wave; it is not a
+    transitional inconvenience but the principal engineering effort
+    of the wave's duration.
+  \item[Pre-requisite.] An institutional or technical condition
+    that must hold before the wave begins. Each wave declares its
+    pre-requisites in the wave chapter; the dependency map of
+    \S\ref{sec:pr-dependencies} consolidates them.
+  \item[Exit criteria.] The conditions under which the wave is
+    considered closed. Exit criteria include the relevant subset of
+    the conformance suite of \trchap{ch:conformance}{}; they are
+    not subjective.
+  \item[Reversibility criteria.] The conditions under which the
+    wave can be reversed at acceptable cost during a published
+    window. Reversibility is non-negotiable in this playbook
+    (\trchap{ch:reversibility}{}).
+\end{description}
+
+%-----------------------------------------------------------------------------
+\section{Wave dependency map}
+\label{sec:pr-dependencies}
+
+The waves do not unfold in strict sequence; they unfold under a
+dependency graph that allows certain waves to proceed in parallel
+and others to wait. The reference dependency structure is given in
+Table~\ref{tab:pr-deps}.
+
+\begin{table}[H]
+\centering\small
+\caption{Wave dependency structure. ``Required'' pre-requisites must
+be closed; ``Recommended'' pre-requisites strengthen the wave but do
+not block it.}
+\label{tab:pr-deps}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.55\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.50\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=0.95\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Wave & Required pre-requisites & Recommended \\
+\midrule
+0 — Foundations          & --- (entry point)                         & --- \\
+1 — Identity             & 0                                         & --- \\
+2 — Observability        & 0                                         & --- \\
+3 — Network              & 0                                         & 2 (to baseline flows) \\
+4 — Policy               & 1, 2                                      & 3 \\
+5 — Pilot                & 1, 2, 3, 4                                & --- \\
+6 — Endpoint             & 1, 4                                      & 2, 5 \\
+7 — Audit \& IR          & 2, 4, 5                                   & --- \\
+8 — Workload             & 1, 3, 4                                   & 5 \\
+9 — Lifecycle            & 1--8 in some form                         & --- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Wave~0 is the entry point for every trajectory: it
+establishes the governance and inventory without which the other
+waves cannot be evaluated. Waves 1, 2 and 3 (Identity,
+Observability, Network) can proceed in parallel after Wave~0 if the
+institution's available staffing profile provides the operational
+capacity to staff them. Wave~4
+(Policy) requires both Identity and Observability. Wave~5 (Pilot)
+requires the four preceding waves and is the first opportunity to
+exercise the architecture end-to-end on a contained scope.
+
+\paragraph{Reading the dependency map.} An institution that has
+mature observability and identity but immature network segmentation
+can reasonably proceed with Wave~4 (Policy) before completing
+Wave~3 (Network), provided the policy enforcement boundary remains
+within the segments already secured. The dependency map is a
+constraint, not a strict ordering.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory selection matrix}
+\label{sec:pr-trajectories}
+
+The trajectory through the waves is a function of the institution's
+starting position, captured in the self-assessment of
+\trchap{ch:self-assessment}{}. The matrix in
+Table~\ref{tab:pr-trajectory-detail} expands the heuristics of
+\S\ref{sec:sa-results} with their operational implications.
+
+\begin{table}[H]
+\centering\small
+\caption{Trajectories through the waves, with their dominant
+characteristics. The Selective and Deferred profiles are tactically
+divergent and are treated as variations of the three principal
+trajectories.}
+\label{tab:pr-trajectory-detail}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.4\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.6\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Trajectory & Dominant characteristics through the waves \\
+\midrule
+Greenfield                  & Rare; applies to new institutions or to a deliberate refoundation. The waves are sequential rather than coexistent because there is little to coexist with. \\
+Brownfield single-suite-centric & A common starting point, especially for institutions whose estate is anchored on a single dominant productivity-suite incumbent. The playbook adds an open policy plane and an open observability collector layer in front of the existing incumbent-suite estate; that estate evolves at its own renewal pace. \\
+Brownfield hybrid           & Frequent where heterogeneous estates and at least one open-source identity component already coexist. The playbook substitutes proprietary components at renewal moments while preserving the open-source perimeter; the institution is rarely starting from zero on any wave. \\
+Selective adoption          & For institutions already largely aligned with the architecture. The playbook is used as a checklist, with waves run only on the non-aligned components. \\
+Deferred                    & For institutions whose self-assessment shows heterogeneity without a dominant trend. Wave~0 is the first step, and the trajectory is re-baselined after that wave. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{Minimum viable subset for resource-constrained institutions}
+\label{sec:pr-mvs}
+
+The trajectories above describe \emph{how} an institution moves
+through the full wave programme, and the pace options
+(\S\ref{sec:pr-pace}) describe \emph{how fast}. A resource-constrained
+institution may also legitimately adopt \emph{less}: a minimal
+coherent core that delivers the size-invariant, legally compelled
+functions of \trchap{ch:architectural-principles}{}
+(\S\ref{sec:ap-necessity}) without committing to the full programme,
+and that can be extended later along the same dependency graph.
+
+\paragraph{The minimal core.} The dependency map
+(Table~\ref{tab:pr-deps}) defines this subset precisely: Wave~0
+(\trchap{ch:wave0-foundations}{} --- governance and inventory),
+Wave~1 (\trchap{ch:wave1-identity}{} --- sovereign identity) and
+Wave~2 (\trchap{ch:wave2-observability}{} --- observability and the
+audit trail), with Wave~4 (\trchap{ch:wave4-policy}{} --- policy) a
+natural next step once Identity and Observability are in place.
+Waves~1 and~2 depend only on Wave~0, so the subset is internally
+consistent and needs no later wave to function.
+
+\paragraph{Why these waves.} This core delivers exactly the functions
+that no institution offering a digital infrastructure can avoid:
+documented governance and inventory, sovereign authentication, and the
+observability and audit trail required under data-protection
+obligations and, where the institution is in scope, NIS2. It is the
+operational expression, in playbook terms, of the minimal necessary
+set of \S\ref{sec:ap-necessity}.
+
+\paragraph{What it does not deliver --- stated plainly.} The minimal
+core does not provide the deeper network segmentation that contains a
+breach (Wave~3, \trchap{ch:wave3-network}{}), managed endpoint fleet
+control (Wave~6) or sovereign workload and storage (Wave~8,
+\trchap{ch:wave8-workload}{}). A constrained institution defers these
+or consumes them as mutualised services (\trchap{ch:sizing}{},
+\S\ref{sec:sz-downscale}). The minimal subset is therefore a
+legitimate \emph{steady state}, not an abandoned migration: the
+conformance index (\trchap{ch:conformance}{}) is read as a maturity
+trajectory, and the institution extends the subset wave by wave when
+capacity allows.
+
+%-----------------------------------------------------------------------------
+\section{Pace options}
+\label{sec:pr-pace}
+
+The reference pace options describe three indicative horizons for
+completing the playbook. They are operational planning aids, not
+contractual commitments: the actual pace is set by the institution's
+operational rhythm and by the renewal cycles of the components the
+playbook substitutes.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[5-year compressed.] The playbook is run with significant
+    parallelisation, with waves overlapping, and with substantial
+    additional resourcing during the active period. This pace is
+    appropriate for institutions whose strategic context warrants
+    accelerated transformation (sovereignty risk crystallised by an
+    incident, regulatory deadline, decisive executive mandate). It
+    requires either substantial budget supplements or a willingness
+    to defer other strategic initiatives for the duration. Risk
+    tolerance is structurally higher.
+  \item[7-year balanced.] The recommended default. Waves proceed
+    largely in sequence with limited parallelisation, additional
+    resourcing is moderate, and most waves close within their
+    reversibility window without difficulty. This pace tolerates
+    institutional rhythm changes (academic-year cadence, budget
+    cycles, leadership transitions) without losing direction.
+  \item[10-year gradual.] The playbook is run with minimal
+    additional resourcing, with each wave aligned to the natural
+    renewal cycle of the components it substitutes. Risk tolerance
+    is structurally lower; coexistence periods are longer; the
+    institution accumulates less migration debt at any moment.
+    This pace is appropriate for institutions whose context does
+    not warrant acceleration and whose financial planning operates
+    on multi-year horizons.
+\end{description}
+
+\paragraph{Pace and trajectory interact.} A greenfield trajectory
+on a 10-year horizon is unusual; a brownfield-hybrid on a 5-year
+horizon is demanding. The combinations that an institution can
+sustain are bounded by its self-assessment results in
+\trchap{ch:self-assessment}{} (Section~E intent), and revising the
+pace is a normal part of operating the playbook.
+
+%-----------------------------------------------------------------------------
+\section{Risk-and-reversibility philosophy}
+\label{sec:pr-philosophy}
+
+The playbook treats reversibility as a non-negotiable property of
+every wave. The reasoning is structural: an institution that
+commits to a transformation it cannot undo at acceptable cost has
+ceased to govern the transformation. Three practical commitments
+follow from the principle.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Every wave declares a \emph{reversibility window}: the
+    period during which the wave can be reversed at acceptable
+    cost. Outside this window, reversal is still possible but is
+    treated as a new wave with its own planning.
+  \item The \emph{coexistence pattern} of a wave is the principal
+    mechanism of reversibility: as long as the incumbent component
+    remains operationally viable, the wave can be reversed by
+    re-routing to the incumbent.
+  \item The \emph{exit criteria} of a wave include passage of the
+    relevant conformance subset (\trchap{ch:conformance}{}); a
+    wave that closes without the conformance subset is not
+    closed in this playbook's sense, regardless of stakeholder
+    declarations.
+\end{itemize}
+
+\paragraph{When reversibility is forfeited.} The principle is
+non-negotiable in normal operation; it admits exceptions when the
+institution's competent governing authority, at whatever level
+holds the mandate to bind the institution, accepts the loss of
+reversibility explicitly, in writing, against the sovereignty grid. The
+architectural posture is that such forfeits should be exceptional
+and that they should be revisited at every renewal as part of the
+sovereignty grid's annual review.
+
+\medskip
+
+\noindent The remainder of Part~III develops each wave in turn.
+Each wave chapter follows the same template: goal and dependencies,
+pre-requisites, coexistence pattern, the three principal
+trajectories, reversibility criteria, exit criteria, and a
+real-world reference where one is publicly documented.

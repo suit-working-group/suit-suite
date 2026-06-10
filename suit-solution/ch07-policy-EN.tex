@@ -1,0 +1,362 @@
+% ============================================================================
+% Chapter 7 --- Policy decision and enforcement
+% ----------------------------------------------------------------------------
+% Purpose : PDP/PEP layer; policy-as-code; decision logging.
+%           Belongs to the Control and governance plane (D5.1).
+% Page target: ~5 pages.
+% Dependencies: Ch. 5 (standards: OPA REST, Cedar API), Ch. 6 (identity
+%               attributes consumed as policy input), Ch. 3 (sovereignty
+%               framework).
+% Mirrors the layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D7.1 minimum compliance set for a policy decision point (the contract)
+%   D7.2 reference instantiation = OPA + bundle server + decision log
+%   D7.3 alternatives are Cedar (open formal semantics) and native IdP authz
+%   D7.4 sovereignty scores for the policy layer (NEW, not in Ch. 3)
+%   D7.5 the policy plane is the most ambitious novelty for many adopters
+% ============================================================================
+
+\chapter{Policy decision and enforcement}
+\label{ch:policy}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the policy layer. It consumes identity
+attributes from \trchap{ch:identity}{} and emits decisions consumed
+by Network (\trchap{ch:network}{}), Compute
+(\trchap{ch:compute}{}), Storage (\trchap{ch:storage}{}) and
+Endpoint (\trchap{ch:endpoint}{}). The decision log produced by this
+layer is consumed by Observability (\trchap{ch:observability}{}).
+The layer belongs to the \emph{Control and governance plane}.
+\end{caveatbox}
+
+The policy layer answers the second question of any access decision,
+once the identity layer has answered the first: \emph{given who is
+acting, with which attributes and from which posture, what is
+permitted?}. It is the layer that translates institutional rules ---
+data classification, role-activation gating, time-of-day or
+location-of-access conditions, posture requirements --- into
+machine-readable decisions consumed by the execution plane. It is
+also, for many adopters at the time of writing --- particularly
+those without a dedicated platform-engineering function --- the most
+ambitious novelty in this architecture: relatively few institutions
+today operate a dedicated policy decision point separate from their
+applications and identity provider. Adopting one is a real
+organisational change, addressed in \trchap{ch:wave4-policy}{Wave~4
+--- Policy plane}.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:po-contract}
+
+The policy layer is responsible for: receiving a decision request
+that combines a subject (with attributes and posture claims), a
+resource (with classification and ownership), and an environment
+(with time, location, and contextual signals); evaluating that
+request against the institution's policy corpus; and returning a
+structured decision that downstream enforcement points consume. It
+is also responsible for emitting an audit-grade decision log that
+makes every consequential decision reconstructable.
+
+\begin{contractbox}[Policy layer]
+\noindent A compliant policy decision point, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item expose a query API, either OPA REST or Cedar evaluation API,
+    receiving a JSON-structured request and returning a JSON-structured
+    decision;
+  \item evaluate against a policy corpus expressed in a high-level
+    language with formal evaluation semantics (Rego, Cedar);
+  \item support a documented \emph{bundle distribution} pattern by
+    which policies are versioned, signed, and pushed to the decision
+    point without redeployment;
+  \item return decisions of the form
+    \texttt{\{allow, deny, indeterminate\}} accompanied by structured
+    \emph{obligations} (e.g.\ session timeout, audit class, additional
+    factor required) that the enforcement point applies;
+  \item produce a decision log that includes the inputs, the policy
+    version, the decision and the obligations, in a form ingestible
+    by the observability layer;
+  \item support a \emph{shadow mode} in which the decision is logged
+    but not enforced, used during introduction or after a policy
+    change.
+\end{itemize}
+\end{contractbox}
+
+The contract is silent on the policy authoring workflow (who writes
+policies, how they are reviewed, how they are deployed) and on the
+mapping of institutional rules to the policy language. These are
+governance choices addressed in \trchap{ch:wave4-policy}{}; the
+contract requires only that the chosen workflow respect the
+versioning and the audit-trail properties.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: OPA + bundle server + decision log to SIEM}
+\label{sec:po-reference}
+
+The reference instantiation comprises an Open Policy Agent
+(OPA)~\cite{opa-project}
+deployment as the decision point, a bundle server as the policy
+distribution mechanism, and a decision-log forwarder that delivers
+every decision to the observability pipeline.
+
+\begin{instantiationbox}[Policy layer]
+\noindent\textbf{Topology.} OPA runs as a sidecar or as a centralised
+service depending on latency requirements; policies are authored in
+Rego and stored in a Git repository under standard code review;
+\emph{bundles} (signed archives of compiled policies and data) are
+built by continuous integration and served by a bundle server, from
+which OPA instances pull at a configurable interval; decision logs
+are emitted in OpenTelemetry format and routed to the observability
+layer (\trchap{ch:observability}{}). The bundle distribution pattern
+is co-normative with OPA REST itself: it is the mechanism that turns
+a runtime decision point into a governable artefact.
+\end{instantiationbox}
+
+\paragraph{Authoring workflow.} Policies are authored in Rego in a
+Git repository under code review. Each merge produces a versioned
+bundle, signed by the build system, served by the bundle server.
+\gls{opa} instances pull the bundle and reload without restart. The
+review workflow is the institutional governance mechanism for the
+policy corpus; the bundle distribution is the technical mechanism
+that propagates the result.
+
+\paragraph{Operational considerations.} The reference instantiation
+is expected to require expertise in Rego (or in the Cedar
+alternative, see below), which is a domain-specific language whose
+learning curve is typically reported in weeks rather than days. The
+principal recurring effort is policy testing: each policy is
+unit-tested against representative request patterns, and the test
+suite is maintained alongside the policy corpus. The operational
+team would typically be small --- indicatively a fraction of the
+institution's platform-engineering staffing profile, shared across
+other duties --- but the
+institutional skill investment remains significant.
+
+\paragraph{Decision log schema.} The schema includes, at minimum:
+the request inputs (subject identifier, resource identifier,
+environment signals), the policy version, the decision verdict, the
+obligations, the evaluation duration, and a correlation identifier
+that ties the decision to the activity context. The canonical schema
+is consolidated in \trchap{ch:observability}{} \S\ref{sec:ob-schema};
+the policy layer is its principal producer.
+
+\begin{realworldbox}[Policy plane in academic and research settings]
+\noindent The policy plane in academia is more thinly documented
+in policy-as-code terms than the identity plane. Authorisation
+patterns relevant to research collaborations are developed in
+GÉANT's eduTEAMS~\cite{eduteams} service, which implements the
+AARC Blueprint Architecture~\cite{aarc-blueprint} --- a
+sector-specific design pattern for
+authentication and authorisation in international research
+collaborations. The AARC Blueprint and policy-as-code engines
+such as OPA address overlapping concerns at different levels:
+the former is a sector-specific architecture, the latter a
+general decision engine; their combination remains a relatively
+open area for academic deployments. Industrial OPA deployments
+publicly described by large-scale technology and financial-services
+organisations demonstrate the engine at scale; their
+transposition to academic settings is conditional on the
+institution's authorisation profile. The phase-2 international
+university network anticipated by this Reference would be one of
+the contexts in which a shared library of academic-context
+policies might emerge.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Cedar with the Verified Permissions pattern}
+\label{sec:po-alt1}
+
+\begin{alternativebox}[Cedar evaluation engine]
+\noindent Cedar~\cite{cedar-project} is an open-source policy language,
+developed by AWS and released as open source, designed for static
+verifiability. It
+admits a formal semantics that supports automated checks (for
+example, that no policy in the corpus grants a forbidden action under
+any input). Cedar is integrated either standalone or as part of the
+AWS Verified Permissions service; the architecture relies on Cedar
+itself, not on the AWS hosted variant, to preserve the technical
+sovereignty dimension.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Cedar's formal semantics make the
+policy corpus more readable than Rego in many cases, and they admit
+verification techniques (consistency, no-bypass) that Rego does not.
+For institutions whose risk posture demands a higher assurance on the
+policy corpus itself, Cedar is the appropriate choice.
+
+\paragraph{Where it constrains the institution.} The Cedar
+ecosystem is younger than the OPA ecosystem; integrations with
+specific enforcement points (network attachment, Kubernetes
+admission, application middlewares) are fewer and less mature. The
+institutional skill investment is comparable to Rego, but the labour
+market is shallower at the time of writing.
+
+\paragraph{When it is the right choice.} An institution with a
+strong formal-methods culture, with a policy corpus large enough to
+benefit from verifiability, and with the resources to bridge gaps in
+the Cedar ecosystem with internal engineering. Cedar is also a
+reasonable choice for an institution that wants to avoid OPA's
+specific operational patterns (sidecar density, bundle refresh) and
+prefers a request-response engine.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Native identity-provider authorisation rules}
+\label{sec:po-alt2}
+
+\begin{alternativebox}[Native IdP authorisation]
+\noindent The institution does not introduce a separate policy
+decision point. Authorisation rules are expressed in the identity
+provider's own configuration: conditional-access expressions for
+the institution's incumbent proprietary identity suite, authorisation
+policies and scopes for Keycloak.
+The identity layer is also the policy layer.
+\end{alternativebox}
+
+\paragraph{Where it works.} For institutions whose authorisation
+needs are limited to coarse-grained role gating, MFA enforcement and
+basic time-of-day or location conditions, the identity provider's
+native rules are sufficient. The reduction in moving parts is real,
+and the operational burden is lower.
+
+\paragraph{Where it fails.} TAC-aware decisions require composing
+multiple signals --- subject attributes, posture, resource
+classification, time, location, environment --- in expressions whose
+complexity quickly exceeds what a proprietary conditional-access
+language accommodates without becoming unmaintainable. More fundamentally,
+encoding the policy corpus in the identity provider couples it to
+that provider: an exit from the identity provider becomes an exit
+from the policy plane as well. Native authorisation is a viable
+\emph{starting} configuration but a poor \emph{end-state} for an
+institution whose sovereignty posture aims at separation of
+concerns.
+
+\paragraph{When it is acceptable.} As an early stage of the
+migration, before the policy plane is mature enough to take over;
+or as a permanent solution for institutions whose authorisation
+needs do not justify the cost of a separate policy layer.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:po-sovereignty}
+
+The three instantiations are profiled below using the grid of
+\trchap{ch:sovereignty-grid}{}. The scores are specific to the
+policy layer and are introduced in this chapter; they were not
+worked through in \trchap{ch:sovereignty-grid}{}.
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the three policy
+instantiations.}
+\label{tab:po-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.18\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.40\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.40\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.40\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.62\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & OPA + bundle & Cedar & Native IdP authz \\
+\midrule
+Data          & 3 Robust      & 3 Robust      & 1--2 (per IdP) \\
+Technical     & 3 Robust      & 3 Robust      & 1 Partial \\
+Financial     & 3 Robust      & 3 Robust      & inherits IdP \\
+Operational   & 2 Established & 1--2 Partial  & 3 Robust \\
+Institutional & 3 Robust      & 3 Robust      & 1 Partial \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent OPA and Cedar score similarly on the four sovereignty
+dimensions other than operational, where the OPA labour market is
+deeper. The native IdP path inherits the IdP's profile on most
+dimensions and is consequently bounded by it: this is a structural
+property of co-locating identity and policy, not a fixable gap. A
+shift from native IdP authorisation to a separate policy plane
+(OPA or Cedar) is consequently the highest-leverage sovereignty
+move available in the control plane.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:po-regulatory}
+
+\noindent The policy layer is the per-request decision point that
+operationalises the applicable data-protection regime's
+data-protection-by-design obligation and contributes to its
+access-control-effectiveness obligation. Under the applicable
+cybersecurity-baseline regime --- its risk-analysis and
+information-system security-policy requirement and its
+access-control-policy requirement --- it is the locus where
+the institutional risk posture is enforced uniformly. Under the
+applicable AI regulation, its prohibited-practices and
+transparency provisions
+admit a policy-plane enforcement: rules that gate AI-related TACs
+on context labelling and on prohibited-use classification. The
+layer operationalises 27001~A.5.15 (access control), A.5.18
+(access rights) and A.8.3 (information access restriction) and
+contributes to NIST CSF \textsf{PROTECT} (PR.AA). Detailed mapping
+in \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-ai-act}, \S\ref{sec:rm-iso}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:po-pitfalls}
+
+\begin{pitfallbox}[Policy explosion]
+\noindent A policy corpus left ungoverned grows by accretion: every
+new application adds rules, no rules are retired, and the corpus
+loses the structure that makes it auditable. The mitigation is a
+governance process for the corpus that mirrors the governance process
+for application code: review, versioning, retirement, and a
+pre-merge consistency check that the new rule does not conflict with
+an existing one. Policy languages with formal semantics (Cedar in
+particular) support automated consistency checks; OPA admits the same
+through unit tests against representative inputs.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Missing shadow mode]
+\noindent A policy change deployed directly in enforcing mode
+without a shadow-mode period silently denies legitimate access until
+the affected users open tickets. The mitigation is to make shadow
+mode the default for any new policy and any modification to an
+existing policy: the decision is logged, compared against the
+incumbent rule, and switched to enforcing only when the discrepancy
+profile is understood. The shadow / enforcing toggle is part of the
+contract of \S\ref{sec:po-contract}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Decision/log drift]
+\noindent The decision log is intended to allow reconstruction of any
+consequential decision, but a poorly-implemented log records a
+summary that does not allow reconstruction (e.g.\ the obligations are
+elided, the policy version is not recorded). The mitigation is to
+exercise the reconstruction in the conformance suite of
+\trchap{ch:conformance}{}: take a decision from the log and replay
+it against the recorded policy version; the result must match.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Hidden coupling to identity-provider attributes]
+\noindent Policies that reference identity-provider-specific
+attributes (e.g.\ vendor-specific extension claims from a
+proprietary identity suite) lose portability
+when the identity provider is replaced. The mitigation is to map the
+identity-provider attributes to a stable institutional schema before
+they reach the policy plane, and to author policies against the
+institutional schema only. The mapping is itself part of the
+contract between Identity and Policy.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Over-centralisation of policy authoring]
+\noindent A central policy team that becomes the bottleneck for every
+application's authorisation rules slows the institution to a halt
+and accumulates a corpus that the team alone understands. The
+mitigation is to delegate authoring rights with code review:
+application owners propose policies for their resources; the central
+team reviews for consistency and conflicts. The model mirrors the
+federated-governance delegation pattern common in mature
+higher-education and research IT organisations.
+\end{pitfallbox}

@@ -1,0 +1,267 @@
+% ============================================================================
+% Chapter 32 --- External references and standards
+% ----------------------------------------------------------------------------
+% Purpose : annotated catalogue of normative references used throughout
+%           the document. Closes Part IV.
+% Page target: ~4 pages.
+% Dependencies: cited throughout Parts II and III.
+% ============================================================================
+
+\chapter{External references and standards}
+\label{ch:external-references}
+
+This chapter is a curated index of the normative references on
+which the architecture and the playbook rest. It is not a
+literature review; the standards listed below are those that
+appear in the contracts of Part~II or in the wave declarations of
+Part~III. Each entry indicates briefly the role the reference plays
+in this document; full citations are in the bibliography.
+
+%-----------------------------------------------------------------------------
+\section{NIST publications}
+\label{sec:er-nist}
+
+The NIST series provides several of the architectural anchors
+this Reference draws on. The following are most directly used.
+
+\paragraph{NIST CSF~2.0 --- Cybersecurity Framework~\cite{nist-csf}.} The five-function structure (Govern,
+Identify, Protect, Detect, Respond, Recover) is referenced
+implicitly throughout the architecture: Govern aligns with the
+sovereignty grid and the playbook's wave-0 governance discipline;
+Detect and Respond align with the observability and audit
+chapters; Recover aligns with the reversibility playbook.
+
+\paragraph{NIST SP 800-207 --- Zero Trust
+Architecture~\cite{nist-zt}.} The zero-trust principles --- never
+trust by location, verify continuously, assume breach --- align
+with the TAC model's per-activity context and with the policy
+layer's per-request decision. The SP~800-207 abstract decomposition
+into PE (policy engine), PA (policy administrator), and PEP
+(policy enforcement point) maps onto the architecture's policy
+layer (\trchap{ch:policy}{}) and its enforcement points across the
+execution plane.
+
+\paragraph{NIST SP 800-53 Rev.~5~\cite{nist-sp800-53}.} The
+control families (AC, SC, AU, IA, CM, IR among others) are
+referenced as the source for several of the architecture's
+contractual obligations: SC-7 (boundary protection) for
+\trchap{ch:network}{}; AU-2 and AU-12 (audit events) for
+\trchap{ch:observability}{}; IA-2 and IA-8 (identification and
+authentication) for \trchap{ch:identity}{}.
+
+\paragraph{NIST SP 800-162 --- Attribute-Based Access
+Control~\cite{nist-sp800-162}.} The ABAC framework underpins the
+policy layer's evaluation model: attributes from the subject
+(identity), the resource (classification), and the environment
+(zone, time, posture) compose the policy decision.
+
+\paragraph{NIST SP 800-171 Rev.~3~\cite{nist-171r3}.} The CUI
+(Controlled Unclassified Information) protection requirements
+inform the data-classification discussion of
+\trchap{ch:storage}{}, particularly for institutions with
+United-States government research contracts.
+
+\paragraph{NIST SP 800-160 Vol.~2~\cite{nist-sp800-160v2}.}
+Cyber-resiliency techniques --- segmentation, contextual
+awareness, dynamic positioning, deception --- are referenced as
+the resilience underpinning of the architecture's
+fault-tolerance posture.
+
+\paragraph{NIST SP 800-215~\cite{nist-sp800-215}.} Trusted
+infrastructure considerations relevant to the reference
+architecture's hardware and platform choices.
+
+\paragraph{NIST SP 1800 series.} The practice-guide series
+(notably SP 1800-3 \emph{Attribute Based Access Control} and
+SP 1800-19 \emph{Trusted Cloud}) provides worked-example
+deployments for several of the patterns this Reference develops.
+These guides are practitioner-oriented and complement the
+SP 800 family.
+
+%-----------------------------------------------------------------------------
+\section{ISO/IEC publications}
+\label{sec:er-iso}
+
+\paragraph{ISO/IEC 27001:2022.} The information-security
+management system standard frames the institutional context in
+which the architecture operates. The control catalogue (Annex~A)
+is a recurring reference for procurement clauses; the management
+system clauses inform the wave-0 governance discipline.
+
+\paragraph{ISO/IEC 27002.} The implementation guidance
+accompanying ISO/IEC 27001 expands several controls into
+operational practice; A.8.22 (network segregation) is referenced
+in \trchap{ch:network}{} as the framework anchor for the
+zone-based segmentation pattern.
+
+\paragraph{ISO/IEC 27005.} Risk management for information
+security; provides the methodology underpinning the wave-aware
+risk register of \trchap{ch:cross-cutting}{}.
+
+\paragraph{ISO/IEC 19790 and FIPS 140 series.} Cryptographic-module
+security requirements frame the HSM choices of
+\trchap{ch:crypto}{}, particularly for institutions with
+regulatory obligations that name a specific FIPS level.
+
+%-----------------------------------------------------------------------------
+\section{European regulatory framework}
+\label{sec:er-eu}
+
+\paragraph{General Data Protection Regulation
+(\gls{gdpr})~\cite{gdpr}.} The risk-based security obligation
+(Art.~32), the data-protection-by-design obligation (Art.~25),
+and the data-protection-impact-assessment obligation (Art.~35)
+are the EU instance of the data-protection regime against which
+the data dimension of the sovereignty grid is scored (generically,
+\loc{data-protection-regime}).
+
+\paragraph{NIS2 Directive~\cite{nis2}.} The cybersecurity
+obligations on essential and important entities, particularly
+the management-body accountability for security measures
+(Art.~20), are the EU instance of the cybersecurity-baseline
+regime (generically, \loc{cybersecurity-baseline-regime}) that
+informs the institutional sovereignty dimension and the wave-0
+governance discipline. The incident-reporting
+obligations align with the audit and IR pipeline of
+\trchap{ch:wave7-audit-ir}{}.
+
+\paragraph{\emph{Schrems~II} judgement
+(C-311/18)~\cite{schrems2020}.} The CJEU's clarification that
+contractual safeguards alone do not satisfy data sovereignty
+when data falls under a third-country surveillance regime is,
+for adopters under the EU regime, the anchor of the data-dimension
+scoring in the sovereignty grid; generically that scoring follows
+\loc{cross-border-transfer-regime}.
+
+\paragraph{EU AI Act (Regulation 2024/1689).} The risk-based
+classification of AI systems intersects with the policy-plane
+authorisation decisions for AI-related TACs (the
+Researcher-LLM-API pilot scenario of \trchap{ch:wave5-pilot}{}
+in particular).
+
+\paragraph{eIDAS 2.} The renewed framework for electronic
+identification and trust services informs the cryptographic
+services chapter for institutions that provide EU-recognised
+electronic credentials.
+
+\paragraph{EDPB transfer
+guidelines~\cite{edpb-guidelines}.} The European Data
+Protection Board's recommendations on data transfers
+operationalise the post-Schrems-II posture for the data-
+dimension assessment.
+
+%-----------------------------------------------------------------------------
+\section{Sector publications}
+\label{sec:er-sector}
+
+\paragraph{EDUCAUSE~\cite{educause-top10}.} In North-American
+higher education, the principal venue for IT discussion. Its Top 10 IT
+issues, governance case material, and identity-and-access-
+management practice papers inform several of the
+institutional-precedent claims in
+\trchap{ch:institutional-precedents}{}; equivalent sector bodies
+(e.g.\ UCISA in the UK, regional consortia elsewhere) play the
+analogous role in other jurisdictions.
+
+\paragraph{REN-ISAC~\cite{ren-isac}.} In the North-American context,
+the Research and Education Networks Information Sharing and Analysis
+Center provides incident-response intelligence and coordination
+patterns referenced in \trchap{ch:wave7-audit-ir}{}; the analogous
+role elsewhere is the regional NREN CSIRT or national R\&E ISAC.
+
+\paragraph{ENISA~\cite{enisa-risk}.} The European Union Agency
+for Cybersecurity provides risk-management and incident-response
+guidance; its publications underpin several institutional
+sovereignty-dimension considerations.
+
+\paragraph{Research-and-education-network community publications.}
+The institution's national research and education network, and the
+regional research-network community to which it belongs, publish
+architecture reviews, operational case material, and federation
+guidance (the applicable inter-institutional identity-federation
+profile, e.g.\ eduGAIN~\cite{edugain}, the associated
+collaboration-management service eduTEAMS~\cite{eduteams}, and the
+community authentication-and-authorisation AARC
+Blueprint~\cite{aarc-blueprint})
+that inform the multiple references in this document to identity
+federation, audit pipelines, and research-network patterns.
+
+\paragraph{Verizon DBIR~\cite{verizon-dbir}.} The annual Data
+Breach Investigations Report provides the empirical anchor for
+several of the threat-pattern discussions in the policy and audit
+chapters.
+
+%-----------------------------------------------------------------------------
+\section{Open-source specifications and projects}
+\label{sec:er-oss}
+
+The reference instantiation of Part~II can be realised with
+open-source specifications and projects such as those listed
+below. The list is illustrative rather than prescriptive or
+exhaustive; it records representative projects of the kind
+referenced in the Reference's contracts and instantiations, and
+equivalent alternatives may be substituted on a like-for-like
+basis. Project documentation
+should be consulted for current capability statements; the
+ecosystem evolves at a faster cadence than this Reference.
+
+\paragraph{Identity layer.} Keycloak~\cite{keycloak} (federated
+identity provider with OIDC and SAML2 support);
+Shibboleth~\cite{shibboleth} (SAML2 federation, widely deployed in
+academia); the applicable inter-institutional identity-federation
+technical profile~\cite{edugain}
+(inter-institutional federation policy framework).
+
+\paragraph{Policy layer.} Open Policy Agent (OPA)~\cite{opa-project}
+(CNCF graduated, Rego-based policy decision engine);
+Cedar~\cite{cedar-project} (open formal-semantics policy language).
+
+\paragraph{Network layer.} FreeRADIUS~\cite{freeradius} (open-source
+RADIUS server); Open vSwitch~\cite{openvswitch} (OVS, programmable
+switch); Cilium~\cite{cilium} (eBPF-based CNI for Kubernetes,
+micro-segmentation); NETCONF/YANG~\cite{rfc-6241-netconf,rfc-7950-yang}
+(IETF standards for declarative network configuration).
+
+\paragraph{Compute and storage.} Kubernetes~\cite{kubernetes} (CNCF,
+container orchestration); OpenStack~\cite{openstack} (OpenInfra
+Foundation, IaaS); Ceph~\cite{ceph} (distributed storage);
+Harbor~\cite{harbor} (CNCF, container registry);
+SLSA~\cite{slsa-spec} (Supply-chain Levels for Software Artifacts,
+OpenSSF); Sigstore~\cite{sigstore} (artifact signing and
+verification); OCI image format~\cite{oci-image-spec}.
+
+\paragraph{Endpoint.} Munki~\cite{munki} (macOS software
+distribution); osquery~\cite{osquery} (cross-platform endpoint
+posture queries); Ansible~\cite{ansible} (declarative configuration
+management); MicroMDM~\cite{micromdm} / NanoMDM (open Apple MDM
+servers).
+
+\paragraph{Observability.} Vector~\cite{vector-project} (event
+collection and routing); Apache Kafka~\cite{kafka} (durable event
+ingestion); OpenSearch~\cite{opensearch} (analytical store); Grafana
+Loki~\cite{grafana-loki} (log-line search);
+Grafana~\cite{grafana} (dashboards);
+OpenTelemetry~\cite{opentelemetry-spec} (CNCF, telemetry collection
+standard); CloudEvents~\cite{cloudevents-spec} (CNCF, event format).
+
+\paragraph{Cryptography.} HashiCorp Vault~\cite{vault} (secrets and
+PKI); step-ca~\cite{step-ca} (Smallstep, ACME-compliant institutional
+CA); SoftHSM~\cite{softhsm} (software HSM for non-production);
+Nitrokey HSM (hardware HSM with PKCS\#11 support).
+
+\paragraph{Orchestration.} Argo Workflows~\cite{argo-workflows} (CNCF,
+workflow engine); Argo CD~\cite{argocd} / Flux (CNCF, GitOps
+reconcilers); Crossplane~\cite{crossplane} (CNCF,
+infrastructure-as-code beyond Kubernetes);
+Temporal.io~\cite{temporal} (durable workflow engine);
+Tekton~\cite{tekton} (CNCF, CI/CD pipelines).
+
+\medskip
+
+\noindent The standards and projects above illustrate one viable
+backbone for the Reference's instantiation. The list is a working
+artefact: projects gain or lose maturity over time, new projects
+emerge, specifications are revised, and equivalent components may
+be substituted. The phase-2 international university network would
+be the natural locus for maintaining a current and collectively
+curated version of this catalogue.

@@ -1,0 +1,349 @@
+% ============================================================================
+% Chapter 6 --- Identity and subject trust
+% ----------------------------------------------------------------------------
+% Purpose : functional layer covering subjects, attributes, role activation
+%           and federation. Belongs to the Subject and Trust plane (D5.1).
+%           First layer chapter --- instantiates the per-layer template that
+%           Ch. 7--14 will mirror.
+% Page target: ~5 pages.
+% Dependencies: Ch. 3 (sovereignty cases must remain consistent), Ch. 5
+%               (standards table, replaceability conditions, three-plane
+%               taxonomy).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D6.1 minimum compliance set for an identity provider (the contract)
+%   D6.2 reference instantiation = Keycloak + SCIM + eduGAIN
+%   D6.3 alternatives are commercial (Entra) and hybrid (Shibboleth + Keycloak)
+%   D6.4 sovereignty scores in this chapter MUST match Ch. 3 §3.4
+% ============================================================================
+
+\chapter{Identity and subject trust}
+\label{ch:identity}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the architectural principles of
+\trchap{ch:architectural-principles}{} to the identity layer. It
+references the standards table of \S\ref{sec:ap-standards} and the four conditions of
+replaceability of \S\ref{sec:ap-replaceability}. The sovereignty profiles given in
+\S\ref{sec:id-sovereignty} are consistent with the worked examples of
+\trchap{ch:sovereignty-grid}{} (Cases 1--3). The layer belongs to the
+\emph{Subject and trust plane}.
+\end{caveatbox}
+
+The identity layer answers the first question of any access decision:
+\emph{who is acting, with what attributes, and under what session
+guarantees}. It is the layer on which Policy
+(\trchap{ch:policy}{}), Endpoint (\trchap{ch:endpoint}{}) and
+Cryptographic services (\trchap{ch:crypto}{}) all rely; a deficiency
+here propagates to the entire control plane.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:id-contract}
+
+The identity layer is responsible for: authenticating subjects
+(human and non-human); maintaining the canonical attributes attached
+to each subject (affiliation, role, group, posture claim); issuing
+short-lived assertions that downstream layers can verify; and,
+where such arrangements are available and relevant to the
+institution, participating in federation arrangements that allow it
+to delegate authentication to peer institutions and accept their
+delegated authentications in return.
+
+\begin{contractbox}[Identity layer]
+\noindent A compliant identity provider, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item issue authentication assertions over OIDC
+    Core~1.0~\cite{oidc-core-1.0} \emph{or} SAML~2.0~\cite{saml-core-2.0}
+    (legacy compatibility), without captive extensions in the
+    assertion path;
+  \item accept and emit identity provisioning over
+    SCIM~2.0~\cite{rfc-7643-scim-core,rfc-7644-scim-protocol};
+  \item be capable of publishing federation metadata interoperable
+    with \loc{identity-federation-profile}, and do so
+    where the institution participates in inter-institutional
+    federation;
+  \item express attributes in a documented schema, with an
+    attribute-release policy reviewable by the institution;
+  \item support the addition of a multi-factor authentication step
+    that the institution can configure without supplier intervention;
+  \item produce an authentication and assertion log in a form
+    ingestible by the observability layer
+    (\trchap{ch:observability}{}).
+\end{itemize}
+\end{contractbox}
+
+The contract is deliberately silent on \emph{which} attribute schema
+is used, on \emph{which} MFA factor is enforced, and on \emph{which}
+research-and-education identity federation profile the
+institution participates in. These are matters of institutional
+context; the contract requires only that the answers be documented
+and that the underlying mechanism be standards-based. An institution
+with no national research-and-education identity federation available
+satisfies the contract by
+retaining the capability to publish interoperable metadata and
+deferring actual participation until it joins one --- the standards
+basis is required at all scales, the federation membership only
+where it exists.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: open-source IdP + SCIM + research-and-education federation}
+\label{sec:id-reference}
+
+The reference instantiation comprises a self-hosted open-source
+identity-provider deployment --- Keycloak~\cite{keycloak} is one
+mature representative --- a \gls{scim} provisioning bus,
+and participation in \loc{identity-federation-profile}~\cite{edugain}
+through its national research-and-education federation operator.
+
+\begin{instantiationbox}[Identity layer]
+\noindent\textbf{Topology.} An open-source identity-provider realm
+(here illustrated with Keycloak~\cite{keycloak}) hosts the
+institutional subject base; a SAML2 metadata feed integrates with the
+national research-and-education federation, which is itself a member of
+the wider interfederation~\cite{edugain}; SCIM 2.0 provisioning
+synchronises authoritative subject attributes into the identity
+provider from the
+institution's source-of-truth (typically the human resources system
+for staff and the student information system for students); OIDC and
+SAML2 are exposed to applications, with OIDC preferred for
+modern integrations. Authentication and assertion logs are forwarded
+in OpenTelemetry format to the observability layer.
+\end{instantiationbox}
+
+\paragraph{Operational considerations.} The reference instantiation
+is expected to sustain the identity needs of a research-intensive
+institution within a small operating team sized to the institution's
+own staffing profile --- provided that the lifecycle
+automation (SCIM upstream and downstream) is robust. Actual envelopes
+vary with the application portfolio and the federation
+participation. The principal recurring effort is the
+maintenance of attribute-release policies as new applications join
+the federation; this effort scales with application count, not user
+count.
+
+\paragraph{Federation profile.} The applicable
+research-and-education federation's technical profile of
+SAML2 is co-normative with the standard itself: the institution must
+publish metadata signed by its national research-and-education
+federation operator, must commit to
+attribute release commitments encoded in the federation's policy
+framework, and must respond to deprecation cycles (typically
+multi-year) for cryptographic algorithms.
+
+\begin{realworldbox}[CERN SSO]
+\noindent CERN operates a Keycloak-based federated SSO~\cite{cern-keycloak-2020} serving its
+research community and a wide set of collaborating institutions.
+Aspects of the architecture have been presented in the GÉANT
+community and illustrate how a research-intensive institution may
+sustain a fully open identity plane without sacrificing operational
+depth. The CERN experience also illustrates a recurring pattern:
+the migration to Keycloak from the prior bespoke system was reported
+not as a single-step replacement but as a multi-year coexistence
+during which both stacks remained authoritative for distinct
+application sets. Specific scale figures and migration durations
+should be confirmed against current public CERN documentation before
+being cited in derivative work.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Incumbent commercial identity suite with conditional-access policy}
+\label{sec:id-alt1}
+
+\begin{alternativebox}[Incumbent commercial identity suite]
+\noindent A tenancy of \loc{incumbent-identity-suite-vendor}~\cite{microsoft-entra}, operated by the supplier in a
+designated EU (or analogous regional) region, integrated through the
+institution's existing tenant arrangements, with the vendor's
+conditional-access policy engine
+expressing the role-activation rules. Authentication is exposed to
+applications via OIDC and SAML2; provisioning is exposed via SCIM
+2.0; logs are forwarded to the observability layer through the
+vendor's management API
+or via the OpenTelemetry collectors of
+\trchap{ch:observability}{}.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} The operational dimension benefits
+from a deep and broadly available skills market, extensive
+documentation, and integration with an incumbent office-and-collaboration
+suite, where one is already dominant in the institution. The cost
+of activation, in operational time, is lower than for a self-hosted
+solution.
+
+\paragraph{Where it constrains the institution.} Three constraints
+recur. First, the vendor's conditional-access expressions, while
+powerful, are
+not portable: an authorisation logic encoded in that vendor-specific
+policy language
+does not transfer to another identity provider without rewriting.
+Second, several capabilities of operational interest (privileged-access
+management, verifiable-credential issuance, advanced risk analytics) are
+gated behind specific licences and may shift between licence tiers
+across renewals. Third, the assertion and provisioning paths admit
+optional extensions whose use would silently couple the institution
+to the supplier; an architecture-aware deployment pins the
+configuration to the standard interface and forgoes those extensions
+in critical paths.
+
+\paragraph{When it is the right choice.} An institution with a
+mature deployment of an incumbent office-and-collaboration suite,
+limited identity-engineering capacity,
+and a sovereignty position that accepts a Partial score on data,
+technical and institutional dimensions in exchange for a Robust score
+on operational. The choice is consistent with this architecture
+\emph{provided} that the OIDC, SAML2, and SCIM interfaces are pinned
+to the standard and that an exit-data export procedure is documented
+and rehearsed.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Hybrid (open-source federation engine + open-source local activation)}
+\label{sec:id-alt2}
+
+\begin{alternativebox}[Hybrid identity]
+\noindent An institution that already operates a mature open-source
+federation engine --- Shibboleth~\cite{shibboleth} is a common
+representative --- preserves it for
+inter-institutional authentication (facing the research-and-education
+federation), and adds a
+self-hosted open-source activation identity provider that
+handles \emph{local activation}: role enrichment, TAC session
+issuance, attribute mapping toward downstream applications, and
+short-lived OIDC token emission. The two components communicate
+through standard SAML2 / OIDC bridges; neither is captive to the
+other.
+\end{alternativebox}
+
+\paragraph{Why this pattern works.} It separates two concerns that
+have different lifetimes and different governance bodies. Federation
+is long-lived, governed by inter-institutional agreements, and
+benefits from the stability of a mature open-source federation engine.
+Activation is short-lived,
+local, and benefits from the policy expressiveness and modern
+extensibility of an open-source activation identity provider. Each
+component speaks the standards of
+\S\ref{sec:ap-standards}; the bridge between them is the authentication context emitted
+by the federation engine and consumed by the activation provider.
+
+\paragraph{Operational implications.} The hybrid pattern carries a
+modest operational premium over a
+single-component instantiation, sized to the institution's staffing
+profile and divided across two skill sets
+(federation-engine and activation-provider operators). It is offset by
+the preservation
+of the existing federation investment and by the avoidance of a
+high-risk single migration.
+
+\paragraph{When it is the right choice.} An institution with a
+significant existing investment in an open-source federation engine, a
+research-intensive profile that already values open-source identity,
+and a pace constraint that does not permit a wholesale migration in
+the immediate term. The pattern is also a stable end-state, not only
+a transition.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:id-sovereignty}
+
+The three instantiations above were profiled in
+\trchap{ch:sovereignty-grid}{} (Cases~1--3) and the scores are
+reproduced here for the layer chapter, with brief commentary at the
+indicator level.
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the three identity
+instantiations. Scores are consistent with
+\trchap{ch:sovereignty-grid}{} \S\ref{sec:sg-examples}.}
+\label{tab:id-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.80\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.80\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.80\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.80\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.80\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Pure OSS & Commercial suite (default) & Hybrid & Driving indicators \\
+\midrule
+Data          & 3 Robust      & 1 Partial      & 3 Robust      & Storage location, key custody, disclosure regime \\
+Technical     & 3 Robust      & 1 Partial      & 3 Robust      & Source visibility, standard interfaces, regression auditability \\
+Financial     & 2 Established & 1 Partial      & 2 Established & Cost predictability, supplier substitutability \\
+Operational   & 2 Established & 3 Robust       & 2 Established & Local skills availability, labour-market depth \\
+Institutional & 3 Robust      & 1 Partial      & 3 Robust      & Roadmap influence, integration freedom \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The principal sovereignty trade-off in the identity layer
+is between the operational depth of the commercial alternative and
+the technical / institutional / data sovereignty of the open
+alternatives. The hybrid pattern recovers most of the open-side
+profile while modestly increasing the operational footprint over a
+single-component instantiation, by an increment sized to the
+institution's own staffing profile.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:id-regulatory}
+
+\noindent The identity layer is the primary technical anchor of
+the access-control security obligations of the applicable
+data-protection regime (e.g.\ \gls{gdpr}~Art.~32(1)(b)) and of
+several measures of the applicable cybersecurity baseline regime
+(e.g.\ NIS2~Art.~21(2)): (i) human-resources security and
+access control, (j) multi-factor authentication and secured
+communications. Joiner / mover / leaver via SCIM operationalises
+27001~A.5.16, A.6.5 and A.8.2; the OIDC / SAML2 federation pattern
+operationalises eIDAS~2 trust services and notified-eID
+interoperability; the MFA / FIDO2 baseline operationalises
+27001~A.8.5. The layer contributes to the NIST CSF \textsf{PROTECT}
+function (PR.AA --- identity management, authentication and access
+control). Detailed mapping in \trchap{ch:regulatory-mapping}{}
+\S\ref{sec:rm-gdpr}, \S\ref{sec:rm-nis2}, \S\ref{sec:rm-eidas2},
+\S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:id-pitfalls}
+
+\begin{pitfallbox}[Captive attribute extensions]
+\noindent Encoding authorisation logic in supplier-specific attribute
+expressions (vendor conditional-access expressions, vendor-defined claims)
+turns the identity provider into a captive policy engine. The
+mitigation is to keep authorisation in the policy layer
+(\trchap{ch:policy}{}) and to use the identity layer only for
+authentication and attribute carriage, against the standard schema.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Broken metadata refresh]
+\noindent Federation metadata expires, is rotated, and is signed by
+keys that themselves rotate. Institutions whose metadata refresh
+pipeline is undocumented or manually triggered lose federation
+participation silently --- typically discovered during a partner
+authentication outage. The mitigation is to automate metadata
+refresh, monitor freshness through the observability layer, and
+include a metadata-currency check in the conformance suite of
+\trchap{ch:conformance}{}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Opaque multi-factor risk decisions]
+\noindent Some commercial identity providers couple MFA to a
+proprietary risk score whose inputs and weights are not disclosed.
+The institution then cannot explain to its own users why a session
+was challenged, nor reproduce the decision for audit. The mitigation
+is to either use a transparent MFA factor (TOTP, FIDO2 with documented
+attestation handling) or, if a risk-based factor is used, to ensure
+that the decision is logged with sufficient detail for explanation.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Attribute-release drift]
+\noindent The set of attributes released to each application tends to
+grow over time, and to lose alignment with what the application
+actually requires. This is both a data-minimisation issue under the
+applicable data-protection regime and a sovereignty issue, since unnecessary releases
+multiply the dependencies that an exit must address. The mitigation
+is an annual review of the attribute-release policy by application,
+recorded in the institution's data-protection register.
+\end{pitfallbox}

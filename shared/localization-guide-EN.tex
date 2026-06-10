@@ -1,0 +1,455 @@
+% ============================================================================
+% localization-guide-EN.tex — SUIT Localization Guide (English)
+% ============================================================================
+%
+% STATUS: populated. One row per parameterize entry.
+%
+% ----------------------------------------------------------------------------
+% PURPOSE
+% ----------------------------------------------------------------------------
+% The SUIT documents are written to be adopted directly by any university. The
+% body of every document uses role-based, vendor-neutral, institution-neutral,
+% and jurisdiction-neutral language (see .claude/rules/suit-domain.md). Wherever
+% a concrete local anchor would otherwise be hard-coded into the prose -- a
+% national CSIRT, a data-protection authority, a national NREN, a specific
+% governance body, a national transposition of an EU instrument -- the body
+% already reads in a GENERIC ROLE TERM. This guide tells an adopting institution
+% which concrete local value to read each generic role term as.
+%
+% ----------------------------------------------------------------------------
+% THE HYBRID LOCALIZATION MODEL  (read this first)
+% ----------------------------------------------------------------------------
+% SUIT uses a two-tier ("hybrid") model rather than a single substitution sweep:
+%
+%   1. GENERIC BODY (default, always shipped)
+%      The published SUIT documents read entirely in generic terms. They are
+%      complete and correct as-is: an adopter can read and reason about them
+%      without supplying any local value. The generic term is the canonical
+%      reference; localization is additive, never required for comprehension.
+%
+%   2. LOCAL INSTANTIATION (per-adopter reading)
+%      An adopting institution maps each generic role below to its own concrete
+%      value (its NREN, its national CSIRT, its DPA, its supervisory authority
+%      under the national NIS2 transposition, its highest governance body, etc.)
+%      and reads the generic prose against that mapping, producing an
+%      institution-specific understanding WITHOUT forking the generic source.
+%
+% IMPORTANT -- THIS IS DOCUMENTATION, NOT A BUILD-TIME OVERLAY.
+%   * The SUIT document bodies contain FINISHED GENERIC PROSE. There are NO
+%     mustache tokens, no {{PLACEHOLDERS}}, and no \locvar/\locdefine macros in
+%     the source to expand. Nothing is substituted at compile time.
+%   * The table below is a HUMAN-FACING reference: it tells an adopter, in plain
+%     reading terms, "where the documents say X (generic role), read it as your
+%     Y (local value), and here is where X appears." Localizing is an editorial
+%     act performed by the adopter against their own jurisdiction and estate, not
+%     an automated token sweep.
+%   * The two tiers share ONE source. The generic edition is the source of truth;
+%     a localized edition is the generic edition read (and, if an adopter
+%     chooses, edited) against this lookup table.
+%
+% ----------------------------------------------------------------------------
+% HOW TO READ THE TABLE
+% ----------------------------------------------------------------------------
+% Each row corresponds to one localization variable. The columns are:
+%
+%   VARIABLE        a stable handle for the localization point (for adopter
+%                   notes / change tracking; it is NOT a token in the prose).
+%   GENERIC ROLE    the generic role phrase as it appears in the SUIT body.
+%   ADOPTER VALUE   what an adopting university reads it as / substitutes it with.
+%   WHERE / NOTES   which document(s) it appears in and any scoping guidance,
+%                   including whether the generic phrasing should simply be kept.
+%
+% Document keys used in the WHERE column:
+%   SUITPOLICY         -- suit-policy/policy-EN.tex                (the Policy)
+%   SUITPOLICYSUMMARY  -- suit-policy/companion/policy-summary-EN.tex (Summary)
+%   SUITSOLUTION       -- suit-solution/solution-EN.tex            (Technical Solution)
+%   CONSOLIDATION      -- ul-itsec-consolidation-EN.tex (out of suite scope; noted)
+%
+% "Keep" in the ADOPTER VALUE column means the generic phrasing is already
+% institution-/jurisdiction-agnostic and an adopter normally leaves it unchanged;
+% the WHERE / NOTES column states the condition under which it would still change.
+%
+% ============================================================================
+
+\begin{center}
+\small
+\begin{longtable}{@{}p{0.20\linewidth}p{0.24\linewidth}p{0.24\linewidth}p{0.28\linewidth}@{}}
+\caption{SUIT localization map — read each generic role as your local value.}
+\label{tab:suit-localization}\\
+\toprule
+\textbf{Variable} & \textbf{Generic role (as it appears)} & \textbf{Adopter substitutes with} & \textbf{Where it appears / notes}\\
+\midrule
+\endfirsthead
+\multicolumn{4}{@{}l}{\small\itshape Table~\ref{tab:suit-localization} (continued)}\\
+\toprule
+\textbf{Variable} & \textbf{Generic role (as it appears)} & \textbf{Adopter substitutes with} & \textbf{Where it appears / notes}\\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r@{}}{\small\itshape continued on next page}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+% --- amount ------------------------------------------------------------------
+\texttt{NIS2\_SANCTION\_CEILING} &
+The generic NIS2 essential-entity sanction ceiling (EUR amount) &
+Keep --- this is the generic NIS2 essential-entity ceiling, not a Luxembourg-specific figure &
+SUITPOLICY (3 occurrences). Generic regulatory anchor; left unchanged unless the adopter's regime sets a different ceiling.\\
+\midrule
+
+% --- artifact ----------------------------------------------------------------
+\texttt{INSTITUTION\_NAME} (bib) &
+UL-suite bibliography path and citation keys &
+The adopter's own bibliography; flag UL-specific keys (e.g.\ \texttt{unilu-amenagements}, \texttt{ilr-ul-essential}) for removal or parameterization &
+SUITPOLICY, SUITPOLICYSUMMARY (5). These keys support home-institution facts and have no generic equivalent; remove/parameterize when localizing to the adopter's institution.\\
+\midrule
+
+% --- cost / staffing ---------------------------------------------------------
+\texttt{STAFFING\_PROFILE} &
+Staffing / FTE envelopes, cadences and windows &
+The adopter's own staffing envelope; drop the wealth-of-country claim and the "excellence as sole objective" framing (or generalize to "an institution that sets excellence as a strategic objective") &
+SUITPOLICY, SUITSOLUTION (24). Largest localization point; figures are illustrative of the home institution.\\
+\midrule
+
+% --- facilities --------------------------------------------------------------
+\texttt{NATIONAL\_HPC\_FACILITY} &
+National/regional supercomputer (MeluXina/EuroHPC) &
+"A national/EuroHPC supercomputer", or the adopter's regional EuroHPC system &
+SUITPOLICY, SUITSOLUTION (8).\\
+\midrule
+
+\texttt{IDENTITY\_FEDERATION\_PROFILE} &
+Identity interfederation (eduGAIN) &
+Keep for an EU edition; for a jurisdiction-agnostic edition gate the EU-law layer behind a "regulatory regime" parameter (EU as default). Parameterize the EU-first provider examples (Mistral/OVH/Scaleway), which are region-bound &
+SUITPOLICY, SUITSOLUTION (6).\\
+\midrule
+
+\texttt{INSTITUTION\_HPC\_FACILITY} &
+Institutional HPC facility/team (ULHPC) &
+"The institution's HPC facility / HPC team" &
+SUITPOLICY (21).\\
+\midrule
+
+\texttt{NREN\_NAME} &
+National research \& education network (RESTENA) &
+"The institution" / "our institution" --- this whole Q\&A is a Luxembourg-specific local-deployment objection &
+SUITPOLICY, SUITPOLICYSUMMARY, SUITSOLUTION (41). Highest-frequency point.\\
+\midrule
+
+\texttt{NREN\_CSIRT} &
+NREN security team (RESTENA-CSIRT) &
+"The national NREN" (National Research and Education Network) and "the NREN CSIRT" &
+SUITPOLICY, SUITSOLUTION (14).\\
+\midrule
+
+\texttt{RESEARCH\_BACKBONE\_SCALE} &
+Region-bound research-backbone scale and capacity figures (G\'EANT/RENATER) &
+Keep the campus-connection capacity range (10--100\,Gbps) as a jurisdiction-neutral engineering figure; parameterize the G\'EANT-specific membership and backbone-capacity numbers to "the regional research backbone (membership and backbone capacity per region)" &
+SUITPOLICY (1). Affects 40+ NRENs, 50M users, 10,000+ institutions, 400\,Gbps wavelengths, multi-100\,Gbps national backbones.\\
+\midrule
+
+\texttt{INTERNAL\_EMERGENCY\_INCIDENT\_CONTACT} &
+Institution-specific internal emergency incident-reporting number (9911) &
+A generic "internal emergency / incident-reporting contact"; keep the operational pattern (mandatory reporting to ISO/CISO with an internal emergency line) &
+CONSOLIDATION (1). Out of suite file scope --- no work-item; listed for completeness.\\
+\midrule
+
+% --- governance bodies -------------------------------------------------------
+\texttt{ACADEMIC\_GOVERNING\_BODIES} &
+Academic deliberative bodies (Faculty/University Council) &
+Role-based collegial-body terms for academic deliberative councils &
+SUITPOLICY (2).\\
+\midrule
+
+\texttt{EXECUTIVE\_LEADERSHIP} &
+Executive leadership (Rectorate/Rector) &
+A role-based term for the institution's central executive leadership &
+SUITPOLICY, SUITSOLUTION (4).\\
+\midrule
+
+\texttt{GOVERNING\_BOARD} &
+Top governing board (Board of Governors) &
+Keep --- already largely role-based ("governing bodies", "board", "CIO"); confirm these remain generic governance roles rather than a specific board-of-governors/rectorate shape &
+SUITPOLICY, SUITPOLICYSUMMARY, SUITSOLUTION (19).\\
+\midrule
+
+% --- pilot entities ----------------------------------------------------------
+\texttt{PILOT\_ENTITIES} &
+Pilot entity set &
+Replace ULHPC with the role "the institution's HPC facility / team" &
+SUITPOLICY, SUITPOLICYSUMMARY, SUITSOLUTION (6).\\
+\midrule
+
+% --- institution identity / profile -----------------------------------------
+\texttt{INSTITUTION\_NAME} &
+Subject institution name (University of Luxembourg) &
+"The institution" / "a small institution" as the subject of the comparison objection &
+SUITPOLICY, SUITSOLUTION (22).\\
+\midrule
+
+\texttt{INSTITUTION\_TYPE} &
+Reference institution type/profile (R1 / research-intensive) &
+Keep --- "research-intensive institution" is hedged with "typical"; note as a scoping assumption a non-research (teaching-led or administrative) profile would adjust &
+SUITSOLUTION (9).\\
+\midrule
+
+\texttt{CS\_RESEARCH\_UNIT} &
+Computer Science department (pilot/host unit) &
+Role-based "entities with the strongest domain expertise (e.g., a computer-science department, a security/research centre, and the HPC team)" &
+SUITPOLICY, SUITSOLUTION (23).\\
+\midrule
+
+\texttt{SECURITY\_RESEARCH\_CENTRE} &
+Security research centre (SnT) &
+"A cybersecurity-focused interdisciplinary research centre" &
+SUITPOLICY (5).\\
+\midrule
+
+% --- macro -------------------------------------------------------------------
+\texttt{INSTITUTION\_MACRO\_SET} &
+\texttt{\textbackslash institution\{\}} macro set expanding to UL terms &
+Keep --- already framed conditionally ("for institutions whose \dots\ framework is built on ITIL or COBIT"); institution-agnostic by construction &
+SUITSOLUTION (1).\\
+\midrule
+
+% --- legal -------------------------------------------------------------------
+\texttt{AI\_REGULATION} &
+AI-governance regime (EU AI Act) &
+For a jurisdiction-agnostic template, parameterize the legal-framework layer to the adopter's jurisdiction; the whole legal scaffolding (GDPR, NIS2, AI Act, EU Charter, CJEU/ECtHR) presumes an EU/European jurisdiction &
+SUITPOLICYSUMMARY, SUITSOLUTION (8).\\
+\midrule
+
+\texttt{CER\_NATIONAL\_TRANSPOSITION} &
+National CER transposition law (PL 8307) &
+"The national CER (Critical Entities Resilience) transposition law"; keep CER Directive (EU) 2022/2557 as the generic anchor &
+SUITPOLICY (6).\\
+\midrule
+
+\texttt{DATA\_PROTECTION\_REGIME} &
+Data-protection regime (GDPR) &
+Keep US-funding references where they describe external precedent institutions; where 800-171/CUI is presented as a driver, frame as "where the institution processes regulated data (e.g.\ controlled, health, classified)" &
+SUITPOLICY, SUITSOLUTION (7).\\
+\midrule
+
+\texttt{EID\_TRUST\_SERVICES\_REGIME} &
+eID / trust-services regime (eIDAS\,2) &
+Frame the regulatory anchors as "the institution's applicable data-protection, network-and-information-security, and trust-services regime", giving GDPR/NIS2/eIDAS\,2 as the worked instantiation; keep ISO\,27001 and NIST CSF (jurisdiction-neutral) &
+SUITSOLUTION (4).\\
+\midrule
+
+\texttt{NATIONAL\_EQUAL\_TREATMENT\_LAW} &
+National equal-treatment / anti-discrimination law (Law of 28 Nov 2006) &
+A role-based reference to "the national transposition of Directive 2000/78/EC into labour law" &
+SUITPOLICY (8).\\
+\midrule
+
+\texttt{ESSENTIAL\_ENTITY\_CLASSIFICATION\_BASIS} &
+Essential-entity classification status \& basis &
+Generalize "the University [is] an essential entity" to "institutions under the NIS2 essential-entity (or important-entity) regime", making classification a configurable premise &
+SUITPOLICY, SUITSOLUTION (11).\\
+\midrule
+
+\texttt{NATIONAL\_CYBER\_STRATEGY} &
+National cybersecurity strategy (NCSS III) &
+A role-based reference to the national cybersecurity strategy's academic-cooperation objective &
+SUITPOLICY (4).\\
+\midrule
+
+\texttt{CYBERSECURITY\_BASELINE\_REGIME} &
+Cybersecurity baseline regime (NIS2) &
+Generalize "including Luxembourg" to "including the institution's jurisdiction"; frame the EU/CoE legal order as "the applicable supranational and national legal framework" so non-EU adopters can substitute their own &
+SUITPOLICY, SUITSOLUTION (15).\\
+\midrule
+
+\texttt{NIS2\_NATIONAL\_TRANSPOSITION} &
+National NIS2 transposition law (PL 8364) &
+Generalize the lawful-basis argument to "a public-sector or public-interest institution"; note the NIS2 statutory duty depends on national transposition (stated without naming the transposing law/country) &
+SUITPOLICY, SUITPOLICYSUMMARY, SUITSOLUTION (15).\\
+\midrule
+
+\texttt{REGULATORY\_REGIME} &
+Composite regulatory regime / national transposition &
+"Binding law in the EU and Council of Europe member states (including the institution's jurisdiction)" &
+SUITPOLICY, SUITSOLUTION (10).\\
+\midrule
+
+\texttt{NATIONAL\_PUBLIC\_SECTOR\_ISP} &
+State public-sector information-security policy (PSI-LU) &
+A role-based reference to the national public-sector information-security baseline policy &
+SUITPOLICY (4).\\
+\midrule
+
+\texttt{CROSS\_BORDER\_TRANSFER\_REGIME} &
+Cross-border data-transfer regime (Schrems II) &
+Keep --- the list is supranational (EU/international), framed generically for "a research-intensive university", with no national transposition named; already institution-agnostic &
+SUITPOLICY, SUITSOLUTION (11).\\
+\midrule
+
+\texttt{NATIONAL\_CYBER\_COMMISSARIAT\_FOUNDING\_LAW} &
+National founding statute of the cyber-resilience commissariat (loi du 23 juillet 2016) &
+Parameterize to the national founding statute of the cyber-resilience/protection commissariat; keep the role (agency exists by national law, sits under the executive), drop the 23 July 2016 date and the loi-modifi\'ee form &
+SUITPOLICY, SUITSOLUTION (2).\\
+\midrule
+
+% --- jurisdiction ------------------------------------------------------------
+\texttt{DATA\_CUSTODY\_SOVEREIGNTY\_PROFILE} &
+On-premises key custody / no-third-country-disclosure as the structural data-sovereignty optimum &
+Generalize the data-dimension optimum to "custody arrangement that minimises the applicable disclosure-regime exposure" rather than hard-coding on-premises custody; gate the "no third-country disclosure regime" criterion behind the adopter's jurisdiction profile &
+SUITSOLUTION (3).\\
+\midrule
+
+\texttt{NATIONAL\_LEGISLATURE} &
+National legislative chamber as deposit / enactment venue (Chambre des D\'eput\'es) &
+A role-based national-legislature reference; keep that the instrument is national law passed by the national parliament, drop the chamber proper noun, the Grand-Duch\'e framing and the vote-tally specifics &
+SUITPOLICY, SUITSOLUTION (2).\\
+\midrule
+
+% --- method ------------------------------------------------------------------
+\texttt{NATIONAL\_RISK\_METHOD} &
+National risk-analysis method (MONARC) &
+Keep MONARC only as one of several examples, or parameterize the leading example by jurisdiction (listing it first implies a Luxembourg/ANSSI-LU context) &
+SUITSOLUTION (1).\\
+\midrule
+
+% --- person ------------------------------------------------------------------
+\texttt{AUTHOR\_NAME} &
+Named author / contact person &
+Keep --- these are public case-law attributions, not institution-specific persons; they generalize to any EU adopter &
+SUITPOLICY, SUITSOLUTION (3).\\
+\midrule
+
+\texttt{AUTHOR\_AFFILIATION} &
+Author-to-affiliation binding (named contact + UL host unit + uni.lu email) &
+Parameterize the binding everywhere it appears: self-citation \texttt{@techreport} institution/note fields (\texttt{ng-tech-ref-2026}, \texttt{ng-dossier-2026}), the title-page contact-point block, the book front-matter "Citation:" line, and the PDF \texttt{\textbackslash hypersetup} pdfauthor/pdftitle metadata. The uni.lu email domain must be parameterized, not carried into another institution's edition; remove the pdfauthor AI-tool string &
+SUITPOLICY, SUITSOLUTION (4).\\
+\midrule
+
+% --- regulators --------------------------------------------------------------
+\texttt{NATIONAL\_CYBER\_COMPETENCE\_CENTRE} &
+National cyber competence centre (NC3 / House of Cybersecurity) &
+"An ISO/IEC 27005-aligned risk-analysis method/tool (e.g.\ a nationally provided open-source methodology)"; keep ISO/IEC 27005 as the generic anchor &
+SUITPOLICY (5).\\
+\midrule
+
+\texttt{NATIONAL\_DPA} &
+National data-protection authority (CNPD) &
+"The competent data protection authority (DPA)" &
+SUITPOLICY, SUITSOLUTION (11).\\
+\midrule
+
+\texttt{NATIONAL\_GOV\_CSIRT} &
+Governmental CSIRT (GOVCERT.LU) &
+A role-based term for the national/governmental CSIRT applicable to the public sector &
+SUITPOLICY (7).\\
+\midrule
+
+\texttt{NATIONAL\_INFOSEC\_AGENCY} &
+National information-security agency (ANSSI-LU) &
+A role-based term for the national information-security agency authoring the state IS policy &
+SUITPOLICY, SUITSOLUTION (13).\\
+\midrule
+
+\texttt{NATIONAL\_NOTIFICATION\_PLATFORM} &
+National incident-notification platform (SERIMA) &
+A role-based term for the national NIS2 incident-notification/risk-analysis platform; drop the launch date &
+SUITPOLICY, SUITPOLICYSUMMARY (8).\\
+\midrule
+
+\texttt{NATIONAL\_SPOC\_AUTHORITY} &
+NIS2 national single point of contact (HCPN) &
+Generalize to "the national cybersecurity strategy, where it identifies cooperation with the academic and research sphere as a priority" &
+SUITPOLICY (4).\\
+\midrule
+
+\texttt{NIS2\_SUPERVISORY\_AUTHORITY} &
+NIS2 supervisory authority (ILR) &
+A role-based term for the national NIS2 supervisory authority &
+SUITPOLICY, SUITPOLICYSUMMARY, SUITSOLUTION (25).\\
+\midrule
+
+\texttt{NATIONAL\_EXECUTIVE\_DEPARTMENT} &
+National executive department hosting the cyber-resilience commissariat (Minist\`ere d'\'Etat) &
+A role-based reference (the national executive department responsible for the protection commissariat); keep that the commissariat sits under the head-of-government's authority, drop the Minist\`ere d'\'Etat proper noun and Francophone form &
+SUITPOLICY, SUITSOLUTION (2).\\
+\midrule
+
+% --- vendor ------------------------------------------------------------------
+\texttt{INCUMBENT\_IDENTITY\_SUITE\_VENDOR} &
+Incumbent proprietary identity suite (Entra ID / Conditional Access) &
+Keep as a generally-recognised market example of a "pure-commercial identity provider" (illustrative, not prescriptive); note the "designated EU region" carries the EU-jurisdiction assumption &
+SUITSOLUTION (8). Named products: Microsoft Entra ID, Conditional Access, Customer Lockbox, Double Key Encryption.\\
+
+\end{longtable}
+\end{center}
+
+% ============================================================================
+% STEP 0 — SELECT YOUR REGULATORY REGIME
+% ============================================================================
+%
+% This prose step precedes the per-variable substitution above for any adopter
+% whose binding regime is not the EU/EEA baseline. It points at the shared
+% Regulatory Applicability module (shared/regulatory-applicability-EN.tex),
+% which carries the size- and jurisdiction-invariant obligation spine (F1--F6),
+% the obligation->mechanism matrix, the regime typology, and the derivation
+% method for unlisted regimes. Selecting the regime here fixes the value of the
+% legal/regulator localization variables in the table above (DATA_PROTECTION_
+% REGIME, CYBERSECURITY_BASELINE_REGIME, AI_REGULATION, EID_TRUST_SERVICES_
+% REGIME, CROSS_BORDER_TRANSFER_REGIME, NATIONAL_DPA, NIS2_SUPERVISORY_
+% AUTHORITY, NATIONAL_GOV_CSIRT, and the *_NATIONAL_TRANSPOSITION rows) in one
+% coherent move rather than row by row.
+
+\bigskip
+\noindent\textbf{Step~0 --- Select your regulatory regime (do this first).}
+The legal and regulator rows of the table above (data-protection regime,
+cybersecurity-baseline regime, AI-governance regime, eID/trust-services regime,
+cross-border-transfer regime, and the national-authority and
+national-transposition rows) are all instances of a single decision: which
+regulatory regime binds the adopting institution. Make that decision once,
+using the shared \emph{Regulatory Applicability} module
+(\texttt{shared/regulatory-applicability-EN.tex}), and the individual rows
+follow coherently. The module separates the part that does not change from the
+part that does: the size- and jurisdiction-invariant functional-obligation
+spine (F1--F6) and the obligation~$\rightarrow$~mechanism matrix are fixed for
+every adopter; only the \emph{instrument} column --- the local statute,
+competent authority and deadline --- is substituted per regime.
+
+\smallskip
+\noindent\emph{If your regime is one of the typology profiles}, read it
+directly from the module's regime typology and adopt its F1--F6 instrument
+column as your localization. The profiles shipped are:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{European Union / EEA} --- deep regime, the SUIT baseline anchor
+        (GDPR, NIS2, EU AI Act, eIDAS\,2, GDPR Chapter~V transfers);
+  \item \textbf{United States} --- deep regime, sectoral and fragmented (FERPA,
+        HIPAA, GLBA/FTC Safeguards, NIST SP~800-171 / CMMC, EAR/ITAR,
+        CCPA/CPRA);
+  \item \textbf{United Kingdom} --- light regime, post-Brexit diverging (UK
+        GDPR + DPA~2018 + DUAA~2025, NIS Regulations~2018, UK eIDAS, PSBAR);
+  \item \textbf{Brazil} --- light regime, distributed federal stack (LGPD,
+        E-Ciber, CTIR.Gov, the Inclusion Law, the Access to Information Law);
+  \item \textbf{South Africa} --- light regime, single national jurisdiction
+        (POPIA, the Cybercrimes Act, the ECT Act, PEPUDA / Equality Act).
+\end{itemize}
+
+\smallskip
+\noindent\emph{If your regime is not listed}, derive your own regime row with
+the module's seven-step mapping method
+(\texttt{regulatory-applicability-EN.tex}, ``Mapping method: deriving a row for
+an unlisted regime''): (1) identify your data-protection authority and its
+security-of-processing duty (F1); (2) identify your lawful-basis and
+risk-governance regime (F2); (3) record your shortest breach/incident
+notification deadline (F3); (4) determine your essential-/important-entity
+status and its basis (F2/F3 scope); (5) establish your cross-border transfer
+regime (F4); (6) add your sector overlays --- trust/eID, AI governance, export
+control, health, financial-aid, accessibility (F5/F6); (7) write each local
+instrument, authority and deadline into the instrument column against the
+matching F~row, leaving the SUIT control-mechanism column unchanged. The result
+is your own regime profile in the same shape as the five worked profiles, and
+the same architectural evidence base discharges it. As the module states, this
+is interpretive engineering guidance, not legal advice: confirm the mapping
+with the institution's data-protection officer, information-security officer
+and legal counsel before relying on it.
+
+\endinput

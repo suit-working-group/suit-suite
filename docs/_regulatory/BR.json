@@ -1,0 +1,89 @@
+{
+  "schema": "https://json-schema.org/draft/2020-12/schema",
+  "profileKind": "national-regulatory-regime",
+  "jurisdiction": "BR",
+  "jurisdictionName": "Federative Republic of Brazil",
+  "sector": "University / higher-education IT (federal public universities as autarquias / fundações públicas)",
+  "depth": "light",
+  "generated": "2026-06-09",
+  "sourcePolicy": "REAL primary regulation (Planalto official consolidated texts) and authoritative secondary sources only; no prior SUIT document used.",
+  "note": "Brazil has no single omnibus cybersecurity statute; obligations are distributed across the LGPD (personal-data protection and breach notification), the federal cybersecurity strategy and incident-management decrees (cyber governance and federal incident coordination), the Inclusion Law (accessibility), the Access to Information Law (transparency) and the Federal Administrative Procedure Law (due process). Federal public universities are within scope as autarquias/fundações públicas of the federal public administration.",
+  "competentAuthorities": {
+    "ANPD": "Autoridade Nacional de Proteção de Dados — national data protection authority (LGPD supervisory authority)",
+    "GSI/PR": "Gabinete de Segurança Institucional da Presidência da República — coordinates national/federal cybersecurity (E-Ciber) and hosts CTIR.Gov",
+    "CTIR.Gov": "Centro de Prevenção, Tratamento e Resposta a Incidentes Cibernéticos de Governo — central team of the Federal Cyber Incident Management Network (within GSI/PR)",
+    "CGU": "Controladoria-Geral da União — federal oversight/monitoring authority for the Access to Information Law",
+    "MEC": "Ministério da Educação — higher-education sector regulator (accessibility in course recognition); e-MAG standard via gov.br / Governo Digital"
+  },
+  "functions": [
+    {
+      "fn": "F1",
+      "label": "Personal data protection / security of processing",
+      "instrument": "Lei nº 13.709/2018 (LGPD), esp. Art. 46 (technical and administrative security measures)",
+      "authority": "ANPD (Autoridade Nacional de Proteção de Dados)",
+      "deadlineOrMechanism": "Continuous duty: controllers/processors must adopt security measures protecting personal data; ANPD may issue minimum technical standards. Applies to federal universities as public-power controllers (LGPD Chapter IV).",
+      "bibKey": "br-lgpd-13709",
+      "note": "Foundational omnibus data-protection statute covering public and private sectors."
+    },
+    {
+      "fn": "F2",
+      "label": "Cybersecurity governance / risk management",
+      "instrument": "Decreto nº 10.222/2020 (Estratégia Nacional de Segurança Cibernética — E-Ciber)",
+      "authority": "GSI/PR (Gabinete de Segurança Institucional da Presidência da República)",
+      "deadlineOrMechanism": "Federal public-administration bodies and entities (incl. federal universities) implement the strategic actions under GSI coordination; strategy-cycle instrument (2020–2023 cycle) rather than a fixed filing deadline. Complemented by GSI normative instructions (IN GSI) setting information-security baselines.",
+      "bibKey": "br-eciber-d10222",
+      "note": "Marco Civil da Internet (Lei 12.965/2014) provides the connectivity/online-privacy baseline framing alongside this strategy."
+    },
+    {
+      "fn": "F3",
+      "label": "Security-incident notification",
+      "instrument": "LGPD Art. 48 (Lei 13.709/2018) operationalised by Resolução CD/ANPD nº 15/2024; plus federal cyber-incident track via Decreto nº 10.748/2021 (Rede Federal de Gestão de Incidentes Cibernéticos / CTIR.Gov)",
+      "authority": "ANPD (personal-data breaches); GSI/PR — CTIR.Gov (federal cyber incidents)",
+      "deadlineOrMechanism": "Personal-data breaches likely to cause risk/relevant harm: notify ANPD and affected data subjects within 3 business days of awareness (preliminary notice supplementable within 20 business days); 5-year record retention. Federal cyber incidents: report to/through CTIR.Gov per the federal incident-management network.",
+      "bibKey": "br-anpd-res15-2024",
+      "note": "Dual-track: ANPD/LGPD channel for personal-data breaches; CTIR.Gov channel (Decreto 10.748/2021, bib br-redeinc-d10748) for federal cyber incidents."
+    },
+    {
+      "fn": "F4",
+      "label": "Digital accessibility / inclusion",
+      "instrument": "Lei nº 13.146/2015 (Lei Brasileira de Inclusão / Estatuto da Pessoa com Deficiência), esp. Arts. 63 ff. on accessibility of information and communication; operationalised by e-MAG (Modelo de Acessibilidade em Governo Eletrônico)",
+      "authority": "MEC (higher-education accessibility); Governo Digital / gov.br (e-MAG standard)",
+      "deadlineOrMechanism": "Standing obligation: public-power websites, applications and digital content must be accessible; no transfer/filing deadline — conformance is assessed against e-MAG. Higher-education accessibility also conditions MEC course authorisation/recognition (Portaria MEC 3.284/2003).",
+      "bibKey": "br-lbi-13146",
+      "note": "Accessibility functional obligation; e-MAG is the federal web-accessibility conformance reference."
+    },
+    {
+      "fn": "F5",
+      "label": "Transparency / access to public information",
+      "instrument": "Lei nº 12.527/2011 (Lei de Acesso à Informação — LAI)",
+      "authority": "CGU (Controladoria-Geral da União) — federal monitoring authority",
+      "deadlineOrMechanism": "Publicity-as-rule / secrecy-as-exception: active (proactive) disclosure plus passive (on-request) access with statutory response deadlines for information requests; federal universities bound as public entities. Procedures filled subsidiarily by Lei 9.784/1999.",
+      "bibKey": "br-lai-12527",
+      "note": "Transparency functional obligation; CGU oversight at federal level."
+    },
+    {
+      "fn": "F6",
+      "label": "Administrative due process / governance",
+      "instrument": "Lei nº 9.784/1999 (Lei do Processo Administrativo Federal)",
+      "authority": "Each federal body/entity (self-applying); judicial review by the federal courts; applies to federal universities as autarquias/fundações",
+      "deadlineOrMechanism": "Baseline procedural guarantees (legality, contraditório and ampla defesa, reasoned decisions, defined procedural deadlines) governing how the institution takes and reviews administrative decisions, including those arising from F1–F5; applies subsidiarily across federal procedural regimes (incl. LAI).",
+      "bibKey": "br-procadm-9784",
+      "note": "Administrative-procedure backbone underpinning enforcement and review of the other functional obligations."
+    }
+  ],
+  "bibKeysAdded": [
+    "br-lgpd-13709",
+    "br-anpd-res15-2024",
+    "br-marco-civil-12965",
+    "br-eciber-d10222",
+    "br-redeinc-d10748",
+    "br-lbi-13146",
+    "br-lai-12527",
+    "br-procadm-9784"
+  ],
+  "verification": {
+    "method": "Planalto official consolidated texts and ANPD/gov.br official pages fetched via HTTP; LGPD official title and Art. 48 text confirmed inline; secondary corroboration from law-firm and IAPP/Baker McKenzie analyses for the ANPD Res. 15/2024 deadlines.",
+    "allPrimaryUrlsHttp200": true,
+    "date": "2026-06-09"
+  }
+}

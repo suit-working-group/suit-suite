@@ -1,0 +1,82 @@
+% ============================================================================
+% Glossary definitions for gls-modes.sty
+% \glsdefine{key}{SHORT}{Long Form}{Tooltip definition}
+% ============================================================================
+%
+% SUIT NOTE: this is the institution-neutral SUIT glossary. All entries are
+% role-based / generic. Adopting institutions supply their own local values
+% via the Localization Guide (shared/localization-guide-EN.tex) rather than
+% via hard-coded glossary entries.
+% ============================================================================
+
+% --- Technical Infrastructure ---
+\glsdefine{acl}{ACL}{Access Control List}{Access Control List -- a set of rules on a network device that permits or denies traffic based on source/destination addresses and ports.}
+\glsdefine{api}{API}{Application Programming Interface}{Application Programming Interface -- a standardised interface allowing software systems to communicate with each other.}
+\glsdefine{byod}{BYOD}{Bring Your Own Device}{Bring Your Own Device -- the practice of employees or students using personal devices to access institutional resources.}
+\glsdefine{dhcp}{DHCP}{Dynamic Host Configuration Protocol}{Dynamic Host Configuration Protocol -- automatically assigns IP addresses to devices on a network.}
+\glsdefine{dmz}{DMZ}{Demilitarised Zone}{Demilitarised Zone -- a network segment between an internal network and the Internet, hosting externally accessible services.}
+\glsdefine{dns}{DNS}{Domain Name System}{Domain Name System -- translates human-readable domain names into IP addresses.}
+\glsdefine{dpi}{DPI}{Deep Packet Inspection}{Deep Packet Inspection -- a method of examining the content of network packets as they pass through a checkpoint.}
+\glsdefine{dtn}{DTN}{Data Transfer Node}{Data Transfer Node -- a server optimised for high-throughput scientific data transfers in a Science DMZ.}
+\glsdefine{edr}{EDR}{Endpoint Detection and Response}{Endpoint Detection and Response -- security software monitoring endpoints for threats.}
+\glsdefine{hpc}{HPC}{High-Performance Computing}{High-Performance Computing -- computing systems designed for large-scale scientific simulations and data processing.}
+\glsdefine{iam}{IAM}{Identity and Access Management}{Identity and Access Management -- systems and processes for managing digital identities and controlling access to resources.}
+\glsdefine{nac}{NAC}{Network Access Control}{Network Access Control -- system enforcing authentication, device posture assessment, and dynamic VLAN assignment at the network edge (e.g. PacketFence, Cisco ISE).}
+\glsdefine{ids}{IDS}{Intrusion Detection System}{Intrusion Detection System -- monitors network traffic for suspicious activity (detection only, no inline blocking).}
+\glsdefine{ips}{IPS}{Intrusion Prevention System}{Intrusion Prevention System -- monitors and actively blocks detected threats inline.}
+\glsdefine{lms}{LMS}{Learning Management System}{Learning Management System -- platform for delivering and managing educational content (e.g. Moodle).}
+\glsdefine{mfa}{MFA}{Multi-Factor Authentication}{Multi-Factor Authentication -- requiring two or more verification factors to access a resource.}
+\glsdefine{pki}{PKI}{Public Key Infrastructure}{Public Key Infrastructure -- framework for managing digital certificates and encryption keys.}
+\glsdefine{rbac}{RBAC}{Role-Based Access Control}{Role-Based Access Control -- access permissions assigned to roles rather than to individual users.}
+\glsdefine{sciencedmz}{Science DMZ}{Science Demilitarised Zone}{Science DMZ -- a network architecture pattern developed by ESnet for high-performance scientific data transfers, bypassing enterprise firewalls in favour of ACLs and dedicated IDS.}
+\glsdefine{sdn}{SDN}{Software-Defined Networking}{Software-Defined Networking -- centralised, programmable control of network behaviour.}
+\glsdefine{siem}{SIEM}{Security Information and Event Management}{Security Information and Event Management -- centralised platform for collecting and analysing security logs and alerts.}
+\glsdefine{soc}{SOC}{Security Operations Centre}{Security Operations Centre -- team and facility responsible for monitoring and responding to security incidents.}
+\glsdefine{sso}{SSO}{Single Sign-On}{Single Sign-On -- authentication allowing access to multiple systems with one set of credentials.}
+\glsdefine{tac}{TAC}{Trusted Activity Context}{Trusted Activity Context -- a coherent, validated environment assembling data, tools, services, and access rights for a specific university activity (concept introduced in this report).}
+\glsdefine{vdi}{VDI}{Virtual Desktop Infrastructure}{Virtual Desktop Infrastructure -- technology delivering desktop environments from a centralised server to any device.}
+\glsdefine{vlan}{VLAN}{Virtual Local Area Network}{Virtual Local Area Network -- a logical subdivision of a physical network, isolating traffic between groups of devices.}
+\glsdefine{vpn}{VPN}{Virtual Private Network}{Virtual Private Network -- encrypted tunnel for secure remote connectivity.}
+
+% --- Governance Frameworks and Standards ---
+\glsdefine{abac}{ABAC}{Attribute-Based Access Control}{Attribute-Based Access Control -- access decisions based on attributes of the user, resource, and environment (NIST SP 800-162).}
+\glsdefine{cobit}{COBIT}{Control Objectives for Information and Related Technologies}{COBIT -- Control Objectives for Information and Related Technologies, IT governance framework by ISACA distinguishing governance from management.}
+\glsdefine{fair}{FAIR}{Factor Analysis of Information Risk}{FAIR -- Factor Analysis of Information Risk, a quantitative methodology for assessing and managing information risk.}
+\glsdefine{isms}{ISMS}{Information Security Management System}{Information Security Management System -- the set of policies and procedures for systematically managing security (ISO 27001).}
+\glsdefine{zt}{Zero Trust}{Zero Trust architecture}{Zero Trust -- security model based on never trust, always verify; access decisions based on identity and device posture rather than network location (NIST SP 800-207).}
+
+% --- European Regulations and Legal Instruments ---
+\glsdefine{gdpr}{GDPR}{General Data Protection Regulation}{General Data Protection Regulation (EU) 2016/679 -- EU regulation on the protection of personal data.}
+\glsdefine{nis2}{NIS2}{NIS2 Directive}{NIS2 Directive (EU) 2022/2555 -- directive on measures for a high common level of cybersecurity.}
+\glsdefine{aiact}{AI Act}{European AI Act}{European AI Act -- Regulation (EU) 2024/1689 on artificial intelligence, risk-based classification of AI systems.}
+\glsdefine{cjeu}{CJEU}{Court of Justice of the European Union}{Court of Justice of the European Union -- the EU highest court, interpreting EU law.}
+\glsdefine{ecthr}{ECtHR}{European Court of Human Rights}{European Court of Human Rights -- court enforcing the ECHR, based in Strasbourg.}
+\glsdefine{edpb}{EDPB}{European Data Protection Board}{European Data Protection Board -- EU body ensuring consistent application of the GDPR.}
+\glsdefine{edps}{EDPS}{European Data Protection Supervisor}{European Data Protection Supervisor -- independent EU authority overseeing the application of GDPR by EU institutions and bodies (distinct from the EDPB which coordinates national DPAs).}
+\glsdefine{enisa}{ENISA}{European Union Agency for Cybersecurity}{ENISA -- European Union Agency for Cybersecurity.}
+\glsdefine{dpo}{DPO}{Data Protection Officer}{Data Protection Officer -- person responsible for overseeing GDPR compliance within an organisation.}
+\glsdefine{icradp}{ICRADP}{Independent Commission for Reasonable Adjustments of Digital Policies}{ICRADP -- Independent Commission for Reasonable Adjustments of Digital Policies (proposed in this report; French: CARPN).}
+
+% --- Cross-border data transfers ---
+\glsdefine{tia}{TIA}{Transfer Impact Assessment}{Transfer Impact Assessment -- documented assessment of whether a third country offers a level of personal-data protection essentially equivalent to EU law, required by CJEU Schrems II for transfers outside the EEA when relying on Standard Contractual Clauses.}
+\glsdefine{scc}{SCC}{Standard Contractual Clauses}{Standard Contractual Clauses -- pre-approved European Commission contractual clauses for transfers of personal data outside the EEA; valid under Schrems II only when supplemented by a Transfer Impact Assessment and supplementary measures.}
+
+% --- Sovereignty grid and technical reference vocabulary ---
+\glsdefine{it}{IT}{Information Technology}{Information Technology -- the systems, software, networks and processes used to store, manipulate and transmit institutional information.}
+\glsdefine{scim}{SCIM}{System for Cross-domain Identity Management}{System for Cross-domain Identity Management -- IETF standard (RFC 7643/7644) for automating the exchange of user identity information between identity domains.}
+\glsdefine{byok}{BYOK}{Bring Your Own Key}{Bring Your Own Key -- a key-management arrangement in which the customer generates and provides the encryption keys used by a third-party service, retaining custody and rotation control.}
+\glsdefine{hyok}{HYOK}{Hold Your Own Key}{Hold Your Own Key -- an arrangement stronger than BYOK in which the customer retains the keys in their own infrastructure (typically an HSM) and the service never has cleartext access; cryptographic operations require live customer participation.}
+\glsdefine{rfp}{RFP}{Request for Proposal}{Request for Proposal -- a procurement document issued by an institution to solicit proposals from suppliers, specifying functional, technical, and contractual requirements.}
+\glsdefine{iot}{IoT}{Internet of Things}{Internet of Things -- networked devices typically embedded in physical objects (sensors, controllers, lab instruments) with limited or no user interface and constrained security update mechanisms.}
+\glsdefine{tls}{TLS}{Transport Layer Security}{Transport Layer Security -- IETF cryptographic protocol (RFC 8446 for TLS 1.3) providing confidentiality and integrity for network communications; the foundation of HTTPS.}
+\glsdefine{opa}{OPA}{Open Policy Agent}{Open Policy Agent -- CNCF graduated open-source policy decision engine using the Rego language; widely adopted as a general-purpose authorisation and admission-control PDP.}
+\glsdefine{pdp}{PDP}{Policy Decision Point}{Policy Decision Point -- the component that evaluates a request against the policy corpus and returns a decision; distinct from the Policy Enforcement Point (PEP) that applies the decision.}
+\glsdefine{pep}{PEP}{Policy Enforcement Point}{Policy Enforcement Point -- the component that intercepts an access request, queries the PDP, and applies the returned decision (allow/deny plus obligations).}
+
+% --- Research Networks ---
+\glsdefine{csirt}{CSIRT}{Computer Security Incident Response Team}{Computer Security Incident Response Team -- team responsible for detecting, analysing, and responding to cybersecurity incidents.}
+\glsdefine{eduroam}{eduroam}{Education Roaming}{eduroam -- Education Roaming, federated Wi-Fi service allowing users to connect at any participating institution worldwide using their home credentials.}
+\glsdefine{edugain}{eduGAIN}{eduGAIN interfederation service}{eduGAIN -- global interfederation service connecting identity federations, enabling cross-institutional single sign-on.}
+\glsdefine{geant}{GEANT}{GEANT pan-European research network}{GEANT -- pan-European backbone network connecting 40+ NRENs, serving 50 million users in 10,000+ institutions.}
+\glsdefine{nren}{NREN}{National Research and Education Network}{National Research and Education Network -- a specialised ISP dedicated to supporting research and education (each country operates one).}
+\glsdefine{first}{FIRST}{Forum of Incident Response and Security Teams}{FIRST -- Forum of Incident Response and Security Teams, global network of CSIRTs facilitating coordination across national and sectoral incident-response teams.}

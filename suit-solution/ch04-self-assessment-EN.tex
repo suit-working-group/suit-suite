@@ -1,0 +1,401 @@
+% ============================================================================
+% Chapter 4 --- Institutional self-assessment
+% ----------------------------------------------------------------------------
+% Purpose : provide an auto-questionnaire allowing any institution to
+%           position itself before reading Parts II and III. Replaces the
+%           original A.4 "open questions" with an instrument turned toward
+%           the institution rather than toward the design.
+% Page target: ~8 pages.
+% Dependencies: applies the dimensions defined in Ch. 3 (sovereignty grid)
+%               and the scoring scale defined there.
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D4.1 self-assessment is conducted by the institution itself (no external audit)
+%   D4.2 four diagnostic sections (A--D) plus one positioning section (E)
+%   D4.3 questions phrased to be verifiable, compact, diagnostic, non-leading
+%   D4.4 trajectory selection matrix gives heuristics, not algorithmic decision
+% ============================================================================
+
+\chapter{Institutional self-assessment}
+\label{ch:self-assessment}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the five-dimension grid and the
+four-point scoring scale established in
+\trchap{ch:sovereignty-grid}{The sovereignty grid}. Section~E
+(\S\ref{sec:sa-sovereignty}) presupposes that the reader has
+completed Chapter~3 of the Technical Reference. The trajectory
+selection matrix (\S\ref{sec:sa-results}) refers forward to
+\trchap{ch:playbook-reading}{How to read this playbook} for the
+definitions of the three migration trajectories.
+\end{caveatbox}
+
+The instrument presented in this chapter is a self-administered
+diagnostic. Its purpose is not to grade an institution against an
+external benchmark but to make explicit the starting position from
+which any migration toward the architecture and playbook of this
+Reference would proceed. An honest self-assessment, conducted by the
+institution itself with the aid of its own documentation, is more
+useful than an externally produced report whose assumptions the
+institution has not internalised.
+
+%-----------------------------------------------------------------------------
+\section{Purpose and method}
+\label{sec:sa-purpose}
+
+The self-assessment is composed of five sections. Sections~A--D are
+diagnostic: they characterise the institution's current technical
+maturity along the four planes that the migration playbook will
+exercise (identity, network, observability, endpoint). Section~E is
+positioning: it applies the sovereignty grid of
+\trchap{ch:sovereignty-grid}{} to the institution as a whole, asking
+both \emph{where it stands today} and \emph{where it aims to stand}.
+
+\paragraph{Time and team.} An indicative envelope for completing the
+assessment is a single facilitated session of two to three hours
+within a small cross-functional group --- typically one identity
+engineer, one network engineer, one security or governance
+representative, and one person familiar with procurement. Institutions
+will adjust the envelope to their own deliberation cadence; the
+resulting profile is a working artefact for the institution, not a
+deliverable for an external party.
+
+\paragraph{Scoring.} Each question admits one of four answers, using
+the same four-point scale as the sovereignty grid: \textbf{0 Absent},
+\textbf{1 Partial}, \textbf{2 Established}, \textbf{3 Robust}. Half-
+points are not allowed; when uncertainty exists, the lower score is
+recorded with a note on the basis for uncertainty. The most useful
+output is not the aggregate but the distribution: a section in which
+most answers are 1 or 2 with one outlier 0 reveals more than an
+average score would.
+
+\paragraph{Honesty discipline.} The instrument is only useful if the
+institution scores itself as it actually is, not as it would prefer to
+appear. Two practices help: scoring is performed before the trajectory
+matrix (\S\ref{sec:sa-results}) is consulted, so respondents do not
+calibrate to a preferred outcome; and the basis for each non-zero
+score is briefly documented (one line) so that the team can revisit
+its judgement later.
+
+%-----------------------------------------------------------------------------
+\section{Section A --- Identity and federation maturity}
+\label{sec:sa-identity}
+
+This section diagnoses the maturity of the institution's identity
+plane --- the layer that the first migration wave
+(\trchap{ch:wave1-identity}{Wave~1 --- Identity and federation}) will
+exercise.
+
+\begin{enumerate}[leftmargin=2em,nosep,label=A\arabic*.]
+  \item Is there a single canonical identity provider for
+  \loc{institution-name}, or multiple competing ones?
+
+  \item Does the institution participate in \gls{edugain} (or a
+  regional equivalent) for inter-institutional federation?
+
+  \item Is account lifecycle (creation, role change, departure)
+  automated end-to-end via \gls{scim} or equivalent?
+
+  \item Is \gls{mfa} enforced for all staff and student accounts, with
+  documented exceptions?
+
+  \item Are role and group memberships expressed in a single source of
+  truth, or duplicated across systems?
+
+  \item Is the identity provider's source code or licence under
+  institutional control (open source, or contractual right to operate
+  independently)?
+
+  \item Are session lifetimes and elevation policies documented and
+  consistent across applications?
+
+  \item Is there a documented break-glass procedure for emergency
+  access that does not bypass audit?
+
+  \item Is the identity provider's evolution roadmap controlled by the
+  institution, by an external supplier, or by community consensus?
+
+  \item Has the identity provider been independently audited within
+  the last \loc{assurance-recency-window}?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\section{Section B --- Network and segmentation maturity}
+\label{sec:sa-network}
+
+This section diagnoses the maturity of the network plane that
+\trchap{ch:wave3-network}{Wave~3 --- Network segmentation} will
+exercise.
+
+\begin{enumerate}[leftmargin=2em,nosep,label=B\arabic*.]
+  \item Are network zones (administrative, research, teaching,
+  \gls{byod}, \gls{iot} where applicable, sensitive) declared and
+  documented?
+
+  \item Does each zone have a published security profile (filtering
+  rules, egress policy, audit obligations)?
+
+  \item Is there a \gls{sciencedmz} for high-throughput research
+  traffic, or an explicit architectural decision against one?
+
+  \item Is east-west traffic between zones restricted by default, or
+  permitted by default?
+
+  \item Are \gls{nac} policies enforced at the wired and wireless
+  edge?
+
+  \item Is encryption-in-transit enforced for institutional traffic
+  (\gls{tls}-everywhere posture)?
+
+  \item Are flow records (NetFlow, IPFIX, sFlow) collected and
+  retained for a documented period?
+
+  \item Is there a documented \gls{byod} segregation strategy
+  (separate \gls{vlan}, captive portal, posture verification)?
+
+  \item Are network device configurations under version control with
+  reviewable history?
+
+  \item Has the segmentation been independently penetration-tested
+  within the last \loc{assurance-recency-window}?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\section{Section C --- Observability and audit maturity}
+\label{sec:sa-observability}
+
+This section diagnoses the maturity of the observability plane that
+\trchap{ch:wave2-observability}{Wave~2 --- Observability baseline}
+will exercise and that \trchap{ch:wave7-audit-ir}{Wave~7 --- TAC-aware
+audit and IR} will refine.
+
+\begin{enumerate}[leftmargin=2em,nosep,label=C\arabic*.]
+  \item Is there a central log collection point (\gls{siem} or
+  equivalent) covering at least identity, network, and endpoint?
+
+  \item Are log sources catalogued and their criticality documented?
+
+  \item Is log retention specified per data classification and
+  contractually enforceable?
+
+  \item Are detection rules (correlations, alerts) documented and
+  version-controlled?
+
+  \item Is there a continuous monitoring capacity, internal or
+  contracted, with defined response times?
+
+  \item Are incident response runbooks documented and exercised?
+
+  \item Is the \gls{siem} cost predictable (fixed envelope, not
+  per-GB ingestion exposed to volume spikes)?
+
+  \item Are log schemas standardised (OpenTelemetry, CloudEvents, or
+  an institutional canonical schema)?
+
+  \item Has an incident response drill been conducted within the last
+  \loc{assurance-recency-window}?
+
+  \item Is there a documented procedure to preserve forensic evidence
+  during an incident?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\section{Section D --- Endpoint management maturity}
+\label{sec:sa-endpoint}
+
+This section diagnoses the maturity of the endpoint plane that
+\trchap{ch:wave6-endpoint}{Wave~6 --- Endpoint and posture} will
+exercise.
+
+\begin{enumerate}[leftmargin=2em,nosep,label=D\arabic*.]
+  \item Is the endpoint estate inventoried and classified (managed,
+  \gls{byod}, \gls{iot})?
+
+  \item Is mobile-device management coverage in place for each
+  managed-endpoint operating system in use?
+
+  \item Are posture verification policies documented and reviewed?
+
+  \item Is patch service-level documented and measured against
+  reality?
+
+  \item Is \gls{byod} acceptable use enforced technically, or relied
+  upon contractually only?
+
+  \item Are administrative privileges on workstations centrally
+  controlled with a documented exception process?
+
+  \item Has the endpoint-management tooling been evaluated against the
+  sovereignty grid (sources, exit assistance, data residency)?
+
+  \item Is there a documented decommissioning procedure (data wipe,
+  account deactivation, return of asset)?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\section{Section E --- Sovereignty positioning}
+\label{sec:sa-sovereignty}
+
+This section applies the sovereignty grid of
+\trchap{ch:sovereignty-grid}{} to the institution as a whole. For each
+of the five dimensions, two questions are asked: one diagnostic of
+the current state, one diagnostic of the institution's stated intent.
+A gap between the two is itself useful information about the maturity
+of the governance.
+
+\paragraph{E1 --- Data sovereignty.}
+\begin{enumerate}[leftmargin=2em,nosep,label=E1.\arabic*.]
+  \item Are storage location, key custody, and disclosure regime
+  documented per data class?
+  \item Is \emph{``data dimension Established or better''} set as a
+  procurement gate for sensitive workloads, in writing?
+\end{enumerate}
+
+\paragraph{E2 --- Technical sovereignty.}
+\begin{enumerate}[leftmargin=2em,nosep,label=E2.\arabic*.]
+  \item Can the institution inspect or independently rebuild every
+  critical component of the infrastructure?
+  \item Is replaceability written into \gls{rfp} language as a
+  structural requirement, not as a desirable preference?
+\end{enumerate}
+
+\paragraph{E3 --- Financial sovereignty.}
+\begin{enumerate}[leftmargin=2em,nosep,label=E3.\arabic*.]
+  \item Is multi-year operating cost for the digital infrastructure
+  predictable and capped contractually?
+  \item Is supplier substitutability evaluated annually as a
+  sovereignty exercise, independent of incident response?
+\end{enumerate}
+
+\paragraph{E4 --- Operational sovereignty.}
+\begin{enumerate}[leftmargin=2em,nosep,label=E4.\arabic*.]
+  \item Are the skills for each critical layer present in the
+  institution or accessible through its national research and
+  education network and peer network?
+  \item Has mutualisation with peer institutions been considered at
+  planning level for at least one shared operational burden?
+\end{enumerate}
+
+\paragraph{E5 --- Institutional sovereignty.}
+\begin{enumerate}[leftmargin=2em,nosep,label=E5.\arabic*.]
+  \item Can the institution decline a supplier roadmap change without
+  contractual penalty for the current procurement period?
+  \item Is the institution publishing, or willing to publish, its
+  sovereignty profile by component to its academic community?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------
+\section{Reading the results: trajectory selection matrix}
+\label{sec:sa-results}
+
+The matrix in Table~\ref{tab:sa-trajectory} translates a profile of
+answers into a recommended dominant migration \emph{trajectory} ---
+greenfield, brownfield single-suite-centric, or brownfield hybrid --- and
+into an indicative \emph{pace} (5-, 7-, or 10-year horizon).
+
+The matrix offers heuristics, not algorithmic decisions: in particular,
+the trajectory and the pace are typically constrained by factors that
+the questionnaire does not capture (executive mandate, budget cycle,
+ongoing transformation programmes). The matrix is the entry into
+\trchap{ch:playbook-reading}{}, which develops the trajectory and pace
+choices in the context of the playbook itself.
+
+\begin{table}[H]
+\centering\small
+\caption{Trajectory and pace heuristics from the self-assessment
+profile. ``A--D maturity'' is the dominant trend across the
+diagnostic sections; ``E gap'' is the gap between current and intent
+in Section~E; ``Section~E intent'' is the intent score itself.}
+\label{tab:sa-trajectory}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.9\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.9\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+A--D maturity profile & E intent profile & Recommended trajectory and pace \\
+\midrule
+Mostly 0--1 (low across sections), no dominant supplier yet &
+Intent~$\geq$~Established on at least three dimensions &
+\textbf{Greenfield}, 5--7~year horizon. Rare; applies to new
+institutions or to a deliberate from-scratch refoundation. \\
+\addlinespace
+Mostly 1--2, with a single dominant commercial productivity-and-identity
+suite across identity, endpoint, and observability (e.g.\ Microsoft) &
+Intent~$\geq$~Established on Data and Institutional dimensions &
+\textbf{Brownfield single-suite-centric}, 7--10~year horizon. A common
+starting point for institutions whose estate is anchored on a single
+dominant productivity-suite incumbent; the playbook adds an open policy
+plane and an open observability collector layer in front of the
+existing incumbent-suite estate. \\
+\addlinespace
+Mostly 1--2, with mixed Linux / macOS / Windows estates and at least
+one open-source identity component already in production &
+Intent~$\geq$~Established on Technical and Institutional dimensions &
+\textbf{Brownfield hybrid}, 5--7~year horizon. Frequent where
+heterogeneous estates and at least one open-source identity component
+already coexist; the playbook progressively
+substitutes proprietary components at renewal moments while
+preserving the open-source perimeter. \\
+\addlinespace
+Mostly 2--3 (high maturity across sections) &
+Intent stable at current level, no significant gap &
+Selective adoption: the institution may already realise much of the
+target architecture. The playbook is used as a checklist, not as a
+roadmap. Pace is set by the renewal cycles of remaining captive
+components. \\
+\addlinespace
+Heterogeneous (some 0, some 3, no dominant trend) &
+Any &
+\textbf{Defer trajectory selection.} The heterogeneity itself is the
+finding. Wave~0 (\trchap{ch:wave0-foundations}{}) is the appropriate
+first step: governance and inventory before architectural commitment. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Pace adjustments.} The horizons indicated above are
+adjusted by Section~E intent: a high intent score across all
+dimensions may justify the shorter horizon; a low intent score
+indicates that the longer horizon is realistic and that the
+institution should not commit to faster pace at planning time.
+
+\paragraph{Trajectory revision.} The trajectory selected at the
+self-assessment is revised at the close of each wave
+(\trchap{ch:reversibility}{Reversibility playbook}). It is normal for
+an institution to start brownfield single-suite-centric and migrate to
+brownfield hybrid as the open policy and observability planes mature;
+it is uncommon, but possible, for a stalled brownfield trajectory to
+be re-baselined as a greenfield refoundation in a contained perimeter.
+
+%-----------------------------------------------------------------------------
+\section{Re-assessment cadence}
+\label{sec:sa-cadence}
+
+The self-assessment is not a one-time exercise. Three cadences govern
+its repetition.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Annual review.] The full questionnaire is re-administered
+    once per year, ideally in the same period as the institution's
+    operational risk review. Year-on-year drift on a single question
+    is more diagnostic than the absolute score in any one year.
+
+  \item[Wave closure.] At the close of each migration wave
+    (\trchap{ch:reversibility}{}), the relevant subset of questions
+    is re-administered. Wave~1 (Identity) re-examines Section~A;
+    Wave~3 (Network) re-examines Section~B; and so on. The grid
+    questions of Section~E are re-administered after every wave.
+
+  \item[Event-driven re-exercise.] An unscheduled re-exercise is
+    triggered by any of: a significant pricing change from a
+    component supplier, a supplier acquisition or restructuring, a
+    court decision or regulatory change affecting the disclosure
+    regime, a major outage, or a publicly disclosed supplier security
+    incident.
+\end{description}
+
+The cumulative record of self-assessments forms part of the
+institution's sovereignty governance archive, and is the principal
+input to the international peer comparison anticipated in phase~2 of
+the network of universities to which this Reference is addressed.

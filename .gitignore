@@ -1,0 +1,39 @@
+# LaTeX build artifacts — temporary files live in out/, only the final .pdf
+# (built next to its .tex) is tracked.
+out/
+*.aux
+*.bcf
+*.bbl
+*.blg
+*.run.xml
+*.synctex.gz
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+
+# Deposited instantiation editions DO track their four built PDFs — the deposit
+# bar requires them so readers get the documents without a TeX install
+# (instantiation-model.md). Only the _TEMPLATE scaffold keeps its render PDFs
+# untracked: the template is copied, its builds are throwaway.
+instantiations/_TEMPLATE/render/*.pdf
+
+# Audit outputs: every run folder is a LOCAL working artefact (runs are
+# self-contained — no run depends on any prior run). Under _AUDITS/, ONLY the
+# canonical methodology (AUDIT-PLAN.md) and the directory README are tracked.
+_AUDITS/*
+!_AUDITS/AUDIT-PLAN.md
+!_AUDITS/README.md
+
+# Scratch / draft folders — any directory named _TEMP, anywhere, is never tracked.
+_TEMP/
+**/_TEMP/
+
+# OS / editor cruft
+.DS_Store
+
+# Per-developer Claude Code settings (machine-local, not part of the toolkit)
+.claude/settings.local.json

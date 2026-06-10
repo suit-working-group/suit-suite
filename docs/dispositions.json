@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SUIT accepted dispositions",
+  "description": "Design constants and standing decisions the substantive audit must never re-raise as findings. Each entry is an accepted deviation: a property of the SUIT suite that has been reviewed and ratified, so audit tracks should treat it as correct-by-decision rather than a defect.",
+  "suite": "SUIT — Sustainable University IT Infrastructure & Technology",
+  "version": "1.0",
+  "dispositions": [
+    {
+      "id": "DISPO-GRID-5DIM",
+      "kind": "design-constant",
+      "title": "5-dimension policy grid",
+      "statement": "The policy framework is organized as a fixed 5-dimension grid. The count of five is a ratified design constant, not an arbitrary or incomplete enumeration.",
+      "doNotRaise": "Do not flag the grid as having too few/too many dimensions, nor as an unexplained or non-exhaustive number.",
+      "appliesTo": ["SCI", "TECH", "XCOH", "DEF"]
+    },
+    {
+      "id": "DISPO-ARCH-9LAYERS",
+      "kind": "design-constant",
+      "title": "9-layer architecture",
+      "statement": "The technical reference architecture is a fixed 9-layer model (with its associated 3-plane separation). Nine layers is a ratified design constant.",
+      "doNotRaise": "Do not flag the layer count as wrong, redundant, or in need of consolidation/expansion purely on the basis of the number nine.",
+      "appliesTo": ["TECH", "XCOH", "DEF"]
+    },
+    {
+      "id": "DISPO-WAVES-10",
+      "kind": "design-constant",
+      "title": "10-wave rollout",
+      "statement": "The implementation roadmap is structured as 10 waves. Ten waves is a ratified design constant; only wave-dependency acyclicity and sequencing realism are auditable, not the count itself.",
+      "doNotRaise": "Do not flag the number of waves as arbitrary; audit wave dependencies and sequencing, not the count of ten.",
+      "appliesTo": ["TECH", "XCOH", "DEF"]
+    },
+    {
+      "id": "DISPO-INVARIANCE",
+      "kind": "principle",
+      "title": "Size and jurisdiction invariance (minimal necessary set)",
+      "statement": "SUIT defends a size-invariant and jurisdiction-invariant minimal functional set: the minimal necessary set of obligations and controls is invariant to institution size and to jurisdiction; only its instantiation scales. The EU regime is cited as a baseline anchor, and non-EU / non-research-intensive adopters substitute the local equivalent via the Localization Guide.",
+      "doNotRaise": "Do not flag the invariance claim as overclaim, nor demand a size or jurisdiction threshold for the minimal set, nor treat the EU-baseline framing as EU-only lock-in. The minimal set itself does not scale; only its instantiation does.",
+      "appliesTo": ["SCI", "LEG", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-ABSTRACT-LENGTH-ADVISORY",
+      "kind": "advisory",
+      "title": "Abstract length is advisory",
+      "statement": "The 450-900 character bibliography abstract length is a preference, not a hard requirement. Honesty over length governs: never inflate to a count, and AI-derived or un-fetched content lives in note, not abstract.",
+      "doNotRaise": "Do not raise an abstract being shorter or longer than 450-900 characters as a defect. Treat abstract length as ADVISORY.",
+      "appliesTo": ["CITE"]
+    },
+    {
+      "id": "DISPO-URL-FRESHNESS-ADVISORY",
+      "kind": "advisory",
+      "title": "URL freshness is advisory between releases",
+      "statement": "URL re-verification within the current month is a release-gate preference, not a standing monthly obligation for living documents between releases.",
+      "doNotRaise": "Do not raise stale URL-verification dates as a defect outside a release/major-revision gate. Treat URL freshness as ADVISORY.",
+      "appliesTo": ["CITE"]
+    },
+    {
+      "id": "DISPO-TECHREF-NO-APPROVAL-LINE",
+      "kind": "design-constant",
+      "title": "Technical reference has no approval line",
+      "statement": "The technical reference (SUIT Solution) intentionally carries no governance approval line; it is an engineering reference realizing the Policy, whose approval lives with the Policy document.",
+      "doNotRaise": "Do not flag the absence of an approval/sign-off line in the technical reference as a missing element.",
+      "appliesTo": ["XCOH", "TECH", "DEF"]
+    },
+    {
+      "id": "DISPO-MULTI-ENTITY-AFFILIATION-SINGLE-ROLE",
+      "kind": "principle",
+      "title": "Multi-entity affiliations collapse to a single generic role",
+      "statement": "When the source named more than one institutional entity in a single affiliation/approval/authorship reference (e.g. a faculty AND its department), the generic edition collapses them to a single generic role phrase (e.g. 'the approving academic unit'), under one localization variable, unless the distinction is load-bearing for the argument. A separate variable per entity is not required.",
+      "doNotRaise": "Do not flag a single generic role phrase that subsumes a compound source affiliation as an under-modeled or missing-variable defect; this is the ratified treatment.",
+      "appliesTo": ["XCOH", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-PACE-HORIZONS",
+      "kind": "design-constant",
+      "title": "5/7/10-year migration pace horizons",
+      "statement": "The migration playbook offers three named pace horizons (5-, 7- and 10-year). The three horizons are a ratified design constant, like the 5-dimension grid, the 9-layer architecture and the 10-wave rollout; only their archetype-appropriate selection is auditable, not the values themselves.",
+      "doNotRaise": "Do not flag the 5/7/10-year horizons as arbitrary, unsourced, or in need of softening; they are named design constants.",
+      "appliesTo": ["TECH", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-LABELLED-LOCAL-EXAMPLES",
+      "kind": "principle",
+      "title": "Labelled examples and \\loc-routed anchors are the ratified genericity treatment",
+      "statement": "After the 2026-06-09 genericity remediation, jurisdiction-, vendor- and institution-specific anchors are handled in one of two ratified ways: routed through a localization \\loc{} key, or kept in prose as an explicitly labelled, non-binding example ('in the EU, ...', 'e.g. ...', 'such as ... in <region>'). A named EU instrument (NIS2 / GDPR / AI Act / Schrems II / eIDAS), vendor (Microsoft / Entra / Sentinel), NREN (GEANT / RENATER / RESTENA), federation (eduGAIN / eduroam / InCommon) or sector body (REN-ISAC / EDUCAUSE / Jisc / JRES) that carries such a label or \\loc routing is correct-by-decision.",
+      "doNotRaise": "Do not flag a named jurisdiction / vendor / institution as a locality leak when it is explicitly labelled as an example or routed through \\loc{}. Only a BARE, unlabelled, unrouted local anchor presented as universal remains a defect.",
+      "appliesTo": ["APP", "XCOH", "DEF"]
+    },
+    {
+      "id": "DISPO-PRECEDENT-PANEL",
+      "kind": "principle",
+      "title": "The institutional reference panel is scoped labelled evidence",
+      "statement": "The reference panel of named institutions (e.g. MIT, Stanford, Cambridge, ETH Zurich, CERN, Michigan, EPFL) and its characterisation of them as world-leading / leading research universities is deliberately scoped labelled EVIDENCE, governed by the panel's stated selection criteria (principles vs. implementations, size-comparability). It is cited as precedent, not asserted as the universal norm for every adopter.",
+      "doNotRaise": "Do not flag the reference panel's named institutions, or its 'world-leading / leading research universities' characterisation within the panel section, as elite-as-norm overreach. This disposition does NOT license unscoped 'world-leading' framing elsewhere in the bodies.",
+      "appliesTo": ["SCI", "APP", "DEF"]
+    },
+    {
+      "id": "DISPO-LIBERTY-FIRST",
+      "kind": "principle",
+      "title": "Liberty-first rule: constraint is never preferred to freedom by default",
+      "statement": "The suite's standing posture is that freedom is the default and constraint the justified exception, escalating through three levels: (i) design — restrictions are proportionate, documented and minimal, with the burden of proof on the restriction; (ii) contracts — an engagement (vendor agreement, insurance policy) that would limit an academic freedom is first renegotiated to maximise freedom in the academic context, the governance bodies remaining free to knowingly pay the price of freedom (residual-risk retention, alternative counterparty, sector mutualisation) rather than surrender the mission; (iii) regulation — where the constraint comes from law or regulation, the institution engages collectively, with the national and international university community, in influence and reform (the main report's Position C) so that imposed regimes, insurance terms included, do not foreclose academic digital freedoms.",
+      "doNotRaise": "Do not flag renegotiation-first or influence-and-reform postures as non-compliance, naivety or scope creep, and do not propose compliance-by-default fixes that would surrender an academic freedom a renegotiation or reform path could preserve. Conversely, a passage that resolves a freedom-vs-constraint tension by default compliance WITHOUT this ladder is a legitimate DEF finding.",
+      "appliesTo": ["DEF", "LEG", "APP", "SCI"]
+    }
+  ]
+}

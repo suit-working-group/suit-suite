@@ -1,0 +1,269 @@
+% ============================================================================
+% Chapter 24 --- Wave 6: Endpoint and posture
+% ----------------------------------------------------------------------------
+% Purpose : extend TAC enforcement to managed and BYOD endpoints. Must
+%           surface the OSS gap on iOS/Android (D11.3) as a known
+%           limitation.
+% Page target: ~5 pages.
+% Dependencies: Waves 1, 4 required; Waves 2, 5 recommended (D17.3);
+%               reference layer Ch. 11 (unified posture schema D11.6,
+%               BYOD via attachment D11.7).
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D24.1 posture signals advisory before enforcing (parallel to Wave 4 shadow)
+%   D24.2 unified posture schema is the wave's central artefact
+%   D24.3 OSS gap on iOS/Android surfaces here as explicit limitation
+%   D24.4 BYOD posture remains network-side per D11.7
+%   D24.5 exit criteria reference Endpoint conformance subset (D16.5)
+% ============================================================================
+
+\chapter{Wave~6 --- Endpoint and posture}
+\label{ch:wave6-endpoint}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~6 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Required pre-requisites are
+Wave~1 (identity provider emitting the institutional schema) and
+Wave~4 (policy plane consuming attribute and posture signals);
+Waves~2 (observability) and 5 (pilot) strengthen the wave when
+present. It instantiates the endpoint contract of
+\trchap{ch:endpoint}{}, including the unified posture schema of
+D11.6 and the boundary with network attachment of D11.7. Closure
+is gated by the three Endpoint tests of \trchap{ch:conformance}{}.
+\end{caveatbox}
+
+Wave~6 brings the endpoint estate into the architecture's
+authorisation surface: posture claims produced by managed devices
+become an input to the policy decisions of \trchap{ch:policy}{},
+unmanaged or BYOD devices are governed at the network attachment
+layer of \trchap{ch:network}{}, and the institutional decommissioning
+procedures are exercised against the new pipeline. The wave is also
+the place where the architecture's most candid acknowledgement ---
+the open-source gap on iOS and Android at scale (D11.3) ---
+becomes operationally consequential.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w6-goal}
+
+The goal of Wave~6 is to deploy a unified posture schema across
+the endpoint operating systems in production, to route the
+resulting posture data into the policy plane established in Wave~4,
+and to integrate the institutional decommissioning procedures with
+the canonical event schema of \trchap{ch:observability}{}. The wave
+does not require a single MDM product across all OSes; it requires
+that the posture data produced by whatever products the institution
+operates be normalised at the wave's boundary.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w6-prereq}
+
+Beyond Waves~1 and 4, four operational conditions strengthen
+Wave~6:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the endpoint estate is inventoried by operating system,
+    by management state (managed, unmanaged, BYOD), and by user
+    population (staff, student, contractor, visiting researcher);
+  \item the existing endpoint-management products are documented
+    against their licence terms and renewal trajectories;
+  \item the boundary with the network layer's BYOD attachment
+    policy is articulated, since posture verification of BYOD
+    endpoints relies on network-side observation rather than on
+    agent-based collection (D11.7);
+  \item the unified posture schema (D11.6) is drafted and reviewed
+    against the policy authoring cadence of Wave~4.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w6-coexistence}
+
+Wave~6 introduces posture signals into the policy plane in
+\emph{advisory} mode before any enforcement decision depends on
+them. The pattern parallels the shadow mode of Wave~4 but operates
+on signal availability rather than on decision evaluation: the
+posture claims are produced and routed to the policy layer, the
+policy decisions are evaluated as if posture were enforced, but
+no access is denied on posture grounds during the advisory
+period.
+
+\paragraph{Per-population transition.} Endpoint populations are
+typically advanced through advisory-to-enforcing in cohorts:
+managed staff devices first (operationally controlled), then
+managed student devices, then BYOD with network-side enforcement.
+Each cohort's transition is per-policy: a posture rule may be
+enforcing for staff devices while still advisory for student
+devices for an extended period.
+
+\paragraph{Multi-product reconciliation.} For institutions with a
+mixed MDM estate (a dedicated management product for the Apple
+platforms, a separate suite for Windows and Android, and
+configuration-management-plus-osquery tooling for Linux), the
+principal engineering effort
+of Wave~6 is the reconciliation of the products' native posture
+formats into the unified schema. Each product's posture data is
+mapped, the mapping is exercised in shadow, and the policy plane
+ultimately consumes only the unified schema --- never the
+product-specific signals.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w6-greenfield}
+
+For institutions in a greenfield position, Wave~6 deploys the
+endpoint products and the unified schema together: there is no
+incumbent MDM logic to reconcile, and the posture-to-policy
+integration is built from the start. Indicative duration is six to
+nine months for an institution of moderate scale.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w6-brownfield-ms}
+
+For institutions whose endpoint management is dominated by a
+single proprietary management suite, Wave~6 is the work of routing
+that suite's compliance signals into the unified schema and of
+reconciling its native authorisation with the policy plane.
+
+\paragraph{Pattern.} The incumbent suite's compliance policies
+remain in place for device-level enforcement (encryption, screen
+lock, OS version, patch SLAs); their compliance signals are
+exported through OpenTelemetry collectors deployed during Wave~2
+and reach the policy plane in the unified schema. The conditional-access
+expressions of the institution's incumbent identity suite that
+depend on device compliance are exercised in shadow mode through
+the equivalent OPA policies authored in Wave~4. Linux endpoints
+--- typically present in environments characteristic of the
+institution's research-computing profile even where a single
+proprietary suite dominates --- are managed through
+configuration-management and osquery tooling, with their posture
+also normalised to the unified schema.
+
+\paragraph{The iOS gap.} For institutions with a substantial iOS
+estate, a proprietary suite's iOS coverage is the working choice;
+there is no credible open-source alternative at scale at the time
+of writing.
+This is a known limitation of the architecture (D11.3 in
+\trchap{ch:endpoint}{}). The
+sovereignty consequence --- a Partial score on the technical and
+institutional dimensions for the iOS portion of the estate ---
+should be acknowledged in the wave-closure report rather than
+elided.
+
+\paragraph{Indicative duration.} Twelve to eighteen months,
+dominated by per-population cohort transition.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w6-brownfield-hybrid}
+
+For institutions with a multi-OS estate combining Apple, Windows,
+Linux and mobile platforms across organisational-unit boundaries, Wave~6 is
+principally the work of \emph{normalisation}: producing a common
+posture schema across products that were chosen at different times
+and managed by different teams.
+
+\paragraph{Pattern.} Each existing endpoint-management product
+(a dedicated suite for macOS and iOS where present, a separate
+suite for Windows and Android, configuration-management-plus-osquery
+tooling for Linux, possibly a further unified-endpoint product in
+some segments) continues to operate in its own domain. A
+collector layer translates each product's posture format into the
+unified schema; the policy plane consumes only the unified schema.
+The institutional posture schema becomes the authoritative artefact;
+the products become substitutable consumers of the schema.
+
+\paragraph{What changes in Wave~6.} The posture data flow becomes
+uniform across the institution; the policy plane no longer
+branches on operating system for routine decisions (D11.6); the
+decommissioning procedures become testable end-to-end against the
+canonical event schema. The product mix itself is not changed by
+this wave.
+
+\paragraph{Indicative duration.} Twelve to eighteen months, with
+the variability driven by the heterogeneity of the existing
+product mix.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w6-reversibility}
+
+Wave~6 is reversible at the per-policy and per-population level
+throughout the advisory-to-enforcing transition. Beyond that
+transition, reversal is operationally possible but requires the
+incumbent enforcement logic to be re-instated.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item The advisory / enforcing toggle is per posture rule and per
+    population; reversal of a posture rule is the deployment of a
+    new policy bundle, not the redeployment of the endpoint
+    products.
+  \item Per-population rollback: if a population's transition to
+    posture-enforced authorisation produces unworkable behaviour,
+    that population is returned to advisory mode while the
+    discrepancy is diagnosed.
+  \item The unified posture schema can be revised; a schema change
+    is treated as a governance event rather than an operational
+    one (D12.2).
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w6-exit}
+
+Wave~6 closes when the three Endpoint tests of the conformance
+suite of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on
+the unified posture pipeline, when the agreed populations are in
+posture-enforced authorisation, and when the BYOD attachment
+boundary with \trchap{ch:network}{} is verified.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Posture data from each managed OS arrives in the canonical
+    schema; decommissioning of a representative endpoint executes
+    end-to-end; MDM configuration profiles export to a documented
+    format that an alternative MDM can consume on a representative
+    subset. (Endpoint conformance subset.)
+  \item Population coverage: the institutionally agreed populations
+    are operating under posture-enforced authorisation; the
+    remainder is in a documented schedule or exception register.
+  \item BYOD boundary: the network-side BYOD posture verification
+    of \trchap{ch:network}{} is consistent with the institution's
+    BYOD acceptable-use policy.
+\end{itemize}
+
+\begin{realworldbox}[Endpoint management at large institutions]
+\noindent Public documentation of endpoint architectures at
+large institutions is uneven. Patterns reported in \loc{nren-name}'s community fora and at sector
+conferences include mixed-OS estates combining a dedicated suite
+for Apple platforms, a separate suite for Windows and Android, and
+open tooling (configuration management, osquery, and macOS package
+managers) for Linux and macOS. Specific institutional
+configurations and the current
+state of any cited deployment should be confirmed against the
+institution's own published material before being cited as
+precedent.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w6-regulatory}
+
+\noindent Wave~6 brings managed endpoints under the same
+attestation discipline as the rest of the architecture. It
+contributes to \gls{gdpr}~Art.~32 (technical measures on the
+device that processes personal data) and operationalises the
+applicable national cybersecurity baseline regime's risk-management
+measures --- the national transposition of the NIS2 Directive where
+it applies --- specifically cyber-hygiene practices
+(NIS2~Art.~21(2)(g)), asset management (Art.~21(2)(i)) and,
+indirectly, multi-factor authentication (Art.~21(2)(j)) where the
+endpoint carries the authentication factors. The wave operationalises 27001~A.8.1
+(user endpoint devices), A.8.7 (protection against malware),
+A.8.9 (configuration management) and contributes to NIST CSF
+\textsf{PROTECT} (PR.PS --- platform security). Detailed mapping
+in \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.

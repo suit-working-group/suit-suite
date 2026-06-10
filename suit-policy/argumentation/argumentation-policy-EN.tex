@@ -1,0 +1,230 @@
+%============================================================================
+% ARGUMENTATION DOCUMENT (POLICY LAYER) — standalone build
+% Anticipatory Q&A defending the policy-layer proposals of the SUIT suite.
+%
+% Fully GENERIC: no adopting-institution specifics. The governance and policy
+% objections are retained and generalised so that ANY research-intensive
+% institution can reuse them. Institution-neutral evidence is drawn from the
+% shared bibliography (../../shared/suit-consolidated.bib) along the five-layer
+% methodology: legal > standards > sector > empirical > institutional.
+%
+% This file is self-contained (own preamble + body). It compiles standalone
+% via its own .latexmkrc and the suit-consolidated.bib symlink in this
+% directory. The body proper begins after \begin{document}; the suite
+% assembler (policy-EN.tex) may instead \input the body sections directly.
+%============================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+
+% --- Encoding and language ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% --- Page layout ---
+\usepackage[top=2.5cm,bottom=1.75cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Typography ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Graphics and colours ---
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{Slate}{RGB}{70,70,90}
+\definecolor{Crimson}{RGB}{220,20,60}
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+
+% --- Lists ---
+\usepackage{enumitem}
+
+% --- Symbols ---
+\usepackage{pifont}
+
+% --- Links ---
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,
+            urlcolor=BrickRed]{hyperref}
+\usepackage{xurl}
+
+% --- Bibliography: biblatex + biber ---
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{../../shared/suit-consolidated.bib}
+
+% --- Citation display modes (standard / annotated / full) ---
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% --- natbib compatibility ---
+\let\citep\parencite
+\let\citet\textcite
+
+% --- Glossary with tooltips ---
+\usepackage{gls-modes}
+\input{../../shared/glossary-defs}
+
+% === Localization (key/value layer 0: generic defaults) ===
+\usepackage{localization}
+\input{../../shared/localization-defaults}
+
+% --- Boxes ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% --- Epigraphs ---
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+
+% --- Logo ---
+\usepackage{graphicx}
+\usepackage{suit-logo}
+
+% --- Headers ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{University IT Infrastructure --- Questions and Answers}}
+\fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Semantic commands (mirror the suite) ---
+\providecommand{\keyword}[1]{\textbf{#1}}
+\providecommand{\institution}[1]{\textsc{#1}}
+\providecommand{\framework}[1]{\textsf{#1}}
+
+% --- Question / Answer / Clarification boxes (mirror the suite) ---
+\newtcolorbox{questionbox}[1][]{
+    colback=red!3!white,
+    colframe=red!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{answerbox}[1][]{
+    colback=OliveGreen!3!white,
+    colframe=OliveGreen!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{clarificationbox}[1][]{
+    colback=orange!3!white,
+    colframe=orange!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+% --- Section behaviour: new page per section ---
+\let\oldsection\section
+\renewcommand{\section}{\clearpage\oldsection}
+
+% --- Prevent vertical stretching ---
+\raggedbottom
+
+%============================================================================
+\begin{document}
+
+% --- Title block ---
+\begin{titlepage}
+\centering
+\vspace*{0.6cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
+
+{\Huge\bfseries Questions and\\[0.25cm] Evidence-Based Answers}
+
+\vspace{0.6cm}
+
+{\LARGE\itshape Anticipatory Argumentation for an Open, Secure\\and Mission-Aligned University Digital Infrastructure}
+
+\vspace{1cm}
+
+{\large --- Policy-Layer Argumentation Module ---}
+
+\vspace{0.5cm}
+
+\suitmetablock
+
+\vspace{0.8cm}
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white,
+    colframe=NavyBlue!85!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=12pt, right=12pt, top=8pt, bottom=8pt,
+    width=0.88\textwidth,
+    halign=center
+]
+{\large\bfseries A systematic, concession-then-rebuttal treatment of the\\[4pt]
+governance and policy objections most likely to be raised\\[4pt]
+against a segmented, federated, mission-aligned architecture}
+\end{tcolorbox}
+
+\vspace{0.6cm}
+
+{\small\noindent This module is institution-neutral. It defends the policy-layer
+proposals of the dossier --- segmentation, federated governance, research
+autonomy, BYOD and managed AI access, transferability, incident
+interpretation, regulatory reading, cost and feasibility, and methodology ---
+without reference to any particular adopting institution. Each answer is built
+on the five-layer evidence methodology: binding law, normative standards,
+sector consensus, empirical data, and institutional precedent.}\par
+
+\vfill
+
+\begin{minipage}{0.85\textwidth}
+\centering\small\itshape
+``Freedom in research and training is the fundamental principle of university
+life, and governments and universities, each as far as in them lies, must
+ensure respect for this fundamental requirement.''
+
+\upshape\smallskip
+--- \textit{Magna Charta Universitatum}, Bologna, 1988~\cite{magna-charta}
+\end{minipage}
+
+\vspace{1cm}
+
+\end{titlepage}
+
+\tableofcontents
+
+%============================================================================
+% READER'S GUIDE
+%============================================================================
+% --- Shared Q&A body (single source; also \input by the suite assembler policy-EN.tex). De-forked 2026-06-09 to remove the former duplicate. ---
+\input{argumentation-policy-body-EN}
+
+% ============================================================================
+\clearpage
+\printbibliography[heading=bibintoc,title={References}]
+
+\printabstractappendix
+
+\end{document}

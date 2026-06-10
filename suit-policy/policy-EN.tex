@@ -1,0 +1,657 @@
+% ============================================================================
+% BOOK: Infrastructure and Organisation of Information Systems
+%        for the adopting institution — Complete Dossier
+% Assembles: Companion + Main Report + Argumentation
+% ============================================================================
+\documentclass[11pt,a4paper,twoside]{book}
+
+% === Encoding and language ===
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% === Page layout ===
+\usepackage[top=2.5cm,bottom=1.75cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.0}
+
+% === Typography and fonts ===
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% === Graphics and colours ===
+\usepackage{graphicx}
+\usepackage{suit-logo}
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{Slate}{RGB}{70,70,90}
+\definecolor{Crimson}{RGB}{220,20,60}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,calc,backgrounds}
+
+% === Tables ===
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+
+% === Lists ===
+\usepackage{enumitem}
+
+% === Symbols (checkmarks, crosses) ===
+\usepackage{pifont}
+
+% === Code and verbatim ===
+\usepackage{listings}
+
+% === Links ===
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,
+            urlcolor=BrickRed,plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{bookmark}
+\bookmarksetup{numbered}
+\usepackage{xurl}  % better URL line-breaking in bibliography
+
+% === Fix bookmark level: \section is used directly under \part (no \chapter) ===
+\makeatletter
+\renewcommand{\toclevel@section}{1}
+\renewcommand{\toclevel@subsection}{2}
+\renewcommand{\toclevel@subsubsection}{3}
+\makeatother
+
+% --- Bibliography: biblatex + biber ---
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{../shared/suit-consolidated.bib}
+
+% --- Citation display mode ---
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% --- natbib compatibility ---
+\let\citep\parencite
+\let\citet\textcite
+
+% === Headers ===
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{University IT Infrastructure --- Complete Dossier}}
+\fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% === Miscellaneous ===
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% === Glossary with tooltips ===
+\usepackage{gls-modes}
+\input{../shared/glossary-defs}
+
+% === Localization (key/value layer 0: generic defaults) ===
+\usepackage{localization}
+\input{../shared/localization-defaults}
+
+% === Epigraphs ===
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+
+% === Watermark (temporarily disabled) ===
+%\usepackage[pages=all]{background}
+%\backgroundsetup{
+%  contents={\sffamily\bfseries CONFIDENTIAL},
+%  color=lightgray,
+%  scale=7,
+%  angle=45,
+%  opacity=0.22
+%}
+
+% ============================================================================
+% CUSTOM COMMANDS (superset from all 3 documents)
+% ============================================================================
+
+% --- From main & argumentation ---
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\institution}[1]{\textsc{#1}}
+\newcommand{\framework}[1]{\textsf{#1}}
+
+% --- From companion ---
+\newcommand{\mainref}[1]{%
+  \par\vspace{1pt}
+  {\footnotesize\color{gray}\itshape
+  $\triangleright$~Full analysis and references: #1
+  in this dossier.}\par\vspace{2pt}
+}
+
+% ============================================================================
+% CUSTOM TCOLORBOX ENVIRONMENTS (superset from all 3 documents)
+% ============================================================================
+
+% --- From companion ---
+\newtcolorbox{principlebox}[1][]{%
+  colback=NavyBlue!5!white,
+  colframe=NavyBlue!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{alertbox}[1][]{%
+  colback=BrickRed!5!white,
+  colframe=BrickRed!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{actionbox}[1][]{%
+  colback=OliveGreen!5!white,
+  colframe=OliveGreen!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+% --- From main ---
+\newtcolorbox{stakeholderbox}[2][]{
+    colback=#2!5!white,
+    colframe=#2!75!black,
+    fonttitle=\bfseries,
+    title=#1,
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt
+}
+
+% --- From argumentation (questions & answers) ---
+\newtcolorbox{questionbox}[1][]{
+    colback=red!3!white,
+    colframe=red!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{answerbox}[1][]{
+    colback=OliveGreen!3!white,
+    colframe=OliveGreen!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+\newtcolorbox{clarificationbox}[1][]{
+    colback=orange!3!white,
+    colframe=orange!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=4pt, right=4pt
+}
+
+% --- Required by the shared Regulatory Applicability annex ---
+\newtcolorbox{caveatbox}[1][]{%
+    colback=Slate!4!white,
+    colframe=Slate!60!black,
+    fonttitle=\bfseries,
+    title={#1},
+    breakable,
+    sharp corners=south,
+    boxrule=0.6pt,
+    left=8pt, right=8pt, top=6pt, bottom=6pt
+}
+
+% ============================================================================
+% SECTION NUMBERING: skip chapter level (we use \part > \section directly)
+% ============================================================================
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% ============================================================================
+% SECTION BEHAVIOUR: save original \section; clearpage toggled per part
+% ============================================================================
+\let\oldsection\section
+
+% === Prevent vertical stretching ===
+\raggedbottom
+
+% === Part title on right page, content starts immediately on next (left) page ===
+\makeatletter
+\renewcommand{\@endpart}{\vfil\newpage}
+\makeatother
+
+% ============================================================================
+\begin{document}
+
+% === Title page (suppress page anchors to avoid duplicate with mainmatter) ===
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
+
+{\Huge\bfseries The University Spirit\\[0.35cm]
+in the Digital Age}
+
+\vspace{0.6cm}
+
+{\LARGE\itshape For an Open, Secure and Mission-Aligned Digital Infrastructure}
+
+\vspace{1cm}
+
+{\large --- Complete Dossier ---}
+
+\vspace{0.5cm}
+
+\suitmetablock
+
+\vspace{0.5cm}
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white,
+    colframe=NavyBlue!85!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=12pt, right=12pt, top=8pt, bottom=8pt,
+    width=0.88\textwidth,
+    halign=center
+]
+{\large\bfseries A segmented architecture with flexible secure contexts\\[4pt]
+for a modern university --- where digital security\\[4pt]
+and academic missions reinforce each other}
+\end{tcolorbox}
+
+\vspace{0.3cm}
+{\small\noindent \textbf{Note on the process:}\\
+\textit{This document is an always living document.
+It is provided for constructive feedback and revision in order to improve its quality.
+The engineering of this document was partially supported by digital tools, some of which incorporate Artificial Intelligence features.}\\[3pt]
+\textcolor{Crimson}{\textit{This document contains a portion of imprecisions, missing content, errors or possibly hallucinations. We believe that a supportive and cooperative approach by the readers will make its content quality increase over time.}}}\par
+
+\vfill
+
+\begin{tcolorbox}[
+    colback=BrickRed!8!white,
+    colframe=BrickRed!75!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=12pt, right=12pt, top=8pt, bottom=8pt,
+    width=0.88\textwidth,
+    halign=center
+]
+{\normalsize\itshape A university is not a corporation: its governance, including digital,
+must optimise for freedom --- of ideas, activities and persons,\\physical and digital.}
+\end{tcolorbox}
+
+\vspace{0.4cm}
+
+\begin{minipage}{0.85\textwidth}
+\centering\small\itshape
+``Freedom in research and training is the fundamental principle of university life, and governments and universities, each as far as in them lies, must ensure respect for this fundamental requirement.''
+
+\upshape\smallskip
+--- \textit{Magna Charta Universitatum}, Bologna, 1988~\cite{magna-charta}
+\end{minipage}
+
+\vspace{2cm}
+
+\end{titlepage}
+
+% === Frontmatter: abstract then table of contents ===
+\frontmatter
+\hypersetup{pageanchor=true}
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\input{main/abstract-EN}
+\newpage
+
+\tableofcontents
+
+% ============================================================================
+\mainmatter
+
+% ============================================================================
+\part{Executive Summary for Governance}
+\label{part:companion}
+% ============================================================================
+
+% Companion: no section numbering, no clearpage (compact 2-3 page design)
+\setcounter{secnumdepth}{0}
+\renewcommand{\section}{\oldsection}
+\glsresetall
+
+\input{companion/companion-body-EN}
+
+% ============================================================================
+\part{Analysis, State of the Art and Propositions}
+\label{part:main}
+% ============================================================================
+
+% Main: numbered sections, clearpage before each (multi-page sections)
+\setcounter{secnumdepth}{3}
+\setcounter{section}{0}
+\renewcommand{\section}{\clearpage\oldsection}
+\glsresetall
+
+\input{main/main-body-EN}
+
+% ============================================================================
+\part{Questions and Evidence-Based Answers}
+\label{part:argumentation}
+% ============================================================================
+
+% Argumentation: same behaviour as main, with unique hyperref prefix
+\setcounter{section}{0}
+\renewcommand{\theHsection}{arg.\arabic{section}}
+\glsresetall
+
+\input{argumentation/argumentation-policy-body-EN}
+
+% ============================================================================
+\part{Regulatory Applicability}
+\label{part:reg-applicability}
+% ============================================================================
+
+% Shared annex (institution-neutral, jurisdiction-neutral). The same module is
+% referenced by the Technical Reference (SUITSOLUTION, Ch. on regulatory
+% mapping). It frames the size- and jurisdiction-invariant functional-obligation
+% spine (F1--F6), instantiates it per regime, and gives an adopter in an
+% unlisted regime a derivation method. The role-based regulatory phrasings used
+% throughout this dossier point here for the worked instantiation of "the
+% applicable regime".
+
+% Numbered sections, clearpage before each (consistent with the main part).
+\setcounter{section}{0}
+\renewcommand{\section}{\clearpage\oldsection}
+\renewcommand{\theHsection}{reg.\arabic{section}}
+\glsresetall
+
+\input{../shared/regulatory-applicability-EN}
+
+% ============================================================================
+\part{Pointer to the standalone Technical Reference}
+\label{annex:tech-ref-pointer}
+% ============================================================================
+
+% This part replaces the previously reproduced synthesis chapter with a
+% lighter pointer to the standalone Technical Reference. The synthesis
+% chapter remains the opening chapter of the standalone document; readers
+% of the present dossier are oriented here through (i) a short
+% introductory paragraph, (ii) a one-page capsule of the three
+% foundational ideas of the Technical Reference, and (iii) the
+% annotated table of contents of the Technical Reference.
+
+\setcounter{section}{0}
+\renewcommand{\section}{\oldsection}
+\glsresetall
+
+\begin{tcolorbox}[
+    colback=Slate!4!white,
+    colframe=Slate!60!black,
+    boxrule=0.6pt,
+    sharp corners=south,
+    left=8pt, right=8pt, top=6pt, bottom=6pt,
+    title={\textbf{About this part}}
+]
+\itshape
+\noindent
+The architectural and migration content sketched throughout the
+present dossier is developed in depth in a standalone document:
+\emph{Sustainable University IT --- A Technical Reference for
+Architecture and Migration}~\cite{ng-tech-ref-2026}. This part
+summarises the three foundational ideas of that document and
+reproduces its annotated table of contents, so that readers of
+this volume can locate the technical depth they may need without
+leaving the dossier. It is not a substitute for the standalone
+document; readers requiring implementation-level detail should
+consult the Technical Reference directly.
+\end{tcolorbox}
+
+\medskip
+
+%-----------------------------------------------------------------------------
+\section*{The three foundational ideas of the Technical Reference}
+\addcontentsline{toc}{section}{The three foundational ideas of the Technical Reference}
+%-----------------------------------------------------------------------------
+
+\subsection*{1. The sovereignty grid}
+
+The Technical Reference's normative pivot is a five-dimension grid
+that operationalises sovereignty in university \gls{it}. The five
+dimensions are \keyword{Data sovereignty} (where data is stored,
+under which jurisdiction, accessible to which actors),
+\keyword{Technical sovereignty} (the capacity to inspect, modify,
+and replace components), \keyword{Financial sovereignty}
+(predictable cost without captive escalation),
+\keyword{Operational sovereignty} (skills available locally or
+through trusted partners), and \keyword{Institutional sovereignty}
+(decision authority retained over architectural choices). Each
+dimension is independently scored on a four-point scale (Absent,
+Partial, Established, Robust); no aggregation is permitted; the
+grid is a deliberation instrument, not an audit scoring system.
+
+\subsection*{2. The reference architecture on open foundations}
+
+The Technical Reference develops a vendor-neutral architecture
+organised in nine functional layers grouped in three planes: a
+\keyword{Subject and Trust plane} (Identity, Endpoint,
+Cryptographic services), an \keyword{Execution plane} (Network,
+Compute, Storage), and a \keyword{Control and Governance plane}
+(Policy, Observability, Orchestration). The architecture's
+normative content is the set of interface contracts (open
+standards) that connect the layers; products are illustrative,
+not prescriptive. A reference instantiation is given on open
+foundations (Keycloak, OPA, OpenStack, Kubernetes, Ceph, Vector,
+step-ca, Argo and others) to demonstrate realisability;
+proprietary alternatives that respect the contracts remain
+admissible.
+
+\subsection*{3. The migration playbook for mixed estates}
+
+The Technical Reference proposes a wave-based migration playbook
+that takes any institution from its current brownfield position
+toward the target architecture. Ten waves (Wave~0 to Wave~9)
+unfold under a documented dependency graph. Each wave declares
+its goal, pre-requisites, coexistence pattern, three principal
+trajectories (greenfield, brownfield single-suite-centric, brownfield
+hybrid), reversibility criteria, and exit criteria gated by a
+structured conformance suite. Three indicative pace options
+(5-, 7-, or 10-year horizons) allow the playbook to be adapted to
+the institution's strategic context. Reversibility is
+non-negotiable: every wave is reversible at acceptable cost
+during a published window.
+
+%-----------------------------------------------------------------------------
+\section*{Annotated table of contents of the Technical Reference}
+\addcontentsline{toc}{section}{Annotated table of contents of the Technical Reference}
+%-----------------------------------------------------------------------------
+
+\noindent\emph{Citation:} the document's lead author, \emph{Sustainable University IT
+--- A Technical Reference for Architecture and Migration},
+the adopting institution and its computer science research unit, May 2026
+\cite{ng-tech-ref-2026}.
+
+\medskip
+
+\subsubsection*{Part I --- Foundations}
+
+\begin{description}[leftmargin=4em,style=nextline,nosep,font=\bfseries]
+  \item[Ch.~1\ \ Synthesis]
+    Self-contained executive overview of the entire Technical
+    Reference (approximately twelve pages); the opening chapter
+    of the standalone document.
+  \item[Ch.~2\ \ Conceptual frame]
+    The TAC concept, end-to-end activation sequence, endpoint
+    operating-system integration matrix, lifecycle state machine.
+  \item[Ch.~3\ \ The sovereignty grid]
+    Full development: five dimensions, twenty indicators, scoring
+    guidance, three worked examples on identity instantiations,
+    common misuses, governance use.
+  \item[Ch.~4\ \ Institutional self-assessment]
+    Self-administered diagnostic organised in five sections;
+    produces the trajectory selection input for
+    Part~III.
+\end{description}
+
+\subsubsection*{Part II --- Reference Architecture on Open Foundations}
+
+\begin{description}[leftmargin=4em,style=nextline,nosep,font=\bfseries]
+  \item[Ch.~5\ \ Architectural principles]
+    Interfaces over products; replaceability as first-class
+    property; standards landscape table; layer decomposition.
+  \item[Ch.~6\ \ Identity and subject trust]
+    Reference: Keycloak + \gls{scim} + eduGAIN. Alternatives: Microsoft
+    Entra~ID; Shibboleth + Keycloak hybrid.
+  \item[Ch.~7\ \ Policy decision and enforcement]
+    Reference: \gls{opa} with bundle distribution and decision log.
+    Alternatives: Cedar; native identity-provider authorisation.
+  \item[Ch.~8\ \ Network and segmentation]
+    Reference: VLAN/VRF + FreeRADIUS + Open vSwitch + Science
+    DMZ. Zone catalogue; discussion of SASE/ZTNA outside the
+    reference.
+  \item[Ch.~9\ \ Compute and workload context]
+    Reference: OpenStack + Kubernetes + Harbor + SLSA.
+    Alternatives: VMware-based; hybrid cloud burst.
+  \item[Ch.~10\ \ Storage and data classification]
+    Reference: Ceph + Vault + label-based access. Alternatives:
+    NetApp + KMIP HSM; hybrid with strict \gls{byok}.
+  \item[Ch.~11\ \ Endpoint management]
+    Reference (with explicit OSS gap on iOS/Android at scale):
+    Munki + osquery + Ansible + MicroMDM. Alternatives: Jamf +
+    Intune; Workspace ONE.
+  \item[Ch.~12\ \ Observability and audit]
+    Canonical TAC event schema (required and recommended fields). Reference:
+    Vector + Kafka + OpenSearch + Grafana Loki + Grafana. Alternatives: Splunk;
+    Microsoft Sentinel.
+  \item[Ch.~13\ \ Cryptographic services]
+    Reference: step-ca + Vault + SoftHSM or Nitrokey HSM.
+    Alternatives: Active Directory Certificate Services +
+    commercial HSM; external CA via ACME.
+  \item[Ch.~14\ \ Orchestration plane]
+    The architecture's principal acknowledged gap (no single
+    standard). Reference: Argo Workflows + Crossplane + GitOps.
+  \item[Ch.~15\ \ Sizing reference points]
+    Indicative orders of magnitude anchored on a large research-intensive
+    profile as one worked instantiation; FTE envelopes per layer; scaling
+    levers and breakpoints down to the minimal functional set.
+  \item[Ch.~16\ \ Conformance and replaceability tests]
+    Suite of conformance tests in four categories
+    (interface fidelity, data portability, exit rehearsal,
+    decision auditability).
+\end{description}
+
+\subsubsection*{Part III --- Migration Playbook for Mixed Estates}
+
+\begin{description}[leftmargin=4em,style=nextline,nosep,font=\bfseries]
+  \item[Ch.~17\ \ How to read this playbook]
+    Vocabulary; wave dependency map; trajectory selection matrix;
+    pace options; reversibility philosophy.
+  \item[Ch.~18\ \ Wave~0 --- Foundations]
+    Governance, baseline inventory, sovereignty grid adoption.
+    Entry point for every trajectory.
+  \item[Ch.~19\ \ Wave~1 --- Identity and federation]
+    Dual identity-provider coexistence; per-cohort migration.
+  \item[Ch.~20\ \ Wave~2 --- Observability baseline]
+    Purely additive; collectors deployed in shadow mode before
+    any analytical-store commitment.
+  \item[Ch.~21\ \ Wave~3 --- Network segmentation]
+    Cut-over per building, faculty or segment; Science DMZ
+    established early.
+  \item[Ch.~22\ \ Wave~4 --- Policy plane]
+    Shadow mode mandatory before enforcing; per-policy transition.
+  \item[Ch.~23\ \ Wave~5 --- TAC pilot]
+    Three illustrative scenarios: Researcher-LLM-API; Teaching
+    cyber-range; Compliance workspace.
+  \item[Ch.~24\ \ Wave~6 --- Endpoint and posture]
+    Posture signals advisory before enforcing; explicit OSS gap
+    surfaced for iOS/Android.
+  \item[Ch.~25\ \ Wave~7 --- TAC-aware audit and IR]
+    Correlation across layers; refreshed incident-response
+    runbooks.
+  \item[Ch.~26\ \ Wave~8 --- Workload classification and scale-out]
+    TAC scope extended to compute and storage workloads at scale.
+  \item[Ch.~27\ \ Wave~9 --- Lifecycle automation and maturity]
+    Self-service, GitOps, mature operational stage.
+  \item[Ch.~28\ \ Cross-cutting concerns]
+    Change management, communication, training, risk register,
+    financial planning, procurement.
+  \item[Ch.~29\ \ Reversibility playbook]
+    Per-wave rollback procedures; data preservation;
+    communication during rollback.
+  \item[Ch.~30\ \ Coexistence patterns library]
+    Incumbent enterprise directory~$\leftrightarrow$~institutional
+    IdP; incumbent endpoint-management
+    suite~$\leftrightarrow$~declarative configuration;
+    per-volume-priced commercial SIEM~$\leftrightarrow$~open-source
+    store; incumbent commercial hypervisor~$\leftrightarrow$~open
+    virtualisation substrate; enterprise storage
+    array~$\leftrightarrow$~open-source distributed storage;
+    eduroam~$\leftrightarrow$~TAC-aware Wi-Fi.
+\end{description}
+
+\subsubsection*{Part IV --- References and Operational Material}
+
+\begin{description}[leftmargin=4em,style=nextline,nosep,font=\bfseries]
+  \item[Ch.~31\ \ Institutional precedents]
+    Public-documentation review of university and
+    research-organisation IT architectures by precedent class
+    (European, North American, Asia-Pacific and Latin American
+    institutions; regional research networks and consortium
+    initiatives), closing on the documented gaps.
+  \item[Ch.~32\ \ External references and standards]
+    NIST publications, ISO/IEC, EU regulatory framework, sector
+    publications, open-source specifications.
+  \item[Ch.~33\ \ Regulatory mapping]
+    Interpretive mapping of the architecture contracts and migration
+    waves to the regulations most likely to apply to a
+    research-intensive university, organised by regulation and by
+    article or control as one worked EU instantiation (GDPR, NIS2, EU
+    AI Act, the applicable cross-border data-transfer regime, NIST
+    CSF~2.0, eIDAS~2, ISO/IEC 27001/27002/27005, COBIT~2019). The
+    chapter folds into the shared Regulatory Applicability annex
+    (Part~\ref{part:reg-applicability} of this dossier), whose
+    size- and jurisdiction-invariant obligation~$\rightarrow$~mechanism
+    matrix is the shared anchor for the Policy~$\leftrightarrow$~Solution
+    traceability.
+\end{description}
+
+% ============================================================================
+\backmatter
+% ============================================================================
+
+\input{../shared/glossary-EN}
+
+\printbibliography
+
+\printabstractappendix
+
+\end{document}

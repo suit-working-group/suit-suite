@@ -1,0 +1,308 @@
+% ============================================================================
+% TECHNICAL REFERENCE (standalone)
+% Sustainable University IT — A Technical Reference for Architecture and Migration
+% Companion to: "Infrastructure and Organisation of Information Systems
+%                for Universities — Analysis, State of the Art and Propositions"
+% May 2026
+% ============================================================================
+\documentclass[11pt,a4paper,twoside]{book}
+
+% === Encoding and language ===
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% === Page layout ===
+\usepackage[top=2.5cm,bottom=1.75cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.0}
+
+% === Typography and fonts ===
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% === Graphics and colours ===
+\usepackage{graphicx}
+\usepackage{suit-logo}
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{Slate}{RGB}{70,70,90}
+\definecolor{Crimson}{RGB}{220,20,60}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,calc,backgrounds}
+
+% === Tables ===
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{array}
+
+% === Lists ===
+\usepackage{enumitem}
+
+% === Symbols (checkmarks, crosses) ===
+\usepackage{pifont}
+
+% === Code and verbatim ===
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{Slate!40},
+  showstringspaces=false
+}
+
+% === Links ===
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,
+            urlcolor=BrickRed,plainpages=false,pdfpagelabels]{hyperref}
+\usepackage{bookmark}
+\bookmarksetup{numbered}
+\usepackage{xurl}
+
+% === Bibliography ===
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{../shared/suit-consolidated.bib}
+
+% === Citation display mode ===
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% === natbib compatibility ===
+\let\citep\parencite
+\let\citet\textcite
+
+% === Headers ===
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{Sustainable University IT --- Technical Reference}}
+\fancyhead[LO]{\textit{\leftmark}}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% === Miscellaneous ===
+\usepackage{csquotes}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% === Glossary with tooltips ===
+\usepackage{gls-modes}
+\input{../shared/glossary-defs}
+
+% === Localization (key/value layer 0: generic defaults) ===
+\usepackage{localization}
+\input{../shared/localization-defaults}
+
+% === Epigraphs ===
+\usepackage{epigraph}
+\setlength{\epigraphwidth}{0.8\textwidth}
+
+% ============================================================================
+% CUSTOM COMMANDS (aligned with the rest of the suite)
+% ============================================================================
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\institution}[1]{\textsc{#1}}
+\newcommand{\framework}[1]{\textsf{#1}}
+
+% Cross-document phrasing helper: "see Chapter X of the Technical Reference"
+% Used in the synthesis chapter so that references are unambiguous when the
+% chapter is read either standalone or embedded as the book's technical annex.
+\newcommand{\trchap}[2]{%
+  Chapter~\ref{#1} of the Technical Reference%
+  \ifx\\#2\\\else\space(\emph{#2})\fi%
+}
+
+% ============================================================================
+% TCOLORBOX ENVIRONMENTS (SUITSOLUTION specific)
+% ============================================================================
+
+\newtcolorbox{contractbox}[1][]{%
+  colback=NavyBlue!4!white,
+  colframe=NavyBlue!70!black,
+  fonttitle=\bfseries,
+  title={Interface contract --- #1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{instantiationbox}[1][]{%
+  colback=OliveGreen!4!white,
+  colframe=OliveGreen!70!black,
+  fonttitle=\bfseries,
+  title={Reference instantiation --- #1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{alternativebox}[1][]{%
+  colback=Slate!4!white,
+  colframe=Slate!70!black,
+  fonttitle=\bfseries,
+  title={Alternative --- #1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{pitfallbox}[1][]{%
+  colback=BrickRed!4!white,
+  colframe=BrickRed!70!black,
+  fonttitle=\bfseries,
+  title={Common pitfall --- #1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{realworldbox}[1][]{%
+  colback=Plum!4!white,
+  colframe=Plum!70!black,
+  fonttitle=\bfseries,
+  title={Real-world reference --- #1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+\newtcolorbox{caveatbox}[1][]{%
+  colback=Slate!4!white,
+  colframe=Slate!60!black,
+  fonttitle=\bfseries,
+  title={#1},
+  breakable,
+  sharp corners=south,
+  boxrule=0.6pt,
+  left=8pt, right=8pt, top=6pt, bottom=6pt
+}
+
+% === Prevent vertical stretching ===
+\raggedbottom
+
+% ============================================================================
+\begin{document}
+
+% === Title page ===
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+{\suittitlelogo}
+
+\vspace{0.8cm}
+
+{\Huge\bfseries Sustainable University IT}
+
+\vspace{0.5cm}
+{\LARGE\itshape A Technical Reference\\for Architecture and Migration}
+
+\vspace{1.2cm}
+{\large Reference architecture on open foundations,\\sovereignty grid, and a brownfield migration playbook}
+
+\vspace{2cm}
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white,
+    colframe=NavyBlue!85!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=12pt, right=12pt, top=8pt, bottom=8pt,
+    width=0.88\textwidth,
+    halign=center
+]
+{\large\bfseries Companion to the report\\
+``Infrastructure and Organisation of Information Systems\\
+for Universities --- Analysis, State of the Art and Propositions''}
+\end{tcolorbox}
+
+\vspace{1cm}
+\suitmetablock
+
+\vspace{0.9cm}
+
+\begin{minipage}{0.85\textwidth}
+\centering
+{\large\bfseries SUIT}\\[3pt]
+{\normalsize\itshape International Working Group\\on Sustainable University IT in the AI Era}\\[4pt]
+{\small\itshape (in formation)}\\[10pt]
+{\small \textbf{Nicolas Guelfi} --- Chairman of the SUIT Working Group;\\
+creator of the first version of the suite.\loc{author-affiliation}}
+\end{minipage}
+
+\vfill
+
+\begin{minipage}{0.85\textwidth}
+\centering\small\itshape
+This document is intended for chief technology officers, information-security
+officers, network and systems engineers, and the governance bodies that
+mandate them. It complements the main report with an architecture reference
+and a migration playbook designed to be applicable across institutions and
+jurisdictions.
+\end{minipage}
+
+\vspace{0.6cm}
+
+\begin{minipage}{0.85\textwidth}
+\small\noindent\textbf{Note on the process:}\\
+\textit{This document is an always living document.
+It is provided for constructive feedback and revision in order to improve
+its quality. The engineering of this document was partially supported by
+digital tools, some of which incorporate Artificial Intelligence features.}\\[3pt]
+\textcolor{Crimson}{\textit{This document contains a portion of imprecisions,
+missing content, errors or possibly hallucinations. We believe that a
+supportive and cooperative approach by the readers will make its content
+quality increase over time.}}
+\end{minipage}
+
+\vspace{1.5cm}
+\end{titlepage}
+
+% === Frontmatter ===
+\frontmatter
+\hypersetup{pageanchor=true}
+
+\input{foreword-EN}
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\input{abstract-EN}
+\newpage
+
+\input{reading-guide-EN}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+% ============================================================================
+\mainmatter
+
+\input{solution-body-EN}
+
+% ============================================================================
+\backmatter
+% ============================================================================
+
+\input{../shared/glossary-EN}
+
+\printbibliography
+
+\end{document}

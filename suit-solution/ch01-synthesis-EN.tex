@@ -1,0 +1,590 @@
+% ============================================================================
+% Chapter 1 --- Synthesis (modular file)
+% ----------------------------------------------------------------------------
+% Purpose : a self-contained ~12-page synthesis of the entire Technical
+%           Reference. Read on its own when this chapter is included as the
+%           book's Part IV; serves as executive overview when read at the
+%           head of the standalone Technical Reference.
+% Audience: CTO, RSSI, governance, anyone who needs the essentials in 30 min.
+% Page target: ~12 pages.
+% Cross-refs use the \trchap macro so phrasing stays unambiguous in both
+% inclusion contexts (standalone and book).
+% ============================================================================
+
+\chapter{Synthesis}
+\label{ch:synthesis}
+
+This chapter is a self-contained executive overview of the entire
+Technical Reference. It develops, at the level of essential
+content rather than implementation detail, the three structural
+contributions of the document: the sovereignty grid, the
+reference architecture on open foundations, and the wave-based
+migration playbook. It also provides a one-minute
+self-assessment, an annotated set of institutional precedents,
+and a reading map for the remaining thirty-two chapters. A
+reader who completes this chapter alone should be able to decide
+which subsequent chapters are most relevant to their role.
+
+%-----------------------------------------------------------------------------
+\section{Purpose and audience}
+\label{sec:synth-purpose}
+
+The Technical Reference addresses chief technology officers,
+information-security officers, network and platform engineers,
+and the institutional governance bodies that mandate them. It
+complements the policy-and-analysis main report with the
+material a practitioner would need to operationalise the
+architecture: explicit interface contracts, a vendor-neutral
+reference instantiation on open foundations, alternatives that
+admit proprietary components within the same contracts, and a
+migration playbook applicable across institutions and
+jurisdictions.
+
+\paragraph{Reading time and dependence.} The present chapter is
+designed to be read in approximately thirty minutes by a reader
+familiar with university IT. It depends on no prior knowledge
+of the Reference's other chapters; cross-references throughout
+point the reader to the development that they may wish to
+consult next.
+
+\paragraph{Where this chapter sits in the suite.} The Technical
+Reference is one of the four documents of the suite on university
+IT infrastructure: the policy dossier --- a policy-and-analysis
+main report with its executive-summary companion and its
+question-and-answer part --- and the present
+practitioner-oriented Technical Reference, with its operational
+summary and its own question-and-answer module. The dossier does
+not reproduce this chapter: it carries a pointer-and-capsule part
+orienting its readers to the standalone Reference, of which this
+chapter is the opening chapter.
+
+%-----------------------------------------------------------------------------
+\section{The TAC concept at a glance}
+\label{sec:synth-tac}
+
+A \keyword{Trusted Activity Context} (\gls{tac}) is a coherent,
+validated environment that assembles the data, tools, services,
+and access rights required for a specific activity --- a research
+project, a digital examination, an administrative process, a
+teaching session --- under documented institutional governance.
+Within a TAC, the identity of subjects, the classification of
+resources, the network attachment, the policy decisions, the
+cryptographic posture, and the audit trail are aligned with the
+activity's objectives and risk level, and are operationally
+bounded by the TAC's declared scope.
+
+\paragraph{Why it matters.} Existing access-control and isolation
+frameworks are typically organised around either subjects (who a
+user is) or resources (what a service contains). A TAC is
+organised around \emph{what is being done}: the same subject,
+holding the same attributes, accessing the same resource, may
+operate in a different TAC depending on the activity engaged.
+This re-frames several recurring difficulties in academic IT ---
+the researcher who is also a teacher, the visiting collaborator
+who is also a host, the administrative process that touches
+research data --- as switches between TACs rather than as
+exceptions to a single role-based model.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\footnotesize},
+    role/.style = {rectangle, rounded corners=2pt,
+                   draw=NavyBlue!70!black, fill=NavyBlue!5,
+                   minimum width=18mm, minimum height=8mm,
+                   line width=0.4pt, align=center},
+    arrow/.style = {-{Stealth[length=1.8mm]}, draw=NavyBlue!50!black,
+                    line width=0.4pt}
+]
+\node[role] (subject) at (0,0)   {Subject};
+\node[role] (id)      at (2.2,0) {Identity};
+\node[role] (po)      at (4.4,0) {Policy};
+\node[role] (nw)      at (6.6,0) {Network};
+\node[role] (co)      at (8.8,0) {Compute};
+\node[role] (au)      at (11.0,0) {Audit};
+
+\draw[arrow] (subject) -- (id);
+\draw[arrow] (id) -- (po);
+\draw[arrow] (po) -- (nw);
+\draw[arrow] (nw) -- (co);
+\draw[arrow] (co) -- (au);
+
+% Correlation_id thread
+\node[font=\scriptsize, anchor=west] at (-0.5,-1.4) {%
+  TAC \texttt{correlation\_id} propagated across all steps:};
+\draw[-, draw=Crimson!70!black, line width=1pt, dashed]
+  (-0.5,-1.7) -- (12.0,-1.7);
+\foreach \x in {0,2.2,4.4,6.6,8.8,11.0} {
+  \draw[draw=Crimson!70!black, line width=0.5pt] (\x,-0.5) -- (\x,-1.7);
+}
+\end{tikzpicture}
+\caption{TAC activation sequence (synthesis view): the activation
+chain crosses six functional roles, with the
+\texttt{correlation\_id} threading every step for cross-layer
+audit reconstruction. Full eleven-step development in
+\trchap{ch:conceptual-frame}{} (\S\ref{sec:cf-activation-sequence}).}
+\label{fig:synth-tac-sequence}
+\end{figure}
+
+\paragraph{Pointer.} The full conceptual development of TAC ---
+formal definition, principles, comparison with related
+frameworks, lifecycle state machine --- is in
+\trchap{ch:conceptual-frame}{}.
+
+%-----------------------------------------------------------------------------
+\section{The sovereignty grid in one table}
+\label{sec:synth-sovereignty}
+
+Sovereignty in university IT is rarely contested in principle and
+rarely operationalised in practice. The grid that the Technical
+Reference proposes is the instrument that bridges the two: a
+structured way of asking, for any candidate component of the
+digital infrastructure, whether the institution retains the
+capacities --- legal, technical, financial, operational, and
+institutional --- that allow it to remain the author of its own
+decisions.
+
+\paragraph{Five dimensions, each scored independently.} The grid
+is structurally non-aggregating: each dimension is reported on
+its own four-point scale (Absent / Partial / Established /
+Robust); no single sovereignty score is produced. A single
+critical gap on a dimension defines the institution's exposure on
+that dimension regardless of the other dimensions' strength.
+
+\begin{table}[H]
+\centering\small
+\caption{The five dimensions of the sovereignty grid (synthesis;
+full version with twenty indicators in
+\trchap{ch:sovereignty-grid}{}).}
+\label{tab:synth-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.4\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.6\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Question (verifiable capacity) \\
+\midrule
+Data
+  & Where is the data stored, under which jurisdiction, accessible
+    to which actors --- including state actors? \\
+\addlinespace
+Technical
+  & Can the institution inspect, modify, repair, and substitute
+    the components of its infrastructure? \\
+\addlinespace
+Financial
+  & Is the multi-year operating cost predictable, and is the
+    institution exposed to captive escalation? \\
+\addlinespace
+Operational
+  & Are the skills required to operate the infrastructure
+    available locally or through trusted partners (the national
+    research and education network, peer institutions)? \\
+\addlinespace
+Institutional
+  & Can the institution decline a supplier roadmap change without
+    contractual penalty, and retain authority over the decisions
+    that matter? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Use as a governance instrument.} The grid feeds four
+governance practices that are frequently
+conducted in mutual ignorance: procurement (RFP language,
+contractual exit assistance, gating thresholds per workload
+class); internal audit (annual review of the institution's
+sovereignty profile per component); peer-institution benchmarking
+(comparison anchored by a shared grid); and public accountability
+(publication of the institution's sovereignty position by
+component).
+
+\paragraph{Pointer.} The grid is fully developed in
+\trchap{ch:sovereignty-grid}{} (twenty indicators, scoring
+guidance, three worked examples on identity instantiations,
+common misuses, governance use). The institutional self-assessment
+that operationalises the grid is in
+\trchap{ch:self-assessment}{}.
+
+%-----------------------------------------------------------------------------
+\section{Reference architecture in one table}
+\label{sec:synth-architecture}
+
+The Technical Reference proposes a vendor-neutral architecture
+organised in nine functional layers grouped in three planes ---
+Subject and Trust (Identity, Endpoint, Crypto), Execution
+(Network, Compute, Storage), and Control and Governance (Policy,
+Observability, Orchestration). The architecture's normative
+content is the set of interface contracts (open standards) that
+connect the layers; products are illustrative, not prescriptive.
+
+\paragraph{The reference instantiation on open foundations.} A
+reference instantiation is given on open-source components to
+demonstrate that the contracts are realisable without proprietary
+extensions in critical paths. Commercial alternatives that
+respect the contracts remain admissible; the choice between
+instantiations is informed by the sovereignty grid rather than
+imposed.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\footnotesize},
+    layer/.style = {rectangle, rounded corners=2pt, draw=NavyBlue!70!black,
+                    fill=NavyBlue!5, minimum width=22mm, minimum height=8mm,
+                    line width=0.4pt, align=center},
+    plane/.style = {rectangle, rounded corners=4pt, draw=Slate!50,
+                    line width=0.4pt, dashed, inner sep=4pt},
+    arrow/.style = {-{Stealth[length=1.8mm]}, draw=NavyBlue!50!black,
+                    line width=0.3pt}
+]
+% Subject and Trust plane (top-left)
+\node[layer] (id)   at ( 0.0, 0.0) {Identity};
+\node[layer] (ep)   at ( 2.6, 0.0) {Endpoint};
+\node[layer] (cr)   at ( 5.2, 0.0) {Crypto};
+\node[plane, fit=(id)(ep)(cr), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]above:Subject and Trust plane}] {};
+
+% Execution plane (middle)
+\node[layer] (nw)   at ( 0.0,-2.6) {Network};
+\node[layer] (co)   at ( 2.6,-2.6) {Compute};
+\node[layer] (st)   at ( 5.2,-2.6) {Storage};
+\node[plane, fit=(nw)(co)(st), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]left:Execution plane}] {};
+
+% Control and Governance plane (bottom)
+\node[layer] (po)   at ( 0.0,-5.2) {Policy};
+\node[layer] (ob)   at ( 2.6,-5.2) {Observ.};
+\node[layer] (or_)  at ( 5.2,-5.2) {Orchestr.};
+\node[plane, fit=(po)(ob)(or_), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]below:Control and Governance plane}] {};
+
+% Principal flows
+% Subject/Trust -> Control (Identity attributes feed Policy)
+\draw[arrow] (id.south) to[bend right=15] (po.north);
+\draw[arrow] (ep.south) to[bend right=10] (po.north);
+% Control -> Execution (Policy decisions enforced at Network/Compute/Storage)
+\draw[arrow] (po.east) -- (nw.south);
+\draw[arrow] (po.east) to[bend right=10] (co.south);
+\draw[arrow] (po.east) to[bend right=18] (st.south);
+% All -> Observability
+\draw[arrow] (nw.south east) to[bend right=8] (ob.north);
+\draw[arrow] (co.south) -- (ob.north);
+\draw[arrow] (st.south) to[bend left=8] (ob.north east);
+% Orchestration spans
+\draw[arrow] (or_.north) to[bend left=15] (st.south east);
+\end{tikzpicture}
+\caption{Layer-dependency map of the reference architecture: nine
+functional layers in three planes. Subject and Trust feeds the
+Control plane; the Control plane writes to the Execution plane;
+Observability collects events from every layer; Orchestration
+spans the Execution plane on activation events. Full development
+in \trchap{ch:architectural-principles}{} through
+\trchap{ch:orchestration}{}.}
+\label{fig:synth-arch-layers}
+\end{figure}
+
+\begin{table}[H]
+\centering\small
+\caption{Reference architecture summary: nine functional layers
+with their principal interface contract and reference open
+instantiation (synthesis; per-layer detail in
+Chapters~6--14 of the Technical Reference).}
+\label{tab:synth-architecture}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.45\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.95\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.60\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Layer & Interface contract (standards) & Open reference \\
+\midrule
+Identity        & OIDC, SAML2, SCIM 2.0, federation metadata  & Keycloak + SCIM + eduGAIN \\
+Policy          & OPA REST or Cedar evaluation API            & OPA + bundle server + decision log \\
+Network         & RADIUS, NETCONF/YANG, BGP/EVPN, IPFIX       & VLAN/VRF + FreeRADIUS + Open vSwitch + research-data path (Science DMZ / national research and education network circuit) \\
+Compute         & Kubernetes API, OpenStack API, OCI, SLSA    & OpenStack + Kubernetes + Harbor + SLSA \\
+Storage         & S3 API, KMIP, NFS v4.1                      & Ceph + Vault + label-based access \\
+Endpoint        & DDM/DEP, MS-MDM, declarative Linux config   & Munki + osquery + Ansible + MicroMDM (gap on iOS/Android at scale acknowledged) \\
+Observability   & OpenTelemetry, CloudEvents, syslog          & Vector + Kafka + OpenSearch + Grafana Loki + Grafana \\
+Crypto          & PKCS\#11, ACME, KMIP                        & step-ca + Vault + SoftHSM or Nitrokey HSM \\
+Orchestration   & Event-driven, idempotent, observable, reversible (no single standard) & Argo Workflows + Crossplane + GitOps \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Conformance and replaceability.} The architecture's
+contracts are operationalised by a conformance suite
+organised in four categories (interface
+fidelity, data portability, exit rehearsal, decision auditability).
+Every wave of the migration playbook closes by passing the
+conformance subset relevant to its scope. The suite is the
+mechanism that prevents the common failure mode of migration
+programmes: change of product disguised as architectural progress.
+Full description in \trchap{ch:conformance}{}.
+
+%-----------------------------------------------------------------------------
+\section{Migration playbook in one figure and one table}
+\label{sec:synth-migration}
+
+The Technical Reference proposes a wave-based migration playbook
+that takes any institution from its current brownfield position
+toward the target architecture. Ten waves (Wave~0 to Wave~9)
+unfold under a documented dependency graph. Each wave declares
+its goal, pre-requisites, coexistence pattern, three principal
+trajectories (greenfield, brownfield single-suite-centric --- a
+dominant proprietary productivity suite --- and brownfield hybrid),
+reversibility criteria,
+and exit criteria gated by the conformance suite.
+
+\paragraph{Three pace options.} The playbook admits three reference
+pace options --- 5-year compressed, 7-year balanced (recommended
+default), 10-year gradual. Pace and trajectory interact; revising
+the pace is a normal part of operating the playbook.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\footnotesize},
+    wave/.style = {circle, draw=NavyBlue!70!black, fill=NavyBlue!5,
+                   minimum size=11mm, line width=0.5pt, align=center,
+                   inner sep=1pt},
+    arrow/.style = {-{Stealth[length=1.8mm]}, draw=NavyBlue!50!black,
+                    line width=0.3pt}
+]
+% Layer 0: Foundations
+\node[wave] (w0) at (0,0) {0};
+% Layer 1: parallel waves 1, 2, 3
+\node[wave] (w1) at (-3.0,-1.6) {1};
+\node[wave] (w2) at (-1.0,-1.6) {2};
+\node[wave] (w3) at ( 1.0,-1.6) {3};
+% Layer 2: wave 4 (needs 1+2)
+\node[wave] (w4) at (-2.0,-3.2) {4};
+% Layer 3: wave 5 (pilot, needs 1+2+3+4) and waves 6, 7, 8
+\node[wave] (w5) at (-2.0,-4.8) {5};
+\node[wave] (w6) at ( 0.5,-3.2) {6};
+\node[wave] (w7) at ( 0.5,-4.8) {7};
+\node[wave] (w8) at ( 3.0,-3.2) {8};
+% Layer 4: wave 9 (closes on cumulative)
+\node[wave, fill=NavyBlue!15] (w9) at ( 3.0,-4.8) {9};
+
+% Wave 0 to 1, 2, 3
+\draw[arrow] (w0) -- (w1);
+\draw[arrow] (w0) -- (w2);
+\draw[arrow] (w0) -- (w3);
+% Wave 1+2 to 4
+\draw[arrow] (w1) -- (w4);
+\draw[arrow] (w2) -- (w4);
+% Wave 1+2+3+4 to 5
+\draw[arrow] (w1) to[bend right=15] (w5);
+\draw[arrow] (w2) to[bend right=10] (w5);
+\draw[arrow] (w3) -- (w5);
+\draw[arrow] (w4) -- (w5);
+% Wave 1+4 to 6
+\draw[arrow] (w1) to[bend left=10] (w6.west);
+\draw[arrow] (w4) -- (w6);
+% Wave 2+4+5 to 7
+\draw[arrow] (w2) to[bend left=10] (w7);
+\draw[arrow] (w4) to[bend right=10] (w7);
+\draw[arrow] (w5) -- (w7);
+% Wave 1+3+4 to 8
+\draw[arrow] (w1) to[bend left=20] (w8);
+\draw[arrow] (w3) to[bend left=10] (w8);
+\draw[arrow] (w4) to[bend left=15] (w8);
+% Wave 1-8 to 9
+\draw[arrow] (w6) -- (w9);
+\draw[arrow] (w7) -- (w9);
+\draw[arrow] (w8) -- (w9);
+
+% Labels
+\node[font=\scriptsize, anchor=west] at (4.0, 0) {Wave~0 — Foundations};
+\node[font=\scriptsize, anchor=west] at (4.0,-1.6) {1 — Identity\quad 2 — Observability\quad 3 — Network};
+\node[font=\scriptsize, anchor=west] at (4.0,-3.2) {4 — Policy\quad 6 — Endpoint\quad 8 — Workload};
+\node[font=\scriptsize, anchor=west] at (4.0,-4.8) {5 — Pilot\quad 7 — Audit/IR\quad 9 — Lifecycle};
+\end{tikzpicture}
+\caption{Wave-dependency map of the migration playbook. Wave~0
+is the entry point; Waves~1, 2 and 3 can proceed in parallel;
+later waves close on cumulative pre-requisites. Full development
+in \trchap{ch:playbook-reading}{}.}
+\label{fig:synth-wave-dag}
+\end{figure}
+
+\begin{table}[H]
+\centering\small
+\caption{Migration playbook summary: ten waves with goal and
+principal exit criterion (synthesis; per-wave detail in
+Chapters~18--27 of the Technical Reference).}
+\label{tab:synth-waves}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Wave & Goal & Principal exit criterion \\
+\midrule
+0 — Foundations            & Governance, baseline inventory, sovereignty grid adoption.
+                           & Four artefacts in writing; programme funded. \\
+\addlinespace
+1 — Identity               & SSO, federation, SCIM aligned with the contract.
+                           & Identity conformance subset passes; agreed application coverage. \\
+\addlinespace
+2 — Observability          & Pre-instrumentation in shadow mode.
+                           & Source coverage; canonical schema enforced. \\
+\addlinespace
+3 — Network                & Zone catalogue, RADIUS attachment, high-throughput research-data path (Science DMZ or national research and education network circuit).
+                           & Network conformance subset passes. \\
+\addlinespace
+4 — Policy plane           & PDP/PEP introduced in shadow before enforcing.
+                           & Policy conformance subset passes; migrated set enforcing. \\
+\addlinespace
+5 — Pilot                  & Full stack exercised end-to-end on a contained scope.
+                           & Union of relevant conformance subsets; pilot host report. \\
+\addlinespace
+6 — Endpoint               & Posture signals routed to policy; per-population transition.
+                           & Endpoint conformance subset passes; agreed populations enforcing. \\
+\addlinespace
+7 — Audit and IR           & TAC-correlated investigation; refreshed runbooks.
+                           & Audit conformance subset; SOC proficiency demonstrated. \\
+\addlinespace
+8 — Workload classification& Classification enforced at provisioning; cluster separation.
+                           & Compute and Storage conformance subsets; classification coverage. \\
+\addlinespace
+9 — Lifecycle automation   & Self-service, GitOps, mature operational stage.
+                           & Orchestration conformance subset; self-service ratio achieved. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Reversibility as non-negotiable.} The playbook commits
+to the reversibility of every wave at acceptable cost during a
+published window. The reversibility playbook of
+\trchap{ch:reversibility}{} consolidates the per-wave rollback
+procedures, the data-preservation considerations, the
+communication patterns, and the post-mortem framework. The
+commitment makes the migration a governance decision rather than
+a leap of faith.
+
+%-----------------------------------------------------------------------------
+\section{Self-assessment in one minute}
+\label{sec:synth-self-assessment}
+
+The full institutional self-assessment of
+\trchap{ch:self-assessment}{} comprises approximately fifty
+questions organised in five sections. The five questions below
+are a one-minute version: one question per sovereignty dimension,
+each answered \textbf{Y} (capacity established or robust) or
+\textbf{N} (absent or partial).
+
+\begin{enumerate}[leftmargin=2em,nosep]
+  \item \textbf{Data.} Are storage location, key custody, and
+    disclosure regime documented per data class?
+  \item \textbf{Technical.} Can the institution inspect or
+    independently rebuild every critical component of its
+    infrastructure?
+  \item \textbf{Financial.} Is the multi-year operating cost of
+    the digital infrastructure predictable and contractually
+    capped?
+  \item \textbf{Operational.} Are the skills for each critical
+    layer present in the institution or accessible through its
+    national research and education network and peer network?
+  \item \textbf{Institutional.} Can the institution decline a
+    supplier roadmap change without contractual penalty for the
+    current procurement period?
+\end{enumerate}
+
+\paragraph{Reading the result.} Five Y answers indicate that the
+institution is already operating close to the architecture's
+sovereignty target; the playbook is then used as a checklist
+rather than as a roadmap. Mixed answers indicate the dominant
+trajectory: predominantly N answers on Data, Technical, and
+Institutional with a Y on Operational suggest a brownfield
+profile dominated by a single proprietary productivity suite;
+mixed answers across all dimensions
+suggest a brownfield hybrid profile; predominantly N answers
+across the board suggest that Wave~0 (governance and inventory)
+is the appropriate first step before trajectory selection.
+
+%-----------------------------------------------------------------------------
+\section{Real-world precedents at a glance}
+\label{sec:synth-precedents}
+
+The architecture and the playbook do not invent their structural
+patterns from first principles; they consolidate patterns visible
+at named institutions whose practices have been the subject of
+public discussion. The list below records the institutions that
+have appeared most consistently as references; the full annotated
+catalogue, with the methodological caveats, is in
+\trchap{ch:institutional-precedents}{}.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \institution{CERN} --- federated identity at scale; experimental network isolation patterns.
+  \item \institution{MIT} --- Information Technology Governance Committee (ITGC); federated IT pattern across institutional and college units.
+  \item \institution{Stanford} --- SUNet multi-zone segmentation; UIT and SRCC.
+  \item \institution{ETH Z\"urich} --- a binding administrator-rights agreement (a contractual, proportionate transfer of root-access responsibility, on the ETH Z\"urich model); federated IT-services organisation.
+  \item \institution{Cambridge} --- University Information Services (UIS); collegiate model with the University Data Network (UDN) connecting central services and the institutions of the Collegiate University.
+  \item \institution{Indiana University} --- Jetstream2 research-cloud architecture (NSF ACCESS).
+  \item \institution{NUS Singapore} --- Asia-Pacific federation patterns.
+  \item \institution{USP Brazil} --- Latin American research-network integration through RNP.
+  \item \institution{University of Michigan} --- ITS, Merit Network, CAEN faculty IT.
+  \item \institution{KU Leuven} --- European research-intensive central IT model.
+\end{itemize}
+
+\paragraph{Documented gaps.} Several aspects of the architecture
+remain thinly documented in public institutional sources: policy
+plane deployments at academic scale; TAC-aware audit pipelines;
+sovereignty grid practice as a structured five-dimension
+instrument applied across an institutional portfolio. The
+cross-institutional infrastructure-sovereignty programme of
+participating institutions anticipated by this Reference is the
+locus where these gaps are intended to be closed.
+
+%-----------------------------------------------------------------------------
+\section{How to use the rest of the Technical Reference}
+\label{sec:synth-using}
+
+The remaining thirty-two chapters of the Technical Reference
+develop the elements summarised above. Three reading paths cover
+the principal use cases.
+
+\paragraph{Reading path: governance and rectorate.}
+Chapter~\ref{ch:conceptual-frame} (the TAC concept),
+\trchap{ch:sovereignty-grid}{} (the sovereignty grid in full),
+\trchap{ch:self-assessment}{} (the institutional self-assessment).
+Indicative reading time: approximately ninety minutes. Output:
+the institution's positioning against the grid and an indication
+of the dominant migration trajectory.
+
+\paragraph{Reading path: chief technology officer or
+information-security officer.} Add to the previous path: the
+architectural principles of \trchap{ch:architectural-principles}{};
+the layer chapter most relevant to the institution's current
+priority among Chapters~6--14; the conformance suite of
+\trchap{ch:conformance}{}; and the playbook reading guide of
+\trchap{ch:playbook-reading}{}. Indicative reading time:
+approximately a working day. Output: a position from which the
+institution can engage its trajectory selection and procurement
+adjustments.
+
+\paragraph{Reading path: programme or migration lead.} Add to the
+CTO path: Part~III in full
+(\trchap{ch:playbook-reading}{} through
+\trchap{ch:coexistence-patterns}{}). Indicative reading time:
+two to three working days. Output: a wave plan with declared
+trajectories, paces, and reversibility windows.
+
+\paragraph{Layer-specific reading paths.} An engineer engaged
+on a specific layer can read the corresponding chapter (Identity:
+\trchap{ch:identity}{}; Policy: \trchap{ch:policy}{}; Network:
+\trchap{ch:network}{}; Compute: \trchap{ch:compute}{}; Storage:
+\trchap{ch:storage}{}; Endpoint: \trchap{ch:endpoint}{};
+Observability: \trchap{ch:observability}{}; Crypto:
+\trchap{ch:crypto}{}; Orchestration: \trchap{ch:orchestration}{}),
+followed by the corresponding wave chapter. Each layer chapter
+is self-contained.
+
+\medskip
+
+\noindent \textbf{End of synthesis.} The remainder of the Technical
+Reference (Parts~I to IV) develops each of the elements summarised
+above in the depth required for technical implementation,
+operational planning, and institutional governance.

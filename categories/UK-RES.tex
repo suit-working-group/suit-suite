@@ -1,0 +1,144 @@
+% ============================================================================
+% UK-RES.tex — category archetype: UK research university
+% ----------------------------------------------------------------------------
+% LAYER 1 (category archetype) override file for the suite localization model.
+% \input AFTER shared/localization-defaults.tex; an institution-level set
+% (LAYER 2) is \input AFTER this file to fill the country-specific NAME keys.
+%
+% ----------------------------------------------------------------------------
+% WHICH INSTITUTIONS THIS ARCHETYPE FITS
+% ----------------------------------------------------------------------------
+% Chartered/statutory research-intensive universities of the United Kingdom
+% (England, Scotland, Wales and Northern Ireland) operating the classic
+% Council/Senate split: a lay-majority governing body (Council, or Court in
+% the older Scottish/post-1992 sense) plus an academic Senate (Academic
+% Board), with a Vice-Chancellor as chief executive and academic officer.
+% This covers the Russell Group and other research-active pre- and post-1992
+% universities connected to Janet via Jisc and bound by the UK
+% (post-Brexit) data-and-cyber regime (UK GDPR + DPA 2018 as amended by the
+% Data (Use and Access) Act 2025; the NIS Regulations 2018). It does NOT fit
+% the federal University of London/collegiate-Oxbridge constituent-college
+% governance shape, teaching-led/FE providers, or non-UK institutions; those
+% take their own archetype.
+%
+% ----------------------------------------------------------------------------
+% SCOPE OF THIS FILE
+% ----------------------------------------------------------------------------
+% This is a PARTIAL set. It binds only the STRUCTURAL keys (governance ladder,
+% executive leadership, constituent units, NREN tier, identity federation,
+% deployment-scale model, data-custody posture, pilot units, operational
+% roles) to this archetype's concrete generic value, and points the
+% REGULATORY keys at the UK regime worked in shared/regulatory-applicability-
+% EN.tex (Section "United Kingdom --- light regime"). It deliberately LEAVES
+% the country-specific NAME keys at their generic default --- the specific
+% national NREN (Janet/Jisc as the operator name), the data-protection
+% authority (the ICO / Information Commission) and the national CSIRT/CERT ---
+% so an institution-level set can bind them. Keys not mentioned here keep the
+% shared default from localization-defaults.tex.
+%
+% Requires localization.sty (\setloc / \loc).
+% ============================================================================
+
+% --- Subject institution & profile ------------------------------------------
+\setloc{institution-type}{a UK research-intensive (typically Russell Group or
+  pre-1992 chartered) university}
+
+% --- Institutional governance ladder ----------------------------------------
+% Council = lay-majority governing body (corporate/financial/strategic);
+% Senate = supreme academic authority. Kept as generic role phrases so the
+% archetype fits any UK university regardless of the body's local proper name
+% (Council vs Court).
+\setloc{governing-board}{the university's lay-majority governing body
+  (the Council, or Court) as the supreme corporate, financial and strategic
+  authority, working through its CIO and audit/risk committee}
+\setloc{academic-governing-bodies}{the academic Senate (Academic Board) and
+  its faculty/school boards as the supreme academic authority}
+\setloc{executive-leadership}{the Vice-Chancellor (and President/Principal) as
+  chief executive and chief academic officer, supported by the senior executive
+  team (Provost, Deputy and Pro-Vice-Chancellors, Registrar)}
+
+% --- Constituent units & pilots ---------------------------------------------
+\setloc{cs-research-unit}{a Department or School of Computer Science within a
+  faculty/college}
+\setloc{security-research-centre}{a research-active cybersecurity centre
+  (an Academic Centre of Excellence in Cyber Security Research, ACE-CSR)}
+\setloc{institution-hpc-facility}{the university's research-computing /
+  HPC service (its central advanced-research-computing team)}
+\setloc{pilot-entities}{the university's central research-computing / HPC
+  service and its strongest-expertise academic units}
+
+% --- Operational roles ------------------------------------------------------
+\setloc{internal-emergency-incident-contact}{the university's IT service desk /
+  Chief Information Security Officer as the mandatory internal incident-reporting
+  route}
+
+% --- Research & education network tier (UK: Janet via Jisc) ------------------
+% NREN TIER (structural): the operator NAME (Janet/Jisc) is left to the
+% institution-level NAME set; here we bind the structural tier, catalogue,
+% backbone scale, federation profile and research-cloud route generically.
+\setloc{nren-name}{the UK national research and education network operated by
+  the sector's not-for-profit digital body (the Janet Network)}
+\setloc{nren-csirt}{the NREN's computer security incident response team
+  (the Janet/Jisc CSIRT)}
+\setloc{nren-service-catalogue}{the NREN-provided federated-service catalogue
+  --- national federated Wi-Fi roaming (eduroam(UK)), a trusted certificate
+  service, the UK Access Management Federation single sign-on, security
+  operations and managed research-data transfer}
+\setloc{research-backbone-scale}{the UK research backbone: a multi-terabit
+  national core (Janet, with regional networks aggregating over a thousand
+  connected organisations and 18M+ members) connecting at 10--100\,Gbps per
+  campus, peering into the European backbone (G\'EANT)}
+\setloc{identity-federation-profile}{the UK Access Management Federation
+  (UKAMF), interoperating with the academic interfederation (eduGAIN)}
+\setloc{nren-research-cloud}{the NREN-brokered research-cloud route ---
+  high-bandwidth peering to the major public clouds plus the sector cloud
+  framework (OCRE) for EU/UK-compliant providers, rather than an
+  NREN-owned cloud}
+\setloc{peer-nren-roster}{peer European NRENs (each operating a national
+  backbone, a CSIRT and federated identity/storage/IaaS services) coordinated
+  through G\'EANT}
+
+% --- High-performance computing (national tier) -----------------------------
+\setloc{national-hpc-facility}{a UK national HPC service (the national
+  tier-1 supercomputing facility and its regional tier-2 centres)}
+
+% --- Deployment topology & data custody -------------------------------------
+% UK post-adequacy posture: keep custody within UK/adequacy-covered space and
+% govern transfers under the UK transfer regime (see regulatory keys below).
+\setloc{deployment-custody-model}{the university operates, or procures under
+  equivalent custody guarantees, a deployment of its core components within the
+  UK (or adequacy-covered) jurisdiction}
+\setloc{data-custody-sovereignty-profile}{a custody arrangement keeping data
+  within the UK / adequacy-covered space and minimising third-country
+  disclosure-regime exposure under the UK transfer regime}
+
+% ============================================================================
+% REGULATORY KEYS --- UK regime (post-Brexit, light regime)
+% ----------------------------------------------------------------------------
+% These reference the worked UK instantiation in
+% shared/regulatory-applicability-EN.tex (Section "United Kingdom --- light
+% regime", Table tab:reg-uk). They bind the REGIME (instruments / scope), not
+% the named authority: the ICO/Information Commission, the specific UK
+% data-protection authority and national CSIRT NAMES are left to the
+% institution-level NAME set.
+% ============================================================================
+\setloc{regulatory-regime}{binding UK law (retained-and-amended EU-derived
+  instruments now diverging via domestic reform)}
+\setloc{data-protection-regime}{the UK GDPR with the Data Protection Act 2018,
+  as amended by the Data (Use and Access) Act 2025}
+\setloc{cybersecurity-baseline-regime}{the UK cyber-resilience framework --- the
+  NIS Regulations 2018 (SI 2018/506) with the NCSC Cyber Assessment Framework,
+  ahead of the forthcoming Cyber Security and Resilience Bill}
+\setloc{eid-trust-services-regime}{the UK eIDAS regime (retained
+  Reg.~(EU)~910/2014 as amended; SI~2016/696)}
+\setloc{cross-border-transfer-regime}{the UK GDPR Chapter~V transfer regime ---
+  adequacy where it exists, else the ICO International Data Transfer Agreement
+  (IDTA) or the UK Addendum to the EU SCCs, with a transfer-risk assessment}
+\setloc{ai-regulation}{the UK's principles-based, regulator-led AI-governance
+  approach (sectoral regulators applying the cross-sector AI principles, no
+  single omnibus AI statute)}
+\setloc{essential-entity-classification-basis}{operators within scope of the
+  NIS Regulations 2018, with sector competent authorities (CSR Bill expanding
+  scope to managed service providers, not yet in force)}
+
+\endinput

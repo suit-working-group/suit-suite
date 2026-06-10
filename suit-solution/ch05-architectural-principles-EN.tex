@@ -1,0 +1,439 @@
+% ============================================================================
+% Chapter 5 --- Architectural principles
+% ----------------------------------------------------------------------------
+% Purpose : establish the principles common to all reference-architecture
+%           chapters: interfaces over products, replaceability as a
+%           first-class property, vendor-neutral by construction.
+%           Freezes the standards landscape table (single source of truth
+%           for Ch. 6--14).
+% Page target: ~4 pages.
+% Dependencies: Ch. 3 (sovereignty grid), Ch. 4 (self-assessment).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D5.1 nine functional layers grouped in three planes (Subject/Execution/Control)
+%   D5.2 standards table is normative; products in Ch. 6--14 are illustrative
+%   D5.3 orchestration plane has no single standard (acknowledged honestly)
+%   D5.4 replaceability defined operationally via Ch. 16 conformance tests
+% ============================================================================
+
+\chapter{Architectural principles}
+\label{ch:architectural-principles}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter rests on the sovereignty grid of
+\trchap{ch:sovereignty-grid}{} --- in particular on the technical
+dimension. It establishes the principles that the layer chapters
+(Chapters~6--14 of the Technical Reference) will instantiate, and
+freezes the standards landscape that those chapters reference.
+\end{caveatbox}
+
+The reference architecture developed in Part~II is governed by a small
+number of principles. They are stated here so that the per-layer
+chapters need only apply them, and so that any deviation in those
+chapters is visible against an established baseline.
+
+%-----------------------------------------------------------------------------
+\section{Interfaces over products}
+\label{sec:ap-interfaces}
+
+The normative content of this architecture is the set of interface
+contracts that connect the layers. The reference instantiations
+proposed in the per-layer chapters --- open-source implementations of
+identity providers, policy engines, network access servers, cloud
+infrastructure managers, and telemetry pipelines, among others --- are
+illustrative: they demonstrate that the contracts are realisable on
+open foundations, not that the institution must adopt these specific
+products.
+
+Three consequences follow from this primacy:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Procurement language} references standards, not
+    products. An \gls{rfp} that asks for ``identity provider compatible
+    with OIDC Core 1.0, SCIM 2.0, and federation metadata in
+    accordance with the applicable research-and-education identity
+    federation technical profile'' admits multiple
+    compliant suppliers; an \gls{rfp} that asks for a named
+    proprietary identity suite with its vendor-specific conditional
+    access feature admits one.
+  \item \textbf{Component evaluation} consists in verifying that the
+    standard is spoken correctly, not that the supplier promises a
+    feature. The conformance test suite of
+    \trchap{ch:conformance}{Conformance and replaceability tests}
+    operationalises this verification.
+  \item \textbf{Architectural decisions} are recorded against the
+    contract, not against the product. A decision to use OIDC for
+    \gls{sso} survives the replacement of the identity provider; a
+    decision to use a specific vendor's proprietary conditional
+    access expression \texttt{X} does not.
+\end{itemize}
+
+This principle is the operational expression of the technical
+sovereignty dimension: an institution that controls the contracts
+controls the architecture, regardless of the suppliers that currently
+realise those contracts.
+
+%-----------------------------------------------------------------------------
+\section{Functional necessity is independent of scale}
+\label{sec:ap-necessity}
+
+The interface contracts of \S\ref{sec:ap-interfaces} are not only the
+normative content of the architecture; they enumerate the
+\emph{minimal set of functions that any institution offering a digital
+infrastructure must discharge}, irrespective of its size, budget, or
+research intensity. The moment an institution authenticates users,
+holds personal or sensitive data, attaches devices to a network, and
+operates services, it has already incurred these functions. The only
+question is whether it discharges them coherently and sovereignly, or
+implicitly and dependently.
+
+\paragraph{Several of these functions are legally compelled, without a
+size threshold.} The \gls{gdpr}~\cite{gdpr} applies to any institution
+processing personal data, with no exemption by size; the
+data-protection, segmentation and audit functions are therefore
+obligations rather than aspirations at every scale. Where the
+institution is classified as an essential or important entity, the
+\gls{nis2}~\cite{nis2} obligations apply in addition. The minimal set
+is thus anchored in binding instruments that do not vary with the size
+of the institution.
+
+\paragraph{What is size-invariant, and what scales.} What does
+\emph{not} vary with scale is the set of functional contracts and the
+legally compelled protections above. What \emph{does} scale is the
+\emph{instantiation} (the specific products that realise a contract),
+the \emph{sizing} (\trchap{ch:sizing}{}, given as orders of magnitude
+for \loc{institution-type}, with a down-scaled profile in
+\S\ref{sec:sz-downscale}), and the \emph{optional components} justified
+only by particular needs --- a dedicated Science~DMZ, multi-site
+federation --- which a smaller or teaching-led institution may
+legitimately defer or mutualise. The architecture is the invariant;
+the realisation is the variable.
+
+\paragraph{Consequence for the ``we are not a flagship'' objection.}
+The objection that an institution ``cannot afford what the leading
+universities do'' misidentifies the commitment. The architecture asks
+no institution to match a flagship's budget or estate; it observes
+that the functions are already owed the moment digital services are
+offered, and provides the minimal coherent and sovereign way to
+discharge them. The alternative to adopting the architecture is not
+\emph{not discharging these functions} --- it is discharging the same
+functions incoherently and dependently.
+
+%-----------------------------------------------------------------------------
+\section{Replaceability as a first-class property}
+\label{sec:ap-replaceability}
+
+A component is \emph{replaceable} when it can be substituted by
+another one speaking the same interface contract, within an agreed
+time window, with the institution's data and configuration preserved.
+Replaceability is the property that makes the architecture survive
+supplier change, regulatory change, and the obsolescence of any
+particular product.
+
+Four conditions, jointly, define replaceability.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Standard interfaces.] The component speaks the relevant
+    interface standard without captive extensions in the critical
+    path. Optional extensions are admissible if they can be turned
+    off without loss of essential function.
+  \item[Open state and configuration formats.] The component's
+    operational state and configuration are expressed in formats that
+    can be read and produced by parties other than the supplier.
+  \item[Documented exit-data export.] A procedure exists to extract
+    the institution's data in a documented open format within an
+    agreed time window, without requiring the supplier's discretionary
+    cooperation.
+  \item[No hidden dependencies.] The component does not depend on
+    supplier-specific operators, controllers or sidecars whose absence
+    would silently degrade behaviour.
+\end{description}
+
+Replaceability is not the same as \emph{having already been replaced}.
+The conformance suite of
+\trchap{ch:conformance}{} includes an \emph{exit rehearsal} category:
+the institution periodically exercises the replacement procedure on a
+representative subset, to confirm that the four conditions still
+hold.
+
+%-----------------------------------------------------------------------------
+\section{Standards landscape}
+\label{sec:ap-standards}
+
+Table~\ref{tab:ap-standards} lists the standards on which the
+reference architecture rests. The list is ordered by layer, then by
+the criticality of the standard within that layer. It is the canonical
+reference for Chapters~6--14: any layer chapter that introduces a
+standard not listed here either introduces a documented exception or
+extends this table.
+
+\begin{table}[H]
+\centering\small
+\caption{Standards landscape of the reference architecture. Status
+indicates the maturity of the standard relative to the architecture's
+expectations: \emph{Stable} (long-established, broadly implemented),
+\emph{Mature} (established but evolving), \emph{Emerging} (recent,
+adopted by the architecture as forward-looking).}
+\label{tab:ap-standards}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.55\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.95\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=0.45\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Layer & Standard & Role in the architecture & Status \\
+\midrule
+\multirow{5}{*}{Identity}
+  & OIDC Core~1.0~\cite{oidc-core-1.0}      & Federated authentication, identity assertion & Stable \\
+  & SAML~2.0~\cite{saml-core-2.0}           & Federated authentication (legacy compatibility) & Stable \\
+  & SCIM~2.0~\cite{rfc-7643-scim-core,rfc-7644-scim-protocol} & Identity provisioning across systems & Stable \\
+  & OAuth~2.1~\cite{oauth-2-1}              & Authorisation framework underpinning OIDC & Emerging \\
+  & OpenID Federation  & Trust establishment between federations & Emerging \\
+\addlinespace
+\multirow{2}{*}{Policy}
+  & OPA REST API~\cite{opa-project}         & Policy decision point query interface (de facto project API) & Mature \\
+  & Cedar evaluation API~\cite{cedar-project} & Alternative policy decision interface (project specification) & Emerging \\
+\addlinespace
+\multirow{5}{*}{Network}
+  & RADIUS~\cite{rfc-2865-radius,rfc-2866-radius-acct} & Network access authentication and accounting & Stable \\
+  & NETCONF~\cite{rfc-6241-netconf}\,/\,YANG~\cite{rfc-7950-yang} & Network device configuration and modelling & Stable \\
+  & BGP / EVPN         & Routing and overlay signalling & Stable \\
+  & CNI~\cite{cni-spec} / eBPF        & Kubernetes network plugin model (CNCF project specification) & Mature \\
+  & IPFIX~\cite{rfc-7011-ipfix}             & Flow record export & Stable \\
+\addlinespace
+\multirow{4}{*}{Compute}
+  & Kubernetes API~\cite{kubernetes}        & Container orchestration & Stable \\
+  & OpenStack API~\cite{openstack}          & Infrastructure as a Service & Stable \\
+  & OCI image format~\cite{oci-image-spec}  & Container image packaging & Stable \\
+  & SLSA~\cite{slsa-spec}                   & Software supply-chain provenance & Mature \\
+\addlinespace
+\multirow{3}{*}{Storage}
+  & S3 API             & Object storage interface (de facto standard) & Stable \\
+  & KMIP~\cite{kmip-oasis}                  & Key management interoperability & Stable \\
+  & NFS v4.1~\cite{rfc-8881-nfs41}          & Network file system & Stable \\
+\addlinespace
+\multirow{3}{*}{Endpoint}
+  & DDM / DEP          & Apple declarative device management (vendor specification) & Stable \\
+  & MS-MDM             & Microsoft device management (published vendor specification) & Stable \\
+  & Declarative Linux config~\cite{osquery,ansible} & Linux endpoint posture and configuration (project tooling, no standards-body specification) & Mature \\
+\addlinespace
+\multirow{3}{*}{Observability}
+  & OpenTelemetry~\cite{opentelemetry-spec} & Telemetry collection (traces, metrics, logs) & Stable \\
+  & CloudEvents~\cite{cloudevents-spec}     & Event format for cross-system signalling & Mature \\
+  & syslog~\cite{rfc-5424-syslog}           & Legacy log transport & Stable \\
+\addlinespace
+\multirow{4}{*}{Crypto}
+  & PKCS\#11~\cite{pkcs11-oasis}            & Hardware security module interface & Stable \\
+  & ACME~\cite{rfc-8555-acme}               & Automated certificate issuance & Stable \\
+  & KMIP~\cite{kmip-oasis}                  & Key management interoperability (cross-listed) & Stable \\
+  & OpenID Federation  & Trust hierarchy for federated entities & Emerging \\
+\addlinespace
+Orchestration & (no single standard --- see \S\ref{sec:ap-standards} note below) & Cross-layer command issuance after a TAC activation & --- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{The orchestration gap.} The orchestration plane --- the
+``glue'' that turns a TAC activation decision into the cross-layer
+commands that realise it --- has no single standard at the time of
+writing. Several patterns are converging (event-driven workflow
+engines, declarative reconcilers, GitOps repositories), but no
+specification consolidates them into a portable interface. This is
+the architecture's most honest gap; \trchap{ch:orchestration}{The
+orchestration plane} discusses how to bound the consequences and how
+the institution can avoid creating a new captive dependency in this
+layer.
+
+\paragraph{The policy-interface choice.} Unlike the orchestration
+plane, the policy plane does have a standards-body specification ---
+OASIS XACML --- which the architecture deliberately does not adopt:
+the de facto project APIs it retains (OPA REST, Cedar) are the
+interfaces its reference instantiations implement, and the table
+records their project status accordingly.
+
+\paragraph{Standards versus reference profiles.} Several standards
+listed above (OIDC, SAML2, OPA, OpenTelemetry) admit broad
+configuration latitude. Where the architecture relies on a specific
+profile of a standard --- for instance, the applicable
+research-and-education identity federation technical profile for SAML2
+federation, or the OPA bundle distribution pattern --- the
+profile is named in the relevant layer chapter and treated as a
+co-normative element.
+
+%-----------------------------------------------------------------------------
+\section{Layer decomposition}
+\label{sec:ap-layers}
+
+The nine functional layers of the architecture are organised in three
+planes that describe what each layer governs.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Subject and trust plane.] Identity (\trchap{ch:identity}{}),
+    Endpoint (\trchap{ch:endpoint}{}), Cryptographic services
+    (\trchap{ch:crypto}{}). These layers together define \emph{who}
+    is acting, \emph{from where}, and \emph{with what cryptographic
+    assurances}.
+  \item[Execution plane.] Network (\trchap{ch:network}{}), Compute
+    (\trchap{ch:compute}{}), Storage (\trchap{ch:storage}{}). These
+    layers together define \emph{where} the activity runs and on
+    \emph{which data}.
+  \item[Control and governance plane.] Policy
+    (\trchap{ch:policy}{}), Observability
+    (\trchap{ch:observability}{}), Orchestration
+    (\trchap{ch:orchestration}{}). These layers together define
+    \emph{how} decisions are made, recorded, and executed across the
+    other planes.
+\end{description}
+
+The dependency structure has two regular features. First, the subject
+and trust plane is read by the control plane (Identity attributes
+parameterise Policy decisions; Endpoint posture conditions Policy and
+Network attachment; Crypto underpins all assertions). Second, the
+control plane writes to the execution plane (Policy decisions are
+enforced at Network, Compute, and Storage; Orchestration realises
+them across the three; Observability collects evidence of all
+crossings). The reference architecture is the realisation of these two
+flows.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    every node/.style = {font=\footnotesize},
+    layer/.style = {rectangle, rounded corners=2pt,
+                    draw=NavyBlue!70!black, fill=NavyBlue!5,
+                    minimum width=26mm, minimum height=10mm,
+                    line width=0.4pt, align=center},
+    plane/.style = {rectangle, rounded corners=4pt, draw=Slate!50,
+                    line width=0.4pt, dashed, inner sep=5pt},
+    arrow/.style = {-{Stealth[length=2mm]}, draw=NavyBlue!50!black,
+                    line width=0.4pt},
+    flowarrow/.style = {-{Stealth[length=2.5mm]}, draw=Crimson!70!black,
+                        line width=0.6pt}
+]
+% Subject and Trust plane (top)
+\node[layer] (id) at ( 0.0, 0.0) {Identity\\ \tiny (Ch.~6)};
+\node[layer] (ep) at ( 3.2, 0.0) {Endpoint\\ \tiny (Ch.~11)};
+\node[layer] (cr) at ( 6.4, 0.0) {Crypto\\ \tiny (Ch.~13)};
+\node[plane, fit=(id)(ep)(cr), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]above:Subject and Trust plane}] {};
+
+% Execution plane (middle)
+\node[layer] (nw) at ( 0.0,-2.8) {Network\\ \tiny (Ch.~8)};
+\node[layer] (co) at ( 3.2,-2.8) {Compute\\ \tiny (Ch.~9)};
+\node[layer] (st) at ( 6.4,-2.8) {Storage\\ \tiny (Ch.~10)};
+\node[plane, fit=(nw)(co)(st), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]left:Execution plane}] {};
+
+% Control and Governance plane (bottom)
+\node[layer] (po) at ( 0.0,-5.6) {Policy\\ \tiny (Ch.~7)};
+\node[layer] (ob) at ( 3.2,-5.6) {Observability\\ \tiny (Ch.~12)};
+\node[layer] (or_) at ( 6.4,-5.6) {Orchestration\\ \tiny (Ch.~14)};
+\node[plane, fit=(po)(ob)(or_), label={[font=\scriptsize\bfseries,
+      color=Slate!80!black]below:Control and Governance plane}] {};
+
+% Flow 1 (Crimson): Subject/Trust -> Control plane
+\draw[flowarrow] (id.south) to[bend right=10] (po.north west);
+\draw[flowarrow] (ep.south) to[bend right=8]  (po.north);
+\draw[flowarrow] (cr.south) to[bend right=10] (or_.north);
+
+% Flow 2 (Crimson): Control plane -> Execution plane
+\draw[flowarrow] (po.north east) to[bend left=12] (nw.south);
+\draw[flowarrow] (po.north east) to[bend left=8]  (co.south);
+\draw[flowarrow] (po.north east) to[bend left=8]  (st.south);
+\draw[flowarrow] (or_.north west) to[bend right=15] (co.south east);
+
+% Observability collects (lighter arrows)
+\draw[arrow, dashed] (nw.south west) to[bend right=10] (ob.north west);
+\draw[arrow, dashed] (co.south) -- (ob.north);
+\draw[arrow, dashed] (st.south) to[bend left=10]  (ob.north east);
+
+% Legend
+\node[font=\scriptsize, anchor=west] at (8.0,-1.0) {%
+  \textcolor{Crimson!70!black}{\textbf{---}} principal flows};
+\node[font=\scriptsize, anchor=west] at (8.0,-1.6) {%
+  \textcolor{NavyBlue!50!black}{\textbf{- - -}} audit collection};
+\end{tikzpicture}
+\caption{Layer decomposition of the reference architecture: nine
+functional layers organised in three planes. The principal
+dependency flows (Crimson) are: Subject and Trust feeds the
+Control plane; the Control plane writes to the Execution plane.
+Observability (dashed) collects events from every layer.}
+\label{fig:ap-layers}
+\end{figure}
+
+%-----------------------------------------------------------------------------
+\section{Availability and failure semantics of the mediation planes}
+\label{sec:ap-availability}
+
+Per-session policy decision makes the identity and policy planes
+mediation points for the whole institution: left unspecified, their
+unavailability would be everyone's unavailability. The architecture
+therefore treats availability and failure semantics as first-class
+design obligations of the mediation planes, on a par with
+replaceability.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Redundant deployment per critical plane.] The identity
+    provider, the policy decision point, and the certificate and
+    secrets services run in redundant deployments --- active-active,
+    or active-passive with a documented and rehearsed failover ---
+    with an availability target declared per plane and measured
+    through the observability layer. The reference components
+    support clustered operation; the sizing envelopes of
+    \trchap{ch:sizing}{} assume it.
+  \item[A policy-plane outage must not interrupt established work.]
+    Policy enforcement points cache decisions for the lifetime of
+    the activation token: an outage of the decision point prevents
+    \emph{new} activations but does not invalidate sessions already
+    activated. Token lifetime is the institution's tunable
+    trade-off between revocation latency and outage tolerance,
+    declared per zone class.
+  \item[Fail-mode policy per zone class.] Each zone's security
+    profile declares its fail mode for new attachments during a
+    mediation-plane outage: \emph{fail-closed} for administrative
+    and sensitive zones; \emph{fail-degraded with audit} where the
+    availability of teaching or BYOD connectivity outweighs the
+    interception of new sessions. Absent a declared choice, the
+    default is fail-closed.
+  \item[The commercial-SLA comparison.] A managed identity or
+    policy service answers the same single-point-of-failure risk
+    with a contractual remedy after the fact; this architecture
+    answers it with engineered redundancy under institutional
+    control and with declared degradation semantics that the
+    institution can design, rehearse, and audit.
+\end{description}
+
+%-----------------------------------------------------------------------------
+\section{What this reference architecture is and is not}
+\label{sec:ap-scope}
+
+The clarity of subsequent chapters depends on a shared understanding
+of what this architecture commits to and what it does not.
+
+\paragraph{It is.} A contract-driven architecture, organised in nine
+layers and three planes, whose realisability is demonstrated on open
+foundations and which integrates proprietary components that respect
+the contracts. Its normative content is the standards landscape of
+\S\ref{sec:ap-standards} and the four conditions of replaceability of
+\S\ref{sec:ap-replaceability}.
+
+\paragraph{It is not.} A product recommendation: the per-layer
+chapters present reference instantiations and alternatives, but the
+choice belongs to the institution and is informed by the sovereignty
+grid (\trchap{ch:sovereignty-grid}{}), not by this Reference. Nor is
+it a deployment specification: sizing
+(\trchap{ch:sizing}{}) is given as orders of magnitude for \loc{institution-type}. Nor is it a security certification: the conformance
+suite (\trchap{ch:conformance}{}) verifies interface fidelity and
+replaceability, not absence of vulnerability.
+
+\paragraph{Why the boundary matters for international
+generalisation.} The architecture is designed to transpose across
+institutions and jurisdictions because its commitments are at the
+level of contracts and properties, not at the level of products and
+configurations. An institution in a different regulatory context, or
+with a different existing estate, instantiates the same contracts
+with different products without leaving the architecture. This is the
+condition under which the network of universities anticipated in
+phase~2 can share an architectural baseline despite operating in very
+different conditions.

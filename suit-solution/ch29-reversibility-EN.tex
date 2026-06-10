@@ -1,0 +1,192 @@
+% ============================================================================
+% Chapter 29 --- Reversibility playbook
+% ----------------------------------------------------------------------------
+% Purpose : the institutional discipline that protects against one-way
+%           commitments. Cross-cutting topic --- not a wave.
+% Page target: ~4 pages.
+% Dependencies: Ch. 17 (D17.6: reversibility non-negotiable);
+%               Ch. 18-27 (each wave's reversibility criteria).
+% ============================================================================
+
+\chapter{Reversibility playbook}
+\label{ch:reversibility}
+
+The wave chapters of Part~III each declare their own reversibility
+criteria. This chapter consolidates the cross-cutting reversibility
+discipline: the reasoning behind it, the rollback procedures
+applicable to each wave, the data and communication considerations
+that any rollback engages, and the post-mortem framework that
+captures what the institution has learned from a reversal.
+
+%-----------------------------------------------------------------------------
+\section{Why reversibility is non-negotiable}
+\label{sec:rv-why}
+
+The architectural commitment of this Reference is that no wave is
+allowed to produce a one-way change at acceptable cost. The
+commitment is not theoretical: every wave declares a reversibility
+window, every component is procured with exit-assistance clauses
+(D28.4), every change to the running state flows through the
+declarative GitOps model (D14.4) so that prior states can be
+reconstructed. The reasoning is structural rather than tactical.
+
+\paragraph{Sovereignty as a temporal property.} Sovereignty is not
+only the property of the architecture today; it is the property of
+the architecture across time. An institution that has committed to
+a transformation it cannot undo at acceptable cost has surrendered
+its sovereignty over the matter, regardless of the transformation's
+merits. The reversibility playbook is the operational expression of
+this insight.
+
+\paragraph{Reversibility differs from rollback.} A \emph{rollback}
+is the execution of a documented procedure to return to a prior
+state. \emph{Reversibility} is the standing capacity to do so within
+an agreed cost envelope. The wave chapters declare reversibility
+windows; this chapter develops the rollback procedures that those
+windows guarantee.
+
+\paragraph{When reversibility is forfeited.} The principle admits
+exceptions when the institution's leadership accepts the loss of
+reversibility explicitly, in writing, against the sovereignty grid
+(\trchap{ch:sovereignty-grid}{}). The forfeit is documented with
+the dimension on which it falls, the rationale, and a review
+schedule. Forfeits are exceptional and are revisited at every
+sovereignty grid annual review.
+
+%-----------------------------------------------------------------------------
+\section{Per-wave rollback procedures}
+\label{sec:rv-procedures}
+
+Table~\ref{tab:rv-procedures} summarises the rollback procedure
+applicable to each wave. The procedures are not exhaustive; the
+institution adapts them to its operational specifics. The intent is
+to ensure that a rollback decision is not blocked by the absence of
+a documented procedure.
+
+\begin{table}[H]
+\centering\small
+\caption{Per-wave rollback procedures (indicative). The unit of
+rollback is the smallest operational increment that the wave's
+coexistence pattern admits.}
+\label{tab:rv-procedures}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.5\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.6\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.9\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Wave & Rollback unit & Procedure summary \\
+\midrule
+0 — Foundations             & Mandate     & Governance body dissolved or reabsorbed; sovereignty grid de-adopted (informational state preserved). \\
+1 — Identity                & Application cohort & Cohort returned to the incumbent identity provider; federation metadata refreshed; user re-onboarded if needed. Incumbent identity provider kept warm 6--12 months. \\
+2 — Observability           & Collector source & New collectors removed at the source; legacy log paths unaffected throughout; parallel store decommissioned. \\
+3 — Network                 & Segment / building & Segment configuration reverted to pre-cut-over version under change control; inter-segment routing rules updated. \\
+4 — Policy                  & Policy rule & New bundle deployed reverting the rule to shadow or removing it; incumbent enforcement (conditional-access expression, in-app rule) re-instated. \\
+5 — Pilot                   & Pilot     & Pilot decommissioned per Wave~5 stop procedure; data exported; tenancy released. \\
+6 — Endpoint                & Population & Population returned to advisory mode; posture rule reverted in policy bundle. \\
+7 — Audit and IR            & Runbook   & Refactored runbook reverted to prior version; refactored detections reverted in detection corpus. \\
+8 — Workload classification & Workload  & Workload classification revised through labelling governance; cluster-separation schedule extended. \\
+9 — Lifecycle automation    & Consumer group & Group returned to ticket-driven flow; self-service portal disabled for the group. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{Data preservation during rollback}
+\label{sec:rv-data}
+
+A rollback that succeeds technically but loses institutional data
+has not actually succeeded. Three classes of data require explicit
+preservation.
+
+\paragraph{Operational data produced under the wave.} Audit
+events, decision logs, configuration histories produced while the
+wave was active are preserved according to the institution's
+classification scheme. The rollback does not delete this data; it
+only changes the operational state of the components that produced
+it. The data remains available to subsequent investigation and to
+the post-mortem of \S\ref{sec:rv-postmortem}.
+
+\paragraph{User data affected by the wave.} Where a wave touches
+user-facing storage or workspaces (Wave~5 pilot, Wave~8 workload),
+the rollback preserves the user data through documented export
+procedures. The export occurs before the rollback executes; the
+exported data is provided to the user and retained according to the
+institutional retention policy.
+
+\paragraph{Migration artefacts.} Configuration that was authored
+during the wave (policy-as-code rules, GitOps manifests, runbook
+revisions) is not discarded by the rollback. It remains in version
+control as a historical record and as a starting point for any
+future re-attempt.
+
+%-----------------------------------------------------------------------------
+\section{Communication during rollback}
+\label{sec:rv-communication}
+
+Rollback communication addresses three audiences with three
+distinct needs.
+
+\paragraph{Affected user constituency.} The constituency directly
+affected by the rollback (a faculty whose segment is reverted, a
+research group whose pilot is decommissioned, a population whose
+posture rule is reverted) receives advance notice through the
+established communication channel for the wave. The notice
+includes the rollback timeline, the operational impact, and the
+named contact for questions.
+
+\paragraph{Programme governance.} The governance body established
+in Wave~0 is informed of the rollback at its next regular cycle,
+or earlier if the rollback affects the programme's overall plan.
+The information is decision-oriented: what triggered the
+rollback, what was preserved, what the next steps are.
+
+\paragraph{External stakeholders.} Where the rollback affects
+external relationships (federation partners, supplier
+contracts, regulatory bodies whose obligations are touched by
+the wave), explicit communication ensures that the external
+parties are not surprised. The message is calibrated to the
+stakeholder: federation partners need technical detail,
+suppliers need contractual clarity, regulators need
+documentation that the institution remains within its
+obligations.
+
+%-----------------------------------------------------------------------------
+\section{Post-mortem and re-planning}
+\label{sec:rv-postmortem}
+
+A rollback is followed by a structured post-mortem. The intent is
+not to assign blame but to extract learning that the next attempt
+can apply.
+
+\paragraph{Post-mortem template.} The post-mortem records, at
+minimum: the trigger that produced the rollback decision, the
+rollback execution itself (what worked, what did not), the data and
+communication outcomes, the root cause as best understood, and the
+recommendations for any future attempt. The template is consistent
+across waves so that post-mortems accumulate into a comparable
+record.
+
+\paragraph{Conditions for re-attempt.} The post-mortem produces
+explicit conditions under which the wave (or its rolled-back
+portion) may be re-attempted. The conditions typically include
+specific technical changes, process changes, or pre-requisites that
+were absent the first time. A re-attempt is treated as a new wave
+phase, not as a continuation of the original.
+
+\paragraph{Lessons-learned propagation.} The post-mortem is shared
+with the broader programme, with peer institutions through the
+\gls{nren} community, and where appropriate with the international
+network anticipated in phase~2. The institutional cost of the
+rollback becomes shared learning; the next institution that
+attempts the same wave benefits from the experience.
+
+\medskip
+
+\noindent The reversibility playbook is the discipline that allows
+the playbook of Part~III to be ambitious without being reckless.
+An institution that has internalised the playbook can commit to a
+wave with the confidence that, if the wave proves unworkable, the
+institution will return to a known state at acceptable cost. That
+confidence is what makes the architecture transformation a
+governance decision rather than a leap of faith.

@@ -1,0 +1,106 @@
+% ============================================================================
+% GLOSSARY OF ACRONYMS AND KEY TERMS  (SUIT, institution-neutral)
+% ----------------------------------------------------------------------------
+% AUTO-DERIVED from shared/glossary-defs.tex (the single source of truth for
+% term definitions). Only the institution-neutral entries are rendered here.
+% Navigation targets use \glstarget{key} so that in-text \gls{key} links
+% resolve to this section.
+% ============================================================================
+
+\section*{Glossary of Acronyms and Key Terms}
+\addcontentsline{toc}{section}{Glossary of Acronyms and Key Terms}
+
+\small
+
+\subsection*{Technical Infrastructure}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{acl}ACL] Access Control List --- a set of rules on a network device that permits or denies traffic based on source/destination addresses and ports.
+    \item[\glstarget{api}API] Application Programming Interface --- a standardised interface allowing software systems to communicate with each other.
+    \item[\glstarget{byod}BYOD] Bring Your Own Device --- the practice of employees or students using personal devices to access institutional resources.
+    \item[\glstarget{dhcp}DHCP] Dynamic Host Configuration Protocol --- automatically assigns IP addresses to devices on a network.
+    \item[\glstarget{dmz}DMZ] Demilitarised Zone --- a network segment between an internal network and the Internet, hosting externally accessible services.
+    \item[\glstarget{dns}DNS] Domain Name System --- translates human-readable domain names into IP addresses.
+    \item[\glstarget{dpi}DPI] Deep Packet Inspection --- a method of examining the content of network packets as they pass through a checkpoint.
+    \item[\glstarget{dtn}DTN] Data Transfer Node --- a server optimised for high-throughput scientific data transfers in a Science DMZ.
+    \item[\glstarget{edr}EDR] Endpoint Detection and Response --- security software monitoring endpoints for threats.
+    \item[\glstarget{hpc}HPC] High-Performance Computing --- computing systems designed for large-scale scientific simulations and data processing.
+    \item[\glstarget{iam}IAM] Identity and Access Management --- systems and processes for managing digital identities and controlling access to resources.
+    \item[\glstarget{ids}IDS] Intrusion Detection System --- monitors network traffic for suspicious activity (detection only, no inline blocking).
+    \item[\glstarget{ips}IPS] Intrusion Prevention System --- monitors and actively blocks detected threats inline.
+    \item[\glstarget{lms}LMS] Learning Management System --- platform for delivering and managing educational content (e.g. Moodle).
+    \item[\glstarget{mfa}MFA] Multi-Factor Authentication --- requiring two or more verification factors to access a resource.
+    \item[\glstarget{nac}NAC] Network Access Control --- system enforcing authentication, device posture assessment, and dynamic VLAN assignment at the network edge (e.g. PacketFence, Cisco ISE).
+    \item[\glstarget{pki}PKI] Public Key Infrastructure --- framework for managing digital certificates and encryption keys.
+    \item[\glstarget{rbac}RBAC] Role-Based Access Control --- access permissions assigned to roles rather than to individual users.
+    \item[\glstarget{sciencedmz}Science DMZ] Science Demilitarised Zone --- a network architecture pattern developed by ESnet for high-performance scientific data transfers, bypassing enterprise firewalls in favour of ACLs and dedicated IDS.
+    \item[\glstarget{sdn}SDN] Software-Defined Networking --- centralised, programmable control of network behaviour.
+    \item[\glstarget{siem}SIEM] Security Information and Event Management --- centralised platform for collecting and analysing security logs and alerts.
+    \item[\glstarget{soc}SOC] Security Operations Centre --- team and facility responsible for monitoring and responding to security incidents.
+    \item[\glstarget{sso}SSO] Single Sign-On --- authentication allowing access to multiple systems with one set of credentials.
+    \item[\glstarget{tac}TAC] Trusted Activity Context --- a coherent, validated environment assembling data, tools, services, and access rights for a specific university activity (concept introduced in this report).
+    \item[\glstarget{vdi}VDI] Virtual Desktop Infrastructure --- technology delivering desktop environments from a centralised server to any device.
+    \item[\glstarget{vlan}VLAN] Virtual Local Area Network --- a logical subdivision of a physical network, isolating traffic between groups of devices.
+    \item[\glstarget{vpn}VPN] Virtual Private Network --- encrypted tunnel for secure remote connectivity.
+\end{description}
+
+\subsection*{Governance Frameworks and Standards}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{abac}ABAC] Attribute-Based Access Control --- access decisions based on attributes of the user, resource, and environment (NIST SP 800-162).
+    \item[\glstarget{cobit}COBIT] Control Objectives for Information and Related Technologies --- Control Objectives for Information and Related Technologies, IT governance framework by ISACA distinguishing governance from management.
+    \item[\glstarget{fair}FAIR] Factor Analysis of Information Risk --- Factor Analysis of Information Risk, a quantitative methodology for assessing and managing information risk.
+    \item[\glstarget{isms}ISMS] Information Security Management System --- the set of policies and procedures for systematically managing security (ISO 27001).
+    \item[\glstarget{zt}Zero Trust] Zero Trust architecture --- security model based on never trust, always verify; access decisions based on identity and device posture rather than network location (NIST SP 800-207).
+\end{description}
+
+\subsection*{European Regulations and Legal Instruments}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{aiact}AI Act] European AI Act --- Regulation (EU) 2024/1689 on artificial intelligence, risk-based classification of AI systems.
+    \item[\glstarget{cjeu}CJEU] Court of Justice of the European Union --- the EU highest court, interpreting EU law.
+    \item[\glstarget{dpo}DPO] Data Protection Officer --- person responsible for overseeing GDPR compliance within an organisation.
+    \item[\glstarget{ecthr}ECtHR] European Court of Human Rights --- court enforcing the ECHR, based in Strasbourg.
+    \item[\glstarget{edpb}EDPB] European Data Protection Board --- EU body ensuring consistent application of the GDPR.
+    \item[\glstarget{edps}EDPS] European Data Protection Supervisor --- independent EU authority overseeing the application of GDPR by EU institutions and bodies (distinct from the EDPB which coordinates national DPAs).
+    \item[\glstarget{enisa}ENISA] European Union Agency for Cybersecurity --- European Union Agency for Cybersecurity.
+    \item[\glstarget{gdpr}GDPR] General Data Protection Regulation --- General Data Protection Regulation (EU) 2016/679 -- EU regulation on the protection of personal data.
+    \item[\glstarget{icradp}ICRADP] Independent Commission for Reasonable Adjustments of Digital Policies --- Independent Commission for Reasonable Adjustments of Digital Policies (proposed in this report; French: CARPN).
+    \item[\glstarget{nis2}NIS2] NIS2 Directive --- NIS2 Directive (EU) 2022/2555 -- directive on measures for a high common level of cybersecurity.
+\end{description}
+
+\subsection*{Cross-border Data Transfers}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{scc}SCC] Standard Contractual Clauses --- pre-approved European Commission contractual clauses for transfers of personal data outside the EEA; valid under Schrems II only when supplemented by a Transfer Impact Assessment and supplementary measures.
+    \item[\glstarget{tia}TIA] Transfer Impact Assessment --- documented assessment of whether a third country offers a level of personal-data protection essentially equivalent to EU law, required by CJEU Schrems II for transfers outside the EEA when relying on Standard Contractual Clauses.
+\end{description}
+
+\subsection*{Sovereignty Grid and Technical Reference Vocabulary}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{byok}BYOK] Bring Your Own Key --- a key-management arrangement in which the customer generates and provides the encryption keys used by a third-party service, retaining custody and rotation control.
+    \item[\glstarget{hyok}HYOK] Hold Your Own Key --- an arrangement stronger than BYOK in which the customer retains the keys in their own infrastructure (typically an HSM) and the service never has cleartext access; cryptographic operations require live customer participation.
+    \item[\glstarget{iot}IoT] Internet of Things --- networked devices typically embedded in physical objects (sensors, controllers, lab instruments) with limited or no user interface and constrained security update mechanisms.
+    \item[\glstarget{it}IT] Information Technology --- the systems, software, networks and processes used to store, manipulate and transmit institutional information.
+    \item[\glstarget{opa}OPA] Open Policy Agent --- CNCF graduated open-source policy decision engine using the Rego language; widely adopted as a general-purpose authorisation and admission-control PDP.
+    \item[\glstarget{pdp}PDP] Policy Decision Point --- the component that evaluates a request against the policy corpus and returns a decision; distinct from the Policy Enforcement Point (PEP) that applies the decision.
+    \item[\glstarget{pep}PEP] Policy Enforcement Point --- the component that intercepts an access request, queries the PDP, and applies the returned decision (allow/deny plus obligations).
+    \item[\glstarget{rfp}RFP] Request for Proposal --- a procurement document issued by an institution to solicit proposals from suppliers, specifying functional, technical, and contractual requirements.
+    \item[\glstarget{scim}SCIM] System for Cross-domain Identity Management --- IETF standard (RFC 7643/7644) for automating the exchange of user identity information between identity domains.
+    \item[\glstarget{tls}TLS] Transport Layer Security --- IETF cryptographic protocol (RFC 8446 for TLS 1.3) providing confidentiality and integrity for network communications; the foundation of HTTPS.
+\end{description}
+
+\subsection*{Research Networks and Organisations}
+
+\begin{description}[style=nextline, leftmargin=2.5cm, font=\normalfont\bfseries]
+    \item[\glstarget{csirt}CSIRT] Computer Security Incident Response Team --- team responsible for detecting, analysing, and responding to cybersecurity incidents.
+    \item[\glstarget{edugain}eduGAIN] eduGAIN interfederation service --- global interfederation service connecting identity federations, enabling cross-institutional single sign-on.
+    \item[\glstarget{eduroam}eduroam] Education Roaming --- Education Roaming, federated Wi-Fi service allowing users to connect at any participating institution worldwide using their home credentials.
+    \item[\glstarget{first}FIRST] Forum of Incident Response and Security Teams --- Forum of Incident Response and Security Teams, global network of CSIRTs facilitating coordination across national and sectoral incident-response teams.
+    \item[\glstarget{geant}GEANT] GEANT pan-European research network --- pan-European backbone network connecting 40+ NRENs, serving 50 million users in 10,000+ institutions.
+    \item[\glstarget{nren}NREN] National Research and Education Network --- a specialised ISP dedicated to supporting research and education (each country operates one).
+\end{description}
+
+\normalsize
+

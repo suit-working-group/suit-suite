@@ -1,0 +1,213 @@
+%============================================================================
+% COMPANION DOCUMENT — Executive Summary for the University Bodies
+% Companion to: "Infrastructure and Organisation of Information Systems
+%                for the adopting university"
+%============================================================================
+\documentclass[12pt,a4paper,twoside]{article}
+
+% --- Encoding and language ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% --- Page layout (compact for 2-3 pages) ---
+\usepackage[top=1.8cm,bottom=1.6cm,left=2.2cm,right=2.2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.05}
+
+% --- Typography ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Graphics and colours ---
+\usepackage[dvipsnames,table]{xcolor}
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+
+% --- Lists ---
+\usepackage{enumitem}
+
+% --- Symbols (checkmarks, crosses) ---
+\usepackage{pifont}
+\setlist{nosep,leftmargin=1.5em}
+
+% --- Links ---
+\usepackage{xr-hyper}  % must be loaded before hyperref; imports section labels from the assembled book
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,urlcolor=BrickRed]{hyperref}
+% Import section labels from the assembled policy book so \nameref{} resolves section names in the standalone build
+\externaldocument{../out/policy-EN}
+
+% --- Bibliography: biblatex + biber ---
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{../../shared/suit-consolidated.bib}
+
+% --- Bibliography display modes (standard / annotated / full) ---
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% --- Glossary with tooltips ---
+\usepackage{gls-modes}
+\input{../../shared/glossary-defs}
+
+% --- Localization (key/value layer 0: generic defaults) ---
+% \loc{key} routes a generic role-phrase through the suite localization layer.
+% The shared defaults are the canonical generic values; the overrides below
+% bind each key used in THIS companion to the exact generic role-phrase already
+% present in its prose, so the generic edition renders byte-for-byte unchanged.
+\usepackage{localization}
+\input{../../shared/localization-defaults}
+\setloc{nren-name}{national research-and-education network}
+\setloc{pilot-entities}{institution's \gls{hpc} team}
+\setloc{ai-regulation}{applicable AI-governance regime}
+\setloc{nis2-national-transposition}{national NIS2 transposition}
+\setloc{national-notification-platform}{national reporting platform}
+\setloc{nis2-supervisory-authority}{competent authority}
+
+% --- Boxes ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% --- Logo ---
+\usepackage{graphicx}
+\usepackage{suit-logo}
+
+% --- Headers ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,RE]{\small\textit{Executive Summary --- University IT Infrastructure}}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Watermark (temporarily disabled) ---
+%\usepackage[pages=all]{background}
+%\backgroundsetup{
+%  contents={\sffamily\bfseries CONFIDENTIAL},
+%  color=lightgray,
+%  scale=7,
+%  angle=45,
+%  opacity=0.20
+%}
+
+% --- No section numbering ---
+\setcounter{secnumdepth}{0}
+
+% --- Compact sections ---
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.5em}{0.2em}
+\titleformat{\section}{\normalsize\bfseries\color{NavyBlue}}{}{}{}
+\titleformat{\subsection}{\small\bfseries\color{MidnightBlue}}{}{}{}
+
+% --- Custom reference-to-main-document command ---
+\newcommand{\mainref}[1]{%
+  \par\vspace{1pt}
+  {\footnotesize\color{gray}\itshape
+  $\triangleright$~Full analysis and references: #1
+  in the complete suite~\cite{suit-wg}.}\par\vspace{2pt}
+}
+
+% --- Coloured principle box ---
+\newtcolorbox{principlebox}[1][]{%
+  colback=NavyBlue!5!white,
+  colframe=NavyBlue!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+% --- Alert box ---
+\newtcolorbox{alertbox}[1][]{%
+  colback=BrickRed!5!white,
+  colframe=BrickRed!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+% --- Action box ---
+\newtcolorbox{actionbox}[1][]{%
+  colback=OliveGreen!5!white,
+  colframe=OliveGreen!70!black,
+  fonttitle=\bfseries,
+  title=#1,
+  boxrule=0.5pt,
+  sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt
+}
+
+% --- Prevent vertical stretching ---
+\raggedbottom
+
+%============================================================================
+\begin{document}
+
+% --- Title block (no separate title page — space is precious) ---
+\begin{center}
+\vspace*{-0.2cm}
+
+{\suittitlelogo[0.30\textwidth]}
+
+\smallskip
+{\Large\bfseries The University Spirit in the Digital Age}
+
+\smallskip
+
+{\normalsize\itshape For an Open, Secure and Mission-Aligned Digital Infrastructure}
+
+\smallskip
+
+{\small Executive Summary addressed to the University Bodies}
+
+\smallskip
+
+{\scriptsize Companion to: \emph{``Infrastructure and Organisation of Information Systems
+for the adopting university --- Analysis, State of the Art and Propositions''}}
+
+\smallskip
+
+\suitmetablock
+
+\medskip
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white,
+    colframe=NavyBlue!85!black,
+    boxrule=1.2pt,
+    arc=3pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    halign=center
+]
+{\normalsize\bfseries A segmented architecture with flexible secure contexts\\[3pt]
+for a modern university --- where digital security\\[3pt]
+and academic missions reinforce each other}
+\end{tcolorbox}
+
+\end{center}
+
+\smallskip
+\noindent\rule{\textwidth}{0.6pt}
+
+\input{companion-body-EN}
+
+\vspace{1em}
+\noindent\rule{\textwidth}{0.4pt}
+\printbibliography[title={\normalsize References}]
+
+\printabstractappendix
+
+\end{document}

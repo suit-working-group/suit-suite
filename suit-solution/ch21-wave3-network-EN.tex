@@ -1,0 +1,301 @@
+% ============================================================================
+% Chapter 21 --- Wave 3: Network segmentation
+% ----------------------------------------------------------------------------
+% Purpose : declare zones, baseline ACL, Science DMZ established. Brownfield
+%           trajectories dominate; greenfield is rare.
+% Page target: ~6 pages.
+% Dependencies: Wave 0 (Ch. 18); recommended Wave 2 (Ch. 20) to baseline
+%               flows; reference layer Ch. 8 (zone catalogue D8.6, standard
+%               interface discipline D8.7).
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D21.1 brownfield trajectory labels mapped to network reality
+%   D21.2 cut-over per building/organizational-unit/segment, not institution-wide
+%   D21.3 Science DMZ established in this wave
+%   D21.4 exit criteria reference Network conformance subset (D16.5)
+% ============================================================================
+
+\chapter{Wave~3 --- Network segmentation}
+\label{ch:wave3-network}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~3 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Its pre-requisite is Wave~0;
+Wave~2 is recommended (to baseline current flows before changing
+the segmentation). It instantiates the network contract of
+\trchap{ch:network}{}, in particular the zone catalogue of
+\S\ref{sec:nw-reference} (D8.6) and the standard-interface
+discipline of D8.7. Closure is gated by the four Network tests of
+\trchap{ch:conformance}{}.
+\end{caveatbox}
+
+\paragraph{A note on the trajectory labels.} The trajectory labels
+\emph{brownfield single-suite-centric} and \emph{brownfield hybrid}
+are used consistently across the playbook, with their meaning
+calibrated for identity, endpoint, and observability. In the
+network layer, the operationally relevant distinction is between
+single-vendor and multi-vendor estates rather than between
+Microsoft and non-Microsoft. The labels are retained for
+consistency; their meaning in this chapter is mapped accordingly.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w3-goal}
+
+The goal of Wave~3 is to bring the institution's network
+infrastructure into conformance with the contract of
+\trchap{ch:network}{}: a declared zone catalogue with documented
+security profiles per zone, standards-aligned attachment via
+RADIUS, declarative configuration via NETCONF/YANG (or equivalent),
+flow telemetry in IPFIX, and a Science DMZ where the research
+mission warrants it. The wave's success is measured against the
+zone catalogue and the standard-interface discipline, not against
+a complete refresh of the physical fabric.
+
+\paragraph{What the wave does not undertake.} Wave~3 does not
+require the institution to replace its network gear. It requires
+that the gear be operated through standards on the operationally
+relevant paths, that the zones be declared and enforced, and that
+the conformance tests of \trchap{ch:conformance}{} pass on a
+representative sample.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w3-prereq}
+
+Beyond Wave~0, four operational conditions strengthen Wave~3:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item a current inventory of network flows --- ideally
+    established by Wave~2 --- so that the segmentation can be
+    designed against actual usage rather than against assumed
+    usage;
+  \item an institutional addressing plan that supports the zone
+    catalogue, with sufficient address space for the institution's planned
+    growth (research, BYOD, IoT, or other drivers as applicable);
+  \item a change-window agreement with the principal user
+    constituencies (academic organizational units, research
+    projects, administrative services), since per-segment cut-over
+    requires scheduled
+    downtime tolerable to those constituencies;
+  \item an identified accountable team for the network operation,
+    with authority to coordinate across organizational-unit IT
+    functions where those exist independently.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w3-coexistence}
+
+Wave~3 is the wave with the most spatially distributed coexistence
+in the playbook: the legacy flat network and the new zoned network
+operate together for as long as the institution requires, with the
+boundary of coexistence drawn at the building, the organizational
+unit, or the network segment level rather than at the institutional
+level.
+
+\paragraph{Cut-over by perimeter.} Each building, organizational
+unit, or segment is cut over to the new segmentation as a
+self-contained
+operation: the new zone is provisioned, the attachment service is
+configured, the flow telemetry is activated, and the segment is
+moved over. The remainder of the institution continues to operate
+on the legacy flat network during this period. Per-segment cut-over
+allows the institution to learn at modest scale before propagating
+the design.
+
+\paragraph{Bridge between zones during coexistence.} Some flows
+must traverse the boundary during coexistence (services in a
+migrated zone consumed by users in non-migrated buildings, for
+example). The bridge is built on routing rules under change
+control, with the explicit understanding that bridges are
+temporary; bridges that have not been retired within an agreed
+horizon are flagged for the governance body's attention.
+
+\paragraph{Science DMZ established early.} The Science DMZ, where
+present, is typically established early in the wave because its
+construction is largely orthogonal to the rest of the segmentation.
+Establishing it early demonstrates the architecture's research-
+serving capability and decouples its delivery from the broader
+cut-over schedule.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w3-greenfield}
+
+For institutions in a genuinely greenfield network position --- a
+new building, a new site, a research-network refoundation --- the
+trajectory is direct: the zone catalogue is implemented from the
+start, the attachment service is the new RADIUS deployment, the
+Science DMZ is a separate fabric, and the gear is procured against
+the standard-interface contract. Indicative duration is six to
+nine months for a new building of moderate size; longer for
+site-scale greenfield, in which case the trajectory is split
+into staged sub-projects.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w3-brownfield-ms}
+
+For institutions whose network is built around a single dominant
+vendor (a homogeneous Cisco, Juniper, Aruba, or Arista estate),
+Wave~3's principal task is to operationalise the standard
+interfaces of the existing gear without acquiring new equipment.
+
+\paragraph{Pattern.} The existing gear is configured through
+NETCONF/YANG (or its vendor-supported standard equivalent) for
+the operationally relevant changes. The vendor's management
+console is retained for diagnostic purposes only; production
+changes flow through the standard interface under version control.
+RADIUS attachment is reconfigured to consume identity attributes
+from Wave~1's identity layer; flow telemetry is brought into the
+collector layer of Wave~2.
+
+\paragraph{What changes in Wave~3.} The zone catalogue is
+declared, the attachment service is reconfigured for zone
+assignment, the Science DMZ is established, the standard-interface
+discipline is operationalised, and the conformance tests of
+\S\ref{sec:cf-suite} pass on a representative sample. The gear
+itself remains on its current refresh schedule; its eventual
+substitution at refresh time is informed by the sovereignty grid
+but not predetermined by Wave~3.
+
+\paragraph{What does not change.} The physical topology, the
+cabling, the gear inventory, and the existing vendor relationship.
+The institutional procurement framework continues through this
+wave; the wave produces information that the next procurement
+cycle will use, not procurement decisions itself.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months,
+dominated by the per-segment cut-over schedule and by the change
+windows that user constituencies tolerate.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid (multi-vendor estate)}
+\label{sec:w3-brownfield-hybrid}
+
+For institutions whose network is multi-vendor --- often the
+result of acquisitions, organizational-unit-level autonomy, or
+research-network specialisation --- Wave~3's principal task is to
+reconcile the
+configuration model across vendors while preserving the existing
+fabric.
+
+\paragraph{Pattern.} The institution adopts a declarative
+configuration management layer (for example an
+infrastructure-automation toolchain or a source-of-truth-driven
+configuration generator, or a comparable approach)
+that emits NETCONF/YANG to each vendor and tolerates the residual
+vendor-specific syntax for the cases where the standard does not
+yet cover the configuration in question. The zone catalogue is
+declared once at the institutional level and applied consistently
+across vendors.
+
+\paragraph{What changes in Wave~3.} The same zone catalogue and
+attachment behaviour are realised across the multi-vendor estate;
+flow telemetry is normalised at the collector layer (D12.3)
+regardless of the vendor's IPFIX dialect; the Science DMZ is
+established with the understanding that its specific gear may
+differ from the rest of the estate and that this is acceptable.
+The configuration is brought under version control across vendors.
+
+\paragraph{What does not change.} The vendor mix itself is not
+changed by this wave. Organizational-unit-level network autonomy,
+where it exists, is respected; the wave provides the institutional
+contract
+under which the autonomy operates, not a new central authority.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months,
+similar to the single-vendor trajectory but with a higher initial
+investment in the cross-vendor configuration management layer and
+a correspondingly lower marginal cost per subsequent zone.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w3-reversibility}
+
+Wave~3 is reversible at the per-segment level for an indicative
+window of three to six months after each segment's cut-over.
+Beyond that window, reversal is operationally possible but is
+treated as a new project rather than as a wave rollback.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Each segment's pre-cut-over configuration is preserved in
+    version control and is re-deployable if the post-cut-over
+    state proves unworkable for that segment.
+  \item Inter-segment routing rules established during coexistence
+    are documented per segment, so that a reversal of one segment
+    does not affect others.
+  \item Where a vendor-specific standard interface proves
+    operationally insufficient, the wave's response is documented
+    --- substitution at next refresh, retention with documented
+    sovereignty cost, or partial retention --- rather than a
+    full-wave reversal.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w3-exit}
+
+Wave~3 closes when the four Network tests of the conformance suite
+of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on a
+representative sample of the segmentation, when the agreed segment
+coverage is achieved, and when the Science DMZ (where present)
+operates against its measurement targets.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item NETCONF/YANG configuration apply succeeds without recourse
+    to the supplier's management console; RADIUS attachment yields
+    expected zone assignment; IPFIX flow records carry the
+    canonical \texttt{correlation\_id}; configuration export and
+    partial re-import on alternative-vendor switch restores
+    expected connectivity on a test segment. (Network conformance
+    subset.)
+  \item Segment coverage: the institutionally agreed proportion of
+    segments has been cut over. The remainder is in a documented
+    schedule.
+  \item Zone responsibility charters: every cut-over zone carries
+    its charter, naming the accountable owner of the zone's
+    published security profile.
+  \item Science DMZ: where present, operating against its
+    documented throughput and latency targets, with measurement
+    data routed to the observability layer.
+\end{itemize}
+
+\begin{realworldbox}[Network segmentation precedents]
+\noindent The Science DMZ pattern, developed at ESnet (Lawrence
+Berkeley National Laboratory) and adopted at a number of
+research-intensive universities, is one of the most extensively
+documented patterns in academic network architecture. Multi-zone
+campus segmentation is reported in various forms across large
+research-intensive universities, among the institutions whose
+architectural choices have been discussed in academic and
+\gls{nren} community fora. At regional and
+global scale the equivalent function is met by \gls{nren}- and
+experiment-operated dedicated networks --- the regional and national
+research and education networks' dedicated
+circuits~\cite{geant} and the
+CERN LHCOPN/LHCONE fabric~\cite{cern-lhcone} --- rather than
+by a campus enclave. Specific deployment details should be verified
+against current public documentation when cited.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w3-regulatory}
+
+\noindent Wave~3 establishes zone-based segmentation and
+attachment-time enforcement. It contributes to
+\gls{gdpr}~Art.~32(1) (security through technical measures
+applied at the network layer) and operationalises NIS2
+Art.~21(2)(a) (risk-analysis applied to network design) and
+(g) (cyber-hygiene baseline including segregation). It is the
+principal anchor of 27001~A.8.20 (network security) and A.8.22
+(segregation of networks) and contributes to NIST CSF
+\textsf{PROTECT} (PR.IR --- infrastructure resilience). The
+Science DMZ pattern operationalises segregation specifically for
+high-throughput research traffic. Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.

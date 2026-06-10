@@ -1,0 +1,593 @@
+% ============================================================================
+% RENDER WRAPPER (solution-summary-EN) --- instantiated edition. GENERATED FILE.
+% Produced by tools/regen-instance-wrappers.sh from the generic source.
+% Sanctioned delta ONLY: \genericroot remap of shared paths + \input{../set}
+% after the Layer-0 defaults. Do NOT edit content here; edit the generic
+% source and regenerate. Build: latexmk -pdf solution-summary-EN.tex
+% ============================================================================
+%============================================================================
+% OPERATIONAL EXECUTIVE SUMMARY of the Technical Reference
+% Sustainable University IT --- A Technical Reference for Architecture and Migration
+%
+% Audience: CISO, CTO, infrastructure / network team leads (operational).
+% Derived from: ../solution-EN.tex and its chapters (the "Technical Reference").
+% Methodology: /companion, applied with an OPERATIONAL framing.
+% Fully generic: no institution named.
+%============================================================================
+\documentclass[11pt,a4paper,twoside]{article}
+% --- instantiation paths (sanctioned delta) ---
+\newcommand{\genericroot}{../../..}
+\newcommand{\catdir}{\genericroot/categories}% consumed by ../set.tex
+
+% --- Encoding and language ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% --- Page layout (compact for 3-6 pages) ---
+\usepackage[top=1.8cm,bottom=1.6cm,left=2.1cm,right=2.1cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.04}
+
+% --- Typography ---
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% --- Graphics and colours ---
+\usepackage{graphicx}
+\usepackage{suit-logo}
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{Slate}{RGB}{70,70,90}
+\definecolor{Crimson}{RGB}{220,20,60}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,calc,backgrounds}
+
+% --- Tables ---
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+
+% --- Lists ---
+\usepackage{enumitem}
+\usepackage{pifont}
+\setlist{nosep,leftmargin=1.5em}
+
+% --- Links ---
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=OliveGreen,
+            urlcolor=BrickRed]{hyperref}
+\usepackage{xurl}
+
+% --- Quotation handling (required by biblatex) ---
+\usepackage{csquotes}
+
+% --- Bibliography: biblatex + biber (shared consolidated bib) ---
+\usepackage[backend=biber,
+            style=numeric,
+            sorting=none,
+            sortcites=true,
+            maxbibnames=99]{biblatex}
+\addbibresource{\genericroot/shared/suit-consolidated.bib}
+
+% --- Bibliography display modes (standard / annotated / full) ---
+\usepackage{bib-modes}
+\setbibmode{linked}
+
+% --- Glossary with tooltips ---
+\usepackage{gls-modes}
+\input{\genericroot/shared/glossary-defs}
+
+% === Localization (key/value layer 0: generic defaults) ===
+\usepackage{localization}
+\input{\genericroot/shared/localization-defaults}
+
+% --- Boxes ---
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% --- Headers ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LO,RE]{\small\textit{Operational Summary --- Sustainable University IT}}
+\fancyhead[LE,RO]{\small\thepage}
+\fancyfoot[C]{\suitfootlogo}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Semantic commands (aligned with the rest of the suite) ---
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\institution}[1]{\textsc{#1}}
+\newcommand{\framework}[1]{\textsf{#1}}
+
+% --- No section numbering ---
+\setcounter{secnumdepth}{0}
+
+% --- Compact sections ---
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{0.8em}{0.3em}
+\titlespacing*{\subsection}{0pt}{0.5em}{0.2em}
+\titleformat{\section}{\normalsize\bfseries\color{NavyBlue}}{}{}{}
+\titleformat{\subsection}{\small\bfseries\color{MidnightBlue}}{}{}{}
+
+%----------------------------------------------------------------------------
+% Cross-reference helpers back to the full Technical Reference (SUITSOLUTION).
+% Self-contained: the summary names the target chapter explicitly so that the
+% pointer resolves without building the full Reference first.
+%----------------------------------------------------------------------------
+% \trchap{N}{title} -> "Chapter N (title) of the Technical Reference"
+\newcommand{\trchap}[2]{%
+  Chapter~#1%
+  \ifx\\#2\\\else\space(\emph{#2})\fi\space of the Technical Reference%
+}
+% \mainref{...} -> grey italic pointer line into the full Reference
+\newcommand{\mainref}[1]{%
+  \par\vspace{1pt}
+  {\footnotesize\color{gray}\itshape
+  $\triangleright$~Full treatment, contracts and references: #1,
+  in the Technical Reference~\cite{ng-tech-ref-2026}.}\par\vspace{2pt}}
+
+% --- Operational box palette (consistent with the suite) ---
+% principle (NavyBlue) / alert (BrickRed) / action (OliveGreen)
+\newtcolorbox{principlebox}[1][]{%
+  colback=NavyBlue!5!white, colframe=NavyBlue!70!black,
+  fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+
+\newtcolorbox{alertbox}[1][]{%
+  colback=BrickRed!5!white, colframe=BrickRed!70!black,
+  fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+
+\newtcolorbox{actionbox}[1][]{%
+  colback=OliveGreen!5!white, colframe=OliveGreen!70!black,
+  fonttitle=\bfseries, title={#1}, boxrule=0.5pt, sharp corners=south,
+  left=6pt, right=6pt, top=4pt, bottom=4pt}
+
+% --- Prevent vertical stretching ---
+\raggedbottom
+
+%============================================================================
+\input{../set}% Layer-1+2: archetype + institution values (sanctioned delta; loaded LAST so edition values override any document-scope \setloc of the generic shell)
+\begin{document}
+
+% --- Title block (no separate title page --- space is precious) ---
+\begin{center}
+\vspace*{-0.2cm}
+
+{\suittitlelogo[0.30\textwidth]}
+
+\smallskip
+{\Large\bfseries Sustainable University IT --- Operational Summary}
+
+\smallskip
+{\normalsize\itshape Reference Architecture, Migration Waves and Acceptance Gates,
+at a Glance}
+
+\smallskip
+{\small For the CISO, the CTO, and infrastructure / network team leads}
+
+\smallskip
+{\scriptsize Operational companion to: \emph{``Sustainable University IT ---
+A Technical Reference for Architecture and Migration''}}
+
+\smallskip
+\suitmetablock
+
+\medskip
+
+\begin{tcolorbox}[
+    colback=NavyBlue!8!white, colframe=NavyBlue!85!black,
+    boxrule=1.2pt, arc=3pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt, halign=center]
+{\normalsize\bfseries Nine layers, three planes, ten waves ---
+each wave reversible, each closure proven\\[3pt]
+by conformance, every component replaceable through a published interface.}
+\end{tcolorbox}
+\end{center}
+
+\smallskip
+\noindent\rule{\textwidth}{0.6pt}
+
+%============================================================================
+\section{Operational synopsis}
+%============================================================================
+
+\noindent We are standing up a \keyword{vendor-neutral reference
+architecture} for university IT and a \keyword{brownfield migration
+playbook} to reach it from whatever estate exists today. In operational
+terms: a small, strongly protected core (identity, observability, network
+backbone) is established first; authorisation is lifted out of scattered
+application logic and identity-provider-native rules into a single
+\gls{pdp}; the network is carved into declared zones; and every workload,
+session and access decision is bound to a \gls{tac} --- a validated bundle of
+subject, action, resource and context that the platform can activate,
+audit and tear down as a unit. The architecture's normative content is a
+set of \keyword{interface contracts} (OIDC/SCIM, RADIUS, NETCONF/YANG, the
+Kubernetes and S3 APIs, OpenTelemetry, KMIP/ACME), not a product list:
+open-source instantiations prove the contracts are realisable, and any
+compliant component --- proprietary or open --- is admissible.
+The migration is delivered as \keyword{ten waves} under a dependency graph,
+each with a coexistence (shadow / dual-stack) pattern, a declared
+reversibility window, and conformance-based exit gates. The pay-off for
+operations is concrete: incidents are bounded by TAC instead of cascading
+through a flat perimeter, suppliers are swapped through a rehearsed exit
+rather than a forklift, and ``done'' is a passing test rather than a
+declaration.
+
+\mainref{\trchap{1}{Synthesis}}
+
+%============================================================================
+\section{Reference architecture at a glance: nine layers, three planes}
+%============================================================================
+
+\begin{table}[h!]
+\centering\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{3.0cm}
+  >{\raggedright\arraybackslash}p{3.3cm}
+  >{\raggedright\arraybackslash}X}
+\toprule
+\textbf{Plane} & \textbf{Layers} & \textbf{Operational role / primary contract} \\
+\midrule
+Subject \& Trust &
+  Identity (Ch.~6), Endpoint (Ch.~11), Crypto (Ch.~13) &
+  Who is acting, from where, with what assurance. OIDC/SAML2/SCIM~2.0;
+  posture schema; PKCS\#11/ACME/KMIP. Read by the Control plane. \\
+\addlinespace
+Execution &
+  Network (Ch.~8), Compute (Ch.~9), Storage (Ch.~10) &
+  Where activity runs and on which data. RADIUS + NETCONF/YANG + IPFIX;
+  Kubernetes/OpenStack/OCI; S3/NFS/KMIP. Written by the Control plane. \\
+\addlinespace
+Control \& Governance &
+  Policy (Ch.~7), Observability (Ch.~12), Orchestration (Ch.~14) &
+  How decisions are made, recorded and executed. \gls{pdp} verdict
+  \texttt{\{verdict, obligations, policy\_version\}}; OpenTelemetry +
+  canonical TAC schema; cross-layer TAC activation (no single standard). \\
+\bottomrule
+\end{tabularx}
+\caption{The reference architecture: nine functional layers grouped in three
+planes. Two regular flows govern it --- the Subject \& Trust plane feeds the
+Control plane (identity, posture and crypto parameterise policy); the Control
+plane writes to the Execution plane (decisions enforced at Network, Compute,
+Storage; Orchestration realises them; Observability collects evidence of every
+crossing).}
+\end{table}
+
+\begin{principlebox}[Operating rule: contracts, not products]
+Procurement and acceptance reference \emph{standards}, not product names. A
+component is in production only when it speaks its layer's interface contract
+and is \keyword{replaceable}: standard interfaces with no captive extensions
+in the critical path, open state/config formats, a documented exit-data
+export within an agreed window, and no hidden supplier sidecars. The one
+honest gap is Orchestration: no single standard yet exists, so the
+cross-layer ``glue'' is bounded deliberately to avoid creating a new captive
+dependency.
+\end{principlebox}
+
+\mainref{\trchap{5}{Architectural principles} and the per-layer
+chapters~6--14}
+
+%============================================================================
+\section{Migration sequence: ten waves, dependencies, reversibility}
+%============================================================================
+
+The waves are not calendar phases; they unfold under a dependency graph that
+permits parallelism. \keyword{Wave~0} is the entry point for every
+trajectory. After it, Waves~1--3 (Identity, Observability, Network) may run
+in parallel if staffing allows; Wave~4 (Policy) needs Identity and
+Observability; Wave~5 (Pilot) is the first end-to-end exercise on a contained
+scope. \keyword{Every wave is reversible at acceptable cost during a published
+window} --- the coexistence pattern is the reversal mechanism: as long as the
+incumbent stays viable, the wave is undone by re-routing to it.
+
+\begin{table}[h!]
+\centering\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{2.2cm}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}p{1.5cm}
+  >{\raggedright\arraybackslash}p{3.0cm}}
+\toprule
+\textbf{Wave} & \textbf{Operational goal} & \textbf{Requires} &
+  \textbf{Reversibility window} \\
+\midrule
+0 --- Foundations &
+  Mandate, governance body, sovereignty grid adopted, baseline inventory.
+  No technical change. & --- &
+  Highest; decisions informational, not binding. \\
+\addlinespace
+1 --- Identity &
+  Sovereign IdP on OIDC/SAML2/SCIM, R\&E federation, reviewable attribute
+  schema, ingestible auth log. & 0 &
+  Throughout cutover; $\sim$6--12 months after final cohort. \\
+\addlinespace
+2 --- Observability &
+  Collector layer emitting canonical TAC schema; portable ingestion;
+  retention schedule. & 0 &
+  Structural; remove collectors to revert. \\
+\addlinespace
+3 --- Network &
+  Declared zone catalogue, RADIUS attachment, NETCONF/YANG config, IPFIX,
+  Science~DMZ where warranted. & 0 (rec.~2) &
+  Per-segment, $\sim$3--6 months after each cut-over. \\
+\addlinespace
+4 --- Policy &
+  \gls{pdp} deployed; selected decisions migrated from app/IdP logic;
+  authoring/review process. & 1, 2 (rec.~3) &
+  Per-policy, while shadow observation continues. \\
+\addlinespace
+5 --- Pilot &
+  One or more TACs in production on contained scope; extract learnings. &
+  1,2,3,4 & Structural; stop the pilot at any time. \\
+\addlinespace
+6 --- Endpoint &
+  Unified posture schema across OSes routed into the policy plane;
+  decommissioning integrated. & 1, 4 (rec.~2,5) &
+  Per-policy and per-population. \\
+\addlinespace
+7 --- Audit \& IR &
+  TAC-correlated investigation, refreshed IR runbooks, routine audit
+  replay. & 2,4,5 & Structurally additive; revert at boundary. \\
+\addlinespace
+8 --- Workload &
+  Classification as authoritative input to provisioning, storage binding,
+  policy; cluster-separation rule. & 1,3,4 (rec.~5) &
+  Per-workload, for the coexistence duration. \\
+\addlinespace
+9 --- Lifecycle &
+  Self-service TAC provisioning, GitOps as source of truth, stability
+  metrics. & 1--8 in some form &
+  Per-consumer-group. \\
+\bottomrule
+\end{tabularx}
+\caption{Wave sequence with required pre-requisites and indicative
+reversibility windows. Pace options: \emph{5-year compressed}
+(parallelised, higher risk tolerance), \emph{7-year balanced} (recommended
+default), \emph{10-year gradual} (renewal-aligned, lower risk). Trajectory
+varies by starting estate (greenfield, brownfield single-suite-centric,
+brownfield hybrid, selective, deferred).}
+\end{table}
+
+\begin{principlebox}[Minimal coherent core --- if resources are constrained]
+A constrained team may legitimately adopt \keyword{less}, not later: Wave~0
+(governance/inventory) + Wave~1 (sovereign identity) + Wave~2 (observability
+/ audit trail), with Wave~4 (policy) the natural next step. This delivers
+exactly the size-invariant, legally compelled functions (authentication,
+audit, segmentation discipline under the applicable data-protection
+regime --- \gls{gdpr} in the EU, with \gls{nis2} where in scope) and is a legitimate \emph{steady state}, not an abandoned
+migration. Defer or mutualise the rest along the same dependency graph.
+\end{principlebox}
+
+\mainref{\trchap{17}{How to read this playbook} and the wave
+chapters~18--27}
+
+%============================================================================
+\section{Conformance \& replaceability: the acceptance gates}
+%============================================================================
+
+A contract that cannot be checked is a slogan. Each wave closes by passing
+the conformance subset for its scope --- never by the judgement that ``the
+migration is done''. This is the single mechanism that prevents the classic
+failure mode: \keyword{a product swap disguised as architectural progress}.
+
+\begin{table}[h!]
+\centering\small
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{3.0cm} X}
+\toprule
+\textbf{Test category} & \textbf{What the gate verifies (operationally)} \\
+\midrule
+Interface fidelity (F) &
+  The component speaks the standard correctly (e.g.\ OIDC discovery metadata
+  conformant; Kubernetes upstream conformance passes; NETCONF apply without
+  the vendor console). \\
+\addlinespace
+Data portability (P) &
+  Data/config export in a documented open format and re-import into an
+  alternative without loss (SCIM export to an alternative IdP; OCI image
+  digest preserved; KMIP key migration). \\
+\addlinespace
+Exit rehearsal (X) &
+  The replacement is \emph{rehearsed}, not simulated: an alternative restores
+  service on a representative subset within the documented window. \\
+\addlinespace
+Decision auditability (A) &
+  A recorded decision replays against its recorded inputs and policy version
+  to the identical verdict; TAC deactivation reverses every recorded change. \\
+\bottomrule
+\end{tabularx}
+\caption{The four acceptance-gate categories, mapped to the four conditions
+of replaceability. Wave-to-test mapping is published per wave; e.g.\ Wave~1
+closes against the four Identity tests, Wave~3 against the four Network
+tests, Wave~5 against the union exercised by the pilot.}
+\end{table}
+
+\begin{principlebox}[How to run it]
+Run a time-boxed \keyword{conformance day}: one engineer per affected layer,
+one observability operator to retrieve replay material, a note-taker, the
+scope owner. Half a day per layer; one day for a full review. Output is a
+structured report (pass / conditional pass / fail, with evidence and
+remediation owner) and an \keyword{exit-confidence index} per layer on the
+0--3 grid scale. The index is a \emph{maturity trajectory}, not a day-one
+gate: a layer consumed as a managed/mutualised service answers
+replaceability through the provider's contractual exit terms, not a
+self-run test.
+\end{principlebox}
+
+\mainref{\trchap{16}{Conformance and replaceability tests}}
+
+%============================================================================
+\section{Sizing reference points (research-intensive reference profile) for capacity planning}
+%============================================================================
+
+\begin{principlebox}[Status of these figures]
+Indicative orders of magnitude for a \keyword{research-intensive}
+reference profile: $\sim$25{,}000 active subjects, $\sim$1{,}500 elevated-access
+staff, $\sim$500 active research projects. These are \emph{planning aids,
+not measurements}; size your own estate by direct workload measurement.
+\end{principlebox}
+
+\begin{table}[h!]
+\centering\small
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{3.0cm}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}p{2.6cm}}
+\toprule
+\textbf{Layer} & \textbf{Indicative reference points} & \textbf{Run FTE
+(shared)} \\
+\midrule
+Identity &
+  Auths/s: a few--tens steady, hundreds at peak; concurrent sessions
+  thousands; \loc{identity-federation-profile} tens--hundreds of thousands/day. & 2--4 \\
+\addlinespace
+Policy &
+  Tens--low hundreds decisions/s; $<$10\,ms p95 online decision; bundle
+  refresh in minutes. & 1--2 \\
+\addlinespace
+Network &
+  Backbone 40--400\,Gb/s aggregate; Science~DMZ at backbone order;
+  IPFIX hundreds of millions of records/day. & 3--5 \\
+\addlinespace
+Compute / Storage &
+  OpenStack + Kubernetes; Ceph multi-PB; per-class cluster separation. &
+  4--7 / 2--4 \\
+\addlinespace
+Observability &
+  Tens--hundreds of millions of events/day; tens--low hundreds of GB/day
+  compressed; 90d hot / 1y warm / multi-year cold. & 3--5 \\
+\bottomrule
+\end{tabularx}
+\caption{Selected sizing reference points and indicative run-time
+engineer-equivalents per layer (ranges are \emph{not additive}; staff are
+shared across layers). The build phase adds $\sim$1--2 FTE per active wave.}
+\end{table}
+
+\noindent\textbf{Scaling breakpoints} (reshape the instantiation, not the
+architecture): Identity $>$\,$\sim$50k subjects $\to$ horizontal
+partitioning; Audit $>$\,$\sim$500\,GB/day $\to$ hot/warm/cold tier
+separation; Policy $>$\,$\sim$5{,}000 decisions/s $\to$ per-app sidecars;
+Storage $>$ multi-PB $\to$ Ceph federation. \textbf{Down-scaling} reads the
+same logic backward: a teaching-led institution collapses planes to logical
+segments on shared hardware, mutualises compute/storage via a national
+research cloud or R\&E service, and defers the optional Science~DMZ ---
+a minimal-core envelope of $\sim$3--5 shared engineer-equivalents.
+
+\mainref{\trchap{15}{Sizing reference points}}
+
+%============================================================================
+\section{Top operational risks, mitigations, and coexistence patterns}
+%============================================================================
+
+\begin{table}[h!]
+\centering\small
+\newcommand{\warn}{\textcolor{BrickRed}{\ding{72}}\,}%
+\begin{tabularx}{\textwidth}{
+  >{\raggedright\arraybackslash}p{4.4cm} X}
+\toprule
+\textbf{Operational risk} & \textbf{Mitigation} \\
+\midrule
+\warn Product swap mistaken for architectural progress &
+  Close every wave on its conformance subset (F/P/X/A); a new IdP that fails
+  data-portability and exit-rehearsal has not closed the wave. \\
+\addlinespace
+\warn Long-running dual stack with no exit date &
+  Declare the exit date at wave open; track it in programme governance;
+  escalate on drift. \\
+\addlinespace
+\warn Bridge fails silently (sync job stops, metadata expires) &
+  Name the bridge owner explicitly at wave open, with a documented
+  escalation path; surface discrepancies through observability. \\
+\addlinespace
+\warn Bidirectional sync without conflict resolution &
+  Prefer unidirectional sync; where bidirectional is unavoidable, document
+  and test an explicit conflict-resolution rule before production. \\
+\addlinespace
+\warn Coexistence frozen as de-facto architecture &
+  Periodic review under the sovereignty grid; a coexistence unrevisited for
+  24 months is re-evaluated against current cost/benefit. \\
+\addlinespace
+\warn Reversibility forfeited under delivery pressure &
+  Forfeit only on explicit written acceptance by the competent governing
+  authority, against the grid, revisited at every renewal. \\
+\bottomrule
+\end{tabularx}
+\caption{Top operational risks during migration and their mitigations.}
+\end{table}
+
+\begin{principlebox}[Shadow-mode and coexistence patterns to standardise on]
+\begin{itemize}[nosep,leftmargin=1.2em]
+  \item \textbf{Incumbent directory $\leftrightarrow$ institutional IdP:}
+    directory stays authoritative; new IdP federates via SAML2/OIDC;
+    \emph{unidirectional} sync only.
+  \item \textbf{Policy shadow mode:} the \gls{pdp} logs decisions with the
+    same fidelity as enforcing mode before any decision becomes binding ---
+    the safe path to flip enforcement.
+  \item \textbf{Per-volume \gls{siem} $\leftrightarrow$ open store:} hot
+    investigative window in the commercial \gls{siem}; long-tail retention in
+    the open store; dashboards migrate on financial, not technical, triggers.
+  \item \textbf{Commercial hypervisor $\leftrightarrow$ open substrate;
+    enterprise array $\leftrightarrow$ distributed storage:} new workloads
+    default to the open side; legacy migrates at its natural lifecycle
+    boundary, validated by checksum.
+  \item \textbf{eduroam $\leftrightarrow$ TAC-aware Wi-Fi:} keep the federated-roaming
+    profile (eduroam) inviolate; add institutional/TAC attributes only on
+    the non-roaming path.
+\end{itemize}
+\end{principlebox}
+
+\mainref{\trchap{29}{Reversibility playbook} and
+\trchap{30}{Coexistence patterns library}}
+
+%============================================================================
+\section{What this means for the operational teams}
+%============================================================================
+
+\begin{actionbox}[Operational call to action]
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Start with Wave~0:} adopt the sovereignty grid as the
+    procurement/acceptance instrument and complete the baseline inventory ---
+    organisational, zero technical risk, but every later wave inherits it.
+  \item \textbf{Stand up the minimal core} (Identity + Observability), then
+    the Policy plane in shadow mode, before touching the network fabric.
+  \item \textbf{Make conformance the definition of done:} schedule
+    conformance days, publish the exit-confidence index, and refuse to close
+    a wave on declaration alone.
+  \item \textbf{Write procurement against contracts, not products,} and
+    rehearse the exit at least once per layer per year --- replaceability is
+    only real once exercised.
+\end{enumerate}
+\end{actionbox}
+
+\vspace{0.4em}
+\noindent\rule{\textwidth}{0.4pt}
+
+{\footnotesize\textbf{Full document:} \emph{``Sustainable University IT --- A
+Technical Reference for Architecture and Migration''}~\cite{ng-tech-ref-2026}
+develops the five-dimension sovereignty grid, the Trusted Activity Context,
+the nine-layer / three-plane reference architecture on open foundations, the
+ten-wave migration playbook with per-wave trajectories and reversibility, the
+conformance suite, the sizing reference points, and the regulatory mapping
+(in the EU instantiation: \gls{gdpr}, \gls{nis2}, the EU AI Act, eIDAS~2, Schrems~II) against the
+jurisdiction-neutral standards spine. It is the shared technical baseline for
+the international university network anticipated in phase~2 of the SUIT
+initiative.}
+
+\smallskip
+
+{\footnotesize\textbf{Note on the process:}
+\textit{This document is an always living document. It is provided for
+constructive feedback and revision in order to improve its quality. The
+engineering of this document was partially supported by digital tools, some
+of which incorporate Artificial Intelligence features.}}
+
+\vspace{0.6em}
+\noindent\rule{\textwidth}{0.4pt}
+\printbibliography[title={\normalsize References}]
+
+\end{document}

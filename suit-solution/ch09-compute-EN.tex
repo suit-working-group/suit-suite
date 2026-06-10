@@ -1,0 +1,337 @@
+% ============================================================================
+% Chapter 9 --- Compute and workload context
+% ----------------------------------------------------------------------------
+% Purpose : VMs, containers, orchestration, research clouds.
+%           Belongs to the Execution plane (D5.1).
+% Page target: ~5 pages.
+% Dependencies: Ch. 5 (Kubernetes API, OpenStack API, OCI image, SLSA),
+%               Ch. 7 (policy decisions enforced at admission and at runtime),
+%               Ch. 8 (network attachment via CNI consistent with Ch. 8 zones),
+%               Ch. 10 (storage volumes consumed by workloads).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D9.1 minimum compliance set for the compute layer
+%   D9.2 reference instantiation = OpenStack + Kubernetes + Harbor + SLSA
+%   D9.3 alternatives = VMware + certified K8s, hybrid with cloud burst
+%   D9.4 supply-chain provenance (SLSA) is part of the contract, not optional
+%   D9.5 compute sovereignty scores
+% ============================================================================
+
+\chapter{Compute and workload context}
+\label{ch:compute}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the compute layer. It consumes policy
+decisions from \trchap{ch:policy}{} (admission and runtime), it
+respects the network zone catalogue of \trchap{ch:network}{}
+(\S\ref{sec:nw-reference}), and it produces workload-context events
+consumed by \trchap{ch:observability}{}. The layer belongs to the
+\emph{Execution plane}.
+\end{caveatbox}
+
+The compute layer is the place where institutional activities ---
+research codes, teaching environments, administrative services, web
+applications --- actually run. It is also a layer where lock-in
+accumulates quietly: a custom hypervisor configuration, a
+proprietary container registry, a cluster-management add-on whose
+\gls{api} drifts from upstream Kubernetes can each, individually,
+appear inexpensive, and together produce a stack from which exit
+becomes a multi-year project.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:co-contract}
+
+The compute layer is responsible for: provisioning workloads as
+virtual machines, containers, or composed workloads of both types;
+enforcing admission decisions returned by the policy layer at the
+moment of workload creation; running workloads under
+network-attachment and storage-binding consistent with the activity
+context; and producing the supply-chain provenance metadata that
+allows the institution to verify what it actually runs.
+
+\begin{contractbox}[Compute layer]
+\noindent A compliant compute layer, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item expose a Kubernetes~\cite{kubernetes} API for container
+    workloads, conformant to the upstream specification, without
+    supplier extensions in critical paths;
+  \item expose an OpenStack~\cite{openstack} API \emph{or} an
+    equivalent standards-aligned IaaS API for virtual-machine
+    workloads;
+  \item accept and store container images in OCI image
+    format~\cite{oci-image-spec}, in a registry whose access can be
+    audited and exit-rehearsed;
+  \item produce supply-chain provenance attestations conformant to
+    the SLSA framework~\cite{slsa-spec} for every artefact produced
+    internally;
+  \item enforce admission decisions returned by \trchap{ch:policy}{}
+    on every workload creation, with the decision recorded in the
+    audit trail;
+  \item integrate with the network layer
+    (\trchap{ch:network}{}) through standard CNI plugins consistent
+    with the institutional zone catalogue, and with the storage
+    layer (\trchap{ch:storage}{}) through standard CSI plugins.
+\end{itemize}
+\end{contractbox}
+
+The contract treats supply-chain provenance as a structural
+requirement, not as a compliance afterthought. The reasoning is that
+without verifiable provenance, the institution cannot make
+auditable statements about what runs on its infrastructure --- a
+gap that the data and institutional sovereignty dimensions surface
+immediately.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: OpenStack + Kubernetes + Harbor + SLSA}
+\label{sec:co-reference}
+
+The reference instantiation combines OpenStack~\cite{openstack} for
+IaaS, upstream Kubernetes~\cite{kubernetes} for container
+orchestration, Harbor~\cite{harbor} as the OCI registry with image
+scanning and signing (Cosign / Sigstore~\cite{sigstore}), and
+SLSA-compliant~\cite{slsa-spec} build attestations emitted by the
+institution's continuous-integration pipelines (typically built on
+Tekton~\cite{tekton}).
+
+\begin{instantiationbox}[Compute layer]
+\noindent\textbf{Topology.} OpenStack provides multi-tenant
+virtual-machine and bare-metal provisioning at the scale of the
+institution; Kubernetes clusters --- one per major tenancy boundary
+(administration, teaching, research projects of comparable scale) ---
+run on top of OpenStack-provided infrastructure or on dedicated
+metal where latency or isolation requires it. Container images live
+in a Harbor registry deployed under the custody model the
+institution has chosen for this layer, scanned at push time and
+signed with cosign or an equivalent. Build pipelines (Tekton, Argo
+Workflows, or comparable) emit SLSA-compliant provenance
+attestations alongside the image. CNI plugins (Cilium is the
+reference) implement the network policies derived from
+\trchap{ch:network}{}; CSI plugins (Ceph-CSI is the reference)
+expose the storage layer.
+\end{instantiationbox}
+
+\paragraph{Tenancy model.} Tenancy is the principal axis of
+governance in this layer. The reference pattern uses Kubernetes
+namespaces for fine-grained tenancy within a cluster, and separate
+clusters for tenancy boundaries that warrant operational isolation
+(cluster lifecycle independence, separate cryptographic identities,
+distinct upgrade cadences). The choice between namespace tenancy
+and cluster tenancy is a recurring design tension; this Reference
+proposes that workloads of distinct sensitivity classifications
+should not share a cluster.
+
+\paragraph{Operational considerations.} The reference instantiation
+is operationally non-trivial: OpenStack and Kubernetes each carry
+substantial operational depth, and integrating them with the
+identity, policy, network, and storage layers is the principal
+ongoing engineering investment. An indicative envelope, for a
+research-intensive institution running both an institutional
+OpenStack and several Kubernetes clusters, would be the staffing
+profile recorded for this layer in the institution's
+infrastructure plan, scaled to the size and intensity of its
+research compute portfolio. The labour market is broad
+for Kubernetes itself and narrower for the integrated stack.
+
+\begin{realworldbox}[Research-cloud precedents]
+\noindent Indiana University's Jetstream2~\cite{jetstream2-2021},
+operated under a national research-infrastructure funding programme,
+provides a publicly documented research-cloud architecture built on
+OpenStack and serving the multi-institutional research community.
+Many institutions participate in a national or regional research
+high-performance computing facility, several of which also rest on
+OpenStack across multiple sites. Both should be
+consulted as primary sources for design and operational lessons,
+rather than as direct templates: each institution's compute layer
+reflects its specific research mission and the context of its
+national or regional research and education network, where one exists.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- VMware with certified Kubernetes}
+\label{sec:co-alt1}
+
+\begin{alternativebox}[VMware-based compute]
+\noindent The IaaS layer is provided by VMware vSphere~\cite{vmware-vsphere}; container
+orchestration runs on VMware Tanzu (or another certified Kubernetes
+distribution); image registry, build pipelines and CNI/CSI plugins
+remain on the standard interfaces, with explicit care to avoid
+captive extensions in their integration with the underlying
+hypervisor.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} A mature operational platform with
+a deep skills market, broad enterprise documentation, and existing
+integrations with most institutional tooling. For institutions whose
+compute layer was built around vSphere over many years, the
+operational momentum is substantial.
+
+\paragraph{Where it constrains the institution.} VMware's
+post-acquisition commercial trajectory has been the subject of
+considerable public discussion, with reported changes to licensing
+and pricing models that the institution would need to evaluate
+against the financial-sovereignty dimension of
+\trchap{ch:sovereignty-grid}{}. Beyond commercial considerations,
+the technical constraint is the gradual coupling of the compute
+layer to VMware-specific operators, controllers, and management
+consoles whose absence would require non-trivial adaptation. The
+architectural posture is to keep workloads expressed at the
+Kubernetes API level and to treat VMware as the underlying
+substrate, not as the API surface.
+
+\paragraph{When it could be the right choice.} An institution with
+a substantial existing investment in vSphere whose immediate
+sovereignty priorities are not in the compute layer, and whose
+financial planning has accounted for the supplier's pricing
+trajectory. The choice would remain consistent with this
+architecture provided that workloads are expressed in standard APIs
+and that exit-rehearsal is practised periodically.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Hybrid with standards-based cloud burst}
+\label{sec:co-alt2}
+
+\begin{alternativebox}[Hybrid compute]
+\noindent The institution operates a primary on-premises
+open-source compute stack and federates additional capacity from
+a public-cloud provider for bounded purposes (peak demand, specific
+research workloads, geographically distributed collaboration). The
+federation occurs through standard interfaces (Kubernetes API
+across clusters, S3-compatible object stores) without proprietary
+glue in the workload definition.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Elasticity for workloads whose
+demand profile would over-provision an on-premises footprint, and
+geographic flexibility for collaborations spanning multiple
+jurisdictions. A hybrid posture also creates a continuously-exercised
+exit rehearsal: workloads regularly cross the boundary between
+on-premises and cloud, demonstrating that they are portable.
+
+\paragraph{Where it constrains the institution.} Public-cloud
+participation reintroduces the data-dimension considerations of
+\trchap{ch:sovereignty-grid}{}: the data accessed by the cloud
+portion of the workload falls under the cloud provider's regime.
+The institutional governance of which workloads are eligible for
+cloud burst, and under which conditions, becomes a permanent
+operational concern. The hybrid posture is also more costly to
+operate than a single-environment one.
+
+\paragraph{When it could be the right choice.} An institution
+with a research mission that includes large but episodic compute
+demand (climate modelling, genomics, astronomical surveys, and
+similar), where the alternative is either chronic
+under-provisioning or institutional-scale over-provisioning, and
+where the data-dimension governance is mature enough to support
+per-workload eligibility decisions.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:co-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the compute
+instantiations.}
+\label{tab:co-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.8\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (OSS) & VMware-based & Hybrid (OSS + cloud) \\
+\midrule
+Data          & 3 Robust      & 3 Robust      & 2 Established \\
+Technical     & 3 Robust      & 1--2 Partial  & 2 Established \\
+Financial     & 2 Established & 1 Partial     & 2 Established \\
+Operational   & 2 Established & 3 Robust      & 2 Established \\
+Institutional & 3 Robust      & 1--2 Partial  & 2 Established \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Driving indicators by dimension.} Data: storage location,
+disclosure regime, especially for the cloud portion of the hybrid.
+Technical: source visibility, presence of captive operators or
+controllers in the cluster. Financial: cost predictability under
+the supplier's announced pricing trajectory. Operational: skills
+market depth and integration documentation. Institutional: roadmap
+control over the hypervisor and the orchestrator.
+
+\noindent The compute layer is the layer where the financial
+dimension has been most visibly disturbed by recent supplier
+consolidation in the proprietary segment. Institutions whose compute
+strategy was set before that consolidation are reported to be
+re-examining their position; this Reference treats that re-examination
+as routine application of the sovereignty grid, not as an exceptional
+event.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:co-regulatory}
+
+\noindent The compute layer carries the workload-context
+attestations on which several security-of-processing obligations
+of \loc{data-protection-regime} rest (integrity of processing,
+posture verification of the host that processes personal data; in
+the EU, \gls{gdpr}~Art.~32). It operationalises the
+business-continuity and secure-development duties of
+\loc{cybersecurity-baseline-regime} (in the EU, NIS2~Art.~21(2)(c),
+through declarative redeployability, and (e), through SLSA-level
+supply-chain attestations on the container images). Where the
+institution adopts them, the layer also maps to ISO/IEC~27001~A.8.32
+(change management) and NIST CSF \textsf{PROTECT} (PR.PS ---
+platform security). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:co-pitfalls}
+
+\begin{pitfallbox}[Proprietary CNI or CSI in critical paths]
+\noindent A Kubernetes deployment that uses a vendor-proprietary CNI
+or CSI plugin for production workloads couples the cluster to that
+vendor: an exit requires re-validation of every networked or
+storage-bound workload. The mitigation is to use standards-aligned
+plugins (Cilium for CNI, Ceph-CSI for CSI as references) for
+production, and to confine vendor plugins to test or evaluation
+clusters.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Custom orchestrator above Kubernetes]
+\noindent An institutional team writes a thin custom orchestrator on
+top of Kubernetes to simplify a particular workflow. Within a few
+years, the orchestrator has accumulated institutional knowledge that
+the standard Kubernetes API does not capture, and migrating away
+becomes expensive. The mitigation is to express workflow logic in
+standards-aligned tools (Argo Workflows, Tekton) whose behaviour can
+be re-implemented elsewhere if needed.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Image registry lock-in]
+\noindent Container images stored in a registry whose data export is
+either undocumented or prohibitively slow create a structural exit
+cost. The mitigation is to keep images in an OCI-compliant registry
+whose export is exercised periodically as part of
+\trchap{ch:conformance}{} (exit-rehearsal category).
+\end{pitfallbox}
+
+\begin{pitfallbox}[Hidden dependencies on supplier-specific operators]
+\noindent Kubernetes admits operators --- in-cluster controllers
+that extend the API --- contributed by suppliers, hardware vendors,
+or open-source projects. Some of these operators carry implicit
+dependencies on supplier services (telemetry endpoints,
+licence-validation calls, configuration retrieval) whose absence
+would silently degrade behaviour. The mitigation is to inventory
+the operators in production clusters, classify their dependencies,
+and either disable or substitute those whose dependencies erode the
+sovereignty profile.
+\end{pitfallbox}

@@ -1,0 +1,507 @@
+%============================================================================
+% NATURE OF THIS COMPANION
+%============================================================================
+
+\noindent\textit{\textbf{On the nature of this companion.}
+This document is the executive summary of a voluntary contribution
+produced by members of the academic community acting in their
+scientific and technical capacity, addressed to the
+institution's governing bodies (the unit-level deliberative body,
+the institution-wide council, and \loc{governing-board}) for
+consideration and, if found substantive, propagation by
+\loc{governing-board} to all concerned components.}
+
+\bigskip
+
+%============================================================================
+% KEY MESSAGES BOX
+%============================================================================
+
+\begin{tcolorbox}[
+    colback=NavyBlue!6!white,
+    colframe=NavyBlue!80!black,
+    boxrule=0.8pt,
+    arc=2pt,
+    left=10pt, right=10pt, top=8pt, bottom=8pt,
+    title={\textbf{Key messages}}
+]
+\begin{itemize}[nosep, leftmargin=1em]
+    \item \textbf{Digital freedom is the rule} in a university; restrictions
+    must be proportionate, documented, and limited to what is strictly
+    necessary. When a contract or a regulation would invert that order,
+    the institution's first reflex is to renegotiate or to engage in
+    reform --- not to comply by default (the main report's
+    liberty-first rule).
+    \item \textbf{Segment to protect, liberate to excel:} a multi-zone
+    architecture with Trusted Activity Contexts strengthens security
+    for sensitive data while granting autonomy to research and teaching.
+    \item \textbf{Democratic governance of digital policy:} a Digital
+    Policy Commission chaired by an elected academic formulates proposals
+    endorsed by the unit-level deliberative bodies and the
+    institution-wide council.
+    \item \textbf{Proven and progressive:} the approach is validated by
+    peer research institutions, international standards, and the
+    applicable regulatory framework; it can be deployed incrementally, starting with a pilot
+    on selected entities.
+\end{itemize}
+\end{tcolorbox}
+
+\bigskip
+
+%============================================================================
+\section{The university spirit: openness as a foundational principle}
+%============================================================================
+
+From the \emph{Magna Charta Universitatum} (Bologna, 1988) to the UNESCO
+\emph{Recommendation on Science and Scientific Researchers} (2017), a
+universal consensus holds: the university is a space of \textbf{intellectual
+freedom}, \textbf{free movement of people and ideas}, and
+\textbf{autonomy} for academic staff. This openness is not a luxury ---
+it is the very condition under which knowledge is produced and transmitted.
+Today, the digital space is the primary space where this movement occurs.
+\textbf{A digital policy that is restrictive by default
+is contrary to the university spirit.}
+
+\begin{principlebox}[Founding principle]
+A university requires administration, but is not a corporation;
+university governance must optimise for freedom for ideas and persons,
+physical or digital. The digital infrastructure should reflect this
+fundamental distinction.
+
+\smallskip
+In a university, \textbf{digital freedom is the rule}. Any restriction must
+be \emph{explicitly justified} by a documented risk, \emph{proportionate}
+to that risk, and \emph{limited to the strictly necessary scope} --- a
+specific laboratory, a specific project, a specific dataset --- never
+applied uniformly across the entire institution.
+
+\smallskip
+This principle reflects the risk-based, proportionate-measures requirement
+that runs through modern data-protection and cybersecurity frameworks --- in
+the European Union, \gls{gdpr} Article~32 (\emph{measures appropriate to the
+risk}) and the NIST Cybersecurity Framework~2.0 (\emph{risk-based approach})
+are canonical references --- and it is consistent with the practice of leading
+research universities.
+\end{principlebox}
+
+\mainref{the sections \nameref{sec:stakeholders}, \nameref{sec:introduction}
+and \nameref{sec:specificites}}
+
+%============================================================================
+\section{What the university spirit demands of digital infrastructure}
+%============================================================================
+
+\begin{table}[h!]
+\centering\small
+\newcommand{\ok}{\textcolor{OliveGreen}{\ding{51}}\,}%
+\newcommand{\warn}{\textcolor{orange}{\ding{72}}\,}%
+\newcommand{\nok}{\textcolor{BrickRed}{\ding{55}}\,}%
+\begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}X X}
+\toprule
+\textbf{Historical university principle} &
+  \textbf{Digital translation (current status --- keep one marker per element)} \\
+\midrule
+Free movement of persons &
+  \ok\warn\nok Functional BYOD,
+  \ok\warn\nok eduroam,
+  \ok\warn\nok seamless researcher mobility \\
+\addlinespace
+Free movement of ideas &
+  \ok\warn\nok unfiltered Internet access,
+  \ok\warn\nok major cloud-based AI services,
+  \ok\warn\nok worldwide scientific sources \\
+\addlinespace
+Teacher-researcher autonomy &
+  \ok\warn\nok local admin privileges (root/admin),
+  \ok\warn\nok freedom of tool choice,
+  \ok\warn\nok configurable environments \\
+\addlinespace
+Scientific openness (Open Science) &
+  \ok\warn\nok access to data platforms,
+  \ok\warn\nok code repositories,
+  \ok\warn\nok open-access publications \\
+\addlinespace
+Realistic training environments &
+  \ok\warn\nok configurable labs,
+  \ok\warn\nok cyber-ranges,
+  \ok\warn\nok API access for AI courses \\
+\bottomrule
+\end{tabularx}
+
+\smallskip
+\footnotesize
+\ok Available \qquad
+\warn To be reinforced \qquad
+\nok Not available
+\par\smallskip
+\textit{This table is generic: each element carries all three markers. The
+adopting institution keeps, for every element, the single marker matching its
+own reality and deletes the other two.}
+\normalsize
+\end{table}
+
+%============================================================================
+\section{Effects of uniform restriction policies}
+%============================================================================
+
+A policy that treats financial data and research GPU clusters
+identically generates several documented effects: it concentrates
+risk on a single perimeter (a breach can affect the institution
+as a whole --- as recent breaches in the sector
+have shown); it correlates with the
+emergence of Shadow IT (researchers may turn to unsupervised
+solutions); it is associated with talent mobility patterns toward
+institutions with more flexible IT environments; and it affects
+competitiveness in European and international grant calls.
+Restrictive policies can also expose the institution to
+\emph{litigation based on fundamental rights} (academic freedom,
+freedom of expression and information, dignity at work).
+
+\begin{principlebox}[Guiding principle for institutional resilience]
+A university information system must not attempt to prevent all errors,
+experiments, or unforeseen uses; it must \textbf{prevent such events from
+compromising the institution as a whole}.
+
+\smallskip
+\textbf{In short:} local freedom, incident confinement, protection of the
+core, global resilience.
+\end{principlebox}
+
+\begin{alertbox}[What the most publicised recent university incidents actually show]
+The most publicised university breaches of recent years --- whether at
+large national research universities or through shared platform and
+enterprise-software vulnerabilities such as those affecting widely used
+managed file-transfer and ERP products --- share \textbf{the same root causes}:
+third-party/supply-chain vulnerabilities, credential compromise, and
+centralised perimeters without internal boundaries.
+\textbf{None of the major recent data breaches analysed here were caused by research-zone
+autonomy.} Known incidents involving research infrastructure --- such as
+the 2020 European supercomputer attacks, where stolen SSH credentials
+were used for cryptomining on \gls{hpc} systems at several national
+academic computing centres~\cite{eu-supercomputers-2020}~--- involved unauthorized access rather than data exfiltration, and
+would have been mitigated by the Trusted Activity Context mechanisms
+proposed here: credentials scoped to a specific activity context cannot
+grant lateral access to other contexts or to the infrastructure core.
+They demonstrate the urgent need for \emph{segmentation and
+context-bounded access} --- precisely what this proposal advocates.
+\end{alertbox}
+
+\mainref{the sections \nameref{subsec:shadow-it}, \nameref{subsec:dependability},
+\nameref{sec:defaillances-mediatiques} and \nameref{sec:couts}}
+
+%============================================================================
+\section{The proposal: segment to liberate, Trusted Activity Contexts for individualised protection}
+%============================================================================
+
+The logic is simple: \textbf{secure strongly what must be secured}
+(administrative, financial, HR data) \textbf{to liberate everything else}.
+This is what research universities and national laboratories
+do --- and, through their national research-and-education
+networks, what institutions of far more modest scale do as well ---
+and what NIST, ISO~27001 and \gls{cobit} recommend. These are not a
+flagship's choices to borrow but a minimal set every institution
+offering a digital infrastructure must discharge; only the
+instantiation varies with size, not the obligation.
+
+The proposed architecture rests on two complementary mechanisms:
+\emph{segmentation} controls where incidents can spread (network
+boundaries); \textbf{Trusted Activity Contexts} provide each user with
+a validated environment --- assembling data, tools, services, and access
+rights --- adapted to their current role and task. Together, they ensure
+that a breach in one context cannot cascade to the rest of the
+institution.
+
+Conceptually, the university information system is organised in
+\textbf{concentric layers} (the executive view of the five structural
+layers detailed in the main report): a small, strongly protected
+\textbf{infrastructure core} (identity, network backbone, backups,
+supervision) that forms the \emph{dependability foundation} of the
+institution; \textbf{common services} (messaging, \gls{lms}, collaboration)
+available to all; \textbf{autonomous zones} (research, teaching) with
+local freedom and bounded impact; \textbf{exposed zones} (public-facing
+services and portals, isolated from the internal system by DMZ-type
+architectures); and \textbf{user networks} (\gls{byod},
+Wi-Fi) that are open but isolated from the core. Protecting the small
+critical core is what makes it possible to liberate everything else.
+
+The six principal operational zones below map onto these layers
+(a seventh IoT/Building zone is detailed in the technical report):
+
+\begin{table}[h!]
+\centering\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{
+  >{\bfseries\raggedright\arraybackslash}p{2.9cm}
+  >{\raggedright\arraybackslash}X
+  >{\raggedright\arraybackslash}p{4.2cm}}
+\toprule
+\textbf{Zone} & \textbf{Philosophy} & \textbf{Constraint level} \\
+\midrule
+Research &
+  \textbf{Maximum openness} --- autonomy, root access, worldwide AI cloud,
+  local server management &
+  Minimal: responsibility charter, monitoring \\
+\addlinespace
+Teaching &
+  \textbf{Broad openness} --- discipline-specific environments
+  for all faculties, AI APIs, cyber-ranges, VDI &
+  Standard: pedagogical framework \\
+\addlinespace
+Staff BYOD &
+  \textbf{Free Internet} + progressive access to institutional resources &
+  \gls{mfa} + minimal posture check \\
+\addlinespace
+Research-data path (e.g.\ Science DMZ) &
+  \textbf{Maximum performance} --- high-throughput transfers without
+  stateful firewall &
+  \gls{acl} + dedicated \gls{ids} \\
+\addlinespace
+Administrative &
+  \textbf{Maximum protection} --- this is where, \emph{and only where},
+  restrictions are concentrated &
+  Strict: firewall, \gls{ids}/\gls{ips}, proxy, full \gls{gdpr} \\
+\addlinespace
+Sensitive enclave &
+  Case by case, \textbf{at project level} &
+  Only on explicit, documented justification \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Key point:} restrictions at laboratory or project level apply
+\textbf{only when explicit and documented reasons require them} (medical data,
+classified projects, specific funding constraints such as NIST~SP~800-171). In
+the absence of such justification, the laboratory benefits from the \textbf{maximum
+openness policy} of the research zone. The default is freedom; the exception is
+restriction.
+
+\smallskip
+\noindent\emph{All zones lie within the cybersecurity-baseline perimeter
+applicable to the institution under its entity classification; calibration of
+controls follows the risk-proportionality principle of that regime --- the
+\gls{nis2} Article~21 measure families in the worked EU instantiation --- not
+scope reduction. The function this discharges is the cybersecurity
+risk-governance obligation (F2) of the Regulatory Applicability annex
+(Part~\ref{part:reg-applicability} of the complete dossier); read your own regime's instrument for
+that obligation in the regime typology there.}
+
+\mainref{the sections \nameref{sec:etat-art}, \nameref{sec:exemples},
+\nameref{sec:ia} and \nameref{sec:propositions-infra}}
+
+%============================================================================
+%\newpage
+\section{Governance aligned with the university spirit}
+%============================================================================
+
+\begin{itemize}
+  \item \textbf{Digital Policy Commission} chaired by an \emph{elected}
+    academic, composed of representatives from the constituent academic
+    units (departments and interdisciplinary centres) across the
+    institution. The Commission formulates policy proposals that are
+    submitted to the unit-level deliberative bodies and then to the
+    institution-wide council for endorsement. The IT-management lead
+    and the information-security-management lead submit proposals; the
+    Commission decides --- aligned with \gls{cobit}~2019's separation of governance
+    (strategic direction) from management (operational execution)
+    and with established academic-governance practice;
+  \item \textbf{Responsibility charters} (as practised across research
+    institutions): autonomy
+    is formalised and accountable, replacing informal exceptions;
+  \item \textbf{Contextual role management:} a single individual
+    (e.g.\ a researcher who also teaches and administers a laboratory)
+    activates only the relevant role for each task --- never carrying all
+    privileges simultaneously. This enforces least privilege, improves
+    auditability, and maps naturally onto the zone structure;
+  \item \textbf{Open-source and open-science tools as default
+    institutional choices}, reducing vendor lock-in, increasing
+    transparency, and aligning with public-sector open-source
+    strategies (e.g., the European Commission's in the EU);
+  \item \textbf{Independent Commission for Reasonable Adjustments
+    of Digital Policies} (\gls{icradp}): any employee can
+    challenge a disproportionate restriction --- for medical, personal,
+    professional reasons, or infringement of fundamental freedoms ---
+    in accordance with the EU Charter of Fundamental Rights, the
+    CRPD Convention and the case law of the \gls{cjeu} and the \gls{ecthr}
+    on the proportionality of digital restrictions. Where the institution
+    already operates a reasonable-adjustments mechanism (supporting
+    students and staff), the \gls{icradp} extends that principle to
+    digital policies; where none exists, it establishes the principle
+    directly. Refusals must be justified in writing.
+\end{itemize}
+
+\medskip
+\noindent\emph{Continuous-improvement mechanism.} Together, the
+Digital Policy Commission, the unit-level deliberative bodies, the
+responsibility charters and the ICRADP constitute the institution's
+continuous-improvement mechanism, materialised in the annual
+compliance and maturity report submitted to the competent cybersecurity
+authority~\cite{ilr-ul-essential} pursuant to the continuous-improvement
+provision of the applicable regime --- see the Regulatory Applicability annex
+(Part~\ref{part:reg-applicability} of the complete dossier), the accountability-and-conformity
+obligation (F6) under your regime profile, instantiated in the worked EU
+example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
+
+\mainref{the sections \nameref{subsec:gouvernance-federee}, \nameref{subsubsec:contextual-roles},
+\nameref{sec:propositions} and \nameref{sec:commission-ajustements}}
+
+%============================================================================
+\section{Feasibility: progressive, controlled, affordable}
+%============================================================================
+
+\begin{table}[h!]
+\centering\small
+\begin{tabularx}{\textwidth}{
+  >{\bfseries}l X}
+\toprule
+\textbf{Step} & \textbf{Content} \\
+\midrule
+1. Governance &
+  Digital Policy Commission, responsibility charters, service catalogue,
+  formalised exception path \\
+\addlinespace
+2. Pilot &
+  Segmented architecture and Trusted Activity Contexts deployed on
+  a pilot technical department, a pilot research centre, and the
+  \loc{pilot-entities} ---
+  high-throughput research-data path (Science DMZ), \gls{byod} zone, open-source tools \\
+\addlinespace
+3. Progressive extension &
+  Gradual rollout to other departments, faculties and centres,
+  progressive \gls{zt}, AI research zone,
+  audit and continuous improvement \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent
+No ``big bang'' required. The governance step is organisational and
+achievable with existing staff. The pilot and progressive extension
+rely on the \loc{nren-name} and its international
+research-backbone services, open-source tools,
+and platforms offered free of charge for academic research.
+
+\medskip
+\noindent\textbf{Scale-appropriate reading.} Where public documentation
+evidences no Science DMZ --- nor any equivalent research-and-education-network-operated
+research-data path --- deployed, neither at the institution nor at the
+\loc{nren-name} level, the substrate is nonetheless frequently
+already operational: high-capacity backbone connectivity to the
+international research backbone through the \loc{nren-name}, an \gls{hpc} facility moving
+petabyte-scale traffic, and \loc{nren-csirt} for incident
+response. For institutions of modest scale, the pragmatic form is
+therefore not an institution-only deployment of the Science DMZ pattern
+but a federated research-network zone --- the same high-throughput
+research-data path realised at national, mutualised scale ---
+\emph{co-designed} with the \loc{nren-name} and shared across
+partner research organisations, with a dedicated medical enclave for
+biomedical workloads where required.
+
+\mainref{the sections \nameref{subsec:lux-sdmz-status}, \nameref{sec:couts} and \nameref{sec:transition}, and the standalone Technical Reference~\cite{ng-tech-ref-2026} (vendor-neutral architecture, sovereignty grid, migration playbook)}
+
+%============================================================================
+%\newpage
+\section{Current regulatory and operational context}
+%============================================================================
+
+\begin{enumerate}
+  \item \textbf{AI as a structural tool for research and teaching:}
+    research and teaching access to major cloud-based and open AI
+    services (commercial APIs and open model hubs) is now part of
+    the standard scientific working environment.
+    Under the \loc{ai-regulation}'s risk-based framework --- the
+    technology-governance obligation (F5) of the Regulatory Applicability annex
+    (Part~\ref{part:reg-applicability} of the complete dossier) --- the
+    resulting obligations
+    depend on the concrete use case and the user's role; many research
+    uses of commercial AI services fall outside the high-risk categories.
+    Under the proposed cooperative researcher-centred model
+    (PI data classification + institutional register maintained by
+    the central IT function + periodic audit by the data-protection
+    function), the cross-border-transfer obligation (F4) bites: in the worked
+    EU instantiation, the \emph{Schrems~II} cumulative regime applies to
+    personal-data transfers~\cite{schrems2020}.
+    The AI regime's research-and-development exemption (where
+    one exists --- e.g.\ Art.~2(6) of the EU AI Act) covers
+    bespoke research tools, not the use of commercial APIs.
+  \item \textbf{The applicable regulatory framework demands it:} the
+    data-protection security-of-processing obligation (F1) requires
+    \emph{proportionate} measures --- \gls{gdpr} Article~32 in the worked EU
+    instantiation; under the cybersecurity-baseline regime (F2), instantiated
+    here by the national transposition of \gls{nis2}~\cite{pl-8364}, the
+    institution may be classified by the \loc{nis2-supervisory-authority}
+    as an \textbf{essential entity}
+    (holistic perimeter, proactive supervision, mandatory audits,
+    annual maturity report via the \loc{national-notification-platform}~\cite{serima})~\cite{ilr-ul-essential};
+    sector cybersecurity guidance from the relevant sector authority
+    treats cybersecurity as a strategic governance
+    risk~\cite{jisc-guidance}; a segmented architecture aligned with
+    \gls{nis2} Article~21 proportionality is the appropriate response. The
+    instruments named here are the EU instantiation of a
+    jurisdiction-invariant obligation spine; an adopter reads its own
+    regime's instruments for these obligations in the Regulatory
+    Applicability annex (Part~\ref{part:reg-applicability} of the
+    complete dossier).
+  \item \textbf{Reference universities providing comparable openness:}
+    reference research institutions
+    provide their researchers with the autonomy and infrastructure
+    described here. The \loc{nren-name} and its
+    international backbone interconnect
+    make the same architectural primitives accessible at the
+    institution's national scale.
+\end{enumerate}
+
+\mainref{the sections \nameref{sec:reglementation}
+and \nameref{sec:ia}}
+
+%============================================================================
+\section{A matter of institutional coherence}
+%============================================================================
+
+\begin{actionbox}[Call to action]
+The university cannot proclaim academic freedom in its statutes and impose
+a uniform digital lockdown in its daily practice. Providing an
+\textbf{open, segmented and proportionately secured} framework means
+honouring the university spirit while \textbf{strengthening security}
+where it is truly necessary --- rather than weakening the institution
+through blanket restrictions that drive talent away and fuel Shadow~IT.
+
+\medskip
+\textbf{Short-term objectives:}
+\begin{enumerate}
+  \item That the \textbf{unit-level deliberative body}, subsequently the
+    \textbf{institution-wide council}, and finally
+    \textbf{\loc{governing-board}} endorse a position statement derived
+    from the present executive summary, \emph{``The University Spirit
+    in the Digital Age''};
+  \item That the \textbf{executive leadership}, in collaboration with IT
+    experts and academic representatives, define a short- to
+    medium-term implementation plan aligned with the architecture
+    described in the accompanying technical report and developed
+    in detail in the standalone Technical Reference~\cite{ng-tech-ref-2026}.
+\end{enumerate}
+\end{actionbox}
+
+\vfill
+
+\noindent\rule{\textwidth}{0.4pt}
+
+{\footnotesize\textbf{Accompanying documents:} \emph{``Infrastructure and
+Organisation of Information Systems for the institution ---
+Analysis, State of the Art and Propositions''}. The report provides the full state of the art, an international set of
+university case studies, European regulatory analysis, detailed
+architecture, cost-benefit analysis, transition plan with risk register and
+KPIs, and the complete legal and normative foundations for the \gls{icradp}.
+A standalone Technical Reference~\cite{ng-tech-ref-2026} addressed to
+chief technology officers and information-security officers develops
+a five-dimension sovereignty grid, a vendor-neutral reference
+architecture demonstrated on open foundations, and a wave-based
+migration playbook. It is intended as the shared technical baseline
+for the cross-institution federation anticipated in phase~2 of
+this initiative.}
+
+\smallskip
+
+{\footnotesize\textbf{Note on the process:}
+\textit{This document is an always living document.
+It is provided for constructive feedback and revision in order to improve its quality.
+The engineering of this document was partially supported by digital tools, some of which incorporate Artificial Intelligence features.}}

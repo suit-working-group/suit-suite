@@ -1,0 +1,89 @@
+% ============================================================================
+% instantiations/_TEMPLATE/set.tex — INSTITUTION SET (Layer 2)
+% ----------------------------------------------------------------------------
+% This file is the single localization entry point for ONE adopting
+% institution. It is the Layer-2 file of the suite localization model:
+%
+%     localization.sty                         (\setloc / \loc machinery)
+%       Layer 0: shared/localization-defaults.tex   (generic role phrases)
+%         Layer 1: categories/<ARCHETYPE>.tex        (this institution's class)
+%           Layer 2: THIS FILE                        (concrete institution values)
+%             document body
+%
+% A render wrapper (render/*.tex) loads Layer 0, then \input's THIS file. This
+% file in turn \input's the chosen category archetype (Layer 1), then applies
+% the institution's own concrete \setloc values and any local deltas (Layer 2).
+% Each later \setloc overrides any key an earlier layer set; keys left untouched
+% keep the value from below.
+%
+% HOW TO FILL THIS FILE (see ./README.md for the full walk-through):
+%   1. Pick your archetype with categories/README.md (the §2 decision tree,
+%      run after the SUITSOLUTION Chapter 4 self-assessment).
+%   2. Set \instcategory below to the chosen archetype file name (no path,
+%      no .tex), e.g. EU-PUB-RI, US-PUB-R1, US-PRIV-R1, UK-RES, LATAM-PUB,
+%      AFR-PUB.
+%   3. Fill the country-specific NAME keys your archetype leaves at default.
+%   4. Add any LOCAL DELTAS the decision tree told you to record (a key your
+%      archetype binds generically but that differs for your institution).
+%   5. Build the four documents from render/ and deposit (see README.md §4).
+%
+% Keys are kebab-case. The full key catalogue is shared/localization-defaults.tex
+% (Layer 0) and categories/README.md §3 (the per-archetype comparison matrix).
+% Calling an undefined key fails the build loudly, so a forgotten value is
+% always caught at compile time.
+% ============================================================================
+
+% --- 1. CHOSEN CATEGORY ARCHETYPE (Layer 1) ---------------------------------
+% Set \instcategory to your archetype's file name (without path or extension):
+% EU-PUB-RI, US-PUB-R1, US-PRIV-R1, UK-RES, LATAM-PUB or AFR-PUB.
+%
+% The render wrapper has already defined \catdir as the relative path from its
+% own location to the repository's categories/ directory, so the \input below
+% resolves to categories/<ARCHETYPE>.tex from whichever document is building.
+% (Do NOT redefine \catdir here.)
+\newcommand{\instcategory}{EU-PUB-RI}% <-- REPLACE with your archetype
+\input{\catdir/\instcategory}% -> categories/<ARCHETYPE>.tex
+
+% ============================================================================
+% 2. COUNTRY-SPECIFIC NAME KEYS (left at default by every archetype)
+% ----------------------------------------------------------------------------
+% Your archetype binds the STRUCTURAL and REGULATORY keys generically but
+% deliberately leaves these per-country NAME keys for you to fill. Replace each
+% placeholder with your institution's concrete value. (UK-RES fixes the NREN to
+% Janet and US-PRIV-R1 fixes it to Internet2 — leave nren-name alone there.)
+% ============================================================================
+\setloc{nren-name}{REPLACE: your national research-and-education network, by name}
+\setloc{national-dpa}{REPLACE: your national data-protection authority, by name}
+\setloc{national-gov-csirt}{REPLACE: your national / governmental CSIRT, by name}
+% US archetypes only — the regional R&E network security team:
+% \setloc{nren-csirt}{REPLACE: your state/regional R&E network security team}
+
+% ============================================================================
+% 3. OPTIONAL: INSTITUTION IDENTITY (pin only if a non-generic edition is wanted)
+% ----------------------------------------------------------------------------
+% Uncomment and fill to render a named edition rather than a generic-by-class
+% one. Leaving these commented keeps the institution anonymous behind its
+% archetype, which is a legitimate deposit.
+% ============================================================================
+% \setloc{institution-name}{REPLACE: the University of Example}
+% \setloc{institution-type}{REPLACE: a public, research-intensive university established under the law of ...}
+% \setloc{executive-leadership}{REPLACE: the rectorate / the President and Provost / the Vice-Chancellorate}
+% \setloc{governing-board}{REPLACE: the Board of Governors / Council / Board of Regents}
+% \setloc{academic-governing-bodies}{REPLACE: the Senate / Academic Council}
+
+% ============================================================================
+% 4. LOCAL DELTAS (record every deviation the decision tree surfaced)
+% ----------------------------------------------------------------------------
+% If your institution does not match the chosen archetype exactly (an NREN-tier
+% delta, a governance delta, a derived regulatory row from the mapping method
+% in shared/regulatory-applicability-EN.tex), re-bind the affected structural
+% or regulatory key HERE so it overrides the archetype. Document WHY in a
+% comment — the delta is a real finding, not noise.
+% ============================================================================
+% Example NREN-tier delta (EU institution reaching GÉANT via a regional aggregator):
+% \setloc{nren-name}{the regional R&E aggregator <name>, reaching GÉANT through the national NREN <name>}
+%
+% Example derived regulatory row (jurisdiction not among the worked regimes):
+% \setloc{data-protection-regime}{the national data-protection law <citation> (derived via the sec:reg-mapping Step 1–7 method)}
+
+\endinput

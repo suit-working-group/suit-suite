@@ -1,0 +1,89 @@
+{
+  "regime": "US",
+  "name": "United States — Regulatory Regime for University IT",
+  "depth": "deep",
+  "as_of": "2026-06-09",
+  "regime_character": "Sectoral and fragmented: no single omnibus data-protection or cybersecurity statute for universities. Obligations arise from federal sector-specific statutes (FERPA for student records, HIPAA for health data, GLBA/FTC Safeguards for financial-aid data), federal contracting baselines (NIST SP 800-171, CMMC, FISMA), federal export-control regimes (EAR, ITAR), and a growing state-law privacy layer (CCPA/CPRA and successors). Enforcement is distributed across federal agencies (ED, HHS OCR, FTC, DoD, Commerce/BIS, State/DDTC) and state Attorneys General. Frameworks such as the NIST Cybersecurity Framework are voluntary but de facto baselines. Public universities additionally sit under state public-records, security-breach-notification, and procurement laws.",
+  "competent_authorities": [
+    {"authority": "US Department of Education — Student Privacy Policy Office (SPPO)", "domain": "Student education records (FERPA)"},
+    {"authority": "US Department of Health and Human Services — Office for Civil Rights (HHS OCR)", "domain": "Electronic protected health information (HIPAA)"},
+    {"authority": "US Federal Trade Commission (FTC)", "domain": "Financial-aid customer data (GLBA Safeguards Rule)"},
+    {"authority": "State Attorneys General / California Privacy Protection Agency (CPPA)", "domain": "State consumer-privacy law (CCPA/CPRA and analogues)"},
+    {"authority": "US Department of Defense (DoD) — CMMC PMO and DIBCAC; C3PAOs", "domain": "Defense-research CUI security certification"},
+    {"authority": "US Department of Commerce — Bureau of Industry and Security (BIS)", "domain": "Dual-use export control (EAR)"},
+    {"authority": "US Department of State — Directorate of Defense Trade Controls (DDTC)", "domain": "Defense-article export control (ITAR)"}
+  ],
+  "functions": [
+    {
+      "fn": "F1",
+      "label": "Data protection / privacy of personal data (students, staff, research subjects)",
+      "instrument": "FERPA (20 U.S.C. §1232g; 34 C.F.R. Part 99) as the primary student-records privacy obligation; HIPAA Privacy Rule (45 C.F.R. Part 164 Subpart E) for covered health components; state consumer-privacy law CCPA/CPRA (Cal. Civ. Code §§1798.100 et seq.) and analogues as the state-law layer.",
+      "authority": "US Department of Education (SPPO) for FERPA; HHS OCR for HIPAA; State Attorneys General / California Privacy Protection Agency for CCPA/CPRA.",
+      "deadlineOrMechanism": "FERPA has no fixed breach-notification deadline; enforcement is administrative via withdrawal of federal education funding, with no private right of action (Gonzaga v. Doe, 536 U.S. 273 (2002)). CCPA/CPRA largely exempts universities (non-profit / public bodies and FERPA/HIPAA/GLBA-governed data per Cal. Civ. Code §1798.145); residual exposure is via covered third-party vendors and for-profit affiliates.",
+      "instruments_bib": ["us-ferpa", "us-ccpa-cpra"],
+      "note": "Sectoral, not omnibus: student records (FERPA) are the anchor; CCPA/CPRA matters mainly as the template for the state-law wave and via vendor flow-down rather than direct coverage of the institution."
+    },
+    {
+      "fn": "F2",
+      "label": "Risk governance / written information security program and risk analysis",
+      "instrument": "FTC Safeguards Rule (16 C.F.R. Part 314) requiring a written information security program with a qualified individual and risk assessment (GLBA basis); HIPAA Security Rule (45 C.F.R. Part 164 Subpart C) mandating documented risk analysis for ePHI; NIST Cybersecurity Framework 2.0 (voluntary governance baseline).",
+      "authority": "FTC for the Safeguards Rule; HHS OCR for the HIPAA Security Rule; NIST (framework author, non-enforcing).",
+      "deadlineOrMechanism": "FTC Safeguards Rule full-compliance date was 9 June 2023 for the strengthened program elements. HIPAA risk-analysis is a continuing obligation enforced by OCR audits and civil money penalties. NIST CSF is voluntary but a de facto baseline and reference for 'reasonable security'.",
+      "instruments_bib": ["us-ftc-safeguards", "us-hipaa-security", "nist-csf"],
+      "note": "Title-IV participation pulls essentially all US universities into the FTC Safeguards Rule as 'financial institutions'."
+    },
+    {
+      "fn": "F3",
+      "label": "Technical and organisational security controls",
+      "instrument": "HIPAA Security Rule administrative/physical/technical safeguards (45 C.F.R. Part 164 Subpart C); FTC Safeguards Rule enumerated controls incl. encryption and MFA (16 C.F.R. §314.4); NIST SP 800-171 Rev. 2/Rev. 3 for Controlled Unclassified Information in federal research; NIST SP 800-53 Rev. 5 for FISMA-scoped systems.",
+      "authority": "HHS OCR; FTC; DoD/federal contracting officers (for SP 800-171 via DFARS); agency CISOs (for FISMA/SP 800-53).",
+      "deadlineOrMechanism": "Controls are continuing obligations. For federal research data, NIST SP 800-171 is imposed contractually (DFARS 252.204-7012) with self-assessment scoring; SP 800-171 Rev. 3 (final 14 May 2024) is the current baseline. FISMA/SP 800-53 applies where universities operate systems on behalf of federal agencies.",
+      "instruments_bib": ["us-hipaa-security", "us-ftc-safeguards", "nist-171", "nist-171r3", "nist-sp800-53"],
+      "note": "Pre-existing NIST entries (nist-171, nist-171r3, nist-sp800-53, nist-csf) are reused; no duplicate legal entries added for them."
+    },
+    {
+      "fn": "F4",
+      "label": "Incident / breach notification",
+      "instrument": "HIPAA Breach Notification Rule (45 C.F.R. §§164.400–164.414); FTC Safeguards Rule notification provision (16 C.F.R. §314.4(j)); state security-breach-notification statutes (e.g., Cal. Civ. Code §1798.82).",
+      "authority": "HHS OCR (HIPAA breaches); FTC (Safeguards notification events); State Attorneys General (state breach laws).",
+      "deadlineOrMechanism": "HIPAA: notify affected individuals and HHS without unreasonable delay and no later than 60 calendar days after discovery; breaches of 500+ individuals reported to HHS contemporaneously, smaller ones logged and reported annually. FTC Safeguards: notify the FTC as soon as possible and no later than 30 days after discovery of a notification event affecting 500+ consumers (in effect since 13 May 2024). State laws impose their own (often shorter) consumer-notification timelines.",
+      "instruments_bib": ["us-hipaa-breach", "us-ftc-safeguards", "us-ccpa-cpra"],
+      "note": "No single federal breach deadline: the operative numbers are HIPAA's 60-day outer limit and the FTC's 30-day/500-consumer trigger, layered with state breach-notification statutes."
+    },
+    {
+      "fn": "F5",
+      "label": "Export control / controlled-technology and deemed-export management for research IT",
+      "instrument": "Export Administration Regulations — EAR (15 C.F.R. Parts 730–774), with the fundamental research exclusion at §734.8; International Traffic in Arms Regulations — ITAR (22 C.F.R. Parts 120–130), with the general-principles/public-domain carve-outs at §120.34(a)(8).",
+      "authority": "US Department of Commerce — Bureau of Industry and Security (BIS) for the EAR; US Department of State — Directorate of Defense Trade Controls (DDTC) for the ITAR.",
+      "deadlineOrMechanism": "Mechanism is licensing and the deemed-export concept: releasing controlled technology/technical data to foreign nationals (including on US soil) is an export needing a BIS or DDTC authorisation. The EAR fundamental research exclusion (§734.8) shields published research results but not controlled inputs, sponsor-imposed restrictions, or controlled equipment; ITAR has no general fundamental-research safe harbour for controlled technical data. Compliance is operationalised via technology control plans, nationality-based access control, and segregated controlled environments.",
+      "instruments_bib": ["us-ear", "us-itar"],
+      "note": "ITAR is materially stricter than the EAR; defence-related projects typically require physical/logical segregation and a technology control plan rather than reliance on the fundamental research exclusion."
+    },
+    {
+      "fn": "F6",
+      "label": "Conformity assessment / certification and contractual transfer of obligations",
+      "instrument": "Cybersecurity Maturity Model Certification — CMMC Program (32 C.F.R. Part 170), with contractual implementation via DFARS (DFARS Case 2019-D041, 48 C.F.R.); NIST SP 800-171 as the assessed control set for CMMC Level 2.",
+      "authority": "US Department of Defense (CMMC PMO, DIBCAC) with accredited C3PAO third-party assessors; contracting officers enforce the DFARS clause.",
+      "deadlineOrMechanism": "Transfer mechanism is contractual certification: the CMMC final rule (32 C.F.R. Part 170) became effective 16 December 2024; the DFARS clause making CMMC a condition of award (DFARS Case 2019-D041) became effective 10 November 2025 and is phased in over roughly three years. Level 1 (FCI) is self-assessed; Level 2 (CUI) requires a C3PAO assessment (or limited self-assessment); Level 3 (highest-sensitivity CUI) is DIBCAC-assessed against NIST SP 800-172. Certification artefacts must be retained for six years.",
+      "instruments_bib": ["us-cmmc", "nist-171r3"],
+      "note": "CMMC is the conformity-assessment/transfer layer that converts the NIST SP 800-171 controls (F3) into an assessed, contractually enforceable obligation for DoD-funded university research."
+    }
+  ],
+  "bib_keys_added": [
+    "us-ferpa",
+    "us-hipaa-security",
+    "us-hipaa-breach",
+    "us-ftc-safeguards",
+    "us-ccpa-cpra",
+    "us-cmmc",
+    "us-ear",
+    "us-itar"
+  ],
+  "bib_keys_reused": [
+    "nist-csf",
+    "nist-171",
+    "nist-171r3",
+    "nist-sp800-53"
+  ],
+  "sources_note": "All entries derived from real primary regulation and authoritative secondary sources (Federal Register listings, eCFR, FTC/HHS/ED official guidance, California AG/CPPA, BIS/DDTC, and corroborating law-firm advisories, IAPP, CRS, and university research-office pages). No prior SUIT document was used. US federal regulator sites (ecfr.gov, federalregister.gov, ftc.gov, hhs.gov, bis.doc.gov, state.gov) serve 403/anti-bot redirects to automated agents; primary citations were cross-checked against multiple independent authoritative secondary sources and dated 2026-06-09."
+}

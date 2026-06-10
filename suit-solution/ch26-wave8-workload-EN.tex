@@ -1,0 +1,280 @@
+% ============================================================================
+% Chapter 26 --- Wave 8: Workload classification and scale-out
+% ----------------------------------------------------------------------------
+% Purpose : extend TAC scope to compute and storage workloads at scale.
+%           Classification labels become enforced at workload provisioning
+%           and at storage binding.
+% Page target: ~5 pages.
+% Dependencies: Waves 1, 3, 4 required (D17.3); reference layers Ch. 9 + 10;
+%               classification scheme institutionally chosen (D10.4); cluster
+%               separation by sensitivity (D9.6).
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D26.1 classification labels enforced at provisioning, retrospective for
+%         existing workloads
+%   D26.2 cluster separation rule (D9.6) applied during this wave
+%   D26.3 snapshots and replicas brought under classification governance (D10.7)
+%   D26.4 exit criteria reference Compute + Storage conformance subsets
+% ============================================================================
+
+\chapter{Wave~8 --- Workload classification and scale-out}
+\label{ch:wave8-workload}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~8 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Required pre-requisites are
+Wave~1 (identity emitting institutional schema), Wave~3 (network
+zone catalogue declared and operational), and Wave~4 (policy
+plane consuming classification signals); Wave~5 (pilot) strengthens the wave when present. It applies the
+contracts of \trchap{ch:compute}{} and \trchap{ch:storage}{},
+the cluster separation rule of D9.6, and the
+classification-labelling discipline of D10.4 and D10.7. Closure is
+gated by the Compute and Storage conformance subsets of
+\trchap{ch:conformance}{}.
+\end{caveatbox}
+
+Wave~8 is the wave in which classification ceases to be a
+documentary discipline and becomes an enforced architectural
+property. Workloads --- virtual machines, containers, research
+workspaces, administrative services --- carry classification
+labels that the policy plane consults at provisioning and that the
+storage layer respects at binding. The wave's principal
+engineering effort is not in introducing the labels (their
+schema was fixed in earlier waves) but in extending classification
+to the existing workload estate and in enforcing the cluster-
+separation rule that the labels imply.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w8-goal}
+
+The goal of Wave~8 is to make the classification of every
+workload an authoritative input to its provisioning, its storage
+binding, and its policy evaluation. Three concrete objectives
+follow:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item every newly provisioned workload declares its
+    classification at the moment of provisioning, with the
+    declaration verified by the policy layer;
+  \item every existing workload acquires a classification through
+    a retrospective labelling exercise, with explicit governance
+    of the period during which workloads operate without
+    classification;
+  \item the cluster-separation rule of D9.6 (workloads of
+    distinct sensitivity classifications should not share a
+    cluster) is operationalised on the production estate, with
+    documented exceptions where the rule is impractical.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w8-prereq}
+
+Beyond Waves~1, 3 and 4, four operational conditions strengthen
+Wave~8:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the institutional classification scheme is stable
+    (whether TLP-derived, domain-specific, or institutional ---
+    the scheme matters less than its stability);
+  \item the policy corpus of Wave~4 contains the classification-
+    consuming rules that the wave will operationalise;
+  \item the storage layer's classification metadata mechanism is
+    in place, with a documented procedure for assigning and
+    revising labels;
+  \item the network zone catalogue of Wave~3 is mature enough to
+    accommodate workload migrations between zones when the
+    classification of a workload changes.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w8-coexistence}
+
+Wave~8 introduces enforcement gradually, distinguishing newly-
+provisioned workloads from existing ones.
+
+\paragraph{Newly-provisioned workloads.} From the wave's start,
+every new workload provisioning request must declare a
+classification; the absence of a declaration produces an explicit
+provisioning failure that the requester can act on. The
+classification is consulted by the policy layer's admission
+decision; the storage layer applies the corresponding label to
+any volume bound to the workload.
+
+\paragraph{Existing workloads.} A retrospective labelling
+exercise classifies the existing workload estate. The exercise is
+typically run unit-by-unit or service-by-service, with a
+nominated classification owner per cohort. Workloads remain
+operational throughout, with an interim default (typically the
+most permissive classification consistent with the workload's
+visible behaviour) until the formal classification is recorded.
+
+\paragraph{Cluster-separation enforcement.} The rule that
+workloads of distinct sensitivity classifications should not
+share a cluster (D9.6) is applied as a target rather than as a
+hard gate at wave open: existing co-located workloads are
+identified, their separation is scheduled, and the schedule is
+managed against the institutional change calendar. The wave
+closes only when the agreed separation has been achieved or
+explicitly excepted.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w8-greenfield}
+
+For institutions in a greenfield position, Wave~8 establishes
+the classification-aware provisioning from the start: there are
+no existing workloads to retro-classify, and the cluster-
+separation rule applies trivially because clusters are
+provisioned per classification class as they are needed.
+Indicative duration is four to six months.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w8-brownfield-ms}
+
+For institutions whose compute estate is dominated by a single
+proprietary vendor suite (public-cloud tenancies aligned to that
+vendor, the vendor's productivity and collaboration workloads,
+virtualisation substrates with vendor-heavy clusters), Wave~8
+brings classification to the visible workload boundary while
+accepting that some vendor-internal workloads remain partly
+opaque.
+
+\paragraph{Pattern.} The retrospective labelling targets the
+workloads visible to the institution's provisioning surface ---
+virtual machines under institutional management, containers
+under the institution's container-orchestration platform,
+research workspaces. The dominant suite's productivity workloads
+(mailboxes, document repositories, collaboration workspaces) are
+addressed at the application level rather than at the workload
+level, with classification expressed as sensitivity labels
+integrated with the incumbent identity-and-productivity suite
+vendor's information-protection capability where the institution
+has adopted it.
+
+\paragraph{Cluster-separation under a dominant-suite estate.}
+Virtualisation-based or vendor-private-cloud clusters that host
+workloads of mixed classifications have a documented separation
+plan. The plan typically aligns with the next infrastructure
+refresh cycle or with a new cluster's provisioning, rather than
+with disruptive mid-cycle migration.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months,
+dominated by the retrospective labelling and by the cluster-
+separation schedule.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w8-brownfield-hybrid}
+
+For institutions with a multi-vendor compute estate (an
+open-source private cloud plus a proprietary virtualisation
+platform plus public-cloud burst, with a mix of
+container-orchestration clusters across organisational units),
+Wave~8's principal effort is the
+\emph{normalisation} of classification across these substrates.
+
+\paragraph{Pattern.} A common classification metadata interface
+is established across the substrates: the same label vocabulary
+is applied whether a workload runs on the open-source private
+cloud, on the proprietary virtualisation platform, or
+in a cloud burst. The workload-context events of
+\trchap{ch:compute}{} carry the classification consistently;
+the storage labels of \trchap{ch:storage}{} match. The
+multi-vendor reality of the estate is preserved; the
+classification governance is unified.
+
+\paragraph{Unit-level classification authorship.} In
+research-intensive institutions, classification is often
+authored at organisational-unit or research-project level rather
+than centrally. The wave operationalises this delegation: a
+classification owner per cohort, a central review for
+consistency, no central authority over individual labels.
+
+\paragraph{Indicative duration.} Twelve to twenty-four months.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w8-reversibility}
+
+Wave~8 is reversible at the per-workload level for the duration
+of the retrospective labelling and for an additional grace
+period thereafter.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Per-workload reversal: a classification that proves
+    operationally inappropriate is revised through the labelling
+    governance rather than through a wave-level reversal.
+  \item Cluster-separation reversal: a separation schedule that
+    cannot be sustained for resource reasons is documented as an
+    exception, not as a wave failure.
+  \item Provisioning enforcement toggle: the requirement for a
+    classification declaration at provisioning can be disabled
+    in defined emergency cases, with the disablement logged and
+    reviewed.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w8-exit}
+
+Wave~8 closes when the Compute and Storage conformance subsets
+of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass, when
+the agreed classification coverage is achieved, and when the
+cluster-separation schedule has been completed or explicitly
+excepted.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Compute conformance subset (Kubernetes API conformance,
+    OCI image migration, SLSA attestation verification);
+    Storage conformance subset (S3 conformance, KMIP migration,
+    snapshot inventory, classification preservation across
+    export/import).
+  \item Classification coverage: the institutionally agreed
+    proportion of workloads has a recorded classification.
+    Workloads in the residual exception register are documented
+    individually with the rationale.
+  \item Cluster-separation schedule: closed, with documented
+    exceptions where applicable. Exceptions are revisited at
+    the next sovereignty grid review.
+  \item Snapshots and replicas (D10.7): brought under the
+    classification governance, with their location and
+    retention reconciled with the primary storage.
+\end{itemize}
+
+\begin{realworldbox}[Workload classification at research institutions]
+\noindent Multi-tenant research-cloud architectures, such as
+those reported under large national research-computing
+allocation programmes or within continental-scale federated
+research clouds, illustrate
+classification-aware patterns at substantial scale. The mapping
+of those patterns to a single-institution context is non-trivial
+and would benefit from the institution's own pilot work
+(Wave~5) rather than from direct transposition.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w8-regulatory}
+
+\noindent Wave~8 brings classified workloads under the
+attestation discipline at scale. It contributes to the
+security-of-processing obligation of \loc{data-protection-regime}
+(e.g.\ \gls{gdpr}~Art.~32, applied to the workload
+tier) and to that regime's data-minimisation principle (e.g.\
+\gls{gdpr}~Art.~5(1)(c), realised through classification-aware
+tiering). It also operationalises the business-continuity and
+secure-development obligations of \loc{cybersecurity-baseline-regime}
+(e.g.\ NIS2~Art.~21(2)(c), through declarative
+redeployability, and (e), through SLSA-level supply-chain
+attestations). Where the institution adopts them, the wave is also
+a principal anchor of ISO/IEC~27001~A.8.32 (change
+management) at scale and contributes to NIST CSF \textsf{PROTECT}
+(PR.PS) and \textsf{RECOVER} (RC.RP). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.

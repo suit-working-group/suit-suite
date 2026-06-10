@@ -1,0 +1,270 @@
+% ============================================================================
+% Chapter 22 --- Wave 4: Policy plane
+% ----------------------------------------------------------------------------
+% Purpose : install PDP/PEP, parameterised by identity attributes (Wave 1)
+%           and observed by the audit pipeline (Wave 2). The most ambitious
+%           novelty of the architecture for most universities (D7.5).
+% Page target: ~5 pages.
+% Dependencies: Wave 0 + Wave 1 + Wave 2 (D17.3); reference layer Ch. 7;
+%               IdP attribute mapping per D7.7.
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D22.1 shadow mode is the mandatory introduction (D7.1)
+%   D22.2 per-policy enforcement decision is the unit of progress
+%   D22.3 brownfield single-suite-centric: conditional-access logic partially reproduced
+%   D22.4 exit criteria reference Policy conformance subset (D16.5)
+% ============================================================================
+
+\chapter{Wave~4 --- Policy plane}
+\label{ch:wave4-policy}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~4 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Its required pre-requisites are
+Waves 1 and 2: an identity layer that emits
+attributes in the institutional schema, and an observability layer
+that captures decisions. It instantiates the policy contract of
+\trchap{ch:policy}{}, with the mapping of identity attributes to
+the institutional schema specified in \trchap{ch:policy}{}. Closure is gated by
+the four Policy tests of \trchap{ch:conformance}{}.
+\end{caveatbox}
+
+Wave~4 is, for most universities at the time of writing, the
+most ambitious novelty of the playbook. Few institutions today
+operate a dedicated policy decision point separate from their
+applications and identity provider. Adopting one is a real
+organisational change as well as a technical one: the institution
+acquires a new artefact (the policy corpus), a new governance
+process (policy authoring and review), and a new operational
+capability (decision auditability). The wave's success depends as
+much on the institutional change as on the technical deployment.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w4-goal}
+
+The goal of Wave~4 is to deploy a policy decision point conformant
+to the contract of \trchap{ch:policy}{}, to migrate selected
+authorisation decisions from the identity-provider-native rules and
+from in-application logic into the policy plane, and to establish
+the policy authoring and review process under which the corpus
+will evolve.
+
+\paragraph{Selected, not all.} Wave~4 does not require that every
+authorisation decision in the institution be expressed in the
+policy plane. The wave's success criterion is that the plane
+exists, that it is conformant, that an institutionally agreed set
+of decisions has been migrated, and that the process for migrating
+further decisions is established. The transition of the rest of
+the corpus is the work of subsequent waves and of routine
+operations.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w4-prereq}
+
+Beyond Waves 0, 1 and 2, three operational conditions strengthen
+Wave~4:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the institutional attribute schema (D7.7) is stable; the
+    identity layer of Wave~1 emits attributes against it;
+  \item the existing authorisation logic --- whether expressed in
+    the identity provider's rules, in application configuration,
+    or in code --- is inventoried at the level of intent if not at
+    the level of implementation;
+  \item the security operations function (which will consume
+    decision logs) is engaged with the canonical schema of
+    \trchap{ch:observability}{}.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w4-coexistence}
+
+The principal engineering pattern of Wave~4 is \emph{shadow mode}:
+the policy decision point evaluates every relevant request and
+emits its decision into the audit trail, but the existing
+enforcement points continue to apply the incumbent authorisation
+logic. The institution thereby acquires the ability to compare
+proposed decisions against actual behaviour before any decision is
+moved to enforcing.
+
+\paragraph{Per-policy transition.} Each authorisation rule is
+migrated in three steps: it is expressed in the policy language;
+the resulting decisions are observed in shadow mode for an
+institutionally agreed period; if the discrepancy profile is
+understood and the institution accepts the proposed behaviour, the
+rule is switched to enforcing and the incumbent rule is retired.
+The transition is per-policy, not per-application; an application
+may have some of its authorisation in the policy plane and some
+still in its incumbent location for a substantial period.
+
+\paragraph{Shadow observation period.} An indicative period is two
+to four weeks per policy for routine rules, longer for rules with
+infrequent triggers (year-end administrative procedures,
+research-data extraction patterns, incident-response invocations)
+that may not be exercised within a shorter window. The observation
+period is set per policy, not by a single institutional rule, and
+is documented in the policy corpus alongside the policy itself.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w4-greenfield}
+
+For institutions in a greenfield position, Wave~4 establishes the
+policy plane as the authorisation surface from the start: there is
+no existing authorisation logic to migrate from. The wave is
+correspondingly compressed but not trivial --- the policy corpus
+must still be authored, the schema integration with identity
+verified, and the auditing trail exercised. Indicative duration is
+six to nine months.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w4-brownfield-ms}
+
+For institutions whose authorisation logic resides primarily in
+the incumbent identity suite's conditional-access (or equivalent)
+expressions and in that suite's application-level configuration,
+Wave~4 introduces the policy plane in front of, not in place of,
+the existing authorisation arrangements.
+
+\paragraph{Pattern.} A standalone policy decision point is
+deployed alongside the incumbent identity suite. For each
+conditional-access expression identified in Wave~1's inventory, an
+equivalent policy is authored in the chosen policy language and
+exercised in shadow mode. The incumbent suite's conditional-access
+expression remains authoritative until the shadow comparison
+demonstrates equivalence; at that point, the institution decides
+whether to retire the vendor expression in favour of the
+policy-plane rule or to keep it as a defence-in-depth element.
+
+\paragraph{What the wave does not promise.} Wave~4 does not
+promise that all conditional-access expressions will be migrated.
+Some are unproductive to migrate (rules that genuinely belong with
+identity, such as MFA enforcement); some are operationally costly
+to migrate (rules that depend on vendor-specific signals not
+exposed to the policy plane); some are simply not worth the
+effort. The selection is institutional and is informed by the
+sovereignty grid: rules that confer roadmap leverage to the
+supplier are the priority candidates for migration.
+
+\paragraph{Indicative duration.} Twelve to eighteen months,
+dominated by the per-policy shadow observation and by the
+institutional debate over which rules to migrate.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w4-brownfield-hybrid}
+
+For institutions whose authorisation logic is scattered across
+standards-based federation attribute releases, open-source
+identity-broker authorisation policies, in-application
+configuration, and ad hoc code paths, Wave~4 is
+principally the work of \emph{consolidation}.
+
+\paragraph{Pattern.} The policy plane becomes the surface against
+which scattered authorisation logic is gradually consolidated. The
+three steps of the per-policy transition apply to each candidate
+rule, regardless of where it currently resides. Rules that already
+live in standards-aligned components (open-source identity-broker
+authorisation policies expressed in standard ways) are migrated
+more easily; rules that live in application code require more
+engineering investment per migration.
+
+\paragraph{What the wave changes.} The policy corpus becomes the
+canonical home for institutional authorisation decisions. The
+governance of the corpus --- review process, authoring rights,
+deprecation discipline --- is established and exercised. The
+decision log becomes a reliable forensic resource.
+
+\paragraph{Indicative duration.} Twelve to eighteen months, with
+substantial variation depending on the spread of the incumbent
+authorisation logic and on the institution's appetite for code
+refactoring.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w4-reversibility}
+
+Wave~4 is reversible at the per-policy level for as long as the
+incumbent authorisation logic is preserved as defence-in-depth.
+Beyond the point at which the incumbent rule is retired, reversal
+is operationally possible but is treated as a re-authoring of the
+incumbent rule rather than as a policy-plane reversal.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item The shadow / enforcing toggle is per policy and is
+    exercised through the policy bundle distribution mechanism;
+    reversal is the deployment of a new bundle, not the
+    redeployment of the engine.
+  \item An emergency disable procedure --- a tested mechanism for
+    switching the policy plane to permissive mode within minutes
+    --- is part of the wave's deliverables.
+  \item The full-wave rollback procedure (return to the
+    pre-Wave-4 authorisation arrangements) is documented at wave
+    open and exercised in tabletop form before any production
+    enforcement migration.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w4-exit}
+
+Wave~4 closes when the four Policy tests of the conformance suite
+of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass, when the
+agreed set of policies is enforcing, and when the governance
+process for the corpus is operating.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item PDP query API returns canonical decisions; recorded
+    decisions replay identically; policy bundle export and
+    re-import on alternative engine produces identical decisions
+    on a representative input set; shadow-mode logging is at
+    parity with enforcing-mode logging. (Policy conformance
+    subset.)
+  \item Migrated policy set: the institutionally agreed set of
+    rules has been migrated and switched to enforcing; the
+    remaining rules are either in a documented schedule or in the
+    documented exception register.
+  \item Governance: the policy corpus is under version control
+    with a documented review process, and the first quarterly
+    governance cycle has been completed.
+\end{itemize}
+
+\begin{realworldbox}[Policy plane adoption patterns]
+\noindent The policy plane is more thinly documented in academia
+than in industry. Industrial deployments of standalone policy
+engines at scale (publicly described at organisations including
+Netflix, Capital One and Pinterest) demonstrate that the
+per-policy shadow-mode pattern
+operates reliably under substantial load; their applicability to
+academic settings is conditional on the institution's specific
+authorisation profile. A cross-institutional academic network
+would be one of the contexts in which a shared library of
+academic-context policies might emerge.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w4-regulatory}
+
+\noindent Wave~4 introduces the policy plane as the per-request
+decision point. It contributes to the applicable data-protection
+regime's data-protection-by-design obligation enforced at decision
+time (e.g.\ \gls{gdpr}~Art.~25), and to the applicable
+cybersecurity-baseline regime's risk-analysis-policy and
+access-control-policy requirements (e.g.\ NIS2~Art.~21(2)(a) and
+(i)). Under the applicable AI regulation it is the locus where the
+prohibited-practices and transparency provisions (e.g.\ EU AI Act
+Art.~5 and Art.~50) admit a
+policy-plane enforcement: rules that gate AI-related
+TACs on context labelling and on prohibited-use classification.
+The wave operationalises 27001~A.5.15 (access control), A.5.18
+(access rights) and A.8.3 (information access restriction) and
+contributes to NIST CSF \textsf{PROTECT} (PR.AA). Detailed
+mapping in \trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-ai-act},
+\S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.

@@ -1,0 +1,119 @@
+% ============================================================================
+% localization-defaults.tex — LAYER 0 default bindings
+% ----------------------------------------------------------------------------
+% One \setloc per localization variable. This file is the authoritative registry
+% of localization variables (49 distinct keys — INSTITUTION_NAME and
+% ACADEMIC_GOVERNING_BODIES each support two anchor families and bind once here).
+%
+% Each default value is the variable's CANONICAL GENERIC ROLE PHRASE: the
+% jurisdiction-neutral, institution-agnostic wording already used in the
+% suite's current generic prose (the genericDecision of the matching row).
+% Rendering a document with ONLY these defaults loaded therefore reproduces
+% the present generic text UNCHANGED. An edition file (e.g. an EU or a
+% Luxembourg edition) overrides any subset of these keys with \setloc after
+% this file is \input.
+%
+% Keys are kebab-case. Requires localization.sty (\setloc / \loc).
+% ============================================================================
+
+% --- Subject institution & profile ------------------------------------------
+\setloc{institution-name}{the institution}
+\setloc{institution-type}{a typical research-intensive institution}
+\setloc{institution-macro-set}{the institution}
+\setloc{staffing-profile}{an institution that sets excellence as a strategic objective}
+
+% --- Named people & affiliation ---------------------------------------------
+\setloc{author-name}{the author}
+% author-affiliation is rendered as an OPTIONAL trailing byline clause via
+% \loc{author-affiliation}: the generic default is EMPTY (the working-group
+% attribution stands alone), and a concrete edition fills it with the
+% convener's host-institution affiliation and contact. An empty value
+% produces no stray punctuation or whitespace.
+\setloc{author-affiliation}{}
+
+% --- Institutional units & pilots -------------------------------------------
+\setloc{cs-research-unit}{a computer-science department}
+\setloc{security-research-centre}{a cybersecurity-focused interdisciplinary research centre}
+\setloc{institution-hpc-facility}{the institution's HPC facility / HPC team}
+\setloc{pilot-entities}{the institution's HPC facility / team}
+
+% --- Institutional governance roles -----------------------------------------
+\setloc{executive-leadership}{the institution's central executive leadership}
+\setloc{governing-board}{the institution's governing board}
+\setloc{academic-governing-bodies}{the academic deliberative councils}
+\setloc{staff-representation-body}{the institution's staff-representation bodies}
+% Approving academic units for the internal-approval byline on the dossier and
+% the rectorate summary (the faculty/department domains that signed off the
+% institution's edition). Generic default is the neutral role phrase.
+\setloc{approving-academic-units}{the approving academic units of \loc{institution-name}}
+
+% Document metadata for the unified \suitmetablock title-page block. Each
+% edition overrides these for its own version/visibility/approval facts.
+\setloc{doc-version}{2.1}
+\setloc{doc-visibility}{INTERNAL}
+\setloc{doc-approval-authority}{\loc{approving-academic-units}}
+\setloc{doc-approval-date}{\textit{(approval date to be set)}}
+
+% --- Research & education network and its services --------------------------
+\setloc{nren-name}{the national research and education network}
+\setloc{nren-csirt}{the NREN CSIRT}
+\setloc{peer-nren-roster}{peer NRENs in comparable jurisdictions, each operating a national backbone, a CSIRT, and federated identity/storage/IaaS services}
+\setloc{nren-service-catalogue}{the NREN-provided federated-service catalogue (federated Wi-Fi, trusted certificate service, performance monitoring, managed research-data transfer)}
+\setloc{nren-research-cloud}{a national/regional research cloud or NREN-provided cloud service, where one exists}
+\setloc{research-backbone-scale}{the regional research backbone (membership and backbone capacity per region)}
+\setloc{identity-federation-profile}{the academic identity interfederation}
+
+% --- High-performance computing ---------------------------------------------
+\setloc{national-hpc-facility}{a national/EuroHPC supercomputer}
+
+% --- Deployment topology & data custody -------------------------------------
+\setloc{deployment-custody-model}{the institution operates, or procures under equivalent custody guarantees, a deployment of its core components}
+\setloc{data-custody-sovereignty-profile}{a custody arrangement that minimises the applicable disclosure-regime exposure}
+
+% --- Regulatory regimes (supranational anchors as default profile) ----------
+\setloc{regulatory-regime}{binding law in the EU and Council of Europe member states (including the institution's jurisdiction)}
+\setloc{cybersecurity-baseline-regime}{the applicable supranational and national legal framework}
+\setloc{data-protection-regime}{the institution's applicable data-protection regime}
+\setloc{eid-trust-services-regime}{the institution's applicable trust-services regime}
+\setloc{ai-regulation}{the adopter's applicable AI-governance regime}
+\setloc{cross-border-transfer-regime}{the applicable cross-border data-transfer regime}
+\setloc{essential-entity-classification-basis}{institutions under the NIS2 essential-entity (or important-entity) regime}
+\setloc{nis2-sanction-ceiling}{up to EUR\,10\,M or 2\,\% of annual turnover}
+
+% --- National transposition instruments -------------------------------------
+\setloc{nis2-national-transposition}{the national NIS2 transposition law}
+\setloc{cer-national-transposition}{the national CER transposition law}
+\setloc{national-equal-treatment-law}{the national transposition of Directive 2000/78/EC into labour law}
+\setloc{national-public-sector-isp}{a national public-sector information-security policy}
+\setloc{national-cyber-strategy}{the national cybersecurity strategy}
+\setloc{national-risk-method}{a national risk-analysis method}
+\setloc{national-cyber-commissariat-founding-law}{the national founding statute of the cyber-resilience commissariat}
+
+% --- National authorities & bodies (role-based) -----------------------------
+\setloc{national-dpa}{the competent data-protection authority}
+\setloc{national-gov-csirt}{the national/governmental CSIRT}
+\setloc{national-infosec-agency}{the national information-security agency}
+\setloc{nis2-supervisory-authority}{the national NIS2 supervisory authority}
+\setloc{national-spoc-authority}{the national single point of contact}
+\setloc{national-cyber-competence-centre}{a national cybersecurity competence centre}
+\setloc{national-notification-platform}{the national NIS2 incident-notification platform}
+\setloc{national-legislature}{the national legislature}
+\setloc{national-executive-department}{the national executive department responsible for the protection commissariat}
+
+% --- Operational contacts & market exemplars --------------------------------
+\setloc{internal-emergency-incident-contact}{the institution's internal emergency / incident-reporting contact}
+\setloc{incumbent-identity-suite-vendor}{a pure-commercial identity provider}
+
+% --- ICRADP administrative-review service levels ----------------------------
+% Adjustment-commission decision deadline and emergency provisional-grant
+% window. Default to the worked figures; an edition may rebind them to its own
+% administrative-review service levels.
+\setloc{icradp-decision-deadline}{15 working days}
+\setloc{icradp-emergency-deadline}{48 hours}
+
+% --- Assurance / review recency window (single-source magic number) ---------
+% The audit/pen-test/drill recency window used by the Chapter 4 self-assessment.
+% Centralised so a re-tuned interval is one edit and an edition may rebind it.
+\setloc{assurance-recency-window}{twenty-four months}
+
+\endinput

@@ -1,0 +1,84 @@
+% ============================================================================
+% localization.sty — modular localization (key/value) mechanism
+% ----------------------------------------------------------------------------
+% Layer 0 of the suite localization model.
+%
+%   \loc{key}           expands to the current value bound to <key>.
+%   \setloc{key}{value} sets (or overrides) the value bound to <key>.
+%
+% Keys are kebab-case (e.g. national-nren). Values may contain arbitrary
+% LaTeX markup. Calling \loc on an UNSET key emits a visible LaTeX warning at
+% build time and renders a conspicuous placeholder, so a missing binding is
+% always caught during compilation and never silently produces a blank.
+%
+% Bindings are stored as control sequences in a private namespace
+% (\loc@val@<key>) so the package carries no dependencies and adds no global
+% command pollution beyond \loc / \setloc.
+% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{localization}[2026/06/09 v1.0 suite localization key/value layer]
+
+% --- Internal: build the storage control-sequence name for a key ------------
+%     \loc@cs{key} -> the csname token \loc@val@key
+\newcommand{\loc@cs}[1]{\csname loc@val@#1\endcsname}
+
+% --- \setloc{key}{value} : bind (or rebind) a localization key --------------
+%     Uses \expandafter so the value is stored verbatim (not expanded now).
+\newcommand{\setloc}[2]{%
+  \expandafter\def\csname loc@val@#1\endcsname{#2}%
+}
+
+% --- \loc{key} : expand to the key's current value --------------------------
+%     If unbound, warn at build time and render a visible placeholder.
+\newcommand{\loc}[1]{%
+  \ifcsname loc@val@#1\endcsname
+    \csname loc@val@#1\endcsname
+  \else
+    \PackageWarning{localization}{%
+      Undefined localization key `#1'. No \string\setloc{#1}{...} binding was
+      found. Add one to localization-defaults.tex (or override it in the
+      edition file)%
+    }%
+    \textbf{??#1??}%
+  \fi
+}
+
+% --- \Loc{key} : like \loc but capitalises the first letter of the value -----
+%     For sentence-initial use. Relies on the value being expandable to text
+%     whose first token is a letter (true for every role phrase in the suite).
+%     Implementation: \MakeUppercase on the first character only, via a helper.
+\newcommand{\loc@firstup}[1]{\loc@@firstup#1\relax}
+\def\loc@@firstup#1#2\relax{\uppercase{#1}#2}
+\newcommand{\Loc}[1]{%
+  \ifcsname loc@val@#1\endcsname
+    \expandafter\expandafter\expandafter\loc@firstup
+      \expandafter\expandafter\expandafter{\csname loc@val@#1\endcsname}%
+  \else
+    \PackageWarning{localization}{%
+      Undefined localization key `#1'. No \string\setloc{#1}{...} binding was
+      found%
+    }%
+    \textbf{??#1??}%
+  \fi
+}
+
+% --- \suitmetablock : the unified, generic document title-page metadata block -
+%     Single source of truth for every document's version/visibility/status
+%     line. All variable parts are localization keys, so an edition overrides
+%     them via \setloc. Renders centred-friendly (uses \\), at \small.
+%       Document Version <doc-version>
+%       Visibility: <doc-visibility>          (INTERNAL / PUBLIC)
+%       Status: Approved by <authority> on <date>
+%       Based on the SUIT Working Group [ref]
+%       Print date: <today>
+\newcommand{\suitmetablock}{%
+  \begingroup\small
+  Document Version~\loc{doc-version}\\[2pt]
+  Visibility:~\loc{doc-visibility}\\[2pt]
+  Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]
+  Based on the SUIT Working Group~\cite{suit-wg}\\[2pt]
+  Print date:~\today
+  \par\endgroup
+}
+
+\endinput

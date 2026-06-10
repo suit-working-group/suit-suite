@@ -1,0 +1,457 @@
+% ============================================================================
+% Chapter 8 --- Network and segmentation
+% ----------------------------------------------------------------------------
+% Purpose : zones, segmentation strategy, attachment service, Science DMZ.
+%           Belongs to the Execution plane (D5.1). Largest layer chapter
+%           because of the zone catalogue and the SASE discussion.
+% Page target: ~7 pages.
+% Dependencies: Ch. 5 (standards: RADIUS, NETCONF/YANG, BGP/EVPN, eBPF/CNI,
+%               IPFIX), Ch. 7 (policy decisions are enforced here for east-west
+%               and attachment), Ch. 3 (sovereignty framework).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D8.1 minimum compliance set for the network layer (the contract)
+%   D8.2 reference instantiation = VLAN/VRF + FreeRADIUS + OvS + Science DMZ
+%   D8.3 alternatives = proprietary macro-segmentation, micro-segmentation overlay
+%   D8.4 SASE/ZTNA explicitly NOT in the reference, with documented rationale
+%   D8.5 Network sovereignty scores
+% ============================================================================
+
+\chapter{Network and segmentation}
+\label{ch:network}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the network layer. It consumes policy
+decisions from \trchap{ch:policy}{} (in particular for attachment
+authorisation and east-west allowance), it produces flow records
+consumed by \trchap{ch:observability}{}, and it relies on standards
+from \S\ref{sec:ap-standards}. The layer belongs to the \emph{Execution plane}.
+\end{caveatbox}
+
+The network layer answers a question that is operationally simple
+and architecturally consequential: \emph{which traffic is permitted
+between which parties}. It is the first layer in which the
+institution's sovereignty posture meets its physical infrastructure
+--- cables, fibres, switches, wireless access points --- and the
+layer in which the longest-lived investments tend to reside. A
+sovereignty analysis that succeeds at the identity and policy planes
+but fails at the network plane has accomplished little of value.
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:nw-contract}
+
+The network layer is responsible for: declaring and operating
+zones with documented security profiles; authenticating and
+attaching subjects to the appropriate zone on the basis of identity
+and posture; enforcing east-west and north-south traffic rules
+returned by the policy layer; emitting flow telemetry of sufficient
+fidelity for the observability layer to support audit and incident
+response; and providing, where the institution's research mission
+requires unobstructed high-throughput data movement, a research-data
+path that the general stateful-filtering perimeter would otherwise
+penalise --- realised, according to the institution's connectivity, as
+a Science DMZ, a dedicated circuit or overlay operated by the
+institution's \gls{nren}, or
+a tuned Data-Transfer-Node fabric~\cite{geant-dtn}.
+
+\begin{contractbox}[Network layer]
+\noindent A compliant network layer, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item declare a zone catalogue with, for each zone, a published
+    security profile (filtering rules, egress policy, audit
+    obligations, posture requirements) and a \keyword{zone
+    responsibility charter} --- the dossier's \emph{enclave
+    charter} --- naming the accountable owner of that profile;
+  \item authenticate and attach subjects via
+    RADIUS~\cite{rfc-2865-radius} using attributes that carry, at
+    minimum, the role activated and the assigned zone;
+  \item configure devices through NETCONF~\cite{rfc-6241-netconf} /
+    YANG~\cite{rfc-7950-yang} \emph{or} an equivalent declarative
+    interface, without dependence on proprietary command-line
+    interfaces in critical paths;
+  \item exchange routing information through standard protocols
+    (BGP, EVPN where applicable);
+  \item emit flow records in IPFIX~\cite{rfc-7011-ipfix} format with
+    sufficient fields for the observability layer to perform
+    correlation;
+  \item express east-west and north-south traffic rules in a form
+    that can be reviewed, version-controlled, and reconciled against
+    the decisions emitted by \trchap{ch:policy}{};
+  \item provide (or document an architectural decision against) a
+    high-throughput research-data path not penalised by the general
+    stateful-filtering perimeter --- a \gls{sciencedmz}, a dedicated
+    circuit or lightpath operated by the institution's \gls{nren},
+    a dedicated overlay
+    (research-community L3VPN) connection, or a tuned Data-Transfer-Node
+    fabric~\cite{geant-dtn} --- kept identity- and posture-attached,
+    IDS-monitored, policy-governed and flow-mirrored to observability
+    (the stateful firewall is bypassed, not the trust model).
+\end{itemize}
+\end{contractbox}
+
+The contract is silent on the physical topology, on the choice of
+overlay technology, and on the specific zones declared --- which
+depend on the institution's mix of administration, teaching,
+research, and shared services. The contract requires that whatever
+choices are made be documented, governed by the policy layer, and
+visible to the observability layer.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: VLAN/VRF + FreeRADIUS + Open vSwitch + Science DMZ}
+\label{sec:nw-reference}
+
+The reference instantiation combines three patterns of differing
+maturity: a classical VLAN / VRF physical segmentation; a FreeRADIUS
+attachment service driven by the institution's identity and policy
+layers; an Open vSwitch overlay for the cases where physical
+segmentation alone is insufficient; and a Science DMZ for the
+research data flows that the enterprise filtering perimeter would
+otherwise penalise.
+
+\begin{instantiationbox}[Network layer]
+\noindent\textbf{Topology.} The campus fabric is partitioned at
+layer~2 into \gls{vlan}s per zone (administration, teaching,
+research, BYOD, IoT, sensitive, management, Science DMZ); routing
+between zones is held in layer-3 \emph{virtual routing and
+forwarding} (VRF) instances with explicit transit rules. Wired and
+wireless attachment is authenticated by FreeRADIUS~\cite{freeradius}, which receives
+attributes from the identity provider (\trchap{ch:identity}{}) and
+queries the policy layer (\trchap{ch:policy}{}) to determine the
+attachment zone and per-subject allowances. Where micro-segmentation
+within a zone is required (for example, between research projects
+sharing a single VLAN), Open vSwitch~\cite{openvswitch} flows are programmed by an SDN
+controller from policy-layer outputs. The Science DMZ is a
+dedicated subnet bypassing the enterprise filtering perimeter,
+protected by IDS and access-control lists rather than by stateful
+firewalling; flows are mirrored to the observability layer.
+\end{instantiationbox}
+
+\paragraph{Research-network-operated realisations.} The same function
+is realised at national and global scale through research-network- and
+experiment-operated dedicated paths rather than a campus-perimeter
+enclave: the regional and national \glsshort{nren}s
+provide dedicated circuits and lightpaths, and large research
+collaborations operate dedicated optical private networks and L3VPN
+overlays~\cite{cern-lhcone, cern-wlcg} --- a dedicated, segmented
+research-data fabric connecting the originating facility and its
+distributed data tiers. The performance-measurement component,
+perfSONAR~\cite{perfsonar}, is co-maintained by the major
+\glsshort{nren}s and is common to all of these realisations. The
+contract of \S\ref{sec:nw-contract} is satisfied by any of them; the
+Science DMZ is the open campus-scale reference, not the only form.
+
+\paragraph{Zone catalogue.} The reference catalogue, adapted from
+established practice in research-intensive institutions, includes
+the zones in Table~\ref{tab:nw-zones}. The catalogue is illustrative;
+each institution declares its own. The contractual obligation is
+that the catalogue exist in writing and that each zone have a
+documented security profile.
+
+\begin{table}[H]
+\centering\small
+\caption{Reference zone catalogue (illustrative). Each row in an
+institutional catalogue is owned by a named accountable team.}
+\label{tab:nw-zones}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.5\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.5\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Zone & Security profile (illustrative) \\
+\midrule
+Administration & Stateful filtering, MFA-required for access, restricted egress, full audit. \\
+Teaching       & Stateful filtering, role-based access, broad egress, standard audit. \\
+Research (general) & Stateful filtering, role-and-project based access, project-scoped egress, audit by project. \\
+Research (high-throughput data path; e.g.\ Science DMZ) & ACL-based filtering only, IDS, dedicated IPv4/IPv6 prefixes, perfSONAR measurement, egress by IP prefix. \\
+BYOD           & Captive portal with \gls{nac} posture verification, Internet egress only, isolated from internal zones. \\
+IoT            & Network-only egress to documented destinations, no internal east-west, periodic posture re-attestation. \\
+Sensitive      & Stricter than Administration; key custody and disclosure regime documented; no direct Internet egress. \\
+Management     & Reachable only from administrative jump hosts; audited at every connection. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Operational considerations.} The reference instantiation
+is the most demanding of the layer chapters in terms of skills: it
+would typically require network engineering (VLAN, VRF, BGP), Linux
+administration (FreeRADIUS, OvS), and a working command of the
+policy layer (\trchap{ch:policy}{}). For a research-intensive
+institution, a small team of engineers shared with adjacent duties
+is an indicative envelope; actual figures vary with the campus
+footprint and the research-network mission. The labour market is
+deep at the level of
+standard protocols and narrower at the level of integrating them
+into a TAC-aware attachment service.
+
+\begin{realworldbox}[Science DMZ adoption at scale]
+\noindent The Science DMZ pattern was developed within the
+high-performance research-networking community and is the
+subject of detailed public documentation. The pattern has been
+implemented at a number of research-intensive universities and at
+large-facility experimental boundaries. Large university networks
+would typically operate multi-zone architectures with explicit
+security profiles per zone, using a combination of proprietary and
+open components --- the brownfield hybrid pattern that this Reference's
+playbook anticipates. Specific zoning details and current deployment
+status of any named institution should be verified against current
+public documentation before being cited.
+\end{realworldbox}
+
+\begin{realworldbox}[Experiment-operated optical private networks and research backbones]
+\noindent At national and global scale the same need is met by
+research-network- and experiment-operated dedicated networks rather
+than by a campus enclave. A large-collaboration optical private
+network (originating facility to the principal data tiers) and a
+companion L3VPN overlay (any-to-any between the data
+tiers)~\cite{cern-lhcone, cern-wlcg} carry experiment data on a
+dedicated, segmented fabric; the regional and national
+\glsshort{nren}s~\cite{geant} provide the backbone and
+dedicated-circuit services on which member networks build, and
+research-network testbed work on Data Transfer
+Nodes~\cite{geant-dtn} addresses the same high-throughput transfer
+problem at the host level. These realise the same contract function as
+the Science DMZ, organised as a managed dedicated network rather than
+a perimeter-bypass subnet.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Proprietary macro-segmentation speaking standards}
+\label{sec:nw-alt1}
+
+\begin{alternativebox}[Proprietary macro-segmentation]
+\noindent The campus fabric is built on Cisco, Juniper, Aruba, or
+Arista equipment, configured through standard protocols (RADIUS for
+attachment, NETCONF/YANG for configuration, BGP/EVPN for routing).
+The institution retains the contracts of \S\ref{sec:nw-contract}
+while using established commercial gear.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} The skills market is the deepest of
+all network alternatives; the gear is mature and well supported;
+integration with existing operational tooling (monitoring, asset
+management, change management) is direct.
+
+\paragraph{Where it constrains the institution.} Two recurring
+constraints. First, the supplier's management consoles often expose
+features that the standard interfaces do not: an institution that
+adopts the management console for non-trivial operations couples
+itself to the supplier even though the underlying configuration is
+notionally NETCONF-based. Second, premium features (behavioural
+analytics, advanced segmentation, integrated identity) are licensed
+separately and shift between licence tiers across renewals; their
+adoption in critical paths erodes replaceability.
+
+\paragraph{When it is the right choice.} Most institutions, in
+practice, will operate the network on commercial gear for at least
+the medium term. The architectural commitment is not to refuse
+proprietary equipment but to keep it on the standard side of its
+interfaces, treat its management consoles as advisory, and use only
+features that the institution can also obtain from at least one
+other supplier.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Micro-segmentation overlay}
+\label{sec:nw-alt2}
+
+\begin{alternativebox}[Micro-segmentation overlay]
+\noindent Segmentation is implemented as a software overlay
+independent of the underlying physical fabric: VMware NSX, Illumio,
+Cisco ACI, or Cilium ClusterMesh in Kubernetes-heavy environments.
+Policy is expressed at the workload level, often per-process or
+per-container, and enforced at host or hypervisor.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} Granularity. Micro-segmentation
+allows differentiation of traffic between workloads sharing a
+physical zone; in environments where a research group's workloads
+must be isolated from each other without provisioning per-group
+VLANs, this is the right tool. Cilium-based~\cite{cilium} micro-segmentation in
+Kubernetes is also the architectural fit for the compute layer
+(\trchap{ch:compute}{}) when policy needs to traverse the K8s and
+VM boundaries.
+
+\paragraph{Where it constrains the institution.} Commercial
+micro-segmentation overlays (NSX, Illumio, ACI) have substantial
+licence costs and tend to express policy in supplier-specific
+languages whose translation to other products is non-trivial; the
+exit-rehearsal condition of \S\ref{sec:ap-replaceability} is most challenged here. Cilium
+and other open alternatives are more recent and less broadly skilled
+than their commercial counterparts.
+
+\paragraph{When it is the right choice.} Institutions with a high
+density of multi-tenant workloads (research clouds, multi-faculty
+shared platforms) where macro-segmentation does not provide
+sufficient granularity. The recommendation is to adopt the open
+alternative (Cilium) as the reference, and the commercial
+alternatives only when the institution's posture cost-justifies them.
+
+%-----------------------------------------------------------------------------
+\section{Discussion --- SASE and ZTNA: why they are not the reference}
+\label{sec:nw-sase}
+
+Secure Access Service Edge (SASE) and Zero Trust Network Access
+(ZTNA) services from suppliers such as Cloudflare, Zscaler, and
+Netskope present an attractive operational profile: policy
+expressed centrally, enforcement near the user, deep integration
+with identity, and reduced reliance on on-premise filtering
+infrastructure. In a sovereignty-aware analysis, however, they
+present a structural difficulty.
+
+The data plane of a SASE service is operated by the supplier, in
+locations and under jurisdictions chosen by the supplier, with
+inspection capabilities that the supplier necessarily exercises (TLS
+termination, content inspection, identity correlation). The supplier
+becomes a recipient of the institution's network traffic in a sense
+that the standards-only configurations of \S\S\ref{sec:nw-reference}
+and \ref{sec:nw-alt1} do not. The data dimension of the sovereignty
+grid is consequently bounded: a SASE deployment, in its standard
+configuration, cannot exceed Partial on the disclosure-regime
+indicator.
+
+This is not an objection to SASE as a technology. SASE is an
+appropriate choice in two bounded scenarios: as a complement to the
+reference architecture for a specific population (for example,
+unmanaged contractor devices) where the institution accepts the
+sovereignty cost in exchange for a manageability gain; and as a
+transitional measure during a brownfield migration whose end-state
+is the reference architecture. The architectural posture is to
+treat SASE as a tactical tool, not as the structural network layer.
+
+\paragraph{Zero-Trust anchoring.} Declining SASE/ZTNA does not
+forgo Zero Trust: the reference architecture realises the seven
+tenets of NIST SP~800-207~\cite{nist-zt} structurally --- every
+layer treated as a protected resource with communication secured
+regardless of network location (Tenets~1--2); identity-mediated,
+per-session, strictly-enforced access through the identity and
+policy planes (Tenets~3 and~6); access decided by dynamic policy on
+identity, role, posture and environment, with default-deny zones
+(Tenet~4); continuous posture and integrity monitoring through the
+endpoint and observability layers (Tenet~5); and decision/access
+telemetry collected through the canonical TAC event schema to refine
+policy (Tenet~7). Zero Trust is thus a property of the architecture,
+not a procured service.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:nw-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the network
+instantiations.}
+\label{tab:nw-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.1\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.3\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.4\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=0.6\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (open) & Proprietary macro-seg & Micro-seg (commercial) & SASE \\
+\midrule
+Data          & 3 Robust      & 3 Robust      & 2 Established & 1 Partial \\
+Technical     & 3 Robust      & 2 Established & 1 Partial     & 1 Partial \\
+Financial     & 2 Established & 2 Established & 1 Partial     & 1 Partial \\
+Operational   & 2 Established & 3 Robust      & 2 Established & 3 Robust  \\
+Institutional & 3 Robust      & 2 Established & 1 Partial     & 1 Partial \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Driving indicators by dimension.} Data: disclosure regime
+and storage location. Technical: source visibility and presence of
+captive extensions in the configuration path. Financial: cost
+predictability and exit-cost proportionality. Operational: depth of
+the skills market and quality of public documentation.
+Institutional: roadmap influence and integration freedom.
+
+\noindent The network layer illustrates clearly the trade-off the
+sovereignty grid is designed to surface: each row of the table is a
+different way of distributing capacity along the five dimensions.
+The reference instantiation is dominant on Data, Technical and
+Institutional; the proprietary macro-segmentation gains on
+Operational at modest cost on Technical; the commercial
+micro-segmentation and SASE deliver Operational and convenience but
+at structural cost on Data and Institutional.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:nw-regulatory}
+
+\noindent The network layer is the perimeter and segmentation
+substrate underpinning \gls{gdpr}~Art.~32(1) (security of
+processing through technical measures). It operationalises
+NIS2~Art.~21(2)(a) (risk analysis applied to network design),
+(g) (cyber hygiene baseline including segregation), and indirectly
+(b) (incident handling, through the chokepoints that bound
+incident scope). The layer is the principal anchor of
+27001~A.8.20 (network security) and A.8.22 (segregation of
+networks); it contributes to NIST CSF \textsf{PROTECT} (PR.IR ---
+infrastructure resilience) and \textsf{DETECT} (DE.CM, through
+flow telemetry feeding the audit pipeline). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:nw-pitfalls}
+
+\begin{pitfallbox}[Standard interfaces promised, proprietary management used]
+\noindent An institution adopts NETCONF/YANG-capable gear, then
+operates it through the supplier's management console for
+day-to-day work. Within two to three years, the operational
+practices, the runbooks, and the team's reflexes are tied to the
+console. The standards remain technically available but
+operationally unused. The mitigation is to make the standard
+interface the operational default, treat the management console as a
+diagnostic aid only, and exercise the standard-only operation
+periodically as part of the conformance suite of
+\trchap{ch:conformance}{}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Science DMZ behind the enterprise firewall]
+\noindent A Science DMZ that traverses the enterprise stateful
+filtering perimeter loses its purpose: the throughput penalty that
+the Science DMZ exists to avoid is reintroduced. The mitigation is
+explicit: the Science DMZ has its own access path to the Internet,
+protected by ACLs and IDS but not by a stateful firewall, and the
+architectural decision to bypass the enterprise perimeter is
+documented and reviewed.
+\end{pitfallbox}
+
+\begin{pitfallbox}[East-west allow-by-default]
+\noindent Many campus networks permit east-west traffic by default
+within a VLAN; consequently, the segmentation is at the zone
+boundary only. Lateral movement during an incident is then bounded
+only by the zone, not by the workload. The mitigation is to treat
+intra-zone east-west as a policy decision, expressed in
+\trchap{ch:policy}{} and enforced at the appropriate layer (host
+firewall, micro-segmentation overlay, or hypervisor); the default is
+deny, with allow-listed flows.
+\end{pitfallbox}
+
+\begin{pitfallbox}[ACL drift]
+\noindent Access control lists are added when needed and removed
+rarely. Within a few years, the ACL set on each device is a
+historical record of past needs rather than a current expression of
+policy. The mitigation is to express ACLs as the materialisation of
+policy decisions (\trchap{ch:policy}{}) under version control, with
+periodic reconciliation against the policy corpus and removal of
+rules whose justification has lapsed.
+\end{pitfallbox}
+
+\begin{pitfallbox}[BYOD VLAN as ``isolation'' without enforcement]
+\noindent A separate BYOD VLAN is declared but the enforcement that
+prevents BYOD endpoints from reaching internal resources is missing
+or broken. Users discover this when they encounter problems and
+their resourceful colleagues find paths around the intended
+isolation. The mitigation is to make the BYOD posture an enforceable
+policy, verified by NAC, with automated periodic re-attestation, and
+to monitor the actual flows from the BYOD VLAN against the policy.
+\end{pitfallbox}

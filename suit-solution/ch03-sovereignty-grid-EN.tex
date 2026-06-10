@@ -1,0 +1,485 @@
+% ============================================================================
+% Chapter 3 --- The sovereignty grid (full version)
+% ----------------------------------------------------------------------------
+% Purpose : publish the normative pivot of the entire document. The grid is
+%           the criterion that determines whether a candidate component is
+%           acceptable; it transforms the OSS-vs-proprietary debate into a
+%           multi-criteria arbitration.
+% Page target: ~8 pages.
+% Dependencies: foundational, referenced by every Part-II and Part-III chapter.
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D3.1 five orthogonal dimensions, never combined into a single score
+%   D3.2 fixed four-point scoring scale (0/1/2/3), no half-points
+%   D3.3 deliberation instrument, not audit instrument
+%   D3.4 data dimension first by convention
+% ============================================================================
+
+\chapter{The sovereignty grid}
+\label{ch:sovereignty-grid}
+
+Sovereignty in university \gls{it} is rarely contested in principle and
+rarely operationalised in practice. The grid presented in this chapter
+is the instrument that bridges the two: a structured way of asking, for
+any candidate component of the digital infrastructure, whether the
+institution retains the capacities --- legal, technical, financial,
+operational, and institutional --- that allow it to remain the author
+of its own decisions. The grid is the normative pivot of this Technical
+Reference: every subsequent chapter applies it; every recommendation
+derives from it.
+
+\begin{caveatbox}[Posture of this chapter]
+\noindent The grid is a deliberation and procurement instrument, not an
+audit scoring system. A component admissible on the grid is not, by
+that fact alone, the right choice; the institutional context, which the
+grid does not capture in full, completes the decision. Conversely, a
+component inadmissible on a critical dimension cannot be rescued by
+strengths elsewhere: each dimension is reported independently and
+critical thresholds may apply per workload class.
+\end{caveatbox}
+
+%-----------------------------------------------------------------------------
+\section{Five dimensions of sovereignty}
+\label{sec:sg-dimensions}
+
+Sovereignty is too often treated as a single concept. In practice, an
+institution can be sovereign in some respects and dependent in others:
+a stack with European data residency may still be operationally captive
+if only the supplier's certified engineers can operate it, and a stack
+that is technically open may still be financially captive if the only
+realistic supplier holds a monopolistic position. The five dimensions
+below are intentionally orthogonal: they ask different questions, can
+have different answers for the same component, and require different
+remediations.
+
+\subsection{Data sovereignty}
+\label{sec:sg-data}
+
+The capacity to determine where institutional data is stored, under
+which jurisdiction it is processed, and which actors --- including
+state actors --- can compel its disclosure. Data sovereignty depends on
+storage location, encryption regime, key custody, and the legal basis
+under which a provider may transfer data across borders. The Court of
+Justice of the European Union, in \emph{Schrems~II}~\cite{schrems2020},
+clarified that contractual safeguards alone do not satisfy this
+dimension when data falls under a third-country regime that authorises
+disproportionate state access. The European Data Protection Board has
+since elaborated the conditions under which transfers remain
+permissible~\cite{edpb-guidelines}, conditions that operationalise the
+data dimension for any university subject to the
+\gls{gdpr}~\cite{gdpr}.
+
+The analytical structure of the data dimension transposes across
+jurisdictions: the questions of \emph{where} data sits, \emph{under
+which law}, and \emph{accessible to which actors} are universal, even
+when the binding instruments differ.
+
+\subsection{Technical sovereignty}
+\label{sec:sg-technical}
+
+The capacity to inspect, modify, repair and extend the components of
+the infrastructure. Technical sovereignty requires source-code access
+where applicable, open data formats, documented application
+programming interfaces, and the absence of binary-only critical paths. A component whose internals the
+institution cannot examine is, by construction, opaque to its own
+governance: incidents cannot be analysed beyond the supplier's
+willingness, regressions cannot be confirmed independently, and the
+institution's defensive posture is bounded by the supplier's pace.
+
+Technical sovereignty does not require that every component be open
+source. It requires that the institution can either inspect a component
+itself or substitute it with another that it can. Replaceability is
+the operational form of technical sovereignty when inspection is
+unavailable.
+
+\subsection{Financial sovereignty}
+\label{sec:sg-financial}
+
+The capacity to predict and contain the cost of operating the
+infrastructure over time, and to be free of captive escalation.
+Financial sovereignty is reduced when pricing depends on a single
+supplier with no realistic substitute, when licence audits create
+unbounded liability, or when exit costs dominate exit decisions to the
+point where no exit is ever attempted. It is restored by genuine
+multi-supplier capability, by predictable cost models with contractual
+caps, and by exit costs proportionate to the genuine migration work
+rather than to the supplier's commercial preference.
+
+Financial sovereignty is the dimension most often treated as a
+secondary concern at procurement and as the primary concern at the
+next renewal. Treating it as a first-order dimension reverses the
+order: it is examined before, not after, the technical evaluation.
+
+\subsection{Operational sovereignty}
+\label{sec:sg-operational}
+
+The capacity to operate the infrastructure with skills available
+locally or through trusted partners --- the institution's own staff,
+its national research and education network, sector consortia, peer
+institutions. A component that requires a specific supplier's certified
+engineers, available only through that supplier, places the institution
+in operational dependence even when other dimensions are satisfied.
+Conversely, components built on widely-known standards admit a deep
+labour market, peer support, and the possibility of mutualised operation
+across institutions.
+
+Operational sovereignty interacts strongly with financial sovereignty:
+a high cost of operation may be acceptable when paid to the local
+labour market, and unacceptable when paid as a captive engagement to
+the same supplier that holds the licence.
+
+\subsection{Institutional sovereignty}
+\label{sec:sg-institutional}
+
+The capacity to retain authority over the decisions that matter ---
+what to do, when, with whom --- without delegating them to a contractual
+arrangement that displaces them. Institutional sovereignty erodes
+silently: it is rarely transferred in a single decision but accumulated
+over many small ones. It manifests as the inability to refuse a
+roadmap change, to choose a non-default integration, to deviate from
+a supplier's reference architecture without penalty, or to set internal
+priorities that the supplier has not anticipated.
+
+Cybersecurity authorities have emphasised the governance dimension of
+digital risk management as a distinct concern from the technical one
+--- as the European Union Agency for Cybersecurity has
+done~\cite{enisa-risk} --- and the applicable cybersecurity regulatory
+regime commonly codifies this distinction by requiring management
+bodies to retain accountability for security measures, as the European
+NIS2 Directive does~\cite{nis2}. In a university, institutional
+sovereignty is the precondition of academic self-government over
+digital matters.
+
+%-----------------------------------------------------------------------------
+\section{Indicators per dimension}
+\label{sec:sg-indicators}
+
+Each dimension is grounded in four measurable indicators. The
+indicators are deliberately conservative: they ask whether a specific
+capacity \emph{exists}, not whether the institution \emph{exercises it
+optimally}. The full canonical table is given in
+Table~\ref{tab:sg-indicators}.
+
+\begin{table}[H]
+\centering\small
+\caption{The twenty indicators of the sovereignty grid (canonical
+form). Indicators are ordered by dimension, then by criticality.}
+\label{tab:sg-indicators}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.60\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.90\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.50\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Indicator & Question (verifiable capacity) \\
+\midrule
+\multirow{4}{*}{\textbf{Data}}
+  & Storage location & Is the storage location of all classes of data
+    documented and contractually fixed? \\
+  & Key custody & Are encryption keys for data-at-rest held in custody
+    that the institution controls (BYOK or HYOK)? \\
+  & Disclosure regime & Has the disclosure regime applicable to the
+    data been characterised, including cross-border state access? \\
+  & Exit-data export & Can data be exported in a documented open
+    format within an agreed time window without supplier
+    cooperation? \\
+\addlinespace
+\multirow{4}{*}{\textbf{Technical}}
+  & Source visibility & Is the source code (or equivalent
+    specification) available for inspection by the institution or its
+    designated experts? \\
+  & Standard interfaces & Does the component speak the relevant
+    interface standards without captive extensions in critical paths? \\
+  & Independent build & Can the operational artifact be built by a
+    party other than the supplier from publicly available material? \\
+  & Regression auditability & Can a behavioural regression be
+    confirmed independently of supplier diagnostics? \\
+\addlinespace
+\multirow{4}{*}{\textbf{Financial}}
+  & Cost predictability & Is the multi-year operating cost predictable
+    within a documented envelope? \\
+  & Supplier substitutability & Are at least two realistic suppliers
+    available for the same functional role? \\
+  & Audit liability & Is the supplier's audit-and-true-up clause
+    bounded in scope and consequence? \\
+  & Exit-cost proportionality & Is the contractual exit cost
+    proportionate to the genuine migration work? \\
+\addlinespace
+\multirow{4}{*}{\textbf{Operational}}
+  & Local skills availability & Are the skills required to operate the
+    component available through the institution, the \gls{nren} or peer
+    institutions? \\
+  & Labour-market depth & Does the underlying technology admit a
+    labour market broader than the supplier's certified
+    pool? \\
+  & Documentation completeness & Is the component documented to a
+    level sufficient for an independent operator to take
+    over? \\
+  & Mutualisation feasibility & Can the operational burden be shared
+    with peer institutions through an existing or feasible
+    consortium? \\
+\addlinespace
+\multirow{4}{*}{\textbf{Institutional}}
+  & Roadmap influence & Can the institution decline a supplier
+    roadmap change without contractual penalty? \\
+  & Integration freedom & Can the institution adopt non-default
+    integrations without operational degradation? \\
+  & Decision retention & Are the decisions of consequence (data
+    classification, access, retention, incident handling) made by the
+    institution rather than imposed by the supplier? \\
+  & Public accountability & Can the institution publicly account for
+    the configuration in place without violating supplier
+    confidentiality clauses? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The indicators are not independent: financial and operational
+sovereignty in particular tend to interact, since a position of
+supplier dependence on one dimension typically constrains the
+institution's ability to recover the other. This is offered as an
+analytical observation rather than an empirical measurement, and
+should be tested against the institution's own history. Reporting the
+dimensions separately preserves analytical clarity, but deliberation
+should attend to these interactions rather than treat each dimension
+as fully isolated.
+
+%-----------------------------------------------------------------------------
+\section{Scoring guidance}
+\label{sec:sg-scoring}
+
+Each indicator is scored on a fixed four-point scale:
+
+\begin{description}[leftmargin=2.5em,nosep,style=nextline]
+  \item[0 --- Absent] The capacity does not exist. The indicator is
+  unsatisfied; remediation requires a structural change.
+  \item[1 --- Partial] The capacity exists but with significant
+  restrictions (scope, jurisdiction, time window, supplier cooperation
+  required).
+  \item[2 --- Established] The capacity is present in normal operating
+  conditions, documented, and known to the relevant team.
+  \item[3 --- Robust] The capacity has been verified by exercise (a
+  drill, an audit, or a real event) within the last twenty-four
+  months (this Reference adopts twenty-four months by convention, to
+  be aligned with the institution's own audit cadence), beyond which
+  operational drift renders an unverified capacity unreliable.
+\end{description}
+
+Half-points are not allowed. When uncertainty exists, the lower score
+is recorded, with the basis for uncertainty noted.
+
+\paragraph{Aggregation.} The grid does \emph{not} produce a single
+sovereignty score. Each dimension is reported independently. Two
+practical conventions apply:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Per-dimension reporting} --- the dimension score is the
+    minimum of its indicator scores. A dimension with a single Absent
+    indicator is reported as Absent regardless of the others. This
+    reflects the fact that a single critical gap defines the
+    institution's exposure on that dimension.
+  \item \textbf{Procurement gates} --- per workload class, the
+    institution may set lexicographic gates (e.g.\ \emph{data dimension
+    must be at least Established for sensitive workloads}). Gates are
+    declared in advance, not adjusted to fit the candidate.
+\end{itemize}
+
+\paragraph{Cadence.} The grid is exercised at three moments: at
+procurement (gate decision), at annual operational review (drift
+detection), and at every renewal (re-qualification). Between these
+moments, an event-driven re-exercise is triggered by any of: a
+significant pricing change, a supplier acquisition, a court decision
+or regulatory change affecting the disclosure regime, a major outage,
+or a publicly disclosed supplier security incident.
+
+%-----------------------------------------------------------------------------
+\section{Worked examples}
+\label{sec:sg-examples}
+
+The three examples below score the same functional layer --- identity
+provision --- with three different instantiations. The intent is
+illustrative, not prescriptive: the same instantiation in a different
+institution may receive different scores because the verifiable
+capacities are institution-specific.
+
+\subsection{Case 1 --- Pure-OSS (Keycloak + SCIM + eduGAIN)}
+\label{sec:sg-ex-oss}
+
+A self-hosted Keycloak deployment, integrated with the institution's
+\gls{sso} federation through eduGAIN, with \gls{scim} provisioning to
+downstream applications.
+
+\begin{table}[H]
+\centering\small
+\caption{Sovereignty profile of the pure-OSS identity instantiation.}
+\label{tab:sg-ex-oss}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.75\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.50\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Score & Comment \\
+\midrule
+Data          & 3 Robust       & Storage under the institution's own data-custody and sovereignty profile, institutional key custody, no third-country disclosure regime. \\
+Technical     & 3 Robust       & Source open, standards respected, regressions auditable. \\
+Financial     & 2 Established  & Operating cost predictable, no licence; substitutability via Shibboleth or Authentik. \\
+Operational   & 2 Established  & Skills available; \gls{nren} community support; no supplier-only certification. \\
+Institutional & 3 Robust       & Roadmap controlled internally; integration freedom complete. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\emph{Profile.} Strong on data, technical and institutional;
+operational and financial dimensions are good but limited by the
+internal staffing burden. The principal risk is operational fragility
+if the maintaining team shrinks below critical mass.
+
+\subsection{Case 2 --- Pure commercial (a dominant commercial identity suite, e.g.\ Microsoft Entra~ID, with conditional-access policies)}
+\label{sec:sg-ex-entra}
+
+A managed identity tenancy from a dominant commercial suite vendor,
+operated by the supplier in a designated in-jurisdiction region and
+integrated through the institution's existing tenant arrangements.
+
+\noindent\emph{Configuration assumed.} The scoring below reflects the
+default supported configuration with in-jurisdiction data residency and
+standard supplier-managed key custody. Optional arrangements such as
+restricted-access lockbox features, double-key encryption, or
+\gls{hyok} integrations would modify the data dimension upward, but at
+the cost of additional licence and operational commitments; their
+adoption is itself a sovereignty-affecting choice that an institution
+should evaluate explicitly.
+
+\begin{table}[H]
+\centering\small
+\caption{Sovereignty profile of the pure-commercial identity instantiation
+(default configuration, without optional HYOK arrangements).}
+\label{tab:sg-ex-entra}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.75\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.50\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Score & Comment \\
+\midrule
+Data          & 1 Partial      & In-jurisdiction regions designated; key custody bounded; disclosure regime under the applicable cross-border transfer analysis remains contested in the absence of \gls{hyok}. \\
+Technical     & 1 Partial      & Standards spoken with captive extensions in conditional-access policy expressions; regressions traceable only via supplier diagnostics. \\
+Financial     & 1 Partial      & Per-seat pricing with documented historical escalation; substitutability constrained by ecosystem coupling. \\
+Operational   & 3 Robust       & Skills market deep; documentation extensive; enterprise support widely available. \\
+Institutional & 1 Partial      & Roadmap supplier-driven; integration freedom limited to certified partner products. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\emph{Profile.} Strong only on operational. The pattern is
+characteristic of mature commercial offerings: the dimensions where
+the institution's bargaining position is structurally weaker
+(technical, financial, institutional) score lower in the default
+configuration, while the dimension underwritten by a deep labour
+market (operational) is excellent. Neither asymmetry is intrinsic to
+commercial supply; both are amenable to contractual remediation when
+the institution makes them an explicit gate at procurement.
+
+\subsection{Case 3 --- Hybrid (Shibboleth federation + Keycloak local activation)}
+\label{sec:sg-ex-hybrid}
+
+The existing Shibboleth federation is preserved for inter-institutional
+authentication; a self-hosted Keycloak instance handles role
+activation, attribute enrichment and \gls{tac} session management
+locally.
+
+\begin{table}[H]
+\centering\small
+\caption{Sovereignty profile of the hybrid identity instantiation.}
+\label{tab:sg-ex-hybrid}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=0.75\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.50\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Dimension & Score & Comment \\
+\midrule
+Data          & 3 Robust       & Federation metadata public; activation data held locally. \\
+Technical     & 3 Robust       & Both components open; standards respected end-to-end. \\
+Financial     & 2 Established  & Two operating teams (federation, local); cost predictable but doubled. \\
+Operational   & 2 Established  & Two skill sets required; mutualisation feasible through the \gls{nren}. \\
+Institutional & 3 Robust       & Roadmap fully retained; integration freedom complete. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\emph{Profile.} The hybrid profile illustrates a recurring
+pattern: better than pure-commercial on every dimension, comparable to
+pure-OSS on most, with a financial and operational cost premium that
+reflects the dual stack. The premium is the price of preserving an
+existing federation investment without surrendering institutional or
+technical sovereignty.
+
+%-----------------------------------------------------------------------------
+\section{Common misuses of the grid}
+\label{sec:sg-misuses}
+
+Three anti-patterns recur in practice and each defeats the purpose of
+the instrument.
+
+\paragraph{Retro-fitting the grid to a pre-decided choice.} A
+procurement decision is taken on other grounds (vendor relationship,
+ease, urgency) and the grid is then completed to legitimise the
+choice. The mitigation is procedural: gates are declared before the
+candidate is scored, not after.
+
+\paragraph{Treating the dimensions as fully independent.} The
+dimensions are orthogonal in the sense that they ask different
+questions, but their answers correlate. A monopoly position
+(financial deficit) is almost always accompanied by an inability to
+refuse roadmap changes (institutional deficit). Treating them as fully
+independent permits the false comfort of compensating one with the
+other.
+
+\paragraph{Applying the grid only at procurement.} The sovereignty
+profile drifts across the operational life of a component: tariffs
+change, suppliers consolidate, regulatory frameworks evolve. A grid
+applied only at procurement captures the worst predictive moment ---
+the moment of maximum supplier accommodation --- and never re-examines
+the trajectory.
+
+%-----------------------------------------------------------------------------
+\section{The grid as a governance instrument}
+\label{sec:sg-governance}
+
+The grid is not solely a technical artifact. It is the connective
+tissue between four governance practices that are frequently conducted in mutual
+ignorance.
+
+\begin{description}[leftmargin=1.5em,style=nextline,nosep]
+  \item[Procurement.] The grid translates into \gls{rfp} clauses,
+    contractual exit assistance, and gating thresholds per workload
+    class. It supplies the procurement team with a vocabulary
+    independent of supplier marketing categories.
+
+  \item[Internal audit.] The grid provides the structure for an annual
+    review of the institution's sovereignty profile, comparable across
+    components and across years.
+
+  \item[Peer-institution benchmarking.] When a network of universities
+    adopts the same grid, the comparison of profiles ceases to be
+    anecdotal. The phase-2 international university network anticipated
+    by this Reference is designed around this premise.
+
+  \item[Public accountability.] An institution that publishes its
+    sovereignty profile by component renders its digital strategy
+    legible to its academic community, its students, and the public
+    that funds it. The grid makes this publication concise and
+    comparable.
+\end{description}
+
+\medskip
+
+\noindent The grid alone does not produce sovereign infrastructure. It
+produces the precondition for sovereign infrastructure: a vocabulary
+shared across procurement, operations, audit and governance, in which
+sovereignty can be discussed without reduction to ideology and without
+indefinite deferral.

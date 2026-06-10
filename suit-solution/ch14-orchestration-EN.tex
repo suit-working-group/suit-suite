@@ -1,0 +1,323 @@
+% ============================================================================
+% Chapter 14 --- Orchestration plane
+% ----------------------------------------------------------------------------
+% Purpose : the cross-layer orchestrator that issues commands following a
+%           TAC activation. The architecture's principal acknowledged gap
+%           (D5.3): no single standard. Belongs to the Control and
+%           Governance plane (D5.1).
+% Page target: ~5 pages.
+% Dependencies: Ch. 5 (D5.3 declares this gap), every layer that the
+%               orchestrator touches (Ch. 6--12), Ch. 12 (events through
+%               canonical schema), Ch. 16 (conformance for orchestration).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D14.1 four required properties of the orchestration plane (the contract)
+%   D14.2 reference instantiation = Argo Workflows + Crossplane + GitOps
+%   D14.3 alternatives = ServiceNow/Ansible Tower; custom on Temporal
+%   D14.4 the gap is bounded by composition discipline and declarative state
+%   D14.5 orchestration sovereignty scores
+% ============================================================================
+
+\chapter{Orchestration plane}
+\label{ch:orchestration}
+
+\begin{caveatbox}[Dependencies and acknowledged gap]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the orchestration plane. As
+\trchap{ch:architectural-principles}{} (\S\ref{sec:ap-standards}, D5.3) acknowledges,
+this is the layer where no single standard consolidates the
+required functionality. The chapter's purpose is to bound the
+consequences of that gap by composing components on standards-aligned
+sub-interfaces, by keeping the composition declarative, and by
+treating the orchestrator itself as replaceable infrastructure
+rather than as institutional knowledge in code. The layer belongs
+to the \emph{Control and governance plane}.
+\end{caveatbox}
+
+The orchestration plane is the glue that turns a TAC activation
+decision into the cross-layer commands that realise it. When the
+policy layer returns ``allow role X for resource Y in zone Z'' for
+a given subject, the orchestration plane is what tells the network
+to attach the subject to zone Z, tells the compute layer to
+provision the workload context, tells the storage layer to bind the
+appropriate volumes, and tells the observability layer to start the
+correlation trace. The plane is consequently both critical (without
+it nothing happens) and exposed to lock-in (the supplier whose
+orchestration patterns the institution adopts becomes a structural
+dependency).
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:or-contract}
+
+\begin{contractbox}[Orchestration plane]
+\noindent A compliant orchestration plane, in the sense of this
+architecture, must exhibit four properties rather than speak a
+single standard:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Event-driven.} The plane reacts to TAC activation
+    and deactivation events emitted by the policy layer; it is not
+    polled, scheduled, or driven by side channels.
+  \item \textbf{Idempotent.} Re-issuing the same activation
+    produces the same end state; partial failures and retries are
+    safe by construction, not by good operational fortune.
+  \item \textbf{Observable.} Every step the plane takes is recorded
+    as an event conformant to the canonical TAC schema of
+    \trchap{ch:observability}{} (\S\ref{sec:ob-schema}), with the
+    \texttt{correlation\_id} preserved across the entire activation.
+  \item \textbf{Reversible.} The deactivation of a TAC undoes
+    every consequential change the plane made under it, in a
+    documented procedure that the institution can audit and exercise.
+\end{itemize}
+\end{contractbox}
+
+\paragraph{Why properties rather than a standard.} The four
+properties together form the plane's semantic contract. They can
+be satisfied by different technical compositions: workflow engines
+with explicit step-by-step execution, declarative reconcilers that
+converge on a target state, or hybrid arrangements that combine
+both. The architecture commits to the properties; the choice of
+composition belongs to the institution.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: declarative GitOps reconciliation with composable workflows}
+\label{sec:or-reference}
+
+\begin{instantiationbox}[Orchestration plane]
+\noindent\textbf{Topology.} A GitOps repository expresses the
+declarative target state of the institution's composed
+infrastructure --- network attachment policies, compute namespaces,
+storage bindings, observability collectors, identity client
+registrations. A declarative reconciler --- of which open-source
+continuous-delivery controllers such as Argo~CD~\cite{argocd} or
+Flux are representative --- ensures that the running state converges
+on the repository state. Workflow logic that does not naturally fit
+the declarative model --- for example, the multi-step provisioning
+of a research workspace that needs explicit ordering and conditional
+branches --- is expressed in a container-native workflow engine, of
+which Argo~Workflows~\cite{argo-workflows} is a representative
+open-source instance, with workflow definitions also held in the
+GitOps repository. A control-plane provider framework --- the
+open-source Crossplane~\cite{crossplane} project being one such
+instance --- provides the infrastructure-as-code layer that lets the
+same declarative model reach beyond Kubernetes itself, into the
+virtualisation platform, into the network layer's RADIUS
+configuration, and into the storage layer's volume management. TAC
+activation events from the policy layer are received as
+CloudEvents and trigger either a reconciliation or a workflow,
+depending on the activation type. Every step emits events
+conformant to the canonical schema.
+\end{instantiationbox}
+
+\paragraph{Operational considerations.} The reference instantiation
+is the most demanding of the layer chapters in terms of
+\emph{integration} skills, although each individual component is
+broadly skilled. The principal recurring effort is composition:
+keeping the GitOps repository, the workflow corpus, and the
+control-plane provider definitions consistent with each other and
+with the upstream layers they touch. An indicative envelope, for \loc{institution-type}, would be on the order of two to four engineers shared
+with the platform-engineering function. The labour market is broad
+for the individual components and currently narrow for their
+integrated composition.
+
+\paragraph{Composition discipline.} The architectural posture is to
+treat the composition itself as institutional artefact: the GitOps
+repository, the workflow corpus, and the provider configurations
+are versioned and reviewed with the same discipline as the policy
+corpus of \trchap{ch:policy}{}. The institution that lets these
+artefacts drift loses the property of replaceability for the
+orchestration plane, even if each individual component remains
+replaceable.
+
+\begin{realworldbox}[Orchestration patterns in industrial and research settings]
+\noindent The cloud-native orchestration ecosystem --- the family of
+open-source GitOps reconcilers, container-native workflow engines,
+control-plane provider frameworks, pipeline engines, and durable
+workflow engines, of which Argo, Flux, Crossplane, Tekton, and
+Temporal are representative members --- is broadly deployed in
+industrial settings, with publicly available reference architectures
+from the projects' member organisations.
+Specific academic deployments tend to combine these patterns with
+institution-specific composition, and are less extensively
+documented in public fora. The phase-2 international university
+network anticipated by this Reference would be one of the contexts
+in which a shared library of academic orchestration compositions
+might emerge.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- ITSM-driven orchestration with Ansible}
+\label{sec:or-alt1}
+
+\begin{alternativebox}[ServiceNow/Jira + Ansible]
+\noindent The institution operates an existing IT service
+management platform (ServiceNow, Atlassian Jira Service Management,
+or comparable) that triggers Ansible playbooks (in Ansible Automation
+Platform or open Ansible) when service requests match TAC
+activation patterns. The four contractual properties are realised
+through workflows defined in the ITSM platform and idempotent
+playbooks executed by Ansible.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} For institutions with a mature
+ITSM platform and existing investment in Ansible operations, the
+operational continuity is substantial. The audit trail produced by
+the ITSM platform is well-developed, and the integration with
+change-management processes is direct.
+
+\paragraph{Where it constrains the institution.} ITSM workflow
+languages tend to be supplier-specific; expressing the four
+properties in those languages typically produces logic that is not
+portable across ITSM platforms. The architectural posture is to
+keep the workflow logic minimal in the ITSM platform and to delegate
+the consequential actions to standard Ansible playbooks held under
+version control --- treating the ITSM platform as a
+trigger-and-audit surface rather than as the orchestration logic
+itself.
+
+\paragraph{When it could be the right choice.} An institution
+whose existing ITSM and Ansible operations carry the operational
+weight, and whose sovereignty posture accepts the trade-offs in
+exchange for the integration with established change-management
+practice.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Custom orchestrator on a durable workflow engine}
+\label{sec:or-alt2}
+
+\begin{alternativebox}[Custom on Temporal or comparable]
+\noindent The institution writes a bespoke orchestrator on a
+durable workflow engine (Temporal.io~\cite{temporal} being the
+principal open-source example, with comparable patterns available
+in other engines). Workflows are expressed in a programming language with
+the engine's SDK, with the engine providing durability,
+replayability, and at-least-once execution.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} For institutions whose
+orchestration needs include long-running workflows (multi-day
+provisioning, multi-stage research-environment lifecycle) where the
+declarative model would be awkward, a durable workflow engine
+provides the right semantics. Replay-based debugging and
+deterministic re-execution are operationally substantial benefits.
+
+\paragraph{Where it constrains the institution.} A custom
+orchestrator written in a programming language risks accumulating
+institutional knowledge in code that the standard interfaces do not
+capture: an exit from the engine then becomes a re-implementation
+of the workflows. The mitigation is to keep the workflows
+expressing the four contractual properties and nothing else,
+delegating consequential actions to the layer-specific standard
+APIs.
+
+\paragraph{When it could be the right choice.} An institution
+with strong software-engineering capacity, with workflow needs that
+genuinely exceed what declarative reconciliation expresses, and
+with the discipline to keep the workflow corpus deliberately thin.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:or-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the orchestration
+instantiations.}
+\label{tab:or-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.5\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.1\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference (GitOps + control-plane providers) & ITSM + config-management & Custom durable-workflow engine \\
+\midrule
+Data          & 3 Robust      & 2 Established & 3 Robust       \\
+Technical     & 3 Robust      & 1--2 Partial  & 2 Established  \\
+Financial     & 2 Established & 1 Partial     & 2 Established  \\
+Operational   & 2 Established & 3 Robust      & 1--2 Partial   \\
+Institutional & 3 Robust      & 1 Partial     & 2 Established  \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The orchestration plane is the layer where the
+\emph{composition discipline} is more consequential than any
+individual component choice. An institution that adopts the
+reference composition without disciplined version control and
+review can score worse, on the technical and institutional
+dimensions, than an institution that adopts the ITSM alternative
+with rigorous practice. The grid scores above assume disciplined
+operation in each instantiation.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:or-regulatory}
+
+\noindent The orchestration plane is the deployment-and-change
+substrate. It contributes to \gls{gdpr}~Art.~25 (data protection
+by design through declarative defaults) and to NIS2~Art.~21(2)(c)
+(business continuity through declarative redeployability), (e)
+(security in development and maintenance), and (f) (effectiveness
+assessment, through GitOps-driven reconciliation that exposes
+drift). The layer operationalises 27001~A.5.30 (ICT readiness for
+business continuity), A.8.32 (change management) and contributes
+to NIST CSF \textsf{PROTECT} (PR.PS) and \textsf{RECOVER} (RC.RP
+--- recovery plan execution). It also operationalises
+COBIT~BAI06 (managed IT changes) and BAI10 (managed
+configuration). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}, \S\ref{sec:rm-cobit}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:or-pitfalls}
+
+\begin{pitfallbox}[Orchestrator becomes the single point of failure]
+\noindent An orchestration plane that holds critical state in its
+runtime memory, in undocumented configuration, or in product-specific
+formats becomes the SPOF for the entire architecture: when it
+fails, no TAC can activate, deactivate, or be modified. The
+mitigation is the GitOps discipline: every consequential decision
+expressed in the repository, the runtime treated as derivable from
+the repository, the recovery procedure exercised periodically.
+\end{pitfallbox}
+
+\begin{pitfallbox}[State not versioned]
+\noindent Orchestration logic exists in three layers: the
+declarative target state, the workflow definitions, and the
+runtime configuration of the engines themselves. When the third
+layer is not under version control, the orchestration plane has
+no rebuildable definition: only its current running state. The
+mitigation is to bring all three layers under version control,
+including the engines' own configuration, and to treat
+non-repository changes as incidents.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Hidden coupling to a supplier SDK]
+\noindent A workflow corpus written against a supplier's SDK
+accumulates idioms that the SDK encourages but that the underlying
+contract does not require. Migration to another engine becomes a
+re-write rather than a re-host. The mitigation is to express
+workflows against the four contractual properties of
+\S\ref{sec:or-contract}, using the SDK only for the engine
+interaction, and to maintain a small set of representative
+workflows that have been ported between engines as part of the
+exit-rehearsal of \trchap{ch:conformance}{}.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Side-effects untracked]
+\noindent A workflow that, in the course of provisioning a
+resource, also creates side-channel changes (firewall rules added
+manually, DNS records inserted by an out-of-band procedure,
+secrets generated and stored in a non-canonical store)
+accumulates technical debt that the declarative model does not
+capture. The deactivation procedure then leaves orphans behind.
+The mitigation is to require every change to flow through the
+declarative model or through the workflow corpus --- there is no
+admissible third path.
+\end{pitfallbox}

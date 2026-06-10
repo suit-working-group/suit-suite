@@ -1,0 +1,138 @@
+% ============================================================================
+% US-PUB-R1.tex — Category archetype: US public (state) research university
+% ----------------------------------------------------------------------------
+% LAYER 1 (category archetype) of the suite localization model. This file is
+% \input AFTER shared/localization-defaults.tex and BEFORE any institution-level
+% set. It binds the STRUCTURAL localization keys (governance ladder, executive
+% leadership, constituent units, NREN tier, identity federation, deployment-scale
+% model, data-custody posture, pilot units, operational roles) to the concrete
+% GENERIC value shared by every institution of this archetype, and it points the
+% REGULATORY keys at the United States regime worked in
+% shared/regulatory-applicability-EN.tex (Section "United States --- deep regime
+% (sectoral and fragmented)") and docs/_regulatory/US.json.
+%
+% It deliberately leaves the COUNTRY-SPECIFIC NAME keys at their generic default:
+%   * nren-name              (the specific national NREN by name)
+%   * national-dpa           (the specific data-protection authority by name)
+%   * national-gov-csirt     (the specific national/governmental CSIRT by name)
+% In the US these are archetype-invariant *roles* but institution-specific in
+% practice (a campus reaches the national tier through its own state/regional R&E
+% network, and "the" DPA is plural and sector-split); the concrete names are
+% supplied by an INSTITUTION-LEVEL set layered on top of this archetype.
+%
+% ----------------------------------------------------------------------------
+% WHICH UNIVERSITIES THIS ARCHETYPE FITS
+% ----------------------------------------------------------------------------
+% Public (state-chartered) doctoral / research-intensive universities in the
+% United States: the state flagships and public R1/R2 institutions (Carnegie
+% "Research 1 / Research 2: Doctoral Universities"), typically members or
+% constituents of a state university SYSTEM. Characteristic structural traits
+% that this archetype encodes:
+%   * a state-law governing layer: the institution is a creature of state
+%     statute (or the state constitution), governed by a state board of
+%     regents / trustees / governors / visitors whose members are appointed by
+%     the governor (or, in a few states, elected);
+%   * an executive led by a President or Chancellor with a Provost as chief
+%     academic officer, and a shared-governance Faculty/Academic Senate;
+%   * state procurement and public-records law sitting under the federal
+%     sector-statute stack (FERPA / HIPAA / GLBA-FTC Safeguards / NIST-CMMC /
+%     EAR-ITAR / CCPA-CPRA);
+%   * national-tier R&E connectivity reached through a state or regional
+%     research-and-education network that connects to the national backbone,
+%     with US academic identity interfederation and global Wi-Fi roaming.
+% It does NOT fit US PRIVATE non-profit universities (no state-law governing
+% layer, private procurement), US for-profit institutions, community colleges,
+% or primarily-undergraduate public colleges without a doctoral/research mission.
+%
+% Requires: localization.sty (\setloc / \loc), loaded after
+% shared/localization-defaults.tex.
+% ============================================================================
+
+% --- Subject institution & profile (structural: archetype identity) ---------
+\setloc{institution-type}{a public (state-chartered) research-intensive university --- a state flagship or public R1/R2 institution, typically a constituent of a state university system}
+\setloc{staffing-profile}{a public research university that sets research excellence as a strategic objective and staffs to a state-appropriations-plus-grants envelope}
+
+% --- Institutional governance ladder (structural) ---------------------------
+% Top board is a state instrumentality created by statute/constitution; its
+% members are gubernatorially appointed (or, in a minority of states, elected).
+\setloc{governing-board}{the institution's state-created governing board (board of regents / trustees / governors / visitors), whose members are appointed by the state governor or elected under state law}
+% Shared-governance academic bodies: the Faculty / Academic Senate and college councils.
+\setloc{academic-governing-bodies}{the Faculty / Academic Senate and the college and departmental councils exercising shared governance}
+
+% --- Executive leadership (structural) ---------------------------------------
+\setloc{executive-leadership}{the institution's central executive leadership --- the President or Chancellor as chief executive and the Provost as chief academic officer, supported by the CIO and CISO}
+
+% --- Constituent units (structural) -----------------------------------------
+\setloc{cs-research-unit}{the university's department or school of computer science / computing}
+\setloc{security-research-centre}{a university cybersecurity research centre or institute (commonly a federally designated NSA/DHS National Center of Academic Excellence in Cybersecurity)}
+\setloc{institution-hpc-facility}{the university's central research-computing / advanced research computing (HPC) facility and team}
+
+% --- Pilot units (structural) -----------------------------------------------
+\setloc{pilot-entities}{the university's research-computing (HPC) facility / team as the first pilot unit}
+
+% --- NREN tier (structural; specific national NREN name left to institution) -
+% In the US the "national tier" is reached through a state/regional R&E network
+% that connects to the national research backbone and operates the CSIRT,
+% federated services and identity interfederation described below. The specific
+% national-NREN NAME (nren-name) is left at its generic default for an
+% institution-level set to bind.
+\setloc{nren-csirt}{the security / incident-response team of the state or regional research-and-education network and the national R\&E backbone operator}
+\setloc{peer-nren-roster}{peer US state and regional research-and-education networks, each connecting member campuses to the national R\&E backbone and offering security operations, federated identity and research-data transfer services}
+\setloc{nren-service-catalogue}{the R\&E network service catalogue --- global academic Wi-Fi roaming, a trusted (InCommon/IGTF) certificate service, performance monitoring (perfSONAR) and managed research-data transfer}
+\setloc{nren-research-cloud}{a national/regional research-cloud or R\&E-network-brokered cloud offering, including federally funded national cyberinfrastructure allocations where the institution qualifies}
+\setloc{research-backbone-scale}{the national research-and-education backbone reached through the institution's state/regional R\&E network (membership and backbone capacity per region)}
+
+% --- Identity federation (structural) ---------------------------------------
+\setloc{identity-federation-profile}{the US academic identity interfederation (SAML-based research-and-education federation, interfederated globally via eduGAIN)}
+
+% --- High-performance computing (structural facility exemplar) ---------------
+\setloc{national-hpc-facility}{a national-cyberinfrastructure supercomputer accessed through a federally funded HPC allocation programme}
+
+% --- Deployment-scale model & data-custody posture (structural) -------------
+\setloc{deployment-custody-model}{the university operates, or procures under state procurement law with equivalent custody guarantees, a deployment of its core components --- on a state/regional R\&E network, in institutional data centres, or in FedRAMP-authorised / contractually controlled cloud environments}
+\setloc{data-custody-sovereignty-profile}{a custody arrangement that keeps controlled and regulated data (CUI, ePHI, education records) under US jurisdiction and under enforceable contractual and technical controls, minimising the applicable disclosure-regime exposure}
+
+% --- Operational roles (structural) -----------------------------------------
+\setloc{internal-emergency-incident-contact}{the university's information-security office / security operations centre (CISO-led) as the internal emergency / incident-reporting contact}
+
+% ============================================================================
+% REGULATORY KEYS --- bound to the United States regime
+% (shared/regulatory-applicability-EN.tex, sec:reg-us; docs/_regulatory/US.json)
+% The US is a DEEP but SECTORAL and FRAGMENTED regime: no omnibus statute, so
+% the role-based regulatory keys resolve to the relevant sector instrument,
+% authority or framework rather than to a single national transposition.
+% ============================================================================
+
+% --- Overarching regime framing ---------------------------------------------
+\setloc{regulatory-regime}{binding US federal sector law (FERPA, HIPAA, GLBA/FTC Safeguards, EAR/ITAR) and federal-contracting baselines (NIST SP~800-171, CMMC, FISMA), layered with state public-university, breach-notification, public-records and procurement law (and the state consumer-privacy layer, CCPA/CPRA and analogues)}
+\setloc{cybersecurity-baseline-regime}{the applicable US sector and federal-contracting cybersecurity framework --- the FTC Safeguards Rule and HIPAA Security Rule, with NIST SP~800-171 / SP~800-53 and the NIST Cybersecurity Framework as the assessed and de-facto baselines}
+\setloc{data-protection-regime}{the institution's applicable US data-protection regime --- FERPA for education records, the HIPAA Privacy Rule for covered health components, and state consumer-privacy law (CCPA/CPRA) as the state-law layer}
+\setloc{eid-trust-services-regime}{the applicable US trust / controlled-technology regime --- export control (EAR and ITAR) governing release of controlled technology and technical data, in the absence of an EU-style qualified-trust-services regime}
+\setloc{ai-regulation}{the adopter's applicable US AI-governance regime --- the NIST AI Risk Management Framework as the de-facto baseline together with applicable federal-agency and state AI requirements}
+\setloc{cross-border-transfer-regime}{the applicable US cross-border-data control --- handled functionally through the export-control (deemed-export) regime rather than an EU-style transfer-adequacy mechanism, with CCPA/CPRA vendor flow-down for consumer data}
+
+% --- Essential-entity / scope analogues (US has no NIS2; map to US triggers) -
+\setloc{essential-entity-classification-basis}{universities brought into the FTC Safeguards Rule as ``financial institutions'' through Title-IV participation, and into the HIPAA, CMMC/DFARS and FISMA regimes through the covered functions they perform}
+\setloc{nis2-sanction-ceiling}{the applicable US sector enforcement ceiling --- FERPA's withdrawal of federal education funding, HIPAA civil money penalties, FTC enforcement, and loss of DoD contract eligibility under CMMC/DFARS}
+
+% --- "National transposition" analogues -> US sector instruments ------------
+\setloc{nis2-national-transposition}{the FTC Safeguards Rule (16~C.F.R. Part~314) and the HIPAA Security Rule (45~C.F.R. Part~164 Subpart~C)}
+\setloc{cer-national-transposition}{the federal critical-infrastructure and incident-reporting baseline applicable to the institution (e.g.\ CISA / CIRCIA reporting where in scope)}
+\setloc{national-equal-treatment-law}{Section~504 of the Rehabilitation Act and the Americans with Disabilities Act (ADA) as the federal non-discrimination / accessibility baseline}
+\setloc{national-public-sector-isp}{NIST SP~800-171 (for Controlled Unclassified Information) and NIST SP~800-53 (for FISMA-scoped systems) as the public-sector information-security baselines}
+\setloc{national-cyber-strategy}{the US National Cybersecurity Strategy}
+\setloc{national-risk-method}{a NIST SP~800-30 / SP~800-171-aligned risk-analysis method}
+
+% --- Authority / body analogues -> US regulators ----------------------------
+% national-dpa and national-gov-csirt are NAME keys: left at generic default
+% for an institution-level set (the US has no single DPA, and the campus CSIRT
+% role is instantiated per institution / per R&E network).
+\setloc{national-infosec-agency}{the Cybersecurity and Infrastructure Security Agency (CISA) and NIST as the federal information-security agencies}
+\setloc{nis2-supervisory-authority}{the competent US sector regulator --- the FTC (Safeguards Rule), HHS OCR (HIPAA) or the DoD (CMMC/DFARS) as applicable}
+\setloc{national-spoc-authority}{the relevant federal sector regulator or contracting authority for the function in scope (no single US single-point-of-contact equivalent)}
+\setloc{national-cyber-competence-centre}{a NSA/DHS-designated National Center of Academic Excellence in Cybersecurity, where the institution holds the designation}
+\setloc{national-notification-platform}{the applicable federal breach-reporting channel --- the HHS OCR breach portal, FTC notification and state-Attorney-General breach-notification channels}
+\setloc{national-legislature}{the US Congress and the state legislature}
+\setloc{national-executive-department}{the relevant federal executive department for the function in scope (Education, HHS, Commerce/BIS, State/DDTC or Defense)}
+
+\endinput

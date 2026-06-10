@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "regime": "EU",
+  "regimeName": "European Union / European Economic Area (EU/EEA)",
+  "title": "SUIT regulatory regime profile — EU/EEA baseline for university IT",
+  "depth": "deep",
+  "generated": "2026-06-09",
+  "scope": "Maps the SUIT minimal necessary functional set (F1–F6) for university IT infrastructure to the concrete EU/EEA primary instruments, the competent authority for each, and the operative deadline or transfer mechanism. Sourced from EUR-Lex primary regulation and authoritative EU bodies (EDPB, ENISA, European Commission). The EU regime is the SUIT baseline anchor; non-EU adopters substitute the local equivalent via the Localization Guide. This profile asserts no size threshold: the functions are obligation-bearing regardless of institution size (GDPR has no de-minimis for security/accountability/breach duties; NIS2 attaches to the function performed). Only instantiation scales.",
+  "sourcingNote": "Authored from real primary regulation and authoritative secondary sources only; no prior SUIT document was used as a source. EUR-Lex ELI permalinks render via JavaScript; instrument numbers, titles, dates and OJ references were cross-verified through the EUR-Lex search index, the Publications Office record, and the relevant EU body's official page.",
+  "competentAuthorities": {
+    "dataProtection": "Each Member State's national Data Protection Authority (DPA / supervisory authority, GDPR Art. 51), coordinated and made consistent by the European Data Protection Board (EDPB, GDPR Art. 68). Cross-border cases run through the one-stop-shop lead-authority mechanism (Art. 56).",
+    "cybersecurity": "Each Member State's NIS2 competent authority / national CSIRT and single point of contact; EU-level coordination and capacity-building by ENISA (European Union Agency for Cybersecurity); strategic coordination via the NIS Cooperation Group and CSIRTs Network.",
+    "trustAndIdentity": "Each Member State's designated eIDAS supervisory body for trust-service providers and EUDI Wallet providers; the European Commission sets the wallet architecture and reference framework via implementing acts.",
+    "ai": "Market-surveillance authorities designated by each Member State; the European AI Office (within the European Commission) plus the European Artificial Intelligence Board coordinate enforcement, with the AI Office directly supervising general-purpose AI models.",
+    "internationalTransfers": "Adequacy is determined by the European Commission (GDPR Art. 45); supervision of individual transfers and appropriate safeguards remains with the national DPAs and the EDPB."
+  },
+  "functions": [
+    {
+      "fn": "F1",
+      "name": "Identity, authentication and trust services",
+      "description": "Authenticate subjects and provide electronic identification, electronic signatures/seals and qualified trust services for federated access, e-signatures and digital diploma/credential issuance.",
+      "instrument": "Regulation (EU) No 910/2014 (eIDAS) as amended by Regulation (EU) 2024/1183 (eIDAS 2 / European Digital Identity Framework, incl. the EUDI Wallet)",
+      "celex": ["32014R0910", "32024R1183"],
+      "authority": "National eIDAS / trust-services supervisory body of each Member State; European Commission sets wallet architecture via implementing acts",
+      "deadlineOrMechanism": "eIDAS 2 entered into force 20 May 2024 (directly applicable, no transposition); Member States must make at least one EUDI Wallet available within 24 months of entry into force (by 31 Dec 2026), with mandatory acceptance by public bodies and regulated services from 2027.",
+      "bibKeys": ["eidas2-2024"],
+      "note": "Directly applicable Regulation amending the 2014 base instrument. Adds three new qualified trust services (electronic archiving, electronic ledgers, remote signature/seal device management) relevant to university records and diploma issuance."
+    },
+    {
+      "fn": "F2",
+      "name": "Network and information system security; incident handling",
+      "description": "Segment and secure the network and information systems, run risk-management measures and cyber-hygiene, and discharge tiered incident notification.",
+      "instrument": "Directive (EU) 2022/2555 (NIS2), with Commission Implementing Regulation (EU) 2024/2690 on technical and methodological requirements (Art. 21)",
+      "celex": ["32022L2555", "32024R2690"],
+      "authority": "National NIS2 competent authority / CSIRT and single point of contact; ENISA at EU level; NIS Cooperation Group and CSIRTs Network",
+      "deadlineOrMechanism": "Directive — Member States had to transpose by 17 October 2024; national measures apply from 18 October 2024 (NIS1 repealed). Incident notification is tiered: early warning within 24 h of awareness, full notification within 72 h, final report within one month. Public-administration and research-intensive entities are typically in scope as essential or important entities (function-based, not headcount-based).",
+      "bibKeys": ["nis2", "eu-regulation-2024-2690", "enisa-risk"],
+      "note": "A Directive, so obligations bite through each Member State's transposition (e.g. the worked Luxembourg instance PL 8364); the Implementing Regulation 2024/2690 is directly applicable and details the ten Art. 21(2) obligation families including MFA, cryptography, access control and supply-chain security."
+    },
+    {
+      "fn": "F3",
+      "name": "Personal data protection; processing security and breach notification",
+      "description": "Classify and protect personal data, implement appropriate technical and organisational security of processing, and notify personal-data breaches.",
+      "instrument": "Regulation (EU) 2016/679 (GDPR) — Art. 32 (security of processing), Art. 33 (breach notification to the supervisory authority), Art. 34 (communication to data subjects)",
+      "celex": ["32016R0679"],
+      "authority": "National DPA (supervisory authority); EDPB for consistency and guidance (e.g. Guidelines 9/2022 on breach notification)",
+      "deadlineOrMechanism": "Regulation — directly applicable since 25 May 2018 (entry into force 24 May 2016). Breach notification to the supervisory authority without undue delay and, where feasible, not later than 72 hours after becoming aware (Art. 33); communication to affected data subjects without undue delay where high risk (Art. 34). No de-minimis size threshold for security, accountability or breach duties.",
+      "bibKeys": ["gdpr", "edpb-guidelines", "enisa-risk"],
+      "note": "Anchors the size-invariance argument: the only size-based relief is the Art. 30(5) records-of-processing derogation below 250 persons, which is conditional and does not touch security, accountability or breach duties."
+    },
+    {
+      "fn": "F4",
+      "name": "International / cross-border data transfers",
+      "description": "Lawfully transfer personal data outside the EU/EEA for cloud, identity, research-collaboration and AI services.",
+      "instrument": "GDPR Chapter V (Arts. 44–50): adequacy decisions (Art. 45), appropriate safeguards incl. Standard Contractual Clauses (Art. 46) — Commission Implementing Decision (EU) 2021/914; EU–US Data Privacy Framework adequacy — Commission Implementing Decision (EU) 2023/1795",
+      "celex": ["32016R0679", "32021D0914", "32023D1795"],
+      "authority": "European Commission (adequacy decisions, Art. 45); national DPAs and EDPB (supervision of safeguards and individual transfers)",
+      "deadlineOrMechanism": "Transfer mechanism (no single deadline): (a) adequacy decision where one exists — for the US, Decision (EU) 2023/1795 of 10 July 2023 covers recipients self-certified on the DPF List; (b) otherwise Art. 46 SCCs (Decision (EU) 2021/914, mandatory for new contracts since 27 Sep 2021) plus a post-Schrems II Transfer Impact Assessment and supplementary technical/organisational measures (encryption, pseudonymisation).",
+      "bibKeys": ["eu-sccs2021", "eu-dpf-adequacy-2023", "gdpr"],
+      "note": "DPF adequacy upheld by the EU General Court in September 2025 but under continuous Commission monitoring; where a recipient is not DPF-certified, the SCC + TIA path applies."
+    },
+    {
+      "fn": "F5",
+      "name": "AI system governance",
+      "description": "Govern AI systems deployed or developed by the institution (admissions, education, research tooling, GPAI use) under a risk-based regime: prohibited practices, high-risk obligations, transparency.",
+      "instrument": "Regulation (EU) 2024/1689 (Artificial Intelligence Act)",
+      "celex": ["32024R1689"],
+      "authority": "National market-surveillance authorities; European AI Office (Commission) and European Artificial Intelligence Board; AI Office directly supervises general-purpose AI models",
+      "deadlineOrMechanism": "Regulation — entered into force 1 August 2024, phased application: prohibited practices and AI-literacy from 2 February 2025; GPAI-model obligations from 2 August 2025; the bulk, including high-risk system obligations, from 2 August 2026. Scientific-research and R&D exemptions apply (Arts. 2(6), 2(8)).",
+      "bibKeys": ["eu-ai-act"],
+      "note": "Universities deploying AI in admissions/education or as high-risk providers must run conformity assessments, maintain technical documentation and ensure human oversight; pure research/R&D activity is exempted but downstream deployment is not."
+    },
+    {
+      "fn": "F6",
+      "name": "Accountability, auditable logging and records",
+      "description": "Retain auditable logs and records; demonstrate compliance (accountability) across data protection and cybersecurity duties; maintain records of processing and incident/maturity reporting.",
+      "instrument": "GDPR Art. 5(2) (accountability), Art. 30 (records of processing), Art. 24 (controller responsibility); NIS2 Art. 21 risk-management measures (logging, monitoring) and Art. 23 reporting, detailed by Implementing Regulation (EU) 2024/2690",
+      "celex": ["32016R0679", "32022L2555", "32024R2690"],
+      "authority": "National DPA (records/accountability) and national NIS2 competent authority (security logging, maturity/incident reporting); EDPB and ENISA for guidance",
+      "deadlineOrMechanism": "Standing obligations, no single deadline. GDPR records of processing maintained continuously and produced on DPA request; NIS2 entities maintain logging/monitoring and file the tiered incident reports (24 h / 72 h / one month) plus periodic maturity reporting through the national reporting platform. Single-window national platforms (e.g. SERIMA) consolidate NIS, NIS2, GDPR and CER reporting.",
+      "bibKeys": ["gdpr", "nis2", "eu-regulation-2024-2690", "edpb-guidelines", "serima"],
+      "note": "Accountability is the cross-cutting glue: it requires evidence (logs, records, assessments) that the F1–F5 controls are in place, which is why auditable logging is a member of the size-invariant minimal set."
+    }
+  ],
+  "bibKeysAdded": ["eu-dpf-adequacy-2023", "eidas2-2024"],
+  "bibKeysReused": ["gdpr", "nis2", "eu-ai-act", "eu-sccs2021", "edpb-guidelines", "enisa-risk", "eu-regulation-2024-2690", "serima"],
+  "bibFile": "/Volumes/Mac_Data/Win_data/data/backups/Dropbox-nicolas.guelfi@laposte.net/messir Dropbox/Nicolas Guelfi/users/NG/dev-dropbox/dvlpt/eclipse/git/lu.uni.sage.publications.2025/suit-infrastructure-policy/shared/suit-consolidated.bib"
+}

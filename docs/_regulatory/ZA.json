@@ -1,0 +1,86 @@
+{
+  "schema": "https://json-schema.org/draft/2020-12/schema",
+  "kind": "REGIME_PROFILE",
+  "jurisdiction": "ZA",
+  "jurisdictionName": "Republic of South Africa",
+  "depth": "light",
+  "generated": "2026-06-09",
+  "sourcePolicy": "REAL primary regulation and authoritative secondary sources only; no prior SUIT document used.",
+  "regionalContext": {
+    "instrument": "African Union Convention on Cyber Security and Personal Data Protection (Malabo Convention)",
+    "adopted": "2014-06-27",
+    "inForce": "2023-06-08",
+    "southAfricaStatus": "Signed but NOT ratified",
+    "effect": "Not directly binding on South African institutions; supplies continental policy baseline against which POPIA, the Cybercrimes Act and the ECT Act are read. No transposition/transfer obligation flows to ZA institutions.",
+    "bibKey": "za_malabo"
+  },
+  "notes": [
+    "South Africa has no standalone unified Cybersecurity Act and no EU-style mutual-recognition or adequacy-list mechanism; cross-border transfer adequacy is self-assessed by the responsible party.",
+    "South Africa has no dedicated statutory web-accessibility standard; the digital-accessibility obligation is principle-based (PEPUDA reasonable accommodation + Constitution), with WCAG used as the de facto benchmark.",
+    "Functional obligations map to a single national jurisdiction (no member-state transposition layer); the Malabo Convention is regional context only, not an operative transfer mechanism for ZA."
+  ],
+  "functions": [
+    {
+      "fn": "F1",
+      "title": "Security of processing of personal data",
+      "instrument": "Protection of Personal Information Act 4 of 2013 (POPIA), Condition 7, section 19",
+      "authority": "Information Regulator (South Africa)",
+      "deadlineOrMechanism": "Continuous obligation: appropriate, reasonable technical and organisational measures on a risk-based standard to secure integrity and confidentiality of personal information against loss, damage, unauthorised destruction and unlawful access/processing.",
+      "bibKeys": ["za_popia", "za_inforegulator"],
+      "note": "Direct national statutory duty; no threshold/size carve-out."
+    },
+    {
+      "fn": "F2",
+      "title": "Personal-data breach notification",
+      "instrument": "POPIA section 22 (Notification of security compromises)",
+      "authority": "Information Regulator (South Africa)",
+      "deadlineOrMechanism": "Notify the Information Regulator and affected data subjects as soon as reasonably possible after discovery of the compromise (subject to legitimate law-enforcement / integrity-restoration needs). No fixed hour-count deadline.",
+      "bibKeys": ["za_popia", "za_inforegulator"],
+      "note": "Notification content prescribed by s.22(5); Regulator may direct public notification."
+    },
+    {
+      "fn": "F3",
+      "title": "Cyber-incident / offence reporting (NIS-type)",
+      "instrument": "Cybercrimes Act 19 of 2020, section 54",
+      "authority": "South African Police Service (SAPS), with national 24/7 point of contact",
+      "deadlineOrMechanism": "Electronic communications service providers and financial institutions must report a qualifying offence to SAPS without undue delay and, where feasible, not later than 72 hours after becoming aware, in prescribed form, and preserve assisting information.",
+      "bibKeys": ["za_cybercrimes"],
+      "note": "No standalone unified Cybersecurity Act; Cybercrimes Act is the operative incident/offence instrument. Applies when the university acts as an electronic communications service provider."
+    },
+    {
+      "fn": "F4",
+      "title": "Cross-border / transborder data transfer",
+      "instrument": "POPIA section 72 (Transfers of personal information outside the Republic)",
+      "authority": "Information Regulator (South Africa) (oversight); responsible party self-assesses adequacy",
+      "deadlineOrMechanism": "Transfer permitted only where adequate protection (substantially similar to POPIA) is ensured by: foreign law / binding corporate rules / a binding agreement; OR data-subject consent; OR contractual necessity. No EU-style adequacy decision list; adequacy is self-assessed and documented per transfer.",
+      "bibKeys": ["za_popia", "za_inforegulator"],
+      "note": "Transfer mechanism = binding-agreement / BCR / law adequacy / consent / contractual-necessity, self-certified by the responsible party."
+    },
+    {
+      "fn": "F5",
+      "title": "Electronic transactions, trust services and electronic signatures (eIDAS-type)",
+      "instrument": "Electronic Communications and Transactions Act 25 of 2002 (ECT Act), ss.13 and 37-40 (advanced electronic signature; accreditation)",
+      "authority": "South African Accreditation Authority (SAAA), under the Department of Communications and Digital Technologies",
+      "deadlineOrMechanism": "Legal recognition of data messages and electronic signatures; advanced electronic signature (AES) requires a digital certificate from an accredited authentication service provider (ss.37-40) and carries a rebuttable presumption of validity. Accreditation is the trust mechanism (no EU-style cross-border mutual recognition).",
+      "bibKeys": ["za_ect_act"],
+      "note": "ECT Act cyber-offence provisions (ss.85-88) repealed by the Cybercrimes Act 19 of 2020."
+    },
+    {
+      "fn": "F6",
+      "title": "Digital accessibility / non-discrimination",
+      "instrument": "Promotion of Equality and Prevention of Unfair Discrimination Act 4 of 2000 (PEPUDA / Equality Act), s.9 and disability provisions",
+      "authority": "Equality Courts; South African Human Rights Commission (SAHRC)",
+      "deadlineOrMechanism": "No fixed deadline; standing duty not to unfairly discriminate on the ground of disability, to remove obstacles and to take reasonable-accommodation steps. No dedicated web-accessibility statute; obligation is principle-based with WCAG as de facto benchmark.",
+      "bibKeys": ["za_pepuda"],
+      "note": "Derived from constitutional equality right; enforced via Equality Courts, monitored by SAHRC."
+    }
+  ],
+  "bibKeysAdded": [
+    "za_popia",
+    "za_inforegulator",
+    "za_cybercrimes",
+    "za_ect_act",
+    "za_pepuda",
+    "za_malabo"
+  ]
+}

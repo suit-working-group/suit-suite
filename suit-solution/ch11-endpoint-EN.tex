@@ -1,0 +1,330 @@
+% ============================================================================
+% Chapter 11 --- Endpoint management
+% ----------------------------------------------------------------------------
+% Purpose : MDM, posture, BYOD, with explicit acknowledgement of OSS gap
+%           on iOS/Android at scale.
+%           Belongs to the Subject and Trust plane (D5.1).
+% Page target: ~4 pages.
+% Dependencies: Ch. 5 (DDM/DEP, MS-MDM, declarative Linux config),
+%               Ch. 6 (identity attaches subjects to endpoints),
+%               Ch. 7 (policy decisions consume posture claims),
+%               Ch. 8 (network attachment depends on posture verification).
+% Mirrors layer chapter template established in Ch. 6 (D6.5).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D11.1 minimum compliance set for the endpoint layer
+%   D11.2 reference instantiation = Munki/Ansible/osquery + MicroMDM (with gap)
+%   D11.3 alternatives = Jamf+Intune; Workspace ONE
+%   D11.4 OSS gap on iOS/Android at scale acknowledged transparently
+%   D11.5 endpoint sovereignty scores
+% ============================================================================
+
+\chapter{Endpoint management}
+\label{ch:endpoint}
+
+\begin{caveatbox}[Dependencies]
+\noindent This chapter applies the layer template of
+\trchap{ch:identity}{} to the endpoint layer. It produces posture
+claims consumed by \trchap{ch:policy}{}, contributes attributes
+that \trchap{ch:identity}{} carries on session assertions, and is
+constrained at the network attachment level by
+\trchap{ch:network}{}. The layer belongs to the \emph{Subject and
+trust plane}.
+\end{caveatbox}
+
+The endpoint layer covers institutional and personal devices that
+connect to institutional services: managed Linux servers and
+workstations, managed macOS, managed Windows, mobile devices
+(\institution{iOS} and \institution{Android}), and BYOD endpoints
+that may run any of the above. The layer reports \emph{posture}
+claims to the policy layer, applies \emph{configuration} from a
+declarative source, and exercises \emph{lifecycle controls}
+(enrolment, audit, retirement) on the devices it manages.
+
+\begin{caveatbox}[Honest acknowledgement]
+\noindent The endpoint layer is the place where the open-source
+reference instantiation is weakest, particularly for iOS and Android
+at scale. This Reference does not minimise that gap; it documents
+it (\S\ref{sec:ep-sovereignty}), proposes an open instantiation
+where it is realistic, and treats the commercial alternatives as
+the working choice for the segments where the open ecosystem has
+not yet matured.
+\end{caveatbox}
+
+%-----------------------------------------------------------------------------
+\section{Functional role and interface contract}
+\label{sec:ep-contract}
+
+\begin{contractbox}[Endpoint layer]
+\noindent A compliant endpoint layer, in the sense of this
+architecture, must:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item enrol managed devices through a documented procedure that
+    binds the device to an institutional identity;
+  \item apply configuration from a declarative source: Apple
+    declarative device management (DDM/DEP) on Apple platforms,
+    MS-MDM on Windows, declarative configuration management
+    (Ansible idempotent profiles, or equivalent) on Linux;
+  \item produce posture claims consumed by \trchap{ch:policy}{}, in
+    a schema that downstream policy authoring can rely on;
+  \item support a documented decommissioning procedure (data wipe,
+    enrolment removal, account deactivation) executable on demand;
+  \item integrate with \trchap{ch:observability}{} so that
+    endpoint events (enrolment, posture violation, configuration
+    failure, suspicious activity) reach the institutional audit
+    pipeline.
+\end{itemize}
+
+\noindent The contract does not require a single product to cover all
+endpoint operating systems. Multi-product instantiations are
+admissible provided that the institution operates a unified posture
+schema across them, so that \trchap{ch:policy}{} can author rules
+without per-OS branching for routine decisions.
+\end{contractbox}
+
+\paragraph{BYOD scope.} The contract applies to managed endpoints.
+BYOD endpoints carry a more limited posture surface (no agent,
+network-side observation only) and are governed through the
+attachment policy of \trchap{ch:network}{} rather than through this
+layer's enrolment procedures. The architectural principle is that
+BYOD endpoints reach institutional services only through
+contexts whose posture requirements they can satisfy without
+agent-based verification.
+
+%-----------------------------------------------------------------------------
+\section{Reference instantiation: Munki + osquery + Ansible + MicroMDM}
+\label{sec:ep-reference}
+
+\begin{instantiationbox}[Endpoint layer]
+\noindent\textbf{Topology by operating system.}
+\textbf{Linux} endpoints (servers and workstations) are configured
+through Ansible~\cite{ansible} idempotent playbooks under version
+control; posture is queried through osquery~\cite{osquery}; package
+state is tracked against an institutional repository.
+\textbf{macOS} endpoints are configured through Munki~\cite{munki}
+for software distribution and through MDM commands delivered by an
+open-source MDM server (MicroMDM~\cite{micromdm} or NanoMDM, or a
+comparable project) speaking Apple's MDM protocol with DEP/ADE
+enrolment, and Declarative Device Management (DDM) where the chosen
+open server and its companion services support it --- a coverage
+currently partial relative to commercial MDMs; posture is
+queried through osquery. \textbf{Windows} endpoints are partially
+covered by declarative configuration through Ansible with the
+WinRM/PowerShell-DSC integration, with the explicit observation
+that the open-source coverage of MS-MDM is, at the time of writing,
+substantially less mature than the Apple and Linux equivalents.
+\textbf{iOS and Android} are addressed through commercial
+alternatives in this architecture (\S\ref{sec:ep-alt1}); the
+open-source ecosystem at the institutional scale would not, at the
+time of writing, provide a credible reference instantiation.
+\end{instantiationbox}
+
+\paragraph{Posture schema.} The unified posture schema is the
+artefact that decouples policy authoring from per-OS endpoint
+products. The schema covers, at minimum: device identity,
+enrolment status, OS version, encryption state, last-update
+timestamp, presence of expected security agents, deviation from
+declared configuration. Each product reports into this schema; the
+mapping from product-specific signals to the unified schema is the
+institution's responsibility.
+
+\paragraph{Operational considerations.} A multi-product reference
+instantiation imposes a multi-skill operating team. The indicative
+staffing envelope set in the resourcing profile of \loc{institution-type}
+spreads a small group
+of engineers across the OS-specific operations, with one
+engineer-equivalent dedicated to the unified posture schema and
+its integration with the policy layer.
+
+\begin{realworldbox}[Endpoint management precedents]
+\noindent Research-intensive institutions are reported to operate
+mixed-OS endpoint estates that combine open-source and commercial
+tooling along the OS boundary, typically retaining open tooling for
+Linux and macOS where the OSS ecosystem is mature, and commercial
+tooling for Windows at scale and for iOS/Android. The specific tool
+choices and operational details would be best confirmed against
+the institution's own published documentation, when available, or
+its presentations in the community fora of the institution's
+national research and education network.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Alternative~1 --- Jamf (macOS/iOS) + Intune (Windows) with OpenTelemetry export}
+\label{sec:ep-alt1}
+
+\begin{alternativebox}[Commercial multi-product]
+\noindent The institution adopts Jamf~\cite{jamf} for Apple platforms
+(macOS and iOS), Microsoft Intune~\cite{intune} for Windows and
+Android, and continues Ansible/osquery for Linux. Posture data from each product is
+exported through OpenTelemetry collectors so that the unified
+posture schema is fed without any product becoming the
+authoritative store.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} For iOS and Android in particular,
+the operational depth of Jamf and Intune is, at the time of
+writing, substantially ahead of the open alternatives. For an
+institution where the mobile estate is large and lifecycle controls
+must be exercised reliably, this is the working choice.
+
+\paragraph{Where it constrains the institution.} Each product
+expresses configuration and posture in its own model; the
+reconciliation of these models with the unified schema of
+\S\ref{sec:ep-reference} is a sustained engineering effort. Beyond
+the schema work, the institution accepts a non-trivial financial
+commitment per device per year, and a roadmap that the suppliers
+control. The architectural posture is to keep posture data
+exported through OpenTelemetry collectors so that the policy layer
+remains the source of authorisation truth, and so that exit from
+either product would be a re-implementation of the data pipe rather
+than a re-foundation of the policy.
+
+\paragraph{When it could be the right choice.} An institution
+whose iOS and Android estates are operationally significant, whose
+financial position absorbs the per-device licensing, and whose
+sovereignty posture accepts a Partial score on the technical and
+institutional dimensions of the endpoint layer in exchange for the
+operational depth.
+
+%-----------------------------------------------------------------------------
+\section{Alternative~2 --- Workspace ONE multi-OS}
+\label{sec:ep-alt2}
+
+\begin{alternativebox}[Single-vendor multi-OS]
+\noindent The institution adopts a single multi-OS endpoint
+management platform (Workspace ONE, or comparable) covering Apple,
+Windows, Android and a subset of Linux through one supplier
+relationship. Posture export to OpenTelemetry remains a contractual
+requirement.
+\end{alternativebox}
+
+\paragraph{Where it adds value.} A single supplier relationship,
+a single skill set within the team, and consistent posture semantics
+across operating systems out of the box. The reconciliation work
+that the multi-product alternative imposes is largely absorbed by
+the supplier.
+
+\paragraph{Where it constrains the institution.} The single supplier
+becomes the sole point of failure for the entire endpoint layer.
+Substitutability is significantly weaker than in the multi-product
+alternative, and institutional negotiation leverage diminishes
+across renewal cycles. The exit-cost-proportionality indicator of
+\trchap{ch:sovereignty-grid}{} should be evaluated explicitly at
+procurement.
+
+\paragraph{When it could be the right choice.} An institution with
+limited engineering capacity to integrate multiple endpoint
+products, where the operational simplification is more valuable
+than the substitutability cost, and whose financial sovereignty
+posture is comfortable with a single-supplier exposure on the
+endpoint layer.
+
+%-----------------------------------------------------------------------------
+\section{Sovereignty grid applied}
+\label{sec:ep-sovereignty}
+
+\begin{table}[H]
+\centering\small
+\caption{Per-dimension sovereignty profile of the endpoint
+instantiations. The reference is scored across two columns to
+make the iOS/Android gap visible.}
+\label{tab:ep-sovereignty}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.6\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.2\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.0\hsize\linewidth=\hsize\centering\arraybackslash}X%
+  >{\hsize=1.0\hsize\linewidth=\hsize\centering\arraybackslash}X%
+}
+\toprule
+Dimension & Reference \emph{Linux/macOS} & Reference \emph{iOS/Android} & Jamf/Intune & Workspace ONE \\
+\midrule
+Data          & 3 Robust      & --- (gap)     & 2 Established & 2 Established \\
+Technical     & 3 Robust      & 0--1 Absent/Partial & 1 Partial     & 1 Partial     \\
+Financial     & 2 Established & 0--1 Absent/Partial & 1 Partial     & 1 Partial     \\
+Operational   & 2 Established & 0--1 Absent/Partial & 3 Robust      & 3 Robust      \\
+Institutional & 3 Robust      & 0--1 Absent/Partial & 1 Partial     & 1 Partial     \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent The transparent split of the reference column is
+deliberate. The open-source reference is competitive on Linux and
+macOS; it is not, at the time of writing, a credible institutional
+choice for iOS and Android. The architectural posture is to use the
+reference where it works and the commercial alternatives where the
+ecosystem requires it, while keeping the policy layer in a position
+to consume posture from any of them without favour.
+
+\paragraph{Driving indicators by dimension.} Data: enrolment data,
+posture data, telemetry destination. Technical: source visibility,
+captive extensions in the configuration model. Financial: per-device
+licensing and renewal trajectory. Operational: skills market depth
+across the institution's OS mix. Institutional: roadmap influence
+and integration freedom.
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:ep-regulatory}
+
+\noindent The endpoint layer is the device-side anchor of the
+applicable data protection regime's technical-measures obligation
+(technical measures applied at the device that processes personal
+data) and the principal locus of the applicable cybersecurity
+baseline regime's requirements on basic cyber hygiene practices,
+asset management, and indirectly authentication (where the endpoint
+carries the authentication factors). Posture attestations consumable by the
+policy layer operationalise the device dimension of
+zero-trust~(SP~800-207). The layer contributes to 27001~A.8.1
+(user endpoint devices), A.8.7 (protection against malware) and
+A.8.9 (configuration management) and to NIST CSF \textsf{PROTECT}
+(PR.PS --- platform security). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso}, \S\ref{sec:rm-nist-csf}.
+
+%-----------------------------------------------------------------------------
+\section{Common pitfalls}
+\label{sec:ep-pitfalls}
+
+\begin{pitfallbox}[BYOD posture without enforcement]
+\noindent The institution declares a BYOD posture (encryption,
+patch level, screen lock) and relies on user attestation for it.
+Within months, the actual fleet has drifted from the declared
+posture, and the network attachment of \trchap{ch:network}{} no
+longer reflects what the institution thought it enforced. The
+mitigation is to make BYOD posture either verifiable
+(network-side observation, captive-portal challenge) or
+contractual without the architecture relying on it for sensitive
+zones.
+\end{pitfallbox}
+
+\begin{pitfallbox}[MDM cost explosion]
+\noindent Per-device licensing in the commercial alternatives can
+grow with the estate at a rate that procurement did not anticipate,
+particularly when contractor and visiting-researcher devices accrue.
+The mitigation is to budget per-device licensing as a recurring
+variable cost, to maintain a current device inventory, and to
+include the projection in the financial-sovereignty review.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Policy drift between MDM and central PDP]
+\noindent An MDM product expresses authorisation rules in its own
+language (compliance policies, conditional access expressions); the
+central PDP of \trchap{ch:policy}{} expresses them in Rego or Cedar.
+Over time, the two drift, and the same notional rule says different
+things in the two systems. The mitigation is to author posture-aware
+authorisation in the central PDP only, and to use the MDM
+product's authorisation features only for device-level decisions
+that the policy layer does not need to know about.
+\end{pitfallbox}
+
+\begin{pitfallbox}[Undocumented MDM extensions]
+\noindent Commercial MDM products extend the standard
+DDM/MS-MDM/declarative protocols with proprietary capabilities.
+Adoption of such extensions in critical paths erodes
+replaceability without making it visible. The mitigation is to
+audit the configuration profiles and policies for non-standard
+extensions periodically, and to confine such extensions to
+non-critical paths or to substitute them.
+\end{pitfallbox}

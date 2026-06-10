@@ -1,0 +1,736 @@
+% ============================================================================
+% Chapter 33 --- Regulatory mapping
+% ----------------------------------------------------------------------------
+% Purpose : per-provision mapping of the architecture and the playbook to the
+%           regulatory and normative perimeter that the international audience
+%           of this Reference is expected to encounter. The chapter is the
+%           consolidation point of the per-chapter "Regulatory anchoring"
+%           pointers added to Ch. 6--14 (layer chapters) and Ch. 18--27 (wave
+%           chapters).
+% Page target: ~8 pages.
+% Dependencies: cited from Ch. 6--14 and Ch. 18--27 via "Regulatory anchoring"
+%               paragraphs; complements the catalogue of normative references
+%               of Ch. 32.
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D33.1 mapping is per-article / per-control, three columns (provision,
+%         architecture element, operationalised in)
+%   D33.2 perimeter is international: GDPR + NIS2 + AI Act + Schrems~II +
+%         NIST~CSF~2.0 + eIDAS~2 + ISO/IEC~27001/27002/27005 + COBIT~2019
+%   D33.3 a national-transposition cautionary note closes the chapter and
+%         is referenced from the per-chapter pointers
+%   D33.4 mapping is interpretive, not legal advice (caveatbox at chapter top)
+% ============================================================================
+
+\chapter{Regulatory mapping}
+\label{ch:regulatory-mapping}
+
+\begin{caveatbox}[Status of this chapter]
+\noindent This chapter records the working interpretive mapping
+between the architecture's contracts (Part~II) and the playbook's
+waves (Part~III) on the one hand, and the regulatory provisions
+and normative controls most likely to apply to \loc{institution-type}
+on the other. The mapping is interpretive and would
+need to be reviewed by qualified counsel and by the institution's
+data-protection and information-security officers before being
+relied on for a compliance argument. National transpositions of
+European directives, sectoral regulations, and contractual
+obligations from research funders may add provisions that this
+chapter does not record.
+\end{caveatbox}
+
+The architecture and the playbook of this Reference are not
+designed against a regulatory checklist; they are designed against
+the engineering question of how a university
+can be sovereign at the architectural level, and they are then
+read against the regulations that the institution will face. This
+chapter performs that second reading at two levels. It opens with the
+shared, jurisdiction-neutral \emph{Regulatory Applicability} module,
+which abstracts the size- and jurisdiction-invariant
+functional-obligation spine (F1--F6) and its
+obligation~$\rightarrow$~mechanism matrix
+(Table~\ref{tab:reg-matrix}); that matrix is the shared anchor that the
+Policy and this Solution both reference for the
+Policy~$\leftrightarrow$~Solution traceability. It then continues with
+the detailed, per-article EU instantiation that follows the module ---
+organised by regulation and, within each regulation, by article or
+control. Each per-article mapping row identifies: the provision, the
+architecture element (layer, wave, or contract) that the institution
+may invoke, and the chapters and sections of this Reference where the
+operationalisation is described. The per-article mapping is the
+consolidated view of the per-chapter \emph{Regulatory anchoring}
+paragraphs introduced in the layer and wave chapters; it is one worked
+instantiation --- the EU/EEA regime row of the module's typology
+(\S\ref{sec:reg-eu}) --- developed to article granularity.
+
+% --- Shared Regulatory Applicability module (institution-neutral, ------------
+% --- jurisdiction-neutral). The SAME module is referenced as a shared annex --
+% --- by the Policy (SUITPOLICY). Its obligation->mechanism matrix -------------
+% --- (Table~\ref{tab:reg-matrix}) is the shared traceability anchor. ----------
+% --- The module uses \section, correctly nesting under this \chapter. ---------
+\input{../shared/regulatory-applicability-EN}
+
+\bigskip
+\noindent The remainder of this chapter develops the EU/EEA regime row
+of the module above (\S\ref{sec:reg-eu}) to per-article granularity,
+binding each provision to the specific architecture element and to the
+chapter where it is operationalised.
+
+%-----------------------------------------------------------------------------
+\section{Method, scope and limitations}
+\label{sec:rm-method}
+
+\paragraph{Perimeter.} The regulations and frameworks covered below
+are the per-article development of the EU/EEA regime row of the shared
+module's typology (\S\ref{sec:reg-eu}); they are those most frequently
+encountered by \loc{institution-type} operating
+internationally, presented here as one worked instantiation of the
+applicable regulatory regime that each adopting institution substitutes
+with its own --- the spine and the obligation~$\rightarrow$~mechanism
+matrix (\S\ref{sec:reg-matrix}) being identical across regimes, only the
+instrument column changing. The worked
+instantiation comprises the applicable data-protection regime
+(here the EU \gls{gdpr}); the applicable cybersecurity baseline
+regime (here the NIS2 Directive); the applicable AI-governance
+regulation (here the EU AI Act); the cross-border data-transfer
+regime (here the \emph{Schrems~II} judgement and the EDPB transfer
+guidelines that operationalise it); the NIST Cybersecurity
+Framework~2.0; the applicable electronic-identification and
+trust-services regime (here eIDAS~2, the renewed framework for
+electronic identification and trust services); the ISO/IEC 27001 /
+27002 / 27005 management-system and risk-management family; and
+COBIT~2019 as a governance framework. The selection privileges
+international applicability over national specificity.
+
+\paragraph{What the mapping is and is not.} The mapping shows
+where the architecture's contracts and the playbook's waves
+\emph{contribute} to the satisfaction of a regulatory provision.
+It does not claim that adopting the architecture is sufficient to
+demonstrate compliance: most provisions also require organisational
+elements (policies, training, designated officers, audit reports)
+that are outside this Reference's scope. It also does not claim
+that any specific deployment described in the architecture is
+\emph{necessary} for compliance: alternative architectures may
+satisfy the same provisions through different means. The mapping
+is best read as a tool for identifying which architectural elements
+the institution can invoke when responding to a regulator's
+question.
+
+\paragraph{Reading conventions.} For each regulation, the
+provisions are listed in the order the source instrument adopts.
+The architecture-element column references chapters of this
+Reference using the \texttt{\textbackslash{}trchap} cross-reference
+convention. The
+operationalisation column points to specific sections; multiple
+references appear when several layers contribute jointly.
+
+\paragraph{Scope of binding force.} Among the references covered,
+the data-protection regime, the cybersecurity baseline regime and
+the AI-governance regulation are binding statutory instruments
+within their regime (in the worked instantiation, the \gls{gdpr},
+NIS2 and the AI Act); the cross-border data-transfer regime is
+binding authority (here \emph{Schrems~II} case law from the CJEU);
+the electronic-identification and trust-services regime is a
+binding regulation (here eIDAS~2). NIST~CSF~2.0, ISO/IEC~27001 and
+COBIT~2019 are non-binding frameworks unless made binding by
+contract (a research funder requirement, a procurement clause) or
+by sectoral national transposition. The institution must read its
+own contracts and national legal framework alongside this chapter.
+
+%-----------------------------------------------------------------------------
+\section{General Data Protection Regulation (GDPR)}
+\label{sec:rm-gdpr}
+
+The applicable data-protection regime establishes risk-based
+security and accountability obligations applicable to any
+institution processing personal data; in the worked instantiation
+below this regime is the \gls{gdpr}~\cite{gdpr}. The provisions
+below are the most frequently invoked in IT architecture
+discussions; the mapping is not exhaustive, and an adopting
+institution reads its own data-protection regime in place of the
+worked instantiation.
+
+\begin{table}[H]
+\centering\small
+\caption{GDPR mapping --- principal provisions and architectural
+contributions.}
+\label{tab:rm-gdpr}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Provision & Architectural contribution & Operationalised in \\
+\midrule
+Art.~5(1)(f) integrity and confidentiality
+  & Identity, policy, network, crypto layers as the technical chain enforcing access control and confidentiality
+  & \trchap{ch:identity}{}, \trchap{ch:policy}{}, \trchap{ch:network}{}, \trchap{ch:crypto}{} \\
+Art.~6(1)(e)/(f) lawful basis
+  & Public-task and legitimate-interest bases for the monitoring, audit and identity processing the architecture entails; the per-processing determination is finalised in the DPIA/RoPA, with the sovereignty-grid institutional dimension recording it
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:policy}{}, \trchap{ch:observability}{} \\
+Art.~25 data protection by design and by default
+  & TAC contract enforces minimum necessary attribute release; sovereignty grid surfaces design-time choices
+  & \trchap{ch:conceptual-frame}{}, \trchap{ch:sovereignty-grid}{}, \trchap{ch:identity}{} \S\ref{sec:id-contract} \\
+Art.~30 records of processing
+  & Canonical TAC schema and its persistence in the audit pipeline produce the per-activity record from which RoPA entries can be derived
+  & \trchap{ch:observability}{}, \trchap{ch:wave2-observability}{}, \trchap{ch:wave7-audit-ir}{} \\
+Art.~32 security of processing
+  & Identity, policy, network, crypto, observability layers; conformance suite as evidence of effectiveness
+  & \trchap{ch:identity}{}--\trchap{ch:observability}{}, \trchap{ch:conformance}{} \\
+Art.~33--34 notification of breaches
+  & TAC-aware audit pipeline and the wave-7 IR procedure provide detection and timeline reconstruction
+  & \trchap{ch:wave7-audit-ir}{} \\
+Art.~35 data-protection impact assessment
+  & Sovereignty grid and TAC scenario inventory provide structured input to a DPIA
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:self-assessment}{} \\
+Art.~44--49 international transfers
+  & Storage layer placement constraints, cryptographic-key custody, sovereignty-grid data dimension
+  & \trchap{ch:storage}{}, \trchap{ch:crypto}{}, \trchap{ch:sovereignty-grid}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Scope of the contribution.} The architecture provides
+the technical substrate for the obligations above. The
+organisational substrate (data-protection officer, RoPA
+maintenance, supplier contracts, data-subject-rights procedures)
+is outside this Reference's scope and would need to be in place
+independently.
+
+%-----------------------------------------------------------------------------
+\section{NIS2 Directive}
+\label{sec:rm-nis2}
+
+The applicable cybersecurity baseline regime applies to the
+classes of entity its scoping rules designate as in scope; in the
+worked instantiation below this regime is the NIS2
+Directive~\cite{nis2}, whose classification basis distinguishes
+essential and important entities. Whether a research-intensive
+university falls in scope depends on the applicable national
+transposition of that regime (research organisations are an
+Annex~II covered sector (important entities), but the Art.~6(41)
+definition excludes education establishments, so universities
+usually enter scope by another route --- public-administration
+designation, digital infrastructure, hospital affiliation ---
+depending on the national transposition). The provisions below are most
+frequently relevant when the institution is in scope.
+
+\begin{table}[H]
+\centering\small
+\caption{NIS2 mapping --- governance, risk-management measures and
+incident reporting.}
+\label{tab:rm-nis2}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Provision & Architectural contribution & Operationalised in \\
+\midrule
+Art.~20 governance --- management-body accountability and training
+  & Wave-0 governance discipline; sovereignty-grid review by the management body
+  & \trchap{ch:wave0-foundations}{}, \trchap{ch:cross-cutting}{} \\
+Art.~21(2)(a) risk-analysis and information-system security policy
+  & Sovereignty grid and self-assessment; cross-cutting risk register
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:self-assessment}{}, \trchap{ch:cross-cutting}{} \\
+Art.~21(2)(b) incident handling
+  & TAC-aware audit pipeline and the wave-7 IR procedure
+  & \trchap{ch:wave7-audit-ir}{} \\
+Art.~21(2)(c) business continuity, backup, crisis management
+  & Reversibility playbook; storage and orchestration backup contracts
+  & \trchap{ch:reversibility}{}, \trchap{ch:storage}{}, \trchap{ch:orchestration}{} \\
+Art.~21(2)(d) supply-chain security
+  & Lifecycle wave; SLSA / Sigstore supply-chain instantiation; procurement-clause workstream
+  & \trchap{ch:wave9-lifecycle}{}, \trchap{ch:wave0-foundations}{} \\
+Art.~21(2)(e) acquisition, development, maintenance security
+  & Conformance suite; coexistence-pattern library; orchestration GitOps controls
+  & \trchap{ch:conformance}{}, \trchap{ch:coexistence-patterns}{}, \trchap{ch:orchestration}{} \\
+Art.~21(2)(f) policies to assess effectiveness
+  & Conformance-suite execution and reporting; observability and audit dashboards
+  & \trchap{ch:conformance}{}, \trchap{ch:observability}{} \\
+Art.~21(2)(g) cyber hygiene and training
+  & Endpoint posture controls; identity-layer MFA / FIDO2 baseline
+  & \trchap{ch:endpoint}{}, \trchap{ch:identity}{} \\
+Art.~21(2)(h) cryptography policies and procedures
+  & Cryptographic services contract; HSM custody; key-rotation procedure
+  & \trchap{ch:crypto}{} \\
+Art.~21(2)(i) HR security, access control, asset management
+  & Identity layer (joiner/mover/leaver via SCIM); endpoint inventory; asset-tagging in observability
+  & \trchap{ch:identity}{}, \trchap{ch:endpoint}{}, \trchap{ch:observability}{} \\
+Art.~21(2)(j) MFA, secured communications
+  & Identity-layer MFA contract; cryptographic-services certificate distribution
+  & \trchap{ch:identity}{}, \trchap{ch:crypto}{} \\
+Art.~23 incident reporting (24h / 72h / 1m)
+  & TAC-aware audit pipeline and wave-7 IR procedure provide the timeline-reconstruction substrate
+  & \trchap{ch:wave7-audit-ir}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Cumulative argument.} The cybersecurity baseline
+regime's risk-management provisions are designed to be read as an
+integrated set, not satisfied control by control. The architecture's contribution
+should be presented in the institution's compliance argument as
+the technical foundation on which the organisational measures
+(policies, drills, third-party assessments) build.
+
+%-----------------------------------------------------------------------------
+\section{EU AI Act}
+\label{sec:rm-ai-act}
+
+The applicable AI-governance regulation classifies AI systems by
+risk level and imposes graduated obligations; in the worked
+instantiation below this regulation is the EU AI Act (Regulation
+2024/1689). For a university, three
+contexts most frequently apply: research, testing and development of AI prior to placing it on the
+market or putting it into service (Art.~2(8)), alongside AI
+developed for the sole purpose of scientific research and
+development (Art.~2(6));
+deployment of AI tools that interact with users or generate
+content (Art.~50 transparency obligations); and use or hosting of
+general-purpose AI models, which carry baseline provider
+obligations (Art.~53) and, where classified as posing systemic
+risk (Art.~51), additional obligations (Art.~55).
+
+\begin{table}[H]
+\centering\small
+\caption{EU AI Act mapping --- principal provisions for \loc{institution-type}.}
+\label{tab:rm-aiact}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Provision & Architectural contribution & Operationalised in \\
+\midrule
+Art.~2(6) research exemption
+  & Pilot-wave scoping (Researcher-LLM-API scenario); audit pipeline records the research-only nature of the activity
+  & \trchap{ch:wave5-pilot}{}, \trchap{ch:wave7-audit-ir}{} \\
+Art.~2(8) pre-market R\&D activity exemption
+  & Development and testing activity scoped and recorded as pre-market R\&D, distinct from production deployment (real-world testing excluded)
+  & \trchap{ch:wave5-pilot}{}, \trchap{ch:wave7-audit-ir}{} \\
+Art.~5 prohibited practices
+  & Policy-layer authorisation rules; sovereignty-grid institutional dimension flags incompatible procurement
+  & \trchap{ch:policy}{}, \trchap{ch:sovereignty-grid}{} \\
+Art.~6 high-risk classification
+  & TAC scenario inventory; sovereignty-grid risk register
+  & \trchap{ch:conceptual-frame}{}, \trchap{ch:cross-cutting}{} \\
+Art.~27 fundamental-rights impact assessment
+  & Sovereignty-grid institutional dimension; TAC scenario record
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:self-assessment}{} \\
+Art.~50 transparency obligations
+  & Policy layer enforces context labelling; observability records AI-interaction events
+  & \trchap{ch:policy}{}, \trchap{ch:observability}{} \\
+Art.~53 obligations for general-purpose AI providers
+  & Lifecycle wave (model documentation and provenance); supply-chain attestations
+  & \trchap{ch:wave9-lifecycle}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Research-context caveat.} The Art.~2(6) and Art.~2(8) research
+exemptions are narrow and would not in themselves shield AI services
+that the institution operates as production tools for staff or
+students. The pilot wave (Wave~5) is therefore designed to
+distinguish research activity from operational deployment, with
+distinct audit records and access patterns; the institution's AI
+governance body would be expected to maintain this distinction.
+
+%-----------------------------------------------------------------------------
+\section{Schrems~II and the cross-border data posture}
+\label{sec:rm-schrems2}
+
+The applicable cross-border data-transfer regime governs when
+contractual safeguards alone do not satisfy data sovereignty
+because the data falls under a third-country surveillance regime;
+in the worked instantiation this regime is the CJEU's
+\emph{Schrems~II} judgement~\cite{schrems2020} together with the
+EDPB transfer guidelines~\cite{edpb-guidelines} that operationalise
+its consequences. The architecture's contribution to the
+resulting cross-border posture is concentrated in the data
+dimension of the sovereignty grid and in the storage and
+cryptographic layers.
+
+\begin{table}[H]
+\centering\small
+\caption{Cross-border data --- elements of the
+post-\emph{Schrems~II} posture and their architectural
+counterparts.}
+\label{tab:rm-schrems2}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Element & Architectural contribution & Operationalised in \\
+\midrule
+Transfer impact assessment (TIA)
+  & Sovereignty-grid data dimension provides the indicator-level structure for the TIA
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:self-assessment}{} \\
+Supplementary technical measures
+  & Cryptographic services contract; storage-layer key-custody constraints; per-tenant key separation
+  & \trchap{ch:crypto}{}, \trchap{ch:storage}{} \\
+Standard contractual clauses (SCC) supplementation
+  & Procurement-clause workstream of Wave~0; sovereignty-grid review of supplier disclosure obligations
+  & \trchap{ch:wave0-foundations}{}, \trchap{ch:sovereignty-grid}{} \\
+Onward-transfer surveillance
+  & Audit pipeline records cross-border traffic and identity-federation interactions
+  & \trchap{ch:observability}{}, \trchap{ch:wave7-audit-ir}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{NIST Cybersecurity Framework~2.0}
+\label{sec:rm-nist-csf}
+
+The NIST CSF~2.0~\cite{nist-csf} is non-binding but widely used as
+the structuring framework for a cybersecurity programme. The six
+functions (Govern, Identify, Protect, Detect, Respond, Recover)
+provide a useful checklist against which the architecture and
+the playbook can be presented.
+
+\begin{table}[H]
+\centering\small
+\caption{NIST CSF~2.0 mapping --- the architecture's contribution
+by function.}
+\label{tab:rm-nist-csf}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Function & Architectural contribution & Operationalised in \\
+\midrule
+\textsf{GOVERN} (GV)
+  & Sovereignty grid; wave-0 governance discipline; cross-cutting risk register
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:wave0-foundations}{}, \trchap{ch:cross-cutting}{} \\
+\textsf{IDENTIFY} (ID)
+  & Self-assessment; institutional-precedents catalogue; coexistence-pattern inventory
+  & \trchap{ch:self-assessment}{}, \trchap{ch:institutional-precedents}{}, \trchap{ch:coexistence-patterns}{} \\
+\textsf{PROTECT} (PR)
+  & Identity, policy, network, endpoint, crypto layers
+  & \trchap{ch:identity}{}--\trchap{ch:network}{}, \trchap{ch:endpoint}{}, \trchap{ch:crypto}{} \\
+\textsf{DETECT} (DE)
+  & Observability layer; TAC-aware audit pipeline
+  & \trchap{ch:observability}{}, \trchap{ch:wave2-observability}{} \\
+\textsf{RESPOND} (RS)
+  & Wave-7 audit and IR; coexistence-pattern fallback procedures
+  & \trchap{ch:wave7-audit-ir}{}, \trchap{ch:coexistence-patterns}{} \\
+\textsf{RECOVER} (RC)
+  & Reversibility playbook; storage backup contract; orchestration declarative redeployment
+  & \trchap{ch:reversibility}{}, \trchap{ch:storage}{}, \trchap{ch:orchestration}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{eIDAS~2 and the trust-services dimension}
+\label{sec:rm-eidas2}
+
+The applicable electronic-identification and trust-services regime
+is relevant to \loc{institution-type} in three ways; in
+the worked instantiation this regime is the renewed EU framework
+for electronic identification and trust services (Regulation
+2024/1183 amending Regulation 910/2014). The three ways are:
+participation in the EU Digital Identity Wallet ecosystem when
+issuing or relying on academic credentials; provision of
+qualified electronic signatures for institutional acts; and the
+trust-services baseline for cross-border identity federation. The
+operationalisation is concentrated in the identity and
+cryptographic layers.
+
+\begin{table}[H]
+\centering\small
+\caption{eIDAS~2 mapping --- elements relevant to \loc{institution-type}
+and their architectural counterparts.}
+\label{tab:rm-eidas2}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Element & Architectural contribution & Operationalised in \\
+\midrule
+Trust services (qualified signature, seal, time stamp)
+  & Cryptographic services layer; HSM custody; institutional CA pattern
+  & \trchap{ch:crypto}{} \\
+Notified eID schemes
+  & Identity-federation pattern (eduGAIN, eduTEAMS); SAML2 / OIDC carriage
+  & \trchap{ch:identity}{} \\
+EU Digital Identity Wallet (EUDI Wallet) interoperability
+  & Identity layer carrying wallet-issued attestations; policy layer authorising on attribute claims
+  & \trchap{ch:identity}{}, \trchap{ch:policy}{} \\
+Cross-border recognition obligations
+  & Audit pipeline records federation interactions; sovereignty-grid institutional dimension addresses cross-border governance
+  & \trchap{ch:observability}{}, \trchap{ch:sovereignty-grid}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{ISO/IEC 27001 / 27002 / 27005}
+\label{sec:rm-iso}
+
+The ISO/IEC 27000 family provides the management-system framing
+that many institutions use to structure their information-security
+programme. ISO/IEC 27001:2022 provides the management-system
+clauses (clauses 4--10) and the Annex~A control catalogue (93
+controls organised in four themes); ISO/IEC 27002:2022 provides
+implementation guidance for those controls; ISO/IEC 27005:2022
+provides the risk-management methodology. The mapping below
+focuses on Annex~A controls that are most directly addressed by
+the architecture.
+
+\begin{table}[H]
+\centering\small
+\caption{ISO/IEC 27001:2022 Annex~A --- controls most directly
+addressed by the architecture (illustrative subset).}
+\label{tab:rm-iso27001}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Annex~A control & Architectural contribution & Operationalised in \\
+\midrule
+A.5.7 Threat intelligence
+  & Observability ingest; integration with the relevant R\&E ISAC / sectoral threat-intel feeds (e.g.\ REN-ISAC)
+  & \trchap{ch:observability}{}, \trchap{ch:wave7-audit-ir}{} \\
+A.5.23 Information security for cloud services
+  & Sovereignty-grid data and institutional dimensions; procurement-clause workstream
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:wave0-foundations}{} \\
+A.5.30 ICT readiness for business continuity
+  & Reversibility playbook; orchestration declarative redeployment
+  & \trchap{ch:reversibility}{}, \trchap{ch:orchestration}{} \\
+A.8.2 Privileged access rights
+  & Identity layer joiner/mover/leaver; policy layer step-up authorisation
+  & \trchap{ch:identity}{}, \trchap{ch:policy}{} \\
+A.8.5 Secure authentication
+  & Identity-layer MFA / FIDO2 baseline; OIDC / SAML2 federation
+  & \trchap{ch:identity}{} \\
+A.8.15 Logging
+  & Observability layer; canonical TAC schema
+  & \trchap{ch:observability}{} \\
+A.8.16 Monitoring activities
+  & Observability dashboards; conformance-suite execution
+  & \trchap{ch:observability}{}, \trchap{ch:conformance}{} \\
+A.8.22 Network segregation
+  & Network-layer zone-based segmentation; Cilium / Open vSwitch instantiation
+  & \trchap{ch:network}{} \\
+A.8.24 Use of cryptography
+  & Cryptographic services contract; key-rotation procedure
+  & \trchap{ch:crypto}{} \\
+A.8.30 Outsourced development
+  & Lifecycle wave; SLSA / Sigstore supply-chain pattern
+  & \trchap{ch:wave9-lifecycle}{} \\
+A.8.32 Change management
+  & Orchestration GitOps reconciler; conformance-suite gating
+  & \trchap{ch:orchestration}{}, \trchap{ch:conformance}{} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Risk methodology.} ISO/IEC 27005:2022 provides the
+risk-identification, analysis and evaluation methodology against
+which the wave-aware risk register of \trchap{ch:cross-cutting}{}
+should be cross-checked. The sovereignty grid provides the
+indicator-level structure that operationalises several of the
+27005 inputs (asset valuation, vulnerability assessment of
+supplier dependencies, threat-context evaluation).
+
+%-----------------------------------------------------------------------------
+\section{COBIT~2019 governance and management objectives}
+\label{sec:rm-cobit}
+
+COBIT~2019 organises governance and management of enterprise IT
+into 40 governance and management objectives across five domains
+(EDM --- Evaluate, Direct and Monitor; APO --- Align, Plan and
+Organise; BAI --- Build, Acquire and Implement; DSS --- Deliver,
+Service and Support; MEA --- Monitor, Evaluate and Assess). The
+mapping below highlights objectives most directly addressed by
+the architecture and the playbook; the institution's IT-governance function
+would be expected to consolidate a complete mapping in its IT
+governance documentation.
+
+\begin{table}[H]
+\centering\small
+\caption{COBIT~2019 mapping --- governance and management
+objectives most directly addressed (illustrative subset).}
+\label{tab:rm-cobit}
+\renewcommand{\arraystretch}{1.20}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.75\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.05\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+  >{\hsize=1.20\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Objective & Architectural contribution & Operationalised in \\
+\midrule
+EDM01 Ensure governance framework
+  & Wave-0 governance discipline; cross-cutting management body cadence
+  & \trchap{ch:wave0-foundations}{}, \trchap{ch:cross-cutting}{} \\
+EDM03 Ensure risk optimisation
+  & Sovereignty grid; wave-aware risk register
+  & \trchap{ch:sovereignty-grid}{}, \trchap{ch:cross-cutting}{} \\
+APO12 Managed risk
+  & ISO/IEC 27005 alignment; sovereignty grid as indicator-level structure
+  & \trchap{ch:cross-cutting}{}, \trchap{ch:sovereignty-grid}{} \\
+APO13 Managed security
+  & Layered architecture; conformance suite as effectiveness evidence
+  & \trchap{ch:identity}{}--\trchap{ch:crypto}{}, \trchap{ch:conformance}{} \\
+BAI03 Managed solutions identification and build
+  & Reference instantiations and replaceability conditions
+  & \trchap{ch:architectural-principles}{}, layer chapters \\
+BAI06 Managed IT changes
+  & Orchestration GitOps reconciler; coexistence-pattern controlled migrations
+  & \trchap{ch:orchestration}{}, \trchap{ch:coexistence-patterns}{} \\
+BAI10 Managed configuration
+  & Endpoint declarative configuration; orchestration as configuration source of truth
+  & \trchap{ch:endpoint}{}, \trchap{ch:orchestration}{} \\
+DSS02 Managed service requests and incidents
+  & Wave-7 audit and IR procedure
+  & \trchap{ch:wave7-audit-ir}{} \\
+DSS04 Managed continuity
+  & Reversibility playbook; storage backup contract
+  & \trchap{ch:reversibility}{}, \trchap{ch:storage}{} \\
+DSS05 Managed security services
+  & Identity / policy / network / crypto layers as the security-service backbone
+  & \trchap{ch:identity}{}, \trchap{ch:policy}{}, \trchap{ch:network}{}, \trchap{ch:crypto}{} \\
+MEA02 Managed system of internal control
+  & Conformance suite; observability dashboards; audit pipeline
+  & \trchap{ch:conformance}{}, \trchap{ch:observability}{}, \trchap{ch:wave7-audit-ir}{} \\
+MEA03 Managed compliance with external requirements
+  & This chapter (consolidated regulatory mapping); per-chapter pointers
+  & \S\ref{sec:rm-method}--\S\ref{sec:rm-national} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+%-----------------------------------------------------------------------------
+\section{Applicability beyond the EU jurisdiction}
+\label{sec:rm-beyond-eu}
+
+The per-article mapping above is built against EU instruments because
+they are the institution's own binding context. It should not be read
+as confining the architecture to EU jurisdictions. As established in
+\trchap{ch:architectural-principles}{} (\S\ref{sec:ap-necessity}), the
+functions the architecture discharges are necessary to any institution
+offering a digital infrastructure; that necessity is
+jurisdiction-invariant just as it is size-invariant. What changes
+across jurisdictions is the instrument that names the obligation, not
+the architectural element that contributes to satisfying it. The shared
+module that opens this chapter makes this explicit: the regime typology
+(\S\ref{sec:reg-typology}) gives worked F1--F6 instantiations for the
+EU, the US, the UK, Brazil and South Africa, and the mapping method
+(\S\ref{sec:reg-mapping}) gives an adopter in an unlisted jurisdiction a
+seven-step procedure to derive its own regime row against the same
+invariant matrix. The paragraphs below summarise how a non-EU adopter
+reads the per-article EU mapping through that lens.
+
+\paragraph{Lead with the jurisdiction-neutral spine.} A non-EU
+institution can ground its compliance argument on the international
+frameworks already mapped in this chapter --- ISO/IEC~27001
+(\S\ref{sec:rm-iso}), the NIST Cybersecurity Framework~2.0
+(\S\ref{sec:rm-nist-csf}) and COBIT~2019 (\S\ref{sec:rm-cobit}) ---
+which are adopted worldwide and are independent of any single legal
+regime. The EU-instrument mappings then read as one worked example of
+how a regional regulatory regime maps onto that spine.
+
+\paragraph{Functional substitution.} Where this chapter cites the
+GDPR, NIS2 or the AI Act, a non-EU institution substitutes its host
+jurisdiction's functional analogue --- a data-protection regime, a
+cybersecurity or critical-infrastructure regime, and an emerging
+AI-governance regime respectively. Illustrative, non-exhaustive
+analogues for data protection include the UK GDPR and Data Protection
+Act~2018, Brazil's LGPD, California's CCPA/CPRA and Canada's PIPEDA;
+these are \emph{functional analogues, not legal equivalences}, and the
+architectural element invoked against the obligation is unchanged
+regardless of which instrument names it.
+
+\paragraph{Verification remains local.} As with national
+transpositions (\S\ref{sec:rm-national}), the institution's
+data-protection officer, chief information security officer and legal
+counsel are the authoritative interpreters of the regime that actually
+applies. This section identifies the portable structure of the
+argument; it does not assert equivalence between any two legal
+instruments.
+
+%-----------------------------------------------------------------------------
+\section{National-transposition cautionary note}
+\label{sec:rm-national}
+
+The mapping above is constructed against EU regulations and
+internationally recognised frameworks. National transpositions
+and sectoral regulations frequently add provisions that this
+chapter does not record:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Cybersecurity baseline transposition.}
+    Jurisdictions vary in the sectoral scope of the applicable
+    national transposition of the cybersecurity baseline regime
+    (whether higher-education institutions fall under the
+    classification basis that designates in-scope entities, whether
+    research is in scope), in the national competent authority
+    designated to supervise it, and in the incident-reporting
+    thresholds and channels.
+  \item \textbf{Data-protection national supplements.} Many
+    jurisdictions have adopted national data-protection laws that
+    operate alongside the general data-protection regime, with
+    provisions on research exemptions, employee monitoring, and
+    identifiers that the architecture must respect.
+  \item \textbf{Sectoral regulations.} University hospitals,
+    institutions handling government research contracts, and
+    institutions operating critical national infrastructure may
+    be subject to sectoral regulations not addressed here.
+  \item \textbf{Funder requirements.} Research funders
+    (institutional, national, EU framework programmes) frequently
+    impose security and data-management obligations through grant
+    agreements; these are contractual rather than regulatory but
+    operate as binding constraints on the institution.
+  \item \textbf{Non-EU jurisdictions.} Institutions operating
+    branches or research stations outside the EU are subject to
+    the host jurisdiction's regulations; the international scope
+    of this Reference does not imply a single legal framework. A
+    wholly non-EU institution adopting the architecture reads the
+    mapping through \S\ref{sec:rm-beyond-eu}.
+\end{itemize}
+
+\noindent The institution's data-protection officer, chief
+information security officer, and legal counsel would be the
+authoritative interpreters of the provisions that apply at the
+institution's specific situation. Where adopters cooperate --- for example through an international
+university network --- that forum is a natural locus for sharing
+transposition notes and harmonising the practical interpretation of
+the framework above.
+
+%-----------------------------------------------------------------------------
+\section{Reading the mapping in conjunction with the chapters}
+\label{sec:rm-using}
+
+The per-chapter \emph{Regulatory anchoring} paragraphs in the
+layer chapters (\trchap{ch:identity}{}--\trchap{ch:orchestration}{})
+and the wave chapters
+(\trchap{ch:wave0-foundations}{}--\trchap{ch:wave9-lifecycle}{})
+each record the principal regulatory references the chapter
+contributes to, and point back to the section of this chapter
+where the contribution is mapped. The two views are
+complementary: the per-chapter pointer answers ``which
+regulations does this layer or wave touch~?'', and the
+consolidated mapping of this chapter answers ``which layers and
+waves contribute to this regulatory provision~?''. A compliance
+argument typically draws on both.

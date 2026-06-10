@@ -1,0 +1,141 @@
+% ============================================================================
+% gls-modes.sty — Glossary terms with PDF tooltips and hyperlinks
+%
+% Provides interactive glossary terms: hover shows the definition as a
+% PDF tooltip, click navigates to the glossary entry.  First occurrence
+% of each term displays the long form; subsequent occurrences display
+% the short form only.  Uses the same \pdfstartlink mechanism as
+% bib-modes.sty for a consistent reader experience.
+%
+% Usage:
+%   \usepackage{gls-modes}           % in preamble (after hyperref)
+%   \input{glossary-defs}            % load definitions
+%   \gls{vlan}                       % in text: first → long (SHORT), then → SHORT
+%   \Gls{vlan}                       % capitalised long form on first use
+%   \glsshort{vlan}                  % force short form (skip first-use logic)
+%   \glsreset{vlan}                  % reset first-use flag for a term
+%   \glsresetall                     % reset all terms (e.g., at each \part)
+%
+% In the glossary:
+%   \glstarget{vlan}                 % creates the hypertarget destination
+%
+% Requires: hyperref (already loaded), etoolbox, xcolor
+% ============================================================================
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{gls-modes}[2026/04/01 v1.0 Glossary terms with tooltips]
+
+\RequirePackage{etoolbox}
+\RequirePackage{xcolor}
+
+% ============================================================================
+% COLOUR FOR GLOSSARY LINKS
+% ============================================================================
+\providecolor{GlsLinkColor}{named}{NavyBlue}
+
+% ============================================================================
+% DEFINING GLOSSARY ENTRIES
+% ============================================================================
+%
+% \glsdefine{key}{SHORT}{Long Form}{Tooltip definition text}
+%
+% Creates:
+%   \gls@short@<key>   — short form (e.g., VLAN)
+%   \gls@long@<key>    — long form (e.g., Virtual Local Area Network)
+%   \gls@tip@<key>     — tooltip text
+%   toggle gls@used@<key> — tracks first use
+%
+\newcommand{\glsdefine}[4]{%
+  \expandafter\newcommand\csname gls@short@#1\endcsname{#2}%
+  \expandafter\newcommand\csname gls@long@#1\endcsname{#3}%
+  \expandafter\newcommand\csname gls@tip@#1\endcsname{#4}%
+  \newtoggle{gls@used@#1}%
+}
+
+% ============================================================================
+% USING GLOSSARY ENTRIES IN TEXT
+% ============================================================================
+
+% Internal: render the linked, coloured, tooltipped text
+% \leavevmode ensures we are in horizontal mode (avoids pdfstartlink error
+% when \gls is the first token after a page break or \par).
+\newcommand{\gls@render}[2]{%  #1 = key, #2 = display text
+  \leavevmode
+  \pdfstartlink
+    attr{/Contents (\csname gls@tip@#1\endcsname) /Border [0 0 0]}
+    goto name{gls:#1}%
+  \textcolor{GlsLinkColor}{#2}%
+  \pdfendlink
+}
+
+% \gls{key} — first use: Long Form (SHORT), subsequent: SHORT
+\newcommand{\gls}[1]{%
+  \ifcsname gls@short@#1\endcsname
+    \iftoggle{gls@used@#1}{%
+      % subsequent use: short form only
+      \gls@render{#1}{\csname gls@short@#1\endcsname}%
+    }{%
+      % first use: Long Form (SHORT)
+      \global\toggletrue{gls@used@#1}%
+      \gls@render{#1}{\csname gls@long@#1\endcsname{} (\csname gls@short@#1\endcsname)}%
+    }%
+  \else
+    \PackageWarning{gls-modes}{Undefined glossary key '#1'}%
+    \textbf{??#1??}%
+  \fi
+}
+
+% \Gls{key} — same as \gls but capitalised (for sentence start)
+% (since our long forms are already capitalised, this is identical to \gls)
+\let\Gls\gls
+
+% \glsshort{key} — force short form with tooltip, skip first-use logic
+\newcommand{\glsshort}[1]{%
+  \ifcsname gls@short@#1\endcsname
+    \gls@render{#1}{\csname gls@short@#1\endcsname}%
+  \else
+    \PackageWarning{gls-modes}{Undefined glossary key '#1'}%
+    \textbf{??#1??}%
+  \fi
+}
+
+% \glstext{key} — just the short form text, no link, no tooltip (for headings etc.)
+\newcommand{\glstext}[1]{%
+  \ifcsname gls@short@#1\endcsname
+    \csname gls@short@#1\endcsname
+  \else
+    #1%
+  \fi
+}
+
+% ============================================================================
+% RESET COMMANDS
+% ============================================================================
+
+% \glsreset{key} — reset first-use flag for one entry
+\newcommand{\glsreset}[1]{%
+  \global\togglefalse{gls@used@#1}%
+}
+
+% \glsresetall — reset all entries (call at start of each \part if desired)
+% Implementation: we maintain a list of all keys and iterate
+\newcommand{\gls@allkeys}{}
+\let\gls@origdefine\glsdefine
+\renewcommand{\glsdefine}[4]{%
+  \gls@origdefine{#1}{#2}{#3}{#4}%
+  \listadd{\gls@allkeys}{#1}%
+}
+
+\newcommand{\glsresetall}{%
+  \forlistloop{\glsreset}{\gls@allkeys}%
+}
+
+% ============================================================================
+% GLOSSARY TARGETS
+% ============================================================================
+
+% \glstarget{key} — place in the glossary to create the navigation destination
+\newcommand{\glstarget}[1]{%
+  \hypertarget{gls:#1}{}%
+}
+
+\endinput

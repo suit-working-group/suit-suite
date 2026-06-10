@@ -1,0 +1,278 @@
+% ============================================================================
+% Chapter 20 --- Wave 2: Observability baseline
+% ----------------------------------------------------------------------------
+% Purpose : establish measurement before changing things --- a regression
+%           detector for every subsequent wave. Collectors deployed in
+%           shadow mode (D12.7), no commitment to a specific analytical
+%           store at this stage.
+% Page target: ~5 pages.
+% Dependencies: Wave 0 (Ch. 18); reference layer Ch. 12.
+% Mirrors wave template (D18.2).
+% ----------------------------------------------------------------------------
+% Decisions registered in _coherence-EN.md:
+%   D20.1 Wave 2 is purely additive --- existing logging untouched
+%   D20.2 collectors deployed in shadow mode before any product commitment
+%   D20.3 the canonical TAC schema is enforced at the collector layer
+%         even when no TAC is yet emitted
+%   D20.4 exit criteria reference Observability conformance subset (D16.5)
+% ============================================================================
+
+\chapter{Wave~2 --- Observability baseline}
+\label{ch:wave2-observability}
+
+\begin{caveatbox}[Dependencies]
+\noindent Wave~2 applies the wave chapter template established in
+\trchap{ch:wave0-foundations}{}. Its pre-requisite is Wave~0
+(governance and inventory in place); it can proceed in parallel
+with Wave~1. It instantiates the observability contract of
+\trchap{ch:observability}{}, including the canonical TAC schema of
+\S\ref{sec:ob-schema}, and its closure is gated by the four
+Observability tests of \trchap{ch:conformance}{}.
+\end{caveatbox}
+
+Wave~2 is the wave that measures the institution before any
+substantial change is made to it. The reasoning is procedural: an
+institution that begins technical transformation without a baseline
+of its current state has no objective way to recognise regression.
+It is also the lowest-risk wave of the playbook --- the wave is
+purely additive, and the existing logging arrangements continue
+unchanged for as long as the institution chooses.
+
+%-----------------------------------------------------------------------------
+\section{Goal and dependencies}
+\label{sec:w2-goal}
+
+The goal of Wave~2 is to deploy a collector layer that captures
+events from every layer of the architecture in the canonical TAC
+schema of \trchap{ch:observability}{} (\S\ref{sec:ob-schema}), to
+route those events to a portable ingestion pipeline, and to
+establish the retention schedule that the data classification
+warrants. The wave commits to the collector layer and the
+ingestion pipeline; it does not commit to a specific analytical
+store, which is treated as a substitutable consumer.
+
+\paragraph{Why before other waves.} Subsequent waves change
+operational state. Without a baseline, the change cannot be
+distinguished from drift, regression, or pre-existing condition.
+Wave~2's purpose is to make those distinctions possible.
+
+%-----------------------------------------------------------------------------
+\section{Pre-requisites}
+\label{sec:w2-prereq}
+
+Beyond Wave~0, five operational conditions strengthen Wave~2:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the log sources of the existing infrastructure are
+    catalogued, with their volume, format, and current retention
+    documented;
+  \item the institution's data classification scheme (or the
+    intent to develop one) is articulated, since the retention
+    schedule is keyed on it;
+  \item the existing SIEM (or the explicit absence thereof) is
+    acknowledged, with its contractual envelope documented;
+  \item the security operations function and its staffing profile
+    --- whether delivered by an internal team, by a contracted
+    managed-security provider, or by a distributed arrangement
+    shared across units --- is identified, since the wave will
+    produce events that the function will consume;
+  \item where the adopter's labour law gives staff-representation
+    bodies consultation or co-determination rights over workplace
+    monitoring, the consultation of \loc{staff-representation-body}
+    on the observability design (scope, metadata-only default,
+    retention, access) is initiated --- deployment must not precede
+    it where the law so requires.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Coexistence pattern}
+\label{sec:w2-coexistence}
+
+Wave~2 introduces no displacement. The existing log paths continue
+to operate; existing dashboards, alerts, and detection rules
+remain in place; the existing analytical store, if any, continues
+to receive its incumbent feed.
+
+\paragraph{Collector layer in shadow mode.} The new collectors are
+deployed at the event-producing sources and forward to the new
+ingestion pipeline (an open-source log-routing agent feeding an
+open-source distributed event-streaming bus). Initially, the
+events flow only into a development or
+staging analytical store, where the institution exercises the
+canonical schema, the retention policy, and the correlation
+patterns. The production analytical store --- whether it remains
+the existing one or is migrated later --- consumes from the
+ingestion pipeline only when the institution has decided which
+analytical store it wishes to commit to (a decision that is
+neither blocked nor pre-empted by Wave~2).
+
+\paragraph{Operating two layers.} For the duration of the wave, the
+institution operates the legacy log paths and the new collector
+layer simultaneously. The cost is real but bounded; the benefit is
+that any subsequent wave's regression is observable against the
+baseline established here.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: greenfield}
+\label{sec:w2-greenfield}
+
+For institutions in a greenfield position, Wave~2 establishes the
+collector layer, the ingestion pipeline, and the analytical store
+together. There is no incumbent to coexist with, and the wave is
+correspondingly compressed (indicative duration four to six
+months). The greenfield trajectory has the freedom to commit to an
+analytical store at wave open, since the substitution risk is
+absent.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield single-suite-centric}
+\label{sec:w2-brownfield-ms}
+
+For institutions whose existing observability is dominated by
+a cloud-vendor-native SIEM (for example Microsoft Sentinel with
+Log Analytics), Wave~2 introduces an open-source collector layer,
+built on a vendor-neutral telemetry-collection standard, upstream
+of the incumbent SIEM, without displacing its role.
+
+\paragraph{Pattern.} Open-source collectors, such as those built on
+a vendor-neutral telemetry-collection standard, are deployed at
+every event-producing source (identity, network, endpoint,
+compute). The events are converted to the canonical TAC
+schema and forwarded to two destinations: the incumbent SIEM (which
+continues its role for the operational SOC) and a
+parallel open-source store (an open-source search-and-analytics
+engine or an open-source log-aggregation store) for portability and
+for the retention horizons that the incumbent SIEM's pricing makes
+unattractive. The institution retains the incumbent SIEM for the
+analytical-depth use cases and acquires the data-portability
+property of the architecture's contract.
+
+\paragraph{What changes in Wave~2.} The institution gains a
+canonical schema across its sources, an ingestion pipeline whose
+re-routing is tactical rather than structural, and a retention
+horizon for cold-tier events that does not pay the per-GB premium
+of the production SIEM. The collector deployment is itself
+conformance-tested before the wave closes.
+
+\paragraph{What does not change.} The incumbent SIEM remains the
+production SOC tool, with its dashboards, detections, and the team's
+familiarity. The incumbent vendor's licensing trajectory is
+unaffected by this wave; the institution gains the option to revisit it in
+future waves without operational disruption.
+
+\paragraph{Indicative duration.} Six to twelve months, dominated by
+the source-by-source deployment of collectors and by the
+canonical-schema enforcement effort.
+
+%-----------------------------------------------------------------------------
+\section{Trajectory: brownfield hybrid}
+\label{sec:w2-brownfield-hybrid}
+
+For institutions whose existing observability is built on Splunk
+or a comparable per-volume-priced analytical store, Wave~2
+introduces the same collector layer upstream of Splunk, with the
+same parallel open-source store, for analogous reasons.
+
+\paragraph{Pattern.} Open-source collectors built on a
+vendor-neutral telemetry-collection standard deployed at every
+event-producing source, with conversion to the canonical TAC
+schema. The events flow to Splunk (incumbent SOC store) and to a
+parallel open-source search-and-analytics engine or log-aggregation
+store. Sampling decisions become
+tactical at the collector layer (D12.8: sample by TAC session, not
+by event), reducing the per-volume exposure to Splunk without
+losing the activity that the institution has chosen to make
+visible.
+
+\paragraph{What changes in Wave~2.} The volume reaching Splunk is
+brought under deliberate control; the parallel open store
+preserves the events that volume management would otherwise have
+discarded; the canonical schema is enforced uniformly, removing
+the schema drift that ad hoc Splunk-side parsing accumulates over
+years.
+
+\paragraph{What does not change.} Splunk remains the production
+analytical surface. The detection content (alerts, correlations,
+dashboards) is preserved.
+
+\paragraph{Indicative duration.} Six to twelve months.
+
+%-----------------------------------------------------------------------------
+\section{Reversibility criteria}
+\label{sec:w2-reversibility}
+
+Wave~2 is structurally reversible: removing the collectors
+returns the institution to its prior state without operational
+impact. Three explicit conditions support this:
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item the legacy log paths are not modified, so a removal of the
+    new collectors leaves them operational;
+  \item the analytical-store decision is deferred to a subsequent
+    wave or wave-internal milestone, so no commitment is made
+    that would be costly to reverse;
+  \item the parallel open-source store, if exercised during the
+    wave, is sized for the wave's purpose and can be decommissioned
+    without contractual penalty.
+\end{itemize}
+
+%-----------------------------------------------------------------------------
+\section{Exit criteria}
+\label{sec:w2-exit}
+
+Wave~2 closes when the four Observability tests of the conformance
+suite of \trchap{ch:conformance}{} (\S\ref{sec:cf-suite}) pass on
+the new collector layer, when the agreed source coverage is
+achieved, and when the retention schedule is documented and
+verified.
+
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item Events from every layer arrive in the canonical TAC schema
+    at the parallel store; the retention horizon is verified by
+    deliberate retrieval at the documented limit; cross-layer
+    correlation via \texttt{correlation\_id} succeeds on a
+    representative test activation; event re-routing to an
+    alternative analytical store succeeds on a sampling window.
+    (Observability conformance subset.)
+  \item Source coverage: the institutionally agreed proportion of
+    event-producing sources is feeding the new collector layer.
+    The remaining sources are either in a documented schedule or
+    in the documented exception register.
+  \item Retention schedule: published, with the documented horizons
+    per data class, and verified at least once during the wave.
+\end{itemize}
+
+\begin{realworldbox}[Audit pipeline precedents]
+\noindent Several research-intensive institutions are reported to
+operate observability pipelines combining open-source collectors
+with commercial analytical stores. Specific architectures
+discussed in the fora of \loc{nren-name} and \loc{nren-csirt}, and
+in the security operations environments of large research
+infrastructures, would benefit from being consulted in their
+current published form before being cited; the patterns described
+in this chapter are consistent with those reported in those
+settings.
+\end{realworldbox}
+
+%-----------------------------------------------------------------------------
+\section{Regulatory anchoring}
+\label{sec:w2-regulatory}
+
+\noindent Wave~2 establishes the observability and audit
+baseline. It is a key contributor to \gls{gdpr}~Art.~30 (records
+of processing, derivable from the canonical TAC schema), Art.~32
+(security of processing, monitored through measurable
+indicators) and Art.~33--34 (breach notification, supported by
+the timeline-reconstruction substrate produced by the wave). It
+also supports the incident-handling obligations of the
+applicable national cybersecurity baseline regime --- the
+national transposition of the NIS2 Directive where it applies ---
+under its incident-handling provision (NIS2~Art.~21(2)(b)) and
+prepares the ground for that regime's incident-reporting
+timelines (NIS2~Art.~23), fully exercised at Wave~7. The wave
+is the principal anchor of
+27001~A.8.15 (logging) and A.8.16 (monitoring activities) and
+of NIST CSF \textsf{DETECT} (DE.CM, DE.AE). Detailed mapping in
+\trchap{ch:regulatory-mapping}{} \S\ref{sec:rm-gdpr},
+\S\ref{sec:rm-nis2}, \S\ref{sec:rm-iso},
+\S\ref{sec:rm-nist-csf}.

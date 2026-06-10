@@ -1,0 +1,130 @@
+% ============================================================================
+% Reading guide --- Technical Reference
+% Page target: ~2 pages
+% ============================================================================
+
+\section*{Reading guide}
+\addcontentsline{toc}{section}{Reading guide}
+
+The document is structured in four parts (Foundations, Reference
+Architecture on Open Foundations, Migration Playbook for Mixed
+Estates, References and Operational Material) and is designed to
+be read in order. Each chapter is, however, written so that it
+remains intelligible on its own; cross-references are explicit so
+the reader can jump in wherever the table of audience entry
+points below directs.
+
+\paragraph{Document structure at a glance.}
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Part~I --- Foundations} (Ch.~2--4): conceptual frame,
+    the sovereignty grid and its twenty indicators, and the
+    self-assessment instrument.
+  \item \textbf{Part~II --- Reference architecture} (Ch.~5--16):
+    architectural principles, the nine layer chapters (identity,
+    policy, network, compute, storage, endpoint, observability,
+    cryptographic services, orchestration), the sizing chapter and
+    the conformance suite.
+  \item \textbf{Part~III --- Migration playbook} (Ch.~17--30):
+    reading the playbook, the ten waves (Wave~0--Wave~9),
+    cross-cutting topics, the reversibility playbook, and the
+    coexistence-pattern library.
+  \item \textbf{Part~IV --- References and operational material}
+    (Ch.~31--33): institutional precedents, external references and
+    standards, and the regulatory mapping.
+\end{itemize}
+
+\paragraph{Audiences and entry points.} The table below proposes a
+reading path for each principal audience. The synthesis chapter
+(Chapter~1) is the recommended common starting point.
+
+\begin{table}[H]
+\centering\small
+\renewcommand{\arraystretch}{1.18}
+\begin{tabularx}{\textwidth}{%
+  >{\hsize=0.55\hsize\linewidth=\hsize\bfseries\raggedright\arraybackslash}X%
+  >{\hsize=1.45\hsize\linewidth=\hsize\raggedright\arraybackslash}X%
+}
+\toprule
+Audience & Recommended reading path \\
+\midrule
+Governing board / executive leadership
+  & Ch.~1 (synthesis), Ch.~3 (sovereignty grid), Ch.~4
+    (self-assessment), Ch.~33 (regulatory mapping). \\
+CIO / CTO
+  & Ch.~1, Ch.~2 (TAC), Ch.~3, Ch.~5 (architectural principles),
+    Ch.~17 (playbook reading), Ch.~31 (institutional precedents),
+    Ch.~33. \\
+Chief Information Security Officer
+  & Ch.~1, Ch.~6 (Identity), Ch.~7 (Policy), Ch.~12 (Observability),
+    Ch.~13 (Cryptographic services), Ch.~25 (Wave~7 audit and IR),
+    Ch.~33. \\
+Network architect
+  & Ch.~1, Ch.~5, Ch.~8 (Network), Ch.~21 (Wave~3 network),
+    Ch.~30 (Coexistence patterns). \\
+Platform / SRE engineer
+  & Ch.~1, Ch.~9--11 (Compute, Storage, Endpoint),
+    Ch.~14 (Orchestration), Ch.~15 (Sizing),
+    Ch.~16 (Conformance). \\
+Data-protection officer
+  & Ch.~1, Ch.~3, Ch.~10 (Storage), Ch.~12,
+    Ch.~33 (regulatory mapping: data-protection, cross-border-transfer,
+    and national-transposition sections). \\
+Programme / migration lead
+  & Ch.~1, Ch.~17, Part~III in full,
+    Ch.~28--30 (Cross-cutting, Reversibility, Coexistence). \\
+Phase-2 peer institution
+  & Ch.~1, Ch.~31 (precedents), Ch.~32 (external references),
+    Ch.~33 (regulatory mapping), then the chapters most relevant
+    to the institution's prevailing brownfield. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Reading the document linearly.} The four parts are
+designed to be read in order. Part~I establishes the conceptual
+vocabulary on which Parts~II and~III rest; Part~II defines the
+architecture against which Part~III's waves measure progress; and
+Part~IV consolidates the references and the regulatory anchoring
+that the rest of the document points at. A reader new to the
+material is best served by following this order.
+
+\paragraph{Reading the document in the book context.} When this
+material is encountered as Part~IV of the book \emph{Complete
+Dossier}, the reader sees only the synthesis chapter (Chapter~1)
+together with an annotated table of contents pointing back to the
+present standalone document. The standalone Technical Reference
+is the canonical full version: the synthesis chapter is identical
+in both contexts, and all cross-references named ``\emph{Chapter
+X of the Technical Reference}'' resolve into this document.
+
+\paragraph{Tonality and box conventions.} Coloured boxes have
+stable semantics throughout the document:
+\begin{itemize}[leftmargin=1.5em,nosep]
+  \item \textbf{Blue (Interface contract)} --- normative. The
+    minimum set of properties a layer must expose for the
+    architecture to compose.
+  \item \textbf{Green (Reference instantiation)} --- illustrative.
+    The open-foundation default shown sufficient to satisfy the
+    contract.
+  \item \textbf{Slate (Alternative)} --- illustrative. A
+    commercial or hybrid option evaluated against the contract.
+  \item \textbf{Red (Common pitfall)} --- cautionary. Patterns
+    that have produced poor outcomes and the mitigations that
+    address them.
+  \item \textbf{Plum (Real-world reference)} --- precedent. A
+    documented institution or pattern; statements are framed
+    conditionally pending verification by member institutions.
+  \item \textbf{Slate caveatbox} --- epistemic posture. A note
+    on what the document claims and what it does not.
+\end{itemize}
+
+\paragraph{Voice conventions.} The Reference is assertive when
+discussing contracts, standards and measurable properties; it is
+analytical, not advocatory, when comparing instantiations; and
+it is conditional (``would'', ``may'', ``is expected to'') when
+projecting onto institutional outcomes that cannot be
+demonstrated from the state of the art at the time of writing.
+This convention is consistent across the document and is part of
+the always-living posture stated in the foreword.
+
+\newpage

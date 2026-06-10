@@ -1,0 +1,229 @@
+% ============================================================================
+% instantiations/lu-university-of-luxembourg/set.tex — INSTITUTION SET (Layer 2)
+% ----------------------------------------------------------------------------
+% LUXEMBOURG REFERENCE INSTANTIATION — University of Luxembourg.
+%
+% This is the canonical, named concrete edition of the SUIT suite. It binds the
+% generic role-phrases to the real Luxembourg / University of Luxembourg surface
+% forms. Every binding below is the University-of-Luxembourg surface form for its
+% localization variable (see shared/localization-defaults.tex for the variable
+% set and Layer-0 generic defaults). A concrete instantiation legitimately names
+% Luxembourg and the University of Luxembourg: that is its purpose. It is NOT the
+% generic body.
+%
+% Localization model:
+%     localization.sty                         (\setloc / \loc machinery)
+%       Layer 0: shared/localization-defaults.tex   (generic role phrases)
+%         Layer 1: categories/EU-PUB-RI.tex          (European public RI class)
+%           Layer 2: THIS FILE                        (concrete LU/UL values)
+%             document body
+%
+% NOTE ON GLOSSARY: the SUIT glossary (shared/glossary-defs.tex) is
+% institution-neutral — it defines NO UL-named acronym entries (no \gls{govcertlu},
+% \gls{anssilu}, \gls{monarc}, \gls{psilu}, ...). The matrix surface forms carry
+% such \gls{} wrappers because they came from the original UL-suite glossary; we
+% therefore bind PLAIN-TEXT values here (calling an undefined \gls key would fail
+% the build). eduGAIN is the only LU-relevant glossary key that exists upstream.
+% ============================================================================
+
+% --- 1. CHOSEN CATEGORY ARCHETYPE (Layer 1) ---------------------------------
+% University of Luxembourg: a public, research-intensive university established
+% under the law of an EU/EEA Member State — the worked EU-PUB-RI archetype lists
+% it as a representative member.
+\newcommand{\instcategory}{EU-PUB-RI}
+\input{\catdir/\instcategory}% -> categories/EU-PUB-RI.tex
+
+% ============================================================================
+% 2. COUNTRY-SPECIFIC NAME KEYS (left at default by the EU-PUB-RI archetype)
+% ----------------------------------------------------------------------------
+% The archetype binds the structural and supranational-regulatory keys and
+% leaves these per-country NAME keys for the Member-State edition to fill.
+% LU bindings from the matrix (ANCHOR-NREN, ANCHOR-DPA, ANCHOR-GOV-CSIRT).
+% ============================================================================
+\setloc{nren-name}{RESTENA (the Luxembourg national research and education network)}
+\setloc{national-dpa}{the CNPD (Commission Nationale pour la Protection des Donn\'ees, the Luxembourg national data-protection authority)}
+\setloc{national-gov-csirt}{GOVCERT.LU (the Luxembourg governmental CSIRT)}
+
+% ============================================================================
+% 3. INSTITUTION IDENTITY (named LU edition)
+% ----------------------------------------------------------------------------
+% ANCHOR-INSTITUTION-NAME, ANCHOR-INSTITUTION-TYPE-PROFILE, ANCHOR-INSTITUTION-
+% MACRO-SET, and the governance ladder (ANCHOR-EXECUTIVE-LEADERSHIP,
+% ANCHOR-GOVERNING-BOARD, ANCHOR-ACADEMIC-BODIES).
+% ============================================================================
+\setloc{institution-name}{the University of Luxembourg}
+\setloc{institution-macro-set}{the University of Luxembourg}
+\setloc{institution-type}{a public, research-intensive (R1) university established under the law of the Grand Duchy of Luxembourg}
+
+% Governance ladder (the named University Bodies of the University of Luxembourg):
+\setloc{executive-leadership}{the Rectorate (the Rector and the central executive team)}
+\setloc{governing-board}{the Board of Governors (the Conseil de Gouvernance)}
+\setloc{academic-governing-bodies}{the academic deliberative bodies (the Faculty Councils and the University Council)}
+\setloc{staff-representation-body}{the staff delegation (d\'el\'egation du personnel)}
+
+% Approving academic units for the internal-approval byline (the original UL
+% surface form: the named STM faculty and Computer Science department domains):
+\setloc{approving-academic-units}{the Faculty of Science, Technology and Medicine and the Department of Computer Science of the University of Luxembourg}
+
+% ============================================================================
+% 4. CONCRETE LU/UL VALUES (institution units, pilots, people, network tier)
+% ----------------------------------------------------------------------------
+% These re-bind keys the archetype set to a generic EU phrase, pinning them to
+% the original UL surface forms recorded in the matrix.
+% ============================================================================
+
+% --- Institutional units & pilots -------------------------------------------
+% ANCHOR-CS-UNIT, ANCHOR-SECURITY-RESEARCH-CENTRE, ANCHOR-INSTITUTION-HPC,
+% ANCHOR-PILOT-ENTITIES.
+\setloc{cs-research-unit}{the Department of Computer Science (DCS)}
+\setloc{security-research-centre}{the SnT (the Interdisciplinary Centre for Security, Reliability and Trust)}
+\setloc{institution-hpc-facility}{the University's HPC facility and team (ULHPC)}
+\setloc{pilot-entities}{the University's HPC team (ULHPC) together with the Department of Computer Science (DCS) and the SnT (the Interdisciplinary Centre for Security, Reliability and Trust)}
+
+% --- Named author & affiliation ---------------------------------------------
+% ANCHOR-AUTHOR-NAME, ANCHOR-AUTHOR-AFFILIATION.
+\setloc{author-name}{Nicolas Guelfi}
+% Rendered as the OPTIONAL trailing byline clause via \loc{author-affiliation}
+% (see localization-defaults.tex): a leading space + a closing full stop yield a
+% clean second sentence after the working-group attribution.
+\setloc{author-affiliation}{ Department of Computer Science, University of Luxembourg, Luxembourg (nicolas.guelfi@uni.lu). The suite was originally developed for the University of Luxembourg.}
+
+% --- Title-block keys (consumed by \suitmetablock on the four title pages) ---
+% Edition facts for the LU edition; bound explicitly so the edition is immune
+% to Layer-0 default changes and never renders the Layer-0 approval-date
+% placeholder (audit 260609-2153, INST-47f3e9e5).
+\setloc{doc-version}{2.1}
+\setloc{doc-visibility}{INTERNAL}
+\setloc{doc-approval-authority}{\loc{approving-academic-units}}
+\setloc{doc-approval-date}{May 7, 2026}
+
+% --- Staffing / FTE profile -------------------------------------------------
+% ANCHOR-FTE-ENVELOPE: the original UL framing (R1 institution, small operating
+% team, governance bodies setting excellence as the strategic objective).
+\setloc{staffing-profile}{the University of Luxembourg, whose governance bodies set excellence as a strategic objective and which sustains the identity needs of an R1 institution within a small operating team (indicatively two to four engineers shared across other duties)}
+
+% --- Research & education network tier (RESTENA + GEANT) --------------------
+% ANCHOR-NREN-CSIRT, ANCHOR-IDENTITY-FEDERATION, ANCHOR-RESEARCH-BACKBONE-SCALE.
+\setloc{nren-csirt}{RESTENA-CSIRT (the CSIRT of the Luxembourg NREN RESTENA)}
+\setloc{identity-federation-profile}{the RESTENA-operated Luxembourg academic identity federation, interconnected through the eduGAIN interfederation (with collaboration authorisation patterns developed in G\'EANT's eduTEAMS service)}
+\setloc{research-backbone-scale}{the G\'EANT pan-European research backbone (40+ NRENs serving some 50 million users in 10\,000+ institutions, with multiple-wavelength backbone capacity at 400\,Gbps), reached from Luxembourg through RESTENA with campus connections in the 10--100\,Gbps range}
+
+% --- High-performance computing (national/supranational tier) ----------------
+% ANCHOR-EUROHPC-SYSTEM: the national/regional supercomputer is MeluXina.
+\setloc{national-hpc-facility}{MeluXina (the Luxembourg EuroHPC JU supercomputer)}
+
+% --- Data custody / sovereignty optimum -------------------------------------
+% ANCHOR-ONPREM-KEY-CUSTODY: on-premises storage, institutional key custody,
+% no third-country disclosure regime (the structural sovereignty optimum).
+\setloc{data-custody-sovereignty-profile}{on-premises storage with the trust anchor held in an HSM under University custody and no third-country disclosure exposure (the structural data-sovereignty optimum), keeping the core estate within the EU/EEA}
+
+% --- Incumbent proprietary identity suite -----------------------------------
+% ANCHOR-PROPRIETARY-IDP: the incumbent commercial identity suite is Microsoft
+% Entra ID with Conditional Access.
+\setloc{incumbent-identity-suite-vendor}{Microsoft Entra ID with Conditional Access}
+
+% --- Internal operational contact -------------------------------------------
+% ANCHOR-INTERNAL-EMERGENCY-CONTACT: the UL internal emergency number is 9911.
+\setloc{internal-emergency-incident-contact}{the University's internal emergency / incident-reporting contact (emergency number 9911), reporting to the ISO/CISO}
+
+% ============================================================================
+% 5. NATIONAL REGULATORY STACK, AUTHORITIES AND INSTRUMENTS (Luxembourg)
+% ----------------------------------------------------------------------------
+% The EU-PUB-RI archetype binds the supranational instruments (NIS2, GDPR,
+% eIDAS 2, AI Act). Here we pin the Luxembourg national transpositions,
+% authorities, strategy, methods and the named legal instruments — every value
+% is the original UL surface form from the matrix.
+% ============================================================================
+
+% --- Composite regime & supranational anchors (named for the LU edition) -----
+% ANCHOR-REGULATORY-STACK, ANCHOR-NIS-REGIME, ANCHOR-DATA-PROTECTION-REGIME,
+% ANCHOR-EIDAS-REGIME, ANCHOR-AI-REGIME, ANCHOR-TRANSFER-REGIME,
+% ANCHOR-SANCTION-CEILING.
+\setloc{regulatory-regime}{the European Union regime as it binds Luxembourg, instantiated through the national transpositions of the Grand Duchy of Luxembourg}
+\setloc{cybersecurity-baseline-regime}{the NIS2 Directive (EU) 2022/2555 as transposed in Luxembourg}
+\setloc{data-protection-regime}{the EU General Data Protection Regulation (Regulation (EU) 2016/679, GDPR), supervised in Luxembourg by the CNPD}
+\setloc{eid-trust-services-regime}{the EU eIDAS\,2 trust-services regime (Regulation (EU) No~910/2014 as amended by Regulation (EU) 2024/1183)}
+\setloc{ai-regulation}{the EU AI Act (Regulation (EU) 2024/1689)}
+\setloc{cross-border-transfer-regime}{the GDPR Chapter~V cross-border data-transfer regime (post-Schrems~II)}
+\setloc{nis2-sanction-ceiling}{up to EUR~10 million or 2\% of annual turnover}
+
+% --- National transposition instruments -------------------------------------
+% ANCHOR-NIS2-TRANSPOSITION (PL 8364), ANCHOR-CER-TRANSPOSITION (PL 8307),
+% ANCHOR-EQUAL-TREATMENT-LAW (Law of 28 Nov 2006), ANCHOR-STATE-INFOSEC-POLICY
+% (PSI-LU), ANCHOR-NATIONAL-CYBER-STRATEGY (NCSS III), ANCHOR-RISK-METHOD
+% (MONARC), ANCHOR-HCPN-FOUNDING-LAW (loi modifiee du 23 juillet 2016).
+\setloc{nis2-national-transposition}{the Luxembourg transposition of the NIS2 Directive (projet de loi 8364, deposited at the Chambre des D\'eput\'es on 13 March 2024)}
+\setloc{cer-national-transposition}{the Luxembourg transposition of the CER Directive (EU) 2022/2557 (projet de loi 8307, deposited at the Chambre des D\'eput\'es on 1 September 2023)}
+\setloc{national-equal-treatment-law}{the Luxembourg Law of 28 November 2006 (transposing Directive 2000/78/EC into national labour law, integrating the obligation of reasonable adjustments)}
+\setloc{national-public-sector-isp}{PSI-LU (the Politique g\'en\'erale de la s\'ecurit\'e de l'information de l'\'Etat luxembourgeois, approved 13 July 2018)}
+\setloc{national-cyber-strategy}{NCSS~III (the third National Cybersecurity Strategy of Luxembourg, 2018, Implementation Objective~7)}
+\setloc{national-risk-method}{MONARC (the Luxembourg-developed ISO/IEC~27005-aligned risk-analysis method, developed by NC3 under the Luxembourg House of Cybersecurity)}
+% Reference-only binding (no \loc{} consumption site; see the note on the
+% reference-only authority bindings below): the HCPN founding statute.
+\setloc{national-cyber-commissariat-founding-law}{the loi modifi\'ee du 23 juillet 2016 establishing the Haut-Commissariat \`a la Protection nationale (HCPN), parent of ANSSI Luxembourg and host of GOVCERT.LU}
+
+% --- National authorities & bodies ------------------------------------------
+% ANCHOR-NATIONAL-INFOSEC-AGENCY (ANSSI-LU), ANCHOR-NIS2-SUPERVISORY-AUTH (ILR),
+% ANCHOR-NATIONAL-SPOC-HCPN (HCPN), ANCHOR-CYBER-COMPETENCE-CENTRE (NC3 /
+% Luxembourg House of Cybersecurity), ANCHOR-NATIONAL-NOTIFICATION-PLATFORM
+% (SERIMA), ANCHOR-NATIONAL-LEGISLATIVE-CHAMBER (Chambre des Deputes),
+% ANCHOR-NATIONAL-EXECUTIVE-DEPARTMENT (Ministere d'Etat).
+\setloc{national-infosec-agency}{ANSSI Luxembourg (ANSSI-LU, the national Agency for Information Systems Security, a component of HCPN and distinct from the French ANSSI)}
+\setloc{nis2-supervisory-authority}{the ILR (the Institut Luxembourgeois de R\'egulation, the Luxembourg NIS2 supervisory authority)}
+\setloc{national-spoc-authority}{the HCPN (the Haut-Commissariat \`a la Protection nationale, the Luxembourg NIS2 national single point of contact)}
+\setloc{national-cyber-competence-centre}{NC3 (the National Cybersecurity Competence Center) under the Luxembourg House of Cybersecurity}
+\setloc{national-notification-platform}{SERIMA (the Luxembourg SEcurity RIsk MAnagement incident-notification platform, operational since 2 May 2025)}
+
+% Reference-only bindings: the following three name the LU legislative chamber,
+% the executive department and the HCPN founding statute. The generic suite has
+% no \loc{} consumption site for them (they are administrative back-references,
+% not surfaces of the rendered argument), and the HCPN/ANSSI-LU substance they
+% support is already carried through \loc{national-spoc-authority},
+% \loc{national-infosec-agency} and \loc{national-gov-csirt}. They are retained
+% as authoritative parameterize anchors for any edition or tooling that does
+% cite them; they intentionally do not render in the four SUIT documents.
+\setloc{national-legislature}{the Chambre des D\'eput\'es du Grand-Duch\'e de Luxembourg}
+\setloc{national-executive-department}{the Minist\`ere d'\'Etat (under the authority of the Prime Minister)}
+
+% --- Essential-entity classification basis ----------------------------------
+% ANCHOR-ESSENTIAL-ENTITY-CLASSIFICATION: UL classified by the ILR as an
+% essential entity on the basis of its status as a public institution
+% (public-administration-entity route, regardless of size).
+\setloc{essential-entity-classification-basis}{the University of Luxembourg's classification by the ILR as an essential entity under the NIS2 essential-entity regime, on the basis of its status as a public institution (the public-administration-entity route, which applies regardless of size)}
+
+% ============================================================================
+% 6. NOTE ON THE REMAINING UNCONSUMED BINDINGS (substance-in-prose orphans)
+% ----------------------------------------------------------------------------
+% Some keys bound above have no \loc{} consumption site in the four SUIT
+% documents AS RENDERED, yet are deliberately retained (recounted by grep on
+% 2026-06-10, audit 260609-2153, INST-4fbe80b2):
+%
+%   - Declared orphans (no consumption site today): regulatory-regime,
+%     eid-trust-services-regime, data-custody-sovereignty-profile,
+%     institution-hpc-facility, academic-governing-bodies,
+%     internal-emergency-incident-contact, institution-macro-set, author-name,
+%     essential-entity-classification-basis, and the reference-only authority
+%     bindings noted above (national-legislature, national-executive-department,
+%     national-cyber-commissariat-founding-law).
+%
+% These are NOT regressions: the LU-applicable substance they carry is already
+% present in the generic prose (on-prem HSM key custody, the EU/EEA sovereignty
+% posture, the internal emergency contact pattern, etc.), so the round-trip
+% already closes for them through the body text. They remain bound here as
+% authoritative parameterize anchors so that (a) other editions/archetypes that
+% DO add a consumption site inherit the correct LU value, and (b) the matrix's
+% parameterize intent is recorded against a real value rather than dropped.
+% All other bound keys have at least one \loc{} consumption site in the
+% generic suite and render in the LU edition --- including the retrofit set
+% (national-dpa, national-gov-csirt, national-public-sector-isp,
+% cer-national-transposition, national-equal-treatment-law, author-affiliation,
+% approving-academic-units, national-spoc-authority,
+% national-cyber-competence-centre, national-risk-method, nren-csirt,
+% nis2-sanction-ceiling, executive-leadership), the six formerly listed here as
+% orphans and consumed since (institution-type, data-protection-regime,
+% cybersecurity-baseline-regime, identity-federation-profile,
+% incumbent-identity-suite-vendor, research-backbone-scale), and the newer
+% staff-representation-body and doc-* title-block keys.
+% ============================================================================
+
+\endinput
