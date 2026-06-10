@@ -67,7 +67,7 @@ If you use, adopt, or build on SUIT, please cite the suite:
   title        = {{SUIT} --- Sustainable University {IT} Infrastructure \& Technology},
   year         = {2026},
   howpublished = {SUIT Working Group reference document suite},
-  url          = {https://github.com/suit-working-group/suit-infrastructure-policy},
+  url          = {https://github.com/suit-working-group/suit-suite},
   note         = {Reference document suite of the SUIT Working Group, chaired by Nicolas Guelfi}
 }
 ```
