@@ -90,6 +90,16 @@ localization keys); `tools/suite-gates.sh` passes.
   and the template requires the binding (`REPLACE:`). Audit plan
   (PLAN-VERSION 2.1): XCOH gains the cited-title-concordance check, INST the
   edition-identity-visible gate.
+- **Depersonalised attribution.** The Technical Reference title page carried a
+  personal byline (named chairman, host-department affiliation and personal
+  email); the suite belongs to the working group, not to an individual, so the
+  byline is replaced by the public organisation URL
+  (`https://github.com/suit-working-group`). The now-dead `author-name` /
+  `author-affiliation` localization keys are removed (Layer 0 and the LU
+  edition). The self-referential bibliography records (`suit-wg`,
+  `ng-tech-ref-2026`) are re-authored as `{SUIT Working Group}`, carry the
+  organisation and repository URLs, and `ng-tech-ref-2026`'s note now cites
+  the main report under its current title.
 
 ## v1.0.0 — 2026-06-09 — Initial public release of the SUIT suite
 
