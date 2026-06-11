@@ -50,8 +50,10 @@ $ENV{'TEXINPUTS'} =
   . ($ENV{'TEXINPUTS'} ? $ENV{'TEXINPUTS'} . ':' : ':');
 
 # The consolidated bibliography lives in shared/ (also symlinked into this dir).
+# '..' (the edition root) lets this edition's bibliography overlay
+# (lu-sources.bib, added via \addbibresource from ../set.tex) resolve.
 $ENV{'BIBINPUTS'} =
-    '.:../../../shared/:'
+    '.:..:../../../shared/:'
   . ($ENV{'BIBINPUTS'} ? $ENV{'BIBINPUTS'} . ':' : ':');
 
 $clean_ext = 'synctex.gz';

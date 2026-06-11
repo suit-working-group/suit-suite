@@ -5,6 +5,63 @@ release onward, each applied change references the **ticket id** of the request
 that motivated it (see `CONTRIBUTING.md` and `GOVERNANCE.md`). Document bodies
 remain atemporal; all traceability lives in this file.
 
+## Unreleased — 2026-06-11 — Non-regression remediation of the University-of-Luxembourg edition
+
+Motivating record: a read-only, multi-agent non-regression review comparing the
+pre-refactoring University-of-Luxembourg suite against the instantiated SUIT
+Luxembourg edition (`_TEMP/maintenance/SUIT-regression-report/`), and the
+maintainer session of 2026-06-11. Ticket id: assigned by the maintainer at issue
+creation.
+
+- **LU-specific facts restored through the localization mechanism, never as
+  generic-body locality.** Every recovered University-of-Luxembourg anchor is
+  carried by a `\loc{}` key with a clean Layer-0 generic default and the LU
+  surface form in `instantiations/lu-university-of-luxembourg/set.tex`; the
+  generic build remains institution-neutral and the deposit bar stays clean.
+- **NIS2 essential-entity status re-asserted for the LU edition** (C1–C3, M9):
+  conditional-fact keys (`essential-entity-modality`, `nis2-status-conditional-tail`,
+  `essential-entity-classification-basis`) render the established classification
+  by the ILR — confirmed by a letter notified to the DCS on 3 April 2026, under
+  projet de loi 8364 Art. 2(34°)/11(1)(4°) — while the generic build keeps the
+  hedged formulation; CER non-designation restored (`cer-designation-status`);
+  the "is may be classified" typo removed.
+- **Edition bibliography overlay** (C4, M2, M10): new
+  `instantiations/lu-university-of-luxembourg/lu-sources.bib` carries the 15
+  named, verifiable Luxembourg sources (Chambre des Députés, ILR, GOVCERT.LU,
+  HCPN, ANSSI-LU, PSI-LU, CIRCL, CSSF, SERIMA, MONARC, NCSS III, PL 8307, Loi du
+  28 Nov 2006, RESTENA-CSIRT, UL adjustments committee), recovered verbatim from
+  the original UL bibliography. The three previously depersonalised generic
+  entries were removed from the shared bib, and every Luxembourg citation is
+  routed through empty-in-generic `cite-*` keys; the generic suite no longer
+  cites any specific national instrument.
+- **Dead bindings reconnected and ecosystem restored** (M1, C5–C8, C12, M3, M5):
+  the Faculty/University Councils, the Rectorate, ULHPC, MONARC, the RESTENA
+  federation, the two-tier endorsement path and the "three faculties" structure
+  now render in the LU edition; CIRCL/CSSF disambiguation, the dated
+  RESTENA/ULHPC Science-DMZ finding, LIST/LIH and the RESTENA ecosystem item
+  restored.
+- **Companion openness-status table de-templated** (C11): the unfilled
+  three-marker gabarit and its visible edit instruction are replaced by one
+  `\loc{status-*}` per element (generic = single neutral marker; LU = the 15
+  original University-of-Luxembourg verdicts).
+- **Abstract genesis, adjustments-committee precedent and financial premise**
+  (C10, C9, M7): "at the University of Luxembourg", the existing Committee for
+  Reasonable Adjustments (cited), and the wealthiest-country / sole-objective /
+  multi-year-State-agreement framing restored as LU surface forms.
+- **Named non-Luxembourg precedents restored where the source supports them**
+  (M6): Leeds/Warwick/Eindhoven (ISO 27001); the MOVEit victim list corrected to
+  the source-supported set (UCLA, Stanford Medicine, University System of
+  Georgia); ETH Zurich's CSCS; and the MIT/Stanford/Oxford/ETH/Cambridge/CERN/
+  Michigan/EPFL reference list — these benefit the generic suite as well.
+- **Double-article ("the the") rendering fixed** at nine companion sites in both
+  the generic and edition builds; GÉANT backbone capacity aligned to 500 Gbps.
+- **Deliberately NOT restored (claim-to-record / editorial decisions, not
+  regressions):** the Magna Charta "over 1 000 signatories from 94 countries"
+  figure (not supported by the cited source abstract); the NSF "500 awards since
+  2012" figure (already reconciled to the source-verified "over 100 campuses");
+  and the Paris-Saclay "did not pay the ransom" incident detail (its dedicated
+  incident item was editorially replaced by the Texas Tech / Howard analyses).
+
 ## Unreleased — 2026-06-10 — Audit 260609-2153 remediation · liberty-first rule · instantiation-library publication
 
 Motivating record: the recurring suite audit `_AUDITS/260609-2153/`

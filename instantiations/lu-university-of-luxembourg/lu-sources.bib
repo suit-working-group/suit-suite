@@ -1,0 +1,157 @@
+% ============================================================================
+% lu-sources.bib --- LUXEMBOURG EDITION BIBLIOGRAPHY OVERLAY (Layer-2 sources)
+% ----------------------------------------------------------------------------
+% Edition-scoped bibliography for the University of Luxembourg edition. These
+% are the named, verifiable Luxembourg national instruments, authorities and
+% tools cited by the LU edition. They are NOT part of the generic suite: the
+% generic build loads ONLY shared/suit-consolidated.bib and never this file
+% (it is added via \addbibresource from this edition's set.tex, which the
+% generic build never \input's).
+%
+% Every \cite{} to a key below is routed through a \loc{cite-...} key bound in
+% set.tex (empty in the generic Layer-0 default, \cite{key} in the LU edition),
+% so the generic build emits none of these citations and stays jurisdiction-
+% neutral; the LU edition resolves them against this overlay.
+%
+% Entries recovered verbatim from the original University-of-Luxembourg suite
+% bibliography (ul-it-policy/main/infra-uni-consolide.bib); not reconstructed.
+% A concrete instantiation legitimately names Luxembourg and its institutions.
+% ============================================================================
+
+@misc{pl-8364,
+  author       = {{Chambre des D{\'e}put{\'e}s du Grand-Duch{\'e} de Luxembourg}},
+  title        = {Projet de loi 8364 concernant des mesures destin{\'e}es {\`a} assurer un niveau {\'e}lev{\'e} de cybers{\'e}curit{\'e} (transposition de la Directive (UE) 2022/2555 dite NIS2)},
+  year         = {2024},
+  url          = {https://www.chd.lu/fr/dossier/8364},
+  abstract     = {Luxembourg project of law transposing Directive (EU) 2022/2555 (NIS2) into national law, deposited at the Chambre des D{\'e}put{\'e}s on 13 March 2024 by Prime Minister Luc Frieden. The text establishes the national cybersecurity framework applicable to essential and important entities, defining risk-management obligations (Article 12), incident-notification duties and cooperation with the ILR as supervisory authority. Articles 2(34) and 11(1)(4) consolidate the classification of public-administration entities as essential regardless of size; Article 2(40) defines research organisations by explicitly excluding teaching establishments. First constitutional vote passed on 28 April 2026 (60 in favour, 0 against, 0 abstentions). Direct binding national reference for the NIS2 sections of the present report.},
+  note         = {Deposited 13 March 2024 by the Government (Luc Frieden). Title amended on 13 May 2025. First constitutional vote passed on 28 April 2026 (60--0--0); dispensation from second vote requested.},
+  fetch_status = {OK},
+  fetch_note   = {Chambre des D{\'e}put{\'e}s dossier page accessible, HTTP 200. Status verified May 2026.},
+}
+@misc{ilr-ul-essential,
+  author       = {{Institut Luxembourgeois de R{\'e}gulation}},
+  title        = {Classification of the University of Luxembourg as an essential entity under the {NIS2} Directive transposition},
+  year         = {2026},
+  url          = {https://web.ilr.lu/},
+  abstract     = {Written confirmation issued by the Institut Luxembourgeois de R{\'e}gulation (ILR), the Luxembourg supervisory authority designated under the NIS2 Directive transposition, classifying the University of Luxembourg as an essential entity. The classification rests on three cumulative legal pegs of project of law 8364: Article 2(34) defining the public-administration entity through four cumulative criteria (public-interest mission, legal personality, public funding or State control, decision-making power affecting cross-border movements); Article 11(1)(4) under which a public-administration entity is essential regardless of size; and Article 2(40) which excludes teaching establishments from the research-organisation track. Operational consequences: holistic application across the institution, proactive supervision, mandatory audits, annual compliance and maturity report. Binding regulatory anchor for all NIS2-related sections of the present report.},
+  note         = {Original ILR letter on file at the Department of Computer Science, transmission acknowledged by the University CISO via email on 3 April 2026 at 10:50.},
+  fetch_status = {OK},
+  fetch_note   = {ILR letter on file at DCS, transmitted via University CISO on 3 April 2026 at 10:50. Verified May 2026.},
+}
+@misc{govcert-lu,
+  author       = {{GOVCERT.LU}},
+  title        = {GOVCERT.LU --- Computer Security Incident Response Team of the Luxembourg Government},
+  url          = {https://www.govcert.lu/},
+  year         = {2026},
+  abstract     = {Government Computer Security Incident Response Team of the Grand-Duchy of Luxembourg, hosted by the Haut-Commissariat {\`a} la Protection nationale (HCPN). GOVCERT.LU operates as the central contact point for IT incidents that could compromise the information systems of the State, public bodies and critical infrastructure operators (public or private). Its mission encompasses incident response, threat intelligence dissemination, and coordination with national and international peer CSIRTs. As a public institution, the University of Luxembourg falls under GOVCERT.LU's primary responsibility for incident response, in coordination with the ILR as supervisory authority under the NIS2 transposition.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{hcpn,
+  author       = {{Haut-Commissariat {\`a} la Protection nationale}},
+  title        = {Haut-Commissariat {\`a} la Protection nationale (HCPN)},
+  url          = {https://hcpn.gouvernement.lu/},
+  year         = {2026},
+  abstract     = {Luxembourg's High Commissariat for National Protection, established under the loi modifi{\'e}e du 23 juillet 2016, placed under the authority of the Prime Minister within the Minist{\`e}re d'{\'E}tat. HCPN coordinates national-level resilience policy and major-crisis management; it hosts GOVCERT.LU (governmental CSIRT) and ANSSI Luxembourg (national agency for information-systems security). HCPN operates as Luxembourg's single point of contact under the NIS2 Directive transposition for cross-border cyber-cooperation and major-incident escalation. The University of Luxembourg engages with HCPN through GOVCERT.LU for incident response and through ANSSI Luxembourg for information-security policy alignment.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{anssi-lu,
+  author       = {{Agence nationale de la s{\'e}curit{\'e} des syst{\`e}mes d'information}},
+  title        = {ANSSI Luxembourg --- Agence nationale de la s{\'e}curit{\'e} des syst{\`e}mes d'information},
+  url          = {https://hcpn.gouvernement.lu/fr/service/attributions/missions-nationales/anssi.html},
+  year         = {2026},
+  abstract     = {Luxembourg's National Agency for Information Systems Security, established as a component of the Haut-Commissariat {\`a} la Protection nationale (HCPN) under the loi modifi{\'e}e du 23 juillet 2016. ANSSI Luxembourg's missions include contributing to the implementation of State information-security policy (PSI-LU), issuing security recommendations to administrations, governing risk-assessment approaches, and promoting information-security awareness across the public sector. ANSSI Luxembourg is administratively and operationally distinct from the French ANSSI mentioned elsewhere in the present report (Paris-Saclay incident analysis). The University of Luxembourg's policy alignment is with ANSSI Luxembourg, not with the French agency.},
+  fetch_status = {OK},
+  fetch_note   = {HCPN page on ANSSI; the alias https://www.anssi.lu redirects to this canonical URL. Verified May 2026.},
+}
+@misc{psi-lu,
+  author       = {{Agence nationale de la s{\'e}curit{\'e} des syst{\`e}mes d'information}},
+  title        = {PSI --- Politique g{\'e}n{\'e}rale de la s{\'e}curit{\'e} de l'information de l'{\'E}tat luxembourgeois},
+  url          = {https://hcpn.gouvernement.lu/fr/service/attributions/missions-nationales/anssi/politique-securite.html},
+  year         = {2018},
+  abstract     = {General information security policy of the Luxembourg State, developed by ANSSI Luxembourg and approved by the Government Council on 13 July 2018. PSI-LU establishes the baseline information-security objectives applicable to State administrations: confidentiality of sensitive information held by the State, integrity of information and processes, availability of information and services, and risk-based security-measure adoption. As an essential entity in the Luxembourg public sector, the University of Luxembourg's information-security architecture must align with the PSI-LU baseline; the multi-zone architecture proposed in the present report is positioned as a compatible operational implementation that adapts the State baseline to the heterogeneous public-research perimeter of the University.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Official ANSSI/HCPN page on PSI-LU; URL verified via web search May 2026.},
+}
+@misc{circl,
+  author       = {{Computer Incident Response Center Luxembourg}},
+  title        = {CIRCL --- Computer Incident Response Center Luxembourg},
+  url          = {https://www.circl.lu/},
+  year         = {2026},
+  abstract     = {Government-driven CSIRT serving the private sector, communes (local governments) and non-governmental entities in Luxembourg. CIRCL gathers, reviews, reports and responds to computer security threats outside the central State perimeter. It is administratively distinct from GOVCERT.LU, which handles incidents in the central administration, public bodies and critical infrastructure. The University of Luxembourg, as a public institution, falls under GOVCERT.LU's primary responsibility for incident response; CIRCL is mentioned in the present report for ecosystem completeness and for cases where third-party private partners of the University may interact with CIRCL. CIRCL is affiliated to the Luxembourg House of Cybersecurity.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{cssf,
+  author       = {{Commission de Surveillance du Secteur Financier}},
+  title        = {Commission de Surveillance du Secteur Financier (CSSF)},
+  url          = {https://www.cssf.lu/},
+  year         = {2026},
+  abstract     = {Luxembourg's regulatory authority for the financial sector. Under the NIS2 transposition (project of law 8364), CSSF is the supervisory authority for financial-sector essential and important entities, in parallel with the ILR for the rest of the perimeter. CSSF is mentioned in the present report only for ecosystem disambiguation: as a public institution outside the financial sector, the University of Luxembourg is supervised by the ILR, not by the CSSF, except in the specific case of financial projects where CSSF requirements may apply to a defined scope of the activity. The disambiguation is included so that readers familiar with the financial-sector framework do not confuse the two supervisory chains.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{serima,
+  author       = {{Institut Luxembourgeois de R{\'e}gulation}},
+  title        = {SERIMA --- SEcurity RIsk MAnagement platform},
+  url          = {https://www.ilr.lu/en/sectors/niss/serima/},
+  year         = {2026},
+  abstract     = {Centralised cybersecurity reporting platform operated by the Institut Luxembourgeois de R{\'e}gulation (ILR) in partnership with the Luxembourg House of Cybersecurity, with participation from the CNPD and HCPN. SERIMA implements unified reporting obligations stemming from NIS, NIS2, EECC, GDPR and CER directives, replacing the previous fragmented reporting channels. Modules include incident notification (operational), risk analysis based on MONARC, and forthcoming modules for security objectives, reporting and dependencies. Operational since 2 May 2025, the platform is the binding channel through which the University of Luxembourg, as an essential entity, will discharge its 24h/72h/30-day NIS2 incident-notification obligations and submit its annual maturity report to the ILR.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{monarc,
+  author       = {{Luxembourg House of Cybersecurity (NC3)}},
+  title        = {MONARC --- Method for an Optimised Analysis of Risks},
+  url          = {https://www.monarc.lu/},
+  year         = {2026},
+  abstract     = {Open-source risk-analysis method and tool developed by the National Cybersecurity Competence Center (NC3) under the Luxembourg House of Cybersecurity. MONARC enables organisations of any size to conduct optimised, precise and repeatable risk assessments, leveraging the capitalisation of risk-analysis scenarios already produced in similar business contexts. The toolset is integrated into the SERIMA platform managed by the ILR for the risk-analysis module of NIS2-related obligations. As a Luxembourg national methodology aligned with ISO/IEC 27005, MONARC is a politically and operationally relevant choice for the maturity-report structure and the institution-level dashboard contemplated by Proposition 14 of the present report. Open-source code is hosted on GitHub.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{ncss-iii,
+  author       = {{Haut-Commissariat {\`a} la Protection nationale}},
+  title        = {National Cybersecurity Strategy III},
+  url          = {https://hcpn.gouvernement.lu/dam-assets/fr/publications/brochure-livre/national-cybersecurity-strategy-3/national-cybersecurity-strategy-iii-en-.pdf},
+  year         = {2018},
+  abstract     = {Third national cybersecurity strategy of the Grand-Duchy of Luxembourg, approved by the Government Council on 26 January 2018. Published by the Haut-Commissariat {\`a} la Protection nationale (HCPN), the strategy articulates four guidelines: strengthening public confidence in the digital environment including combating cybercrime and inter-actor cooperation; digital infrastructure protection; economy promotion; and implementation of the strategy. Implementation Objective 7 calls explicitly for strengthening cooperation with the academic and research sphere. The strategy is the direct national-level political hook for the present report's positioning of the University of Luxembourg as a contributor to the cybersecurity ecosystem, consistent with the knowledge-institution responsibility articulated in Bloc M.},
+  fetch_status = {VERIFIED},
+  fetch_note   = {Official PDF on HCPN domain (gouvernement.lu); URL verified via web search May 2026.},
+}
+@misc{pl-8307-cer,
+  author       = {{Chambre des D{\'e}put{\'e}s du Grand-Duch{\'e} de Luxembourg}},
+  title        = {Projet de loi 8307 sur la r{\'e}silience des entit{\'e}s critiques (transposition de la Directive (UE) 2022/2557 dite CER)},
+  url          = {https://www.chd.lu/fr/dossier/8307},
+  year         = {2023},
+  abstract     = {Luxembourg project of law 8307 transposing Directive (EU) 2022/2557 on the resilience of critical entities (CER directive), the operational counterpart of NIS2 covering physical resilience (premises, energy, supply continuity). Deposited at the Chambre des D{\'e}put{\'e}s on 1 September 2023, with rapporteur Laurent Zeimet. Title amended on 29 January 2025. First constitutional vote passed on 28 April 2026 (60 in favour, 0 against, 0 abstentions). Under Luxembourg's combined transposition, every entity classified as critical under PL 8307 is automatically essential under PL 8364 (NIS2). The University of Luxembourg is not, to current knowledge, designated as a CER critical entity, but the framework is part of the regulatory neighbourhood relevant to the present report.},
+  fetch_status = {OK},
+  fetch_note   = {Chambre des D{\'e}put{\'e}s dossier page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{restena-csirt,
+  author       = {{Restena Foundation}},
+  title        = {RESTENA-CSIRT --- Computer Security Incident Response Team of the Luxembourg NREN},
+  url          = {https://www.restena.lu/en/security},
+  year         = {2026},
+  abstract     = {Computer Security Incident Response Team operated by the Restena Foundation, the Luxembourg National Research and Education Network (NREN). RESTENA-CSIRT is a single point of contact for the research and education community in Luxembourg, providing incident gathering, analysis, awareness and prevention services. Member of the Trusted Introducer (TI) network since 2009, granting access to the international peer-CSIRT framework. The University of Luxembourg, as a member institution of the RESTENA federation, benefits from RESTENA-CSIRT services for incidents arising within or affecting the academic perimeter, in complementarity with GOVCERT.LU as the national State CSIRT under NIS2.},
+  fetch_status = {OK},
+  fetch_note   = {Landing page accessible, HTTP 200. Verified May 2026.},
+}
+@misc{lux-loi-2006,
+  title        = {Loi du 28 novembre 2006 portant transposition de la Directive 2000/78/{CE}},
+  year         = {2006},
+  url          = {https://legilux.public.lu/eli/etat/leg/loi/2006/11/28/n1/jo},
+  abstract     = {IMPOSSIBLE TO FETCH},
+  note         = {M{\'e}morial A, n\textsuperscript{o}207, 6 d{\'e}cembre 2006 (Luxembourg) --- Loi du 28 novembre 2006 portant 1. transposition de la directive 2000/43/CE du Conseil du 29 juin 2000 relative {\`a} la mise en oeuvre du principe de l'{\'e}galit{\'e} de traitement entre les personnes sans distinction de race ou d'origine ethnique; 2. transposition de la directive 2000/78/CE du Conseil du 27 novembre 2000 portant cr{\'e}ation d'un cadre g{\'e}n{\'e}ral en faveur de l'{\'e}galit{\'e} de traitement en mati{\`e}re d'emploi et de travail; 3. modification du Code du travail. The law establishes a general framework prohibiting discrimination based on religion, belief, disability, age, or sexual orientation in employment and occupation within Luxembourg. It is directly relevant to the University of Luxembourg's governance and HR policies, mandating equal treatment in hiring, working conditions, and the provision of reasonable accommodations for employees and students with disabilities.},
+  fetch_status = {OK},
+  fetch_note   = {URL valid (Legilux, JS-rendered). Verified Feb 2026.},
+}
+@misc{unilu-amenagements,
+  author       = {{Universit{\'e} du Luxembourg}},
+  title        = {Service des am{\'e}nagements raisonnables pour {\'e}tudiants {\`a} besoins sp{\'e}cifiques},
+  url          = {https://www.uni.lu/fr/etudes/questions-academiques/dispositions-speciales/amenagements-raisonnables/},
+  abstract     = {Les am{\'e}nagements raisonnables sont des mesures pour garantir qu'un {\'e}tudiant ne soit pas d{\'e}savantag{\'e} par rapport aux autres {\'e}tudiants.},
+  note         = {University of Luxembourg's service for reasonable accommodations provides support and adjustments for students with disabilities, learning difficulties, or chronic conditions. Relevant to university governance as it demonstrates institutional compliance with disability rights legislation and the implementation of inclusive policies within the academic environment.},
+  fetch_status = {OK},
+  fetch_note   = {URL updated (old English path redirected to homepage; now points to French accommodations page). Verified Feb 2026.},
+}

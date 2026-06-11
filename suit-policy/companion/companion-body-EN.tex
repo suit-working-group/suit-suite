@@ -99,32 +99,32 @@ and \nameref{sec:specificites}}
 \begin{tabularx}{\textwidth}{>{\bfseries\raggedright\arraybackslash}X X}
 \toprule
 \textbf{Historical university principle} &
-  \textbf{Digital translation (current status --- keep one marker per element)} \\
+  \textbf{Digital translation (\loc{status-table-subtitle})} \\
 \midrule
 Free movement of persons &
-  \ok\warn\nok Functional BYOD,
-  \ok\warn\nok eduroam,
-  \ok\warn\nok seamless researcher mobility \\
+  \loc{status-byod} Functional BYOD,
+  \loc{status-eduroam} eduroam,
+  \loc{status-mobility} seamless researcher mobility \\
 \addlinespace
 Free movement of ideas &
-  \ok\warn\nok unfiltered Internet access,
-  \ok\warn\nok major cloud-based AI services,
-  \ok\warn\nok worldwide scientific sources \\
+  \loc{status-internet} unfiltered Internet access,
+  \loc{status-cloud-ai} major cloud-based AI services,
+  \loc{status-sci-sources} worldwide scientific sources \\
 \addlinespace
 Teacher-researcher autonomy &
-  \ok\warn\nok local admin privileges (root/admin),
-  \ok\warn\nok freedom of tool choice,
-  \ok\warn\nok configurable environments \\
+  \loc{status-local-admin} local admin privileges (root/admin),
+  \loc{status-tool-choice} freedom of tool choice,
+  \loc{status-environments} configurable environments \\
 \addlinespace
 Scientific openness (Open Science) &
-  \ok\warn\nok access to data platforms,
-  \ok\warn\nok code repositories,
-  \ok\warn\nok open-access publications \\
+  \loc{status-data-platforms} access to data platforms,
+  \loc{status-code-repos} code repositories,
+  \loc{status-open-access} open-access publications \\
 \addlinespace
 Realistic training environments &
-  \ok\warn\nok configurable labs,
-  \ok\warn\nok cyber-ranges,
-  \ok\warn\nok API access for AI courses \\
+  \loc{status-labs} configurable labs,
+  \loc{status-cyber-ranges} cyber-ranges,
+  \loc{status-api-access} API access for AI courses \\
 \bottomrule
 \end{tabularx}
 
@@ -133,10 +133,6 @@ Realistic training environments &
 \ok Available \qquad
 \warn To be reinforced \qquad
 \nok Not available
-\par\smallskip
-\textit{This table is generic: each element carries all three markers. The
-adopting institution keeps, for every element, the single marker matching its
-own reality and deletes the other two.}
 \normalsize
 \end{table}
 
@@ -178,7 +174,7 @@ centralised perimeters without internal boundaries.
 autonomy.} Known incidents involving research infrastructure --- such as
 the 2020 European supercomputer attacks, where stolen SSH credentials
 were used for cryptomining on \gls{hpc} systems at several national
-academic computing centres~\cite{eu-supercomputers-2020}~--- involved unauthorized access rather than data exfiltration, and
+academic computing centres including ETH~Zurich's CSCS~\cite{eu-supercomputers-2020}~--- involved unauthorized access rather than data exfiltration, and
 would have been mitigated by the Trusted Activity Context mechanisms
 proposed here: credentials scoped to a specific activity context cannot
 grant lateral access to other contexts or to the infrastructure core.
@@ -195,8 +191,8 @@ context-bounded access} --- precisely what this proposal advocates.
 
 The logic is simple: \textbf{secure strongly what must be secured}
 (administrative, financial, HR data) \textbf{to liberate everything else}.
-This is what research universities and national laboratories
-do --- and, through their national research-and-education
+This is what MIT, Stanford, Oxford, ETH~Zurich, Cambridge, CERN,
+Michigan and EPFL do --- and, through their national research-and-education
 networks, what institutions of far more modest scale do as well ---
 and what NIST, ISO~27001 and \gls{cobit} recommend. These are not a
 flagship's choices to borrow but a minimal set every institution
@@ -322,11 +318,7 @@ that obligation in the regime typology there.}
     professional reasons, or infringement of fundamental freedoms ---
     in accordance with the EU Charter of Fundamental Rights, the
     CRPD Convention and the case law of the \gls{cjeu} and the \gls{ecthr}
-    on the proportionality of digital restrictions. Where the institution
-    already operates a reasonable-adjustments mechanism (supporting
-    students and staff), the \gls{icradp} extends that principle to
-    digital policies; where none exists, it establishes the principle
-    directly. Refusals must be justified in writing.
+    on the proportionality of digital restrictions. \loc{icradp-committee-precedent-lead} Refusals must be justified in writing.
 \end{itemize}
 
 \medskip
@@ -335,11 +327,11 @@ Digital Policy Commission, the unit-level deliberative bodies, the
 responsibility charters and the ICRADP constitute the institution's
 continuous-improvement mechanism, materialised in the annual
 compliance and maturity report submitted to the competent cybersecurity
-authority~\cite{ilr-ul-essential} pursuant to the continuous-improvement
+authority\loc{cite-ilr-essential} pursuant to the continuous-improvement
 provision of the applicable regime --- see the Regulatory Applicability annex
 (Part~\ref{part:reg-applicability} of the complete dossier), the accountability-and-conformity
 obligation (F6) under your regime profile, instantiated in the worked EU
-example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
+example by \loc{nis2-national-transposition}\loc{cite-nis2-transposition}.
 
 \mainref{the sections \nameref{subsec:gouvernance-federee}, \nameref{subsubsec:contextual-roles},
 \nameref{sec:propositions} and \nameref{sec:commission-ajustements}}
@@ -361,7 +353,7 @@ example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
 \addlinespace
 2. Pilot &
   Segmented architecture and Trusted Activity Contexts deployed on
-  a pilot technical department, a pilot research centre, and the
+  a pilot technical department, a pilot research centre, and
   \loc{pilot-entities} ---
   high-throughput research-data path (Science DMZ), \gls{byod} zone, open-source tools \\
 \addlinespace
@@ -376,23 +368,23 @@ example by the \loc{nis2-national-transposition}~\cite{pl-8364}.
 \noindent
 No ``big bang'' required. The governance step is organisational and
 achievable with existing staff. The pilot and progressive extension
-rely on the \loc{nren-name} and its international
+rely on \loc{nren-name} and its international
 research-backbone services, open-source tools,
 and platforms offered free of charge for academic research.
 
 \medskip
 \noindent\textbf{Scale-appropriate reading.} Where public documentation
 evidences no Science DMZ --- nor any equivalent research-and-education-network-operated
-research-data path --- deployed, neither at the institution nor at the
+research-data path --- deployed, neither at the institution nor at
 \loc{nren-name} level, the substrate is nonetheless frequently
 already operational: high-capacity backbone connectivity to the
-international research backbone through the \loc{nren-name}, an \gls{hpc} facility moving
-petabyte-scale traffic, and \loc{nren-csirt} for incident
+international research backbone through \loc{nren-name}, an \gls{hpc} facility moving
+petabyte-scale traffic, and \loc{nren-csirt}\loc{cite-nren-csirt} for incident
 response. For institutions of modest scale, the pragmatic form is
 therefore not an institution-only deployment of the Science DMZ pattern
 but a federated research-network zone --- the same high-throughput
 research-data path realised at national, mutualised scale ---
-\emph{co-designed} with the \loc{nren-name} and shared across
+\emph{co-designed} with \loc{nren-name} and shared across
 partner research organisations, with a dedicated medical enclave for
 biomedical workloads where required.
 
@@ -408,7 +400,7 @@ biomedical workloads where required.
     research and teaching access to major cloud-based and open AI
     services (commercial APIs and open model hubs) is now part of
     the standard scientific working environment.
-    Under the \loc{ai-regulation}'s risk-based framework --- the
+    Under \loc{ai-regulation}'s risk-based framework --- the
     technology-governance obligation (F5) of the Regulatory Applicability annex
     (Part~\ref{part:reg-applicability} of the complete dossier) --- the
     resulting obligations
@@ -427,11 +419,11 @@ biomedical workloads where required.
     data-protection security-of-processing obligation (F1) requires
     \emph{proportionate} measures --- \gls{gdpr} Article~32 in the worked EU
     instantiation; under the cybersecurity-baseline regime (F2), instantiated
-    here by the national transposition of \gls{nis2}~\cite{pl-8364}, the
-    institution may be classified by the \loc{nis2-supervisory-authority}
+    here by the national transposition of \gls{nis2}\loc{cite-nis2-transposition}, the
+    institution \loc{essential-entity-modality} by \loc{nis2-supervisory-authority}
     as an \textbf{essential entity}
     (holistic perimeter, proactive supervision, mandatory audits,
-    annual maturity report via the \loc{national-notification-platform}~\cite{serima})~\cite{ilr-ul-essential};
+    annual maturity report via \loc{national-notification-platform}\loc{cite-notification-platform})\loc{cite-ilr-essential};
     sector cybersecurity guidance from the relevant sector authority
     treats cybersecurity as a strategic governance
     risk~\cite{jisc-guidance}; a segmented architecture aligned with
@@ -442,7 +434,7 @@ biomedical workloads where required.
     Applicability annex (Part~\ref{part:reg-applicability} of the
     complete dossier).
   \item \textbf{Reference universities providing comparable openness:}
-    reference research institutions
+    ETH~Zurich, EPFL, Oxford, Cambridge, MIT, Stanford and many others
     provide their researchers with the autonomy and infrastructure
     described here. The \loc{nren-name} and its
     international backbone interconnect

@@ -18,18 +18,18 @@ communication.
 document is a voluntary contribution produced by members of the
 institution's academic community acting in
 their scientific and technical capacity. It is transversal across
-the institutional actors concerned (central executive leadership, faculties,
+the institutional actors concerned (\loc{executive-leadership}, faculties,
 interdisciplinary centres, services, IT departments, DPO, CISO)
 and independent of any institutional hierarchy or formal mandate.
 The single objective of this report is to be considered by the
-institution's academic governing bodies (the collegial academic councils and
+institution's academic governing bodies (\loc{academic-governing-bodies} and
 \loc{governing-board}) and, if found substantive, to
 be propagated by \loc{governing-board} to all concerned components
 for deliberation through the appropriate institutional channels.}
 \end{tcolorbox}
 
 % --- Top governing board / executive leadership ---
-\begin{stakeholderbox}[Message to \loc{governing-board} and executive leadership]{blue}
+\begin{stakeholderbox}[Message to \loc{governing-board} and \loc{executive-leadership}]{blue}
 \textbf{Strategic issue:} The university's capacity to attract
 and retain world-class researchers, to compete for European and
 international funding, and to meet its legal obligations under
@@ -115,12 +115,12 @@ report is a voluntary contribution produced by members of the
 academic community acting in their scientific and technical
 capacity, independent of any institutional hierarchy or formal
 mandate. Its propositions are offered to the institution's academic
-governing bodies (the collegial academic councils and \loc{governing-board}) for
+governing bodies (\loc{academic-governing-bodies} and \loc{governing-board}) for
 consideration alongside the cybersecurity strengthening initiatives
 already approved by \loc{governing-board}. The contributors of
 this report request that, if the analysis is found substantive,
 the document be propagated by \loc{governing-board} to all
-concerned components (the central executive leadership, faculties, interdisciplinary
+concerned components (\loc{executive-leadership}, faculties, interdisciplinary
 centres, services, IT departments, DPO, CISO) so that integration
 with existing initiatives can be deliberated through the
 appropriate institutional channels.
@@ -156,12 +156,11 @@ boundaries as recurring causes.
 \textbf{Proposed next steps:}
 \begin{enumerate}[nosep]
     \item The report is submitted to the institution's academic
-    governing bodies (the collegial academic councils and
+    governing bodies (\loc{academic-governing-bodies} and
     \loc{governing-board}) for consideration within
     their respective remits; each body may issue a position
     statement on the propositions.
-    \item If endorsed by \loc{governing-board}, the central
-    executive leadership
+    \item If endorsed by \loc{governing-board}, \loc{executive-leadership}
     --- in collaboration with the CISO, the DPO, the academic
     representatives and the contributors of this report ---
     defines an integrated implementation roadmap consistent with
@@ -444,8 +443,7 @@ rather than push them into shadow IT.
 % ============================================================================
 
 This section provides a pedagogical overview intended for
-non-specialist decision-makers, particularly members of the
-institution's collegial academic councils and
+non-specialist decision-makers, particularly members of \loc{academic-governing-bodies} and
 \loc{governing-board}. It introduces the regulatory
 landscape, the academic-domain specificities, the institutional
 context and the architectural proposition of this report. Each
@@ -530,8 +528,7 @@ module of the Technical Reference):
     Cybersecurity for \emph{essential} and \emph{important}
     entities. Where the institution's jurisdiction has transposed
     the Directive into national law, a public research-and-teaching
-    institution \emph{may} be classified as an \emph{essential entity},
-    depending on the national transposition --- the public-administration
+    institution \loc{essential-entity-modality} as an \emph{essential entity}\loc{nis2-status-conditional-tail} --- the public-administration
     route being a common basis (Section~\ref{sec:nis2}).
     Essential-entity supervision is proactive (audits, maturity
     reports), with sanctions \loc{nis2-sanction-ceiling}.
@@ -574,9 +571,9 @@ statute applicable in its own jurisdiction (the worked instantiation
 is given in the Regulatory Applicability annex).
 
 \begin{description}[nosep]
-    \item[Status.] Depending on the national transposition, a public
-    research-and-teaching institution may be classified as an
-    \emph{essential entity}; in the worked transposition example, the
+    \item[Status.] A public
+    research-and-teaching institution \loc{essential-entity-modality} as an
+    \emph{essential entity}\loc{nis2-status-conditional-tail}; the
     classification rests on three cumulative legal pegs:
     the public-administration entity definition, the essential-%
     regardless-of-size clause, and the research-organisation track
@@ -658,8 +655,7 @@ mechanism in Chapter~16 (conformance suite).}
 The report is structured for several reading paths:
 
 \begin{itemize}[nosep]
-    \item \textbf{For decision-makers (the collegial academic
-    councils and \loc{governing-board}):}
+    \item \textbf{For decision-makers (\loc{academic-governing-bodies} and \loc{governing-board}):}
     Section~\ref{sec:stakeholders} presents per-audience
     messages; the accompanying executive summary (companion
     document) provides a condensed synthesis.
@@ -1030,7 +1026,7 @@ for digital-sector entities, Commission Implementing
 Regulation~(EU)~2024/2690~\cite{eu-regulation-2024-2690}),
 the binding case law (CJEU \emph{Schrems~II}~\cite{schrems2020}),
 and the national instruments (the national public-sector
-information-security policy and \loc{national-cyber-strategy}'s
+information-security policy and \loc{national-cyber-strategy}\loc{cite-cyber-strategy}'s
 academic-cooperation objective) cited throughout. The
 analysis is produced by the contributors of this report acting in
 their academic-community capacity; it has not been formally
@@ -1078,12 +1074,8 @@ freedoms, provided that each domain has:
 \label{sec:nis2}
 
 Where the institution's jurisdiction has transposed the \gls{nis2}
-Directive~\cite{nis2}, a public research-and-teaching institution is
-may be classified --- depending on the national transposition, on
-written confirmation by the national competent authority (the NIS2
-supervisory authority) --- as an \keyword{essential entity}, the
-public-administration entry of NIS2 Annex~I being the basis in the
-worked example. This classification is
+Directive~\cite{nis2}, a public research-and-teaching institution \loc{essential-entity-modality}
+as an \keyword{essential entity}\loc{nis2-status-conditional-tail}\loc{essential-entity-classification-basis}. This classification is
 independent of the institution's research activities and applies to the
 institution as a whole.
 
@@ -1166,7 +1158,7 @@ non-overlapping responsibilities towards the institution:
     and maturity report is addressed.
     \item[The national / governmental \gls{csirt}.] The
     incident-response team for public-sector entities, namely
-    \loc{national-gov-csirt}. As a public
+    \loc{national-gov-csirt}\loc{cite-gov-csirt}. As a public
     institution, the institution reports incidents primarily through
     this team.
     \item[The national single point of contact.] The body responsible
@@ -1175,9 +1167,8 @@ non-overlapping responsibilities towards the institution:
 \end{description}
 
 \noindent Two further categories of body may exist for ecosystem
-disambiguation: a separate CSIRT serving the private sector, communes
-and non-governmental entities (relevant when third-party private
-partners are involved), and a financial-sector supervisor (competent
+disambiguation: \loc{national-private-sector-csirt}\loc{cite-circl} (relevant when third-party private
+partners are involved), and \loc{financial-sector-supervisor}\loc{cite-cssf} (competent
 only for the financial sector and not for the institution outside
 specific financial projects).
 
@@ -1204,11 +1195,10 @@ is consistent with it.
 
 \subsubsection{Concomitant CER framework}
 
-\Loc{cer-national-transposition}, transposing the Critical Entities
+\Loc{cer-national-transposition}\loc{cite-cer-transposition}, transposing the Critical Entities
 Resilience (CER) Directive~(EU)~2022/2557, typically provides that every entity
 designated as critical under the CER framework is automatically
-essential under NIS2. A given institution may or may not be designated
-as a CER critical entity; the cross-reference is provided for
+essential under NIS2. \loc{cer-designation-status}; the cross-reference is provided for
 regulatory-neighbourhood completeness.
 
 Commission Implementing
@@ -1223,8 +1213,8 @@ by the national transposition.
 \subsubsection{Public-sector reference framework}
 
 The public-sector information-security baseline is typically governed
-by \loc{national-public-sector-isp}, developed
-by \loc{national-infosec-agency} and applicable to State
+by \loc{national-public-sector-isp}\loc{cite-public-sector-isp}, developed
+by \loc{national-infosec-agency}\loc{cite-infosec-agency} and applicable to State
 administrations. Such a baseline establishes the objectives of
 confidentiality, integrity, availability and risk-based
 security-measure adoption. The multi-zone architecture
@@ -1461,7 +1451,7 @@ criterion of the public-administration entity definition through
 diploma issuance, ECTS recognition, and qualification certification.
 The interpretation is reasonable but novel; this report recommends
 that interpretive guidance be requested from the national supervisory
-authority and \loc{national-spoc-authority} as part of the
+authority and \loc{national-spoc-authority}\loc{cite-spoc} as part of the
 auto-registration dialogue
 (Section~\ref{sec:obligations-mapping}).
 
@@ -2577,8 +2567,8 @@ and \keyword{isolation of activity contexts} as defences, not to blanket restric
     sciences} and administrative perimeter, not research openness.
     \item \textbf{MOVEit supply-chain attacks} (2023--2024): The Cl0p
     group exploited a vulnerability in Progress MOVEit Transfer software.
-    Many universities were affected (e.g.\ UCLA and the University
-    System of Georgia, among many others). \textbf{These breaches were caused by a \emph{third-party
+    Many universities were affected (e.g.\ UCLA, Stanford Medicine and the
+    University System of Georgia, among many others). \textbf{These breaches were caused by a \emph{third-party
     software vulnerability}, not by institutional policies on openness or
     segmentation.} Affected institutions patched the product and improved
     vendor oversight; the lesson is supply-chain and vendor risk, not
@@ -2704,6 +2694,7 @@ federated services and shared security.
     \item[GÉANT~\cite{geant}:] pan-European backbone network connecting
     around 40 \gls{nren}s across Europe, serving 50 million users
     in 10\,000+ institutions. Backbone capacity: up to 500~Gbps.
+    \item[\Loc{nren-name}\loc{cite-restena}:] the adopter's own national \gls{nren}.
     \item[RENATER~\cite{renater}:] French \gls{nren} connecting all
     universities, research laboratories (CNRS, INRIA, CEA, INSERM)
     and French grandes écoles. Multi-100~Gbps backbone.
@@ -2771,9 +2762,9 @@ internally.
 \subsection{NREN status: what is typically in place, what is missing}
 \label{subsec:lux-sdmz-status}
 
-In many national ecosystems the public documentation of the NREN and
-of the institution's HPC facility does not, as of early 2026, evidence
-a deployed \gls{sciencedmz} at the institution or at the national
+\loc{sdmz-status-lead} public documentation of \loc{nren-name} and
+of \loc{institution-hpc-facility} does not, as of early 2026, evidence
+a deployed \gls{sciencedmz} at \loc{institution-name} or at the national
 \gls{nren} level. A typical NREN advertises 10--100~Gbps
 point-to-point links on demand and a 100~Gbps uplink to
 \gls{geant}~\cite{geant}, but publishes no dedicated \gls{dtn} fabric,
@@ -2788,8 +2779,8 @@ in~\cite{dart2013, esnet-cases}.
 \noindent\textbf{The substrate is present; the pattern is not.}
 The \emph{building blocks} required for a \gls{sciencedmz} are
 frequently already operational: high-bandwidth \gls{geant}
-connectivity through the national NREN, the NREN's CSIRT for
-incident response, and an institutional HPC facility with
+connectivity through \loc{nren-name}, \loc{nren-csirt} for
+incident response, and \loc{institution-hpc-facility} with
 petabyte-scale research traffic to \loc{national-hpc-facility}
 and to international partners.
 What is missing is the architectural \emph{pattern}: a dedicated
@@ -2804,8 +2795,8 @@ design must internalise:
 
 \begin{itemize}[nosep]
     \item \textbf{Mutualised, not siloed.} Where the national
-    research ecosystem is small (the institution together with a
-    handful of national research institutes), it may be too small for
+    research ecosystem is small (the institution together with
+    \loc{research-ecosystem-partners}), it may be too small for
     several separate Science DMZs. The operationally rational
     form is then an \gls{nren}-anchored Science DMZ \emph{co-designed}
     with the national NREN, federated across the research-active
@@ -2903,9 +2894,10 @@ framework for an Information Security Management System (ISMS).
 
 \subsubsection{ISO 27001 certified universities}
 
-Several universities --- in the United Kingdom, the Netherlands,
-Germany, Australia and Japan among others --- have obtained
-certification, typically for specific scopes.
+Several universities --- including the University of Leeds and the
+University of Warwick (UK, IT services) and Eindhoven University of
+Technology (Netherlands), among others in Germany, Australia and
+Japan --- have obtained certification, typically for specific scopes.
 
 \textbf{Observation:} in most cases, certification covers
 \emph{central IT services} and not the entire institution, which
@@ -2969,7 +2961,7 @@ produced in similar contexts, and integrated into the national
 incident-notification platform as the risk-analysis module for
 NIS2-related obligations.
 
-For the adopting institution, such a method carries a specific
+For the adopting institution, \loc{national-risk-method}\loc{cite-national-risk-method} carries a specific
 operational relevance: being aligned with \framework{ISO/IEC 27005},
 it is directly usable for the institutional maturity-report structure
 and the per-zone risk-analysis evidence that Proposition~14
@@ -3475,8 +3467,7 @@ controls, not in the inclusion within scope.
 
 \medskip
 \noindent\textbf{Continuous-improvement mechanism.} The Digital
-Policy Commission (Section~\ref{sec:dpc}), the collegial academic
-councils, the responsibility charters and the ICRADP
+Policy Commission (Section~\ref{sec:dpc}), \loc{academic-governing-bodies}, the responsibility charters and the ICRADP
 (Section~\ref{sec:commission-ajustements}) collectively constitute
 the institution's \keyword{continuous-improvement mechanism}. The
 institutional artefact through which this mechanism becomes
@@ -3582,8 +3573,8 @@ characteristics are:
     \item \textbf{Advisory members (non-voting):} the CIO, the CISO,
     the \gls{dpo}, and a student representative;
     \item \textbf{Decision path:} the Commission formulates policy
-    proposals that are submitted to the institution's collegial
-    academic councils for endorsement before implementation.
+    proposals that are submitted to \loc{academic-endorsement-path}
+    for endorsement before implementation.
 \end{itemize}
 
 This Commission holds \emph{decision-making authority} over digital
@@ -3623,13 +3614,10 @@ COBIT~2019's foundational distinction~\cite{cobit}. The Commission
 also defines the minimum standards that each zone must comply with.
 
 \smallskip\noindent
-Applied to a research-and-teaching university --- typically organised
-into faculties, each with departments of teaching and research, and
-interdisciplinary centres with strong industrial and institutional
+Applied to \loc{institution-name} --- \loc{institution-faculty-structure} with strong industrial and institutional
 partnerships --- the proposed Commission would include representatives
 from these diverse entities. Its proposals would follow the
-institutional decision path: endorsement by the relevant collegial
-academic councils before operational
+institutional decision path: endorsement by \loc{academic-endorsement-path} before operational
 implementation by the IT services.
 
 \subsubsection{Contextual role management and separation of privileges}
@@ -3728,7 +3716,7 @@ A predictable process replaces informal exceptions:
     responsibilities, incident contacts, and the monitoring baseline.
     \item \textbf{Validation:} the Digital Policy Commission validates
     cases involving external exposure or sensitive data, with
-    endorsement by the relevant collegial academic council for
+    endorsement by \loc{academic-endorsement-path} for
     institution-wide implications.
 \end{enumerate}
 
@@ -3813,7 +3801,7 @@ laboratories, and lecture halls, it must invest in a digital
 infrastructure worthy of its ambitions. The progressive approach
 proposed in this dossier (governance first, then pilot on selected
 entities, then gradual extension) is designed to be implementable
-within the institution's multi-year planning and funding cycle,
+within the institution's \loc{funding-instrument},
 spreading effort over several cycles and aligning each step with
 demonstrated results.
 
@@ -4144,8 +4132,7 @@ these propositions.
     university campuses with NSF \emph{Campus Cyberinfrastructure} (CC*) funding~\cite{esnet-history,nsf-cc}.
 
     \item \textbf{Implement federated identity} via
-    \gls{eduroam} and the national NREN-operated identity
-    federation (linked to eduGAIN), enabling inter-institutional
+    \gls{eduroam} and \loc{identity-federation-profile}, enabling inter-institutional
     \gls{sso} and researcher mobility --- where a national identity
     federation operates; otherwise deploy the standards-based
     identity layer with interoperable federation metadata and defer
@@ -4238,7 +4225,7 @@ accommodation}) is a pillar of European anti-discrimination law:
     non-discrimination, including reasonable accommodation, in
     Article~5.
 
-    \item \textbf{\loc{national-equal-treatment-law}}
+    \item \textbf{\loc{national-equal-treatment-law}}\loc{cite-equal-treatment-law}
     integrates the obligation of
     reasonable adjustments into national law.
 \end{itemize}
@@ -4555,8 +4542,7 @@ apply directly to a digital policy adjustment commission.
 
 \subsection{The precedent of an existing reasonable-adjustments committee}
 
-Many institutions already operate a
-\keyword{reasonable-adjustments committee} (or equivalent) that supports
+\loc{existing-adjustments-committee-precedent} that supports
 students and staff with disabilities, learning difficulties,
 chronic illnesses, or other specific
 needs. Such a committee typically:
@@ -4609,8 +4595,7 @@ their fundamental rights, for reasons of:
 \subsubsection{Fundamental principles}
 
 \begin{enumerate}
-    \item \textbf{Independence:} the commission reports to the central
-    executive leadership
+    \item \textbf{Independence:} the commission reports to \loc{executive-leadership}
     and not to the IT department or any operational service. Its members
     may not receive instructions from any department regarding the
     handling of requests.
@@ -4645,7 +4630,7 @@ their fundamental rights, for reasons of:
     \emph{documented and quantified} security risk (and not merely invoked).
 
     \item \textbf{Right of appeal:} the requester may appeal
-    to the central executive leadership in case of refusal.
+    to \loc{executive-leadership} in case of refusal.
 
     \item \textbf{Transparency:} the commission publishes an
     anonymized annual report indicating the number of requests, the types

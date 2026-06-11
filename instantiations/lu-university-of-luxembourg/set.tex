@@ -33,6 +33,13 @@
 \newcommand{\instcategory}{EU-PUB-RI}
 \input{\catdir/\instcategory}% -> categories/EU-PUB-RI.tex
 
+% --- Edition bibliography overlay (Layer-2 sources) --------------------------
+% Named, verifiable Luxembourg national instruments/authorities/tools cited by
+% this edition. Loaded in addition to the generic shared/suit-consolidated.bib;
+% the generic build never \input's this set, so it never loads this overlay.
+% Resolved via BIBINPUTS (render/.latexmkrc adds '..', the edition root).
+\addbibresource{lu-sources.bib}
+
 % ============================================================================
 % 2. COUNTRY-SPECIFIC NAME KEYS (left at default by the EU-PUB-RI archetype)
 % ----------------------------------------------------------------------------
@@ -62,6 +69,8 @@
 \setloc{executive-leadership}{the Rectorate (the Rector and the central executive team)}
 \setloc{governing-board}{the Board of Governors (the Conseil de Gouvernance)}
 \setloc{academic-governing-bodies}{the academic deliberative bodies (the Faculty Councils and the University Council)}
+\setloc{academic-endorsement-path}{the relevant Faculty Council(s), then the University Council}
+\setloc{institution-faculty-structure}{which comprises three faculties, each with departments of teaching and research, and interdisciplinary centres}
 \setloc{staff-representation-body}{the staff delegation (d\'el\'egation du personnel)}
 
 % Approving academic units for the internal-approval byline (the original UL
@@ -95,13 +104,14 @@
 % --- Staffing / FTE profile -------------------------------------------------
 % ANCHOR-FTE-ENVELOPE: the original UL framing (R1 institution, small operating
 % team, governance bodies setting excellence as the strategic objective).
-\setloc{staffing-profile}{the University of Luxembourg, whose governance bodies set excellence as a strategic objective and which sustains the identity needs of an R1 institution within a small operating team (indicatively two to four engineers shared across other duties)}
+\setloc{staffing-profile}{the University of Luxembourg, in a country that is among the wealthiest in the world, and whose governance bodies set \emph{excellence} as the sole objective for academic personnel, sustaining the identity needs of an R1 institution within a small operating team (indicatively two to four engineers shared across other duties)}
+\setloc{funding-instrument}{multi-year agreement with the State}
 
 % --- Research & education network tier (RESTENA + GEANT) --------------------
 % ANCHOR-NREN-CSIRT, ANCHOR-IDENTITY-FEDERATION, ANCHOR-RESEARCH-BACKBONE-SCALE.
 \setloc{nren-csirt}{RESTENA-CSIRT (the CSIRT of the Luxembourg NREN RESTENA)}
 \setloc{identity-federation-profile}{the RESTENA-operated Luxembourg academic identity federation, interconnected through the eduGAIN interfederation (with collaboration authorisation patterns developed in G\'EANT's eduTEAMS service)}
-\setloc{research-backbone-scale}{the G\'EANT pan-European research backbone (40+ NRENs serving some 50 million users in 10\,000+ institutions, with multiple-wavelength backbone capacity at 400\,Gbps), reached from Luxembourg through RESTENA with campus connections in the 10--100\,Gbps range}
+\setloc{research-backbone-scale}{the G\'EANT pan-European research backbone (40+ NRENs serving some 50 million users in 10\,000+ institutions, with multiple-wavelength backbone capacity at 500\,Gbps), reached from Luxembourg through RESTENA with campus connections in the 10--100\,Gbps range}
 
 % --- High-performance computing (national/supranational tier) ----------------
 % ANCHOR-EUROHPC-SYSTEM: the national/regional supercomputer is MeluXina.
@@ -169,6 +179,37 @@
 \setloc{national-cyber-competence-centre}{NC3 (the National Cybersecurity Competence Center) under the Luxembourg House of Cybersecurity}
 \setloc{national-notification-platform}{SERIMA (the Luxembourg SEcurity RIsk MAnagement incident-notification platform, operational since 2 May 2025)}
 
+% --- Ecosystem disambiguation, research partners and Science-DMZ status (LU) ---
+\setloc{national-private-sector-csirt}{CIRCL (the Computer Incident Response Center Luxembourg), serving the private sector, communes and non-governmental entities}
+\setloc{financial-sector-supervisor}{the CSSF (the Commission de Surveillance du Secteur Financier), the financial-sector supervisor}
+\setloc{research-ecosystem-partners}{LIST and LIH}
+\setloc{sdmz-status-lead}{The}
+
+% --- Companion openness-status table: the original University-of-Luxembourg verdicts ---
+\setloc{status-table-subtitle}{at the institution today}
+\setloc{status-byod}{\nok}
+\setloc{status-eduroam}{\ok}
+\setloc{status-mobility}{\nok}
+\setloc{status-internet}{\warn}
+\setloc{status-cloud-ai}{\warn}
+\setloc{status-sci-sources}{\warn}
+\setloc{status-local-admin}{\nok}
+\setloc{status-tool-choice}{\nok}
+\setloc{status-environments}{\nok}
+\setloc{status-data-platforms}{\warn}
+\setloc{status-code-repos}{\warn}
+\setloc{status-open-access}{\ok}
+\setloc{status-labs}{\warn}
+\setloc{status-cyber-ranges}{\nok}
+\setloc{status-api-access}{\warn}
+
+% --- Abstract genesis + ICRADP adjustments-committee precedent (LU) ---
+\setloc{abstract-genesis-institution}{the University of Luxembourg}
+\setloc{existing-adjustments-committee-precedent}{the University of Luxembourg already operates a \keyword{Committee for Reasonable Adjustments}\loc{cite-adjustments-committee}}
+\setloc{icradp-committee-precedent-lead}{The institution already operates a reasonable-adjustments mechanism (supporting students and staff); the \gls{icradp} extends that established principle to digital policies.}
+\setloc{cite-adjustments-committee}{~\cite{unilu-amenagements}}
+\setloc{cite-equal-treatment-law}{~\cite{lux-loi-2006}}
+
 % Reference-only bindings: the following three name the LU legislative chamber,
 % the executive department and the HCPN founding statute. The generic suite has
 % no \loc{} consumption site for them (they are administrative back-references,
@@ -184,7 +225,27 @@
 % ANCHOR-ESSENTIAL-ENTITY-CLASSIFICATION: UL classified by the ILR as an
 % essential entity on the basis of its status as a public institution
 % (public-administration-entity route, regardless of size).
-\setloc{essential-entity-classification-basis}{the University of Luxembourg's classification by the ILR as an essential entity under the NIS2 essential-entity regime, on the basis of its status as a public institution (the public-administration-entity route, which applies regardless of size)}
+\setloc{essential-entity-classification-basis}{ on the basis of its status as a public institution (the public-administration-entity route under \loc{nis2-national-transposition}\loc{cite-nis2-transposition}, Art.~2(34\textdegree) and Art.~11(1)(4\textdegree), which applies regardless of size), confirmed by the ILR in a letter of which \loc{cs-research-unit} was notified on 3~April~2026\loc{cite-ilr-essential}}
+
+% --- NIS2 essential-entity status: the LU edition asserts the established fact (conditional-fact pattern) ---
+\setloc{essential-entity-modality}{is classified}
+\setloc{nis2-status-conditional-tail}{}
+\setloc{cer-designation-status}{The University of Luxembourg is not designated as a CER critical entity}
+% Edition-routed citations: bind the routing keys to the real \cite{} markers (entries in the LU bibliography).
+\setloc{cite-ilr-essential}{~\cite{ilr-ul-essential}}
+\setloc{cite-nis2-transposition}{~\cite{pl-8364}}
+\setloc{cite-notification-platform}{~\cite{serima}}
+\setloc{cite-national-risk-method}{~\cite{monarc}}
+\setloc{cite-public-sector-isp}{~\cite{psi-lu}}
+\setloc{cite-cyber-strategy}{~\cite{ncss-iii}}
+\setloc{cite-nren-csirt}{~\cite{restena-csirt}}
+\setloc{cite-cer-transposition}{~\cite{pl-8307-cer}}
+\setloc{cite-gov-csirt}{~\cite{govcert-lu}}
+\setloc{cite-spoc}{~\cite{hcpn}}
+\setloc{cite-infosec-agency}{~\cite{anssi-lu}}
+\setloc{cite-circl}{~\cite{circl}}
+\setloc{cite-cssf}{~\cite{cssf}}
+\setloc{cite-restena}{~\cite{restena}}
 
 % ============================================================================
 % 6. NOTE ON THE REMAINING UNCONSUMED BINDINGS (substance-in-prose orphans)
@@ -195,9 +256,8 @@
 %
 %   - Declared orphans (no consumption site today): regulatory-regime,
 %     eid-trust-services-regime, data-custody-sovereignty-profile,
-%     institution-hpc-facility, academic-governing-bodies,
 %     internal-emergency-incident-contact, institution-macro-set,
-%     essential-entity-classification-basis, and the reference-only authority
+%     and the reference-only authority
 %     bindings noted above (national-legislature, national-executive-department,
 %     national-cyber-commissariat-founding-law).
 %

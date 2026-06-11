@@ -484,36 +484,13 @@
   fetch_note    = {Landing page accessible, HTTP 200. Verified Feb 2026.},
 }
 
-@misc{pl-8364,
-  author       = {{National legislature}},
-  title        = {National law transposing Directive (EU) 2022/2555 (NIS2) into domestic law},
-  year         = {2024},
-  abstract     = {The applicable national instrument transposing Directive (EU) 2022/2555 (NIS2) into domestic law, cited as a worked instance of how member states implement the EU directive baseline. The transposing text establishes the national cybersecurity framework applicable to essential and important entities, defining risk-management obligations, incident-notification duties and cooperation with the designated supervisory authority. Its classification provisions consolidate the treatment of public-administration entities as essential regardless of size and define research organisations by excluding teaching establishments. Provided as a concrete illustration of the directive-to-national-law mapping that an adopting institution reads against its own jurisdiction's transposition instrument.},
-  note         = {Illustrative national transposition of the NIS2 directive baseline; an adopting institution substitutes the equivalent instrument and supervisory authority of its own jurisdiction.},
-  fetch_status = {OK},
-  fetch_note   = {Stands for the applicable national NIS2 transposition instrument, adopted and in force in 2026; an adopting institution resolves it to the specific act and official-journal reference of its own jurisdiction. Verified 2026-06-09.},
-}
-
-@misc{ilr-ul-essential,
-  author       = {{National competent authority}},
-  title        = {Classification of a research university as an essential entity under the {NIS2} Directive transposition},
-  year         = {2026},
-  abstract     = {Worked instance of a written determination issued by the competent national supervisory authority designated under the NIS2 Directive transposition, classifying a public research university as an essential entity. The classification rests on three cumulative legal pegs of the national transposition: a definition of the public-administration entity through cumulative criteria (public-interest mission, legal personality, public funding or State control, decision-making power affecting cross-border movements); a provision under which a public-administration entity is essential regardless of size; and a provision excluding teaching establishments from the research-organisation track. Operational consequences: holistic application across the institution, proactive supervision, mandatory audits, and an annual compliance and maturity report. Illustrates the essential-entity determination an adopting institution obtains from its own national supervisory authority.},
-  note         = {Cited as an illustrative essential-entity determination under the NIS2 directive baseline; the supervisory authority and classification instrument vary by jurisdiction.},
-  fetch_status = {OK},
-  fetch_note   = {Determination letter from the national competent authority held on file by the adopting institution and transmitted through its CISO; the letter itself is non-public, so its content is held in the note field rather than the abstract. Verified 2026-06-09.},
-}
-
-%--- National supervisory and reporting landscape (illustrative instances) ---
-
-@misc{serima,
-  author       = {{National competent authority}},
-  title        = {National single-window cybersecurity risk-management and reporting platform},
-  year         = {2026},
-  abstract     = {Centralised cybersecurity reporting platform operated by a national supervisory authority in partnership with the national cybersecurity competence centre and the competent data protection authority. The platform implements unified reporting obligations stemming from the NIS, NIS2, EECC, GDPR and CER directives, replacing previously fragmented reporting channels. Modules include incident notification, risk analysis, and forthcoming modules for security objectives, reporting and dependencies. Cited as a concrete instance of the single-window reporting platform through which an essential entity discharges its tiered NIS2 incident-notification obligations and submits its annual maturity report; an adopting institution uses the equivalent platform of its own national authority.},
-  fetch_status = {OK},
-  fetch_note   = {Stands for the single-window reporting platform of the applicable national authority; modules and unified-reporting scope corroborated against a live national instance. Verified 2026-06-09.},
-}
+% NOTE: the worked-instance national instruments pl-8364, ilr-ul-essential and
+% serima have moved to the LU edition overlay (instantiations/lu-university-of-
+% luxembourg/lu-sources.bib) with their real named identity (Chambre des
+% Deputes, ILR, SERIMA). The generic suite no longer cites a specific national
+% transposition: those citations are routed through \loc{cite-*} keys that are
+% EMPTY in the generic Layer-0 default and bound to \cite{} only in an edition
+% set. Each adopting edition supplies its own national instruments the same way.
 
 @misc{eu-regulation-2024-2690,
   author       = {{European Commission}},
