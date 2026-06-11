@@ -13,8 +13,9 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 fail=0
-ok()  { echo "GATE $1 ok  — $2"; }
-bad() { echo "GATE $1 FAIL — $2"; echo "$3" | head -12; fail=1; }
+ok()   { echo "GATE $1 ok  — $2"; }
+bad()  { echo "GATE $1 FAIL — $2"; echo "$3" | head -12; fail=1; }
+warn() { echo "GATE $1 warn — $2"; }   # advisory only; never sets fail
 
 # --- G1: bare locality anchors in GENERIC bodies ----------------------------
 g1=$(grep -rn "pan-European\|European backbone\|top governing board\|R-tier" \
@@ -154,6 +155,27 @@ for inst in instantiations/*/; do
   done
 done
 if [ -n "$g8" ]; then bad G8 "cohérence gouvernance/diffusion" "$g8"; else ok G8 "liens des READMEs et dépôt des PDFs d'édition cohérents"; fi
+
+# --- G9: suite-version freshness (NON-BLOCKING advisory) ----------------------
+# Reminds the maintainer to run tools/bump-version.sh when suite .tex/.bib have
+# changed since the last bump of shared/suite-version.tex. Never fails.
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  vlast=$(git log -1 --format=%H -- shared/suite-version.tex 2>/dev/null || true)
+  if [ -z "$vlast" ]; then
+    ok G9 "version de suite (non bloquant) : suite-version.tex pas encore versionnée"
+  else
+    vchanged=$(git diff --name-only "$vlast"..HEAD -- suit-policy suit-solution shared categories 2>/dev/null \
+               | grep -E '\.(tex|bib)$' | grep -v 'shared/suite-version.tex' || true)
+    vn=$(printf '%s' "$vchanged" | grep -c . || true)
+    if [ "$vn" -gt 0 ]; then
+      warn G9 "$vn fichier(s) .tex/.bib changé(s) depuis le dernier bump — pensez à 'tools/bump-version.sh' (non bloquant)"
+    else
+      ok G9 "version de suite à jour (aucun .tex/.bib changé depuis le dernier bump)"
+    fi
+  fi
+else
+  ok G9 "version de suite (non bloquant) : hors dépôt git, vérification ignorée"
+fi
 
 echo
 if [ "$fail" -ne 0 ]; then echo "SUITE GATES: FAIL"; exit 1; else echo "SUITE GATES: PASS"; fi

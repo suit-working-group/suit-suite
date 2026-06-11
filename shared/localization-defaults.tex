@@ -44,9 +44,18 @@
 % institution's edition). Generic default is the neutral role phrase.
 \setloc{approving-academic-units}{the approving academic units of \loc{institution-name}}
 
+% Suite version (generic, maintainer-managed; bumped by tools/bump-version.sh).
+\input{suite-version}
+% Per-document edition versions: EMPTY in the generic build (the suite version
+% is shown instead); an edition fills, in its set.tex, the documents it
+% publishes. Keyed by document id (derived from \jobname in \suitmetablock).
+\setloc{policy-EN-edition-version}{}
+\setloc{policy-summary-EN-edition-version}{}
+\setloc{solution-EN-edition-version}{}
+\setloc{solution-summary-EN-edition-version}{}
+
 % Document metadata for the unified \suitmetablock title-page block. Each
-% edition overrides these for its own version/visibility/approval facts.
-\setloc{doc-version}{2.1}
+% edition overrides these for its own visibility/approval facts.
 \setloc{doc-visibility}{INTERNAL}
 \setloc{doc-approval-authority}{\loc{approving-academic-units}}
 \setloc{doc-approval-date}{\textit{(approval date to be set)}}

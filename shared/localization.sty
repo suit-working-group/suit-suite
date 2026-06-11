@@ -95,10 +95,28 @@
 %       Status: Approved by <authority> on <date>
 %       Based on the SUIT Working Group [ref]
 %       Print date: <today>
+% --- \suitversionline : the version line used inside \suitmetablock ----------
+%     The per-document edition-version key is named after \jobname (the render
+%     target): <jobname>-edition-version, e.g. policy-EN-edition-version. We
+%     look it up via \csname, which builds the control-sequence name from
+%     character codes and so is immune to the catcode-12 characters \jobname
+%     yields. The generic build leaves every key empty and shows the
+%     maintainer-managed suite version; an edition fills the key and shows its
+%     edition version while still naming the suite version it tracks.
+\newcommand{\suitversionline}{%
+  \edef\suit@ev{\ifcsname loc@val@\jobname-edition-version\endcsname
+      \csname loc@val@\jobname-edition-version\endcsname\fi}%
+  \ifx\suit@ev\@empty
+    SUIT suite version~\loc{suite-version}%
+  \else
+    Edition version~\suit@ev{} $\cdot$ tracks SUIT suite~\loc{suite-version}%
+  \fi
+}
+
 \newcommand{\suitmetablock}{%
   \begingroup\small
   Edition:~\loc{edition-name}\\[2pt]
-  Document Version~\loc{doc-version}\\[2pt]
+  \suitversionline\\[2pt]
   Visibility:~\loc{doc-visibility}\\[2pt]
   Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]
   Based on the SUIT Working Group~\cite{suit-wg}\\[2pt]
