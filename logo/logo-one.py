@@ -28,6 +28,8 @@ Tous les réglages sont dans le bloc PARAMÈTRES ci-dessous.
 """
 
 import re
+import shutil
+import subprocess
 from pathlib import Path
 
 # ----------------------------------------------------------------------
@@ -77,6 +79,10 @@ LET_FIG_GAP = 48            # écart horizontal colonne lettres <-> colonne figu
 # Format « inline » : mot « SUIT » suivi des figures sur une même ligne.
 INLINE_CAP = SHAPE_SIZE     # hauteur du mot (= hauteur des figures)
 INLINE_GAP = 56            # écart horizontal mot <-> première figure
+
+# Export PNG — facteur d'agrandissement appliqué aux dimensions du SVG
+# (fond transparent préservé). 3x ≈ qualité impression/retina.
+PNG_SCALE = 3
 
 # ----------------------------------------------------------------------
 # THÈMES — une couleur assignable à CHAQUE élément
@@ -444,6 +450,42 @@ def svg_logo_inline(theme="light"):
 
 
 # ----------------------------------------------------------------------
+# EXPORT PNG — rendu fidèle (strokes, fills, transparence)
+#
+# ImageMagick est à proscrire ici : son moteur SVG interne (MSVG) ignore
+# les éléments dessinés en stroke sans fill (cercles creux, carré extérieur,
+# arêtes de liaison). On passe par librsvg (rsvg-convert), le moteur de
+# référence, avec repli sur cairosvg si l'outil n'est pas installé.
+# ----------------------------------------------------------------------
+def svg_to_png(svg_path, scale=PNG_SCALE):
+    """Convertit `svg_path` en PNG (même nom, fond transparent).
+
+    Renvoie le chemin du PNG, ou None si aucun moteur de rendu n'est
+    disponible (un avertissement est alors émis une seule fois).
+    """
+    svg_path = Path(svg_path)
+    png_path = svg_path.with_suffix(".png")
+
+    if shutil.which("rsvg-convert"):
+        subprocess.run(
+            ["rsvg-convert", "--zoom", str(scale),
+             "--output", str(png_path), str(svg_path)],
+            check=True)
+        return png_path
+
+    try:
+        import cairosvg
+        cairosvg.svg2png(url=str(svg_path), write_to=str(png_path), scale=scale)
+        return png_path
+    except ImportError:
+        if not getattr(svg_to_png, "_warned", False):
+            svg_to_png._warned = True
+            print("AVERTISSEMENT : ni rsvg-convert ni cairosvg disponibles — "
+                  "PNG non générés (brew install librsvg).")
+        return None
+
+
+# ----------------------------------------------------------------------
 def save_logo():
     # Chaque thème × trois dispositions × {sans wordmark / avec « SUIT » }, plus
     # le format « lettres latérales » (qui porte toujours le mot).
@@ -461,11 +503,16 @@ def save_logo():
         files[f"suit_logo_vlock_{theme}.svg"]  = svg_logo_vlock(theme)
         files[f"suit_logo_inline_{theme}.svg"] = svg_logo_inline(theme)
 
+    generated = []
     for name, content in files.items():
         Path(name).write_text(content, encoding="utf-8")
+        generated.append(name)
+        png = svg_to_png(name)
+        if png:
+            generated.append(png.name)
 
-    print(f"Fichiers générés ({len(files)}) :")
-    for name in files:
+    print(f"Fichiers générés ({len(generated)}) :")
+    for name in generated:
         print(f"- {name}")
 
 
