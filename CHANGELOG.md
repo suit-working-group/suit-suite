@@ -5,7 +5,50 @@ release onward, each applied change references the **ticket id** of the request
 that motivated it (see `CONTRIBUTING.md` and `GOVERNANCE.md`). Document bodies
 remain atemporal; all traceability lives in this file.
 
-## Unreleased — 2026-06-11 — Non-regression remediation of the University-of-Luxembourg edition
+The current generic **suite version** is recorded in `shared/suite-version.tex`
+and rendered on every document ("SUIT suite version X.Y.Z"). Each release bumps
+it via `tools/bump-version.sh` (patch by default — one bump per release); the
+`## [Unreleased]` section below is stamped with the new version at that point.
+
+## [Unreleased]
+
+_No changes yet since 1.0.1._
+
+## 1.0.1 — 2026-06-11 — post-1.0.0 maintenance release
+
+Suite version bumped **1.0.0 → 1.0.1** (one patch for this release;
+`shared/suite-version.tex`). Documents now render "SUIT suite version 1.0.1";
+the Luxembourg edition renders "Edition version 2.1.0 · tracks SUIT suite 1.0.1".
+This release consolidates all post-1.0.0 maintenance — the items below plus the
+two remediation efforts that follow as sub-sections.
+
+- **Two-axis document versioning** (suite + per-document edition). One
+  maintainer-managed semver suite version (`shared/suite-version.tex`), shown on
+  every generic document; per-document `<doc>-edition-version` keys filled by
+  each instantiation, shown as "Edition version X.Y.Z · tracks SUIT suite X.Y.Z".
+  `\suitmetablock` selects the document by `\jobname` (catcode-robust `\csname`,
+  `\ifcsname` fall-through to the suite version for any document without a key);
+  no wrapper/generator change. New `tools/bump-version.sh [patch|minor|major]
+  [--tag]` (one bump per release, patch default; minor/major manual) and a
+  non-blocking freshness gate G9. The LU edition is initialised at edition
+  version 2.1.0 on all four documents.
+- **SUIT logo assets published** for participants (`logo/`: PNG + SVG colour
+  variants and the generator `logo/logo-one.py`); working-only variants moved
+  out of the repository tree.
+- **Find-only audit remediation** (audit run `_AUDITS/2026-06-11/`, candidates
+  manually verified read-only before any fix): single-sourced two stale cited
+  titles and a literal cover title via the title macros (lot A); cross-document
+  coherence — clarification-box colour unified to orange, phase-2 terminology
+  aligned, AI Act high-risk Annex-III date precision (lot B); citation hygiene —
+  an unsourced quantitative claim reformulated, four inline citations added, the
+  27 `IMPOSSIBLE TO FETCH` abstract placeholders replaced with honest concise
+  abstracts (lot C); `categories/US-PUB-R1.tex` now leaves `nren-csirt` at its
+  Layer-0 default, matching the rule and US-PRIV-R1 (lot D). Several find-only
+  candidates were **refuted on verification** (a Gartner-citation false positive;
+  a README "self-conflict"; two design candidates already disclosed in
+  `ch31`/`ch16`) and correctly **not** changed.
+
+### Non-regression remediation of the University-of-Luxembourg edition
 
 Motivating record: a read-only, multi-agent non-regression review comparing the
 pre-refactoring University-of-Luxembourg suite against the instantiated SUIT
@@ -62,7 +105,7 @@ creation.
   and the Paris-Saclay "did not pay the ransom" incident detail (its dedicated
   incident item was editorially replaced by the Texas Tech / Howard analyses).
 
-## Unreleased — 2026-06-10 — Audit 260609-2153 remediation · liberty-first rule · instantiation-library publication
+### Audit 260609-2153 remediation · liberty-first rule · instantiation-library publication
 
 Motivating record: the recurring suite audit `_AUDITS/260609-2153/`
 (74 confirmed findings, 13 blocking gates) and the maintainer session of
