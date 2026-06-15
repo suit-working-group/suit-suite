@@ -95,7 +95,9 @@ When a single file could fall under both (for example, a `.sty` package shipped 
 
 SUIT grows through its community. Whether you want to adopt the suite, deposit an instantiation for your own university, or improve the shared reference, **you are warmly invited to join the working group** — university IT decision-makers, architects, engineers, teachers, researchers and students are all welcome.
 
-The documents are maintained under a **ticket-centralized** change model: the community proposes every change through issues (tickets), and the maintainer centralizes, decides, and applies each one. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`GOVERNANCE.md`](GOVERNANCE.md).
+🚀 **The simplest way to join — no GitHub account required —** is the one-page form at **[suit-onboarding.vercel.app](https://suit-onboarding.vercel.app)**: fill it in, confirm by email, and you are added to the [`MEMBERS/`](MEMBERS/) registry once the maintainer reviews the request (and, if you give your GitHub handle, credited as a contributor — without any write access).
+
+The documents themselves are maintained under a **ticket-centralized** change model: the community proposes every change through issues (tickets), and the maintainer centralizes, decides, and applies each one. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`GOVERNANCE.md`](GOVERNANCE.md).
 
 📧 **Contact:** to join the working group or for any question, write to **Nicolas Guelfi** — [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu).
 
