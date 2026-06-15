@@ -2,7 +2,7 @@
 name: "Benoît RIES"
 entity_type: "individual"
 participation: "contributor"
-github: "https://github.com/benoitries"
+github: "benoitries"
 affiliation: "Université du Luxembourg"
 role: "researcher"
 country: "Luxembourg"
