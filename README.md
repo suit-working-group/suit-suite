@@ -16,6 +16,16 @@
 
 ---
 
+<p align="center">
+  <a href="https://join.suit.ros.lu">
+    <img alt="Join or support the SUIT Working Group" height="46"
+      src="https://img.shields.io/badge/Join%20or%20Support%20the%20Working%20Group-3a3a8e?style=for-the-badge">
+  </a>
+</p>
+<p align="center"><sub>👥 No GitHub account required — register and confirm by email · <a href="https://join.suit.ros.lu"><strong>join.suit.ros.lu</strong></a></sub></p>
+
+---
+
 ## 📖 Overview
 
 SUIT is a reference document suite produced by an international working group of academic-community members that includes university IT decision-makers, architects, engineers, teachers, researchers and students.
