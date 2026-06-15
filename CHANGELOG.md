@@ -12,7 +12,30 @@ it via `tools/bump-version.sh` (patch by default — one bump per release); the
 
 ## [Unreleased]
 
-_No changes yet since 1.0.1._
+_No changes yet since 1.0.2._
+
+## 1.0.2 — 2026-06-15 — community onboarding + "sustainable" disambiguation
+
+Suite version bumped **1.0.1 → 1.0.2** (`shared/suite-version.tex`). All generic
+documents and the Luxembourg edition were rebuilt to render "SUIT suite version
+1.0.2" (0 undefined citations/references, 0 `??key??`). This release bundles the
+community-onboarding integration and a terminology clarification.
+
+- **Community onboarding integrated into the suite front-door.** New `MEMBERS/`
+  (working-group roster) and `SUPPORTERS/` (endorsements) registries, with three
+  nested participation levels — **supporter / member / member & contributor**,
+  open to individuals and organizations. The one-page web join flow
+  (`https://join.suit.ros.lu`, no GitHub account required) is surfaced in
+  `README.md`, `GOVERNANCE.md` and a prominent "Join or Support" button;
+  membership grants **no write access** at any level. The onboarding service
+  itself lives in the separate `suit-onboarding` repository.
+- **"Sustainable" disambiguation (longevity, not environmental).** A one-line
+  gloss was added where the term is introduced — README overview, GOVERNANCE
+  mission, CONTRIBUTING intro, and a footnote on the working-group name in the
+  Solution foreword — clarifying that in SUIT "sustainable" means *built to last*
+  (operational, financial and organisational durability and continuity over
+  time), not environmental sustainability. Policy documents were untouched (the
+  word does not appear there).
 
 ## 1.0.1 — 2026-06-11 — post-1.0.0 maintenance release
 

@@ -9,7 +9,7 @@
 <p align="center">
   <img alt="Documents license: CC BY-SA 4.0" src="https://img.shields.io/badge/documents-CC--BY--SA--4.0-1f6feb">
   <img alt="Tooling license: MIT" src="https://img.shields.io/badge/tooling-MIT-3fb950">
-  <img alt="Version 1.0.0" src="https://img.shields.io/badge/version-1.0.0-8957e5">
+  <img alt="Version 1.0.2" src="https://img.shields.io/badge/version-1.0.2-8957e5">
   <img alt="Deliverables: 4 documents + 2 modules" src="https://img.shields.io/badge/deliverables-4%20documents%20%2B%202%20modules-555">
   <img alt="Built with LaTeX" src="https://img.shields.io/badge/built%20with-LaTeX-008080">
 </p>
