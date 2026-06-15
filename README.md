@@ -32,6 +32,8 @@ SUIT is a reference document suite produced by an international working group of
 
 It sets out a governance and engineering reference for building, operating, and sustaining research and education IT infrastructure at a modern university.
 
+> 📌 **On the word “sustainable”:** in SUIT it means **built to last** — operationally, financially and organisationally durable and maintainable over the long term. The emphasis is on **longevity and continuity**, *not* (specifically) environmental sustainability.
+
 The four documents in this repository build on a first version — the policy and the technical solution together with their respective executive companion. They are written to be adopted directly by any university: the body of every document uses role-based, vendor-neutral, institution-neutral language, and a `shared/` localization guide lets each adopting institution instantiate the generic material to its own context. The institution-neutral framing exists so the suite reads as a shared international reference rather than one university's local policy — the prior work and its authorship are acknowledged, not erased.
 
 ## 📚 The four documents

@@ -4,7 +4,7 @@ This document defines how the **SUIT — Sustainable University IT Infrastructur
 
 ## 🎯 Mission
 
-SUIT is an international working group of academic-community members that includes university IT decision-makers, architects, engineers, teachers, researchers and students. It produces and maintains a reference suite — Policy, Policy Summary, Solution, Solution Summary — that any university can adopt to build, operate, and sustain its research and education IT infrastructure.
+SUIT is an international working group of academic-community members that includes university IT decision-makers, architects, engineers, teachers, researchers and students. It produces and maintains a reference suite — Policy, Policy Summary, Solution, Solution Summary — that any university can adopt to build, operate, and sustain its research and education IT infrastructure. Here, *sustainable* means **built to last** — durable and maintainable over the long term (longevity and continuity), not (specifically) environmental sustainability.
 
 ## 🌱 Origins
 

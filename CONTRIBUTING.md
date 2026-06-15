@@ -1,6 +1,6 @@
 # Contributing to SUIT
 
-Thank you for your interest in the **SUIT — Sustainable University IT Infrastructure & Technology** suite.
+Thank you for your interest in the **SUIT — Sustainable University IT Infrastructure & Technology** suite. *(In SUIT, “sustainable” means built to last — longevity and continuity over time — not environmental.)*
 
 ## How changes work here: ticket-centralized
 
