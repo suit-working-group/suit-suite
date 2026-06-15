@@ -28,7 +28,7 @@ This single point of integration is what keeps the four documents coherent in te
 
 ## 🤝 Joining the working group
 
-The working group is open and we actively welcome new members. The easiest way to join is the **one-page web form at [suit-onboarding.vercel.app](https://suit-onboarding.vercel.app)** — **no GitHub account needed**: fill it in, confirm by email, and you are recorded in the [`MEMBERS/`](MEMBERS/) registry once the maintainer reviews the request. Supplying your (optional) GitHub handle also credits you as a repository contributor, without any write access.
+The working group is open and we actively welcome new members. The easiest way to join is the **one-page web form at [join.suit.ros.lu](https://join.suit.ros.lu)** — **no GitHub account needed**: fill it in, confirm by email, and you are recorded in the [`MEMBERS/`](MEMBERS/) registry once the maintainer reviews the request. Supplying your (optional) GitHub handle also credits you as a repository contributor, without any write access.
 
 You can also join the classic way — to propose changes, contribute evidence, or deposit your institution's instantiation — by writing to **Nicolas Guelfi** at [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu), or opening an issue through the templates in `.github/ISSUE_TEMPLATE/`. The [`MEMBERS/`](MEMBERS/) registry — not any access level — is the authoritative record of working-group membership.
 

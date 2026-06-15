@@ -11,7 +11,7 @@ repository; the suite stays under its ticket-centralized governance (see
 
 The easy way to join is the one-page form:
 
-### → **https://suit-onboarding.vercel.app**
+### → **https://join.suit.ros.lu**
 
 Fill it in and confirm via the email you receive. That's all — **no GitHub account, no
 command line.** Your request opens a pull request adding your `MEMBERS/` entry, which the
