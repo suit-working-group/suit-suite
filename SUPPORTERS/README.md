@@ -12,7 +12,7 @@ separate from the [`MEMBERS/`](../MEMBERS/) roster on purpose: support ≠ membe
 
 Use the one-page form and choose **“Supporter”**:
 
-### → **https://join.suit.ros.lu**
+### → **https://join.suit.academic-citizens.org**
 
 Fill it in and confirm via email — **no GitHub account needed**. Your request opens a pull
 request adding your `SUPPORTERS/` entry, which the maintainer reviews and merges. Want to

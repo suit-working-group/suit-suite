@@ -28,7 +28,7 @@ This single point of integration is what keeps the four documents coherent in te
 
 ## 🤝 Joining the working group
 
-The working group is open and we actively welcome new participants. The easiest way is the **one-page web form at [join.suit.ros.lu](https://join.suit.ros.lu)** — **no GitHub account needed**: fill it in and confirm by email. It offers three nested levels of participation, open to **individuals and organizations** alike:
+The working group is open and we actively welcome new participants. The easiest way is the **one-page web form at [join.suit.academic-citizens.org](https://join.suit.academic-citizens.org)** — **no GitHub account needed**: fill it in and confirm by email. It offers three nested levels of participation, open to **individuals and organizations** alike:
 
 - **Supporter** — endorse the initiative without being a member; recorded in [`SUPPORTERS/`](SUPPORTERS/).
 - **Member** — join the working group; recorded in [`MEMBERS/`](MEMBERS/).

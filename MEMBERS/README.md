@@ -23,7 +23,7 @@ contributor status is for **individuals** with a GitHub account (no write access
 
 The easy way is the one-page form:
 
-### → **https://join.suit.ros.lu**
+### → **https://join.suit.academic-citizens.org**
 
 Fill it in and confirm via the email you receive. That's all — **no GitHub account, no
 command line.** Your request opens a pull request adding your registry entry, which the
