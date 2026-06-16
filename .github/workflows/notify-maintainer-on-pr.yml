@@ -1,0 +1,53 @@
+name: Notify maintainer on PR
+
+# Emails the maintainer whenever a pull request is opened or reopened — including
+# PRs authored by the onboarding bot's own token (which GitHub would not notify
+# you about) and PRs from forks. Uses Resend (same provider as suit-onboarding).
+#
+# pull_request_target runs in the BASE repo context, so secrets are available
+# even for fork PRs. This job NEVER checks out or runs the PR's code — it only
+# reads event metadata and sends an email — so that context is safe here.
+
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send email via Resend
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          NOTIFY_TO: ${{ vars.NOTIFY_TO }}
+          PR_NUMBER: ${{ github.event.number }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_BASE: ${{ github.event.pull_request.base.ref }}
+          PR_HEAD: ${{ github.event.pull_request.head.ref }}
+          REPO: ${{ github.repository }}
+        run: |
+          if [ -z "$RESEND_API_KEY" ]; then
+            echo "RESEND_API_KEY secret not set — skipping notification."; exit 0
+          fi
+          TO="${NOTIFY_TO:-nicolas.guelfi@uni.lu}"
+          BODY="Repository: $REPO
+          PR #$PR_NUMBER: $PR_TITLE
+          Author: $PR_AUTHOR
+          Branch: $PR_HEAD -> $PR_BASE
+          URL: $PR_URL"
+          # Build JSON safely with jq (no string injection from the PR title).
+          payload=$(jq -n \
+            --arg from "SUIT Working Group <noreply@suit.academic-citizens.org>" \
+            --arg to "$TO" \
+            --arg subject "New PR #$PR_NUMBER on $REPO: $PR_TITLE" \
+            --arg text "$BODY" \
+            '{from:$from, to:[$to], subject:$subject, text:$text}')
+          curl -sS -X POST https://api.resend.com/emails \
+            -H "Authorization: Bearer $RESEND_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$payload"
