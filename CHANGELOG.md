@@ -12,7 +12,13 @@ it via `tools/bump-version.sh` (patch by default — one bump per release); the
 
 ## [Unreleased]
 
-_No changes yet since 1.0.2._
+- **Working-group join URL moved to its own domain.** The one-page join flow is
+  now served at `https://join.suit.academic-citizens.org` (previously
+  `join.suit.ros.lu`). The front-door references in `README.md`, `GOVERNANCE.md`,
+  `MEMBERS/README.md` and `SUPPORTERS/README.md` were updated accordingly; the
+  dated 1.0.2 entry below keeps the original URL as a historical record. The
+  former host now issues a 308 redirect (path and query preserved) to the new
+  domain, so links already shared keep working. No document bodies were affected.
 
 ## 1.0.2 — 2026-06-15 — community onboarding + "sustainable" disambiguation
 
