@@ -130,7 +130,7 @@ _Auto-generated from the [`CONTRIBUTORS/`](CONTRIBUTORS/), [`MEMBERS/`](MEMBERS/
 
 **CONTRIBUTORS:** Hyacinthe Cartiaux, Benoît RIES
 
-**MEMBERS:** —
+**MEMBERS:** Stéphane Bordas
 
 **SUPPORTERS:** —
 <!-- MEMBERS-LIST:END -->
