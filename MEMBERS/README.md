@@ -1,20 +1,22 @@
 # 👥 MEMBERS — Working Group registry
 
-This folder is the **roster of the SUIT Working Group**. Each member has one file,
-`MEMBERS/<handle-or-name>.md`. **This registry — not any GitHub access level — is the
-authoritative record of who belongs to the working group.** Membership grants no write
-access to the repository; the suite stays under its ticket-centralized governance (see
-[`GOVERNANCE.md`](../GOVERNANCE.md)).
+This folder lists **working-group members** — people who joined without GitHub
+contributor credit. Members who are also credited on the repository live in
+[`CONTRIBUTORS/`](../CONTRIBUTORS/); together, `MEMBERS/` and `CONTRIBUTORS/` form the
+working-group roster. Each member has one file, `MEMBERS/<handle-or-name>.md`. **This
+registry — not any GitHub access level — is the authoritative record of who belongs to
+the working group.** Membership grants no write access to the repository; the suite stays
+under its ticket-centralized governance (see [`GOVERNANCE.md`](../GOVERNANCE.md)).
 
 ## Three ways to take part
 
-Registration offers three nested levels (each includes the previous):
+Registration offers three levels, each recorded in **its own folder**:
 
 | Level | Recorded in | Meaning |
 |---|---|---|
 | **Supporter** | [`SUPPORTERS/`](../SUPPORTERS/) | Endorses the initiative — **not** a member |
-| **Member** | `MEMBERS/` (`participation: member`) | Joins the working group |
-| **Member & contributor** | `MEMBERS/` (`participation: contributor`) | Member **and** credited as a GitHub contributor |
+| **Member** | `MEMBERS/` | Joins the working group |
+| **Member & contributor** | [`CONTRIBUTORS/`](../CONTRIBUTORS/) | Member **and** credited as a GitHub contributor |
 
 Both **individuals** and **organizations** can register as supporters or members;
 contributor status is for **individuals** with a GitHub account (no write access is ever granted).
@@ -42,20 +44,21 @@ Individual:
 ---
 name: "Jane Doe"
 entity_type: "individual"
-participation: "contributor"   # member | contributor
+participation: "member"
 honorific: "Dr."               # optional — —/Prof./Dr./Prof. Dr.
-github: "janedoe"              # only for contributors
 affiliation: "University of X" # optional (recommended)
 linkedin: "https://www.linkedin.com/in/janedoe"   # optional
 role: "CISO"                   # optional
 country: "Germany"
 contact_point: "Nicolas Guelfi"
 joined: 2026-06-15
-handle_verified: false         # contributors only
 ---
 
 A few words (optional).
 ```
+
+Members who are also credited on the repository (with a GitHub handle) live in
+[`CONTRIBUTORS/`](../CONTRIBUTORS/) — see that folder's README for the contributor format.
 
 Organization (member):
 
@@ -71,9 +74,6 @@ contact_point: "Nicolas Guelfi"
 joined: 2026-06-15
 ---
 ```
-
-`handle_verified` is `false` while the GitHub handle is self-declared (the maintainer
-eyeballs it at merge). A future verification step may set it to `true`.
 
 ## 🏛️ Governance
 

@@ -1,14 +1,15 @@
 name: Update participants list
 
-# When a registration is validated (a MEMBERS/ or SUPPORTERS/ file is merged to
-# main), regenerate the participants section of README.md and commit it back.
-# The commit only touches README.md, which is outside the paths filter, so it
-# does not re-trigger this workflow (the [skip ci] marker is a second guard).
+# When a registration is validated (a CONTRIBUTORS/, MEMBERS/ or SUPPORTERS/ file
+# is merged to main), regenerate the participants section of README.md and commit
+# it back. The commit only touches README.md, which is outside the paths filter,
+# so it does not re-trigger this workflow (the [skip ci] marker is a second guard).
 
 on:
   push:
     branches: [main]
     paths:
+      - 'CONTRIBUTORS/**'
       - 'MEMBERS/**'
       - 'SUPPORTERS/**'
   workflow_dispatch:

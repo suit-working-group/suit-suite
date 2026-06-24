@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 // Regenerate the "Working group participants" section of README.md from the
-// MEMBERS/ and SUPPORTERS/ registries (the source of truth). Names are grouped
-// by participation and sorted alphabetically by last name. No dependencies.
+// CONTRIBUTORS/, MEMBERS/ and SUPPORTERS/ registries (the source of truth). Names
+// are grouped by participation and sorted alphabetically by last name. No deps.
 //
 // Run locally:  node scripts/build-members-list.mjs
-// In CI: run on every push to main that touches MEMBERS/** or SUPPORTERS/**.
+// In CI: run on every push to main touching CONTRIBUTORS/**, MEMBERS/** or SUPPORTERS/**.
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 
@@ -33,7 +33,11 @@ function readFolder(dir, fallbackParticipation) {
     .filter((p) => p.name);
 }
 
-const all = [...readFolder('MEMBERS', 'member'), ...readFolder('SUPPORTERS', 'supporter')];
+const all = [
+  ...readFolder('CONTRIBUTORS', 'contributor'),
+  ...readFolder('MEMBERS', 'member'),
+  ...readFolder('SUPPORTERS', 'supporter'),
+];
 
 const lastName = (n) => n.trim().split(/\s+/).pop() || n;
 const byLastName = (a, b) =>
@@ -52,7 +56,7 @@ const list = (names) => (names.length ? names.join(', ') : '—');
 const section = [
   '## 👥 Working group participants',
   '',
-  '_Auto-generated from the [`MEMBERS/`](MEMBERS/) and [`SUPPORTERS/`](SUPPORTERS/) registries — do not edit this section by hand._',
+  '_Auto-generated from the [`CONTRIBUTORS/`](CONTRIBUTORS/), [`MEMBERS/`](MEMBERS/) and [`SUPPORTERS/`](SUPPORTERS/) registries — do not edit this section by hand._',
   '',
   `**CONTRIBUTORS:** ${list(contributors)}`,
   '',
