@@ -107,7 +107,7 @@ When a single file could fall under both (for example, a `.sty` package shipped 
 
 SUIT grows through its community. Whether you want to adopt the suite, deposit an instantiation for your own university, or improve the shared reference, **you are warmly invited to join the working group** — university IT decision-makers, architects, engineers, teachers, researchers and students are all welcome.
 
-🚀 **The simplest way to join — no GitHub account required —** is the one-page form at **[join.suit.academic-citizens.org](https://join.suit.academic-citizens.org)**: fill it in, confirm by email, and you are added to the [`MEMBERS/`](MEMBERS/) registry once the maintainer reviews the request (and, if you give your GitHub handle, credited as a contributor — without any write access).
+🚀 **The simplest way to join — no GitHub account required —** is the one-page form at **[join.suit.academic-citizens.org](https://join.suit.academic-citizens.org)**: fill it in, confirm by email, and you are added to the [`MEMBERS/`](MEMBERS/) registry once the maintainer reviews the request (or [`CONTRIBUTORS/`](CONTRIBUTORS/) if you give your GitHub handle, where you are also credited as a contributor — without any write access).
 
 The documents themselves are maintained under a **ticket-centralized** change model: the community proposes every change through issues (tickets), and the maintainer centralizes, decides, and applies each one. See [`CONTRIBUTING.md`](CONTRIBUTING.md) and [`GOVERNANCE.md`](GOVERNANCE.md).
 
@@ -122,3 +122,15 @@ latexmk -pdf <document>.tex
 ```
 
 Temporary files are written to `out/`; the final `.pdf` is produced next to its `.tex` source. Set `SUIT_CLEAN=1` to wipe the `out/` temporaries after a successful build. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full build and bibliography conventions.
+
+<!-- MEMBERS-LIST:START -->
+## 👥 Working group participants
+
+_Auto-generated from the [`CONTRIBUTORS/`](CONTRIBUTORS/), [`MEMBERS/`](MEMBERS/) and [`SUPPORTERS/`](SUPPORTERS/) registries — do not edit this section by hand._
+
+**CONTRIBUTORS:** Hyacinthe Cartiaux, Benoît RIES
+
+**MEMBERS:** —
+
+**SUPPORTERS:** —
+<!-- MEMBERS-LIST:END -->
