@@ -122,3 +122,15 @@ latexmk -pdf <document>.tex
 ```
 
 Temporary files are written to `out/`; the final `.pdf` is produced next to its `.tex` source. Set `SUIT_CLEAN=1` to wipe the `out/` temporaries after a successful build. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full build and bibliography conventions.
+
+<!-- MEMBERS-LIST:START -->
+## 👥 Working group participants
+
+_Auto-generated from the [`MEMBERS/`](MEMBERS/) and [`SUPPORTERS/`](SUPPORTERS/) registries — do not edit this section by hand._
+
+**CONTRIBUTORS:** Hyacinthe Cartiaux, Benoît RIES
+
+**MEMBERS:** —
+
+**SUPPORTERS:** —
+<!-- MEMBERS-LIST:END -->
