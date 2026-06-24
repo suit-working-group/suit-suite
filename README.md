@@ -128,7 +128,7 @@ Temporary files are written to `out/`; the final `.pdf` is produced next to its 
 
 _Auto-generated from the [`CONTRIBUTORS/`](CONTRIBUTORS/), [`MEMBERS/`](MEMBERS/) and [`SUPPORTERS/`](SUPPORTERS/) registries — do not edit this section by hand._
 
-**CONTRIBUTORS:** Hyacinthe Cartiaux, Benoît RIES
+**CONTRIBUTORS:** Hyacinthe Cartiaux, Nicolas Guelfi, Benoît RIES
 
 **MEMBERS:** Stéphane Bordas
 
