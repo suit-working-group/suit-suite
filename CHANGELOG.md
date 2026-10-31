@@ -12,6 +12,26 @@ it via `tools/bump-version.sh` (patch by default — one bump per release); the
 
 ## [Unreleased]
 
+- **Luxembourg edition: NIS2 transposition now cited as the enacted law; ILR
+  attestation stated as it is on file; status table dated (ticket #25).** In
+  `instantiations/lu-university-of-luxembourg/set.tex` the key
+  `nis2-national-transposition` now names the Law of 5 May 2026 on measures for a
+  high level of cybersecurity (Mémorial A No. 225 of 6 May 2026, in force since
+  10 May 2026) instead of bill 8364; `cite-nis2-transposition` points to the new
+  `lu-sources.bib` entry `loi-2026-05-05-nis2` (verified against the published
+  text on 31 October 2026), while `pl-8364` stays as legislative history with its
+  note completed. `essential-entity-classification-basis` no longer speaks of an
+  ILR letter on file: the classification is "attested in the written statement
+  of the University CISO of 3 April 2026", the ILR document itself not being on
+  file (entry `ilr-ul-essential` rewritten accordingly). `status-table-subtitle`
+  reads "at the institution, as of 31 October 2026". The edition README states
+  the scope of the "approved May 7, 2026" line (faculty-level endorsement, not a
+  University adoption). The four edition PDFs were rebuilt (0 undefined
+  citations/references, 0 undefined localization keys, 0 `??key??`); gates PASS.
+  Generic bodies untouched.
+- **README "Referencing": ORBi technical-report record added (ticket #26).** A
+  `@techreport` entry for the report deposited on ORBilu (handle 10993/68540,
+  May 2026) now follows the `@misc{suit-wg}` entry. No document bodies affected.
 - **Working-group join URL moved to its own domain.** The one-page join flow is
   now served at `https://join.suit.academic-citizens.org` (previously
   `join.suit.ros.lu`). The front-door references in `README.md`, `GOVERNANCE.md`,

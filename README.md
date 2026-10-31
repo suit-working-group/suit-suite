@@ -92,6 +92,21 @@ If you use, adopt, or build on SUIT, please cite the suite:
 }
 ```
 
+The technical report integrating the suite is deposited on ORBilu, the open repository of the University of Luxembourg (handle 10993/68540):
+
+```bibtex
+@techreport{Guelfi2026SUIT,
+  author      = {Guelfi, Nicolas},
+  title       = {{SUIT} - Sustainable {IT} Policies for the Academic Community},
+  institution = {University of Luxembourg},
+  type        = {Technical report},
+  year        = {2026},
+  month       = may,
+  url         = {https://orbilu.uni.lu/handle/10993/68540},
+  note        = {Integrates the deliverables of the SUIT Working Group reference suite; handle 10993/68540}
+}
+```
+
 The suite builds on a first version created by **Nicolas Guelfi**, chair of the SUIT Working Group.
 
 ## ⚖️ Licensing
