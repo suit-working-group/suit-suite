@@ -47,7 +47,7 @@ be REMOVED; three things are explicitly VALUED and KEPT.
    **without naming the origin institution**. The University-of-Luxembourg origin
    is an **instantiation** detail: it belongs to the Luxembourg edition under
    `instantiations/lu-university-of-luxembourg/`, and any edition may express it
-   through `\loc{author-affiliation}`.
+   through `\loc{doc-author-contact}` (the title-block author-and-contact line, empty in the generic suite).
 
    **The author's name is NOT a forbidden token.** Removing "Nicolas Guelfi" in
    the name of genericity is an error. Authorship ≠ locality-as-framing: a credit

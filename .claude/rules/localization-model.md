@@ -81,7 +81,7 @@ The generic build is defined as "Layer 0 only". Its output is the canonical
 generic text. It MUST read as finished prose, NEVER as a literal mustache
 token (`{{INSTITUTION_NAME}}`, `<placeholder>`, `TODO`, etc.). A mustache token
 names an abstract localization variable only; in `.tex` it is always resolved
-through `\loc{}` against a real Layer-0 default. Optional clauses (e.g. `author-affiliation`) default to an EMPTY value
+through `\loc{}` against a real Layer-0 default. Optional clauses (e.g. `doc-author-contact`) default to an EMPTY value
 that produces no stray punctuation or whitespace, not to a placeholder.
 
 ## Authoring Checklist

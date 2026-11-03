@@ -12,6 +12,27 @@ it via `tools/bump-version.sh` (patch by default — one bump per release); the
 
 ## [Unreleased]
 
+## 1.0.4 — 2026-11-03 — the edition names its author and contact point
+
+Suite version bumped **1.0.3 → 1.0.4** (`shared/suite-version.tex`); the ten
+PDFs rebuilt (0 undefined citations/references/localization keys, 0 `??key??`;
+gates PASS); the Luxembourg edition moves to **edition version 2.1.2**.
+
+- **Author and contact line on the edition's title pages (ticket #31).** Since
+  release 1.0.1 ("Depersonalised attribution") no title page named the author
+  or a contact point, although the documents circulated at the Faculty in June
+  2026 did, and `no-false-locality.md` (point 3) keeps the authorship of the
+  first version as a fact of record. `\suitmetablock` gains an optional line
+  "Author and contact: …", printed only when the new Layer-0 key
+  `doc-author-contact` is non-empty: the generic suite leaves it empty (it
+  belongs to the working group and names no individual on its title pages, as
+  decided in 1.0.1); the Luxembourg edition binds it to "Nicolas Guelfi,
+  Department of Computer Science, University of Luxembourg (chair of the SUIT
+  working group, creator of the first version) — nicolas.guelfi@uni.lu". The
+  rules `no-false-locality.md` and `localization-model.md` now name this key
+  instead of the `author-affiliation` key removed in 1.0.1. Edition README
+  updated. No document body changes.
+
 ## 1.0.3 — 2026-11-03 — external-review corrections before the governance presentation
 
 Suite version bumped **1.0.2 → 1.0.3** (`shared/suite-version.tex`). All six

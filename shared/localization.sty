@@ -95,6 +95,7 @@
 %       Status: Approved by <authority> on <date>
 %       Scope: <doc-approval-scope>          (only when the key is non-empty)
 %       Based on the SUIT Working Group [ref]
+%       Author and contact: <doc-author-contact>   (only when the key is non-empty: editions)
 %       Print date: <today>
 % --- \suitversionline : the version line used inside \suitmetablock ----------
 %     The per-document edition-version key is named after \jobname (the render
@@ -126,6 +127,19 @@
   \fi
 }
 
+% --- \suitauthorcontactline : optional "Author and contact:" line -------------
+%     Printed only when doc-author-contact is bound to a non-empty value. The
+%     generic suite belongs to the working group and names no individual on its
+%     title pages (release 1.0.1); an edition names its author and contact
+%     point here (no-false-locality.md, point 3: authorship is kept).
+\newcommand{\suitauthorcontactline}{%
+  \edef\suit@contact{\ifcsname loc@val@doc-author-contact\endcsname
+      \csname loc@val@doc-author-contact\endcsname\fi}%
+  \ifx\suit@contact\@empty\else
+    Author and contact:~\loc{doc-author-contact}\\[2pt]%
+  \fi
+}
+
 % The edition name is NOT repeated here: \suiteditionline already prints it
 % prominently on every title page (an "Edition:" line here duplicated it).
 \newcommand{\suitmetablock}{%
@@ -135,6 +149,7 @@
   Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]
   \suitapprovalscopeline
   Based on the SUIT Working Group~\cite{suit-wg}\\[2pt]
+  \suitauthorcontactline
   Print date:~\today
   \par\endgroup
 }
