@@ -23,6 +23,7 @@ This single point of integration is what keeps the four documents coherent in te
 ## 👥 Roles
 
 - **Chairman / Maintainer** — **Nicolas Guelfi** (**@nicolasguelfi**), chair of the SUIT working group and creator of the first version of the policy and technical solution and their executive companions. Owns the repository, triages tickets, makes final decisions, applies changes, cuts releases. Contact: [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu).
+- **Deputy maintainer** — *to be appointed* by the maintainer among the working-group members and recorded here. Acts for the maintainer when the maintainer is unavailable or recuses (see *Decision process*), with the same single-point-of-integration duty for the period concerned.
 - **Working group members** — propose changes, review proposals, and contribute evidence through tickets and discussion. Membership is open to the whole academic community — decision-makers, architects, engineers, teachers, researchers and students.
 - **Adopting institutions** — use the suite and request localization guidance through the *Localization request* template.
 
@@ -32,16 +33,18 @@ The working group is open and we actively welcome new participants. The easiest 
 
 - **Supporter** — endorse the initiative without being a member; recorded in [`SUPPORTERS/`](SUPPORTERS/).
 - **Member** — join the working group; recorded in [`MEMBERS/`](MEMBERS/).
-- **Member & contributor** — join and also appear as a GitHub contributor (individuals with a GitHub handle); recorded in [`MEMBERS/`](MEMBERS/). **No write access is ever granted** at any level.
+- **Member & contributor** — join and also appear as a GitHub contributor (individuals with a GitHub handle); recorded in [`CONTRIBUTORS/`](CONTRIBUTORS/) (and in [`MEMBERS/`](MEMBERS/) as a member). **No write access is ever granted** at any level.
 
-You can also take part the classic way — to propose changes, contribute evidence, or deposit your institution's instantiation — by writing to **Nicolas Guelfi** at [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu), or opening an issue through the templates in `.github/ISSUE_TEMPLATE/`. The [`MEMBERS/`](MEMBERS/) registry — not any access level — is the authoritative record of working-group membership.
+You can also take part the classic way — to propose changes, contribute evidence, or deposit your institution's instantiation — by writing to **Nicolas Guelfi** at [nicolas.guelfi@uni.lu](mailto:nicolas.guelfi@uni.lu), or opening an issue through the templates in `.github/ISSUE_TEMPLATE/`. The [`MEMBERS/`](MEMBERS/) and [`CONTRIBUTORS/`](CONTRIBUTORS/) registries — not any access level — are the authoritative records of working-group membership and of contributor status.
 
 ## 🔁 Decision process
 
 1. A change is proposed as a **Document change request** ticket (with target, current text, proposal, rationale, evidence).
 2. The maintainer triages: accept / refine / decline, with a rationale recorded on the ticket.
 3. Accepted changes are applied by the maintainer, verified by a clean `latexmk` build (0 undefined citations/references), and recorded in `CHANGELOG.md` with the ticket id.
-4. Substantive or contested changes may be put to the working group for input before a decision.
+4. Substantive or contested changes receive **two independent reviews** by working-group members, recorded on the ticket, before the decision; they may also be put to the whole working group for input.
+5. The maintainer **recuses** from deciding a change in which they have a personal interest (for example a change concerning their own institution's edition or their own cited work); the deputy maintainer decides and records the decision on the ticket.
+6. **Disagreements are logged**: a declined or contested proposal keeps its rationale and the dissenting position on the ticket, and `CHANGELOG.md` points to the ticket when the matter is substantive.
 
 ## 🚀 Release cadence
 

@@ -6,10 +6,10 @@
 This document is the executive summary of a voluntary contribution
 produced by members of the academic community acting in their
 scientific and technical capacity, addressed to the
-institution's governing bodies (the unit-level deliberative body,
-the institution-wide council, and \loc{governing-board}) for
+institution's governing bodies (\loc{academic-governing-bodies}, and
+\loc{governing-board}) for
 consideration and, if found substantive, propagation by
-\loc{governing-board} to all concerned components.}
+\loc{governing-board}\loc{governing-board-gloss} to all concerned components.}
 
 \bigskip
 
@@ -190,7 +190,8 @@ context-bounded access} --- precisely what this proposal advocates.
 %============================================================================
 
 The logic is simple: \textbf{secure strongly what must be secured}
-(administrative, financial, HR data) \textbf{to liberate everything else}.
+(administrative, financial, HR data --- and any data of equivalent
+sensitivity wherever it sits) \textbf{to liberate everything else}.
 This is what MIT, Stanford, Oxford, ETH~Zurich, Cambridge, CERN,
 Michigan and EPFL do --- and, through their national research-and-education
 networks, what institutions of far more modest scale do as well ---
@@ -203,9 +204,10 @@ The proposed architecture rests on two complementary mechanisms:
 \emph{segmentation} controls where incidents can spread (network
 boundaries); \textbf{Trusted Activity Contexts} provide each user with
 a validated environment --- assembling data, tools, services, and access
-rights --- adapted to their current role and task. Together, they ensure
-that a breach in one context cannot cascade to the rest of the
-institution.
+rights --- adapted to their current role and task. Together, they are
+designed to contain a breach within its context, subject to tested
+boundaries and documented exceptions, rather than letting it cascade to
+the rest of the institution.
 
 Conceptually, the university information system is organised in
 \textbf{concentric layers} (the executive view of the five structural
@@ -253,8 +255,9 @@ Research-data path (e.g.\ Science DMZ) &
   \gls{acl} + dedicated \gls{ids} \\
 \addlinespace
 Administrative &
-  \textbf{Maximum protection} --- this is where, \emph{and only where},
-  restrictions are concentrated &
+  \textbf{Maximum protection} --- this is where restrictions are
+  concentrated by default; the sensitive enclave carries equivalent
+  controls wherever the data class requires them &
   Strict: firewall, \gls{ids}/\gls{ips}, proxy, full \gls{gdpr} \\
 \addlinespace
 Sensitive enclave &
@@ -460,9 +463,8 @@ through blanket restrictions that drive talent away and fuel Shadow~IT.
 \medskip
 \textbf{Short-term objectives:}
 \begin{enumerate}
-  \item That the \textbf{unit-level deliberative body}, subsequently the
-    \textbf{institution-wide council}, and finally
-    \textbf{\loc{governing-board}} endorse a position statement derived
+  \item That \textbf{\loc{academic-endorsement-path}}, and finally
+    \textbf{\loc{governing-board}}, endorse a position statement derived
     from the present executive summary, \emph{``\suitpolicytitle''};
   \item That the \textbf{executive leadership}, in collaboration with IT
     experts and academic representatives, define a short- to

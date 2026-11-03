@@ -22,9 +22,9 @@ the institutional actors concerned (\loc{executive-leadership}, faculties,
 interdisciplinary centres, services, IT departments, DPO, CISO)
 and independent of any institutional hierarchy or formal mandate.
 The single objective of this report is to be considered by the
-institution's academic governing bodies (\loc{academic-governing-bodies} and
+institution's academic governing bodies (\loc{academic-governing-bodies}, and
 \loc{governing-board}) and, if found substantive, to
-be propagated by \loc{governing-board} to all concerned components
+be propagated by \loc{governing-board}\loc{governing-board-gloss} to all concerned components
 for deliberation through the appropriate institutional channels.}
 \end{tcolorbox}
 
@@ -62,9 +62,9 @@ The analysis of the most publicised university breaches in
 2024--2025 (Paris-Saclay, Texas Tech, Western Sydney ---
 see Section~\ref{sec:defaillances-mediatiques}) reveals that
 \emph{none} were caused by research-zone autonomy or segmented
-architectures; all stemmed from centralised, unsegmented
-perimeters, supply-chain vulnerabilities, or credential
-compromise.
+architectures; the publicly documented causes were supply-chain
+vulnerabilities, credential compromise, and attacks on central
+administrative services.
 
 \medskip
 \textbf{What we propose:}
@@ -72,14 +72,15 @@ compromise.
     \item \textbf{Multi-zone architecture with Trusted Activity
     Contexts:} a segmented infrastructure that \emph{strengthens}
     the protection of sensitive administrative data by isolating
-    them in a dedicated enclave (recent media-covered incidents
-    show that centralised, undifferentiated perimeters amplify
-    impact --- see Section~\ref{sec:defaillances-mediatiques}),
+    them in a dedicated enclave (recent media-covered incidents hit
+    central administrative services, where a single undifferentiated
+    perimeter amplifies impact --- see
+    Section~\ref{sec:defaillances-mediatiques}),
     while each research project, teaching activity, or
     administrative process operates within a validated, isolated
-    environment adapted to its risk level --- ensuring that an
-    incident in one context cannot compromise the rest of the
-    institution;
+    environment adapted to its risk level --- designed to contain
+    an incident within its context, subject to tested boundaries
+    and documented exceptions;
     \item \textbf{Federated governance with responsibility charters}
     aligned with the models of world-class universities (MIT,
     Oxford, Cambridge, ETH Zurich, Michigan), formalising autonomy
@@ -738,9 +739,10 @@ a \emph{centralised} security approach consisting of:
           laboratories and departments.
 \end{itemize}
 
-While this approach may be justified for a purely
-administrative environment, it \keyword{raises significant challenges} in a
-university context for several reasons:
+This approach has real merits --- uniform visibility over the estate
+and a smaller rule set to maintain --- and may be justified for a purely
+administrative environment; in a university context, however, it
+\keyword{raises significant challenges} for several reasons:
 
 \begin{enumerate}[nosep]
     \item \textbf{It can hinder experimental research} in computer science,
@@ -940,9 +942,11 @@ elevating from per-request access decisions to
     controlled, monitored, and bounded so that users can be granted a
     high degree of autonomy within it.
 
-    \item[\textsc{Dependability}] Failures, misconfigurations, or
-    security incidents occurring within one context remain contained
-    and cannot compromise the core infrastructure or other contexts.
+    \item[\textsc{Dependability}] The architecture is designed to
+    contain failures, misconfigurations, or security incidents within
+    the context where they occur, subject to tested boundaries and
+    documented exceptions, so that they do not reach the core
+    infrastructure or other contexts.
 
     \item[\textsc{User-centricity}] The digital environment adapts to
     the user's current role and activity rather than imposing a rigid
@@ -1841,9 +1845,10 @@ application-layer content. These limitations are mitigated by (i)~\gls{soc}
 monitoring of Zeek alerts, (ii)~endpoint hardening on \gls{dtn}s (minimal
 services, regular patching), (iii)~the Trusted Activity Context
 framework proposed in this report, which confines each research
-activity to an isolated, monitored environment --- ensuring that a
-compromise within one context cannot propagate laterally to other
-activities or to the infrastructure core.
+activity to an isolated, monitored environment designed to contain a
+compromise within its context, subject to tested boundaries and
+documented exceptions, rather than letting it propagate laterally to
+other activities or to the infrastructure core.
 
 \subsubsection{Quantitative performance evidence}
 
@@ -2098,10 +2103,10 @@ criteria:
     mid-sized research university)~\cite{epfl-rcp}, \institution{CERN}
     (governance model translatable to research-and-teaching
     consortia)~\cite{cern-network}, and Paris-Saclay
-    (multi-institution federation in a public-research perimeter
-    regulated under an EU national equivalent of the
-    framework)~\cite{paris-saclay-cyber}, alongside larger
-    institutions.
+    (a grouping of institutions sharing campus-wide digital
+    services in a public-research perimeter regulated under an EU
+    national equivalent of the framework)~\cite{paris-saclay-network},
+    alongside larger institutions.
     \item \textbf{Track record.} Institutions of this kind commonly
     have substantial experience adapting external models to
     their specific public-research context.
@@ -2512,7 +2517,12 @@ contrary, they underscore the need for \emph{segmentation} and
 
 The aim here is not to minimise the harm caused by breaches or to assign
 blame to specific institutions. It is to provide a factual basis so that
-debate relies on \textbf{cause and architecture}, not on anecdote. When
+debate relies on \textbf{cause and architecture}, not on anecdote. For
+each incident, what is publicly established (the attack and the services
+affected), what is alleged (by the attackers or by third parties) and
+what remains unknown (the internal topology, the propagation path) are
+kept distinct below; the architectural lesson is drawn from the
+established facts only. When
 incidents are cited as proof that ``permissive'' policies fail, the
 appropriate response is to distinguish: (i)~\emph{third-party and
 supply-chain vulnerabilities}, (ii)~\emph{centralised, unsegmented
@@ -2534,12 +2544,14 @@ and \keyword{isolation of activity contexts} as defences, not to blanket restric
     reportedly involved theft of around 1\,TB of data and compromise of
     employee credentials (infostealer activity). Recovery lasted months; the
     university worked with the French national
-    cybersecurity agency (ANSSI). \textbf{Relevant point:} the systems
-    targeted were \emph{central} administrative and email infrastructure ---
-    a large, undifferentiated perimeter. The incident illustrates the
-    risk of a \keyword{single point of failure} and the value of
-    isolating sensitive administrative data in a dedicated enclave, as
-    recommended in this report~\cite{paris-saclay-cyber,soccer-paris-saclay}.
+    cybersecurity agency (ANSSI). \textbf{Relevant point:} the publicly
+    reported targets were \emph{central} administrative and e-mail
+    services; public sources do not document the internal topology or
+    the propagation path. The incident is cited for what it shows: the
+    concentration of critical services in one central perimeter, the
+    \keyword{single point of failure} that isolating sensitive
+    administrative data in a dedicated enclave, as recommended in this
+    report, is designed to avoid~\cite{paris-saclay-cyber,soccer-paris-saclay}.
     \item[\institution{Université de Rennes} (March 2025):] The university
     reported a cyberattack affecting a \emph{teaching subnet} (ISTIC ---
     computing and electronics). The group FunkSec claimed theft of
@@ -2619,11 +2631,11 @@ Third-party / supply-chain (MOVEit, Oracle EBS) &
     Vendor risk, patching, and isolation of critical apps --- not
     restricting research/teaching zones. \\
 \addlinespace
-Credential compromise \& lateral movement (e.g.\ Paris-Saclay, Western Sydney) &
+Credential compromise \& lateral movement (e.g.\ Western Sydney) &
     Need for \keyword{segmentation} and least-privilege access so that
     one compromise does not expose the whole institution. \\
 \addlinespace
-Centralised, undifferentiated perimeter (e.g.\ Paris-Saclay central services) &
+Concentration of critical services in one central perimeter (e.g.\ Paris-Saclay central administrative and e-mail services) &
     Aligns with this report's argument: a single large perimeter
     creates a \keyword{single point of failure}; administrative data
     should be in a dedicated, hardened enclave. \\
@@ -3089,21 +3101,28 @@ Six items detail the framework:
     \emph{Schrems~II}~\cite{schrems2020} and AI
     Act~\cite{eu-ai-act} provisions. The institution provides
     classification templates, registration facilities and training;
-    the PI applies scientific and legal judgment case by case.
+    the PI applies scientific and legal judgment case by case. The
+    institution remains the controller (\gls{gdpr} Art.~24(1)); the
+    PI acts under a documented delegation.
 
     \item \textbf{Data classification.} Before any transfer to a
     non-EU AI cloud provider, the PI classifies the data:
     \begin{itemize}[nosep]
-        \item \emph{Non-personal or fully anonymised data}:
-        free transfer (\gls{gdpr} not applicable);
-        \item \emph{Pseudonymised personal data}: transfer permitted
-        under \gls{scc} + documented \gls{tia} + supplementary
-        measures (encryption with key separation, reinforced
-        contractual clauses);
-        \item \emph{Identifying personal data}: transfer requires
-        explicit informed consent (or another Art.~6 lawful basis)
-        + \gls{scc} + supplementary measures + documented
-        \gls{tia}, or the data must remain within the EEA.
+        \item \emph{Non-personal or fully anonymised data}: no
+        \gls{gdpr} transfer restriction, but contractual,
+        confidentiality, intellectual-property and export-control
+        constraints still apply;
+        \item \emph{Pseudonymised personal data}: remain personal
+        data; a transfer is possible only through an adequacy
+        decision covering the recipient, or under \gls{scc} with a
+        documented \gls{tia} and supplementary measures (encryption
+        with key separation, reinforced contractual clauses) --- see
+        Part~\ref{part:reg-applicability}, obligation F4;
+        \item \emph{Identifying personal data}: a transfer is
+        possible only on a lawful basis (explicit informed consent
+        or another Art.~6 basis) and through an adequacy decision or
+        \gls{scc} with supplementary measures and a documented
+        \gls{tia}; otherwise the data must remain within the EEA.
     \end{itemize}
 
     \item \textbf{Cooperative declaration via institutional register.}
@@ -3826,9 +3845,10 @@ demonstrated results.
 \subsection{Cost analysis: federated approach}
 
 \begin{itemize}
-    \item \textbf{Enhanced security:} Trusted Activity Contexts limit the
-    propagation of incidents --- a compromise in a research context
-    cannot reach the administrative context;
+    \item \textbf{Enhanced security:} Trusted Activity Contexts are
+    designed to contain an incident within its context, subject to
+    tested boundaries and documented exceptions, so that a compromise
+    in a research context does not reach the administrative context;
     \item \textbf{Proportionate controls:} maximum investment where
     the risk is highest (sensitive administrative data),
     adapted investment elsewhere;
@@ -3848,6 +3868,13 @@ demonstrated results.
     evidence of compliance and effectiveness.
 \end{itemize}
 
+The federated approach carries risks of its own --- uneven zone
+maturity, hidden flatness behind nominal segmentation, charter drift ---
+which the risk register (Section~\ref{subsec:risk-register}) records
+together with their mitigations; the comparison above is therefore
+between two documented risk profiles, not between a flawed model and a
+flawless one.
+
 \subsection{Feasibility and cost structure of the proposed approach}
 
 The question of \textbf{cost and feasibility} is addressed explicitly,
@@ -3857,8 +3884,11 @@ art}, \textbf{costs} and context~\cite{gdpr}.
 
 \begin{itemize}[nosep]
     \item \textbf{Proportionate investment:} by concentrating the
-    strictest controls on the \emph{administrative enclave} only, the
-    university avoids over-investing in perimeter security for
+    strictest controls on the \emph{administrative and sensitive
+    enclaves} --- that is, wherever the data class requires them (see
+    the storage and data-classification chapter of the Technical
+    Reference) --- the university avoids over-investing in perimeter
+    security for
     low-sensitivity research and teaching traffic; the ``high security''
     perimeter becomes \emph{smaller and cheaper to harden and monitor}.
     \item \textbf{Reuse of existing ecosystems:} many components are
@@ -3978,6 +4008,7 @@ Progressive extension then follows validated results, allowing the
 institution to control scope at each step.
 
 \subsection{Risk Register}
+\label{subsec:risk-register}
 
 \begin{table}[H]
 \centering

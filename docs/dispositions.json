@@ -34,7 +34,9 @@
       "kind": "principle",
       "title": "Size and jurisdiction invariance (minimal necessary set)",
       "statement": "SUIT defends a size-invariant and jurisdiction-invariant minimal functional set: the minimal necessary set of obligations and controls is invariant to institution size and to jurisdiction; only its instantiation scales. The EU regime is cited as a baseline anchor, and non-EU / non-research-intensive adopters substitute the local equivalent via the Localization Guide.",
-      "doNotRaise": "Do not flag the invariance claim as overclaim, nor demand a size or jurisdiction threshold for the minimal set, nor treat the EU-baseline framing as EU-only lock-in. The minimal set itself does not scale; only its instantiation does.",
+      "doNotRaise": "Do not flag the invariance claim as overclaim per se, nor demand a size or jurisdiction threshold for the minimal set, nor treat the EU-baseline framing as EU-only lock-in. The minimal set itself does not scale; only its instantiation does. A concrete applicability counter-example for a named archetype (an obligation or control of the minimal set that demonstrably does not apply to that archetype) remains raisable and is never dispositioned.",
+      "validityDomain": "The minimal functional set only: the six functional obligations F1-F6 of the Regulatory Applicability module and their invariant SUIT control mechanisms. It does not cover sizing figures, pace horizons, staffing profiles or the reference stack, which scale with the institution and are auditable as such.",
+      "reviewBy": "Re-examined at the first deposited instantiation of a non-EU or teaching-led archetype, and at the latest at the next major release of the suite.",
       "appliesTo": ["SCI", "LEG", "APP", "DEF"]
     },
     {

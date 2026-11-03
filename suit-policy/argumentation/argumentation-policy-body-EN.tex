@@ -204,7 +204,7 @@ Giving departments autonomy over their IT will lead to neglect: unpatched server
 \begin{itemize}[nosep]
     \item \textbf{Charters with accountability:} mandatory incident contacts, logging baseline, periodic reviews;
     \item \textbf{Baseline monitoring by the \gls{soc}:} the central security team monitors all zones for anomalies, including research zones;
-    \item \textbf{Default-deny at internal boundaries:} a neglected zone cannot propagate to other zones;
+    \item \textbf{Default-deny at internal boundaries:} designed to contain a neglected zone's incident within that zone, subject to tested boundaries and documented exceptions;
     \item \textbf{ETH~Z\"urich isolation model:} non-compliant resources are placed in isolated network zones~\cite{eth-baseline} so that weaknesses are not exploitable from outside;
     \item \textbf{Periodic audits:} a digital-policy governance body reviews zone compliance.
 \end{itemize}
@@ -281,7 +281,7 @@ Root access means researchers can disable security tools, install vulnerable sof
 
 \noindent\textbf{Why this is safer than the alternative:} when root access is denied, researchers jailbreak managed machines, use hidden VMs, connect lab equipment via personal hotspots, or deploy entirely unmanaged servers under desks. These shadow systems have \emph{no} logging, \emph{no} patching, \emph{no} accountability, and \emph{no} isolation. Formal root access with charters, accountability, and network isolation is strictly safer than informal root access with no controls.
 
-\medskip\noindent\textbf{The ``launchpad'' fear:} in a segmented architecture, a compromised research machine cannot reach the administrative enclave --- this is the entire point of segmentation. At CERN, experiment networks are isolated from the general network by strict firewalls and \gls{acl}s~\cite{cern-tn}, yet physicists retain extensive local control.
+\medskip\noindent\textbf{The ``launchpad'' fear:} in a segmented architecture, the boundaries are designed to contain a compromised research machine within its context, subject to tested boundaries and documented exceptions, so that it does not reach the administrative enclave --- this is the entire point of segmentation. At CERN, experiment networks are isolated from the general network by strict firewalls and \gls{acl}s~\cite{cern-tn}, yet physicists retain extensive local control.
 \end{answerbox}
 
 \bigskip
@@ -496,7 +496,7 @@ The lock-in answer rests on exit tests and a reversibility playbook; if those te
 \end{questionbox}
 
 \begin{answerbox}[Answer to Q5.4]
-\textbf{The exit tests are cross-implementation by design, not single-vendor.} Each replaceable layer is tested against an \emph{alternative} implementation: \gls{scim} user/group export to an alternative identity provider, policy bundles re-imported into an alternative engine, container images to an alternative OCI registry, switch configuration to an alternative-vendor device, the analytical store re-pointed, and object-store operations against an independent S3-compatible implementation. Reversibility is therefore tested behaviour, not a vendor promise --- developed in full in the standalone Technical Reference~\cite{ng-tech-ref-2026}.
+\textbf{The exit tests are cross-implementation by design, not single-vendor.} Each replaceable layer is tested against an \emph{alternative} implementation: \gls{scim} user/group export to an alternative identity provider, policy bundles re-imported into an alternative engine, container images to an alternative OCI registry, switch configuration to an alternative-vendor device, the analytical store re-pointed, and object-store operations against an independent S3-compatible implementation. Reversibility is therefore a tested property once the institution runs these exit tests, not a vendor promise --- developed in full in the standalone Technical Reference~\cite{ng-tech-ref-2026}.
 \end{answerbox}
 
 % ============================================================================
@@ -624,7 +624,7 @@ Any incident can be interpreted multiple ways. Claiming that a centralised-perim
 
 \medskip\noindent The claim that a centralised-perimeter breach proves ``stronger centralisation'' would need to show that (i) the breach was caused by a \emph{decentralised} part of the infrastructure, and (ii) a more centralised architecture would have prevented the specific attack vector.
 
-\medskip\noindent The available evidence on the canonical cases shows the opposite: such attacks target \emph{central administrative services} (email, data servers), and the damage is amplified because these services sit in a single, undifferentiated perimeter. Centralising \emph{more} services into that perimeter would have \emph{increased} the blast radius.
+\medskip\noindent The available evidence on the canonical cases shows the opposite: such attacks target \emph{central administrative services} (email, data servers), and the damage is amplified wherever these services sit in a single, undifferentiated perimeter. Centralising \emph{more} services into that perimeter would not have reduced the blast radius, and plausibly enlarges it.
 
 \medskip\noindent\textbf{The interpretation aligns with independent sector analysis:}
 \begin{itemize}[nosep]
@@ -651,7 +651,7 @@ The \gls{nis2} Directive requires incident notification, risk management, and go
 \begin{answerbox}[Answer to Q8.1]
 \textbf{\gls{nis2} is requirements-based, not architecture-prescriptive.} The Directive specifies \emph{what} must be achieved (risk management, incident containment, governance) but does \emph{not} prescribe \emph{how} the infrastructure must be organised.
 
-\medskip\noindent A federated architecture with a central \gls{soc} for detection and notification, per-zone risk assessments and incident playbooks, charters documenting responsibilities and contacts, and a digital-policy commission for strategic oversight, meets every \gls{nis2} requirement while \emph{also} providing the compartmentalisation that \emph{improves} incident containment --- a core \gls{nis2} objective.
+\medskip\noindent A federated architecture with a central \gls{soc} for detection and notification, per-zone risk assessments and incident playbooks, charters documenting responsibilities and contacts, and a digital-policy commission for strategic oversight, addresses each \gls{nis2} Article~21(2) measure family --- the organisational measures remain the institution's to implement and evidence (see the regulatory mapping) --- while \emph{also} providing the compartmentalisation that \emph{improves} incident containment --- a core \gls{nis2} objective.
 
 \medskip\noindent\textbf{One locatable clock owner.} Where the adopter is an essential or important entity under \loc{cybersecurity-baseline-regime}, the central \gls{soc} owns the incident-reporting clock --- in the EU, the \gls{nis2} Article~23 timeline of a 24-hour early warning, a 72-hour notification and a one-month final report~\cite{nis2} --- while the zone charters oblige each zone to report inward to the \gls{soc} within a sub-deadline. The single-owner pattern is generic: it applies to whatever incident-reporting regime governs the adopter, so federation does not fragment the reporting obligation but gives it a single, accountable owner.
 
@@ -690,9 +690,9 @@ The proposal introduces new processing of personal data --- per-zone monitoring,
 \begin{answerbox}[Answer to Q8.3]
 \textbf{The concern is well founded, and the lawful basis is stated here explicitly.} The proposal does introduce new processing, and under \gls{gdpr} Article~5(2) the controller must be able to demonstrate its lawful basis~\cite{gdpr}.
 
-\medskip\noindent\textbf{Lawful basis.} The controller identifies a lawful basis under \loc{data-protection-regime}: a public-mission body typically relies on the public-interest task, a private body on legitimate interests or consent. In the EU instantiation, for a public university the monitoring, audit and identity processing rests on \gls{gdpr} Article~6(1)(e) --- processing necessary for a task carried out in the public interest (the institution's research and teaching mission and its statutory security obligations, including those under \gls{nis2}) --- and, where appropriate, Article~6(1)(f) legitimate interests (network and information security, expressly recognised in Recital~49), subject to the balancing test against data subjects' rights and freedoms. Any processing of special categories of data is conditioned on a corresponding Article~9 ground.
+\medskip\noindent\textbf{Lawful basis.} The controller identifies a lawful basis under \loc{data-protection-regime}: a public-mission body typically relies on the public-interest task, a private body on legitimate interests or consent. In the EU instantiation, for a public university the monitoring, audit and identity processing rests on \gls{gdpr} Article~6(1)(e) --- processing necessary for a task carried out in the public interest (the institution's research and teaching mission and its statutory security obligations, including those under \gls{nis2}) --- and, where appropriate, Article~6(1)(f) legitimate interests (network and information security, expressly recognised in Recital~49) --- available only where the institution is not acting as a public authority in the performance of its tasks (Article~6(1), second subparagraph); for a public university so qualified under national law, Recital~49 informs the necessity test under point~(e) rather than supplying a separate basis --- subject to the balancing test against data subjects' rights and freedoms. Any processing of special categories of data is conditioned on a corresponding Article~9 ground.
 
-\medskip\noindent\textbf{DPIA.} Because the monitoring and audit pipeline use new technologies and entail systematic processing likely to result in high risk, they are expected to warrant a DPIA under Article~35(1)~\cite{gdpr}. The proposal feeds that assessment rather than replacing it: the per-scenario audit records supply the systematic description, the necessity-and-proportionality analysis and the risk treatment an Article~35 DPIA requires. The per-processing lawful basis is finalised in the DPIA and the Record of Processing Activities (Article~30), owned by the institution's \gls{dpo}.
+\medskip\noindent\textbf{DPIA.} Because the monitoring and audit pipeline use new technologies and entail systematic processing likely to result in high risk, they are expected to warrant a DPIA under Article~35(1)~\cite{gdpr}. The proposal feeds that assessment rather than replacing it: the per-scenario audit records supply the systematic description, the necessity-and-proportionality analysis and the risk treatment an Article~35 DPIA requires. The per-processing lawful basis is finalised in the DPIA and the Record of Processing Activities, both maintained by the controller (Article~30(1)); the \gls{dpo} advises on and monitors the DPIA (Articles~35(2) and~39(1)(c)).
 
 \medskip\noindent\textbf{This strengthens, rather than weakens, the proposal.} A monolithic perimeter that monitors all traffic uniformly faces the \emph{same} Article~6 and Article~35 obligations with \emph{less} ability to scope and minimise. The segmented, context-bounded design keeps monitoring proportionate --- per-zone scope, minimised audit fields, access-controlled logs --- which is exactly what the necessity-and-proportionality test of Article~35 rewards.
 \end{answerbox}
@@ -756,7 +756,7 @@ Q8.3 and Q8.4 establish the lawful basis, DPIA and proportionality of monitoring
 
 \medskip\noindent\textbf{Per-zone retrieval duty.} Each zone charter carries a binding obligation to locate, return, rectify or erase the records it holds within a sub-deadline, reporting inward to the \gls{dpo} --- exactly as zones report inward to the \gls{soc} for incident notification.
 
-\medskip\noindent\textbf{Bounded retention and a locator.} The audit pipeline records minimised \emph{metadata} for a bounded period (Q8.4), so scheduled expiry makes Article~17 erasure tractable rather than a distributed deletion hunt; and the Article~30 Record of Processing Activities~\cite{gdpr}, owned by the \gls{dpo}, maps which zones and systems hold which categories of data, so any Article~15/16/17 request is routed deterministically across the federation.
+\medskip\noindent\textbf{Bounded retention and a locator.} The audit pipeline records minimised \emph{metadata} for a bounded period (Q8.4), so scheduled expiry makes Article~17 erasure tractable rather than a distributed deletion hunt; and the Article~30 Record of Processing Activities~\cite{gdpr}, maintained by the controller (Article~30(1)) and monitored by the \gls{dpo} (Article~39(1)(b)), maps which zones and systems hold which categories of data, so any Article~15/16/17 request is routed deterministically across the federation.
 
 \medskip\noindent\textbf{The evidence store is itself a control.} The audit trail that underwrites these rights is not assumed trustworthy: it is append-only and tamper-evident (per-record signing or hash-chaining), with separation of duties between operators and readers and a four-eyes rule on retention expiry, as specified in the Technical Reference's observability chapter. The record proving accountability therefore cannot be silently altered or selectively deleted~(\gls{gdpr} Art.~32 / Art.~5(1)(f); ISO/IEC~27001 A.8.15).
 \end{answerbox}
@@ -819,8 +819,8 @@ This dossier asks the governing bodies to adopt the policy; the detailed, situat
 \begin{answerbox}[Answer to Q9.3]
 \textbf{The detailed, situation-specific cost analysis is the CIO's to produce once the governing bodies request it; the dossier's task is to give the board a defensible order of magnitude and a cost shape, not to pre-empt that analysis.}
 \begin{enumerate}[nosep]
-  \item \textbf{Cost shape.} The governance step (commission, charters, digital-policy commission) is \emph{cost-neutral} --- existing staff, no procurement. Cost-bearing items sit in later, optional waves (segmentation, Science~DMZ, observability storage), each gated by the validated results of the prior step.
-  \item \textbf{A scalable benchmark.} Rather than invent a figure, the order of magnitude can be read from sector benchmarks: higher education currently allocates only about 3.6\% of the IT budget to information security~\cite{educause-spending}, below the cross-industry averages reported in vendor benchmark data~\cite{gartner-security-spend2024}. A board can therefore size the likely envelope from its enrolment and current IT budget, and ask the CIO to refine it.
+  \item \textbf{Cost shape.} The governance step (commission, charters, digital-policy commission) requires no new procurement; it does draw on existing staff, whose coordination and training time has to be budgeted. Cost-bearing items sit in later, optional waves (segmentation, Science~DMZ, observability storage), each gated by the validated results of the prior step.
+  \item \textbf{A scalable benchmark.} Rather than invent a figure, the order of magnitude can be read from sector benchmarks: in the 2018 EDUCAUSE Core Data Service, US higher-education institutions allocated on average about 3.6\% of central IT spending to information security (identity and access management included)~\cite{educause-infosec-almanac-2019}, below the cross-industry averages reported in vendor benchmark data for the same period~\cite{gartner-security-spend2024}. A board can therefore size the likely envelope from its enrolment and current IT budget, and ask the CIO to refine it.
   \item \textbf{Cost of inaction.} The status quo is not free: the global all-industry average data-breach cost reached \$4.88M in 2024~\cite{ibm-cost-breach-2024} (the education sector below it), with talent drain and Shadow-IT exposure growing with delay.
 \end{enumerate}
 \noindent This frames precisely the decision the dossier asks of the governing bodies --- to commission a costed implementation study --- with enough quantified context (a scalable percentage and a quantified downside) to make that decision defensible, while leaving the precise TCO to the CIO.
@@ -1040,7 +1040,7 @@ Q5.2 & Cherry-picked success stories & Broad set of reference universities + sec
 \addlinespace
 Q5.3 & Cannot retrofit federation & NC State, Penn State, Wisconsin-Madison, Michigan deliberately transitioned to federation \\
 \addlinespace
-Q5.4 & Reversibility rests on single-vendor tests & Exit tests are cross-implementation by design; tested behaviour, not vendor promise \\
+Q5.4 & Reversibility rests on single-vendor tests & Exit tests are cross-implementation by design; a property tested when the institution runs them, not a vendor promise \\
 \addlinespace
 Q6.1 & Adjustments commission creates bureaucracy & Short published deadlines; handles exceptions, not routine; formalises existing informal process \\
 \addlinespace
@@ -1054,7 +1054,7 @@ Q7.1 & Recent breaches prove need for restriction & Root causes are supply chain
 \addlinespace
 Q7.2 & Incident analysis is biased & Interpretation aligns with Verizon DBIR, NIST, Sophos independently \\
 \addlinespace
-Q8.1 & NIS2 requires centralisation & NIS2 is requirements-based, not architecture-prescriptive; federation meets all requirements with one clock owner \\
+Q8.1 & NIS2 requires centralisation & NIS2 is requirements-based, not architecture-prescriptive; federation addresses each Art.~21(2) measure family with one clock owner, organisational measures remaining the institution's to evidence \\
 \addlinespace
 Q8.2 & Risk-based argument is too convenient & Applies symmetrically; state of the art is segmented architecture; EDPB/ENISA confirm \\
 Q8.3 & No \gls{gdpr} lawful basis / DPIA trigger stated & Art.~6(1)(e)/(f) basis stated; Art.~35 DPIA expected; segmentation aids data minimisation \\
@@ -1066,7 +1066,7 @@ Q9.1 & No concrete budget numbers & Normal for policy documents; budget produced
 \addlinespace
 Q9.2 & Timeline is too optimistic & Phased structure absorbs delays; status quo worsens with time \\
 \addlinespace
-Q9.3 & Economic case is asserted, not shown & Cost shape + scalable benchmark (higher education's 3.6\% vs cross-industry averages) + cost of inaction frame the board decision \\
+Q9.3 & Economic case is asserted, not shown & Cost shape + scalable benchmark (US higher education's 3.6\% security share of central IT spending, 2018 data, vs cross-industry averages) + cost of inaction frame the board decision \\
 \addlinespace
 Q9.4 & Small team cannot operate the stack & Reference stack is the high-scale instantiation; layers degrade to managed/mutualised realisations \\
 \addlinespace

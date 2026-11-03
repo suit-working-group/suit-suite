@@ -12,6 +12,106 @@ it via `tools/bump-version.sh` (patch by default — one bump per release); the
 
 ## [Unreleased]
 
+## 1.0.3 — 2026-11-03 — external-review corrections before the governance presentation
+
+Suite version bumped **1.0.2 → 1.0.3** (`shared/suite-version.tex`). All six
+generic documents and the four PDFs of the Luxembourg edition were rebuilt
+(0 undefined citations/references, 0 undefined localization keys, 0 `??key??`;
+gates PASS); the Luxembourg edition moves to **edition version 2.1.1**. This
+release applies the corrections decided by the maintainer on 3 November 2026
+after a point-by-point verification of an external review of 31 October 2026,
+before the suite is presented to the University's governing bodies. No proposal
+changes: the corrections remove overstatements, mis-sourced claims and stale
+legislative references.
+
+- **SUIT Policy, executive companion and argumentation (ticket #27).** One
+  canonical containment clause replaces eight absolute guarantees ("cannot
+  compromise / propagate / cascade", "meets every NIS2 requirement"): "designed
+  to contain an incident within its context, subject to tested boundaries and
+  documented exceptions"; Q8.1 now "addresses each NIS2 Article 21(2) measure
+  family — the organisational measures remain the institution's to implement
+  and evidence". The incident chapter separates established facts, allegations
+  and unknowns: the Paris-Saclay entry states that public sources do not
+  document the internal topology or the propagation path, Paris-Saclay leaves
+  the "credential compromise & lateral movement" row, the cause-type row is
+  reworded as "concentration of critical services in one central perimeter",
+  the stakeholder summary names "the publicly documented causes", Q7.2 says
+  "would not have reduced the blast radius, and plausibly enlarges it", and the
+  reference-panel entry on Paris-Saclay cites the university's own
+  digital-services page. The centralised approach is granted its real merits
+  (uniform visibility, smaller rule set) and the federated cost analysis names
+  the model's own risks with a pointer to the risk register (new label
+  `subsec:risk-register`). GDPR items of the AI-cloud framework: the
+  institution remains the controller (Art. 24(1)); non-personal data carry no
+  GDPR transfer restriction but contractual, confidentiality, IP and
+  export-control constraints; pseudonymised data remain personal data and
+  transfer only through an adequacy decision or SCCs with a documented TIA and
+  supplementary measures (Regulatory Applicability, F4). Argumentation Q8.3
+  adds the Article 6(1) second-subparagraph limit on legitimate interests and
+  attributes the DPIA and the Record of Processing Activities to the controller
+  with the DPO advising and monitoring (Articles 30(1), 35(2), 39(1)); Q8.6
+  aligned. Slogans nuanced ("and any data of equivalent sensitivity wherever it
+  sits"; "concentrated by default; the sensitive enclave carries equivalent
+  controls wherever the data class requires them"; "administrative and
+  sensitive enclaves"). Q9.3: the governance step "requires no new procurement;
+  it does draw on existing staff", and the 3.6 % benchmark is restated to its
+  source — "in the 2018 EDUCAUSE Core Data Service, US higher-education
+  institutions allocated on average about 3.6 % of central IT spending to
+  information security (identity and access management included)" — the
+  bibliography entry `educause-spending` (2024, FY2022–23) being replaced by
+  `educause-infosec-almanac-2019` (The EDUCAUSE Information Security Almanac,
+  April 2019, PDF read, VERIFIED 3 November 2026) and the Gartner entry's
+  abstract aligned. Q5.4: "a tested property once the institution runs these
+  exit tests, not a vendor promise". The companion's opening paragraph and
+  objective 1 now use the governance-body keys (`academic-governing-bodies`,
+  `academic-endorsement-path`) and the new optional key `governing-board-gloss`
+  (empty by default), also consumed once by the Policy's opening box.
+- **SUIT Solution (Technical Reference) and argumentation (ticket #28).**
+  Chapter 3: the hybrid profile is "better than pure-commercial on four of the
+  five dimensions and behind it on the operational dimension (2 vs 3)" — the
+  previous "on every dimension" contradicted the chapter's own tables — and
+  the worked examples are stated to be hypothetical, a score of 3 presupposing
+  the exercise evidence of the scoring rule. Chapter 15: the sizing ranges are
+  "design estimates for the broad reference profile, not measurements" (no
+  P25–P75 claim). Argumentation: the conformance suite "is specified as an
+  executable, evidence-producing test to be run by the adopting institution".
+- **Luxembourg edition (ticket #29).** CER transposition cited as the enacted
+  law: `cer-national-transposition` names the Law of 5 May 2026 on the
+  resilience of critical entities (Mémorial A No. 226 of 6 May 2026); new
+  `lu-sources.bib` entry `loi-2026-05-05-cer` (official PDF read, VERIFIED
+  3 November 2026; the NIS2-law cross-reference, Articles 1(3) and 11(1)(6),
+  verified in Mémorial A No. 225); `pl-8307-cer` kept as legislative history
+  with its note completed; the `cssf` abstract and the localization guide no
+  longer name bill 8364. Edition version 2.1.1 on the four documents.
+  `doc-visibility` = "PUBLIC (published in the SUIT working-group repository)":
+  the edition PDFs are tracked in this public repository and said INTERNAL.
+  New `doc-approval-scope`, printed under the Status line: "a faculty-level
+  endorsement of the proposal (Faculty Council of the Faculty of Science,
+  Technology and Medicine, and Department of Computer Science), not an adoption
+  by the University; the proposal is in the University's governance process".
+  Wording keys: `governing-board` = "the Board of Governors", the French name
+  carried once per document by `governing-board-gloss`;
+  `academic-governing-bodies` = "the Faculty Councils and the University
+  Council"; `status-table-subtitle` = "at the University of Luxembourg, as of
+  31 October 2026". Edition README updated accordingly.
+- **Governance and machinery (ticket #30).** `GOVERNANCE.md`: a deputy
+  maintainer (to be appointed), two independent reviews for substantive or
+  contested changes, recusal of the maintainer when personally interested,
+  disagreements logged with their rationale; contributor status recorded in
+  `CONTRIBUTORS/`, both registries authoritative; `CONTRIBUTING.md` aligned.
+  `docs/dispositions.json`: `DISPO-INVARIANCE` gains `validityDomain` and
+  `reviewBy` and leaves a concrete applicability counter-example for a named
+  archetype raisable; `_AUDITS/AUDIT-PLAN.md` synthesis rule 1 says so
+  (PLAN-VERSION 2.2). `.claude/rules/evidence-methodology.md`: layers are
+  independent only if their sources do not derive from a common instrument; a
+  normative source is never cited as a measure of efficacy. Title block
+  (`shared/localization.sty`): the "Edition:" line that duplicated
+  `\suiteditionline` is removed; an optional "Scope:" line is printed when
+  `doc-approval-scope` is non-empty; Layer-0 `doc-visibility` becomes PUBLIC.
+  New `tools/release-manifest.sh` writes `RELEASE-MANIFEST.md` (suite version,
+  commit, TeX engine and biber versions, and per document PDF its SHA-256,
+  page count and undefined citations/references/localization-key counts); the
+  manifest of this release is committed with it.
 - **Luxembourg edition: NIS2 transposition now cited as the enacted law; ILR
   attestation stated as it is on file; status table dated (ticket #25).** In
   `instantiations/lu-university-of-luxembourg/set.tex` the key

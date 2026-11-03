@@ -21,8 +21,8 @@ It is a **thin shell over the unchanged generic documents**: one value file
 | Fact | Value |
 |---|---|
 | Archetype (Layer 1) | `EU-PUB-RI` — selected via the §2 decision tree of `categories/README.md` (Q1: EU/EEA public research-intensive) |
-| Layer-2 bindings | 51 `\setloc` values in [`set.tex`](set.tex) — NREN: RESTENA; DPA: CNPD; NIS2 authority: ILR; notification platform: SERIMA; HPC: ULHPC; governing board: the Board of Governors (Conseil de Gouvernance); staff representation: the staff delegation; … |
-| Title block | version 2.1 · INTERNAL · approved May 7, 2026 by the Faculty of Science, Technology and Medicine and the Department of Computer Science. Scope of that approval: a faculty-level endorsement of the proposal (Faculty Council of the FSTM, Department of Computer Science), not an adoption by the University; the proposal is in the University's governance process (as of 31 October 2026) |
+| Layer-2 bindings | the `\setloc` bindings (one line each) in [`set.tex`](set.tex) — NREN: RESTENA; DPA: CNPD; NIS2 authority: ILR; notification platform: SERIMA; HPC: ULHPC; governing board: the Board of Governors (Conseil de Gouvernance); staff representation: the staff delegation; … |
+| Title block | edition version 2.1.1 · PUBLIC (published in the SUIT working-group repository) · approved May 7, 2026 by the Faculty of Science, Technology and Medicine and the Department of Computer Science. The scope of that approval is printed on the title page itself (`doc-approval-scope`): a faculty-level endorsement of the proposal (Faculty Council of the FSTM, Department of Computer Science), not an adoption by the University; the proposal is in the University's governance process (as of 3 November 2026) |
 | Authorship | Nicolas Guelfi (chair of the SUIT working group, creator of the first version); affiliation and the suite's University-of-Luxembourg origin are carried by `author-affiliation` in `set.tex` |
 
 ## How this edition was produced (the process, as lived)

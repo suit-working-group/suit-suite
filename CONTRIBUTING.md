@@ -7,7 +7,7 @@ Thank you for your interest in the **SUIT — Sustainable University IT Infrastr
 The documents are maintained under a **ticket-centralized** model. This is deliberate and strict:
 
 - **You do not edit the documents directly.** The community has read access and proposes every change through an **issue (ticket)**.
-- **The maintainer is the single point** that centralizes, triages, decides, and applies changes — and records each applied change in `CHANGELOG.md` with its ticket id.
+- **The maintainer is the single point** that centralizes, triages, decides, and applies changes — and records each applied change in `CHANGELOG.md` with its ticket id. A deputy maintainer acts when the maintainer is unavailable or recuses; substantive or contested changes receive two independent reviews recorded on the ticket; disagreements are logged with their rationale (see `GOVERNANCE.md`, *Decision process*).
 - Unsolicited pull requests that modify document content are **not merged directly**. Open a ticket first; the maintainer may use a PR as input, but authorship of the change stays with the maintainer to keep the suite coherent.
 
 This keeps terminology, evidence, colours, and cross-document references consistent across the four documents.

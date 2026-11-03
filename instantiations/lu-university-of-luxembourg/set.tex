@@ -67,8 +67,11 @@
 
 % Governance ladder (the named University Bodies of the University of Luxembourg):
 \setloc{executive-leadership}{the Rectorate (the Rector and the central executive team)}
-\setloc{governing-board}{the Board of Governors (the Conseil de Gouvernance)}
-\setloc{academic-governing-bodies}{the academic deliberative bodies (the Faculty Councils and the University Council)}
+\setloc{governing-board}{the Board of Governors}
+% The French name of the board is carried once per document, at one mention
+% outside any parenthesis (consumed as \loc{governing-board}\loc{governing-board-gloss}).
+\setloc{governing-board-gloss}{~(Conseil de Gouvernance)}
+\setloc{academic-governing-bodies}{the Faculty Councils and the University Council}
 \setloc{academic-endorsement-path}{the relevant Faculty Council(s), then the University Council}
 \setloc{institution-faculty-structure}{which comprises three faculties, each with departments of teaching and research, and interdisciplinary centres}
 \setloc{staff-representation-body}{the staff delegation (d\'el\'egation du personnel)}
@@ -97,13 +100,18 @@
 % to Layer-0 default changes and never renders the Layer-0 approval-date
 % placeholder (audit 260609-2153, INST-47f3e9e5).
 % Per-document edition versions for the University-of-Luxembourg edition.
-\setloc{policy-EN-edition-version}{2.1.0}
-\setloc{policy-summary-EN-edition-version}{2.1.0}
-\setloc{solution-EN-edition-version}{2.1.0}
-\setloc{solution-summary-EN-edition-version}{2.1.0}
-\setloc{doc-visibility}{INTERNAL}
+\setloc{policy-EN-edition-version}{2.1.1}
+\setloc{policy-summary-EN-edition-version}{2.1.1}
+\setloc{solution-EN-edition-version}{2.1.1}
+\setloc{solution-summary-EN-edition-version}{2.1.1}
+% The edition's PDFs are published in the public SUIT repository: the
+% visibility line says so (was INTERNAL while the documents were only e-mailed).
+\setloc{doc-visibility}{PUBLIC (published in the SUIT working-group repository)}
 \setloc{doc-approval-authority}{\loc{approving-academic-units}}
 \setloc{doc-approval-date}{May 7, 2026}
+% Scope of that approval, printed under the Status line so the PDF says itself
+% what the May 7, 2026 approval is and is not.
+\setloc{doc-approval-scope}{a faculty-level endorsement of the proposal (Faculty Council of the Faculty of Science, Technology and Medicine, and Department of Computer Science), not an adoption by the University; the proposal is in the University's governance process}
 
 % --- Staffing / FTE profile -------------------------------------------------
 % ANCHOR-FTE-ENVELOPE: the original UL framing (R1 institution, small operating
@@ -157,12 +165,12 @@
 \setloc{nis2-sanction-ceiling}{up to EUR~10 million or 2\% of annual turnover}
 
 % --- National transposition instruments -------------------------------------
-% ANCHOR-NIS2-TRANSPOSITION (Law of 5 May 2026, formerly PL 8364; ticket #25), ANCHOR-CER-TRANSPOSITION (PL 8307),
+% ANCHOR-NIS2-TRANSPOSITION (Law of 5 May 2026, formerly PL 8364; ticket #25), ANCHOR-CER-TRANSPOSITION (Law of 5 May 2026, formerly PL 8307),
 % ANCHOR-EQUAL-TREATMENT-LAW (Law of 28 Nov 2006), ANCHOR-STATE-INFOSEC-POLICY
 % (PSI-LU), ANCHOR-NATIONAL-CYBER-STRATEGY (NCSS III), ANCHOR-RISK-METHOD
 % (MONARC), ANCHOR-HCPN-FOUNDING-LAW (loi modifiee du 23 juillet 2016).
 \setloc{nis2-national-transposition}{the Luxembourg Law of 5 May 2026 on measures for a high level of cybersecurity (M\'emorial A No.~225 of 6 May 2026, in force since 10 May 2026), transposing Directive (EU) 2022/2555}
-\setloc{cer-national-transposition}{the Luxembourg transposition of the CER Directive (EU) 2022/2557 (projet de loi 8307, deposited at the Chambre des D\'eput\'es on 1 September 2023)}
+\setloc{cer-national-transposition}{the Luxembourg Law of 5 May 2026 on the resilience of critical entities (M\'emorial A No.~226 of 6 May 2026), transposing Directive (EU) 2022/2557}
 \setloc{national-equal-treatment-law}{the Luxembourg Law of 28 November 2006 (transposing Directive 2000/78/EC into national labour law, integrating the obligation of reasonable adjustments)}
 \setloc{national-public-sector-isp}{PSI-LU (the Politique g\'en\'erale de la s\'ecurit\'e de l'information de l'\'Etat luxembourgeois, approved 13 July 2018)}
 \setloc{national-cyber-strategy}{NCSS~III (the third National Cybersecurity Strategy of Luxembourg, 2018, Implementation Objective~7)}
@@ -190,7 +198,7 @@
 \setloc{sdmz-status-lead}{The}
 
 % --- Companion openness-status table: the original University-of-Luxembourg verdicts ---
-\setloc{status-table-subtitle}{at the institution, as of 31 October 2026}
+\setloc{status-table-subtitle}{at the University of Luxembourg, as of 31 October 2026}
 \setloc{status-byod}{\nok}
 \setloc{status-eduroam}{\ok}
 \setloc{status-mobility}{\nok}
@@ -243,7 +251,7 @@
 \setloc{cite-public-sector-isp}{~\cite{psi-lu}}
 \setloc{cite-cyber-strategy}{~\cite{ncss-iii}}
 \setloc{cite-nren-csirt}{~\cite{restena-csirt}}
-\setloc{cite-cer-transposition}{~\cite{pl-8307-cer}}
+\setloc{cite-cer-transposition}{~\cite{loi-2026-05-05-cer}}
 \setloc{cite-gov-csirt}{~\cite{govcert-lu}}
 \setloc{cite-spoc}{~\cite{hcpn}}
 \setloc{cite-infosec-agency}{~\cite{anssi-lu}}

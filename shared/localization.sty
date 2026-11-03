@@ -88,11 +88,12 @@
 % --- \suitmetablock : the unified, generic document title-page metadata block -
 %     Single source of truth for every document's version/visibility/status
 %     line. All variable parts are localization keys, so an edition overrides
-%     them via \setloc. Renders centred-friendly (uses \\), at \small.
-%       Edition: <edition-name>
-%       Document Version <doc-version>
-%       Visibility: <doc-visibility>          (INTERNAL / PUBLIC)
+%     them via \setloc. Renders centred-friendly (uses \\), at \small. The
+%     edition name is printed above the block by \suiteditionline, not here.
+%       SUIT suite version X.Y.Z  |  Edition version X.Y.Z · tracks SUIT suite X.Y.Z
+%       Visibility: <doc-visibility>          (PUBLIC by default; an edition may say INTERNAL)
 %       Status: Approved by <authority> on <date>
+%       Scope: <doc-approval-scope>          (only when the key is non-empty)
 %       Based on the SUIT Working Group [ref]
 %       Print date: <today>
 % --- \suitversionline : the version line used inside \suitmetablock ----------
@@ -113,12 +114,26 @@
   \fi
 }
 
+% --- \suitapprovalscopeline : optional "Scope:" line under the Status line ---
+%     Printed only when doc-approval-scope is bound to a non-empty value (an
+%     edition states what its approval is and is not); the generic render,
+%     whose default is empty, prints nothing.
+\newcommand{\suitapprovalscopeline}{%
+  \edef\suit@scope{\ifcsname loc@val@doc-approval-scope\endcsname
+      \csname loc@val@doc-approval-scope\endcsname\fi}%
+  \ifx\suit@scope\@empty\else
+    Scope:~\loc{doc-approval-scope}\\[2pt]%
+  \fi
+}
+
+% The edition name is NOT repeated here: \suiteditionline already prints it
+% prominently on every title page (an "Edition:" line here duplicated it).
 \newcommand{\suitmetablock}{%
   \begingroup\small
-  Edition:~\loc{edition-name}\\[2pt]
   \suitversionline\\[2pt]
   Visibility:~\loc{doc-visibility}\\[2pt]
   Status:~Approved by \loc{doc-approval-authority} on \loc{doc-approval-date}\\[2pt]
+  \suitapprovalscopeline
   Based on the SUIT Working Group~\cite{suit-wg}\\[2pt]
   Print date:~\today
   \par\endgroup

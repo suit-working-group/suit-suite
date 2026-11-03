@@ -35,6 +35,11 @@
 % --- Institutional governance roles -----------------------------------------
 \setloc{executive-leadership}{the institution's central executive leadership}
 \setloc{governing-board}{the institution's governing board}
+% Optional local-language gloss of the governing board, appended at one
+% mention per document, outside any parenthesis
+% (\loc{governing-board}\loc{governing-board-gloss}); empty in the generic
+% render, e.g. "~(Conseil de Gouvernance)" in an edition.
+\setloc{governing-board-gloss}{}
 \setloc{academic-governing-bodies}{the academic deliberative councils}
 \setloc{academic-endorsement-path}{the relevant academic deliberative councils}
 \setloc{institution-faculty-structure}{typically organised into faculties, each with departments of teaching and research, and interdisciplinary centres}
@@ -56,9 +61,14 @@
 
 % Document metadata for the unified \suitmetablock title-page block. Each
 % edition overrides these for its own visibility/approval facts.
-\setloc{doc-visibility}{INTERNAL}
+% The suite's PDFs (generic and deposited editions) are published in the
+% public SUIT repository: the default visibility says so.
+\setloc{doc-visibility}{PUBLIC}
 \setloc{doc-approval-authority}{\loc{approving-academic-units}}
 \setloc{doc-approval-date}{\textit{(approval date to be set)}}
+% Optional scope of the approval (what the approval is and is not), printed
+% under the Status line by \suitmetablock when non-empty; empty by default.
+\setloc{doc-approval-scope}{}
 
 % --- Research & education network and its services --------------------------
 \setloc{nren-name}{the national research and education network}

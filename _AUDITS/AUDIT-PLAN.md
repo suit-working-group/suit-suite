@@ -1,6 +1,6 @@
 # SUIT Audit Plan — Canonical Methodology
 
-<!-- PLAN-VERSION: 2.1 -->
+<!-- PLAN-VERSION: 2.2 -->
 
 This file is **the single source of truth for the SUIT suite audit**. It is
 written for two readers at once:
@@ -359,8 +359,11 @@ Inputs: the adversarially-CONFIRMED findings and the dispositions registry
    deviation into a `dispositioned` list (verification_status
    "WONTFIX-justified" + the disposition id); do not count it in severity
    tallies. Never suppress a guardrail violation (presenting an
-   instantiation/sizing/optional component as universally mandatory) or a
-   sourced-external-statistic error.
+   instantiation/sizing/optional component as universally mandatory), a
+   sourced-external-statistic error, or an applicability counter-example for
+   a named archetype: an applicability counter-example is never
+   dispositioned, whatever DISPO-INVARIANCE says about the invariance claim
+   itself.
 2. DEDUP: collapse the same physical defect raised by >1 track into one
    canonical finding (merge contributing tracks; keep the HIGHEST severity).
 3. ROOT-CAUSE CLUSTERING: group distinct findings that share one underlying

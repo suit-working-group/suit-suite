@@ -43,6 +43,8 @@ When building an argument or defending a thesis, construct evidence at five inde
 
 ## Convergence Principle
 - A thesis is considered robust when supported by at least 3 independent layers
+- Layers count as independent only if their sources do not derive from a common instrument (a standard and a precedent that both restate the same regulation are one layer, not two)
+- A normative source (law, standard, framework) is never cited as a measure of efficacy; an efficacy claim needs Layer 4 or Layer 5 evidence
 - If any single layer is successfully challenged, the remaining layers must sustain the argument
 - When only 1-2 layers are available, explicitly acknowledge the limitation
 - Present the strongest layer first, then corroborate with others
